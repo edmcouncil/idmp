@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
-	<!ENTITY cmns-strdsg "https://www.omg.org/spec/Commons/StructuredDesignators/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -13,10 +13,10 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/PartiesAndSituations/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
-	xmlns:cmns-strdsg="https://www.omg.org/spec/Commons/StructuredDesignators/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -35,12 +35,21 @@
 		<sm:copyright>Copyright (c) 2020-2022 Thematix Partners LLC</sm:copyright>
 		<sm:copyright>Copyright (c) 2020-2022 Working Ontologist LLC</sm:copyright>
 		<sm:copyright>Copyright (c) 2022 Object Management Group, Inc.</sm:copyright>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/StructuredDesignators/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220101/PartiesAndSituations/"/>
 		<skos:note>This ontology was originally designed for use in the Financial Industry Business Ontology (FIBO) for representing complex relationships between parties.</skos:note>
 	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-cxtdsg;ContextualName">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom rdf:resource="&cmns-pts;Party"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;Actor">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
@@ -53,7 +62,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
-				<owl:onClass rdf:resource="&cmns-strdsg;ContextualName"/>
+				<owl:onClass rdf:resource="&cmns-cxtdsg;ContextualName"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -90,7 +99,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;AgentRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-strdsg;hasApplicablePeriod"/>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;hasApplicablePeriod"/>
 				<owl:onClass rdf:resource="&cmns-dt;DatePeriod"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -252,13 +261,13 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasPartyRole">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
 		<rdfs:label>has party role</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
-		<skos:definition>identifies a party acting in a specific role as related to the particular agreement, contract, policy, regulation, or other business relationship</skos:definition>
+		<skos:definition>identifies a specific role played by some person or organization as related to a situation, agreement, contract, policy, regulation, or other business relationship</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasRelatedPartyRole">
-		<rdf:type rdf:resource="&owl;SymmetricProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
 		<rdfs:label>has related party role</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
@@ -268,7 +277,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasRole">
-		<rdfs:label>has thing in role</rdfs:label>
+		<rdfs:label>has role</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;Role"/>
 		<skos:definition>identifies something acting in a recipient or target role as related to the particular agreement, contract, policy, regulation, situation, or other business relationship</skos:definition>
 	</owl:ObjectProperty>
@@ -385,8 +394,8 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;playsRole">
 		<rdfs:label>plays role</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;Role"/>
-		<skos:definition>indicates a part that an independent thing plays under some circumstance</skos:definition>
-		<skos:example>an organization in the role of employer, issuer, regulatory agency, bank, custodian, etc.</skos:example>
+		<skos:definition>indicates a part that someone or something plays under some circumstance</skos:definition>
+		<skos:example>an organization may play the role of employer, issuer, regulatory agency, bank, custodian, manufacturer, vendor, etc.; a person may play the role of employee, examiner, banker, seller, buyer, etc.</skos:example>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;undergoes">
@@ -396,14 +405,5 @@
 		<owl:inverseOf rdf:resource="&cmns-pts;hasUndergoer"/>
 		<skos:definition>indicates a situation that the undergoer experiences</skos:definition>
 	</owl:ObjectProperty>
-	
-	<owl:Class rdf:about="&cmns-strdsg;ContextualName">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
-				<owl:someValuesFrom rdf:resource="&cmns-pts;Party"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-	</owl:Class>
 
 </rdf:RDF>
