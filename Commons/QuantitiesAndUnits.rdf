@@ -65,6 +65,12 @@
 		<skos:note>Quantity units that are not base units are derived units.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;Constant">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:label>constant</rdfs:label>
+		<skos:definition>symbol that represents a value that does not change (i.e., is fixed) with respect to a formula or expression</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;DerivedQuantity">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityKind"/>
 		<rdfs:subClassOf>
@@ -136,6 +142,32 @@
 		<skos:note>Note that this definition is broader than that provided in SysML, which is an expression of the dependence of a quantity on the base quantities of a system of quantities as a product of powers of factors corresponding to the base quantities.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;Expression">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasArgument"/>
+				<owl:onClass rdf:resource="&cmns-qtu;Constant"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasArgument"/>
+				<owl:onClass rdf:resource="&cmns-qtu;Variable"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>expression</rdfs:label>
+		<skos:definition>finite combination of symbols that are well-formed according to applicable rules</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;Measure">
+		<rdfs:label>measure</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://stats.oecd.org/glossary/detail.asp?ID=7062</dct:source>
+		<skos:definition>amount or degree of something; the dimensions, capacity, or amount of something ascertained by measuring</skos:definition>
+		<skos:note>Measure refers to the phenomenon or phenomena to be measured in a data set. In a data set, the instance of a measure is often called an observation.</skos:note>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;Quantity"/>
 		<rdfs:subClassOf>
@@ -159,7 +191,16 @@
 		<skos:note>A Unit is a quantity in terms of which the magnitudes of other quantities that have the same quantity kind can be stated. A unit often relies on precise and reproducible ways to measure the unit. For example, a unit of length such as meter may be specified as a multiple of a particular wavelength of light. A unit may also specify less stable or precise ways to express some value, such as a cost expressed in some currency, or a severity rating measured by a numerical scale.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;Percentage">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Ratio"/>
+		<rdfs:label>percentage</rdfs:label>
+		<skos:definition>ratio value expressed as a fraction of 100, i.e., in which the denominator is fixed rather than variable and equal to 100</skos:definition>
+		<skos:note>The percent value is computed by multiplying the numeric value of the ratio by 100.</skos:note>
+		<skos:note>While many percentage values are between 0 and 100, there is no mathematical restriction and percentages may take on other values (positive or negative), particularly in the case of comparisons (percent change).</skos:note>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;Quantity">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Measure"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
@@ -242,6 +283,30 @@
 		<skos:definition>number and measurement unit together giving magnitude of a quantity</skos:definition>
 		<skos:example>2 days, 3.5 hours, 150 lb, 45.5 miles</skos:example>
 		<skos:note>The quantity expressed by a quantity value is the quantity whose ratio to the measurement unit is the number.  Note that dimensionless quantities may not have a measurement unit associated with them.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;Ratio">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasDenominator"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasNumerator"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ratio</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://stats.oecd.org/glossary/detail.asp?ID=6688</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www150.statcan.gc.ca/n1/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#r.</dct:source>
+		<rdfs:altLabel>rate</rdfs:altLabel>
+		<skos:definition>proportional relationship between two different quantity values that gives rise to a datum of a specific quantity kind</skos:definition>
+		<skos:note>A ratio is a quantity measured with respect to some other quantity, or in mathematics a quotient of two numbers or expressions, arrived at by dividing one by the other.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;SystemOfQuantities">
@@ -339,6 +404,34 @@
 		<skos:definition>factor in a product of powers that defines a derived unit</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;Variable">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:label>variable</rdfs:label>
+		<skos:definition>symbol that represents a parameter in a formula or expression</skos:definition>
+	</owl:Class>
+	
+	<owl:AnnotationProperty rdf:about="&cmns-qtu;describesActualExpression">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
+		<rdfs:label>describes actual expression</rdfs:label>
+		<skos:definition>specifies the calculation or expression used to determine the value of something</skos:definition>
+		<skos:note>In cases where some expression can only be calculated in SPARQL or via rules, this property is useful for stating what that calculation should be using the input arguments to the expression.</skos:note>
+	</owl:AnnotationProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasArgument">
+		<rdfs:label>has argument</rdfs:label>
+		<rdfs:altLabel>has independent variable</rdfs:altLabel>
+		<rdfs:range rdf:resource="&cmns-qtu;Variable"/>
+		<skos:definition>indicates a specific input to a function, formula or expression, also known as an independent variable</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasDenominator">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
+		<rdfs:label>has denominator</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<skos:definition>specifies the quantity value that is the part of a fraction &apos;below the line&apos; and signifies the value by which the numerator should be divided</skos:definition>
+		<skos:note>If a fraction is considered as an ordered pair, the denominator is the second argument of the fraction.</skos:note>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasDimension">
 		<rdfs:label>has dimension</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;QuantityKind"/>
@@ -353,6 +446,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasFactor">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:label>has factor</rdfs:label>
 		<skos:definition>indicates a number or quantity that when multiplied with another produces a given number or expression</skos:definition>
 	</owl:ObjectProperty>
@@ -361,6 +455,14 @@
 		<rdfs:label>has measurement unit</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-qtu;MeasurementUnit"/>
 		<skos:definition>indicates the unit in which something is expressed</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasNumerator">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
+		<rdfs:label>has numerator</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<skos:definition>specifies the quantity value that is the part of a fraction &apos;above the line&apos; and signifies the value to be divided by the denominator</skos:definition>
+		<skos:note>If a fraction is considered as an ordered pair, the numerator is the first argument of the fraction.</skos:note>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;hasNumericValue">
