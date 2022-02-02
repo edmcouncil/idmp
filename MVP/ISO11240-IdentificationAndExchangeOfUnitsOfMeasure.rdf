@@ -2,8 +2,11 @@
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
+	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
+	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-av "https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/">
 	<!ENTITY idmp-dtp "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/">
@@ -17,8 +20,11 @@
 <rdf:RDF xml:base="https://spec.edmcouncil.org/idmp-ontology/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
+	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-av="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"
 	xmlns:idmp-dtp="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"
@@ -33,11 +39,15 @@
 		<rdfs:label>ISO 11240 Identification and Exchange of Units of Measure (UOM) Ontology</rdfs:label>
 		<dct:abstract>This ontology provides a semantic model representing common definitions for exchanging units of measure and measurement concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment.  It is derived from the ISO 11240:2012 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement as well as from other ISO and OMG standards such as SysML.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"/>
 		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/20220201/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"/>
 		<idmp-av:copyright>Copyright (c) 2022 EDM Council, Inc.</idmp-av:copyright>
 	</owl:Ontology>
@@ -71,6 +81,49 @@
 		<skos:note>Arbitrary units represent references to materials or procedures that are defined outside the SI system. A quantity value is arbitrarily assigned to the reference preparation or the result of a measurement procedure, usually specific for a particular substance. This generally precludes comparability of quantity values across different systems and components for this type of units.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-uom;CodeSystemFullName">
+		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:onClass rdf:resource="&idmp-uom;UnitOfMeasureIdentificationScheme"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>code system full name</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.3 Code System, Table 3</dct:source>
+		<skos:definition>official name of the code system</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;CodeSystemIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom rdf:resource="&cmns-cds;CodeSet"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>code system identifier</rdfs:label>
+		<dct:source>ISO 11240:2012, clause 4.6.2.3 Code System, Table 3</dct:source>
+		<skos:definition>globally unique identifier for the code system</skos:definition>
+		<skos:note>Code System Identifier should take the form of an ISO Object Identifier (OID).</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;CodeSystemName">
+		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:onClass rdf:resource="&idmp-uom;UnitOfMeasureIdentificationScheme"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>code system name</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.3 Code System, Table 3</dct:source>
+		<skos:definition>The name is used strictly for communication between humans. The Code System Identifier should be used for all computer-to-computer communication.</skos:definition>
+		<skos:definition>short token that uniquely identifies the code system</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-uom;CoherentDerivedUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;DerivedUnit"/>
 		<rdfs:label>coherent derived unit</rdfs:label>
@@ -101,6 +154,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;MeasurementProcedure">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
 		<rdfs:label>measurement procedure</rdfs:label>
 		<dct:source>ISO 11240:2012, clause 3.1.16</dct:source>
 		<skos:definition>detailed description of a measurement according to one or more measurement principles (i.e. phenomena, observables) and to a given measurement method, based on a measurement model and including any calculation to obtain a measurement result</skos:definition>
@@ -121,10 +175,33 @@
 	<owl:Class rdf:about="&idmp-uom;UnitOfMeasureIdentificationScheme">
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:subClassOf rdf:resource="&cmns-id;IdentificationScheme"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;SystemOfQuantities"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;SystemOfUnits"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:allValuesFrom rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-uom;CodeSystemFullName"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-uom;CodeSystemName"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>unit of measure identification scheme</rdfs:label>
@@ -155,9 +232,17 @@
 		</rdfs:subClassOf>
 		<rdfs:label>unit of measure identifier</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 4.6.2.1</dct:source>
-		<skos:definition>unique identifier for the unit of measurement entry within the ISO lexicon</skos:definition>
-		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
+		<skos:definition>unique identifier for the unit of measure in some system of units</skos:definition>
 	</owl:Class>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-uom;isSIQuantity">
+		<rdfs:label>is SI quantity</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.1, Table 1</dct:source>
+		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementUnit"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates that the unit of measure is an SI quantity, or is based on an SI quantity</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL"/>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-uom;refersTo">
 		<rdfs:label>refers to</rdfs:label>
@@ -167,6 +252,33 @@
 	<owl:Class rdf:about="&cmns-qtu;Dimensionality">
 		<idmp-av:synonym>dimension of a quantity</idmp-av:synonym>
 		<idmp-av:synonym>quantity dimension</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-uom;isSIQuantity"/>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<dct:source>ISO 11240:2021, clause 4.6.2.1, Table 1</dct:source>
+		<skos:note>Each core unit of measurement concept may have one or more associated unit of measurement code entries from different CodeSystems, reflecting the fact that a unit of measurement concept can be present in multiple unit of measurement dictionaries or coding systems (e.g. UCUM, NCI Thesaurus, SNOMED).</skos:note>
+		<skos:note>The two core attributes (identifier and definition) refer to the abstract concept, and shall be part of its core definition. The identifier represents a particular unit quantity and refers to the underlying metrological or published definitions, e.g. the SI base units, through the intrinsic formalism that is provided by the reference code system.</skos:note>
+		<idmp-av:synonym>unit of measurement</idmp-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;QuantityKind">
