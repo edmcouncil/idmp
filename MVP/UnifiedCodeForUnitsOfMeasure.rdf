@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
+	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
+	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY idmp-av "https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/">
+	<!ENTITY idmp-dtp "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/">
+	<!ENTITY idmp-ucum "https://spec.edmcouncil.org/idmp-ontology/MVP/UnifiedCodeForUnitsOfMeasure/">
+	<!ENTITY idmp-uom "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/idmp-ontology/MVP/UnifiedCodeForUnitsOfMeasure/"
+	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
+	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:idmp-av="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"
+	xmlns:idmp-dtp="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"
+	xmlns:idmp-ucum="https://spec.edmcouncil.org/idmp-ontology/MVP/UnifiedCodeForUnitsOfMeasure/"
+	xmlns:idmp-uom="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/idmp-ontology/MVP/UnifiedCodeForUnitsOfMeasure/">
+		<rdfs:label>Unified Code for Units of Measure (UCUM) Ontology</rdfs:label>
+		<dct:abstract>The Unified Code for Units of Measure (UCUM) was developed by Regenstrief Institute and the UCUM Organization as a unambiguous system of units and their combinations. This ontology specifies the UCUM code system, and is intended to cover the units of measure specified therein, as described by the ISO 11240:2012 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement standard.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/20220201/UnifiedCodeForUnitsOfMeasure/"/>
+		<idmp-av:copyright>Copyright (c) 2022 EDM Council, Inc.</idmp-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&idmp-ucum;UCUMUnitOfMeasureIdentifier">
+		<rdfs:subClassOf rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:hasValue rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:hasValue rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&cmns-dsg;Name"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&cmns-qtu;MeasurementUnit"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>UCUM unit of measure identifier</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.2</dct:source>
+		<skos:definition>unique identifier for the unit of measurement entry within the ISO lexicon</skos:definition>
+		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
+		<idmp-av:synonym>code entry</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ucum;UnifiedCodeForUnitsOfMeasure">
+		<rdf:type rdf:resource="&idmp-uom;UnitOfMeasureIdentificationScheme"/>
+		<rdfs:label>Unified Code for Units of Measure</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://ucum.nlm.nih.gov/"/>
+		<rdfs:seeAlso rdf:resource="https://ucum.org/trac"/>
+		<owl:versionInfo>Version: 2.1, Revision: 442</owl:versionInfo>
+		<skos:definition>code system intended to include all units of measures being contemporarily used in international science, engineering, and business</skos:definition>
+		<skos:note>UCUM has been adopted internationally by many organizations such as IEEE, DICOM, LOINC, and HL7, and is also in the ISO 11240:2012 standard</skos:note>
+		<idmp-av:abbreviation>UCUM</idmp-av:abbreviation>
+		<idmp-av:copyright>Copyright 1999-2021 Regenstrief Institute, Inc. All rights reserved.</idmp-av:copyright>
+		<cmns-dsg:hasDescription>The Unified Code for Units of Measure (UCUM) was developed by Regenstrief Institute and the UCUM Organization as a unambiguous system of units and their combinations. The purpose is to facilitate unambiguous electronic communication of quantities together with their units. The focus is on electronic communication, as opposed to communication between humans. A typical application of The Unified Code for Units of Measure are electronic data interchange (EDI) protocols, but there is nothing that prevents it from being used in other types of machine communication.</cmns-dsg:hasDescription>
+		<cmns-dsg:hasName rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasureCodeSystemFullName"/>
+		<cmns-dsg:hasName rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasureCodeSystemName"/>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasureIdentifier"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ucum;UnifiedCodeForUnitsOfMeasureCodeSystemFullName">
+		<rdf:type rdf:resource="&idmp-uom;CodeSystemFullName"/>
+		<rdfs:label>Unified Code for Units of Measure code system full name</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.3 Code System, Table 3</dct:source>
+		<skos:definition>official name for the Unified Code for Units of Measure code system</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+		<cmns-dsg:isNameOf rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasure"/>
+		<cmns-txt:hasTextValue>Unified Code for Units of Measure</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ucum;UnifiedCodeForUnitsOfMeasureCodeSystemName">
+		<rdf:type rdf:resource="&idmp-uom;CodeSystemName"/>
+		<rdfs:label>Unified Code for Units of Measure code system name</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.3 Code System, Table 3</dct:source>
+		<skos:definition>short name that uniquely identifies the Unified Code for Units of Measure code system for communications between people</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+		<cmns-dsg:isNameOf rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasure"/>
+		<cmns-txt:hasTextValue>UCUM</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ucum;UnifiedCodeForUnitsOfMeasureIdentifier">
+		<rdf:type rdf:resource="&idmp-uom;CodeSystemIdentifier"/>
+		<rdfs:label>Unified Code for Units of Measure identifier</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.2 and clause 4.6.2.3 Code System, Table 3</dct:source>
+		<skos:definition>ISO Object Identifier (OID) for the Unified Code for Units of Measure (UCUM) code set</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+		<cmns-id:identifies rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasure"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.6.8</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-ucum;UCUMUnitOfMeasureIdentifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+
+</rdf:RDF>
