@@ -44,6 +44,27 @@
 	
 	<owl:Class rdf:about="&idmp-uom;ArbitraryUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-uom;refersTo"/>
+				<owl:onClass rdf:resource="&idmp-uom;MaterialMeasure"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-uom;refersTo"/>
+				<owl:onClass rdf:resource="&idmp-uom;MeasurementProcedure"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-uom;refersTo"/>
+				<owl:onClass rdf:resource="&idmp-uom;ReferenceMaterial"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>arbitrary unit</rdfs:label>
 		<dct:source>ISO 11240:2012, clause 3.1.1</dct:source>
 		<skos:definition>arbitrarily defined unit of measurement, where a relation of the unit to a physical unit of the SI does not exist or is unknown</skos:definition>
@@ -69,6 +90,32 @@
 		<rdfs:label>conversion factor between units</rdfs:label>
 		<dct:source>ISO 11240:2012, clause 3.1.6</dct:source>
 		<skos:definition>ratio of two measurement units for quantities of the same kind</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;MaterialMeasure">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Measure"/>
+		<rdfs:label>material measure</rdfs:label>
+		<dct:source>ISO 11240:2012, clause 3.1.14</dct:source>
+		<skos:definition>something that reproduces or supplies one or more quantities, each with an assigned quantity value</skos:definition>
+		<skos:example>Ruler, standard weight, volume measure</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;MeasurementProcedure">
+		<rdfs:label>measurement procedure</rdfs:label>
+		<dct:source>ISO 11240:2012, clause 3.1.16</dct:source>
+		<skos:definition>detailed description of a measurement according to one or more measurement principles (i.e. phenomena, observables) and to a given measurement method, based on a measurement model and including any calculation to obtain a measurement result</skos:definition>
+		<skos:example>Lowering of the concentration of glucose in blood in a fasting rabbit is an observable that can be applied to the measurement of insulin concentration in a preparation. Together with a description of the measurement method this can be used to define a measurement procedure.</skos:example>
+		<skos:note>A measurement procedure can include a statement concerning a target measurement uncertainty.</skos:note>
+		<skos:note>A measurement procedure is usually documented in sufficient detail to enable an operator to perform a measurement.</skos:note>
+		<idmp-av:abbreviation>SOP</idmp-av:abbreviation>
+		<idmp-av:synonym>standard operating procedure</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;ReferenceMaterial">
+		<rdfs:label>reference material</rdfs:label>
+		<dct:source>ISO 11240:2012, clause 3.1.26</dct:source>
+		<skos:definition>material, sufficiently homogeneous and stable with reference to specified properties, which has been established to be fit for its intended use in measurement or in examination of nominal properties</skos:definition>
+		<skos:note>Some reference materials have assigned quantity values that are metrologically traceable to a measurement unit outside a system of units. Such materials include vaccines to which International Units (IU) have been assigned by the World Health Organization (WHO).</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;UnitOfMeasureIdentificationScheme">
@@ -111,6 +158,11 @@
 		<skos:definition>unique identifier for the unit of measurement entry within the ISO lexicon</skos:definition>
 		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
 	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&idmp-uom;refersTo">
+		<rdfs:label>refers to</rdfs:label>
+		<skos:definition>makes reference to as a source for information or explanation</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&cmns-qtu;Dimensionality">
 		<idmp-av:synonym>dimension of a quantity</idmp-av:synonym>
