@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY idmp-av "https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/">
+	<!ENTITY idmp-dtp "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/">
+	<!ENTITY idmp-uom "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/idmp-ontology/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"
+	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:idmp-av="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"
+	xmlns:idmp-dtp="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"
+	xmlns:idmp-uom="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/idmp-ontology/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/">
+		<rdfs:label>ISO 11240 Identification and Exchange of Units of Measure (UOM) Ontology</rdfs:label>
+		<dct:abstract>This ontology provides a semantic model representing common definitions for exchanging units of measure and measurement concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment.  It is derived from the ISO 11240:2012 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement as well as from other ISO and OMG standards such as SysML.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/20220201/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"/>
+		<idmp-av:copyright>Copyright (c) 2022 EDM Council, Inc.</idmp-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&idmp-uom;ArbitraryUnit">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
+		<rdfs:label>arbitrary unit</rdfs:label>
+		<dct:source>ISO 11240:2012, clause 3.1.1</dct:source>
+		<skos:definition>arbitrarily defined unit of measurement, where a relation of the unit to a physical unit of the SI does not exist or is unknown</skos:definition>
+		<skos:note>Arbitrary units represent references to materials or procedures that are defined outside the SI system. A quantity value is arbitrarily assigned to the reference preparation or the result of a measurement procedure, usually specific for a particular substance. This generally precludes comparability of quantity values across different systems and components for this type of units.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;CoherentDerivedUnit">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;DerivedUnit"/>
+		<rdfs:label>coherent derived unit</rdfs:label>
+		<dct:source>ISO 11240:2012, clause 3.1.4</dct:source>
+		<skos:definition>derived unit that, for a given system of quantities and for a chosen set of base units, is a product of powers of base units with no other proportionality factor than one</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;ConversionFactorBetweenUnits">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Ratio"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityKind"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>conversion factor between units</rdfs:label>
+		<dct:source>ISO 11240:2012, clause 3.1.6</dct:source>
+		<skos:definition>ratio of two measurement units for quantities of the same kind</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;UnitOfMeasureIdentificationScheme">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:subClassOf rdf:resource="&cmns-id;IdentificationScheme"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:allValuesFrom rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>unit of measure identification scheme</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.1</dct:source>
+		<skos:definition>system for minting identifiers for things that specifies constraints on the structure of the unit of measure identifier</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;UnitOfMeasureIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:someValuesFrom rdf:resource="&idmp-uom;UnitOfMeasureIdentificationScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-uom;UnitOfMeasureIdentificationScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementUnit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>unit of measure identifier</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 4.6.2.1</dct:source>
+		<skos:definition>unique identifier for the unit of measurement entry within the ISO lexicon</skos:definition>
+		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;Dimensionality">
+		<idmp-av:synonym>dimension of a quantity</idmp-av:synonym>
+		<idmp-av:synonym>quantity dimension</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;QuantityKind">
+		<skos:example>The quantities diameter, circumference and wavelength are generally considered to be quantities of the same kind, namely of the kind-of-quantity called length.</skos:example>
+		<skos:example>The quantities number of entities, relative substance concentration, and mass fraction are, by convention, not regarded as being of the same kind, although they have the same quantity dimension.</skos:example>
+		<skos:note>Quantities of the same kind within a given system of quantities have the same quantity dimension. However, quantities of the same dimension are not necessarily of the same kind. The division of the concept of &apos;quantity&apos; according to &apos;kind-of-quantity&apos; is to some extent arbitrary.</skos:note>
+		<skos:note>This concept is necessary for the definition of a measurable quantity, along with a system and often a component.</skos:note>
+		<idmp-av:synonym>kind-of-quantity</idmp-av:synonym>
+	</owl:Class>
+
+</rdf:RDF>
