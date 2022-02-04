@@ -10,8 +10,6 @@
 	<!ENTITY idmp-dtp "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/">
 	<!ENTITY idmp-ucum "https://spec.edmcouncil.org/idmp-ontology/MVP/UnifiedCodeForUnitsOfMeasure/">
 	<!ENTITY idmp-uom "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/">
-	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
-	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -29,8 +27,6 @@
 	xmlns:idmp-dtp="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"
 	xmlns:idmp-ucum="https://spec.edmcouncil.org/idmp-ontology/MVP/UnifiedCodeForUnitsOfMeasure/"
 	xmlns:idmp-uom="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"
-	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
-	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -49,14 +45,11 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/20220201/UnifiedCodeForUnitsOfMeasure/"/>
 		<idmp-av:copyright>Copyright (c) 2022 EDM Council, Inc.</idmp-av:copyright>
 	</owl:Ontology>
 	
-	<owl:Class rdf:about="&idmp-ucum;CodeEntry">
-		<rdfs:subClassOf rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
+	<owl:Class rdf:about="&idmp-uom;CodeEntry">
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
@@ -69,29 +62,6 @@
 				<owl:hasValue rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-ucum;hasLanguageCode"/>
-				<owl:someValuesFrom rdf:resource="&lcc-lr;LanguageIdentifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-ucum;hasRegionCode"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>code entry</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.2</dct:source>
-		<skos:definition>unique identifier for the unit of measurement entry within the ISO lexicon</skos:definition>
-		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ucum;UnifiedCodeForUnitsOfMeasure">
@@ -139,23 +109,5 @@
 		<cmns-id:identifies rdf:resource="&idmp-ucum;UnifiedCodeForUnitsOfMeasure"/>
 		<cmns-txt:hasTextValue>2.16.840.1.113883.6.8</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
-	
-	<owl:ObjectProperty rdf:about="&idmp-ucum;hasLanguageCode">
-		<rdfs:subPropertyOf rdf:resource="&idmp-uom;refersTo"/>
-		<rdfs:label>has language code</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.2 Unit of measurement Code Entry, Table 2</dct:source>
-		<rdfs:range rdf:resource="&lcc-lr;LanguageIdentifier"/>
-		<skos:definition>indicates the language of this entry using ISO 639</skos:definition>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-ucum;hasRegionCode">
-		<rdfs:subPropertyOf rdf:resource="&idmp-uom;refersTo"/>
-		<rdfs:label>has region code</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.2 Unit of measurement Code Entry, Table 2</dct:source>
-		<rdfs:range rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
-		<skos:definition>indicates a geographic refinement of the language of this entry using ISO 3166</skos:definition>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
-	</owl:ObjectProperty>
 
 </rdf:RDF>
