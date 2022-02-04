@@ -180,7 +180,15 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;SystemOfUnits"/>
+				<owl:onClass rdf:resource="&cmns-qtu;SystemOfUnits"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityKind"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>measurement unit</rdfs:label>
@@ -201,6 +209,12 @@
 	
 	<owl:Class rdf:about="&cmns-qtu;Quantity">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;Measure"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
@@ -261,12 +275,32 @@
 		<skos:definition>factor in a product of powers that defines a derived quantity</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;QuantityName">
+		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;Quantity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>quantity name</rdfs:label>
+		<skos:definition>human-readable textual representation of the quantity</skos:definition>
+		<skos:note>A number of systems of quantities and units encode a quantity, such as a unit of measure, via a generally accepted abbreviation. URIs representing such quantities are very useful in applications that require globally unique, machine readable names, but are less accessible to people. This concept is intended to provide the corresponding name for a given quantity in the context of a specific system of quantities and units for human consumption.</skos:note>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;QuantityValue">
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementUnit"/>
 				<owl:onClass rdf:resource="&cmns-qtu;MeasurementUnit"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;expressesTheMagnitudeOf"/>
+				<owl:onClass rdf:resource="&cmns-qtu;Quantity"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -365,7 +399,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
 				<owl:onClass rdf:resource="&cmns-qtu;SystemOfQuantities"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
@@ -416,6 +450,12 @@
 		<skos:definition>specifies the calculation or expression used to determine the value of something</skos:definition>
 		<skos:note>In cases where some expression can only be calculated in SPARQL or via rules, this property is useful for stating what that calculation should be using the input arguments to the expression.</skos:note>
 	</owl:AnnotationProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;expressesTheMagnitudeOf">
+		<rdfs:label>expresses the magnitude of</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-qtu;Quantity"/>
+		<skos:definition>specifies the quantity that some quantity value reflects</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasArgument">
 		<rdfs:label>has argument</rdfs:label>
