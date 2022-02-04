@@ -37,7 +37,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220101/QuantitiesAndUnits/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220201/QuantitiesAndUnits/"/>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-qtu;BaseQuantity">
@@ -82,16 +82,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;isDerivedFrom"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&cmns-qtu;BaseQuantity">
-							</rdf:Description>
-							<rdf:Description rdf:about="&cmns-qtu;DerivedQuantity">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKind"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>derived quantity</rdfs:label>
@@ -246,6 +237,13 @@
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:onClass rdf:resource="&cmns-qtu;SystemOfQuantities"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>quantity kind</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
@@ -362,16 +360,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&cmns-qtu;BaseQuantity">
-							</rdf:Description>
-							<rdf:Description rdf:about="&cmns-qtu;DerivedQuantity">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKind"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en">system of quantities</rdfs:label>
