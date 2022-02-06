@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
+	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-av "https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/">
@@ -15,8 +19,12 @@
 ]>
 <rdf:RDF xml:base="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
+	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-av="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"
@@ -29,17 +37,66 @@
 	
 	<owl:Ontology rdf:about="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/">
 		<rdfs:label>ISO 21090 Harmonized Datatypes Ontology</rdfs:label>
-		<dct:abstract>The harmonized datatypes ontology provides a semantic model representing the harmonized datatype definitions for exchanging basic concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment.  It is derived from the ISO 21090:2011 Health informatics - Harmonized data types for information interchange specification, which in turn is compliant with and uses the terminology, notations and datatypes defined in ISO/IEC 11404.</dct:abstract>
+		<dct:abstract>The harmonized datatypes ontology provides a semantic model representing the harmonized datatype definitions for exchanging basic concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment. It is derived from the ISO 21090:2011 Health informatics - Harmonized data types for information interchange specification, which in turn is compliant with and uses the terminology, notations and datatypes defined in ISO/IEC 11404.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/20220101/ISO21090-HarmonizedDatatypes/"/>
 		<idmp-av:copyright>Copyright (c) 2022 EDM Council, Inc.</idmp-av:copyright>
 		<idmp-av:explanatoryNote>The harmonized datatypes ontology provides a set of codes for datatypes and classes used in other standards in the health informatics family of standards, including those published by HL7.  These codes need to be referenced via an annotation in the context of the IDMP ontologies due to the fact that any other approach would result in punning.</idmp-av:explanatoryNote>
 	</owl:Ontology>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;A">
+		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdfs:label>A</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code indicating that an item was (or is to be) added, having not been present immediately before</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<idmp-av:explanatoryNote>If it is already present, this may be treated as an error condition.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Add</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>A</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;ANY">
+		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:label>boolean</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code representing the most basic, non-private datatype in the ISO 21090 datatype classification hierarchy</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-txt:hasTextValue>ANY</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;AR">
+		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdfs:label>AR</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code indicating that an item was (or is to be) either added or replaced</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<idmp-av:explanatoryNote>No assertion is made as to whether the item previously existed.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Add or replace</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>AR</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;ASKU">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>ASKU</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value for which information was sought but not found (e.g. patient was asked but did not know).</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Asked but unknown</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;UNK"/>
+		<cmns-txt:hasTextValue>ASKU</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;BL">
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
@@ -59,6 +116,38 @@
 		<cmns-txt:hasTextValue>CD</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;D">
+		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdfs:label>D</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code indicating that an item item was (or is to be) removed (sometimes referred to as deleted)</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<idmp-av:explanatoryNote>If the item is part of a collection, delete any matching items.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Remove</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>D</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;DER">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>DER</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for value for which no attempt has been made to encode the information correctly but the raw source information is represented (usually in originalText)</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Derived</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;INV"/>
+		<cmns-txt:hasTextValue>DER</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-dtp;DatatypeFlavor">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:label>datatype flavor</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 6.7.6</dct:source>
+		<skos:definition>code element that describes a common constraint pattern on a datatype</skos:definition>
+		<skos:note>Datatype flavors cannot introduce new attributes, new codes, default values, or any new definitional material. Datatype flavors may only make rules about what or how existing features of a class may be used.</skos:note>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;ED">
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>encapsulated data</rdfs:label>
@@ -75,6 +164,14 @@
 		<idmp-av:explanatoryNote>This code denotes a name expressed as an xsd:string or rdf:langString, or a reified name that is an individual of type cmns-dsg:Name or of a subclass of cmns-dsg:Name such as a composite person name, organizational name, or other contextual name that may include provenance details such as the date such a name was last verified in addition to possible components of a name.</idmp-av:explanatoryNote>
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
 		<cmns-txt:hasTextValue>EN</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;HXIT">
+		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:label>HXIT</rdfs:label>
+		<skos:definition>code representing the top-level datatype in the ISO 21090 datatype classification hierarchy</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-txt:hasTextValue>HXIT</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;II">
@@ -95,11 +192,188 @@
 		<cmns-txt:hasTextValue>INT</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;INV">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>INV</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value as represented in the instance that is not a member of the set of permitted data values in the constrained value domain of a variable</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">2</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Invalid</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NI"/>
+		<cmns-txt:hasTextValue>INV</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-AnyDatatype">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasExceptionalValue"/>
+				<owl:onClass rdf:resource="&idmp-dtp;NullFlavor"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasUpdateMode"/>
+				<owl:onClass rdf:resource="&idmp-dtp;UpdateMode"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasFlavorIdentifier"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ISO 21090 any datatype</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3</dct:source>
+		<skos:definition>code element that defines the basic properties of every data value</skos:definition>
+		<skos:note>However exceptional values (nullFlavored values) may be of type ANY, except for the exceptional values that imply the NullFlavor INV, since this requires a type to be meaningful. Not all NullFlavors may be used with the type ANY.</skos:note>
+		<skos:note>This is conceptually an abstract type, meaning that no proper value can be just a data value without belonging to any concrete type. Every public concrete type is a specialization of this general abstract DataValue type.</skos:note>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;ISO21090-CodeSet">
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:label>ISO 21090 code set</rdfs:label>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.iso.org/standard/35646.html</rdfs:seeAlso>
 		<skos:definition>the set of codes for harmonized datatypes defined in the ISO 21090 specification</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-Datatype">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasControlInformationExtension"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;String"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasControlInformationRoot"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;String"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasValidTimeHigh"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasValidTimeLow"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ISO 21090 datatype</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.2</dct:source>
+		<skos:definition>classifier that provides the top-level, abstract definition of a datatype according to the ISO 20190 specification</skos:definition>
+		<skos:note>Because of the way that the types are defined, a number of attributes of the datatypes have values with a type derived from HXIT (i.e., from this abstract class definition corresponding to HXIT). In these cases the HXIT attributes are constrained to null. The only case where the HXIT attributes are allowed within a datatype is on items in a collection (DSET, LIST, BAG, HIST). The use of these attributes is generally subject to further constraints in the specifications that make use of these types.</skos:note>
+		<skos:note>This concept corresponds to the HXIT datatype, which is abstract and private from a UML perspective - this datatype is not for use outside the datatypes in this International Standard.</skos:note>
+		<skos:note>Together, the root and extension identify a particular record of a real world event that may supply additional information about the value such as who made the change, when it was made, why it was made, what system originated the change. These attributes exist because sometimes this information is required, but the value is being represented in an external context that does not contain a proper relationship to the control information for the value itself. The record need not be directly or easily resolvable. Conformance statements may make additional statements about these two properties, or about how such a reference should be resolved. If a controlInformationExtension is provided, a ControlInformationRoot shall also be provided.</skos:note>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;K">
+		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdfs:label>K</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code indicating that the item is part of the identifying information for the object that contains it</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Key</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>K</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;MSK">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>MSK</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value for which there is information available but it has not been provided by the sender due to security, privacy or other reasons</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">2</idmp-dtp:hasLevel>
+		<idmp-av:explanatoryNote>There may be an alternate mechanism for gaining access to this information.</idmp-av:explanatoryNote>
+		<idmp-av:explanatoryNote>Warning: Using this Nullflavor does provide information that may be a breach of confidentiality, even though no detailed data are provided. Its primary purpose is for those circumstances where it is necessary to inform the receiver that the information does exist without providing any detail.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Masked</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NI"/>
+		<cmns-txt:hasTextValue>MSK</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;N">
+		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdfs:label>N</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code indicating that there was (or is to be) no change to the item</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<idmp-av:explanatoryNote>This is primarily used when this element has not changed, but other attributes in the instance have changed.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>No change</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>N</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;NA">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>NA</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value for which no proper value is applicable in this context (e.g. last menstrual period for a male)</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">2</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Not applicable</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NI"/>
+		<cmns-txt:hasTextValue>NA</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;NASK">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>NASK</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value for which information has not been sought (e.g. patient was not asked)</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Not asked</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;UNK"/>
+		<cmns-txt:hasTextValue>NASK</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;NAV">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>NAV</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value for which information is not available at this time but it is expected that it would be available later</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">4</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Temporarily unavailable</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;ASKU"/>
+		<cmns-txt:hasTextValue>NAV</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;NI">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>NI</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value that is exceptional (missing, omitted, incomplete, improper)</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<idmp-av:explanatoryNote>No information as to the reason for being an exceptional value is provided. This is the most general exceptional value. It is also the default exceptional value.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>No information</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>NI</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;NINF">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>NINF</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value that is part of a value domain including a negative infinity of numbers</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">4</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Negative infinity</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;OTH"/>
+		<cmns-txt:hasTextValue>NINF</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;NM">
@@ -111,6 +385,72 @@
 		<cmns-txt:hasTextValue>NM</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-dtp;NullFlavor">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;DatatypeFlavor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasLevel"/>
+				<owl:someValuesFrom rdf:resource="&xsd;nonNegativeInteger"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>null flavor</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code element that provides a general framework for handling incomplete data which is often encountered in healthcare information collection, use and analysis</skos:definition>
+		<skos:note>Some of the Null flavors are not generally applicable to all datatypes. The NullFlavors NINF, PINF, QS, and TRC shall only be used in association with QTY types. The NullFlavor UNC shall only be used with any type that has an originalText, and when UNC is used the originalText property shall be populated. When the NullFlavor DER is used, an expression shall be provided.</skos:note>
+		<skos:note>The nullFlavor property may also play a special role in conformance frameworks in specifications that make use of these types.</skos:note>
+		<idmp-av:synonym>null flavor enumeration</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;NullFlavorEnumeration">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>null flavor enumeration</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>singleton used for reference to the null flavor class to avoid punning</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;NullFlavorObjectIdentifier">
+		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+		<rdfs:label>null flavor object identifier</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>object identifier for the null flavor enumeration</skos:definition>
+		<idmp-av:abbreviation>null flavor OID</idmp-av:abbreviation>
+		<cmns-col:conformsWith rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-id:identifies rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.5.1008</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;OTH">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>OTH</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for an actual value that is not a member of the set of permitted data values in the constrained value domain of a variable (e.g. concept not provided by required code system)</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Other</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;INV"/>
+		<cmns-txt:hasTextValue>OTH</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-dtp;ObjectIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:label>object identifier</rdfs:label>
+		<skos:definition>globally unique identifier of a data object as defined in ISO/IEC 8824-2</skos:definition>
+		<idmp-av:abbreviation>OID</idmp-av:abbreviation>
+		<idmp-av:explanatoryNote>An object identifier (OID) is a unique alphanumeric/numeric identifier registered under the ISO/IEC 8824-2 registration standard to reference a specific object or object class.</idmp-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;PINF">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>PINF</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value that is part of a value domain including a positive infinity of numbers</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">4</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Positive infinity</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;OTH"/>
+		<cmns-txt:hasTextValue>PINF</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;PQ">
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>physical quantity</rdfs:label>
@@ -118,6 +458,30 @@
 		<idmp-av:explanatoryNote>This code denotes a complex concept, i.e., a named individual of type cmns-qtu:QuantityValue that has an inherent unit of measure and numeric value.</idmp-av:explanatoryNote>
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
 		<cmns-txt:hasTextValue>PQ</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;QS">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>QS</rdfs:label>
+		<skos:definition>code for a value for which a specific quantity is not known, but is known to be non-zero and is not specified because it makes up the bulk of the material</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevel>
+		<idmp-av:explanatoryNote>&apos;Add 10 mg of ingredient X, 50 mg of ingredient Y, and sufficient quantity of water to 100 ml.&apos; The null flavor would be used to express the quantity of water.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Sufficient quantity</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;UNK"/>
+		<cmns-txt:hasTextValue>QS</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;R">
+		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdfs:label>R</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code indicating that an item existed previously and has been (or is to be) revised</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<idmp-av:explanatoryNote>If an item does not already exist, this may be treated as an error condition.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Replace</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>R</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;REAL">
@@ -146,6 +510,17 @@
 		<cmns-txt:hasTextValue>STT</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;TRC">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>TRC</rdfs:label>
+		<skos:definition>code for a value for which content is greater than zero, but too small to be quantified</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Trace</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;UNK"/>
+		<cmns-txt:hasTextValue>TRC</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;TS">
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>timestamp</rdfs:label>
@@ -154,6 +529,149 @@
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
 		<cmns-txt:hasTextValue>TS</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;U">
+		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdfs:label>U</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code indicating that it is not specified whether or what kind of change has occurred to the item, or whether the item is present as a reference or identifying property</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Unknown</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>U</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;UNC">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>UNC</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value for which an actual value may exist, but it must be derived from the information provided (usually an expression is provided directly)</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Unencoded</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;INV"/>
+		<cmns-txt:hasTextValue>UNC</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;UNK">
+		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdfs:label>UNK</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<skos:definition>code for a value for which proper value is applicable, but not known</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">2</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Unknown</cmns-dsg:hasDescription>
+		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NI"/>
+		<cmns-txt:hasTextValue>UNK</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-dtp;UpdateMode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasLevel"/>
+				<owl:someValuesFrom rdf:resource="&xsd;nonNegativeInteger"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>update mode</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>code element that allows a sending system to identify the role that thevcattribute plays in processing the instance that is being represented</skos:definition>
+		<skos:note>If populated, the value of this attribute shall be taken from the HL7 UpdateMode code system.</skos:note>
+		<idmp-av:synonym>update mode enumeration</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;UpdateModeEnumeration">
+		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdfs:label>update mode enumeration</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>singleton used for reference to the update mode class to avoid punning</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;UpdateModeObjectIdentifier">
+		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+		<rdfs:label>update mode object identifier</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>object identifier for the update mode enumeration</skos:definition>
+		<idmp-av:abbreviation>update mode OID</idmp-av:abbreviation>
+		<cmns-col:conformsWith rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-id:identifies rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.5.57</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasControlInformationExtension">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has control information root</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.2.3.4</dct:source>
+		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>indicates the extension of the identifier of the event associated with setting the datatype to its specified value</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasControlInformationRoot">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has control information root</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.2.3.3</dct:source>
+		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>indicates the root of the identifier of the event associated with setting the datatype to its specified value</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasExceptionalValue">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
+		<rdfs:label>has exceptional value</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.1</dct:source>
+		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<rdfs:range rdf:resource="&idmp-dtp;NullFlavor"/>
+		<skos:definition>indicates the reason if a value is not proper</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasFlavorIdentifier">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has flavor identifier</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.2.3.3</dct:source>
+		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>indicates the root of the identifier of the event associated with setting the datatype to its specified value</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasLevel">
+		<rdfs:label>has level</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
+		<rdfs:domain rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+		<skos:definition>indicates a position of the concept with respect to the hierarchy of the terminology</skos:definition>
+		<skos:note>All concepts marked with the same level and not separated by a concept with a level of less numerical magnitude are siblings, and all concepts that follow after another concept with a higher level value are children of that concept.</skos:note>
+		<skos:note>The hierarchy in the enumeration is an important part of the specification. Although the enumerations are defined as linear lists within ISO/IEC 11404 and the UML definitions, any information processing entity that asserts direct or indirect conformance with this International Standard shall conform to the relationships when evaluating meaning (implication) within the enumeration. In addition, this International Standard occasionally refers to the relationships within the narrative when defining the outcome of some operations.</skos:note>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasUpdateMode">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
+		<rdfs:label>has update mode</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<rdfs:range rdf:resource="&idmp-dtp;UpdateMode"/>
+		<skos:definition>allows a sending system to to identify the role that the attribute plays in processing the instance that is being represented</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasValidTimeHigh">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
+		<rdfs:label>has valid time high</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.2.3.2</dct:source>
+		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
+		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
+		<skos:definition>indicates the time that the given information ceased or will cease to be correct</skos:definition>
+		<skos:note>Both validTimeLow and validTimeHigh shall be valid timestamps using the format described in 7.8.13.3.1 (TS.value).</skos:note>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasValidTimeLow">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
+		<rdfs:label>has valid time low</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.2.3.1</dct:source>
+		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
+		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
+		<skos:definition>indicates the time that the given information became or will become valid</skos:definition>
+		<skos:note>This is not the time that any system first observed the value, but the time that the actual value became correct (i.e. when a patient changes their name).</skos:note>
+	</owl:DatatypeProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-dtp;isEncodedAs">
 		<rdfs:label>is encoded as</rdfs:label>
