@@ -235,9 +235,26 @@
 		</rdfs:subClassOf>
 		<rdfs:label>ISO 21090 any datatype</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.3.3</dct:source>
-		<skos:definition>code element that defines the basic properties of every data value</skos:definition>
+		<skos:definition>classifier that defines the basic properties of every data value</skos:definition>
 		<skos:note>However exceptional values (nullFlavored values) may be of type ANY, except for the exceptional values that imply the NullFlavor INV, since this requires a type to be meaningful. Not all NullFlavors may be used with the type ANY.</skos:note>
 		<skos:note>This is conceptually an abstract type, meaning that no proper value can be just a data value without belonging to any concrete type. Every public concrete type is a specialization of this general abstract DataValue type.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ANY"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-BooleanDatatype">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasBooleanValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ISO 21090 boolean datatype</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.4</dct:source>
+		<skos:definition>classifier that stands for the values of two-valued logic</skos:definition>
+		<skos:note>A BL value can be either true or false, or may have a nullFlavor, which makes this classifier essentially three-valued.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL"/>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;ISO21090-CodeSet">
@@ -283,6 +300,7 @@
 		<skos:note>Because of the way that the types are defined, a number of attributes of the datatypes have values with a type derived from HXIT (i.e., from this abstract class definition corresponding to HXIT). In these cases the HXIT attributes are constrained to null. The only case where the HXIT attributes are allowed within a datatype is on items in a collection (DSET, LIST, BAG, HIST). The use of these attributes is generally subject to further constraints in the specifications that make use of these types.</skos:note>
 		<skos:note>This concept corresponds to the HXIT datatype, which is abstract and private from a UML perspective - this datatype is not for use outside the datatypes in this International Standard.</skos:note>
 		<skos:note>Together, the root and extension identify a particular record of a real world event that may supply additional information about the value such as who made the change, when it was made, why it was made, what system originated the change. These attributes exist because sometimes this information is required, but the value is being represented in an external context that does not contain a proper relationship to the control information for the value itself. The record need not be directly or easily resolvable. Conformance statements may make additional statements about these two properties, or about how such a reference should be resolved. If a controlInformationExtension is provided, a ControlInformationRoot shall also be provided.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;HXIT"/>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;K">
@@ -610,6 +628,14 @@
 		<cmns-txt:hasTextValue>2.16.840.1.113883.5.57</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasBooleanValue">
+		<rdfs:label>has boolean value</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.4.3.1</dct:source>
+		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates the value of the BL</skos:definition>
+	</owl:DatatypeProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasControlInformationExtension">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has control information root</rdfs:label>
@@ -644,6 +670,7 @@
 		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>indicates the root of the identifier of the event associated with setting the datatype to its specified value</skos:definition>
+		<skos:note>Signals the imposition of one or more sets of constraints on the datatype. The sole purpose of specifying that a constraint that has been used to further constrain the datatype is to support validation of the instance: a validation engine can look up the rules expressed for the specified flavors and confirm that the instance conforms to the rules for the flavor. No other processing should depend on the content of the flavor attribute. No other semantic or computational use shall depend on the value of this property. If this value is populated,the datatype flavor(s) shall be a valid constraint on the type of value.</skos:note>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasLevel">
