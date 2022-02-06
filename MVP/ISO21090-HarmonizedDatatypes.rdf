@@ -11,6 +11,7 @@
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-av "https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/">
 	<!ENTITY idmp-dtp "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/">
+	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -29,6 +30,7 @@
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-av="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"
 	xmlns:idmp-dtp="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"
+	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -257,6 +259,35 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-CharacterStringDatatype">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasTranslation"/>
+				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-CharacterStringDatatype"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasLanguageCode"/>
+				<owl:onClass rdf:resource="&lcc-lr;LanguageIdentifier"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ISO 21090 character string datatype</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.6</dct:source>
+		<skos:definition>classifier that stands for text data, primarily intended for machine processing (e.g. sorting, querying, indexing, etc.) or direct display</skos:definition>
+		<skos:note>A ST shall have at least one character or else have a nullFlavor</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;ISO21090-CodeSet">
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:label>ISO 21090 code set</rdfs:label>
@@ -430,18 +461,28 @@
 		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
 		<rdfs:label>null flavor enumeration</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
-		<skos:definition>singleton used for reference to the null flavor class to avoid punning</skos:definition>
+		<skos:definition>singleton used for reference to the null flavor code element class to avoid punning</skos:definition>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-dtp;NullFlavorObjectIdentifier">
+	<owl:NamedIndividual rdf:about="&idmp-dtp;OID-2.16.840.1.113883.5.1008">
 		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
-		<rdfs:label>null flavor object identifier</rdfs:label>
+		<rdfs:label>null flavor enumeration object identifier</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
 		<skos:definition>object identifier for the null flavor enumeration</skos:definition>
-		<idmp-av:abbreviation>null flavor OID</idmp-av:abbreviation>
 		<cmns-col:conformsWith rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
 		<cmns-id:identifies rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-txt:hasTextValue>2.16.840.1.113883.5.1008</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;OID-2.16.840.1.113883.5.57">
+		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+		<rdfs:label>update mode enumeration object identifier</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
+		<skos:definition>object identifier for the update mode enumeration</skos:definition>
+		<idmp-av:abbreviation>update mode OID</idmp-av:abbreviation>
+		<cmns-col:conformsWith rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-id:identifies rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.5.57</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;OTH">
@@ -614,18 +655,7 @@
 		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
 		<rdfs:label>update mode enumeration</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
-		<skos:definition>singleton used for reference to the update mode class to avoid punning</skos:definition>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-dtp;UpdateModeObjectIdentifier">
-		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
-		<rdfs:label>update mode object identifier</rdfs:label>
-		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
-		<skos:definition>object identifier for the update mode enumeration</skos:definition>
-		<idmp-av:abbreviation>update mode OID</idmp-av:abbreviation>
-		<cmns-col:conformsWith rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
-		<cmns-id:identifies rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
-		<cmns-txt:hasTextValue>2.16.840.1.113883.5.57</cmns-txt:hasTextValue>
+		<skos:definition>singleton used for reference to the update mode code element class to avoid punning</skos:definition>
 	</owl:NamedIndividual>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasBooleanValue">
@@ -673,6 +703,16 @@
 		<skos:note>Signals the imposition of one or more sets of constraints on the datatype. The sole purpose of specifying that a constraint that has been used to further constrain the datatype is to support validation of the instance: a validation engine can look up the rules expressed for the specified flavors and confirm that the instance conforms to the rules for the flavor. No other processing should depend on the content of the flavor attribute. No other semantic or computational use shall depend on the value of this property. If this value is populated,the datatype flavor(s) shall be a valid constraint on the type of value.</skos:note>
 	</owl:DatatypeProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasLanguageCode">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
+		<rdfs:label>has language code</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 7.4.6.3.2</dct:source>
+		<rdfs:range rdf:resource="&lcc-lr;LanguageIdentifier"/>
+		<skos:definition>indicates the human language of the content</skos:definition>
+		<skos:note>Valid codes are taken from the IETF RFC 3066. If this attribute is null, the language may be inferred from elsewhere, either from the context or from unicode language tags, for example. Conformance profiles should define defaulting rules for language for a given usage environment of this International Standard. While language tags usually alter the meaning of the text, the language does not alter the meaning of the characters in the text.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasLevel">
 		<rdfs:label>has level</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
@@ -682,6 +722,16 @@
 		<skos:note>All concepts marked with the same level and not separated by a concept with a level of less numerical magnitude are siblings, and all concepts that follow after another concept with a higher level value are children of that concept.</skos:note>
 		<skos:note>The hierarchy in the enumeration is an important part of the specification. Although the enumerations are defined as linear lists within ISO/IEC 11404 and the UML definitions, any information processing entity that asserts direct or indirect conformance with this International Standard shall conform to the relationships when evaluating meaning (implication) within the enumeration. In addition, this International Standard occasionally refers to the relationships within the narrative when defining the outcome of some operations.</skos:note>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasTranslation">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
+		<rdfs:label>has translation</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 7.4.6.3.3</dct:source>
+		<rdfs:range rdf:resource="&idmp-dtp;ISO21090-CharacterStringDatatype"/>
+		<skos:definition>indicates an alternate rendition of the same content translated into a different language</skos:definition>
+		<skos:note>Translations may not contain translations. The translations shall convey the same information, but in a different language. The translations do not take part in the test for equality, so shall not introduce any new semantics to the value.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasUpdateMode">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
@@ -716,5 +766,10 @@
 		<rdfs:label>is encoded as</rdfs:label>
 		<skos:definition>assigns an ISO 21090 datatype to an XML Scheme Datatype or more complex concept corresponding to the notion of an ISO 21090 datatype</skos:definition>
 	</owl:AnnotationProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;refersTo">
+		<rdfs:label>refers to</rdfs:label>
+		<skos:definition>makes reference to as a source for information or explanation</skos:definition>
+	</owl:ObjectProperty>
 
 </rdf:RDF>

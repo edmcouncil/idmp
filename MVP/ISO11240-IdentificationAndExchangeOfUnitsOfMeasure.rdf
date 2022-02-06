@@ -52,8 +52,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/20220201/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"/>
 		<idmp-av:copyright>Copyright (c) 2022 EDM Council, Inc.</idmp-av:copyright>
 	</owl:Ontology>
@@ -62,21 +60,21 @@
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-uom;refersTo"/>
+				<owl:onProperty rdf:resource="&idmp-dtp;refersTo"/>
 				<owl:onClass rdf:resource="&idmp-uom;MaterialMeasure"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-uom;refersTo"/>
+				<owl:onProperty rdf:resource="&idmp-dtp;refersTo"/>
 				<owl:onClass rdf:resource="&idmp-uom;MeasurementProcedure"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-uom;refersTo"/>
+				<owl:onProperty rdf:resource="&idmp-dtp;refersTo"/>
 				<owl:onClass rdf:resource="&idmp-uom;ReferenceMaterial"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -282,17 +280,8 @@
 		<skos:definition>unique identifier for the unit of measure in some system of units</skos:definition>
 	</owl:Class>
 	
-	<owl:ObjectProperty rdf:about="&idmp-uom;hasLanguageCode">
-		<rdfs:subPropertyOf rdf:resource="&idmp-uom;refersTo"/>
-		<rdfs:label>has language code</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.2 Unit of measurement Code Entry, Table 2</dct:source>
-		<rdfs:range rdf:resource="&lcc-lr;LanguageIdentifier"/>
-		<skos:definition>indicates the language of this entry using ISO 639</skos:definition>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&idmp-uom;hasRegionCode">
-		<rdfs:subPropertyOf rdf:resource="&idmp-uom;refersTo"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
 		<rdfs:label>has region code</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 4.6.2.2 Unit of measurement Code Entry, Table 2</dct:source>
 		<rdfs:range rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
@@ -308,11 +297,6 @@
 		<skos:definition>indicates that the unit of measure is an SI quantity, or is based on an SI quantity</skos:definition>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL"/>
 	</owl:DatatypeProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-uom;refersTo">
-		<rdfs:label>refers to</rdfs:label>
-		<skos:definition>makes reference to as a source for information or explanation</skos:definition>
-	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&cmns-qtu;Dimensionality">
 		<idmp-av:synonym>dimension of a quantity</idmp-av:synonym>
