@@ -334,6 +334,35 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;HXIT"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-EncapsulatedDataDatatype">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasTranslation"/>
+				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-EncapsulatedDataDatatype"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasLanguageCode"/>
+				<owl:onClass rdf:resource="&lcc-lr;LanguageIdentifier"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ISO 21090 encapsulated data datatype</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.6</dct:source>
+		<skos:definition>classifier that stands for data that are primarily intended for human interpretation or for further machine processing outside the scope of the ISO 21090 International Standard</skos:definition>
+		<skos:note>This includes unformatted or formatted written language, multimedia data, or structured information as defined by a different standard (e.g. XML-signatures).</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ED"/>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;K">
 		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
 		<rdfs:label>K</rdfs:label>
@@ -727,7 +756,7 @@
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
 		<rdfs:label>has translation</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 7.4.6.3.3</dct:source>
-		<rdfs:range rdf:resource="&idmp-dtp;ISO21090-CharacterStringDatatype"/>
+		<rdfs:range rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<skos:definition>indicates an alternate rendition of the same content translated into a different language</skos:definition>
 		<skos:note>Translations may not contain translations. The translations shall convey the same information, but in a different language. The translations do not take part in the test for equality, so shall not introduce any new semantics to the value.</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
