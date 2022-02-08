@@ -40,7 +40,7 @@
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220201/QuantitiesAndUnits/"/>
 	</owl:Ontology>
 	
-	<owl:Class rdf:about="&cmns-qtu;BaseQuantity">
+	<owl:Class rdf:about="&cmns-qtu;BaseQuantityKind">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityKind"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -49,7 +49,7 @@
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>base quantity</rdfs:label>
+		<rdfs:label>base quantity kind</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>quantity kind in a conventionally chosen subset of a given system of quantities, where no subset quantity can be expressed in terms of the others</skos:definition>
@@ -76,7 +76,7 @@
 		<skos:definition>symbol that represents a value that does not change (i.e., is fixed) with respect to a formula or expression</skos:definition>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-qtu;DerivedQuantity">
+	<owl:Class rdf:about="&cmns-qtu;DerivedQuantityKind">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityKind"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -90,10 +90,10 @@
 				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKind"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>derived quantity</rdfs:label>
+		<rdfs:label>derived quantity kind</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
-		<owl:disjointWith rdf:resource="&cmns-qtu;BaseQuantity"/>
+		<owl:disjointWith rdf:resource="&cmns-qtu;BaseQuantityKind"/>
 		<skos:definition>quantity kind that may be defined as a product of powers of one or more other kinds of quantity</skos:definition>
 		<skos:example>velocity (length/time), mass density (mass/length3)</skos:example>
 		<skos:note>A derived quantity may also be used to define a synonym kind of quantity for another kind of quantity.</skos:note>
@@ -157,6 +157,11 @@
 		<skos:definition>finite combination of symbols that are well-formed according to applicable rules</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;Factor">
+		<rdfs:label>factor</rdfs:label>
+		<skos:definition>number or quantity that when multiplied with another produces a given number or expression</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;Measure">
 		<rdfs:label>measure</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">https://stats.oecd.org/glossary/detail.asp?ID=7062</dct:source>
@@ -201,6 +206,20 @@
 		<skos:definition>ratio value expressed as a fraction of 100, i.e., in which the denominator is fixed rather than variable and equal to 100</skos:definition>
 		<skos:note>The percent value is computed by multiplying the numeric value of the ratio by 100.</skos:note>
 		<skos:note>While many percentage values are between 0 and 100, there is no mathematical restriction and percentages may take on other values (positive or negative), particularly in the case of comparisons (percent change).</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;Prefix">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Factor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasFactorValue"/>
+				<owl:onDataRange rdf:resource="&owl;rational"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>prefix</rdfs:label>
+		<skos:definition>named multiple or submultiple multiplication factor used in the specification of a derived unit</skos:definition>
+		<skos:note>A system of units may specify a set of prefixes.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Quantity">
@@ -258,7 +277,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;QuantityKindFactor">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Factor"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
@@ -412,7 +431,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;UnitFactor">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Factor"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementUnit"/>
@@ -490,6 +509,12 @@
 		<rdfs:label>has factor</rdfs:label>
 		<skos:definition>indicates a number or quantity that when multiplied with another produces a given number or expression</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-qtu;hasFactorValue">
+		<rdfs:label>has factor value</rdfs:label>
+		<rdfs:range rdf:resource="&owl;rational"/>
+		<skos:definition>indicates the numeric multiple or submultiple multiplication factor</skos:definition>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMeasurementUnit">
 		<rdfs:label>has measurement unit</rdfs:label>
