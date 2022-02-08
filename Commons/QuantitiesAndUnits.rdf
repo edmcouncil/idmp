@@ -52,6 +52,7 @@
 		<rdfs:label>base quantity kind</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<rdfs:altLabel>simple quantity kind</rdfs:altLabel>
 		<skos:definition>quantity kind in a conventionally chosen subset of a given system of quantities, where no subset quantity can be expressed in terms of the others</skos:definition>
 		<skos:example>The International System of Quantities (ISQ) comprises these base quantities (with their SI base measurement units): length (meter), mass (kilogram), duration (second), electric current (ampere), thermodynamic temperature (kelvin), amount of substance (mole), and luminous intensity (candela).  These base quantities are not mutually comparable.  All quantities of any one of these kinds are, however, mutually comparable.</skos:example>
 	</owl:Class>
@@ -61,12 +62,14 @@
 		<rdfs:label>base unit</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<rdfs:altLabel>simple unit</rdfs:altLabel>
 		<skos:definition>measurement unit that is defined by a system of units to be the reference measurement unit for a base quantity</skos:definition>
 		<skos:note>Quantity units that are not base units are derived units.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;CoherentDerivedUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;DerivedUnit"/>
+		<rdfs:label>coherent derived unit</rdfs:label>
 		<skos:definition>derived unit that, for a given system of quantities and for a chosen set of base units, is a product of powers of base units with no other proportionality factor than one</skos:definition>
 	</owl:Class>
 	
@@ -76,12 +79,25 @@
 		<skos:definition>symbol that represents a value that does not change (i.e., is fixed) with respect to a formula or expression</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;ConversionBasedUnit">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;DerivedUnit"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasExpression"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;Expression"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>conversion-based unit</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>derived unit that is defined with respect to another reference unit through an explicit conversion relationship</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;DerivedQuantityKind">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityKind"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasFactor"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKindFactor"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKindPowerFactor"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -104,7 +120,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasFactor"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;UnitFactor"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;UnitPowerFactor"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -127,7 +143,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasFactor"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityKindFactor"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityKindPowerFactor"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -162,11 +178,74 @@
 		<skos:definition>number or quantity that when multiplied with another produces a given number or expression</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;IntervalScale">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:label>interval scale</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.statista.com/statistics-glossary/definition/320/interval_scale/</dct:source>
+		<skos:definition>measurement scale that represents quantitative values and for which mode, median and mean can be calculated</skos:definition>
+		<skos:example>Celsius and Fahrenheit are examples of interval scales: they represent equality or inequality among intervals of temperature, but not ratios of temperature, because their zero points are arbitrary. Rating scales, where it is assumed that the distances between the single expressions of evaluation (score) are equal, are also interval scales with no natural zero point.</skos:example>
+		<skos:note>Linear interval scales allow both multiplication by a positive number and a constant shift, e.g., the conversion from Celsius to Fahrenheit in accordance with the formula °C × 9/5 + 32 = °F.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;LogarithmicScale">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:label>logarithmic scale</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://en.wikipedia.org/wiki/Logarithmic_scale/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>measurement scale on which the actual distance of a point from the scale&apos;s zero is proportional to the logarithm of the corresponding scale number rather than to the number itself</skos:definition>
+		<skos:example>A logarithmic scale (or log scale) is a way of displaying numerical data over a very wide range of values in a compact way - typically the largest numbers in the data are hundreds or even thousands of times larger than the smallest numbers. Such a scale is nonlinear: the numbers 10 and 20, and 60 and 70, are not the same distance apart on a log scale. Rather, the numbers 10 and 100, and 60 and 600 are equally spaced. Thus moving a unit of distance along the scale means the number has been multiplied by 10 (or some other fixed factor).</skos:example>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;Measure">
 		<rdfs:label>measure</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">https://stats.oecd.org/glossary/detail.asp?ID=7062</dct:source>
 		<skos:definition>amount or degree of something; the dimensions, capacity, or amount of something ascertained by measuring</skos:definition>
 		<skos:note>Measure refers to the phenomenon or phenomena to be measured in a data set. In a data set, the instance of a measure is often called an observation.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;MeasurementScale">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasMaximumPermissiveValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasMinimumPermissiveValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;isMaximumInclusive"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;isMinimumInclusive"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementUnit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>measurement scale</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>classification scheme that provides a many-to-one mapping from an empirical to a numerical relational structure, acting as a reference against which measurements can be compared</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
@@ -187,6 +266,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasFactor"/>
+				<owl:onClass rdf:resource="&cmns-qtu;UnitPowerFactor"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
 				<owl:onClass rdf:resource="&cmns-qtu;QuantityKind"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -198,6 +284,25 @@
 		<skos:definition>quantity, defined and adopted by convention, with which any other quantity of the same kind can be compared to express the ratio of the two quantities as a number</skos:definition>
 		<skos:example>week, day, hour, minute, second, kilogram, joule, meter</skos:example>
 		<skos:note>A Unit is a quantity in terms of which the magnitudes of other quantities that have the same quantity kind can be stated. A unit often relies on precise and reproducible ways to measure the unit. For example, a unit of length such as meter may be specified as a multiple of a particular wavelength of light. A unit may also specify less stable or precise ways to express some value, such as a cost expressed in some currency, or a severity rating measured by a numerical scale.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;NominalScale">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:label>nominal scale</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4589638/</dct:source>
+		<skos:definition>measurement scale that represents objects as belonging to classes that have no particular order</skos:definition>
+		<skos:example>Many nominal scales are qualitative in nature. A common example of a nominal scale is that of gender identity, which is a way of describing one&apos;s persistent inner concept of their gender. While the terminology from a psychological and medical perspective continues to evolve, the scale covers individuals who self identify as male or female as well as those that have an indeterminate perspective, such as transsexual or non-binary.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;OrdinalScale">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:label>ordinal scale</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>measurement scale that represents order but no further algebraic structure</skos:definition>
+		<skos:example>For example, the Mohs scale of mineral hardness represents minerals with numbers ranging from 1 (softest) to 10 (hardest), but there is no empirical significance to equality among intervals or ratios of those numbers.</skos:example>
+		<skos:note>Ordinal scales allow any transformation function as long as it is monotonic and increasing.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Percentage">
@@ -220,6 +325,19 @@
 		<rdfs:label>prefix</rdfs:label>
 		<skos:definition>named multiple or submultiple multiplication factor used in the specification of a derived unit</skos:definition>
 		<skos:note>A system of units may specify a set of prefixes.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;PrefixedUnit">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ConversionBasedUnit"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasFactor"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;Prefix"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>prefixed unit</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>conversion-based unit that is defined with respect to another measurement reference unit through a linear conversion relationship with a named prefix that represents a multiple or submultiple of a unit</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Quantity">
@@ -276,15 +394,8 @@
 		<skos:note>Every instance of &apos;quantity kind&apos; is also a specialization of &apos;quantity&apos;. So the concept &apos;duration&apos; is an instance of &apos;quantity kind&apos; and it is a specialization of &apos;quantity&apos;, i.e., it is a classifier of actual quantities. But a given duration (i.e., the duration of something) is an instance of &apos;duration&apos; and thus a &apos;quantity value,&apos; not an instance of &apos;quantity kind&apos;. For example, a &apos;year&apos; is not an instance of quantity kind; it is an instance of quantity, but not a category of quantity.</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-qtu;QuantityKindFactor">
+	<owl:Class rdf:about="&cmns-qtu;QuantityKindPowerFactor">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;Factor"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityKind"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasExponent"/>
@@ -292,7 +403,13 @@
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>quantity kind factor</rdfs:label>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKind"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>quantity kind power factor</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>factor in a product of powers that defines a derived quantity</skos:definition>
 	</owl:Class>
@@ -365,6 +482,15 @@
 		<skos:note>A ratio is a quantity measured with respect to some other quantity, or in mathematics a quotient of two numbers or expressions, arrived at by dividing one by the other.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;RatioScale">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:label>ratio scale</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>measurement scale that represents quantitative values, allows comparison of differences in values, has a fixed zero value and is invariant under multiplication by a positive number</skos:definition>
+		<skos:example>The Kelvin scale is a ratio scale, as are the familiar scales representing mass in kilograms, length in meters and duration in seconds.</skos:example>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;SystemOfQuantities">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:subClassOf>
@@ -430,7 +556,7 @@
 		<skos:example>The International System of Units (SI) is a system of units.</skos:example>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-qtu;UnitFactor">
+	<owl:Class rdf:about="&cmns-qtu;UnitPowerFactor">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;Factor"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -446,7 +572,7 @@
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>unit factor</rdfs:label>
+		<rdfs:label>unit power factor</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>factor in a product of powers that defines a derived unit</skos:definition>
 	</owl:Class>
@@ -516,10 +642,24 @@
 		<skos:definition>indicates the numeric multiple or submultiple multiplication factor</skos:definition>
 	</owl:DatatypeProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMaximumPermissiveValue">
+		<rdfs:label>has maximum permissive value</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<skos:definition>indicates the maximum allowed value for a measurement on the given scale</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMeasurementUnit">
 		<rdfs:label>has measurement unit</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-qtu;MeasurementUnit"/>
 		<skos:definition>indicates the unit in which something is expressed</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMinimumPermissiveValue">
+		<rdfs:label>has minimum permissive value</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<skos:definition>indicates the minimum allowed value for a measurement on the given scale</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasNumerator">
@@ -532,8 +672,9 @@
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;hasNumericValue">
 		<rdfs:label>has numeric value</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<rdfs:range rdf:resource="&xsd;decimal"/>
-		<skos:definition>indicates a value associated with something that is a number</skos:definition>
+		<skos:definition>indicates a particular magnitude or designation for a given observable characteristic that is a number</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasQuantityKind">
@@ -554,6 +695,20 @@
 		<skos:definition>indicates something from which the subject is obtained or determined</skos:definition>
 		<skos:example>a derived quantity is derived from a base quantity; a derived unit is derived from a base unit</skos:example>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMaximumInclusive">
+		<rdfs:label>is maximum inclusive</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates whether the scale includes the absolute maximum permissive value or not</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMinimumInclusive">
+		<rdfs:label>is minimum inclusive</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates whether the scale includes the absolute minimum permissive value or not</skos:definition>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;specializes">
 		<rdfs:label>specializes</rdfs:label>
