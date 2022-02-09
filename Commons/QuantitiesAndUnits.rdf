@@ -58,7 +58,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;BaseUnit">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;PhysicalUnit"/>
 		<rdfs:label>base unit</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
@@ -116,7 +116,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;DerivedUnit">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;PhysicalUnit"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasFactor"/>
@@ -311,6 +311,21 @@
 		<skos:definition>ratio value expressed as a fraction of 100, i.e., in which the denominator is fixed rather than variable and equal to 100</skos:definition>
 		<skos:note>The percent value is computed by multiplying the numeric value of the ratio by 100.</skos:note>
 		<skos:note>While many percentage values are between 0 and 100, there is no mathematical restriction and percentages may take on other values (positive or negative), particularly in the case of comparisons (percent change).</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;PhysicalUnit">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;SystemOfUnits"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical unit</rdfs:label>
+		<dct:source>ISO 11240:2012, clause 3.1.1</dct:source>
+		<skos:definition>unit of measurement that is defined using a physical quantity</skos:definition>
+		<skos:note>Its definition relates measured quantities to the base quantities through a set of well-defined equations.</skos:note>
+		<skos:note>Physical units and their related scales are defined independently of the measurement procedure and the measured components. They relate to an internationally standardized system of units and equations governing the mathematical relations between those units.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Prefix">

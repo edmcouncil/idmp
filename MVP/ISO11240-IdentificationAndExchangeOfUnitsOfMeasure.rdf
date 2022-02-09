@@ -52,6 +52,8 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/20220201/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"/>
 		<idmp-av:copyright>Copyright (c) 2022 EDM Council, Inc.</idmp-av:copyright>
 	</owl:Ontology>
@@ -189,22 +191,6 @@
 		<idmp-av:synonym>standard operating procedure</idmp-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-uom;PhysicalUnit">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;SystemOfUnits"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>physical unit</rdfs:label>
-		<dct:source>ISO 11240:2012, clause 3.1.1</dct:source>
-		<owl:disjointWith rdf:resource="&idmp-uom;ArbitraryUnit"/>
-		<skos:definition>unit of measurement that is defined using a physical quantity</skos:definition>
-		<skos:note>Its definition relates measured quantities to the base quantities through a set of well-defined equations.</skos:note>
-		<skos:note>Physical units and their related scales are defined independently of the measurement procedure and the measured components. They relate to an internationally standardized system of units and equations governing the mathematical relations between those units.</skos:note>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-uom;ReferenceMaterial">
 		<rdfs:label>reference material</rdfs:label>
 		<dct:source>ISO 11240:2012, clause 3.1.26</dct:source>
@@ -321,6 +307,10 @@
 		<skos:note>Each core unit of measurement concept may have one or more associated unit of measurement code entries from different CodeSystems, reflecting the fact that a unit of measurement concept can be present in multiple unit of measurement dictionaries or coding systems (e.g. UCUM, NCI Thesaurus, SNOMED).</skos:note>
 		<skos:note>The two core attributes (identifier and definition) refer to the abstract concept, and shall be part of its core definition. The identifier represents a particular unit quantity and refers to the underlying metrological or published definitions, e.g. the SI base units, through the intrinsic formalism that is provided by the reference code system.</skos:note>
 		<idmp-av:synonym>unit of measurement</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;PhysicalUnit">
+		<owl:disjointWith rdf:resource="&idmp-uom;ArbitraryUnit"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;QuantityKind">
