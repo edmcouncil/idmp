@@ -111,6 +111,27 @@
 		<cmns-txt:hasTextValue>BL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;BL.NONNULL">
+		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:label>BL.NONNULL</rdfs:label>
+		<skos:definition>code for a boolean datatype for which a value is required</skos:definition>
+		<idmp-av:explanatoryNote>This code typically denotes an xsd:boolean value.</idmp-av:explanatoryNote>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>flavor that constrains boolean</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>BL.NONNULL</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;BZ">
+		<rdf:type rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<rdfs:label>BZ</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>code indicating the bzip-2 compression format. See [http://www.bzip.org/] for more information.</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>bzip</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>BZ</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;CD">
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>CD</rdfs:label>
@@ -119,6 +140,29 @@
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
 		<cmns-dsg:hasDescription>concept description</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>CD</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-dtp;CompressionAlgorithm">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;DatatypeFlavor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasLevel"/>
+				<owl:someValuesFrom rdf:resource="&xsd;nonNegativeInteger"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>compression algorithm</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>code element that identifies a compression algorithm, if any, used on the raw byte data</skos:definition>
+		<skos:note>If populated, the value of this attribute shall be taken from the HL7 CompressionAlgorithm code system.</skos:note>
+		<skos:note>If the attribute is null, the data are not compressed. Compression only applies to the binary form of the content.</skos:note>
+		<idmp-av:synonym>compression algorithm enumeration</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;CompressionAlgorithmEnumeration">
+		<rdf:type rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<rdfs:label>compression algorithm enumeration</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>singleton used for reference to the compression algorithm code element class to avoid punning</skos:definition>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;D">
@@ -143,6 +187,17 @@
 		<cmns-dsg:hasDescription>Derived</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;INV"/>
 		<cmns-txt:hasTextValue>DER</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;DF">
+		<rdf:type rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<rdfs:label>DF</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>code indicating the deflate compressed data format as specified in IETF RFC 1951</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>deflate</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>DF</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-dtp;DatatypeFlavor">
@@ -171,6 +226,17 @@
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
 		<cmns-dsg:hasDescription>entity name</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>EN</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;GZ">
+		<rdf:type rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<rdfs:label>GZ</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>code indicating a compressed data format that is compatible with the widely used GZIP utility as specified in IETF RFC 1952 (uses the deflate algorithm)</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>gzip</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>GZ</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;HXIT">
@@ -260,6 +326,21 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-BooleanNonNullDatatype">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-BooleanDatatype"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasBooleanValue"/>
+				<owl:someValuesFrom rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ISO 21090 boolean non-null datatype</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.4</dct:source>
+		<skos:definition>classifier that stands for the values of two-valued logic, for which a value is required</skos:definition>
+		<skos:note>BL.NONNULL is a constrained instance of BL that cannot have a nullFlavor. By implication, a null can never be used in the place of a BL.NONNULL, though this is not a rule that can be enforced by this International Standard.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL.NONNULL"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-dtp;ISO21090-CharacterStringDatatype">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<rdfs:subClassOf>
@@ -293,7 +374,7 @@
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:label>ISO 21090 code set</rdfs:label>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.iso.org/standard/35646.html</rdfs:seeAlso>
-		<skos:definition>the set of codes for harmonized datatypes defined in the ISO 21090 specification</skos:definition>
+		<skos:definition>set of codes for harmonized datatypes defined in the ISO 21090 specification</skos:definition>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-dtp;ISO21090-Datatype">
@@ -327,8 +408,8 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>ISO 21090 datatype</rdfs:label>
-		<dct:source>ISO 21090:2011, clause 7.3.2</dct:source>
-		<skos:definition>classifier that provides the top-level, abstract definition of a datatype according to the ISO 20190 specification</skos:definition>
+		<dct:source>ISO 21090:2011, clause 3.7, 7.3.2</dct:source>
+		<skos:definition>classifier that provides the top-level, abstract definition of a datatype, which is set of distinct values, characterized by properties of those values, and by operations on those values, according to the ISO 20190 specification</skos:definition>
 		<skos:note>Because of the way that the types are defined, a number of attributes of the datatypes have values with a type derived from HXIT (i.e., from this abstract class definition corresponding to HXIT). In these cases the HXIT attributes are constrained to null. The only case where the HXIT attributes are allowed within a datatype is on items in a collection (DSET, LIST, BAG, HIST). The use of these attributes is generally subject to further constraints in the specifications that make use of these types.</skos:note>
 		<skos:note>This concept corresponds to the HXIT datatype, which is abstract and private from a UML perspective - this datatype is not for use outside the datatypes in this International Standard.</skos:note>
 		<skos:note>Together, the root and extension identify a particular record of a real world event that may supply additional information about the value such as who made the change, when it was made, why it was made, what system originated the change. These attributes exist because sometimes this information is required, but the value is being represented in an external context that does not contain a proper relationship to the control information for the value itself. The record need not be directly or easily resolvable. Conformance statements may make additional statements about these two properties, or about how such a reference should be resolved. If a controlInformationExtension is provided, a ControlInformationRoot shall also be provided.</skos:note>
@@ -345,9 +426,72 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasCompressionAlgorithm"/>
+				<owl:onClass rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasIntegrityCheckAlgorithm"/>
+				<owl:onClass rdf:resource="&idmp-dtp;IntegrityCheckAlgorithm"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasCharacterSet"/>
+				<owl:onClass rdf:resource="&cmns-cds;CodeElement"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasMediaType"/>
+				<owl:onClass rdf:resource="&cmns-cds;CodeElement"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-dtp;hasLanguageCode"/>
 				<owl:onClass rdf:resource="&lcc-lr;LanguageIdentifier"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasReferenceURL"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;anyURI"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasBinaryData"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;base64Binary"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasIntegrityCheck"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;base64Binary"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasXMLEncodedData"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -360,9 +504,32 @@
 		<rdfs:label>ISO 21090 encapsulated data datatype</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.4.6</dct:source>
 		<skos:definition>classifier that stands for data that are primarily intended for human interpretation or for further machine processing outside the scope of the ISO 21090 International Standard</skos:definition>
+		<skos:note>The three representations of the ED data - as a sequence of characters, as a sequence of bytes, or as XML in a native XML format - are mutually incompatible and could also have been implemented as three specializations of an abstract ED supertype. However, doing so would complicate definition and implementation of the ED flavors and complicate the associated XML format (the additional of a mandatory xsi:type attribute) without significantly simplifying the overall implementation of ED.</skos:note>
 		<skos:note>This includes unformatted or formatted written language, multimedia data, or structured information as defined by a different standard (e.g. XML-signatures).</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ED"/>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-dtp;IntegrityCheckAlgorithm">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;DatatypeFlavor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasLevel"/>
+				<owl:someValuesFrom rdf:resource="&xsd;nonNegativeInteger"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>compression algorithm</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.10</dct:source>
+		<skos:definition>code element that identifies the algorithm used to compute the integrityCheck value</skos:definition>
+		<skos:note>If populated, the value of this attribute shall be taken from the HL7 IntegrityCheckAlgorithm code system.</skos:note>
+		<idmp-av:synonym>integrity check algorithm enumeration</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;IntegrityCheckAlgorithmEnumeration">
+		<rdf:type rdf:resource="&idmp-dtp;IntegrityCheckAlgorithm"/>
+		<rdfs:label>integrity check algorithm enumeration</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.10</dct:source>
+		<skos:definition>singleton used for reference to the integrity check algorithm code element class to avoid punning</skos:definition>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;K">
 		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
@@ -504,6 +671,26 @@
 		<cmns-txt:hasTextValue>2.16.840.1.113883.5.1008</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;OID-2.16.840.1.113883.5.1009">
+		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+		<rdfs:label>compression algorithm enumeration object identifier</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>object identifier for the compression algorithm enumeration</skos:definition>
+		<cmns-col:conformsWith rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-id:identifies rdf:resource="&idmp-dtp;CompressionAlgorithmEnumeration"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.5.1009</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;OID-2.16.840.1.113883.5.1010">
+		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+		<rdfs:label>integrity check algorithm enumeration object identifier</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>object identifier for the integrity check algorithm enumeration</skos:definition>
+		<cmns-col:conformsWith rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-id:identifies rdf:resource="&idmp-dtp;IntegrityCheckAlgorithmEnumeration"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.5.1010</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;OID-2.16.840.1.113883.5.57">
 		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
 		<rdfs:label>update mode enumeration object identifier</rdfs:label>
@@ -589,6 +776,28 @@
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
 		<cmns-dsg:hasDescription>real number</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>REAL</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;SHA1">
+		<rdf:type rdf:resource="&idmp-dtp;IntegrityCheckAlgorithm"/>
+		<rdfs:label>SHA1</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.10</dct:source>
+		<skos:definition>code indicating the algorithm defined in FIPS PUB 180-1: Secure Hash Standard, As of April 17, 1995</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>secure hash algorithm - 1</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>SHA1</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;SHA256">
+		<rdf:type rdf:resource="&idmp-dtp;IntegrityCheckAlgorithm"/>
+		<rdfs:label>SHA256</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.10</dct:source>
+		<skos:definition>code indicating the algorithm defined in FIPS PUB 180-2: Secure Hash Standard</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>secure hash algorithm - 256</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>SHA256</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;ST">
@@ -688,13 +897,70 @@
 		<skos:definition>singleton used for reference to the update mode code element class to avoid punning</skos:definition>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;Z">
+		<rdf:type rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<rdfs:label>Z</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>code indicating the original UNIX compress algorithm and file format using the LZC algorithm (a variant of LZW). Patent encumbered and less efficient than deflate</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>compress</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>Z</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;Z7">
+		<rdf:type rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<rdfs:label>Z7</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>code indicating the 7z compression file format. See [http://www.7-zip.org/7z.html] for more information.</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>Z7</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>Z7</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-dtp;ZL">
+		<rdf:type rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<rdfs:label>ZL</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.8</dct:source>
+		<skos:definition>code indicating a compressed data format that also uses the deflate algorithm. Specified as IETF RFC 1950</skos:definition>
+		<idmp-dtp:hasLevel rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevel>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>zlib</cmns-dsg:hasDescription>
+		<cmns-txt:hasTextValue>ZL</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasBinaryData">
+		<rdfs:label>has binary data</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.2</dct:source>
+		<rdfs:range rdf:resource="&xsd;base64Binary"/>
+		<skos:definition>indicates a simple sequence of byte values that contains the content</skos:definition>
+	</owl:DatatypeProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasBooleanValue">
 		<rdfs:label>has boolean value</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.3.4.3.1</dct:source>
-		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates the value of the BL</skos:definition>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasCharacterSet">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
+		<rdfs:label>has character set</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 7.4.2.3.6</dct:source>
+		<rdfs:range rdf:resource="&cmns-cds;CodeElement"/>
+		<skos:definition>identifies an Internet Assigned Numbers Authority (IANA) Charset Registered character set and character encoding for character-based encoding types</skos:definition>
+		<skos:note>Whenever the content of the ED is character type data in any form, the charset property needs to be known. If the content is provided directly in the value attribute, then the charset shall be a known character set consistent with the String Character Set. If the content is provided as a reference, and the access method does not provide the charset for the content (such as by a mime header), then the charset shall be conveyed as part of the ED.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasCompressionAlgorithm">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
+		<rdfs:label>has compression algorithm</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 7.4.2.3.6</dct:source>
+		<rdfs:range rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<skos:definition>indicates the compression algorithm, if any, used on the raw byte data</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasControlInformationExtension">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
@@ -733,6 +999,23 @@
 		<skos:note>Signals the imposition of one or more sets of constraints on the datatype. The sole purpose of specifying that a constraint that has been used to further constrain the datatype is to support validation of the instance: a validation engine can look up the rules expressed for the specified flavors and confirm that the instance conforms to the rules for the flavor. No other processing should depend on the content of the flavor attribute. No other semantic or computational use shall depend on the value of this property. If this value is populated,the datatype flavor(s) shall be a valid constraint on the type of value.</skos:note>
 	</owl:DatatypeProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasIntegrityCheck">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBinaryData"/>
+		<rdfs:label>has integrity check</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.9</dct:source>
+		<rdfs:range rdf:resource="&xsd;base64Binary"/>
+		<skos:definition>indicates a checksum calculated over the binary data</skos:definition>
+		<skos:note>The purpose of this property, when communicated with a reference is for anyone to validate later whether or not the reference still resolved to the same content that the reference resolved to when the encapsulated data value with reference was created. If the attribute is null, there is no integrityCheck. It is an error if the data resolved through the reference does not match the integrity check.</skos:note>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasIntegrityCheckAlgorithm">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
+		<rdfs:label>has integrity check algorithm</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 7.4.2.3.10</dct:source>
+		<rdfs:range rdf:resource="&idmp-dtp;IntegrityCheckAlgorithm"/>
+		<skos:definition>indicates the algorithm used to compute the integrityCheck value</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasLanguageCode">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
 		<rdfs:label>has language code</rdfs:label>
@@ -746,11 +1029,28 @@
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasLevel">
 		<rdfs:label>has level</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.1.4</dct:source>
-		<rdfs:domain rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
 		<skos:definition>indicates a position of the concept with respect to the hierarchy of the terminology</skos:definition>
 		<skos:note>All concepts marked with the same level and not separated by a concept with a level of less numerical magnitude are siblings, and all concepts that follow after another concept with a higher level value are children of that concept.</skos:note>
 		<skos:note>The hierarchy in the enumeration is an important part of the specification. Although the enumerations are defined as linear lists within ISO/IEC 11404 and the UML definitions, any information processing entity that asserts direct or indirect conformance with this International Standard shall conform to the relationships when evaluating meaning (implication) within the enumeration. In addition, this International Standard occasionally refers to the relationships within the narrative when defining the outcome of some operations.</skos:note>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasMediaType">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
+		<rdfs:label>has media type</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 7.4.2.3.5</dct:source>
+		<rdfs:range rdf:resource="&cmns-cds;CodeElement"/>
+		<skos:definition>identifies the type of the encapsulated data and can be used to determine a method to interpret or render the content</skos:definition>
+		<skos:note>If the content is compressed using a specified compression algorithm, the mediaType shall refer the mediaType of the uncompressed data, whether the data are accessed by reference or not.</skos:note>
+		<skos:note>The IANA defined domain of media types is established by the IETF RFCs 2045 and 2046. mediaType has a default value of text/plain and cannot be null. If the media type is different to text/plain, the mediaType attribute shall be populated.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasReferenceURL">
+		<rdfs:label>has reference URL</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.4.2.3.4</dct:source>
+		<rdfs:range rdf:resource="&xsd;anyURI"/>
+		<skos:definition>indicates a URL the target of which provides the binary content</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasTranslation">
@@ -767,7 +1067,6 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
 		<rdfs:label>has update mode</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.3.3.3.2</dct:source>
-		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<rdfs:range rdf:resource="&idmp-dtp;UpdateMode"/>
 		<skos:definition>allows a sending system to to identify the role that the attribute plays in processing the instance that is being represented</skos:definition>
 	</owl:ObjectProperty>
@@ -776,7 +1075,6 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
 		<rdfs:label>has valid time high</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.3.2.3.2</dct:source>
-		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
 		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
 		<skos:definition>indicates the time that the given information ceased or will cease to be correct</skos:definition>
 		<skos:note>Both validTimeLow and validTimeHigh shall be valid timestamps using the format described in 7.8.13.3.1 (TS.value).</skos:note>
@@ -786,10 +1084,17 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
 		<rdfs:label>has valid time low</rdfs:label>
 		<dct:source>ISO 21090:2011, clause 7.3.2.3.1</dct:source>
-		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
 		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
 		<skos:definition>indicates the time that the given information became or will become valid</skos:definition>
 		<skos:note>This is not the time that any system first observed the value, but the time that the actual value became correct (i.e. when a patient changes their name).</skos:note>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasXMLEncodedData">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has XML-encoded data</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.3.2.3.3</dct:source>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>indicates content represented in plain XML form</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-dtp;isEncodedAs">
@@ -801,5 +1106,19 @@
 		<rdfs:label>refers to</rdfs:label>
 		<skos:definition>makes reference to as a source for information or explanation</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&cmns-cds;CodeElement">
+		<dct:source>ISO 21090:2011, clause 3.3</dct:source>
+		<idmp-av:explanatoryNote>A code element is a concept representation published by the author of a code system as part of the code system, being an entity of that code system.</idmp-av:explanatoryNote>
+		<idmp-av:synonym>code</idmp-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-cds;CodeSet">
+		<dct:source>ISO 21090:2011, clause 3.4</dct:source>
+		<skos:example>ICD-9, LOINC and SNOMED</skos:example>
+		<skos:note>They are often described as collections of uniquely identifiable concepts with associated representations, designations, associations and meanings.</skos:note>
+		<idmp-av:explanatoryNote>A code system is a managed collection of concept identifiers, usually codes, but sometimes more complex sets of rules and references.</idmp-av:explanatoryNote>
+		<idmp-av:synonym>code system</idmp-av:synonym>
+	</owl:Class>
 
 </rdf:RDF>
