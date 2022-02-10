@@ -36,6 +36,12 @@
 		<skos:note>This ontology was originally designed for use in the OMG Languages, Countries and Codes (LCC) specification as part of the broader CountryRepresentation ontology. The concepts have also been used in the Financial Industry Business Ontology (FIBO) for representing industry sectors, financial instrument classifiers (e.g., asset classes), lifecycle states, and so forth.</skos:note>
 	</owl:Ontology>
 	
+	<owl:Class rdf:about="&cmns-cls;Aspect">
+		<rdfs:label>aspect</rdfs:label>
+		<rdfs:altLabel>filter</rdfs:altLabel>
+		<skos:definition>characteristic or feature that can be used to dimensionalize, filter, or subset something</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-cls;ClassificationScheme">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
 		<rdfs:label>classification scheme</rdfs:label>
@@ -45,6 +51,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-cls;Classifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
@@ -64,9 +71,22 @@
 		<skos:note>In ISO 1087, classifiers form categories of characteristics that serve as the criterion of subdivision when establishing concept systems.</skos:note>
 	</owl:Class>
 	
+	<owl:ObjectProperty rdf:about="&cmns-cls;characterizes">
+		<rdfs:label>characterizes</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-cls;Aspect"/>
+		<skos:definition>provides a discriminating feature or quality of</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-cls;classifies">
 		<rdfs:label>classifies</rdfs:label>
 		<skos:definition>arranges in categories according to shared characteristics</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-cls;isCharacterizedBy">
+		<rdfs:label>is characterized by</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-cls;Aspect"/>
+		<owl:inverseOf rdf:resource="&cmns-cls;characterizes"/>
+		<skos:definition>indicates a quality or feature of something, distinguishing it from something else</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-cls;isClassifiedBy">
