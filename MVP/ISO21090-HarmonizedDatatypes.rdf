@@ -420,6 +420,12 @@
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasThumbnail"/>
+				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-EncapsulatedDataDatatype"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-dtp;hasTranslation"/>
 				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-EncapsulatedDataDatatype"/>
 			</owl:Restriction>
@@ -960,6 +966,7 @@
 		<dct:source>ISO 11240:2021, clause 7.4.2.3.6</dct:source>
 		<rdfs:range rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
 		<skos:definition>indicates the compression algorithm, if any, used on the raw byte data</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasControlInformationExtension">
@@ -1052,6 +1059,16 @@
 		<rdfs:range rdf:resource="&xsd;anyURI"/>
 		<skos:definition>indicates a URL the target of which provides the binary content</skos:definition>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-dtp;hasThumbnail">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
+		<rdfs:label>has thumbnail</rdfs:label>
+		<dct:source>ISO 11240:2021, clause 7.4.2.3.12</dct:source>
+		<rdfs:range rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<skos:definition>indicates an abbreviated rendition of the full content</skos:definition>
+		<skos:note>A thumbnail requires significantly fewer resources than the full content, while still maintaining some distinctive similarity with the full content. A thumbnail is typically used with by-reference encapsulated data. It allows a user to select the appropriate content more efficiently before actually downloading through the reference. Originally, the term thumbnail refers to an image in a lower resolution (or smaller size) than another image. However, the thumbnail concept can be metaphorically used for media types other than images. For example a movie may be represented by a shorter clip; an audio-clip may be represented by another audio-clip that is shorter, has a lower sampling rate, or a glossy compression; or an abstract provided for a long document. A thumbnail itself shall not contain a thumbnail.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ED"/>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasTranslation">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
