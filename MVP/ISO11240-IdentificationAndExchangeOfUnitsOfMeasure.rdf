@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
@@ -8,7 +9,6 @@
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
-	<!ENTITY idmp-av "https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/">
 	<!ENTITY idmp-dtp "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/">
 	<!ENTITY idmp-uom "https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/">
 	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
@@ -20,6 +20,7 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
@@ -28,7 +29,6 @@
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
-	xmlns:idmp-av="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"
 	xmlns:idmp-dtp="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"
 	xmlns:idmp-uom="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"
 	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
@@ -44,7 +44,7 @@
 		<dct:abstract>This ontology provides a semantic model representing common definitions for exchanging units of measure and measurement concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment.  It is derived from the ISO 11240:2012 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement as well as from other ISO and OMG standards such as SysML.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/ISO21090-HarmonizedDatatypes/"/>
-		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/metadata/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
@@ -55,7 +55,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp-ontology/MVP/20220201/ISO11240-IdentificationAndExchangeOfUnitsOfMeasure/"/>
-		<idmp-av:copyright>Copyright (c) 2022 EDM Council, Inc.</idmp-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-uom;ArbitraryUnit">
@@ -187,8 +187,8 @@
 		<skos:example>Lowering of the concentration of glucose in blood in a fasting rabbit is an observable that can be applied to the measurement of insulin concentration in a preparation. Together with a description of the measurement method this can be used to define a measurement procedure.</skos:example>
 		<skos:note>A measurement procedure can include a statement concerning a target measurement uncertainty.</skos:note>
 		<skos:note>A measurement procedure is usually documented in sufficient detail to enable an operator to perform a measurement.</skos:note>
-		<idmp-av:abbreviation>SOP</idmp-av:abbreviation>
-		<idmp-av:synonym>standard operating procedure</idmp-av:synonym>
+		<cmns-av:abbreviation>SOP</cmns-av:abbreviation>
+		<cmns-av:synonym>standard operating procedure</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;ReferenceMaterial">
@@ -269,6 +269,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-uom;isSIQuantity">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
 		<rdfs:label>is SI quantity</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 4.6.2.1, Table 1</dct:source>
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementUnit"/>
@@ -278,8 +279,8 @@
 	</owl:DatatypeProperty>
 	
 	<owl:Class rdf:about="&cmns-qtu;Dimensionality">
-		<idmp-av:synonym>dimension of a quantity</idmp-av:synonym>
-		<idmp-av:synonym>quantity dimension</idmp-av:synonym>
+		<cmns-av:synonym>dimension of a quantity</cmns-av:synonym>
+		<cmns-av:synonym>quantity dimension</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
@@ -306,7 +307,7 @@
 		<dct:source>ISO 11240:2021, clause 4.6.2.1, Table 1</dct:source>
 		<skos:note>Each core unit of measurement concept may have one or more associated unit of measurement code entries from different CodeSystems, reflecting the fact that a unit of measurement concept can be present in multiple unit of measurement dictionaries or coding systems (e.g. UCUM, NCI Thesaurus, SNOMED).</skos:note>
 		<skos:note>The two core attributes (identifier and definition) refer to the abstract concept, and shall be part of its core definition. The identifier represents a particular unit quantity and refers to the underlying metrological or published definitions, e.g. the SI base units, through the intrinsic formalism that is provided by the reference code system.</skos:note>
-		<idmp-av:synonym>unit of measurement</idmp-av:synonym>
+		<cmns-av:synonym>unit of measurement</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;PhysicalUnit">
@@ -318,7 +319,7 @@
 		<skos:example>The quantities number of entities, relative substance concentration, and mass fraction are, by convention, not regarded as being of the same kind, although they have the same quantity dimension.</skos:example>
 		<skos:note>Quantities of the same kind within a given system of quantities have the same quantity dimension. However, quantities of the same dimension are not necessarily of the same kind. The division of the concept of &apos;quantity&apos; according to &apos;kind-of-quantity&apos; is to some extent arbitrary.</skos:note>
 		<skos:note>This concept is necessary for the definition of a measurable quantity, along with a system and often a component.</skos:note>
-		<idmp-av:synonym>kind-of-quantity</idmp-av:synonym>
+		<cmns-av:synonym>kind-of-quantity</cmns-av:synonym>
 	</owl:Class>
 
 </rdf:RDF>
