@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
@@ -10,10 +11,10 @@
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
 	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
-	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
@@ -24,20 +25,23 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 		<rdfs:label>Quantities and Units Ontology</rdfs:label>
-		<dct:abstract>This ontology provides a core set of concepts for quantities, units, systems of quantities, and systems of units. The most widely accepted, scrutinized, and globally used system of quantities and system of units are the International System of Quantities (ISQ) and the International System of Units (SI). They are formally standardized through [ISO31] and [IEC60027]. The harmonization of these two sets of standards into one new set [ISO/IEC80000] has been published by ISO in 2009 and 2010. This ontology is derived from the QUDV (Quantities, Units, Dimensions and Values) model in SysML, which, in turn, is based on ISO/IEC 80000-1:2009, which refers normatively to the ISO/IEC Guide 99:2007. Originally developed for use in the Financial Industry Business Ontology (FIBO), it is compatible with and can be mapped directly to the OMG Date Time Vocabulary (DTV) Quantities Ontology, the de-facto QUDT ontology representing Units of Measure, Quantity Kinds, Dimensions and Data Types (see http://www.qudt.org/), the Units of Measurement Ontology (UO) ontology available from the BioPortal (https://bioportal.bioontology.org/ontologies/UO) and others, as well as the QUDV annex of the SysML specification.</dct:abstract>
+		<dct:abstract>This ontology provides a core set of concepts for quantities, units, systems of quantities, and systems of units. The most widely accepted, scrutinized, and globally used system of quantities and system of units are the International System of Quantities (ISQ) and the International System of Units (SI). They are formally standardized through [ISO31] and [IEC60027]. The harmonization of these two sets of standards into one new set [ISO/IEC80000] has been published by ISO in 2009 and 2010. This ontology is derived from the QUDV (Quantities, Units, Dimensions and Values) model in SysML, which, in turn, is based on ISO/IEC 80000-1:2009, which refers normatively to the ISO/IEC Guide 99:2007. Originally developed for use on various Thematix&apos; client projects and integrated with the Financial Industry Business Ontology (FIBO), it is compatible with and can be mapped directly to the OMG Date Time Vocabulary (DTV) Quantities Ontology, the de-facto QUDT ontology representing Units of Measure, Quantity Kinds, Dimensions and Data Types (see http://www.qudt.org/), the Units of Measurement Ontology (UO) ontology available from the BioPortal (https://bioportal.bioontology.org/ontologies/UO) and others, as well as the QUDV annex of the SysML specification.</dct:abstract>
+		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
+		<dct:contributor>Evan Wallace, U.S. National Institute of Standards and Technology (NIST)</dct:contributor>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
-		<sm:copyright>Copyright (c) 2015-2022 EDM Council, Inc.</sm:copyright>
-		<sm:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</sm:copyright>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220201/QuantitiesAndUnits/"/>
+		<cmns-av:copyright>Copyright (c) 2011-2022 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2015-2022 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-qtu;BaseQuantityKind">
@@ -605,12 +609,12 @@
 		<skos:definition>symbol that represents a parameter in a formula or expression</skos:definition>
 	</owl:Class>
 	
-	<owl:AnnotationProperty rdf:about="&cmns-qtu;describesActualExpression">
+	<owl:DatatypeProperty rdf:about="&cmns-qtu;describesActualExpression">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
 		<rdfs:label>describes actual expression</rdfs:label>
 		<skos:definition>specifies the calculation or expression used to determine the value of something</skos:definition>
 		<skos:note>In cases where some expression can only be calculated in SPARQL or via rules, this property is useful for stating what that calculation should be using the input arguments to the expression.</skos:note>
-	</owl:AnnotationProperty>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;expressesTheMagnitudeOf">
 		<rdfs:label>expresses the magnitude of</rdfs:label>
