@@ -39,9 +39,15 @@
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-cls;Aspect">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:allValuesFrom rdf:resource="&owl;Thing"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>aspect</rdfs:label>
-		<rdfs:altLabel>filter</rdfs:altLabel>
 		<skos:definition>characteristic or feature that can be used to dimensionalize, filter, or subset something</skos:definition>
+		<cmns-av:synonym>characteristic</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-cls;ClassificationScheme">
@@ -74,6 +80,7 @@
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&cmns-cls;characterizes">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
 		<rdfs:label>characterizes</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-cls;Aspect"/>
 		<skos:definition>provides a discriminating feature or quality of</skos:definition>
@@ -85,6 +92,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-cls;isCharacterizedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
 		<rdfs:label>is characterized by</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-cls;Aspect"/>
 		<owl:inverseOf rdf:resource="&cmns-cls;characterizes"/>
