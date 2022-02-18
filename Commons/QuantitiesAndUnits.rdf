@@ -4,6 +4,7 @@
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
@@ -18,6 +19,7 @@
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:dct="http://purl.org/dc/terms/"
@@ -38,11 +40,42 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220201/QuantitiesAndUnits/"/>
 		<cmns-av:copyright>Copyright (c) 2011-2022 Thematix Partners LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-qtu;ArbitraryUnit">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
+				<owl:onClass rdf:resource="&cmns-qtu;MaterialMeasure"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
+				<owl:onClass rdf:resource="&cmns-qtu;MeasurementProcedure"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ReferenceMaterial"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>arbitrary unit</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.1</dct:source>
+		<owl:disjointWith rdf:resource="&cmns-qtu;PhysicalUnit"/>
+		<skos:definition>arbitrarily defined unit of measurement, where a relation of the unit to a physical unit of the SI does not exist or is unknown</skos:definition>
+		<skos:note>Arbitrary units represent references to materials or procedures that are defined outside the SI system. A quantity value is arbitrarily assigned to the reference preparation or the result of a measurement procedure, usually specific for a particular substance. This generally precludes comparability of quantity values across different systems and components for this type of units.</skos:note>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;BaseQuantityKind">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityKind"/>
@@ -54,26 +87,32 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>base quantity kind</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.2</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
-		<rdfs:altLabel>simple quantity kind</rdfs:altLabel>
 		<skos:definition>quantity kind in a conventionally chosen subset of a given system of quantities, where no subset quantity can be expressed in terms of the others</skos:definition>
 		<skos:example>The International System of Quantities (ISQ) comprises these base quantities (with their SI base measurement units): length (meter), mass (kilogram), duration (second), electric current (ampere), thermodynamic temperature (kelvin), amount of substance (mole), and luminous intensity (candela).  These base quantities are not mutually comparable.  All quantities of any one of these kinds are, however, mutually comparable.</skos:example>
+		<cmns-av:synonym>base quantity</cmns-av:synonym>
+		<cmns-av:synonym>simple quantity kind</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;BaseUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;PhysicalUnit"/>
 		<rdfs:label>base unit</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.3</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
-		<rdfs:altLabel>simple unit</rdfs:altLabel>
 		<skos:definition>measurement unit that is defined by a system of units to be the reference measurement unit for a base quantity</skos:definition>
+		<skos:example>In the SI, the metre is the base unit of length.</skos:example>
+		<skos:note>A set of base units defines a system of units.</skos:note>
 		<skos:note>Quantity units that are not base units are derived units.</skos:note>
+		<cmns-av:synonym>simple unit</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;CoherentDerivedUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;DerivedUnit"/>
 		<rdfs:label>coherent derived unit</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.4</dct:source>
 		<skos:definition>derived unit that, for a given system of quantities and for a chosen set of base units, is a product of powers of base units with no other proportionality factor than one</skos:definition>
 	</owl:Class>
 	
@@ -96,6 +135,21 @@
 		<skos:definition>derived unit that is defined with respect to another reference unit through an explicit conversion relationship</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;ConversionFactorBetweenUnits">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Factor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Ratio"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityKind"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>conversion factor between units</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.6</dct:source>
+		<skos:definition>ratio of two measurement units for quantities of the same kind</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;DerivedQuantityKind">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityKind"/>
 		<rdfs:subClassOf>
@@ -111,12 +165,14 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>derived quantity kind</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.7</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<owl:disjointWith rdf:resource="&cmns-qtu;BaseQuantityKind"/>
 		<skos:definition>quantity kind that may be defined as a product of powers of one or more other kinds of quantity</skos:definition>
 		<skos:example>velocity (length/time), mass density (mass/length3)</skos:example>
 		<skos:note>A derived quantity may also be used to define a synonym kind of quantity for another kind of quantity.</skos:note>
+		<skos:note>A derived quantity, in a system of quantities, is defined in terms of the base quantities of that system.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;DerivedUnit">
@@ -134,6 +190,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>derived unit</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.8</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>measurement unit that is defined with respect to one or more base units, such as as a product of powers of one or more other measurement units</skos:definition>
@@ -153,9 +210,12 @@
 		</rdfs:subClassOf>
 		<rdfs:label>dimensionality</rdfs:label>
 		<dct:source>ISO 11179-3:2013 Information technology - Metadata registries (MDR)</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.9</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>classifier that represents a set of equivalent units of measure</skos:definition>
 		<skos:note>Note that this definition is broader than that provided in SysML, which is an expression of the dependence of a quantity on the base quantities of a system of quantities as a product of powers of factors corresponding to the base quantities.</skos:note>
+		<cmns-av:synonym>dimension of a quantity</cmns-av:synonym>
+		<cmns-av:synonym>quantity dimension</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Expression">
@@ -204,11 +264,31 @@
 		<skos:example>A logarithmic scale (or log scale) is a way of displaying numerical data over a very wide range of values in a compact way - typically the largest numbers in the data are hundreds or even thousands of times larger than the smallest numbers. Such a scale is nonlinear: the numbers 10 and 20, and 60 and 70, are not the same distance apart on a log scale. Rather, the numbers 10 and 100, and 60 and 600 are equally spaced. Thus moving a unit of distance along the scale means the number has been multiplied by 10 (or some other fixed factor).</skos:example>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;MaterialMeasure">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Measure"/>
+		<rdfs:label>material measure</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.14</dct:source>
+		<skos:definition>something that reproduces or supplies one or more quantities, each with an assigned quantity value</skos:definition>
+		<skos:example>Ruler, standard weight, volume measure</skos:example>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;Measure">
 		<rdfs:label>measure</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">https://stats.oecd.org/glossary/detail.asp?ID=7062</dct:source>
 		<skos:definition>amount or degree of something; the dimensions, capacity, or amount of something ascertained by measuring</skos:definition>
 		<skos:note>Measure refers to the phenomenon or phenomena to be measured in a data set. In a data set, the instance of a measure is often called an observation.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;MeasurementProcedure">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
+		<rdfs:label>measurement procedure</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.16</dct:source>
+		<skos:definition>detailed description of a measurement according to one or more measurement principles (i.e. phenomena, observables) and to a given measurement method, based on a measurement model and including any calculation to obtain a measurement result</skos:definition>
+		<skos:example>Lowering of the concentration of glucose in blood in a fasting rabbit is an observable that can be applied to the measurement of insulin concentration in a preparation. Together with a description of the measurement method this can be used to define a measurement procedure.</skos:example>
+		<skos:note>A measurement procedure can include a statement concerning a target measurement uncertainty.</skos:note>
+		<skos:note>A measurement procedure is usually documented in sufficient detail to enable an operator to perform a measurement.</skos:note>
+		<cmns-av:abbreviation>SOP</cmns-av:abbreviation>
+		<cmns-av:synonym>standard operating procedure</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementScale">
@@ -284,11 +364,14 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>measurement unit</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.33</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>quantity, defined and adopted by convention, with which any other quantity of the same kind can be compared to express the ratio of the two quantities as a number</skos:definition>
 		<skos:example>week, day, hour, minute, second, kilogram, joule, meter</skos:example>
 		<skos:note>A Unit is a quantity in terms of which the magnitudes of other quantities that have the same quantity kind can be stated. A unit often relies on precise and reproducible ways to measure the unit. For example, a unit of length such as meter may be specified as a multiple of a particular wavelength of light. A unit may also specify less stable or precise ways to express some value, such as a cost expressed in some currency, or a severity rating measured by a numerical scale.</skos:note>
+		<skos:note>Depending on the nature of the reference scale, the unit of measurement expression may stand either for a physical unit of measurement that is related to a system of quantities (e.g. SI units) or for an arbitrarily defined unit of measurement, which may refer to a certain reference material, a standard measurement procedure, a material measure or even to a combination of those.</skos:note>
+		<cmns-av:synonym>unit of measurement</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;NominalScale">
@@ -327,10 +410,11 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>physical unit</rdfs:label>
-		<dct:source>ISO 11240:2012, clause 3.1.1</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.21</dct:source>
 		<skos:definition>unit of measurement that is defined using a physical quantity</skos:definition>
 		<skos:note>Its definition relates measured quantities to the base quantities through a set of well-defined equations.</skos:note>
 		<skos:note>Physical units and their related scales are defined independently of the measurement procedure and the measured components. They relate to an internationally standardized system of units and equations governing the mathematical relations between those units.</skos:note>
+		<cmns-av:synonym>physical unit of measurement</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Prefix">
@@ -343,7 +427,9 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>prefix</rdfs:label>
-		<skos:definition>named multiple or submultiple multiplication factor used in the specification of a derived unit</skos:definition>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.22</dct:source>
+		<skos:definition>named multiple or sub-multiple multiplication factor used in the specification of a derived unit</skos:definition>
+		<skos:note>A prefix is a word or symbol for attachment to the name or symbol of a unit in order to form units that are multiples or sub-multiples of that unit.</skos:note>
 		<skos:note>A system of units may specify a set of prefixes.</skos:note>
 	</owl:Class>
 	
@@ -375,9 +461,10 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>quantity</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.24</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
-		<skos:definition>property of a phenomenon, body, or substance, to which a number can be assigned with respect to a reference</skos:definition>
+		<skos:definition>property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed as a number and a unit</skos:definition>
 		<skos:editorialNote>The term quantity is used here to refer to the abstraction of the properties - the amount of measurable stuff that can be compared between particular quantities. The height of the something refers to a particular quantity; 555 ft 5 inches refers to a quantity value.</skos:editorialNote>
 		<skos:example>second, kilogram, joule, meter. These are quantities in a general sense, which is what is meant here by quantity.</skos:example>
 		<skos:note>A quantity as defined here is said to be a &quot;scalar&quot; as distinct from a &quot;vector.&quot; However, a vector or a tensor whose components are quantities is also considered to be a quantity.</skos:note>
@@ -407,11 +494,17 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>quantity kind</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.12</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>classifier that characterizes quantities as being mutually comparable</skos:definition>
+		<skos:example>The quantities diameter, circumference and wavelength are generally considered to be quantities of the same kind, namely of the kind-of-quantity called length.</skos:example>
+		<skos:example>The quantities number of entities, relative substance concentration, and mass fraction are, by convention, not regarded as being of the same kind, although they have the same quantity dimension.</skos:example>
 		<skos:note>A QuantityKind is a kind of quantity that may be stated by means of defined units. For example, the quantity kind of length may be measured by units of meters, kilometers, or feet. Note that this definition allows for dimensionless quantity kinds, such as rates.</skos:note>
 		<skos:note>Every instance of &apos;quantity kind&apos; is also a specialization of &apos;quantity&apos;. So the concept &apos;duration&apos; is an instance of &apos;quantity kind&apos; and it is a specialization of &apos;quantity&apos;, i.e., it is a classifier of actual quantities. But a given duration (i.e., the duration of something) is an instance of &apos;duration&apos; and thus a &apos;quantity value,&apos; not an instance of &apos;quantity kind&apos;. For example, a &apos;year&apos; is not an instance of quantity kind; it is an instance of quantity, but not a category of quantity.</skos:note>
+		<skos:note>Quantities of the same kind within a given system of quantities have the same quantity dimension. However, quantities of the same dimension are not necessarily of the same kind. The division of the concept of &apos;quantity&apos; according to &apos;kind-of-quantity&apos; is to some extent arbitrary.</skos:note>
+		<skos:note>This concept is necessary for the definition of a measurable quantity, along with a system and often a component.</skos:note>
+		<cmns-av:synonym>kind of quantity</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;QuantityKindPowerFactor">
@@ -435,7 +528,21 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;QuantityName">
-		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&cmns-qtu;SystemOfQuantities"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&cmns-qtu;SystemOfUnits"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
@@ -470,12 +577,14 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>quantity value</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clauses 3.1.19, 3.1.25</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
-		<rdfs:altLabel>measurement</rdfs:altLabel>
 		<skos:definition>number and measurement unit together giving magnitude of a quantity</skos:definition>
 		<skos:example>2 days, 3.5 hours, 150 lb, 45.5 miles</skos:example>
 		<skos:note>The quantity expressed by a quantity value is the quantity whose ratio to the measurement unit is the number.  Note that dimensionless quantities may not have a measurement unit associated with them.</skos:note>
+		<cmns-av:synonym>measurement</cmns-av:synonym>
+		<cmns-av:synonym>value of a quantity</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Ratio">
@@ -497,9 +606,9 @@
 		<rdfs:label>ratio</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">https://stats.oecd.org/glossary/detail.asp?ID=6688</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www150.statcan.gc.ca/n1/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#r.</dct:source>
-		<rdfs:altLabel>rate</rdfs:altLabel>
 		<skos:definition>proportional relationship between two different quantity values that gives rise to a datum of a specific quantity kind</skos:definition>
 		<skos:note>A ratio is a quantity measured with respect to some other quantity, or in mathematics a quotient of two numbers or expressions, arrived at by dividing one by the other.</skos:note>
+		<cmns-av:synonym>rate</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;RatioScale">
@@ -509,6 +618,13 @@
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>measurement scale that represents quantitative values, allows comparison of differences in values, has a fixed zero value and is invariant under multiplication by a positive number</skos:definition>
 		<skos:example>The Kelvin scale is a ratio scale, as are the familiar scales representing mass in kilograms, length in meters and duration in seconds.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;ReferenceMaterial">
+		<rdfs:label>reference material</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.26</dct:source>
+		<skos:definition>material, sufficiently homogeneous and stable with reference to specified properties, which has been established to be fit for its intended use in measurement or in examination of nominal properties</skos:definition>
+		<skos:note>Some reference materials have assigned quantity values that are metrologically traceable to a measurement unit outside a system of units. Such materials include vaccines to which International Units (IU) have been assigned by the World Health Organization (WHO).</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;SystemOfQuantities">
@@ -534,6 +650,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en">system of quantities</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.29</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>set of quantities together with a set of non-contradictory equations relating those quantities</skos:definition>
@@ -570,6 +687,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>system of units</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.30</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>set of measurement units associated with a system of quantities, together with a set of rules that assign one measurement unit to be the base unit for each base quantity in the system of quantities and a set of rules for the derivation of other units from the base units</skos:definition>
@@ -624,9 +742,9 @@
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasArgument">
 		<rdfs:label>has argument</rdfs:label>
-		<rdfs:altLabel>has independent variable</rdfs:altLabel>
 		<rdfs:range rdf:resource="&cmns-qtu;Variable"/>
 		<skos:definition>indicates a specific input to a function, formula or expression, also known as an independent variable</skos:definition>
+		<cmns-av:synonym>has independent variable</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasDenominator">
