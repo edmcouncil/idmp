@@ -58,35 +58,6 @@
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
-	<owl:Class rdf:about="&idmp-uom;ArbitraryUnit">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-dtp;refersTo"/>
-				<owl:onClass rdf:resource="&idmp-uom;MaterialMeasure"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-dtp;refersTo"/>
-				<owl:onClass rdf:resource="&idmp-uom;MeasurementProcedure"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-dtp;refersTo"/>
-				<owl:onClass rdf:resource="&idmp-uom;ReferenceMaterial"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>arbitrary unit</rdfs:label>
-		<dct:source>ISO 11240:2012, clause 3.1.1</dct:source>
-		<skos:definition>arbitrarily defined unit of measurement, where a relation of the unit to a physical unit of the SI does not exist or is unknown</skos:definition>
-		<skos:note>Arbitrary units represent references to materials or procedures that are defined outside the SI system. A quantity value is arbitrarily assigned to the reference preparation or the result of a measurement procedure, usually specific for a particular substance. This generally precludes comparability of quantity values across different systems and components for this type of units.</skos:note>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-uom;CodeEntry">
 		<rdfs:subClassOf rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
 		<rdfs:subClassOf>
@@ -109,7 +80,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>code entry</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.2</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.2</dct:source>
 		<skos:definition>unique identifier for the unit of measurement entry within the ISO lexicon</skos:definition>
 		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
 	</owl:Class>
@@ -124,7 +95,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>code system full name</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.3 Code System, Table 3</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.3 Code System, Table 3</dct:source>
 		<skos:definition>official name of the code system</skos:definition>
 	</owl:Class>
 	
@@ -137,7 +108,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>code system identifier</rdfs:label>
-		<dct:source>ISO 11240:2012, clause 4.6.2.3 Code System, Table 3</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.3 Code System, Table 3</dct:source>
 		<skos:definition>globally unique identifier for the code system</skos:definition>
 		<skos:note>Code System Identifier should take the form of an ISO Object Identifier (OID).</skos:note>
 	</owl:Class>
@@ -152,50 +123,9 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>code system name</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.3 Code System, Table 3</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.3 Code System, Table 3</dct:source>
 		<skos:definition>The name is used strictly for communication between humans. The Code System Identifier should be used for all computer-to-computer communication.</skos:definition>
 		<skos:definition>short token that uniquely identifies the code system</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-uom;ConversionFactorBetweenUnits">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;Ratio"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityKind"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>conversion factor between units</rdfs:label>
-		<dct:source>ISO 11240:2012, clause 3.1.6</dct:source>
-		<skos:definition>ratio of two measurement units for quantities of the same kind</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-uom;MaterialMeasure">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;Measure"/>
-		<rdfs:label>material measure</rdfs:label>
-		<dct:source>ISO 11240:2012, clause 3.1.14</dct:source>
-		<skos:definition>something that reproduces or supplies one or more quantities, each with an assigned quantity value</skos:definition>
-		<skos:example>Ruler, standard weight, volume measure</skos:example>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-uom;MeasurementProcedure">
-		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
-		<rdfs:label>measurement procedure</rdfs:label>
-		<dct:source>ISO 11240:2012, clause 3.1.16</dct:source>
-		<skos:definition>detailed description of a measurement according to one or more measurement principles (i.e. phenomena, observables) and to a given measurement method, based on a measurement model and including any calculation to obtain a measurement result</skos:definition>
-		<skos:example>Lowering of the concentration of glucose in blood in a fasting rabbit is an observable that can be applied to the measurement of insulin concentration in a preparation. Together with a description of the measurement method this can be used to define a measurement procedure.</skos:example>
-		<skos:note>A measurement procedure can include a statement concerning a target measurement uncertainty.</skos:note>
-		<skos:note>A measurement procedure is usually documented in sufficient detail to enable an operator to perform a measurement.</skos:note>
-		<cmns-av:abbreviation>SOP</cmns-av:abbreviation>
-		<cmns-av:synonym>standard operating procedure</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-uom;ReferenceMaterial">
-		<rdfs:label>reference material</rdfs:label>
-		<dct:source>ISO 11240:2012, clause 3.1.26</dct:source>
-		<skos:definition>material, sufficiently homogeneous and stable with reference to specified properties, which has been established to be fit for its intended use in measurement or in examination of nominal properties</skos:definition>
-		<skos:note>Some reference materials have assigned quantity values that are metrologically traceable to a measurement unit outside a system of units. Such materials include vaccines to which International Units (IU) have been assigned by the World Health Organization (WHO).</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;UnitOfMeasureIdentificationScheme">
@@ -229,7 +159,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>unit of measure identification scheme</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.1</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.1</dct:source>
 		<skos:definition>system for minting identifiers for things that specifies constraints on the structure of the unit of measure identifier</skos:definition>
 	</owl:Class>
 	
@@ -255,14 +185,14 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>unit of measure identifier</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.1</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.1</dct:source>
 		<skos:definition>unique identifier for the unit of measure in some system of units</skos:definition>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-uom;hasRegionCode">
-		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;refersTo"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
 		<rdfs:label>has region code</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.2 Unit of measurement Code Entry, Table 2</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.2 Unit of measurement Code Entry, Table 2</dct:source>
 		<rdfs:range rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
 		<skos:definition>indicates a geographic refinement of the language of this entry using ISO 3166</skos:definition>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
@@ -271,17 +201,12 @@
 	<owl:DatatypeProperty rdf:about="&idmp-uom;isSIQuantity">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
 		<rdfs:label>is SI quantity</rdfs:label>
-		<dct:source>ISO 11240:2021, clause 4.6.2.1, Table 1</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.1, Table 1</dct:source>
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementUnit"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates that the unit of measure is an SI quantity, or is based on an SI quantity</skos:definition>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL"/>
 	</owl:DatatypeProperty>
-	
-	<owl:Class rdf:about="&cmns-qtu;Dimensionality">
-		<cmns-av:synonym>dimension of a quantity</cmns-av:synonym>
-		<cmns-av:synonym>quantity dimension</cmns-av:synonym>
-	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
 		<rdfs:subClassOf>
@@ -304,22 +229,9 @@
 				<owl:someValuesFrom rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<dct:source>ISO 11240:2021, clause 4.6.2.1, Table 1</dct:source>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.1, Table 1</dct:source>
 		<skos:note>Each core unit of measurement concept may have one or more associated unit of measurement code entries from different CodeSystems, reflecting the fact that a unit of measurement concept can be present in multiple unit of measurement dictionaries or coding systems (e.g. UCUM, NCI Thesaurus, SNOMED).</skos:note>
 		<skos:note>The two core attributes (identifier and definition) refer to the abstract concept, and shall be part of its core definition. The identifier represents a particular unit quantity and refers to the underlying metrological or published definitions, e.g. the SI base units, through the intrinsic formalism that is provided by the reference code system.</skos:note>
-		<cmns-av:synonym>unit of measurement</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-qtu;PhysicalUnit">
-		<owl:disjointWith rdf:resource="&idmp-uom;ArbitraryUnit"/>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-qtu;QuantityKind">
-		<skos:example>The quantities diameter, circumference and wavelength are generally considered to be quantities of the same kind, namely of the kind-of-quantity called length.</skos:example>
-		<skos:example>The quantities number of entities, relative substance concentration, and mass fraction are, by convention, not regarded as being of the same kind, although they have the same quantity dimension.</skos:example>
-		<skos:note>Quantities of the same kind within a given system of quantities have the same quantity dimension. However, quantities of the same dimension are not necessarily of the same kind. The division of the concept of &apos;quantity&apos; according to &apos;kind-of-quantity&apos; is to some extent arbitrary.</skos:note>
-		<skos:note>This concept is necessary for the definition of a measurable quantity, along with a system and often a component.</skos:note>
-		<cmns-av:synonym>kind-of-quantity</cmns-av:synonym>
 	</owl:Class>
 
 </rdf:RDF>
