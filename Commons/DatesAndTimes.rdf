@@ -20,8 +20,8 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/DatesAndTimes/">
-		<rdfs:label>Dates and Times Ontology</rdfs:label>
-		<dct:abstract>The dates and times ontology defines commonly used temporal concepts that cover those most frequently needed across domains, with a focus on terminology that is used in business applications. It is designed to be mappable to other date and time ontologies and specifications, such as the W3C Time Ontology in OWL (available at https://www.w3.org/TR/owl-time/), certain temporal elements in BFO 2020 (see https://basic-formal-ontology.org/bfo-2020.html), time concepts defined in schema.org, including schedules (see https://schema.org/docs/schemas.html), the Object Management Group&apos;s Date Time Vocabulary (DTV) specification (available at https://www.omg.org/spec/DTV/), and so forth, without the corresponding overhead or in some cases, issues. The concepts were originally derived from a number of date and time standards including ISO 8601:2004 Representation of Dates and Times. The ontology itself was derived from the Financial Industry Business Ontology (FIBO) Financial Dates ontology, with minor revisions to better reflect requirements for mapping to other ontologies.</dct:abstract>
+		<rdfs:label>Commons Dates and Times Ontology</rdfs:label>
+		<dct:abstract>The dates and times ontology defines commonly used temporal concepts that cover those most frequently needed across domains, with a focus on terminology that is used in business applications. It is designed to be mappable to other date and time ontologies and specifications, such as the W3C Time Ontology in OWL (available at https://www.w3.org/TR/owl-time/), certain temporal elements in BFO 2020 (see https://basic-formal-ontology.org/bfo-2020.html), time concepts defined in schema.org, and the Object Management Group&apos;s Date Time Vocabulary (DTV) specification (available at https://www.omg.org/spec/DTV/), without the corresponding overhead or in some cases, issues. The concepts were originally derived from a number of date and time standards including ISO 8601:2004 Representation of Dates and Times. The ontology itself was derived from the Financial Industry Business Ontology (FIBO) Financial Dates ontology, with minor revisions to better reflect requirements for mapping to other ontologies.</dct:abstract>
 		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
 		<dct:contributor>Mark Linehan, Thematix Partners LLC</dct:contributor>
 		<dct:contributor>Pete Rivett, agnos.ai</dct:contributor>
@@ -65,7 +65,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>date</rdfs:label>
 		<skos:definition>calendar day on some calendar</skos:definition>
-		<skos:note>A date may or may not have a value, and may be explicit or calculated. A date that has a value is one that is either explicitly set as a literal when it is created, or is some form of &apos;calculated date&apos;.  In an instance of date, the existence of the &apos;has date value&apos; property both indicates that the date is known, and gives the value of the date. A date that does not have a value is likely one that is some form of &apos;calculated date, in which the actual date has not (yet) been established.</skos:note>
+		<skos:note>A date may or may not have a value, and may be explicit or calculated. A date that has a value is one that is either explicitly set as a literal when it is created, or is some form of &apos;calculated date&apos;. In an instance of date, the existence of the &apos;has date value&apos; property both indicates that the date is known, and gives the value of the date. A date that does not have a value is likely one that is some form of &apos;calculated date, in which the actual date has not (yet) been established.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-dt;DatePeriod">
@@ -93,7 +93,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>date period</rdfs:label>
 		<skos:definition>time span over one or more calendar days</skos:definition>
-		<skos:note>A date period is defined by at least two of three properties: (1) a start date, (2) an end date, and (3) a duration. If more than one of these properties is missing, the date period is invalid.</skos:note>
+		<skos:note>A date period is defined by at least two of three properties: (1) a start date, (2) an end date, and (3) a duration. If more than one of these properties is missing, the date period may be invalid or unknown.</skos:note>
 		<skos:note>A date period is unknown if either the start date or the end date has no value. If a date period is unknown, then the duration should either be omitted or unknown (have no value).</skos:note>
 	</owl:Class>
 	
@@ -121,9 +121,9 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>date time stamp</rdfs:label>
-		<skos:altLabel>time stamp</skos:altLabel>
 		<skos:definition>time point including a date and a time that requires a time zone offset</skos:definition>
 		<skos:note>&apos;has date time stamp value&apos; is omitted if the &apos;date time stamp&apos; is not (yet) established.</skos:note>
+		<cmns-av:synonym>time stamp</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&cmns-dt;Day">
@@ -216,33 +216,32 @@
 	<owl:Class rdf:about="&cmns-dt;TemporalEntity">
 		<rdfs:label>temporal entity</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://www.w3.org/2006/time#TemporalEntity"/>
-		<skos:altLabel>temporal region</skos:altLabel>
 		<skos:definition>time interval or instant</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-dt;TimeInstant">
 		<rdfs:subClassOf rdf:resource="&cmns-dt;TemporalEntity"/>
 		<rdfs:label>time instant</rdfs:label>
-		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
-		<dct:source rdf:datatype="&xsd;anyURI">https://www.w3.org/TR/owl-time/#time:Instant</dct:source>
-		<skos:altLabel>instant in time</skos:altLabel>
-		<skos:altLabel>time point</skos:altLabel>
 		<skos:definition>temporal entity that is a member of a time scale, with no extent or duration</skos:definition>
 		<skos:example>The Battle of Hastings was on &apos;14 October 1066&apos;. (This gives the Julian date of the battle at a granularity of &apos;day&apos;. If desired, the battle could be given more precisely as a time period within that calendar day.)</skos:example>
 		<skos:note>For scales that have a granularity specified in days, a date is a time point; for scales down to the seconds, the equivalent of an xsd:dateTime or xsd:dateTimeStamp is a time point.</skos:note>
 		<skos:note>The duration of each time interval that is an instance of the time point is the granularity of the time scale of the time point.</skos:note>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/DTV/</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.w3.org/TR/owl-time/#time:Instant</cmns-av:adaptedFrom>
+		<cmns-av:synonym>instant in time</cmns-av:synonym>
+		<cmns-av:synonym>time point</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-dt;TimeInterval">
 		<rdfs:subClassOf rdf:resource="&cmns-dt;TemporalEntity"/>
 		<rdfs:label>time interval</rdfs:label>
-		<dct:source rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/DTV/</dct:source>
-		<dct:source rdf:datatype="&xsd;anyURI">https://www.w3.org/TR/owl-time/#time:Interval</dct:source>
 		<skos:definition>segment of the time axis, a location in time, with an extent or duration</skos:definition>
 		<skos:example>the day whose Gregorian calendar date is September 11, 2001</skos:example>
 		<skos:example>the lifetime of Henry V</skos:example>
 		<skos:note>Every time interval has a beginning, an end, and a duration, even if not known. Every time interval is &apos;finite&apos;, a bounded segment of the time axis. The beginning or end of a time interval may be defined by reference to events that occur for a time interval that is not known.</skos:note>
 		<skos:note>Time intervals may be indefinite, meaning that their beginning is primordiality or their end is perpetuity, or both (eternity). This vocabulary assumes that indefinite time intervals exist and have some duration, but their duration is unknown.</skos:note>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/DTV/</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.w3.org/TR/owl-time/#time:Interval</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-dt;TimeOfDay">
@@ -274,13 +273,13 @@
 	<owl:ObjectProperty rdf:about="&cmns-dt;hasDateTime">
 		<rdfs:label>has date time</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-dt;DateTime"/>
-		<skos:definition>identifies a specific date and time of day, excluding the time zone</skos:definition>
+		<skos:definition>identifies a specific date and time of day, possibly excluding the time zone</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-dt;hasDateTimeStamp">
 		<rdfs:label>has date time stamp</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-dt;DateTimeStamp"/>
-		<skos:definition>identifies a specific date and time of day, including the time zone</skos:definition>
+		<skos:definition>identifies a specific date and time of day, explicitly including the time zone</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-dt;hasDateTimeStampValue">
@@ -300,14 +299,14 @@
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>specifies an actual literal (explicit) date captured in the format specified for xsd:date (i.e., ISO 8601 format), WITHOUT the time or timezone information; the semantics are identical to those of xsd:date</skos:definition>
 		<skos:example>2002-10-10 means October 10, 2002</skos:example>
-		<skos:note>For consistency with FPML (reference FPML Coding Schemes 30 June 2014, Version 1.56, section 2.1.1), the year MUST be specified as 4 digits, and the month and day MUST be specified as 2 digits with a leading zero if needed. Times and timezones should NOT be specified.</skos:note>
+		<skos:note>In the Finance domain, for consistency with FpML (reference FpML Coding Schemes 30 June 2014, Version 1.56, section 2.1.1), the year MUST be specified as 4 digits, and the month and day MUST be specified as 2 digits with a leading zero if needed. Times and timezones should NOT be specified.</skos:note>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-dt;hasDuration">
 		<rdfs:label>has duration</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-dt;Duration"/>
 		<skos:definition>specifies the time during which something continues</skos:definition>
-		<skos:note>This duration may be omitted or unknown if either the start or end Date of the DatePeriod is a CalculatedDate or an ExplicitDate.</skos:note>
+		<skos:note>This duration may be omitted or unknown if either the start or end Date of the DatePeriod is an ExplicitDate.</skos:note>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-dt;hasDurationValue">
@@ -329,7 +328,8 @@
 	<owl:ObjectProperty rdf:about="&cmns-dt;hasEndDate">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDate"/>
 		<rdfs:label>has end date</rdfs:label>
-		<skos:definition>indicates the ending date of some schedule or date period</skos:definition>
+		<rdfs:range rdf:resource="&cmns-dt;Date"/>
+		<skos:definition>indicates the ending date of some date period</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-dt;hasExplicitDate">
@@ -342,12 +342,13 @@
 	<owl:DatatypeProperty rdf:about="&cmns-dt;hasObservedDateTime">
 		<rdfs:label>has observed date and time</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
-		<skos:definition>indicates a date and time for an event, measurement, or other observation</skos:definition>
+		<skos:definition>indicates a date and time associated with an event, measurement, record, or observation</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-dt;hasStartDate">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDate"/>
 		<rdfs:label>has start date</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-dt;Date"/>
 		<skos:definition>indicates the initial date of something</skos:definition>
 	</owl:ObjectProperty>
 	
