@@ -710,7 +710,7 @@
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>set of quantities together with a set of non-contradictory equations relating those quantities</skos:definition>
 		<skos:example>The International System of Quantities (ISQ) is an example of a SystemOfQuantities, defined in ISO 31 and ISO/IEC 80000.</skos:example>
-		<skos:note>Ordinal quantities, such as Rockwell C hardness, and nominal properties, such as colour of light, are usually not considered to be part of a system of quantities because they are related to other quantities through empirical relations only.</skos:note>
+		<skos:note>Ordinal quantities, such as Rockwell C hardness, and nominal properties, such as color of light, are usually not considered to be part of a system of quantities because they are related to other quantities through empirical relations only.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;SystemOfUnits">
@@ -796,8 +796,9 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasArgument">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has argument</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;Variable"/>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
 		<skos:definition>indicates a specific input to a function, formula or expression, also known as an independent variable</skos:definition>
 		<cmns-av:synonym>has independent variable</cmns-av:synonym>
 	</owl:ObjectProperty>
@@ -811,7 +812,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasDimension">
-		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:label>has dimension</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;QuantityKind"/>
 		<rdfs:range rdf:resource="&cmns-qtu;QuantityDimension"/>
@@ -833,6 +833,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasFactor">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:label>has factor</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
 		<skos:definition>indicates a number or quantity that when multiplied with another produces a given number or expression</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -843,6 +844,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMaximumPermissiveValue">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has maximum permissive value</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
 		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
@@ -856,6 +858,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMinimumPermissiveValue">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has minimum permissive value</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
 		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
@@ -898,16 +901,14 @@
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMaximumInclusive">
 		<rdfs:label>is maximum inclusive</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
-		<skos:definition>indicates whether the scale includes the absolute maximum permissive value or not</skos:definition>
+		<skos:definition>indicates whether something, such as a measurement scale, includes the absolute maximum permissive value or not</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMinimumInclusive">
 		<rdfs:label>is minimum inclusive</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
-		<skos:definition>indicates whether the scale includes the absolute minimum permissive value or not</skos:definition>
+		<skos:definition>indicates whether something, such as a measurement scale, includes the absolute minimum permissive value or not</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;specializes">
