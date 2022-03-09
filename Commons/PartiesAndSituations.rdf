@@ -26,7 +26,7 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/PartiesAndSituations/">
-		<rdfs:label>Parties and Situations Ontology</rdfs:label>
+		<rdfs:label>Commons Parties and Situations Ontology</rdfs:label>
 		<dct:abstract>This ontology defines the high-level concepts of parties and the roles they play in various situations.</dct:abstract>
 		<dct:contributor>Dean Allemang, Working Ontologist</dct:contributor>
 		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
@@ -36,7 +36,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220301/PartiesAndSituations/"/>
-		<skos:note>This ontology was originally designed for use in the Financial Industry Business Ontology (FIBO) for representing complex relationships between parties, such as employment, ownership and control. Some concept names have been simplified to align better with traditional party models.</skos:note>
+		<skos:note>This ontology was originally designed for use in the Financial Industry Business Ontology (FIBO) for representing complex relationships between parties, such as employment, ownership and control.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2020-2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2020-2022 Thematix Partners LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2020-2022 Working Ontologist LLC</cmns-av:copyright>
@@ -77,14 +77,14 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>agent role</rdfs:label>
-		<skos:definition>relative concept that ties a part to an agent that fills it in a given situational context</skos:definition>
+		<skos:definition>agentive role that is played by an agent, typically in the context of some situation</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;Party">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Agent"/>
 		<rdfs:label>party</rdfs:label>
 		<owl:disjointWith rdf:resource="&cmns-pts;Role"/>
-		<skos:definition>any person or organization</skos:definition>
+		<skos:definition>person or organization</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;PartyRole">
@@ -104,9 +104,9 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>party role</rdfs:label>
-		<skos:definition>relative concept that ties a person or organization to a specific role they stand in</skos:definition>
-		<skos:example>Examples include organization member, issuer, owner, partner in a partnership, shareholder, etc.</skos:example>
-		<skos:scopeNote>The concept of a party role refers is used in contexts in which one would call someone a &apos;party&apos; to something, such as party to a contract or to a transaction; it does not cover entities as performing some role in some activity or process (the separate concept Actor covers that). A good test is whether something defined as PartyRole can be sensibly said to have a part or play a part in something.</skos:scopeNote>
+		<skos:definition>agent role that is played by person or organization, that typically holds for some period of time</skos:definition>
+		<skos:example>Examples include organization member, employee, issuer, owner, partner in a partnership, shareholder, and so forth.</skos:example>
+		<skos:scopeNote>The concept of a party role is used in contexts in which one would call someone a &apos;party to something&apos;, such as party to a contract or to a transaction, a supplier, buyer, customer, student, employee, and so forth. More specific roles such as those that are performed in the context of some activity or process are actors in that situation.</skos:scopeNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;Role">
@@ -117,7 +117,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>role</rdfs:label>
-		<skos:definition>relative concept that ties a part to something or someone that fills it in a given situational context</skos:definition>
+		<skos:definition>relative concept that ties a part to something or someone that fills it</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;Situation">
@@ -143,14 +143,14 @@
 		</rdfs:subClassOf>
 		<rdfs:label>situation</rdfs:label>
 		<skos:definition>setting, state of being, or relationship that is relatively stable for some period of time</skos:definition>
-		<skos:example>Examples include ownership, control, possession, affiliation, beneficiary, and other similar relations.</skos:example>
-		<skos:note>From a usage perspective, situations are essentially reified relations at the top of the FIBO relationship lattice, also known as mediating relationships.</skos:note>
+		<skos:example>Examples include ownership, control, possession, affiliation, beneficial ownership, employment, and other similar situations.</skos:example>
+		<skos:note>From a usage perspective, situations are essentially reified relations, sometimes called mediating relationships.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;Undergoer">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Role"/>
 		<rdfs:label>undergoer</rdfs:label>
-		<skos:definition>something that is the recipient in a relationship, i.e., the thing (or party) that something impacts, affects, or otherwise plays passive recipient / patient or theme role in the relationship</skos:definition>
+		<skos:definition>something that plays the role of the object or recipient in a situation, i.e., the thing (or party) that the situation impacts, affects, or that otherwise plays a passive recipient / patient or thematic role</skos:definition>
 		<skos:example>Examples include something that is owned or controlled.</skos:example>
 	</owl:Class>
 	
@@ -249,14 +249,14 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasParty">
 		<rdfs:label>has party</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;Party"/>
-		<skos:definition>identifies an independent party associated with an agreement, contract, policy, regulation, or other business arrangement</skos:definition>
+		<skos:definition>identifies an independent party associated with an agreement, contract, policy, regulation, or other arrangement</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasPartyRole">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
 		<rdfs:label>has party role</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
-		<skos:definition>identifies a specific role played by some person or organization as related to a situation, agreement, contract, policy, regulation, or other business relationship</skos:definition>
+		<skos:definition>identifies a specific role played by some person or organization as related to a situation, agreement, contract, policy, regulation, activity or other relationship</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasRelatedPartyRole">
@@ -271,7 +271,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasRole">
 		<rdfs:label>has role</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;Role"/>
-		<skos:definition>identifies something acting in a recipient or target role as related to the particular agreement, contract, policy, regulation, situation, or other business relationship</skos:definition>
+		<skos:definition>identifies something acting in a recipient or target role as related to the particular agreement, contract, policy, regulation, situation, or other arrangement</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasUndergoer">
@@ -279,7 +279,7 @@
 		<rdfs:label>has undergoer</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:range rdf:resource="&cmns-pts;Undergoer"/>
-		<skos:definition>identifies the experiencer in a specific role with respect to a given situation</skos:definition>
+		<skos:definition>identifies an experiencer / passive role with respect to a given situation</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;holdsDuring">
@@ -293,8 +293,7 @@
 		<rdfs:label>is a party to</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Party"/>
 		<owl:inverseOf rdf:resource="&cmns-pts;hasParty"/>
-		<skos:definition>identifies an agreement, contract, policy, regulation, or other business transaction that an independent party is associated with</skos:definition>
-		<skos:note>This property should be read referring to some context (known as a &apos;mediating thing&apos; in the informative upper ontology).</skos:note>
+		<skos:definition>identifies an agreement, contract, policy, regulation, or other arrangement that an independent party is associated with</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;isAffectedBy">
