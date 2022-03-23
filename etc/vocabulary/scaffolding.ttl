@@ -1,0 +1,32 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix idmp-skos: <https://spec.edmcouncil.org/idmp/vocabulary/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+
+idmp-skos:PropertyConcepts
+        a             skos:ConceptScheme ;
+        rdfs:isDefinedBy  "concept scheme for concepts derived from ontology properties"@en ;
+        rdfs:label    "IDMP property scheme"@en .
+
+idmp-skos:ClassConcepts
+        a             skos:ConceptScheme ;
+        rdfs:isDefinedBy  "concept scheme for concepts derived from ontology classes"@en ;
+        rdfs:label    "IDMP classes scheme"@en .
+
+idmp-skos:domainRelated
+        a                   owl:ObjectProperty ;
+        rdfs:isDefinedBy        "denotes an rdfs:domain relationship between concepts"@en ;
+        rdfs:label          "has in domain"@en ;
+        rdfs:subPropertyOf  skos:related .
+
+idmp-skos:rangeRelated
+        a                   owl:ObjectProperty ;
+        rdfs:isDefinedBy        "denotes an rdfs:range relationship between concepts"@en ;
+        rdfs:label          "has in range"@en ;
+        rdfs:subPropertyOf  skos:related .
+		
+idmp-skos:  a        owl:Ontology ;
+        rdfs:label           "IDMP SKOS Vocabulary"@en ;
+        owl:imports <http://www.w3.org/2004/02/skos/core>.
