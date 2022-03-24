@@ -14,14 +14,14 @@ WHERE
     {
         ?propertyIRI a owl:ObjectProperty 
         FILTER (isIRI(?propertyIRI))
-        FILTER (CONTAINS(str(?propertyIRI), 'edmcouncil')) .
+        FILTER (CONTAINS(str(?propertyIRI), 'idmp')) .
         BIND (IRI(REPLACE(str(?propertyIRI), "/ontology/", "/vocabulary/")) as ?vocPropertyIRI)
      
         ?propertyIRI rdfs:subPropertyOf ?parentPropertyIRI .
     
         ?parentPropertyIRI a owl:ObjectProperty 
         FILTER (isIRI(?parentPropertyIRI))
-        FILTER (CONTAINS(str(?parentPropertyIRI), 'edmcouncil')) .
+        FILTER (CONTAINS(str(?parentPropertyIRI), 'idmp')) .
         BIND (IRI(REPLACE(str(?parentPropertyIRI), "/ontology/", "/vocabulary/")) as ?vocParentPropertyIRI)
     }
 }
