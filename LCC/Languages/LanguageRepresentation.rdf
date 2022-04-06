@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
@@ -11,10 +12,10 @@
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
 	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
-	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
@@ -26,7 +27,6 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
@@ -47,26 +47,22 @@ The codes included herein also correspond to the language element of the Languag
 
 This ontology (Language Representation) defines the model for the standard, based in part on ISO 639-4, with individual codes for the other parts of the standard represented in dependent models.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<dct:references>BCP 47, Tags for Identifying Languages, see http://tools.ietf.org/html/bcp47</dct:references>
 		<dct:source>ISO 639-1 Codes for the representation of names of languages - Part 1: Alpha-2 code, First edition, 2002-07-15</dct:source>
 		<dct:source>ISO 639-2 Codes for the representation of names of languages - Part 2: Alpha-3 code, First edition, 1998-11-01</dct:source>
 		<dct:source>ISO 639-3 Codes for the representation of names of languages - Part 3: Alpha-3 code for comprehensive coverage of languages, First edition, 2007-02-01</dct:source>
 		<dct:source>ISO 639-4 Codes for the representation of names of languages - Part 4: General principles of coding of the representation of names of languages and related entities, and application guidelines, First edition, 2010-07-15</dct:source>
 		<dct:source>ISO 639-5 Codes for the representation of names of languages - Part 5: Alpha-3 code for language families and groups, First edition, 2008-05-15</dct:source>
 		<dct:source>ISO 639-6 Codes for the representation of names of languages - Part 6: Alpha-4 code for comprehensive coverage of language variants, First edition, 2009-12-01</dct:source>
-		<sm:copyright>Copyright (c) 2015-2017 Unisys</sm:copyright>
-		<sm:copyright>Copyright (c) 2015-2019 Adaptive Inc.</sm:copyright>
-		<sm:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</sm:copyright>
-		<sm:copyright>Copyright (c) 2015-2022 Thematix Partners LLC</sm:copyright>
-		<sm:copyright>Copyright (c) 2019-2022 agnos.ai</sm:copyright>
-		<sm:relatedSpecification>BCP 47, Tags for Identifying Languages, see http://tools.ietf.org/html/bcp47</sm:relatedSpecification>
 		<rdfs:seeAlso rdf:resource="https://www.omg.org/spec/LCC/AboutLCC/"/>
 		<rdfs:seeAlso rdf:resource="https://www.omg.org/spec/LCC/Languages/AboutLanguages/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/LCC/20220201/Languages/LanguageRepresentation/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/LCC/20220401/Languages/LanguageRepresentation/"/>
 		<skos:changeNote>The LCC 2.0 version of this ontology was revised to integrate the Commons ontologies developed as a part of the MVF 1.0 Specification.</skos:changeNote>
 		<skos:historyNote>This ontology is ultimately intended to represent all of ISO 639 for reference purposes, and to be sufficiently extensible to accommodate new sections or modifications as they are published. The current version of the ontology (including subordinate modules containing the language names and codes) provides a unique English name (i.e., the reference name from 639-3) for each language, with UTF-8 encoded literals specifying alternates in English, French, and Indigenous languages where present in the standard, and in German corresponding to the names on the LoC web site.
 
@@ -83,6 +79,11 @@ This ontology (Language Representation) defines the model for the standard, base
 (2) Serbo-Croatian was included in the 2002 version of 639-1, with part 1 code &apos;sh&apos;.  It was not mentioned in the 1998 version of 693-2, but appears in 639-3 with a language identifier of &apos;hbs&apos;, without codes for 639-2.  As of 2010, Serbo-Croation has been eliminated from ISO 639-1 and 639-2 codes altogether, and the ontology reflects this.
 (3) Other changes in the latest version of the ontology include elimination of the 639-1 code for Moldavian, merging the language with Romanian, and additional English and French names for some languages, such as Dutch (to include Flemish, flamais), among others.
 (4) German names for languages in ISO 639-2 were added to the Library of Congress in 2014, and are supported in this version of the ontology.</skos:historyNote>
+		<cmns-av:copyright>Copyright (c) 2015-2017 Unisys</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2015-2019 Adaptive Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2015-2022 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2019-2022 agnos.ai</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&lcc-lr;Alpha2Code">
