@@ -86,20 +86,20 @@ This ontology (Language Representation) defines the model for the standard, base
 		<cmns-av:copyright>Copyright (c) 2019-2022 agnos.ai</cmns-av:copyright>
 	</owl:Ontology>
 	
-	<owl:Class rdf:about="&lcc-lr;Alpha2Code">
+	<owl:Class rdf:about="&lcc-lr;Alpha2LanguageCode">
 		<rdfs:subClassOf rdf:resource="&lcc-lr;LanguageIdentifier"/>
-		<rdfs:label>alpha-2 code</rdfs:label>
+		<rdfs:label>alpha-2 language code</rdfs:label>
 		<dct:source>Section 4.1, ISO 639-1</dct:source>
 		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://en.wikipedia.org/wiki/UTF-8</rdfs:seeAlso>
 		<skos:definition>language identifier for a human language as defined by ISO 639-1, that is, a two-letter combination of characters used to represent a language or languages</skos:definition>
 		<skos:note>In the ISO 639-1 language code, each language identifier is composed of two letters (lower case letters from the Latin alphabet, corresponding to characters 97 through 122 of the UTF-8 encoding), without diacritical marks or other encodings of any kind.</skos:note>
-		<skos:scopeNote>The identifiers are not abbreviations for the languages they identify.  They are derived in some way from the indiginous language name or from preferences of the relevant speech community.</skos:scopeNote>
+		<skos:scopeNote>The identifiers are not abbreviations for the languages they identify.  They are derived in some way from the indigenous language name or from preferences of the relevant speech community.</skos:scopeNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&lcc-lr;Alpha3Code">
+	<owl:Class rdf:about="&lcc-lr;Alpha3LanguageCode">
 		<rdfs:subClassOf rdf:resource="&lcc-lr;LanguageIdentifier"/>
-		<rdfs:label>alpha-3 code</rdfs:label>
+		<rdfs:label>alpha-3 language code</rdfs:label>
 		<dct:source>Section 3.2, ISO 639-2</dct:source>
 		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://en.wikipedia.org/wiki/UTF-8</rdfs:seeAlso>
@@ -128,7 +128,7 @@ This ontology (Language Representation) defines the model for the standard, base
 	</owl:Class>
 	
 	<owl:Class rdf:about="&lcc-lr;BibliographicCode">
-		<rdfs:subClassOf rdf:resource="&lcc-lr;Alpha3Code"/>
+		<rdfs:subClassOf rdf:resource="&lcc-lr;Alpha3LanguageCode"/>
 		<rdfs:label>bibliographic code</rdfs:label>
 		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<skos:definition>alpha-3 code that is a member of the set of bibliographic codes in ISO 639-2</skos:definition>
@@ -400,7 +400,7 @@ This ontology (Language Representation) defines the model for the standard, base
 	</owl:Class>
 	
 	<owl:Class rdf:about="&lcc-lr;TerminologyCode">
-		<rdfs:subClassOf rdf:resource="&lcc-lr;Alpha3Code"/>
+		<rdfs:subClassOf rdf:resource="&lcc-lr;Alpha3LanguageCode"/>
 		<rdfs:label>terminology code</rdfs:label>
 		<dct:source>Section 3.7, ISO 639-3</dct:source>
 		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
@@ -491,7 +491,7 @@ This ontology (Language Representation) defines the model for the standard, base
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&lcc-lr;hasEnglishName">
-		<rdfs:subPropertyOf rdf:resource="&lcc-lr;hasName"/>
+		<rdfs:subPropertyOf rdf:resource="&lcc-lr;hasTextualName"/>
 		<rdfs:label>has English name</rdfs:label>
 		<dct:source>Section 3.4, ISO 639-3</dct:source>
 		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
@@ -499,7 +499,7 @@ This ontology (Language Representation) defines the model for the standard, base
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&lcc-lr;hasFrenchName">
-		<rdfs:subPropertyOf rdf:resource="&lcc-lr;hasName"/>
+		<rdfs:subPropertyOf rdf:resource="&lcc-lr;hasTextualName"/>
 		<rdfs:label>has French name</rdfs:label>
 		<dct:source>Section 3.4, ISO 639-3</dct:source>
 		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
@@ -507,27 +507,18 @@ This ontology (Language Representation) defines the model for the standard, base
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&lcc-lr;hasGermanName">
-		<rdfs:subPropertyOf rdf:resource="&lcc-lr;hasName"/>
+		<rdfs:subPropertyOf rdf:resource="&lcc-lr;hasTextualName"/>
 		<rdfs:label>has German name</rdfs:label>
 		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<skos:definition>associates a name in German with an individual concept</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&lcc-lr;hasIndigenousName">
-		<rdfs:subPropertyOf rdf:resource="&lcc-lr;hasName"/>
+		<rdfs:subPropertyOf rdf:resource="&lcc-lr;hasTextualName"/>
 		<rdfs:label>has indigenous name</rdfs:label>
 		<dct:source>Section 3.4, ISO 639-3</dct:source>
 		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<skos:definition>associates a local regional or cultural name with an individual concept</skos:definition>
-	</owl:DatatypeProperty>
-	
-	<owl:DatatypeProperty rdf:about="&lcc-lr;hasName">
-		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
-		<rdfs:label>has name</rdfs:label>
-		<dct:source>Section 3.4, ISO 639-3</dct:source>
-		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<skos:definition>associates a name, reference name, or appellation with an individual concept</skos:definition>
-		<skos:note>Note that the hasName properties defined herein have an implicit range of rdfs:Literal.  This is purposeful, so that users can specify any element that has a name with or without a language tag without concern for conflicting datatypes (i.e., xsd:string vs. rdf:langString, which are logically disjoint).</skos:note>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&lcc-lr;hasTag">
@@ -537,6 +528,15 @@ This ontology (Language Representation) defines the model for the standard, base
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>associates unique combination of alphanumeric characters corresponding to a designator for something</skos:definition>
 		<skos:note>Text-valued tags are included here as they may be useful for automated transformation or encoding systems, such as those used to produce IETF compliant language tags in XML.</skos:note>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&lcc-lr;hasTextualName">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has textual name</rdfs:label>
+		<dct:source>Section 3.4, ISO 639-3</dct:source>
+		<rdfs:isDefinedBy rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
+		<skos:definition>associates a name, reference name, or appellation with an individual concept</skos:definition>
+		<skos:note>Note that the hasName properties defined herein have an implicit range of rdfs:Literal.  This is purposeful, so that users can specify any element that has a name with or without a language tag without concern for conflicting datatypes (i.e., xsd:string vs. rdf:langString, which are logically disjoint).</skos:note>
 	</owl:DatatypeProperty>
 
 </rdf:RDF>
