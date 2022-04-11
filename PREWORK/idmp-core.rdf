@@ -1,25 +1,29 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="https://purl.iso.org/idmp/core#"
      xml:base="https://purl.iso.org/idmp/core"
+     xmlns:ns1="http://www.novartis.com/data_governance/knowledgefeed#"
+     xmlns:nvs="https://data-qa.novartis.net/r1/informationtechnology/architecture/iserver/v1/object/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:voc="https://pid.accurids.com/voc/"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:idmp="https://purl.iso.org/idmp/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:upper="https://data-qa.novartis.net/r1/enterprise/datastrategy/upperontology/v1/"
+     xmlns:nvsdoc="https://data-qa.novartis.net/r1/informationtechnology/architecture/iserver/v1/document/"
      xmlns:skos-xl="http://www.w3.org/2008/05/skos-xl#"
      xmlns:authority="http://publications.europa.eu/ontology/authority/">
     <owl:Ontology rdf:about="https://purl.iso.org/idmp/core">
         <owl:versionIRI rdf:resource="https://purl.iso.org/idmp/core/0.1"/>
+        <owl:imports rdf:resource="http://publications.europa.eu/resource/authority/country"/>
         <owl:imports rdf:resource="http://www.w3.org/2004/02/skos/core"/>
         <owl:imports rdf:resource="https://purl.iso.org/datatypes"/>
         <terms:creator rdf:resource="https://accurids.com"/>
         <terms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-11-05T12:00:00Z</terms:issued>
         <terms:license>These files are shared Intellectual Property of OSTHUS and ACCURIDS and may be used only through explicit written permission through OSTHUS or ACCURIDS. In particular further distribution and copy of parts are prohibited.</terms:license>
-        <terms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-08-08</terms:modified>
+        <terms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2022-01-31</terms:modified>
         <terms:rightsHolder rdf:resource="https://accurids.com"/>
         <terms:rightsHolder rdf:resource="https://osthus.com"/>
         <terms:title>Core Ontology of Identification of Medicinal Products (IDMP)</terms:title>
@@ -74,31 +78,42 @@
     
 
 
-    <!-- https://pid.accurids.com/voc/contains -->
+    <!-- https://purl.iso.org/idmp/allowedValues -->
 
-    <owl:AnnotationProperty rdf:about="https://pid.accurids.com/voc/contains">
-        <skos:prefLabel>contains</skos:prefLabel>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://pid.accurids.com/voc/related -->
-
-    <owl:AnnotationProperty rdf:about="https://pid.accurids.com/voc/related">
-        <skos:prefLabel>related</skos:prefLabel>
+    <owl:AnnotationProperty rdf:about="https://purl.iso.org/idmp/allowedValues">
+        <rdfs:comment>Capture defined allowed values according to the ISO standard. This is preliminary and likely to be replaced by a different pattern with controlled lists.</rdfs:comment>
+        <skos:prefLabel>allowed values</skos:prefLabel>
     </owl:AnnotationProperty>
     
 
 
     <!-- https://purl.iso.org/idmp/businessRules -->
 
-    <owl:AnnotationProperty rdf:about="https://purl.iso.org/idmp/businessRules"/>
+    <owl:AnnotationProperty rdf:about="https://purl.iso.org/idmp/businessRules">
+        <rdfs:comment>Capture defined business rules according to the ISO standard.</rdfs:comment>
+        <skos:prefLabel>business rules</skos:prefLabel>
+    </owl:AnnotationProperty>
     
 
 
     <!-- https://purl.iso.org/idmp/conformance -->
 
-    <owl:AnnotationProperty rdf:about="https://purl.iso.org/idmp/conformance"/>
+    <owl:AnnotationProperty rdf:about="https://purl.iso.org/idmp/conformance">
+        <rdfs:comment>Capture defined conformance information according to the ISO standard.</rdfs:comment>
+        <skos:prefLabel>conformance</skos:prefLabel>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://purl.iso.org/idmp/hasUMLAttribute -->
+
+    <owl:AnnotationProperty rdf:about="https://purl.iso.org/idmp/hasUMLAttribute"/>
+    
+
+
+    <!-- https://purl.iso.org/idmp/isUMLAttributeOf -->
+
+    <owl:AnnotationProperty rdf:about="https://purl.iso.org/idmp/isUMLAttributeOf"/>
     
 
 
@@ -113,17 +128,17 @@
     
 
 
-    <!-- http://www.w3.org/2000/01/rdf-schema#subClassOf -->
+    <!-- https://purl.iso.org/idmp/hasUMLAttribute -->
 
-    <owl:ObjectProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+    <owl:ObjectProperty rdf:about="https://purl.iso.org/idmp/hasUMLAttribute">
+        <owl:inverseOf rdf:resource="https://purl.iso.org/idmp/isUMLAttributeOf"/>
+    </owl:ObjectProperty>
     
 
 
-    <!-- https://purl.iso.org/idmp/hasPart -->
+    <!-- https://purl.iso.org/idmp/isUMLAttributeOf -->
 
-    <owl:ObjectProperty rdf:about="https://purl.iso.org/idmp/hasPart">
-        <skos:prefLabel>has part</skos:prefLabel>
-    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="https://purl.iso.org/idmp/isUMLAttributeOf"/>
     
 
 
@@ -352,9 +367,8 @@
         <terms:source>ISO/TS 19844:2018(E) page 67</terms:source>
         <skos:example>Update to previous version to include additional translations.</skos:example>
         <skos:prefLabel>change made</skos:prefLabel>
-        <skos:definition>The description of the updates or changes of the substance should be specified. The field will be left empty when first insert of substance.</skos:definition>
         <idmp:conformance rdf:resource="https://purl.iso.org/idmp/MandatoryInformation"/>
-        <rdfs:isDefinedBy rdf:resource="https://purl.iso.org/idmp/core"/>
+        <skos:definition>The description of the updates or changes of the substance should be specified. The field will be left empty when first insert of substance.</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="https://purl.iso.org/idmp/EffectiveDate">
         <terms:source>ISO/TS 19844:2018(E) page 67</terms:source>
@@ -363,24 +377,29 @@
         <skos:prefLabel>effective date</skos:prefLabel>
         <idmp:conformance rdf:resource="https://purl.iso.org/idmp/MandatoryInformation"/>
         <idmp:businessRules>The value may be implicitly derived.</idmp:businessRules>
-        <rdfs:isDefinedBy rdf:resource="https://purl.iso.org/idmp/core"/>
     </rdf:Description>
     <rdf:Description rdf:about="https://purl.iso.org/idmp/Version">
         <skos:prefLabel>version</skos:prefLabel>
         <terms:source>ISO/TS 19844:2018(E) page 66</terms:source>
-        <rdfs:isDefinedBy rdf:resource="https://purl.iso.org/idmp/core"/>
         <skos:definition>This subclause shall provide information on the version of the substance. Where no “Version Number” and “Effective Date” have been assigned by an authority source, the version number shall be set as 0 with the date set as the date of initial submission of the substance. Any changes or updates to a given substance will result in a new version. This could include changes in the definition of the substance or the addition of names or codes. The version of substances should be tracked. Submitters should also indicate if it is a new version of a previous submission.</skos:definition>
         <idmp:conformance rdf:resource="https://purl.iso.org/idmp/MandatoryInformation"/>
     </rdf:Description>
     <rdf:Description rdf:about="https://purl.iso.org/idmp/VersionNumber">
+        <skos:example>1, 2, 3, 99</skos:example>
         <idmp:businessRules>If same document set exists, version shall be greater than the last submitted version.
 For maintainance purpose, the version number shall be updated after the effective date.</idmp:businessRules>
-        <skos:example>1, 2, 3, 99</skos:example>
         <idmp:conformance rdf:resource="https://purl.iso.org/idmp/MandatoryInformation"/>
-        <rdfs:isDefinedBy rdf:resource="https://purl.iso.org/idmp/core"/>
         <skos:definition>The number of the version of the substance shall be provided.</skos:definition>
         <terms:source>ISO/TS 19844:2018(E) page 67</terms:source>
         <skos:prefLabel>version number</skos:prefLabel>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://purl.iso.org/idmp/hasUMLAttribute">
+        <skos:prefLabel>has UML attribute</skos:prefLabel>
+        <rdfs:comment>This property is used to link UML objects with corresponding &apos;attributes&apos; according to the ISO specification. Its use is preliminary and is assumed to change to a different modelling pattern.</rdfs:comment>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://purl.iso.org/idmp/isUMLAttributeOf">
+        <skos:prefLabel>is UML attribute of</skos:prefLabel>
+        <rdfs:comment>This property is used to link &apos;attributes&apos; with corresponding UML objects according to the ISO specification. Its use is preliminary and is assumed to change to a different modelling pattern.</rdfs:comment>
     </rdf:Description>
 </rdf:RDF>
 
