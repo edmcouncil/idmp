@@ -380,6 +380,16 @@
 		<skos:definition>set of codes for harmonized datatypes defined in the ISO 21090 specification</skos:definition>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-ConceptDescriptor">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:label>ISO 21090 concept descriptor</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.5.2</dct:source>
+		<skos:definition>classifier that refers to a concept defined in an external code system, terminology or ontology</skos:definition>
+		<skos:note>A CD may contain a simple code – that is, a reference to a concept defined directly by the referenced code system, or it may contain an expression in some syntax defined by the referenced code system that can be meaningfully evaluated, e.g. the concept of a &apos;left foot&apos; as a postcoordinated term built from the primary code &apos;FOOT&apos; and the qualifier &apos;LEFT&apos;.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-dtp;ISO21090-Datatype">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
@@ -951,6 +961,7 @@
 		<dct:source>ISO 21090:2011, clause 7.3.4.3.1</dct:source>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates the value of the BL</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL"/>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasCharacterSet">
@@ -979,6 +990,7 @@
 		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>indicates the extension of the identifier of the event associated with setting the datatype to its specified value</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasControlInformationRoot">
@@ -988,6 +1000,7 @@
 		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-Datatype"/>
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>indicates the root of the identifier of the event associated with setting the datatype to its specified value</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasExceptionalValue">
@@ -1007,6 +1020,15 @@
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>indicates the root of the identifier of the event associated with setting the datatype to its specified value</skos:definition>
 		<skos:note>Signals the imposition of one or more sets of constraints on the datatype. The sole purpose of specifying that a constraint that has been used to further constrain the datatype is to support validation of the instance: a validation engine can look up the rules expressed for the specified flavors and confirm that the instance conforms to the rules for the flavor. No other processing should depend on the content of the flavor attribute. No other semantic or computational use shall depend on the value of this property. If this value is populated,the datatype flavor(s) shall be a valid constraint on the type of value.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasIntegerValue">
+		<rdfs:label>has integer value</rdfs:label>
+		<dct:source>ISO 21090:2011, clause 7.8.3.3</dct:source>
+		<rdfs:range rdf:resource="&xsd;integer"/>
+		<skos:definition>indicates the value of the INT</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;INT"/>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasIntegrityCheck">
@@ -1115,6 +1137,7 @@
 		<dct:source>ISO 21090:2011, clause 7.3.2.3.3</dct:source>
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>indicates content represented in plain XML form</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
 	</owl:DatatypeProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-dtp;isEncodedAs">
@@ -1135,5 +1158,17 @@
 		<cmns-av:explanatoryNote>A code system is a managed collection of concept identifiers, usually codes, but sometimes more complex sets of rules and references.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>code system</cmns-av:synonym>
 	</owl:Class>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-dsg;hasDescription">
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-qtu;hasNumericValue">
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;REAL"/>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-txt;hasTextValue">
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+	</owl:DatatypeProperty>
 
 </rdf:RDF>
