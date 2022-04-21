@@ -4,6 +4,7 @@
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
@@ -24,6 +25,7 @@
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
@@ -47,6 +49,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
@@ -110,8 +113,7 @@
 		<rdfs:label>code system name</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.3</dct:source>
 		<skos:definition>common name of the coding system</skos:definition>
-		<skos:note>The purpose of a code system name is to assist an unaided human interpreter of a code value to interpret
-codeSystem.</skos:note>
+		<skos:note>The purpose of a code system name is to assist an unaided human interpreter of a code value to understand which code system is referenced.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-dtp;CodingRationale">
@@ -287,6 +289,7 @@ codeSystem.</skos:note>
 	<owl:NamedIndividual rdf:about="&idmp-dtp;ED">
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>ED</rdfs:label>
+		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2</dct:source>
 		<skos:definition>code for encapsulated data</skos:definition>
 		<cmns-av:explanatoryNote>This code may link to some external resource or denote a complex concept that is a class that has inherent relationships and attributes.</cmns-av:explanatoryNote>
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
@@ -297,6 +300,7 @@ codeSystem.</skos:note>
 	<owl:NamedIndividual rdf:about="&idmp-dtp;EN">
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>EN</rdfs:label>
+		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.7.6</dct:source>
 		<skos:definition>code for an entity name</skos:definition>
 		<cmns-av:explanatoryNote>This code denotes a name expressed as an xsd:string or rdf:langString, or a reified name that is an individual of type cmns-dsg:Name or of a subclass of cmns-dsg:Name such as a composite person name, organizational name, or other contextual name that may include provenance details such as the date such a name was last verified in addition to possible components of a name.</cmns-av:explanatoryNote>
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
@@ -363,7 +367,7 @@ codeSystem.</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ANY"/>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-dtp;ISO21090-BooleanDatatype">
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-Boolean">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -372,7 +376,7 @@ codeSystem.</skos:note>
 				<owl:onDataRange rdf:resource="&xsd;boolean"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>ISO 21090 boolean datatype</rdfs:label>
+		<rdfs:label>ISO 21090 boolean</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.4</dct:source>
 		<skos:definition>classifier that stands for the values of two-valued logic</skos:definition>
 		<skos:note>A BL value can be either true or false, or may have a nullFlavor, which makes this classifier essentially three-valued.</skos:note>
@@ -380,7 +384,7 @@ codeSystem.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-dtp;ISO21090-BooleanNonNullDatatype">
-		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-BooleanDatatype"/>
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-Boolean"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-dtp;hasBooleanValue"/>
@@ -394,12 +398,12 @@ codeSystem.</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL.NONNULL"/>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-dtp;ISO21090-CharacterStringDatatype">
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-CharacterString">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-dtp;hasTranslation"/>
-				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-CharacterStringDatatype"/>
+				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-CharacterString"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -416,7 +420,7 @@ codeSystem.</skos:note>
 				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>ISO 21090 character string datatype</rdfs:label>
+		<rdfs:label>ISO 21090 character string</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.6</dct:source>
 		<skos:definition>classifier that stands for text data, primarily intended for machine processing (e.g. sorting, querying, indexing, etc.) or direct display</skos:definition>
 		<skos:note>A ST shall have at least one character or else have a nullFlavor</skos:note>
@@ -521,18 +525,18 @@ codeSystem.</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;HXIT"/>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-dtp;ISO21090-EncapsulatedDataDatatype">
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-EncapsulatedData">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-dtp;hasThumbnail"/>
-				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-EncapsulatedDataDatatype"/>
+				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-EncapsulatedData"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-dtp;hasTranslation"/>
-				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-EncapsulatedDataDatatype"/>
+				<owl:allValuesFrom rdf:resource="&idmp-dtp;ISO21090-EncapsulatedData"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -612,12 +616,22 @@ codeSystem.</skos:note>
 				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>ISO 21090 encapsulated data datatype</rdfs:label>
+		<rdfs:label>ISO 21090 encapsulated data</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.6</dct:source>
 		<skos:definition>classifier that stands for data that are primarily intended for human interpretation or for further machine processing outside the scope of the ISO 21090 International Standard</skos:definition>
 		<skos:note>The three representations of the ED data - as a sequence of characters, as a sequence of bytes, or as XML in a native XML format - are mutually incompatible and could also have been implemented as three specializations of an abstract ED supertype. However, doing so would complicate definition and implementation of the ED flavors and complicate the associated XML format (the additional of a mandatory xsi:type attribute) without significantly simplifying the overall implementation of ED.</skos:note>
 		<skos:note>This includes unformatted or formatted written language, multimedia data, or structured information as defined by a different standard (e.g. XML-signatures).</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ED"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-dtp;ISO21090-EntityName">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:label>ISO 21090 entity name</rdfs:label>
+		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.7.6</dct:source>
+		<skos:definition>designation by which someone, some place, or something is known in the context of ISO 21090</skos:definition>
+		<skos:note>From an ISO 21090 perspective, entity names may be simple names or include sequences of entity name parts. They add a &apos;use&apos; code and a valid time range for information about when the name was used and how to choose between multiple aliases that may be valid at the same time.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;EN"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-dtp;IntegrityCheckAlgorithm">
