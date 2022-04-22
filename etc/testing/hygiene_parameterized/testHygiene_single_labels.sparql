@@ -12,7 +12,7 @@ WHERE
 {
   ?resource rdfs:label ?label.
   FILTER NOT EXISTS {?s owl:deprecated "true"^^xsd:boolean} .
-	FILTER regex(str(?s), "<HYGIENE_TESTS_FILTER_PARAMETER>")
+	FILTER regex(str(?s), <HYGIENE_TESTS_FILTER_PARAMETER>)
 }
 GROUP BY ?resource LANG(?label)
 HAVING (COUNT(STR(?label)) > 1)
