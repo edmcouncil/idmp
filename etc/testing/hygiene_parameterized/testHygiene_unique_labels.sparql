@@ -3,7 +3,7 @@ PREFIX owl:   <http://www.w3.org/2002/07/owl#>
 prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
 
 ##
-# banner Labels should be unique across all ontologies for classes and properties.
+# banner Labels should be unique across all ontologies for all resources.
 
 SELECT  (concat("PRODERROR: '", ?label, "' labels multiple objects.") AS ?error) ?resource ?type
 WHERE
@@ -13,7 +13,6 @@ WHERE
 		WHERE
         { 
 			?s  rdfs:label  ?label .
-			{?s a owl:Class} UNION {?s a owl:ObjectProperty} UNION {?s a owl:DatatypeProperty}.
 			FILTER NOT EXISTS {?s owl:deprecated "true"^^xsd:boolean} .
 			FILTER regex(str(?s), <HYGIENE_TESTS_FILTER_PARAMETER>)
         }
