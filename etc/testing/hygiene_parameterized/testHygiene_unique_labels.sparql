@@ -1,24 +1,17 @@
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl:   <http://www.w3.org/2002/07/owl#>
-prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl:   <http://www.w3.org/2002/07/owl#>
 
 ##
 # banner Labels should be unique across all ontologies for all resources.
 
-SELECT  (concat("PRODERROR: '", ?label, "' labels multiple objects.") AS ?error) ?resource ?type
+
+SELECT DISTINCT (concat ("ERROR: label ", ?label, " names multiple resources.") AS ?warn)
 WHERE
-{ 
-	{ 
-		SELECT DISTINCT  ?label
-		WHERE
-        { 
-			?s  rdfs:label  ?label .
-			FILTER NOT EXISTS {?s owl:deprecated "true"^^xsd:boolean} .
-			FILTER regex(str(?s), <HYGIENE_TESTS_FILTER_PARAMETER>)
-        }
-		GROUP BY ?label
-		HAVING ( COUNT(?label) > 1 )
-    }
-    ?resource  rdfs:label  ?label .
-    ?resource a ?type .
+{
+  ?resource rdfs:label ?label.
+  FILTER NOT EXISTS {?s owl:deprecated "true"^^xsd:boolean} .
+	FILTER regex(str(?s), <HYGIENE_TESTS_FILTER_PARAMETER>)
 }
+GROUP BY ?label
+HAVING (COUNT(?resource) > 1)
