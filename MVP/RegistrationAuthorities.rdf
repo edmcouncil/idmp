@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtid "https://www.omg.org/spec/Commons/ContextualIdentifiers/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
+	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY idmp-prd "https://spec.edmcouncil.org/idmp/ontology/MVP/ProductsAndServices/">
+	<!ENTITY idmp-ra "https://spec.edmcouncil.org/idmp/ontology/MVP/RegistrationAuthorities/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/idmp/ontology/MVP/RegistrationAuthorities/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtid="https://www.omg.org/spec/Commons/ContextualIdentifiers/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:idmp-prd="https://spec.edmcouncil.org/idmp/ontology/MVP/ProductsAndServices/"
+	xmlns:idmp-ra="https://spec.edmcouncil.org/idmp/ontology/MVP/RegistrationAuthorities/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/idmp/ontology/MVP/RegistrationAuthorities/">
+		<rdfs:label>Registration Authorities Ontology</rdfs:label>
+		<dct:abstract>This ontology defines concepts for representation of registration authorities, registrars, registration-specific identifiers and related identification schemes, and registration authorities specific to ISO. It was derived from the FIBO Foundations Products and Services Ontology and adapted for IDMP.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/idmp/ontology/MVP/ProductsAndServices/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualIdentifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/idmp/ontology/MVP/20220401/RegistrationAuthorities/"/>
+		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&idmp-ra;RegisteredIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtid;ContextualIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:onClass rdf:resource="&idmp-ra;RegistrationScheme"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;hasRegistrationDate"/>
+				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;isRegisteredBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-ra;RegistrationAuthority">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-ra;Registrar">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;isRegisteredIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-ra;Registry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registry identifier</rdfs:label>
+		<skos:definition>identifier associated with an entry in a registry, i.e., one that provides an index into the registry for the identified item</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-ra;Registrar">
+		<rdfs:subClassOf rdf:resource="&idmp-prd;ServiceProvider"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-prd;provides"/>
+				<owl:someValuesFrom rdf:resource="&idmp-ra;RegistrationService"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;isDesignatedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-ra;RegistrationAuthority"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;registers"/>
+				<owl:someValuesFrom rdf:resource="&owl;Thing"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registrar</rdfs:label>
+		<skos:definition>party that acts as a representative of a registration authority to provide registration services, including official record keeping</skos:definition>
+		<cmns-av:adaptedFrom>Barron&apos;s Dictionary of Business and Economic Terms, Fifth Edition, 2012</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-ra;RegistrationAuthority">
+		<rdfs:subClassOf rdf:resource="&idmp-prd;ServiceProvider"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;registers"/>
+				<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-prd;provides"/>
+				<owl:onClass rdf:resource="&idmp-ra;RegistrationService"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;manages"/>
+				<owl:onClass rdf:resource="&idmp-ra;Registry"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onClass rdf:resource="&cmns-pts;Party"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;isRegistrationAuthorityFor"/>
+				<owl:someValuesFrom rdf:resource="&owl;Thing"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registration authority</rdfs:label>
+		<skos:definition>service provider that is officially responsible for maintaining a registry and providing registration services and/or for delegating of some or all of these roles to a registrar</skos:definition>
+		<cmns-av:abbreviation>RA</cmns-av:abbreviation>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-ra;RegistrationScheme">
+		<rdfs:subClassOf rdf:resource="&cmns-id;IdentificationScheme"/>
+		<rdfs:label>registration scheme</rdfs:label>
+		<skos:definition>scheme for organizing information in a registry and allocating identifiers to registered items</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-ra;RegistrationService">
+		<rdfs:subClassOf rdf:resource="&idmp-prd;Service"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-prd;isProvidedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-ra;RegistrationAuthority">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-ra;Registrar">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registration service</rdfs:label>
+		<skos:definition>service provided to individuals and/or organizations for the registration of items in a registry</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-ra;Registry">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Record"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-ra;isManagedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-ra;RegistrationAuthority">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-ra;Registrar">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-ra;RegistryEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registry</rdfs:label>
+		<skos:definition>authoritative record or collection of records relating to something</skos:definition>
+		<cmns-av:explanatoryNote>Electronic registries typically contain a unique identifier for each entry, so that individual records can be referenced from other documents and registries.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>register</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-ra;RegistryEntry">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:allValuesFrom rdf:resource="&idmp-ra;Registry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-ra;RegisteredIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registry entry</rdfs:label>
+		<skos:definition>constituent of a registry that includes the details for something recorded in that registry</skos:definition>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;designates">
+		<rdfs:label>designates</rdfs:label>
+		<skos:definition>appoints someone officially</skos:definition>
+		<cmns-av:explanatoryNote>This property is intended to cover assigning a job or role to someone, selecting or designating someone to fill an office or a position, and fixing or setting by authority or by mutual agreement.</cmns-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;hasRegistrationAuthority">
+		<rdfs:label>has registration authority</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-ra;RegistrationAuthority"/>
+		<owl:inverseOf rdf:resource="&idmp-ra;isRegistrationAuthorityFor"/>
+		<skos:definition>indicates the registration authority for something</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-ra;hasRegistrationDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
+		<rdfs:label>has registration date</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
+		<skos:definition>the date or date and time on which something is recorded</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;isDesignatedBy">
+		<rdfs:label>is designated by</rdfs:label>
+		<owl:inverseOf rdf:resource="&idmp-ra;designates"/>
+		<skos:definition>indicates the party that has assigned or appointed someone to an office or position</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;isManagedBy">
+		<rdfs:label>is managed by</rdfs:label>
+		<skos:definition>relates something to something else that has some role in directing its affairs</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;isRegisteredBy">
+		<rdfs:label>is registered by</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-ra;RegistrationAuthority">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-ra;Registrar">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>indicates the registration authority or registrar that registers something</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;isRegisteredIn">
+		<rdfs:label>is registered in</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-ra;Registry"/>
+		<skos:definition>indicates the registry that something is registered in</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;isRegistrationAuthorityFor">
+		<rdfs:label>is registration authority for</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-ra;RegistrationAuthority"/>
+		<skos:definition>indicates the thing (typically an identifier or code) that the registration authority has authority for</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;manages">
+		<rdfs:label>manages</rdfs:label>
+		<owl:inverseOf rdf:resource="&idmp-ra;isManagedBy"/>
+		<skos:definition>relates a party to something that it directs in some way</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;registers">
+		<rdfs:label>registers</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-ra;RegistrationAuthority">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-ra;Registrar">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<owl:inverseOf rdf:resource="&idmp-ra;isRegisteredBy"/>
+		<skos:definition>records something in a registry or archive</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-ra;specifies">
+		<rdfs:label>specifies</rdfs:label>
+		<skos:definition>states a fact about something</skos:definition>
+	</owl:ObjectProperty>
+
+</rdf:RDF>
