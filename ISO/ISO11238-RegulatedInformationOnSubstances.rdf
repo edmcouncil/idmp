@@ -299,6 +299,39 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SubstanceCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasComment"/>
+				<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasChangeDate"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>substance code</rdfs:label>
+		<skos:definition>sequence of characters denoting a registered code for a given substance that is associated with a publicly recognized code system</skos:definition>
+		<skos:example>CAS Registry numbers, EC numbers, FDA UNII codes, EMA XEVMPD codes, ASK numbers, EPA Pesticide codes</skos:example>
+		<skos:example>These codes include Chemical Abstract Service (CAS) Registry Numbers, European Inventory of Existing Commercial Chemical Substances (EINECS), European Drug Codes (XEVMPD) and Japanese Drug Codes.</skos:example>
+		<skos:note>Codes typically facilitate mapping and linking of substances to a variety of information sources.</skos:note>
+		<skos:note>The actual code shall be captured using the same format that is used in the code system. Only codes associated with a code system shall be captured. The code shall be specifically associated with a given substance. Many public and non-public databases identify substances with a code and these codes can be very helpful in mapping substances to various systems. Codes shall always be verified against the source system. Different jurisdictions may require a code from a code system or multiple code systems to be associated and submitted with a substance.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.5</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SubstanceIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
 		<rdfs:subClassOf>
@@ -316,7 +349,7 @@
 Once a substance has been defined and assigned a unique identifier it is essential that this identifier be permanently associated with the substance. A substance shall only have one unique identifier. This will necessitate the generation of detailed rules to define substances that will be presented in the ISO/TS 19844 implementation guide.</skos:note>
 		<skos:note>Each substance and specified substance shall have only one permanently associated unique identifier (called respectively Substance-ID, resp. Specified Substance Group 1, 2, 3 or 4-ID) that shall not indicate the order of submission to the registration process. The Substance ID and Specified Substance Group 1, 2, 3 or 4-ID are per definition unique and therefore global.</skos:note>
 		<skos:note>The unique identifiers can be publicly available when the defining information along with the name or company code is publicly available in a single reference. The use of the identifier shall be royalty free.</skos:note>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.5</cmns-av:directSource>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.5</cmns-av:adaptedFrom>
 		<cmns-av:synonym>Substance ID</cmns-av:synonym>
 		<cmns-av:synonym>Substance-ID</cmns-av:synonym>
 	</owl:Class>
@@ -352,12 +385,6 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
@@ -376,6 +403,12 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 	<owl:Class rdf:about="&idmp-sub;SubstanceNameClassifier">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>substance name classifier</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.2</dct:source>
@@ -438,6 +471,23 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<skos:definition>describes the nature of the rules to be applied for a given class or element in cases where that element is conditionally required for conformance per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasChangeDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
+		<rdfs:label>has change date</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
+		<skos:definition>indicates date on which the status of something has changed as part of the terminology maintenance</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-TS"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasComment">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has comment</rdfs:label>
+		<skos:definition>indicates a remark</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasConformanceLevel">
 		<rdfs:label>has conformance level</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;ConformanceLevel"/>
@@ -455,7 +505,7 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<idmp-sub:hasBusinessRules>All the jurisdictions in which the Official Name is to be used should be indicated.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;Conditional"/>
 		<idmp-sub:hasValuesAllowed>ISO 3166-1 alpha-2 codes. For the European Union EU shall be used.</idmp-sub:hasValuesAllowed>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasSubstanceNameType">
@@ -473,7 +523,7 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		Specified Substance Group 1, 2 and 3 name types are used to guide the user with regards to which level the substance name belongs to e.g. water for injection – Ph.Eur. is a name having the substance name type: Specified Substance Group 3.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;Mandatory"/>
 		<idmp-sub:hasValuesAllowed>Official Name, Systematic Name, Scientific Name, Company Code, Other Name, Brand Name, Herbal Name, Homeopathic Name, Specified Homeopathic Name, Plasma-Derived Name, Preferred Name, Specified Substance Group 1 Name, Specified Substance Group 2 Name, Specified Substance Group 3 Name, Display Name, Common Name</idmp-sub:hasValuesAllowed>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSubstanceNameValue">
@@ -488,7 +538,7 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<idmp-sub:hasBusinessRules>Mandatory all substances shall have at least one name or company code (also considered to be a Substance Name) associated with the substance.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;Mandatory"/>
 		<idmp-sub:hasValuesAllowed>Free text, multiple names allowed, each in its own element.</idmp-sub:hasValuesAllowed>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;ST"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 	</owl:DatatypeProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasValuesAllowed">
