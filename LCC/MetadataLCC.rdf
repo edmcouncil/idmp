@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
-	<!ENTITY lcc-mod "https://www.omg.org/spec/Commons/MetadataLCC/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY lcc-mod "https://www.omg.org/spec/LCC/MetadataLCC/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -10,10 +10,11 @@
 	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
-<rdf:RDF xml:base="https://www.omg.org/spec/Commons/MetadataLCC/"
+<rdf:RDF xml:base="https://www.omg.org/spec/LCC/MetadataLCC/"
+	xmlns="https://www.omg.org/spec/LCC/MetadataLCC/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
-	xmlns:lcc-mod="https://www.omg.org/spec/Commons/MetadataLCC/"
 	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:lcc-mod="https://www.omg.org/spec/LCC/MetadataLCC/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -21,23 +22,28 @@
 	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	
-	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/MetadataLCC/">
+	<owl:Ontology rdf:about="https://www.omg.org/spec/LCC/MetadataLCC/">
 		<rdfs:label>Metadata for the IDMP LCC Ontologies Library</rdfs:label>
-		<dct:issued rdf:datatype="&xsd;dateTime">2022-03-31T18:00:00</dct:issued>
+		<dct:issued rdf:datatype="&xsd;dateTime">2022-05-01T18:00:00</dct:issued>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220401/MetadataLCC/"/>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/LCC/20220501/MetadataLCC/"/>
 	</owl:Ontology>
+	
+	<owl:AnnotationProperty rdf:about="&dct;hasPart">
+	</owl:AnnotationProperty>
+	
+	<owl:Class rdf:about="&sm;Module">
+	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&lcc-mod;LCCModule">
 		<rdf:type rdf:resource="&sm;Module"/>
 		<rdfs:label>LCC Ontologies Library</rdfs:label>
+		<dct:hasPart rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<dct:hasPart rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes"/>
 		<dct:hasPart rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<dct:hasPart rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-2-LanguageCodes/"/>
 		<dct:hasPart rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<dct:hasPart rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
