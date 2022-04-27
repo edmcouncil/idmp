@@ -8,6 +8,6 @@ WHERE
 {
   ?resource ?property ?object.
   FILTER (REGEX(afn:localname(?resource), "(\\d\\d\\d+$)|([^A-Za-z][A-Za-z][^A-Za-z])"))
-  FILTER (REGEX(str(?resource), "idmp|omg"))
+  FILTER (REGEX(str(?resource), <HYGIENE_TESTS_FILTER_PARAMETER>))
   BIND (concat ("WARN: IRI ", STR(?resource), " may be opaque ") AS ?warn)
 }
