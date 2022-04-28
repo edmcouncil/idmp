@@ -7,6 +7,7 @@
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
+	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
@@ -23,6 +24,7 @@
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
+	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -32,8 +34,8 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/RegistrationAuthorities/">
-		<rdfs:label>Registration Authorities Ontology</rdfs:label>
-		<dct:abstract>This ontology defines concepts for representation of registration authorities, registrars, registration-specific identifiers and related identification schemes. It was derived from the FIBO Foundations Products and Services Ontology and adapted for broader use.</dct:abstract>
+		<rdfs:label>Commons Registration Authorities Ontology</rdfs:label>
+		<dct:abstract>This ontology defines concepts for representation of registration authorities, registrars, registration-specific identifiers and related identification schemes. It was derived from the FIBO Registration Authorities Ontology and ISO 11179-3, and adapted for broader use.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
@@ -41,6 +43,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220401/RegistrationAuthorities/"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
@@ -222,12 +225,17 @@
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;designates">
+		<rdf:type rdf:resource="&owl;SymmetricProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRelatedPartyRole"/>
 		<rdfs:label>designates</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
 		<skos:definition>appoints someone officially</skos:definition>
 		<cmns-av:explanatoryNote>This property is intended to cover assigning a job or role to someone, selecting or designating someone to fill an office or a position, and fixing or setting by authority or by mutual agreement.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;hasRegistrationAuthority">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
 		<rdfs:label>has registration authority</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<owl:inverseOf rdf:resource="&cmns-ra;isRegistrationAuthorityFor"/>
@@ -238,21 +246,25 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
 		<rdfs:label>has registration date</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
-		<skos:definition>the date or date and time on which something is recorded</skos:definition>
+		<skos:definition>indicates the date or date and time on which something is registered</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;isDesignatedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRelatedPartyRole"/>
 		<rdfs:label>is designated by</rdfs:label>
 		<owl:inverseOf rdf:resource="&cmns-ra;designates"/>
-		<skos:definition>indicates the party that has assigned or appointed someone to an office or position</skos:definition>
+		<skos:definition>indicates the role of the party that has assigned or appointed someone to an office or position</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;isManagedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
 		<rdfs:label>is managed by</rdfs:label>
-		<skos:definition>relates something to something else that has some role in directing its affairs</skos:definition>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
+		<skos:definition>indicates the role of a party that directs the affairs or administration of something or someone</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;isRegisteredBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
 		<rdfs:label>is registered by</rdfs:label>
 		<rdfs:range>
 			<owl:Class>
@@ -281,11 +293,13 @@
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;manages">
 		<rdfs:label>manages</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
 		<owl:inverseOf rdf:resource="&cmns-ra;isManagedBy"/>
-		<skos:definition>relates a party to something that it directs in some way</skos:definition>
+		<skos:definition>relates a party to something or someone that it directs or administers in some way</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;registers">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;records"/>
 		<rdfs:label>registers</rdfs:label>
 		<rdfs:domain>
 			<owl:Class>
