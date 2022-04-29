@@ -1,0 +1,14 @@
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+##
+# banner We should avoid punning properties.
+
+SELECT DISTINCT (concat ("ERROR: Property ", str(?property), " is incorrectly punned.") AS ?error) ?property
+WHERE
+{
+    ?property rdf:type ?propertyType.
+    FILTER (REGEX(STR(?propertyType), "ObjectProperty|AnnotationProperty|DatatypeProperty"))
+    FILTER regex(str(?property), <HYGIENE_TESTS_FILTER_PARAMETER>)
+}
+GROUP BY ?property
+HAVING (COUNT(?propertyType) > 1)
