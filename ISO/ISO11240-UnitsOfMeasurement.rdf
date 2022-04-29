@@ -86,7 +86,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;CodeSystemFullName">
-		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;CodeSystemName"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
@@ -100,7 +100,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;CodeSystemIdentifier">
-		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ObjectIdentifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
@@ -111,21 +111,6 @@
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.3 Code System, Table 3</dct:source>
 		<skos:definition>globally unique identifier for the code system</skos:definition>
 		<skos:note>Code System Identifier should take the form of an ISO Object Identifier (OID).</skos:note>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-uom;CodeSystemName">
-		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
-				<owl:onClass rdf:resource="&idmp-uom;UnitOfMeasureIdentificationScheme"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>code system name</rdfs:label>
-		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.3 Code System, Table 3</dct:source>
-		<skos:definition>The name is used strictly for communication between humans. The Code System Identifier should be used for all computer-to-computer communication.</skos:definition>
-		<skos:definition>short token that uniquely identifies the code system</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;UnitOfMeasureIdentificationScheme">
@@ -147,7 +132,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
-				<owl:onClass rdf:resource="&idmp-uom;CodeSystemName"/>
+				<owl:onClass rdf:resource="&idmp-dtp;CodeSystemName"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -195,7 +180,7 @@
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.2 Unit of measurement Code Entry, Table 2</dct:source>
 		<rdfs:range rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
 		<skos:definition>indicates a geographic refinement of the language of this entry using ISO 3166</skos:definition>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;CD"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-uom;isSIQuantity">
@@ -205,7 +190,7 @@
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementUnit"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates that the unit of measure is an SI quantity, or is based on an SI quantity</skos:definition>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;BL"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-BL"/>
 	</owl:DatatypeProperty>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
