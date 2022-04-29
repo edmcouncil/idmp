@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cxtid "https://www.omg.org/spec/Commons/ContextualIdentifiers/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
+	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/Commons/ProductsAndServices/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cxtid="https://www.omg.org/spec/Commons/ContextualIdentifiers/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
+	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/ProductsAndServices/">
+		<rdfs:label>Commons Products and Services Ontology</rdfs:label>
+		<dct:abstract>This ontology defines fundamental concepts for products, services, and providers of those services. It was derived from the FIBO Foundations Products and Services Ontology and adapted for broader use.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualIdentifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220401/ProductsAndServices/"/>
+		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-prd;Capability">
+		<rdfs:label>capability</rdfs:label>
+		<skos:definition>ability to perform a particular type of work that may involve people with particular skills and knowledge, intellectual property, defined practices, operating facilities, tools and equipment</skos:definition>
+		<cmns-av:adaptedFrom>Value Delivery Modeling Language Specification, http://www.omg.org/spec/VDML/</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;Good">
+		<rdfs:label>good</rdfs:label>
+		<skos:definition>physical, produced item over which ownership rights can be established, whose ownership can be passed from one party to another by engaging in transactions, and that is not money or real estate</skos:definition>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://data.oecd.org/trade/trade-in-goods.htm</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.law.cornell.edu/ucc/9/9-102#goods</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>An inherently useful and relatively scarce tangible item produced from agricultural, construction, manufacturing, or mining activities. Off-the-shelf products, including off-the-shelf software products and customization of software products, are generally considered to be goods. Energy, such as electricity, is also considered to be a good from a legal perspective, and meets the criteria of being manufactured or produced via some process, including but not limited to a mining process. According to the UN Convention On Contract For The International Sale Of Goods, the term &apos;good&apos; does not include (1) items bought for personal use, (2) items bought at an auction or foreclosure sale, (3) aircraft or ocean-going vessels.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>From the Universal Commercial Code (UCC) in the United States, the term &apos;good&apos; includes (i) fixtures, (ii) standing timber that is to be cut and removed under a conveyance or contract for sale, (iii) the unborn young of animals, (iv) crops grown, growing, or to be grown, even if the crops are produced on trees, vines, or bushes, and (v) manufactured homes. The term also includes a computer program embedded in goods and any supporting information provided in connection with a transaction relating to the program if (i) the program is associated with the goods in such a manner that it customarily is considered part of the goods, or (ii) by becoming the owner of the goods, a person acquires a right to use the program in connection with the goods. The term does not include a computer program embedded in goods that consist solely of the medium in which the program is embedded. The term also does not include accounts, chattel paper, commercial tort claims, deposit accounts, documents, general intangibles, instruments, investment property, letter-of-credit rights, letters of credit, money, or oil, gas, or other minerals before extraction.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;Producer">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;produces"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;Good"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>producer</rdfs:label>
+		<skos:definition>grower, maker, fabricator, or manufacturer of some product or other good</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;Product">
+		<rdfs:label>product</rdfs:label>
+		<skos:definition>commercially distributed good that is (1) tangible property, (2) the output or result of a fabrication, manufacturing, or production process, or (3) something that passes through a distribution channel before being consumed or used</skos:definition>
+		<cmns-av:adaptedFrom>https://thelawdictionary.org/product/</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>https://www.oecd.org/regreform/sectors/2376087.pdf</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Goods, services, and in some cases rights may be products depending on the circumstances.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>Products are considered to be homogenous when they are perfect substitutes and buyers perceive no actual or real differences between the products offered by different firms. In contrast, heterogenous products differ significantly from each other and are not easily substitutable.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;ProductIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtid;ContextualIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&cmns-prd;Product"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>product identifier</rdfs:label>
+		<skos:definition>sequence of characters uniquely identifying a product in some context</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;Service">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProvidedBy"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;ServiceProvider"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;Capability"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>service</rdfs:label>
+		<skos:definition>intangible activity performed by some party for the benefit of another party</skos:definition>
+		<skos:example>Services include intangible products, such as accounting, banking, cleaning, consultancy, education, insurance, expertise, medical treatment, or transportation services.</skos:example>
+		<cmns-av:explanatoryNote>Sometimes services are difficult to identify because they are closely associated with a good; such as the combination of a diagnosis with the administration of a medicine. No transfer of possession or ownership takes place when services are sold, and they (1) cannot be stored or transported, (2) are instantly perishable, and (3) come into existence at the time they are bought and consumed.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;ServiceProvider">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;Service"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>service provider</rdfs:label>
+		<skos:definition>party that provides professional services, such as consulting, financial, legal, real estate, education, communications, registration, regulatory, manufacturing, storage, processing, or other services to others</skos:definition>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-prd;isProducedBy">
+		<rdfs:label>is produced by</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-prd;produces"/>
+		<skos:definition>identifies the producer that fabricates, manufactures or otherwise creates something through some production process</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-prd;isProvidedBy">
+		<rdfs:label>is provided by</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-prd;provides"/>
+		<skos:definition>is made available by</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-prd;produces">
+		<rdfs:label>produces</rdfs:label>
+		<skos:definition>creates through a fabrication, manufacturing or production process</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-prd;provides">
+		<rdfs:label>provides</rdfs:label>
+		<skos:definition>makes something available</skos:definition>
+	</owl:ObjectProperty>
+
+</rdf:RDF>

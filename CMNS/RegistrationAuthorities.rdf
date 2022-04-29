@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtid "https://www.omg.org/spec/Commons/ContextualIdentifiers/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
+	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
+	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
+	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtid="https://www.omg.org/spec/Commons/ContextualIdentifiers/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
+	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
+	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/RegistrationAuthorities/">
+		<rdfs:label>Commons Registration Authorities Ontology</rdfs:label>
+		<dct:abstract>This ontology defines concepts for representation of registration authorities, registrars, registration-specific identifiers and related identification schemes. It was derived from the FIBO Registration Authorities Ontology and ISO 11179-3, and adapted for broader use.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualIdentifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220401/RegistrationAuthorities/"/>
+		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-ra;RegisteredIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtid;ContextualIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:onClass rdf:resource="&cmns-ra;RegistrationScheme"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;hasRegistrationDate"/>
+				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-ra;Registrar">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
+				<owl:someValuesFrom rdf:resource="&cmns-ra;Registry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registered identifier</rdfs:label>
+		<skos:definition>contextual identifier that is registered in a registry by, or on behalf of, a registration authority according to some registration scheme</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-ra;Registrar">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;ServiceProvider"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
+				<owl:someValuesFrom rdf:resource="&cmns-ra;RegistrationService"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isDesignatedBy"/>
+				<owl:someValuesFrom rdf:resource="&cmns-ra;RegistrationAuthority"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;registers"/>
+				<owl:someValuesFrom rdf:resource="&owl;Thing"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registrar</rdfs:label>
+		<skos:definition>party that acts as a representative of a registration authority to provide registration services, including official record keeping</skos:definition>
+		<cmns-av:adaptedFrom>Barron&apos;s Dictionary of Business and Economic Terms, Fifth Edition, 2012</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-ra;RegistrationAuthority">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;ServiceProvider"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;registers"/>
+				<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
+				<owl:onClass rdf:resource="&cmns-ra;RegistrationService"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;manages"/>
+				<owl:onClass rdf:resource="&cmns-ra;Registry"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegistrationAuthorityFor"/>
+				<owl:someValuesFrom rdf:resource="&owl;Thing"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registration authority</rdfs:label>
+		<skos:definition>service provider that is officially responsible for maintaining a registry and providing registration services and/or for delegating of some or all of these roles to a registrar</skos:definition>
+		<cmns-av:abbreviation>RA</cmns-av:abbreviation>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-ra;RegistrationScheme">
+		<rdfs:subClassOf rdf:resource="&cmns-id;IdentificationScheme"/>
+		<rdfs:label>registration scheme</rdfs:label>
+		<skos:definition>scheme for organizing information in a registry and allocating identifiers to registered items</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-ra;RegistrationService">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;Service"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProvidedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-ra;Registrar">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registration service</rdfs:label>
+		<skos:definition>service provided to individuals and/or organizations for the registration of items in a registry</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-ra;Registry">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Record"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-ra;RegistryEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isManagedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-ra;Registrar">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registry</rdfs:label>
+		<skos:definition>authoritative record or collection of records relating to something</skos:definition>
+		<cmns-av:explanatoryNote>Electronic registries typically contain a unique identifier for each entry, so that individual records can be referenced from other documents and registries.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>register</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-ra;RegistryEntry">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:allValuesFrom rdf:resource="&cmns-ra;Registry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registry entry</rdfs:label>
+		<skos:definition>constituent of a registry that includes the details for something recorded in that registry</skos:definition>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;designates">
+		<rdf:type rdf:resource="&owl;SymmetricProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRelatedPartyRole"/>
+		<rdfs:label>designates</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
+		<skos:definition>appoints someone officially</skos:definition>
+		<cmns-av:explanatoryNote>This property is intended to cover assigning a job or role to someone, selecting or designating someone to fill an office or a position, and fixing or setting by authority or by mutual agreement.</cmns-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;hasRegistrationAuthority">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:label>has registration authority</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-ra;RegistrationAuthority"/>
+		<owl:inverseOf rdf:resource="&cmns-ra;isRegistrationAuthorityFor"/>
+		<skos:definition>indicates the registration authority for something</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-ra;hasRegistrationDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
+		<rdfs:label>has registration date</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
+		<skos:definition>indicates the date or date and time on which something is registered</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;isDesignatedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRelatedPartyRole"/>
+		<rdfs:label>is designated by</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-ra;designates"/>
+		<skos:definition>indicates the role of the party that has assigned or appointed someone to an office or position</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;isManagedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:label>is managed by</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
+		<skos:definition>indicates the role of a party that directs the affairs or administration of something or someone</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;isRegisteredBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:label>is registered by</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-ra;Registrar">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>indicates the registration authority or registrar that registers something</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;isRegisteredIn">
+		<rdfs:label>is registered in</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-ra;Registry"/>
+		<skos:definition>indicates the registry that something is registered in</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;isRegistrationAuthorityFor">
+		<rdfs:label>is registration authority for</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-ra;RegistrationAuthority"/>
+		<skos:definition>indicates the thing (typically an identifier or code) that the registration authority has authority for</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;manages">
+		<rdfs:label>manages</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
+		<owl:inverseOf rdf:resource="&cmns-ra;isManagedBy"/>
+		<skos:definition>relates a party to something or someone that it directs or administers in some way</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;registers">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;records"/>
+		<rdfs:label>registers</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-ra;Registrar">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<owl:inverseOf rdf:resource="&cmns-ra;isRegisteredBy"/>
+		<skos:definition>records something in a registry or archive</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;specifies">
+		<rdfs:label>specifies</rdfs:label>
+		<skos:definition>states a fact about something</skos:definition>
+	</owl:ObjectProperty>
+
+</rdf:RDF>
