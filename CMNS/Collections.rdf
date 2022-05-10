@@ -51,7 +51,7 @@
 	<owl:Class rdf:about="&cmns-col;Constituent">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
 				<owl:onClass rdf:resource="&cmns-col;Collection"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -80,6 +80,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-col;comprises">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
 		<rdfs:label>comprises</rdfs:label>
 		<skos:definition>includes, consists of, or contains, especially within a particular scope</skos:definition>
 		<skos:note>Note that something can be comprised of something(s) that may or may not be understood as separable parts. In other words, comprises does not imply countability or uniqueness.</skos:note>
@@ -89,6 +90,13 @@
 		<rdfs:label>has arrangement</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-col;Arrangement"/>
 		<skos:definition>is structured or organized according to</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-col;hasConstituent">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:label>has constituent</rdfs:label>
+		<skos:definition>consists of or contains</skos:definition>
+		<cmns-col:usageNote>Being a constituent of something does not necessarily mean parthood. Whole-part relations are transitive, whereas constituency is not necessarily transitive and so this property is useful in cases where transitivity is not necessarily desirable or appropriate.</cmns-col:usageNote>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-col;hasMember">
@@ -106,7 +114,15 @@
 		<skos:note>Note that &apos;has part&apos; is not a subproperty of &apos;comprises&apos; in order to enable transitivity for whole-part relationships without limiting the use of cardinality constraints on comprises and membership.</skos:note>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-col;isConstituentOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isIncludedIn"/>
+		<rdfs:label>is constituent of</rdfs:label>
+		<skos:definition>something included in something else</skos:definition>
+		<skos:note>A constituent may be an independently identifiable, discrete element or may be an indistinguishable element once it is combined with the target, such as a part of a substance</skos:note>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-col;isIncludedIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
 		<rdfs:label>is included in</rdfs:label>
 		<owl:inverseOf rdf:resource="&cmns-col;comprises"/>
 		<skos:definition>is contained in or an element of</skos:definition>
@@ -126,6 +142,11 @@
 		<owl:inverseOf rdf:resource="&cmns-col;hasPart"/>
 		<skos:definition>relates something to another thing that it is some component or portion of, regardless of how that whole-part relationship is manifested</skos:definition>
 		<skos:note>Note that &apos;is part of&apos; is not a subproperty of &apos;isIncludedIn&apos; in order to enable transitivity for whole-part relationships without limiting the use of cardinality constraints on inclusion and membership.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-col;isRelatedTo">
+		<rdfs:label>is related to</rdfs:label>
+		<skos:definition>links something or someone to something or someone else</skos:definition>
 	</owl:ObjectProperty>
 
 </rdf:RDF>
