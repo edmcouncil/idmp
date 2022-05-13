@@ -72,6 +72,17 @@
 		<cmns-ra:manages rdf:resource="&idmp-ra;ChemicalAbstractsServiceChemicalRegistrySystem"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-ra;AnatomicalTherapeuticChemicalClassificationSystem">
+		<rdf:type rdf:resource="&cmns-ra;Registry"/>
+		<rdfs:label>Anatomical Therapeutic Chemical Classification System</rdfs:label>
+		<skos:definition>registry that was developed to assist regulators in managing substance information</skos:definition>
+		<cmns-av:abbreviation>WHO-ATC</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 4.2.2</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>In the Anatomical Therapeutic Chemical (ATC) classification system, the active substances are divided into different groups according to the organ or system on which they act and their therapeutic, pharmacological and chemical properties. Drugs are classified in groups at five different levels.</cmns-av:explanatoryNote>
+		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;WorldHealthOrganizationRegistrationAuthority"/>
+		<lcc-lr:hasTextualName>Anatomical Therapeutic Chemical Classification System</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-ra;CASRegistryNumber">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceCode"/>
 		<rdfs:subClassOf>
@@ -92,11 +103,12 @@
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>CAS registry number</rdfs:label>
-		<skos:definition>numeric identifier that usually only identifies a single substance</skos:definition>
+		<rdfs:label>CAS Registry Number</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.9, A.1.2</dct:source>
+		<skos:definition>unique numerical identifier of a substance in the CAS Registry system</skos:definition>
 		<skos:note>The numbers are sequential and are assigned as a substance enters the registry system. The numbers do not have a common length and lengths can be up to 10 digits. Each CAS number contains a single check digit. The assignment of chemical names is done according to the chemical nomenclature rules for CA index names, which is slightly different from the internationally standard IUPAC names, according to the rules of IUPAC.</skos:note>
 		<skos:scopeNote>Polymers frequently only have one CAS registry number associated with them, regardless of differences in molecular mass or other defining elements.</skos:scopeNote>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.2</cmns-av:directSource>
+		<cmns-av:synonym>CAS number</cmns-av:synonym>
 		<cmns-av:usageNote>Although CAS numbers are widely used, they cannot be freely used. CAS has guidelines on the use of CAS registry numbers and has attempted to restrict their use in publicly available databases.</cmns-av:usageNote>
 	</owl:Class>
 	
@@ -296,6 +308,26 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.5</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-ra;InternationalNonproprietaryName">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredBy"/>
+				<owl:hasValue rdf:resource="&idmp-ra;WorldHealthOrganizationRegistrationAuthority"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>international nonproprietary name</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 4.9</dct:source>
+		<rdfs:seeAlso rdf:resource="https://www.who.int/teams/health-product-and-policy-standards/inn/"/>
+		<skos:definition>unique generic name allocated to an active pharmaceutical substance used in medicine worldwide</skos:definition>
+		<skos:note>INNs usually contain a common syllable (known as a stem) to indicate the pharmacological or chemical family to which the substance belongs. The ending –mycin, for example – denotes a type of antibiotic. Syllables, letters or separate words are then added to differentiate between substances in the same family – such as kanamycin, erythromycin. Twice a year, the INN Expert Group gathers at WHO to painstakingly consider and create names for new substances used in medicines. The aim is come up with a single name – an INN – that can be recognized and used globally by doctors, pharmacists, scientists, medicines regulators and patients.</skos:note>
+		<skos:note>International Nonproprietary Names (INN) facilitate the identification of pharmaceutical substances or active pharmaceutical ingredients. Each INN is a unique name that is globally recognized and is public property. A nonproprietary name is also known as a generic name.</skos:note>
+		<skos:note>Nonproprietary names are intended for use in pharmacopoeias, labelling, product information, advertising and other promotional material, drug regulation and scientific literature, and as a basis for product names, e.g. for generics. Their use is normally required by national or, as in the case of the European Community, by international legislation. As a result of ongoing collaboration, national names such as British Approved Names (BAN), Dénominations Communes Françaises (DCF), Japanese Adopted Names (JAN) and United States Adopted Names (USAN) are nowadays, with rare exceptions, identical to the INN.</skos:note>
+		<skos:note>The World Health Organization collaborates closely with INN experts and national nomenclature committees to select a single name of worldwide acceptability for each active substance that is to be marketed as a pharmaceutical. To avoid confusion, which could jeopardize the safety of patients, trade-marks should neither be derived from INNs nor contain common stems used in INNs. The selection and publication of INNs falls under the responsibility of the EMP/RHT/TSN team of the INN Programme.</skos:note>
+		<cmns-av:abbreviation>INN</cmns-av:abbreviation>
+		<cmns-av:synonym>generic name</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-ra;UniqueIngredientNumber">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceCode"/>
 		<rdfs:subClassOf>
@@ -331,6 +363,24 @@
 		<skos:definition>U.S. government agency responsible for protecting the public health by ensuring the safety, efficacy, and security of human and veterinary drugs, biological products, and medical devices; and by ensuring the safety of our nation&apos;s food supply, cosmetics, and products that emit radiation.</skos:definition>
 		<cmns-av:abbreviation>FDA</cmns-av:abbreviation>
 		<cmns-av:explanatoryNote>FDA is responsible for advancing the public health by helping to speed innovations that make medical products more effective, safer, and more affordable and by helping the public get the accurate, science-based information they need to use medical products and foods to maintain and improve their health.</cmns-av:explanatoryNote>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;WorldHealthOrganization">
+		<rdf:type rdf:resource="&cmns-pts;Party"/>
+		<rdfs:label>World Health Organization</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://www.who.int/"/>
+		<skos:definition>United Nations agency that connects nations, partners and people to promote health, keep the world safe and serve the vulnerable – so everyone, everywhere can attain the highest level of health</skos:definition>
+		<cmns-av:abbreviation>WHO</cmns-av:abbreviation>
+		<cmns-av:explanatoryNote>WHO leads global efforts to expand universal health coverage. We direct and coordinate the world’s response to health emergencies. And we promote healthier lives – from pregnancy care through old age. Our Triple Billion targets outline an ambitious plan for the world to achieve good health for all using science-based policies and programmes.</cmns-av:explanatoryNote>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;WorldHealthOrganizationRegistrationAuthority">
+		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
+		<rdfs:label>World Health Organization Registration Authority</rdfs:label>
+		<skos:definition>World Health Organization (WHO) in its role as a Registration Authority (RA)</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 4.2.2</cmns-av:adaptedFrom>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-ra;WorldHealthOrganization"/>
+		<cmns-ra:manages rdf:resource="&idmp-ra;AnatomicalTherapeuticChemicalClassificationSystem"/>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
