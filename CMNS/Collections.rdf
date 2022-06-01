@@ -28,7 +28,7 @@
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220501/Collections/"/>
-		<skos:note>The collections ontology conforms with the OWL 2 RL profile of OWL 2.  See https://www.w3.org/TR/owl2-profiles/#OWL_2_RL for details.</skos:note>
+		<skos:note>The collections ontology conforms with the OWL 2 DL semantics, and is outside of OWL 2 RL due to the inclusion of a local some values constraint. This restriction may be removed as needed to support OWL RL rule-based applications that cannot be extended to support it.</skos:note>
 		<skos:note>This ontology was originally designed for use in the OMG Languages, Countries and Codes (LCC) specification as part of the broader LanguageRepresentation ontology. The concepts have also been used in the Financial Industry Business Ontology (FIBO) for representing collections such as baskets, portfolios records, statistical universes and populations, etc., and schemes such as classification schemes and identification schemes.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2019-2022 Thematix Partners LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2021-2022 EDM Council, Inc.</cmns-av:copyright>
@@ -116,8 +116,9 @@
 	<owl:ObjectProperty rdf:about="&cmns-col;isConstituentOf">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isIncludedIn"/>
 		<rdfs:label>is constituent of</rdfs:label>
-		<skos:definition>something included in something else</skos:definition>
-		<skos:note>A constituent may be an independently identifiable, discrete element or may be an indistinguishable element once it is combined with the target, such as a part of a substance</skos:note>
+		<owl:inverseOf rdf:resource="&cmns-col;hasConstituent"/>
+		<skos:definition>is a component of something else</skos:definition>
+		<skos:note>A constituent may be an independently identifiable, discrete element or may be an indistinguishable element once it is combined with the target, such as a part of a substance.</skos:note>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-col;isIncludedIn">
