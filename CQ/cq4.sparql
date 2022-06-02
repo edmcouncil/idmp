@@ -1,0 +1,14 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+prefix cmns-ra:   <https://www.omg.org/spec/Commons/RegistrationAuthorities/> 
+prefix cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+SELECT ?substance ?evCode
+WHERE {
+    ?substance rdf:type sub:ChemicalSubstance ;
+    		cmns-id:isIdentifiedBy ?identifier ;
+  			skos:prefLabel <SUBSTANCE_LABEL>
+ ?identifier cmns-ra:isRegisteredIn "EVMPD" .
+ ?identifier cmns-txt:hasTextValue ?evCode .
+}
