@@ -10,6 +10,7 @@
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
+	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
@@ -36,6 +37,7 @@
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
+	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
@@ -66,13 +68,14 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220401/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220601/ISO11238-Substances/"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -164,12 +167,32 @@
 		<cmns-txt:hasTextValue>OPTIONAL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;FunctionalRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Role"/>
+		<rdfs:label>functional role</rdfs:label>
+		<skos:definition>role specifying one or more activities, capabilities, purposes, skills or combination thereof in some context</skos:definition>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ISO19844-CodeSet">
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:label>ISO 19844 code set</rdfs:label>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.iso.org/standard/71965.html</rdfs:seeAlso>
 		<skos:definition>set of controlled vocabularies and codes for reporting of substance-related information specified in the ISO/TS 19844 guidelines</skos:definition>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;Ingredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PharmaceuticalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ingredient</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.28</dct:source>
+		<skos:definition>material used in the preparation of a medicinal/pharmaceutical product</skos:definition>
+		<skos:note>The ingredient is part of a medicinal product, either alone or in combination with other ingredients. The ingredient is also a component of a pharmaceutical product. Ingredient is equal to a substance with the indication of the specific role it is playing in the product.</skos:note>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Material">
 		<rdfs:subClassOf>
@@ -280,6 +303,22 @@
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 19</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.6</dct:source>
 		<skos:definition>name or company code associated with the substance</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MoietyRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Moiety"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>moiety role</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 19</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.6</dct:source>
+		<skos:definition>functional role played by a moity in some substance or product</skos:definition>
+		<skos:example>Counter-ion, solvate, hydrate, parent, base, acid, co-crystallising agent</skos:example>
+		<skos:note>In addition to the moiety role for chemicals, for many peptides, the moiety role of counter-ions such as acetate should be indicated.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularGraph">
