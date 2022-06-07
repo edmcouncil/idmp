@@ -9,7 +9,6 @@
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
-	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
@@ -36,7 +35,6 @@
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
-	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
@@ -69,7 +67,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
@@ -180,20 +177,6 @@
 		<skos:definition>set of controlled vocabularies and codes for reporting of substance-related information specified in the ISO/TS 19844 guidelines</skos:definition>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-sub;Ingredient">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PharmaceuticalProduct"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>ingredient</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.28</dct:source>
-		<skos:definition>material used in the preparation of a medicinal/pharmaceutical product</skos:definition>
-		<skos:note>The ingredient is part of a medicinal product, either alone or in combination with other ingredients. The ingredient is also a component of a pharmaceutical product. Ingredient is equal to a substance with the indication of the specific role it is playing in the product.</skos:note>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;Material">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -206,26 +189,6 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
 		<skos:definition>entity that has mass, occupies space and consists of one or more substances</skos:definition>
 		<skos:note>Material is more specifically defined in ISO 11615 to be a &apos;substance or specified substance of which a certain packaging or device is made. This definition applies to a medicinal product package item (container), package (component) and device.</skos:note>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;MedicinalProduct">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PharmaceuticalProduct"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasBasisOfStrength"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PharmaceuticalProduct"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>medicinal product</rdfs:label>
-		<skos:definition>pharmaceutical product or combination of pharmaceutical products that can be administered to human beings (or animals) for treating or preventing disease, with the aim/purpose of making a medical diagnosis or to restore, correct or modify physiological functions</skos:definition>
-		<skos:note>A medicinal product may contain in the packaging one or more manufactured items and one or more pharmaceutical products. In certain regions, a medicinal product may also be defined as any substance or combination of substances which may be used to make a medical diagnosis.</skos:note>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.42</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Mixture">
@@ -443,15 +406,6 @@
 		<skos:definition>name given by an official registration authority/organization</skos:definition>
 		<skos:note>Any authority which assigns official names shall typically do so in a publication, and as such, referencing the publication is sufficient indication for the name being &apos;official&apos; and sufficient representation for the &apos;official name type&apos;. When new official names are issued by official naming bodies, the naming bodies will be reflected in this terminology.</skos:note>
 		<cmns-av:usageNote>Rather than creating an independent code for the representation of the registration authority, the property &apos;is registered by&apos; must be used to link to the authority responsible for such registration in the context of this ontology. Note that this approach allows for linking to all relevant authorities, as required by the ISO standard.</cmns-av:usageNote>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;PharmaceuticalProduct">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
-		<rdfs:subClassOf rdf:resource="&cmns-prd;CommercialProduct"/>
-		<rdfs:label>pharmaceutical product</rdfs:label>
-		<skos:definition>qualitative and quantitative composition of a medicinal product in the dose form approved for administration in line with the regulated product information</skos:definition>
-		<skos:note>In many instances, the pharmaceutical product is equal to the manufactured item. However, there are instances where the manufactured item shall undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.58</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
@@ -1087,13 +1041,6 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<rdfs:range rdf:resource="&idmp-sub;Moiety"/>
 		<owl:inverseOf rdf:resource="&idmp-sub;isActiveMoietyOf"/>
 		<skos:definition>relates a substance to an active moiety</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-sub;hasBasisOfStrength">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
-		<rdfs:label>has basis of strength</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
-		<skos:definition>relates a pharmaceutical or medicinal product to a substance that is its basis of strength</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasBusinessRules">
