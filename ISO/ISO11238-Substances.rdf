@@ -9,6 +9,7 @@
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
@@ -34,6 +35,7 @@
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
@@ -64,12 +66,13 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220401/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220601/ISO11238-Substances/"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -78,9 +81,23 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasActiveMoiety"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
 				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfMoieties"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isStoichiometric"/>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>chemical substance</rdfs:label>
@@ -147,12 +164,32 @@
 		<cmns-txt:hasTextValue>OPTIONAL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;FunctionalRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Role"/>
+		<rdfs:label>functional role</rdfs:label>
+		<skos:definition>role specifying one or more activities, capabilities, purposes, skills or combination thereof in some context</skos:definition>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ISO19844-CodeSet">
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:label>ISO 19844 code set</rdfs:label>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.iso.org/standard/71965.html</rdfs:seeAlso>
 		<skos:definition>set of controlled vocabularies and codes for reporting of substance-related information specified in the ISO/TS 19844 guidelines</skos:definition>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;Material">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>material</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.41</dct:source>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
+		<skos:definition>entity that has mass, occupies space and consists of one or more substances</skos:definition>
+		<skos:note>Material is more specifically defined in ISO 11615 to be a &apos;substance or specified substance of which a certain packaging or device is made. This definition applies to a medicinal product package item (container), package (component) and device.</skos:note>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Mixture">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
@@ -177,16 +214,22 @@
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isActiveMoietyOf"/>
-				<owl:onClass rdf:resource="&idmp-sub;ChemicalSubstance"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
+				<owl:onClass rdf:resource="&idmp-sub;MolecularStructure"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
-				<owl:onClass rdf:resource="&idmp-sub;ChemicalSubstance"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;RegulatoryContext"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>moiety</rdfs:label>
@@ -195,6 +238,50 @@
 		<skos:note>The active moiety of a stoichiometric or non-stoichiometrical substance molecule is considered that part of the molecule that is the base, free acid or ion molecular part of a salt, solvate, chelate, clathrate, molecular complex or ester.</skos:note>
 		<skos:note>The moiety subclause serves for the description of both the moiety and the other fragment constituting the substance. The Element Group Moiety is attached to the element class Chemical in order to describe a salt  solvates and co-crystals relationship to the active moiety in an unambiguous way with respect to the description of the molecular formula and sometimes the official names. The Element Group Amount is attached to Moiety. This will help to describe salts  solvates  hydrated substances and co-crystallising agents in a more unambiguous way with respect to the description of the molecular formula and sometimes official names. Each moiety within the chemical substance is to be identified and the composition range of the moieties when known is to be provided by means of the following data elements:If the numeric value of the element &apos;Number of Moieties&apos; is equal to 1  the class Moiety should not be used; otherwise  the class shall always be mandatory.</skos:note>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.45</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MoietyIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Moiety"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>moiety identifier</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 19</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.6</dct:source>
+		<skos:definition>unique identifier for an entity within a substance that has a complete and continuous molecular structure</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MoietyName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Moiety"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>moiety name</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 19</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.6</dct:source>
+		<skos:definition>name or company code associated with the substance</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MoietyRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Moiety"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>moiety role</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 19</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.6</dct:source>
+		<skos:definition>functional role played by a moity in some substance or product</skos:definition>
+		<skos:example>Counter-ion, solvate, hydrate, parent, base, acid, co-crystallising agent</skos:example>
+		<skos:note>In addition to the moiety role for chemicals, for many peptides, the moiety role of counter-ions such as acetate should be indicated.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularGraph">
@@ -219,7 +306,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>molecular graph identifier</rdfs:label>
-		<skos:definition>unique identifier for a diagram representing a single chemical structure</skos:definition>
+		<skos:definition>unique identifier for a molecular graph representing a single chemical structure</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularStructure">
@@ -241,6 +328,13 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFormula"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFormulaByMoiety"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
@@ -283,6 +377,37 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.54</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;OfficialName">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceNameType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SubstanceNameClassifier-OfficialName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-ra;Registrar">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>official name</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.55</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.1</dct:source>
+		<skos:definition>name given by an official registration authority/organization</skos:definition>
+		<skos:note>Any authority which assigns official names shall typically do so in a publication, and as such, referencing the publication is sufficient indication for the name being &apos;official&apos; and sufficient representation for the &apos;official name type&apos;. When new official names are issued by official naming bodies, the naming bodies will be reflected in this terminology.</skos:note>
+		<cmns-av:usageNote>Rather than creating an independent code for the representation of the registration authority, the property &apos;is registered by&apos; must be used to link to the authority responsible for such registration in the context of this ontology. Note that this approach allows for linking to all relevant authorities, as required by the ISO standard.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:label>polymer substance</rdfs:label>
@@ -303,6 +428,20 @@
 		<skos:note>Synthetic peptides and proteins with defined sequences, recombinant proteins and highly purified proteins extracted from biological matrices are described as protein substances. Sites of glycosylation, disulphide linkages and glycosylation type (e.g. fungal, plant, anthropoid, avian mammalian, human) are defining elements of protein substances, when known. A graphical molecular structure is also included in the definition of all peptides of 40 amino acid residues or less.</skos:note>
 		<skos:note>The absolute configuration at the a-carbon atom of the a-amino acids is designated by the prefixed small capital letter D or L to indicate a formal relationship to D- or L-serine and thus to D- or L-glyceraldehyde.</skos:note>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.68</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;RegulatoryContext">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;Context"/>
+		<rdfs:label>regulatory context</rdfs:label>
+		<skos:definition>context that reflects a regulatory reporting viewpoint</skos:definition>
+		<cmns-av:explanatoryNote>Certain definitions used in the IDMP standards appear to be specific to regulatory reporting, which differ with the perspective of a chemist (scientist) performing analysis. In such cases in this ontology we will attempt to capture both perspectives and identify distinctions to limit ambiguity.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ScientificContext">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;Context"/>
+		<rdfs:label>scientific context</rdfs:label>
+		<skos:definition>context that reflects the viewpoint of subject matter experts that are scientists, including but not limited to organic chemists</skos:definition>
+		<cmns-av:explanatoryNote>Certain definitions used in the IDMP standards appear to be specific to regulatory reporting, which differ with the perspective of a chemist (scientist) performing analysis. In such cases in this ontology we will attempt to capture both perspectives and identify distinctions to limit ambiguity.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SingleSubstance">
@@ -326,55 +465,8 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>stereochemistry</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause B.6.5.1</dct:source>
-		<owl:equivalentClass>
-			<owl:Class>
-				<owl:oneOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Absolute">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-AxialR">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-AxialS">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-SquarePlanar1">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-SquarePlanar2">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-SquarePlanar3">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-SquarePlanar4">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Tetrahedral">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Octahedral12">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Octahedral22">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Octahedral21">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Racemic">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Mixed">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Chiral">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Achiral">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Axial">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Epimeric">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Meso">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Unknown">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Cis">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Trans">
-					</rdf:Description>
-				</owl:oneOf>
-			</owl:Class>
-		</owl:equivalentClass>
-		<skos:definition>relative spatial arrangement of atoms within molecules</skos:definition>
+		<skos:definition>relative spatial arrangement of atoms in 3-dimensional space within molecules</skos:definition>
+		<skos:example>absolute, axial r, axial s, square planar 1, square planar 2, square planar 3, square planar 4, tetrahedral, octahedral 12, octahedral 22, octahedral 21, chiral, geometric, achiral, racemic, mixed</skos:example>
 		<skos:note>Stereochemistry is concerned with the 3-dimensional arrangement of atoms in molecules, and stereoisomers are isomers with no difference in connectivity or bond multiplicity, but whose atomicspatial arrangements differ.</skos:note>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.80, clause 7.2.2 Figure 14</cmns-av:directSource>
 		<cmns-av:synonym>molecular geometry</cmns-av:synonym>
@@ -613,6 +705,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Substance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
@@ -668,6 +761,18 @@
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.5</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SubstanceConstituent">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:label>substance constituent</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.17</dct:source>
+		<skos:definition>substance present within a Specified Substance or a parent substance</skos:definition>
+		<skos:example>The substance, triamcinolone acetonide is the parent (constituent) substance of the Specified Substance Group 1 substance, triamcinolone acetonide, micronized.</skos:example>
+		<skos:note>Constituent component is part of a mixture belonging to a homologous group of individual components, described as parent substances for the manufacture of an allergenic extract.</skos:note>
+		<skos:note>Constituents can be impurities, degradants, extraction solvents, vehicles, active markers or signature substances, parent substances or single substances mixed together to form a multi-substance material.</skos:note>
+		<skos:note>Constituents shall have an associated role and amount at the Specified Substance Group 1 information model. Constituent specifications shall be used to describe components as well as limits on impurities or related substances for a given material.</skos:note>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SubstanceIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
@@ -693,6 +798,13 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceName">
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&cmns-doc;Reference"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasJurisdiction"/>
@@ -749,44 +861,6 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<rdfs:label>substance name classifier</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.2</dct:source>
-		<owl:equivalentClass>
-			<owl:Class>
-				<owl:oneOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-OfficialName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-SystematicName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-ScientificName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-CompanyCode">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-OtherName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-BrandName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-HerbalName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-HomeopathicName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-SpecifiedHomeopathicName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-PlasmaDerivedName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-PreferredName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-SpecifiedSubstanceGroup1Name">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-SpecifiedSubstanceGroup2Name">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-SpecifiedSubstanceGroup3Name">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-DisplayName">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceNameClassifier-CommonName">
-					</rdf:Description>
-				</owl:oneOf>
-			</owl:Class>
-		</owl:equivalentClass>
 		<skos:definition>classifier that describes the nature of the substance name from a pre-defined ISO 19844 code set</skos:definition>
 		<cmns-av:synonym>substance name type</cmns-av:synonym>
 	</owl:Class>
@@ -959,14 +1033,14 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 	</owl:NamedIndividual>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">
-		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
 		<rdfs:label>has active moiety</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
-		<rdfs:domain rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:range rdf:resource="&idmp-sub;Moiety"/>
 		<owl:inverseOf rdf:resource="&idmp-sub;isActiveMoietyOf"/>
-		<skos:definition>relates a chemical substance to an active moiety</skos:definition>
+		<skos:definition>relates a substance to an active moiety</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasBusinessRules">
@@ -1014,6 +1088,8 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasMolecularFormula">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has molecular formula</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.3</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;MolecularStructure"/>
 		<skos:definition>relates a single substance to a formal definition for its molecular formula</skos:definition>
 		<skos:note>Molecular formula is written as a sequence of pairs of atom symbol and stoichiometric number (see example below). This formal notation is essentially a code system. Specified according to the Hill system, i.e. first C, then H, then alphabetical.</skos:note>
 		<skos:note>The messaging requirements can dictate a specific electronic format for the molecular formula and the molecular formula by moiety.</skos:note>
@@ -1021,6 +1097,35 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasMolecularFormulaByMoiety">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has molecular formula by moiety</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.4</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;MolecularStructure"/>
+		<skos:definition>way of describing of the molecular formula of a stoichiometric or non-stoichiometric substance existing of two or more moieties, the molecular formula of each moiety shall be described separated by a dot</skos:definition>
+		<skos:note>In non-cyclic linear structures like sodium nitroprusside: Na2[Fe(CN)5(NO)].2H2O, a non-cyclic structure is constructed in the following order: a) symbol of the central atom placed on the left; b) ionic ligands with cations first then anions; c) neutral ligands.</skos:note>
+		<skos:note>The messaging requirements can dictate a specific electronic format for the molecular formula and the molecular formula by moiety.</skos:note>
+		<skos:note>The molecular formula of the chemical salt Amlodipine besilate is described as C20H25ClN2O5.C6H6O3S.</skos:note>
+		<idmp-sub:hasBusinessRules>Can be implicitly derived from the structure; Validity check for identity and structural representation.
+		For a salt/hydrate the molecular formula of the base or the acid and the salt/hydrate part are separated by a dot per moiety, e.g. Desmopressin Monoacetate Trihydrate: Molecular formula by moiety: C46H64N14O12S2.C2H4O2.3H2O.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfMoieties">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has number of moieties</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.4</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<rdfs:range rdf:resource="&xsd;integer"/>
+		<skos:definition>is a chemical substance that contains complete chemical structures and definite stoichiometric ratios among moieties</skos:definition>
+		<skos:note>The number of moieties specified should be provided. Non-stoichiometric chemical substances shall have at least two moieties. Each moiety shall be represented by a chemical structure.</skos:note>
+		<idmp-sub:hasBusinessRules>The numeric value shall be always greater than or equal to 2; The value is automatically calculated (Implicit) based on the number of Moieties; if the numeric value is equal to 1, the class Moiety shall not be used.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasParentSubstance">
@@ -1044,8 +1149,11 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSimplifiedMolecularInputLineEntrySpecification">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has simplified molecular input line entry specification</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause A.2.3</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;MolecularStructure"/>
 		<skos:definition>specification for an unambiguous linear representation of chemical or molecular structures using ASCII characters</skos:definition>
 		<skos:note>It is predominantly used by Daylight Chemical Information Systems Inc., although an open source version has been recently developed. Canonical smiles is a SMILES string that is unique for each structure and can be used to ensure that duplicate structures are not entered into a database.</skos:note>
+		<skos:note>Other linear representation forms for chemical structures include SYBYL line notation (SLN) and the older Wiswesser Line Notation, which was the first line notation for the representation of chemical structures. These other formats are not currently in wide use.</skos:note>
 		<cmns-av:abbreviation>SMILES</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.2.3</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
@@ -1055,9 +1163,10 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has stereochemistry</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2 Figure 14</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;MolecularStructure"/>
 		<rdfs:range rdf:resource="&idmp-sub;Stereochemistry"/>
 		<skos:definition>is classified by the relative spatial arrangement of atoms within molecules</skos:definition>
-		<idmp-sub:hasBusinessRules>When the Substance type, as defined in is either chemical or polymer, this class is MANDATORY; for all other cases this class is CONDITIONAL.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasBusinessRules>When the substance type, as defined in is either chemical or polymer, this class is MANDATORY; for all other cases this class is CONDITIONAL.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 	</owl:ObjectProperty>
@@ -1114,8 +1223,8 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
 		<rdfs:domain rdf:resource="&idmp-sub;Moiety"/>
-		<rdfs:range rdf:resource="&idmp-sub;ChemicalSubstance"/>
-		<skos:definition>relates a moiety to a chemical substance that it is a constituent of</skos:definition>
+		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
+		<skos:definition>relates a moiety to a substance that it is a constituent of</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isParentSubstanceOf">
@@ -1138,8 +1247,20 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<skos:definition>specifies a target substance with which the source has some relationship</skos:definition>
 		<skos:example>The active moiety of the salt amlodipine besilate hydrate (1:1:1) is the related substance amlodipine. The salt amlodipine besilate hydrate contains 69.8 percent w/w of amlodipine. Therefore, the equivalence factor is 0,698, meaning 10 mg amlodipine besilate hydrate salt corresponds to 6,98 (approx to 7 mg) amlodipine active moiety. The Equivalence Factor is captured by the element group Amount in combination with the element group Substance Relationship as Amount Text.</skos:example>
 		<skos:note>Relationships between substances such as the relationship between a salt form and its active moiety or parent substance should be captured. These relationships are often essential to the description of medicinal products, the basis of strength and the classification of substances. These relationships are often obvious and rules will be developed for specifying substances involved in each type of relationship. For example, the active moiety of all sodium salts would be the free acid, conversely the active moiety of a hydrochloride salt would be a free base.</skos:note>
-		<idmp-sub:hasBusinessRules>The Equivalence Factor shall be less than or equal to 1,00. It is formed by dividing the molecular weight of the (parent) substance (active moiety)/molecular weight of the corresponding salt or salt hydrate or hydrate .</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasBusinessRules>The Equivalence Factor shall be less than or equal to 1,00. It is formed by dividing the molecular weight of the (parent) substance (active moiety)/molecular weight of the corresponding salt or salt hydrate or hydrate.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;isStoichiometric">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
+		<rdfs:label>is stoichiometric</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.3</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>is a chemical substance that contains complete chemical structures and definite stoichiometric ratios among moieties</skos:definition>
+		<skos:note>Stoichiometry describes if a substance can be represented as single covalent structural moiety or a salt or solvate with a defined and constant ratio of ions or molecules and solvents. In the case of a substance consisting of one moiety (e.g. base, acid, ester) there is (per definition) one compound. In this case only one moiety shall be provided.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+	</owl:DatatypeProperty>
 
 </rdf:RDF>
