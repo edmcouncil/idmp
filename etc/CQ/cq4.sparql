@@ -1,0 +1,18 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/> 
+prefix idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX id: <http://identifiers.org/>
+prefix cmns-ra:   <https://www.omg.org/spec/Commons/RegistrationAuthorities/> 
+prefix cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+SELECT ?substance ?evCode
+WHERE {
+    ?type rdfs:subClassOf* idmp-sub:Substance .
+    ?substance rdf:type ?type;
+    		cmns-id:isIdentifiedBy ?identifier ;
+  			skos:prefLabel <SUBSTANCE_LABEL> .
+ ?identifier rdf:type idmp-ra:EudraVigilanceCode .
+ ?identifier cmns-txt:hasTextValue ?evCode .
+}
