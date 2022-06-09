@@ -84,7 +84,8 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;Producer">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-prd;produces"/>
@@ -141,7 +142,8 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;ServiceProvider">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-pts;AgentRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
@@ -149,13 +151,21 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>service provider</rdfs:label>
-		<skos:definition>party that provides professional services, such as consulting, financial, legal, real estate, education, communications, registration, regulatory, manufacturing, storage, processing, or other services to others</skos:definition>
+		<skos:definition>agent that provides professional services, such as consulting, financial, legal, real estate, education, communications, registration, regulatory, manufacturing, storage, processing, or other services</skos:definition>
 	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-prd;isIssuedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedBy"/>
+		<rdfs:label>is issued by</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-pts;AgentRole"/>
+		<skos:definition>indicates a role played by a functional entity or party responsible for circulating, distributing, or publishing something</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isProducedBy">
 		<rdfs:label>is produced by</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-prd;Producer"/>
 		<owl:inverseOf rdf:resource="&cmns-prd;produces"/>
-		<skos:definition>identifies the producer that fabricates, manufactures or otherwise creates something through some production process</skos:definition>
+		<skos:definition>is fabricated, manufactured or otherwise created by, through some production process</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isProvidedBy">
@@ -164,8 +174,17 @@
 		<skos:definition>is made available by</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-prd;issues">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;provides"/>
+		<rdfs:label>issues</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;AgentRole"/>
+		<owl:inverseOf rdf:resource="&cmns-prd;isIssuedBy"/>
+		<skos:definition>officially makes something available</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-prd;produces">
 		<rdfs:label>produces</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-prd;Producer"/>
 		<skos:definition>creates through a fabrication, manufacturing or production process</skos:definition>
 	</owl:ObjectProperty>
 	

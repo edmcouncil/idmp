@@ -4,6 +4,7 @@
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
+	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -16,6 +17,7 @@
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
+	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -30,6 +32,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220601/Documents/"/>
 		<cmns-av:copyright>Copyright (c) 2014-2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2014-2022 Object Management Group, Inc.</cmns-av:copyright>
@@ -90,6 +93,63 @@
 		<skos:definition>document that provides pertinent details for consultation about a subject</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-doc;Report">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;hasReportingPeriod"/>
+				<owl:onClass rdf:resource="&cmns-dt;DatePeriod"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;hasReportDateTime"/>
+				<owl:onClass rdf:resource="&cmns-dt;DateTime"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;hasReportDate"/>
+				<owl:onClass rdf:resource="&cmns-dt;ExplicitDate"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;isReportedBy"/>
+				<owl:someValuesFrom rdf:resource="&cmns-doc;ReportingParty"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;isReportedTo"/>
+				<owl:someValuesFrom rdf:resource="&cmns-pts;PartyRole"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>report</rdfs:label>
+		<skos:definition>document that provides a structured description of something, prepared on ad hoc, periodic, recurring, regular, or as required basis</skos:definition>
+		<cmns-av:explanatoryNote>Reports may refer to specific periods, events, occurrences, or subjects, and may be communicated or presented in oral, electronic, or written form.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;ReportingParty">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;authors"/>
+				<owl:someValuesFrom rdf:resource="&cmns-doc;Report"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reporting party</rdfs:label>
+		<skos:definition>party providing a report, typically in response to some contractual, legal, regulatory or other business requirement</skos:definition>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;authors">
+		<rdfs:label>authors</rdfs:label>
+		<skos:definition>creates or originates and is responsible for the content of</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-doc;hasDataSource">
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
 		<rdfs:label>has data source</rdfs:label>
@@ -119,6 +179,21 @@
 		<skos:definition>links something to a record that pertains to it</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-doc;hasReportDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasExplicitDate"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;hasDateOfIssuance"/>
+		<rdfs:label xml:lang="en">has report date</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-dt;ExplicitDate"/>
+		<skos:definition xml:lang="en">date on which a report was issued</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;hasReportDateTime">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDateTime"/>
+		<rdfs:label xml:lang="en">has report date time</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-dt;DateTime"/>
+		<skos:definition xml:lang="en">date and time at which a report was issued</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-doc;hasReportingPeriod">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDatePeriod"/>
 		<rdfs:label>has reporting period</rdfs:label>
@@ -136,6 +211,20 @@
 	<owl:ObjectProperty rdf:about="&cmns-doc;isAbout">
 		<rdfs:label>is about</rdfs:label>
 		<skos:definition>indicates the subject or topic of something, such as a document</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;isReportedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:label>is reported by</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
+		<skos:definition>indicates the party that authors and provides a report</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;isReportedTo">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:label>is reported to</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
+		<skos:definition>indicates the party to which something is reported</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-doc;records">
