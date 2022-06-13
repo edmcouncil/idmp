@@ -850,8 +850,8 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasJurisdiction"/>
-				<owl:onClass rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&lcc-cr;GeographicRegion"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1113,20 +1113,6 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<rdfs:range rdf:resource="&idmp-sub;ConformanceLevel"/>
 		<skos:definition>indicates whether a given class or element is mandatory, conditional, or optional with respect to a given substance type or specified substance group for reporting information per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-sub;hasJurisdiction">
-		<rdfs:subPropertyOf rdf:resource="&idmp-uom;hasRegionCode"/>
-		<rdfs:label>has jurisdiction</rdfs:label>
-		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
-		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.5</dct:source>
-		<skos:definition>indicates a jurisdiction associated with a substance name</skos:definition>
-		<skos:editorialNote>This property, while it conforms to the ISO standard, oversimplifies the concept of jurisdiction. Jurisdiction is represented in FIBO, and we could leverage that if it makes sense to model this properly in the longer term.</skos:editorialNote>
-		<skos:note>When a product is on the market and contains pharmaceutically active substances at least one jurisdiction should be associated with the name of the active substance. For inactive substances or excipients, the jurisdiction may not be apparent or captured. Pharmacopoeias will often be consulted to determine the jurisdiction of an official name. For Official Names, the Jurisdiction element is optional; when necessary the following conformances apply.</skos:note>
-		<idmp-sub:hasBusinessRules>All the jurisdictions in which the Official Name is to be used should be indicated.</idmp-sub:hasBusinessRules>
-		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
-		<idmp-sub:hasValuesAllowed>ISO 3166-1 alpha-2 codes. For the European Union EU shall be used.</idmp-sub:hasValuesAllowed>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
-	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasMolecularFormula">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
