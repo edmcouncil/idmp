@@ -12,7 +12,8 @@ WHERE {
     ?type rdfs:subClassOf* idmp-sub:Substance .
     ?substance rdf:type ?type;
     		cmns-id:isIdentifiedBy ?identifier ;
-  			skos:prefLabel <SUBSTANCE_LABEL> .
- ?identifier rdf:type idmp-ra:EudraVigilanceCode .
- ?identifier cmns-txt:hasTextValue ?evCode .
+  			skos:prefLabel #substance_label# .
+ ?identifier rdf:type  cmns-ra:RegisteredIdentifier;
+             cmns-txt:hasTextValue ?evCode ;
+             cmns-ra:isRegisteredIn idmp-ra:EuropeanMedicinesAgencyRegistrationAuthority
 }
