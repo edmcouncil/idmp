@@ -110,6 +110,14 @@
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.53</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-mprd;ActiveIngredientRole">
+		<rdf:type rdf:resource="&idmp-mprd;IngredientRole"/>
+		<rdfs:label>active ingredient role</rdfs:label>
+		<skos:definition>role of a substance present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients</skos:definition>
+		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
+		<cmns-av:synonym>active pharmacological ingredient [role]</cmns-av:synonym>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-mprd;Authorization">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
@@ -152,6 +160,14 @@
 		<skos:definition>party that delegates some role, authority, capability, or control to another party</skos:definition>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-mprd;InactiveIngredientRole">
+		<rdf:type rdf:resource="&idmp-mprd;IngredientRole"/>
+		<rdfs:label>inactive ingredient role</rdfs:label>
+		<skos:definition>role of an ingredient of a given formulation (most frequently, an excipient) that does not exhibit pharmacological activity</skos:definition>
+		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Substances are classified based on their effect on disease progression for a specific disease or condition. In this case, a condition is only related to such compound via the formulation used to affect (treat or diagnose) this condition.</cmns-av:explanatoryNote>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-mprd;Ingredient">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
 		<rdfs:subClassOf>
@@ -176,6 +192,18 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.28</dct:source>
 		<skos:definition>material used in the preparation of a medicinal/pharmaceutical product</skos:definition>
 		<skos:note>The ingredient is part of a medicinal product, either alone or in combination with other ingredients. The ingredient is also a component of a pharmaceutical product. Ingredient is equal to a substance with the indication of the specific role it is playing in the product.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;IngredientRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Ingredient"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ingredient role</rdfs:label>
+		<skos:definition>functional role played by an ingredient in some manufactured item or pharmaceutical product</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;InvestigationalMedicinalProduct">
