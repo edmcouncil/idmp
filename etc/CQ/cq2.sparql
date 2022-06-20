@@ -1,0 +1,37 @@
+prefix cmns-cds:    <https://www.omg.org/spec/Commons/CodesAndCodeSets/>
+prefix cmns-cls:    <https://www.omg.org/spec/Commons/Classifiers/>
+prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-cstdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
+prefix cmns-cxtid:  <https://www.omg.org/spec/Commons/ContextualIdentifiers/>
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-dt:     <https://www.omg.org/spec/Commons/DatesAndTimes/>
+prefix cmns-id:     <https://www.omg.org/spec/Commons/Identifiers/>
+prefix cmns-prd:    <https://www.omg.org/spec/Commons/ProductsAndServices/>
+prefix cmns-qtu:    <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
+prefix cmns-ra:     <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
+prefix cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+prefix cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix crm:         <http://www.cidoc-crm.org/cidoc-crm/>
+prefix dc:          <http://purl.org/dc/elements/1.1/>
+prefix fun:         <http://w3id.org/sparql-generate/fn/>
+prefix idmp:        <https://purl.iso.org/idmp/>
+prefix idmp-dtp:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/>
+prefix idmp-ra:     <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix iter:        <http://w3id.org/sparql-generate/iter/>
+prefix owl:         <http://www.w3.org/2002/07/owl#>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:        <http://www.w3.org/2004/02/skos/core#>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select distinct ?activeMoietySubstance ?activeMoietyType ?moietySubstanceLabel
+where {
+
+    ?activeMoietySubstance cmns-pts:playsRole ?activeMoietyRole ;
+                    rdf:type ?activeMoietyType ;
+                    rdfs:label ?moietySubstanceLabel .
+    ?activeMoietyRole rdf:type idmp-sub:MoietyRole ;
+                    skos:related ?targetSubstance .
+    ?targetSubstance rdfs:label #substance_label# .
+}
