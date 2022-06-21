@@ -13,6 +13,7 @@
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
+	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-dtp "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/">
@@ -40,6 +41,7 @@
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
+	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-dtp="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"
@@ -72,6 +74,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
@@ -859,13 +862,6 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
-				<owl:onClass rdf:resource="&lcc-cr;GeographicRegion"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceNameType"/>
 				<owl:onClass rdf:resource="&idmp-sub;SubstanceNameClassifier"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -888,6 +884,12 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
+				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance name</rdfs:label>
