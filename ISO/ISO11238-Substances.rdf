@@ -94,21 +94,30 @@
 		<skos:note>An acid is also defined in CHEBI as a molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid).</skos:note>
 	</owl:Class>
 	
-	<owl:NamedIndividual rdf:about="&idmp-sub;ActiveMoietyRole">
-		<rdf:type rdf:resource="&idmp-sub;MoietyRole"/>
+	<owl:Class rdf:about="&idmp-sub;ActiveMoietyRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MoietyRole"/>
 		<rdfs:label>active moiety role</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
 		<skos:definition>role of the essential aspect of a substance responsible for its pharmacological activity</skos:definition>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
-	</owl:NamedIndividual>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Adjuvant">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PharmacologicalRole"/>
+		<rdfs:label>adjuvant</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1</dct:source>
+		<dct:source>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C2140</dct:source>
+		<skos:definition>pharmacological role of a component that potentiates the immune response to an antigen and/or modulates it towards the desired immune response</skos:definition>
+		<skos:note>An adjuvant is an agent that enhances the activity or therapeutic effect of another pharmacologic substance without having much, if any, therapeutic impact by itself.</skos:note>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Base">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>base</rdfs:label>
 		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_22695</dct:source>
 		<dct:source>Semanticscience Integrated Ontology, see http://semanticscience.org/resource/SIO_010454</dct:source>
-		<skos:definition>substance having an available pair of electrons capable of forming a covalent bond with a hydron (Bronsted base) or with the vacant orbital of some other molecular entity (Lewis base).</skos:definition>
+		<skos:definition>substance having an available pair of electrons capable of forming a covalent bond with a hydron or with the vacant orbital of some other molecular entity</skos:definition>
 		<skos:note>A base is a molecular entity dissolved in a solvent that is capable of accepting a proton (Bronsted base) or forming a covalent bond with a hydron (Lewis base) (SIO).</skos:note>
 	</owl:Class>
 	
@@ -208,6 +217,15 @@
 		<skos:note>Esters are compounds derived from organic or inorganic acids in which at least one hydroxyl group is replaced by an -O-alkyl or another organic group. They can be represented by the structure formula RCOOR&apos; and are usually formed by the reaction between an acid and an alcohol with elimination of water.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Excipient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PharmacologicalRole"/>
+		<rdfs:label>excipient</rdfs:label>
+		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_75324</dct:source>
+		<skos:definition>pharmacological role of a generally pharmacologically inactive substance that is formulated with the active ingredient of a medication</skos:definition>
+		<cmns-av:synonym>bulking agent</cmns-av:synonym>
+		<cmns-av:synonym>filler</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>hydrate</rdfs:label>
@@ -229,14 +247,14 @@
 		<skos:definition>set of controlled vocabularies and codes for reporting of substance-related information specified in the ISO/TS 19844 guidelines</skos:definition>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-sub;InactiveMoietyRole">
-		<rdf:type rdf:resource="&idmp-sub;MoietyRole"/>
+	<owl:Class rdf:about="&idmp-sub;InactiveMoietyRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MoietyRole"/>
 		<rdfs:label>inactive moiety role</rdfs:label>
 		<owl:differentFrom rdf:resource="&idmp-sub;ActiveMoietyRole"/>
 		<skos:definition>role of an inactive portion of a molecule or substance, i.e., one that that does not exhibit pharmacological activity</skos:definition>
 		<skos:example>Examples include the appended portions of the molecule that cause the drug to be an ester, salt (including a salt with hydrogen or coordination bonds), or other noncovalent derivative (such as a complex, chelate, or clathrate) of the molecule.</skos:example>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
-	</owl:NamedIndividual>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Good"/>
@@ -522,6 +540,19 @@
 		<skos:definition>name given by an official registration authority/organization</skos:definition>
 		<skos:note>Any authority which assigns official names shall typically do so in a publication, and as such, referencing the publication is sufficient indication for the name being &apos;official&apos; and sufficient representation for the &apos;official name type&apos;. When new official names are issued by official naming bodies, the naming bodies will be reflected in this terminology.</skos:note>
 		<cmns-av:usageNote>Rather than creating an independent code for the representation of the registration authority, the property &apos;is registered by&apos; must be used to link to the authority responsible for such registration in the context of this ontology. Note that this approach allows for linking to all relevant authorities, as required by the ISO standard.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PharmacologicalRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>pharmacological role</rdfs:label>
+		<skos:definition>functional role related to the composition, properties, or action of a substance or ingredient in another substance or pharmaceutical product</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
