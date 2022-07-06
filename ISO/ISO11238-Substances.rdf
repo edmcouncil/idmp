@@ -1184,6 +1184,19 @@ Once a substance has been defined and assigned a unique identifier it is essenti
 		<cmns-txt:hasTextValue>Systematic Name</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;SubstanceRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>substance role</rdfs:label>
+		<skos:definition>functional role played by a substance with respect to some reified relationship or in some other substance or product</skos:definition>
+	</owl:Class>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
 		<rdfs:label>has active moiety</rdfs:label>

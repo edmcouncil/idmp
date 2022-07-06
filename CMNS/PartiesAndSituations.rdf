@@ -137,15 +137,15 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasUndergoer"/>
-				<owl:onClass rdf:resource="&cmns-pts;Undergoer"/>
+				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
+				<owl:onClass rdf:resource="&cmns-pts;Role"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasActor"/>
-				<owl:someValuesFrom rdf:resource="&cmns-pts;Actor"/>
+				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
+				<owl:someValuesFrom rdf:resource="&cmns-pts;Role"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>situation</rdfs:label>
@@ -162,6 +162,7 @@
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;actsIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isSubjectRoleIn"/>
 		<rdfs:label>acts in</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Actor"/>
 		<rdfs:range rdf:resource="&cmns-pts;Situation"/>
@@ -235,7 +236,7 @@
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasActiveParty">
 		<rdfs:label>has active party</rdfs:label>
-		<owl:inverseOf rdf:resource="&cmns-pts;playsActiveRoleIn"/>
+		<owl:inverseOf rdf:resource="&cmns-pts;playsActivePartyIn"/>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&cmns-pts;hasActor">
 			</rdf:Description>
@@ -245,12 +246,33 @@
 		<skos:definition>relates a situation to the person or organization acting in a primary (agentive) role</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-pts;hasActiveRole">
+		<rdfs:label>has active role</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-pts;playsActiveRoleIn"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-pts;hasSubjectRole">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-pts;isPlayedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a situation to something that is acting in a primary (agentive) role</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasActor">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasSubjectRole"/>
 		<rdfs:label>has actor</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:range rdf:resource="&cmns-pts;Actor"/>
 		<skos:definition>identifies the primary party acting in a specific role with respect to a given situation</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;hasObjectRole">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:label>has object role</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:range rdf:resource="&cmns-pts;Role"/>
+		<skos:definition>identifies a person or thing that is affected by, or is a secondary argument in a specific role with respect to a given relation or situation</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasParty">
@@ -281,12 +303,20 @@
 		<skos:definition>identifies something acting in a recipient or target role as related to the particular agreement, contract, policy, regulation, situation, or other arrangement</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&cmns-pts;hasUndergoer">
+	<owl:ObjectProperty rdf:about="&cmns-pts;hasSubjectRole">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:label>has subject role</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:range rdf:resource="&cmns-pts;Role"/>
+		<skos:definition>identifies the person or thing that is being discussed, described, dealt with, or is the main topic in a specific role with respect to a given situation</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;hasUndergoer">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasObjectRole"/>
 		<rdfs:label>has undergoer</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:range rdf:resource="&cmns-pts;Undergoer"/>
-		<skos:definition>identifies an experiencer / passive role with respect to a given situation</skos:definition>
+		<skos:definition>identifies an experiencer / passive or other object role in a given situation</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;holdsDuring">
@@ -339,6 +369,14 @@
 		<skos:definition>relates a situation to something that is directly involved in or affected by it</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-pts;isObjectRoleIn">
+		<rdfs:label>is object role in</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;Role"/>
+		<rdfs:range rdf:resource="&cmns-pts;Situation"/>
+		<owl:inverseOf rdf:resource="&cmns-pts;hasObjectRole"/>
+		<skos:definition>indicates a situation in which the role is secondary, such as an experiencer or passive participant</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-pts;isPlayedBy">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>is played by</rdfs:label>
@@ -348,7 +386,27 @@
 		<skos:example>A party, counterparty, or third party to a contract is played by an organization or person; an issuer of a financial instrument is typically played by an organization.</skos:example>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&cmns-pts;playsActiveRoleIn">
+	<owl:ObjectProperty rdf:about="&cmns-pts;isRealizedBy">
+		<rdfs:label>is realized by</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-pts;realizes"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-pts;hasObjectRole">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-pts;isPlayedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a situation to something that is affected by, or is a secondary argument to in a specific role with respect to a given relation or situation</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;isSubjectRoleIn">
+		<rdfs:label>is subject role in</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;Role"/>
+		<rdfs:range rdf:resource="&cmns-pts;Situation"/>
+		<owl:inverseOf rdf:resource="&cmns-pts;hasSubjectRole"/>
+		<skos:definition>indicates a situation in which the role is the primary topic</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;playsActivePartyIn">
 		<rdfs:label>plays active role in</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&cmns-pts;playsRole">
@@ -357,6 +415,17 @@
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates a person or organization to a situation that they are directly involved in</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;playsActiveRoleIn">
+		<rdfs:label>plays active role in</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-pts;playsRole">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-pts;isSubjectRoleIn">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates something to a situation that it is directly involved in</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;playsActiveRoleThatAffects">
@@ -396,7 +465,19 @@
 		<skos:example>an organization may play the role of employer, issuer, regulatory agency, bank, custodian, manufacturer, vendor, etc.; a person may play the role of employee, examiner, banker, seller, buyer, etc.</skos:example>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-pts;realizes">
+		<rdfs:label>realizes</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-pts;playsRole">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-pts;isObjectRoleIn">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates something to a situation in which the role they play is secondary, such as an experiencer or passive participant</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-pts;undergoes">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isObjectRoleIn"/>
 		<rdfs:label>undergoes</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Undergoer"/>
 		<rdfs:range rdf:resource="&cmns-pts;Situation"/>
