@@ -642,6 +642,26 @@
 		<cmns-av:synonym>value of a quantity</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-qtu;QuantityValueRange">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasLowerBound"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasUpperBound"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>quantity value range</rdfs:label>
+		<skos:definition>expression of the lowest possible value and highest possible value for some quantity</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-qtu;Ratio">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
 		<rdfs:subClassOf>
@@ -797,9 +817,17 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasArgument">
-		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has argument</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
 		<skos:definition>indicates a specific input to a function, formula or expression, also known as an independent variable</skos:definition>
 		<skos:scopeNote>Note that this property and its subproperties apply in the context of quantities and units as well as statistical measures. They are not intended to support more general mathematics.</skos:scopeNote>
 	</owl:ObjectProperty>
@@ -807,7 +835,16 @@
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasDenominator">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:label>has denominator</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
 		<skos:definition>specifies the quantity value that is the part of a fraction &apos;below the line&apos; and signifies the value by which the numerator should be divided</skos:definition>
 		<skos:note>If a fraction is considered as an ordered pair, the denominator is the second argument of the fraction.</skos:note>
 	</owl:ObjectProperty>
@@ -833,6 +870,7 @@
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasFactor">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has factor</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
 		<skos:definition>indicates a number or quantity that when multiplied with another produces a given number or expression</skos:definition>
@@ -843,6 +881,14 @@
 		<rdfs:range rdf:resource="&owl;rational"/>
 		<skos:definition>indicates the numeric multiple or submultiple multiplication factor</skos:definition>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasLowerBound">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
+		<rdfs:label>has lower bound</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<skos:definition>specifies the quantity value that is the lower value of a pair of values representing a range</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMaximumPermissiveValue">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
@@ -869,7 +915,16 @@
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasNumerator">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:label>has numerator</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
 		<skos:definition>specifies the quantity value that is the part of a fraction &apos;above the line&apos; and signifies the value to be divided by the denominator</skos:definition>
 		<skos:note>If a fraction is considered as an ordered pair, the numerator is the first argument of the fraction.</skos:note>
 	</owl:ObjectProperty>
@@ -892,6 +947,14 @@
 		<rdfs:label>has quantity value</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
 		<skos:definition>relates something (an expression, formula, etc.) to its magnitude expressed as a number together with its unit of measure (if applicable)</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasUpperBound">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
+		<rdfs:label>has upper bound</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<skos:definition>specifies the quantity value that is the higher value of a pair of values representing a range</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;isDerivedFrom">
