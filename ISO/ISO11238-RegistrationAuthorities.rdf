@@ -8,9 +8,11 @@
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
+	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
+	<!ENTITY lcc-3166-1 "https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/">
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -27,9 +29,11 @@
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
+	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
+	xmlns:lcc-3166-1="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -49,8 +53,10 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220501/ISO11238-RegistrationAuthorities/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220701/ISO11238-RegistrationAuthorities/"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -71,6 +77,7 @@
 		<cmns-av:abbreviation>ACS RA</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.2</cmns-av:adaptedFrom>
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-ra;AmericanChemicalSociety"/>
+		<cmns-prd:provides rdf:resource="&idmp-ra;ChemicalAbstractsService"/>
 		<cmns-ra:manages rdf:resource="&idmp-ra;ChemicalAbstractsServiceChemicalRegistrySystem"/>
 	</owl:NamedIndividual>
 	
@@ -131,7 +138,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>Australian Plant Name Index registry entry</rdfs:label>
-		<skos:definition>entry in the Australian Plant Name Index, that includes the Australian Plant Name Index Identifier used in electronic listing and other regulatory activities</skos:definition>
+		<skos:definition>entry in the Australian Plant Name Index that includes the Australian Plant Name Index Identifier used in electronic listing and other regulatory activities</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-ra;AustralianPlantNameIndexIdentifier">
@@ -155,7 +162,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>Australian Plant Name Index Identifier</rdfs:label>
-		<skos:definition>numeric string that is used to identify records in the Australian Plant Name Index registry</skos:definition>
+		<skos:definition>sequence of characters that is used to uniquely identify records in the Australian Plant Name Index registry</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-ra;CASRegistryNumber">
@@ -190,7 +197,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-ra;ChemblDatabase">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>ChEMBL database</rdfs:label>
-		<skos:definition>a manually curated database of bioactive molecules with drug-like properties.</skos:definition>
+		<skos:definition>manually curated database of bioactive molecules with drug-like properties</skos:definition>
 		<cmns-av:abbreviation>ChEMBL</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://www.ebi.ac.uk/chembl/"/>
 		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
@@ -980,7 +987,7 @@
 		<rdf:type rdf:resource="&cmns-pts;Party"/>
 		<rdfs:label>National Library of Medicine</rdfs:label>
 		<rdfs:seeAlso rdf:resource="https://www.nlm.nih.gov/"/>
-		<skos:definition>U.S. government institute that is part of the National Institutes of Health,  responsible for collecting, curating and providing access to medicinal and related scientific publications</skos:definition>
+		<skos:definition>U.S. government institute that is part of the National Institutes of Health, responsible for collecting, curating and providing access to medicinal and related scientific publications</skos:definition>
 		<cmns-av:abbreviation>NLM</cmns-av:abbreviation>
 	</owl:NamedIndividual>
 	
@@ -1062,6 +1069,26 @@
 		<skos:definition>registry that is an open chemistry database at the National Institutes of Health (NIH)</skos:definition>
 		<cmns-av:directSource rdf:resource="https://pubchemdocs.ncbi.nlm.nih.gov/"/>
 		<lcc-lr:hasTextualName>PubChem</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;RegulatoryContext-FoodAndDrugAdministrationGeneral">
+		<rdf:type rdf:resource="&idmp-sub;RegulatoryContext"/>
+		<rdf:type rdf:resource="&cmns-rga;Jurisdiction"/>
+		<rdfs:label>regulatory context - Food and Drug Administration (general)</rdfs:label>
+		<skos:definition>regulatory reporting context covering the U.S. jurisdiction for which the FDA is the primary regulator</skos:definition>
+		<cmns-av:abbreviation>FDA general regulatory context</cmns-av:abbreviation>
+		<cmns-col:isRelatedTo rdf:resource="&idmp-ra;UnitedStatesFoodAndDrugAdministration"/>
+		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;UnitedStatesOfAmerica"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;RegulatoryContext-FoodAndDrugAdministrationPatentExclusive">
+		<rdf:type rdf:resource="&idmp-sub;RegulatoryContext"/>
+		<rdf:type rdf:resource="&cmns-rga;Jurisdiction"/>
+		<rdfs:label>regulatory context - Food and Drug Administration (patent exclusive)</rdfs:label>
+		<skos:definition>regulatory reporting context covering the U.S. jurisdiction for which the FDA is the primary regulator and which reflects certain legal patent restrictions</skos:definition>
+		<cmns-av:abbreviation>FDA patent exclusive regulatory context</cmns-av:abbreviation>
+		<cmns-col:isRelatedTo rdf:resource="&idmp-ra;UnitedStatesFoodAndDrugAdministration"/>
+		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;UnitedStatesOfAmerica"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ra;RxNorm">
