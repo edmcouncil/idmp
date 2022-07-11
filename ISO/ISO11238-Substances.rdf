@@ -94,6 +94,14 @@
 		<skos:note>An acid is also defined in CHEBI as a molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid).</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;ActiveIngredientRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;IngredientRole"/>
+		<rdfs:label>active ingredient role</rdfs:label>
+		<skos:definition>role of a substance present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients</skos:definition>
+		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
+		<cmns-av:synonym>active pharmacological ingredient [role]</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ActiveMoietyRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MoietyRole"/>
 		<rdfs:label>active moiety role</rdfs:label>
@@ -105,7 +113,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AdjuvantRole">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PharmacologicalRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredientRole"/>
 		<rdfs:label>adjuvant role</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1</dct:source>
 		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C2140"/>
@@ -219,7 +227,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ExcipientRole">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PharmacologicalRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredientRole"/>
 		<rdfs:label>excipient role</rdfs:label>
 		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_75324</dct:source>
 		<skos:definition>pharmacological role of a generally pharmacologically inactive substance that is formulated with the active ingredient of a medication</skos:definition>
@@ -248,6 +256,14 @@
 		<skos:definition>set of controlled vocabularies and codes for reporting of substance-related information specified in the ISO/TS 19844 guidelines</skos:definition>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;InactiveIngredientRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;IngredientRole"/>
+		<rdfs:label>inactive ingredient role</rdfs:label>
+		<skos:definition>role of an ingredient of a given formulation (most frequently, an excipient) that does not exhibit pharmacological activity</skos:definition>
+		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Substances are classified based on their effect on disease progression for a specific disease or condition. In this case, a condition is only related to such compound via the formulation used to affect (treat or diagnose) this condition.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;InactiveMoietyRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MoietyRole"/>
 		<rdfs:label>inactive moiety role</rdfs:label>
@@ -255,6 +271,21 @@
 		<skos:definition>role of an inactive portion of a molecule or substance, i.e., one that that does not exhibit pharmacological activity</skos:definition>
 		<skos:example>Examples include the appended portions of the molecule that cause the drug to be an ester, salt (including a salt with hydrogen or coordination bonds), or other noncovalent derivative (such as a complex, chelate, or clathrate) of the molecule.</skos:example>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;IngredientRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ingredient role</rdfs:label>
+		<skos:definition>functional role played by an entity (ingredient, substance) in some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
+		<skos:note>A pharmacological role is related to the composition, properties, or action of a substance or ingredient in another substance or pharmaceutical product. It covers adjuvant and expedient, which are roles played by the substance components in a pharmaceutical product, but it can also be used for treated disease, patient, packaging and routes of administrations, all of which are roles that are studied in the science of pharmacology and have an impact on the drug&apos;s effects.</skos:note>
+		<cmns-av:synonym>pharmacological role</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
@@ -545,20 +576,6 @@
 		<skos:definition>name given by an official registration authority/organization</skos:definition>
 		<skos:note>Any authority which assigns official names shall typically do so in a publication, and as such, referencing the publication is sufficient indication for the name being &apos;official&apos; and sufficient representation for the &apos;official name type&apos;. When new official names are issued by official naming bodies, the naming bodies will be reflected in this terminology.</skos:note>
 		<cmns-av:usageNote>Rather than creating an independent code for the representation of the registration authority, the property &apos;is registered by&apos; must be used to link to the authority responsible for such registration in the context of this ontology. Note that this approach allows for linking to all relevant authorities, as required by the ISO standard.</cmns-av:usageNote>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;PharmacologicalRole">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>pharmacological role</rdfs:label>
-		<skos:definition>functional role played by an entity in its function in a drug or medication action</skos:definition>
-		<skos:note>A pharmacological role is related to the composition, properties, or action of a substance or ingredient in another substance or pharmaceutical product. It covers adjuvant and expedient, which are roles played by the substance components in a pharmaceutical product, but it can also be used for treated disease, patient, packaging and routes of administrations, all of which are roles that are studied in the science of pharmacology and have an impact on the drug&apos;s effects.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
@@ -1199,19 +1216,6 @@
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
 		<cmns-txt:hasTextValue>Systematic Name</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
-	
-	<owl:Class rdf:about="&idmp-sub;SubstanceRole">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>substance role</rdfs:label>
-		<skos:definition>functional role played by a substance with respect to some reified relationship or in some other substance or product</skos:definition>
-	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
