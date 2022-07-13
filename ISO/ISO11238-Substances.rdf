@@ -282,8 +282,20 @@
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+						<owl:onClass rdf:resource="&idmp-sub;ManufacturedItem"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>ingredient role</rdfs:label>
-		<skos:definition>functional role played by an entity (ingredient, substance) in some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
+		<skos:definition>functional role played by an entity (ingredient, substance) that is part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
 		<skos:note>A pharmacological role is related to the composition, properties, or action of a substance or ingredient in another substance or pharmaceutical product. It covers adjuvant and expedient, which are roles played by the substance components in a pharmaceutical product, but it can also be used for treated disease, patient, packaging and routes of administrations, all of which are roles that are studied in the science of pharmacology and have an impact on the drug&apos;s effects.</skos:note>
 		<cmns-av:synonym>pharmacological role</cmns-av:synonym>
 	</owl:Class>
@@ -295,6 +307,18 @@
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:onClass rdf:resource="&idmp-sub;Material"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
+						<owl:onClass rdf:resource="&idmp-sub;IngredientRole"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+					</owl:Restriction>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
