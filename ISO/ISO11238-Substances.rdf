@@ -941,6 +941,25 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SubstanceAsSubject">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isSubjectRoleIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceInclusion"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>substance as subject</rdfs:label>
+		<skos:definition>functional role played by a substance that is the subject of a substance inclusion relationship</skos:definition>
+		<cmns-av:usageNote>From an implementation (mapping) perspective, this role provides a semantic &apos;hook&apos; for the subject of the relationship, to relate a substance to the complex relationship of &apos;substance realizes something (another substance or moiety)&apos;, where the &apos;something&apos; (i.e., the object in the substance situation) may have some basis of strength, for example, or another feature that applies in a specific context.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SubstanceCode">
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
@@ -1005,6 +1024,34 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.5</cmns-av:adaptedFrom>
 		<cmns-av:synonym>Substance ID</cmns-av:synonym>
 		<cmns-av:synonym>Substance-ID</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SubstanceInclusion">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;IngredientRole">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;MoietyRole">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceAsSubject"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>substance inclusion</rdfs:label>
+		<skos:definition>situation in which a substance (i.e., substance as role) incorporates some other substance (ingredient) or moiety, potentially with a given strength, in some context</skos:definition>
+		<cmns-av:usageNote>From an implementation (mapping) perspective, this substance inclusion class provides the basis for a blank node in the relationship &apos;substance realizes ingredient or moiety role played by some substance or moiety&apos;, where the object may have some basis of strength, for example, in a given context.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceName">

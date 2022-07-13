@@ -243,6 +243,25 @@
 		<skos:note>A clinical trial is a research study that prospectively assigns human participants or groups of humans to one or more health-related interventions to evaluate the effects on health outcomes.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;IngredientInclusion">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IngredientRole"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductAsSubject"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ingredient inclusion</rdfs:label>
+		<skos:definition>situation in which a product incorporates some ingredient, potentially with a given strength, in some context</skos:definition>
+		<cmns-av:usageNote>From an implementation (mapping) perspective, this ingredient inclusion class provides the basis for a blank node in the relationship &apos;product realizes ingredient role played by some substance&apos;, where the ingredient role may be that of an active ingredient which, in turn, may have some basis of strength in some context. The same situation could be used to link inactive ingredients to a product in which they are realized. A given product may include multiple active ingredients, each of which may have a different basis of strength.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;InvestigationalMedicinalProduct">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<rdfs:label>investigational medicinal product</rdfs:label>
@@ -422,6 +441,25 @@
 		<rdfs:label>pharmaceutical product identifier</rdfs:label>
 		<skos:definition>unique identifier for a pharmaceutical product</skos:definition>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.61</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ProductAsSubject">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isSubjectRoleIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;IngredientInclusion"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>product as subject</rdfs:label>
+		<skos:definition>functional role played by a pharmaceutical product that is the subject of an ingredient inclusion relationship</skos:definition>
+		<cmns-av:usageNote>From an implementation (mapping) perspective, this role provides a semantic &apos;hook&apos; for the subject of the relationship, to relate a substance to the complex relationship of &apos;substance realizes something (another substance or moiety)&apos;, where the &apos;something&apos; (i.e., the object in the substance situation) may have some basis of strength, for example, or another feature that applies in a specific context.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ReferenceStrength">
