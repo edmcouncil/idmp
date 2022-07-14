@@ -243,8 +243,15 @@
 		<skos:note>A clinical trial is a research study that prospectively assigns human participants or groups of humans to one or more health-related interventions to evaluate the effects on health outcomes.</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;IngredientInclusion">
+	<owl:Class rdf:about="&idmp-mprd;IngredientConstituency">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
@@ -257,9 +264,9 @@
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductAsSubject"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>ingredient inclusion</rdfs:label>
+		<rdfs:label>ingredient constituency</rdfs:label>
 		<skos:definition>situation in which a product incorporates some ingredient, potentially with a given strength, in some context</skos:definition>
-		<cmns-av:usageNote>From an implementation (mapping) perspective, this ingredient inclusion class provides the basis for a blank node in the relationship &apos;product realizes ingredient role played by some substance&apos;, where the ingredient role may be that of an active ingredient which, in turn, may have some basis of strength in some context. The same situation could be used to link inactive ingredients to a product in which they are realized. A given product may include multiple active ingredients, each of which may have a different basis of strength.</cmns-av:usageNote>
+		<cmns-av:usageNote>From an implementation (mapping) perspective, this ingredient constituency class provides the basis for a blank node in the relationship &apos;product realizes ingredient role played by some substance&apos;, where the ingredient role may be that of an active ingredient which, in turn, may have some basis of strength in some context. The same situation could be used to link inactive ingredients to a product in which they are realized. A given product may include multiple active ingredients, each of which may have a different basis of strength.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;InvestigationalMedicinalProduct">
@@ -454,7 +461,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isSubjectRoleIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;IngredientInclusion"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;IngredientConstituency"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>product as subject</rdfs:label>
