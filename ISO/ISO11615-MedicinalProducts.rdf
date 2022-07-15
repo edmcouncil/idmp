@@ -192,6 +192,13 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.84</dct:source>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;ActivityBasedStrength">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
+		<rdfs:label>activity-based strength</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</dct:source>
+		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass) ...</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Authorization">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
@@ -256,6 +263,14 @@
 		<dct:source>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C71104</dct:source>
 		<skos:definition>investigation in human subjects intended to discover or verify the clinical, pharmacological and/or other pharmacodynamic effects of an investigational product(s), and/or to identify any adverse reactions to an investigational medicinal product(s), and/or to study absorption, distribution, metabolism and excretion of investigational medicinal product(s) with the object of ascertaining its safety and/or efficacy</skos:definition>
 		<skos:note>A clinical trial is a research study that prospectively assigns human participants or groups of humans to one or more health-related interventions to evaluate the effects on health outcomes.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;Concentration">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
+		<rdfs:label>concentration</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</dct:source>
+		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass) ...</skos:definition>
+		<cmns-av:synonym>strength (concentration)</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;IngredientConstituency">
@@ -359,6 +374,13 @@
 		<rdfs:label>marketing authorization holder</rdfs:label>
 		<skos:definition>organisation that holds the authorization for marketing a medicinal product in a region</skos:definition>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.41</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MassBasedStrength">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
+		<rdfs:label>mass-based strength</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</dct:source>
+		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass) ...</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProduct">
@@ -465,6 +487,14 @@
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.61</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;PresentationStrength">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
+		<rdfs:label>presentation strength</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</dct:source>
+		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass) expressed in units of presentation ...</skos:definition>
+		<cmns-av:synonym>strength (presentation)</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;ProductAsSubject">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
 		<rdfs:subClassOf>
@@ -503,14 +533,32 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasDenominator"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasNumerator"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -525,7 +573,6 @@
 		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass)</skos:definition>
 		<skos:note>For solid dose forms, strength (concentration) is generally the same as strength (presentation) and therefore is not required to be expressed separately; the strength (presentation) only is required.</skos:note>
 		<cmns-av:explanatoryNote>When required for expression of strength, the unit of presentation shall be specified in accordance with ISO 11239 and its resulting terminology. The controlled term and a term identifier for the unit of presentation shall be specified in the associated manufactured item or pharmaceutical product. For strength expressed using standard units, the unit of measure symbol and the symbol identifier as defined in ISO 11240 and its resulting controlled vocabulary shall be specified.</cmns-av:explanatoryNote>
-		<cmns-av:synonym>concentration</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizes">
