@@ -113,7 +113,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AdjuvantRole">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredientRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;IngredientRole"/>
 		<rdfs:label>adjuvant role</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1</dct:source>
 		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C2140"/>
@@ -289,6 +289,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>ingredient role</rdfs:label>
 		<skos:definition>role played by a substance that is specifically part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
+		<cmns-av:synonym>pharmacological role</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
@@ -618,7 +619,7 @@
 	<owl:Class rdf:about="&idmp-sub;ReferenceSubstanceRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
 		<rdfs:label>reference substance role</rdfs:label>
-		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is, for example, used as the basis of strength in the context of the target substance or product</skos:definition>
+		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is used as the reference substance in the context of the target substance or product</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;RegulatoryContext">
@@ -939,13 +940,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceAsSubject">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isSubjectRoleIn"/>
@@ -1440,6 +1435,12 @@
 		<idmp-sub:hasBusinessRules>When the substance type, as defined in is either chemical or polymer, this class is MANDATORY; for all other cases this class is CONDITIONAL.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasStrength">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
+		<rdfs:label>has strength</rdfs:label>
+		<skos:definition>indicates the strength of any element in a substance or pharmaceutical product</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasStructure">

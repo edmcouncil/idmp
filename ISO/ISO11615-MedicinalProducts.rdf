@@ -88,6 +88,19 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.1</dct:source>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;BasisOfStrengthSubstanceRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Strength"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>basis of strength role</rdfs:label>
+		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is, the active ingredient or active moiety in a substance or drug that is used to establish the strength of the product</skos:definition>
+		<cmns-av:abbreviation>BOSS</cmns-av:abbreviation>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;IngredientRole">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -620,6 +633,13 @@
 		<rdfs:label>has basis of strength</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a pharmaceutical or medicinal product to a substance that is its basis of strength</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasStrength">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
+		<rdfs:label>has strength</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;Strength"/>
+		<skos:definition>indicates the strength of any element in a substance or pharmaceutical product</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedBy">
