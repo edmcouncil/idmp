@@ -88,42 +88,31 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.1</dct:source>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;BasisOfStrengthSubstanceRole">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;Strength"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>basis of strength role</rdfs:label>
-		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is, the active ingredient or active moiety in a substance or drug that is used to establish the strength of the product</skos:definition>
-		<cmns-av:abbreviation>BOSS</cmns-av:abbreviation>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;IngredientRole">
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom>
+				<owl:onClass>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&idmp-mprd;hasBasisOfStrength"/>
 						<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 					</owl:Restriction>
-				</owl:someValuesFrom>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom>
+				<owl:onClass>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
 						<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
 						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 					</owl:Restriction>
-				</owl:someValuesFrom>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.28</dct:source>
@@ -163,21 +152,6 @@
 	<owl:Class rdf:about="&idmp-sub;Material">
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
 		<skos:note>Material is more specifically defined in ISO 11615 to be a &apos;substance or specified substance of which a certain packaging or device is made. This definition applies to a medicinal product package item (container), package (component) and device.</skos:note>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;ReferenceSubstanceRole">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&idmp-mprd;hasBasisOfStrength"/>
-						<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-					</owl:Restriction>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstance">
@@ -235,6 +209,19 @@
 		</rdfs:subClassOf>
 		<rdfs:label>authorizing party</rdfs:label>
 		<skos:definition>party that delegates some role, authority, capability, or control to another party</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;BasisOfStrengthSubstanceRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Strength"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>basis of strength role</rdfs:label>
+		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is, the active ingredient or active moiety in a substance or drug that is used to establish the strength of the product</skos:definition>
+		<cmns-av:abbreviation>BOSS</cmns-av:abbreviation>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ClinicalTrial">
@@ -576,6 +563,24 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.72</dct:source>
 		<skos:definition>strength of an active substance(s) and/or specified substance(s) used as a reference from which the strength of an investigational or authorised medicinal product is described</skos:definition>
 		<skos:note>The strength of the active substance(s) and/or specified substance(s) shall be described as a quantity of the substance present in a given unit of the pharmaceutical product or manufactured item.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ReferenceSubstanceRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&idmp-mprd;hasBasisOfStrength"/>
+						<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference substance role</rdfs:label>
+		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is used as the reference substance in the context of the target substance or product</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Strength">
