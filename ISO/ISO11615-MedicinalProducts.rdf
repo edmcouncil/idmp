@@ -187,6 +187,18 @@
 		<skos:definition>situation in which a party authorizes someone to act on their behalf or to have other responsibilities or capabilities under certain conditions for some period of time</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;AuthorizedMedicinalProduct">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorization"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Authorization"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>authorized medicinal product</rdfs:label>
+		<skos:definition>medicinal product that has been authorized for some purpose in some jurisdiction</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;AuthorizedParty">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
 		<rdfs:subClassOf>
@@ -652,6 +664,13 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
 		<rdfs:label>evaluates</rdfs:label>
 		<skos:definition>assesses the nature, quality, or ability of someone or something</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorization">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+		<rdfs:label>has authorization</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;Authorization"/>
+		<skos:definition>relates a medicinal product to a specific authorization (manufacturing or marketing) in some jurisdiction</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorizedParty">
