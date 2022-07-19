@@ -14,6 +14,7 @@
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
+	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-dtp "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/">
 	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
@@ -41,6 +42,7 @@
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
+	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-dtp="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"
 	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
@@ -74,6 +76,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220701/ISO11615-MedicinalProducts/"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
@@ -87,6 +90,13 @@
 	<owl:Class rdf:about="&idmp-sub;AdjuvantRole">
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.1</dct:source>
 	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ISO20443-CodeSet">
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 20443 code set</rdfs:label>
+		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.iso.org/standard/68041.html</rdfs:seeAlso>
+		<skos:definition>set of controlled vocabularies and codes for reporting of medicinal product-related information specified in the ISO/TS 20443 guidelines</skos:definition>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;IngredientRole">
 		<rdfs:subClassOf>
@@ -160,6 +170,61 @@
 	
 	<owl:Class rdf:about="&idmp-uom;UnitOfPresentation">
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.84</dct:source>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientActiveMoietyBasisOfStrength">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTIM"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>active ingredient active moiety basis of strength</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of a substance present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients, where the active moiety is basis of strength</skos:definition>
+		<skos:example>For example, 287 mg amoxicillin trihydrate equivalent to 250 mg anhydrous amoxicillin.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientEntireSubstanceBasisOfStrength">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTIB"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>active ingredient entire substance basis of strength</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of a substance present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients, where the entire substance is the basis of strength</skos:definition>
+		<skos:example>For example, propranolol hydrochloride quantified as the propranolol hydrochloride salt.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientReferenceSubstanceBasisOfStrength">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTIR"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>active ingredient reference substance basis of strength</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of a substance present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients, where another reference substance is the basis of strength</skos:definition>
+		<skos:example>For example, metoprolol succinate quantified by amount of metoprolol tartrate with the equal amount of metoprolol active moiety.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientWithoutBasisOfStrength">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTI"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>active ingredient without basis of strength</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of a substance present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients whose basis of strength cannot be specified</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ActivityBasedStrength">
@@ -332,6 +397,55 @@
 		<rdfs:label>ingredient constituency</rdfs:label>
 		<skos:definition>situation in which a product incorporates some ingredient, potentially with a given strength, in some context</skos:definition>
 		<cmns-av:usageNote>From an implementation (mapping) perspective, this ingredient constituency class provides the basis for a blank node in the relationship &apos;product realizes ingredient role played by some substance&apos;, where the ingredient role may be that of an active ingredient which, in turn, may have some basis of strength in some context. The same situation could be used to link inactive ingredients to a product in which they are realized. A given product may include multiple active ingredients, each of which may have a different basis of strength.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-mprd;IngredientRole-ACTI">
+		<rdf:type rdf:resource="&idmp-mprd;IngredientRoleCode"/>
+		<rdfs:label>ingredient role - ACTI</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>code for an active ingredient whose basis of strength cannot be specified</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO20443-CodeSet"/>
+		<cmns-txt:hasTextValue>ACTI</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-mprd;IngredientRole-ACTIB">
+		<rdf:type rdf:resource="&idmp-mprd;IngredientRoleCode"/>
+		<rdfs:label>ingredient role - ACTIB</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>code for an active ingredient where the entire substance is the basis of strength</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO20443-CodeSet"/>
+		<cmns-txt:hasTextValue>ACTIB</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-mprd;IngredientRole-ACTIM">
+		<rdf:type rdf:resource="&idmp-mprd;IngredientRoleCode"/>
+		<rdfs:label>ingredient role - ACTIM</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>code for an active ingredient where the active moiety is basis of strength</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO20443-CodeSet"/>
+		<cmns-txt:hasTextValue>ACTIM</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-mprd;IngredientRole-ACTIR">
+		<rdf:type rdf:resource="&idmp-mprd;IngredientRoleCode"/>
+		<rdfs:label>ingredient role - ACTIR</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>code for an active ingredient where another reference substance is the basis of strength</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO20443-CodeSet"/>
+		<cmns-txt:hasTextValue>ACTIR</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-mprd;IngredientRoleCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cds;denotes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IngredientRole"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ingredient role code</rdfs:label>
+		<skos:definition>sequence of characters denoting an ingredient role, according to the ISO 20443 implementation guide for ISO 11615</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;InvestigationalMedicinalProduct">
