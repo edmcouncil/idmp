@@ -130,7 +130,8 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasExpression"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;Expression"/>
+				<owl:onClass rdf:resource="&cmns-qtu;Expression"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>conversion-based unit</rdfs:label>
@@ -477,7 +478,8 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityName"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityName"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -613,13 +615,6 @@
 	<owl:Class rdf:about="&cmns-qtu;QuantityValue">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementUnit"/>
-				<owl:onClass rdf:resource="&cmns-qtu;MeasurementUnit"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;expressesTheMagnitudeOf"/>
 				<owl:onClass rdf:resource="&cmns-qtu;Quantity"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -630,6 +625,12 @@
 				<owl:onProperty rdf:resource="&cmns-qtu;hasNumericValue"/>
 				<owl:onDataRange rdf:resource="&xsd;decimal"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementUnit"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementUnit"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>quantity value</rdfs:label>
