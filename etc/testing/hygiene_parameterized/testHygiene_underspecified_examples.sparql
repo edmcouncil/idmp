@@ -9,23 +9,38 @@ prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?warning ?instance
 WHERE
 {
+    ?instance rdf:type ?class.
+    
     ?class rdfs:subClassOf ?restriction.
     ?restriction rdf:type owl:Restriction.
     {
         ?restriction owl:onProperty ?property.
         ?restriction owl:onClass ?restrictingClass.
         ?restriction owl:minQualifiedCardinality ?cardinality.
+		FILTER (?cardinality > 0)
     }
     UNION
     {
         ?restriction owl:onProperty ?property.
         ?restriction owl:someValuesFrom ?restrictingClass.
-        BIND (1 as ?cardinality).
     }
-    ?instance rdf:type ?class .
-    FILTER NOT EXISTS {?instance ?property []}
-    FILTER (?cardinality > 0)
+    
+    ?subProperty rdfs:subPropertyOf* ?property.
 
+    FILTER NOT EXISTS 
+    {
+        {?subProperty owl:inverseOf ?inverseProperty.}
+        UNION
+        {?inverseProperty owl:inverseOf ?subProperty.}
+
+        ?subInverseProperty rdfs:subPropertyOf* ?inverseProperty.
+        ?inverseRestriction owl:hasValue ?instance.
+        ?restrictedClass rdfs:subClassOf* ?restrictingClass.
+        ?restrictedClass rdfs:subClassOf* ?inverseRestriction.
+    }
+
+    FILTER NOT EXISTS {?instance ?subProperty []}
+    
     BIND (concat ("WARN: ", STR(?instance), " looks like an unfinished example.") AS ?warning)
 }
 ORDER BY ?instance
