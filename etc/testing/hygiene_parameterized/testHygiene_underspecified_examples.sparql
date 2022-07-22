@@ -39,14 +39,7 @@ WHERE
         ?restrictedClass rdfs:subClassOf* ?inverseRestriction.
     }
 
-    {
-	FILTER NOT EXISTS {?instance ?subProperty []}
-    }
-    UNION
-    {
-        ?instance ?subProperty ?restrictingInstance.
-        FILTER NOT EXISTS {?restrictingInstance rdf:type/rdfs:subClassOf ?restrictingClass}
-	}
+    FILTER NOT EXISTS {?instance ?subProperty []}
 
     BIND (concat ("WARN: ", STR(?instance), " looks like an unfinished example.") AS ?warning)
 }
