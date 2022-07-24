@@ -666,12 +666,6 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;ReferenceStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>reference strength</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.72</dct:source>
 		<skos:definition>strength of an active substance(s) and/or specified substance(s) used as a reference from which the strength of an investigational or authorised medicinal product is described</skos:definition>
@@ -682,14 +676,14 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&idmp-mprd;hasBasisOfStrength"/>
-						<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-					</owl:Restriction>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ReferenceStrength"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>reference substance role</rdfs:label>
@@ -767,6 +761,13 @@
 		<skos:definition>assesses the nature, quality, or ability of someone or something</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasActiveIngredientRole">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasObjectRole"/>
+		<rdfs:label>has active ingredient role</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<skos:definition>relates a reified pharmaceutical or medicinal product to something in the role of an active ingredient</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorization">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
 		<rdfs:label>has authorization</rdfs:label>
@@ -795,6 +796,28 @@
 		<rdfs:label>has basis of strength</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a pharmaceutical or medicinal product to a substance that is its basis of strength</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceStrength">
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasStrength"/>
+		<rdfs:label>has reference strength</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;ReferenceStrength"/>
+		<skos:definition>indicates the reference strength for the reference substance of an active ingredient in a pharmaceutical or medicinal product</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceSubstance">
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasBasisOfStrength"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isPlayedBy"/>
+		<rdfs:label>has reference substance</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
+		<skos:definition>relates a substance in the role of an active ingredient in a pharmaceutical or medicinal product to a reference substance that is its underlying basis of strength</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceSubstanceRole">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasObjectRole"/>
+		<rdfs:label>has reference substance role</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;ReferenceSubstanceRole"/>
+		<skos:definition>relates a reified pharmaceutical or medicinal product to something in the role of reference substance that is its underlying basis of strength</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasStrength">
