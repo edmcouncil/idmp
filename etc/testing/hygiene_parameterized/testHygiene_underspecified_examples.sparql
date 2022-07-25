@@ -6,7 +6,7 @@ prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
 ##
 # banner We should provide all required properties for examples.
 
-SELECT DISTINCT ?warning ?instance
+SELECT DISTINCT ?error ?instance ?property
 WHERE
 {
     ?instance rdf:type ?class.
@@ -24,30 +24,36 @@ WHERE
         ?restriction owl:onProperty ?property.
         ?restriction owl:someValuesFrom ?restrictingClass.
     }
-    
-    ?subProperty rdfs:subPropertyOf* ?property.
 
     FILTER NOT EXISTS 
     {
-        {?subProperty owl:inverseOf ?inverseProperty.}
+        {?property owl:inverseOf ?inverseProperty.}
         UNION
-        {?inverseProperty owl:inverseOf ?subProperty.}
+        {?inverseProperty owl:inverseOf ?property.}
 
         ?subInverseProperty rdfs:subPropertyOf* ?inverseProperty.
         ?inverseRestriction owl:hasValue ?instance.
         ?restrictedClass rdfs:subClassOf* ?restrictingClass.
         ?restrictedClass rdfs:subClassOf* ?inverseRestriction.
     }
-
+    
+    FILTER NOT EXISTS 
     {
-	FILTER NOT EXISTS {?instance ?subProperty []}
+        {?property owl:inverseOf ?inverseProperty.}
+        UNION
+        {?inverseProperty owl:inverseOf ?property.}
+
+        ?subInverseProperty rdfs:subPropertyOf* ?inverseProperty.
+        ?inverseInstance ?subInverseProperty ?instance.
+        ?inverseInstance rdf:type/rdfs:subClassOf* ?restrictingClass.
     }
-    UNION
-    {
-        ?instance ?subProperty ?restrictingInstance.
-        FILTER NOT EXISTS {?restrictingInstance rdf:type/rdfs:subClassOf ?restrictingClass}
-	}
 
-    BIND (concat ("WARN: ", STR(?instance), " looks like an unfinished example.") AS ?warning)
+    FILTER NOT EXISTS 
+    {
+        ?subProperty rdfs:subPropertyOf* ?property. 
+        ?instance ?subProperty []. 
+    }
+
+    BIND (concat ("WARN: ", STR(?instance), " looks like an unfinished example.") AS ?error)
 }
 ORDER BY ?instance
