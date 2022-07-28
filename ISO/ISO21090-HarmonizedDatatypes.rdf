@@ -43,7 +43,11 @@
 	
 	<owl:Ontology rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/">
 		<rdfs:label>ISO 21090 Harmonized Datatypes Ontology</rdfs:label>
-		<dct:abstract>The harmonized datatypes ontology provides a semantic model representing the harmonized datatype definitions for exchanging basic concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment. It is derived from the ISO 21090:2011 Health informatics - Harmonized data types for information interchange specification, which in turn is compliant with and uses the terminology, notations and datatypes defined in ISO/IEC 11404.</dct:abstract>
+		<dct:abstract>The harmonized datatypes ontology provides a semantic model representing the harmonized datatype definitions for exchanging basic concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment. It is derived from and largely conforms with the ISO 21090:2011 Health informatics - Harmonized data types for information interchange specification, which in turn is compliant with and uses the terminology, notations and datatypes defined in ISO/IEC 11404.
+		
+		The implementation of ISO 21090 included herein is an OWL 2 DL compliant representation of the datatypes defined in the ISO specification. This means that it is not a perfect match for the UML (Unified Modeling Language) representation given in the standard, as there is not a one-to-one alignment between UML and OWL. For details on mapping UML to OWL, please refer to the Object Management Group (OMG) specifications for (1) the Ontology Definition Metamode (ODM), available at https://www.omg.org/spec/ODM/, and (2) MOF to RDF Mapping (MOF2RDF), available at https://www.omg.org/spec/MOF2RDF/. As a consequence, this ontology is an indirectly conforming implementation that provides mappings to the XML Schema Datatypes that are supported in OWL 2 for some ISO 21090 datatypes, and encodes others in a manner that is OWL 2 DL compliant. References to ISO 11179 with respect to the representation of codes and code sets are faithful to the 3rd edition of 11179 as well as to revisions to that standard that are part of emerging work in the ISO JTC 1 SC32 WG2 working group to the degree possible.
+		
+		For more information on the ontologies on which this ontology depends, please refer to the Object Management Group (OMG) specifications for (1) the Commons Ontology Library (Commons) specification, available at https://www.omg.org/spec/COMMONS/, and (2) the  Languages, Countries and Codes (LCC) specification, available at https://www.omg.org/spec/LCC/. Note that certain Commons ontologies referenced herein, including Documents and Quantities and Units, are not part of the Commons Ontology Library 1.0 Specification but are planned for inclusion in the 1.1 revision planned for late 2022 or early 2023.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
@@ -57,8 +61,10 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220401/ISO21090-HarmonizedDatatypes/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220701/ISO21090-HarmonizedDatatypes/"/>
+		<owl:versionInfo>The IDMP MVP version of this ontology is incomplete, and covers only the parts of the ISO 21090 standard required to support the MVP use cases.</owl:versionInfo>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 		<cmns-av:explanatoryNote>The harmonized datatypes ontology provides a set of codes for datatypes and classes used in other standards in the health informatics family of standards, including those published by HL7. These codes need to be referenced via an annotation in the context of the IDMP ontologies due to the fact that any other approach would result in punning.</cmns-av:explanatoryNote>
 	</owl:Ontology>
 	
@@ -385,7 +391,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-dtp;hasLevel"/>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasLevelInHierarchy"/>
 				<owl:someValuesFrom rdf:resource="&xsd;nonNegativeInteger"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -985,6 +991,7 @@
 		<rdfs:label>object identifier</rdfs:label>
 		<skos:definition>globally unique identifier of a data object as defined in ISO/IEC 8824-2</skos:definition>
 		<cmns-av:abbreviation>OID</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 4</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>An object identifier (OID) is a unique alphanumeric/numeric identifier registered under the ISO/IEC 8824-2 registration standard to reference a specific object or object class.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -1134,6 +1141,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasBooleanValue">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>has boolean value</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.4.3.1</dct:source>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
@@ -1142,6 +1150,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasCharacterSet">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
 		<rdfs:label>has character set</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 7.4.2.3.6</dct:source>
@@ -1152,6 +1161,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasCompressionAlgorithm">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
 		<rdfs:label>has compression algorithm</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 7.4.2.3.6</dct:source>
@@ -1161,6 +1171,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasControlInformationExtension">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has control information extension</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.2.3.4</dct:source>
@@ -1171,6 +1182,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasControlInformationRoot">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has control information root</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.2.3.3</dct:source>
@@ -1192,6 +1204,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasExceptionalValue">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
 		<rdfs:label>has exceptional value</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.3.3.1</dct:source>
@@ -1201,6 +1214,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasFlavorIdentifier">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has flavor identifier</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.2.3.3</dct:source>
@@ -1212,6 +1226,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasIntegerValue">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>has integer value</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.8.3.3</dct:source>
 		<rdfs:range rdf:resource="&xsd;integer"/>
@@ -1220,6 +1235,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasIntegrityCheck">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBinaryData"/>
 		<rdfs:label>has integrity check</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.9</dct:source>
@@ -1229,6 +1245,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasIntegrityCheckAlgorithm">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
 		<rdfs:label>has integrity check algorithm</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 7.4.2.3.10</dct:source>
@@ -1246,8 +1263,9 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 	</owl:ObjectProperty>
 	
-	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasLevel">
-		<rdfs:label>has level</rdfs:label>
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasLevelInHierarchy">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:label>has level in hierarchy</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
 		<skos:definition>indicates a position of the concept with respect to the hierarchy of the terminology</skos:definition>
@@ -1256,6 +1274,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasMediaType">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
 		<rdfs:label>has media type</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 7.4.2.3.5</dct:source>
@@ -1323,6 +1342,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasUpdateMode">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
 		<rdfs:label>has update mode</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.3.3.2</dct:source>
@@ -1331,6 +1351,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasValidTimeHigh">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
 		<rdfs:label>has valid time high</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.2.3.2</dct:source>
@@ -1341,6 +1362,7 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasValidTimeLow">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
 		<rdfs:label>has valid time low</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.2.3.1</dct:source>
