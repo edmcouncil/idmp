@@ -235,7 +235,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AuthorizedMedicinalProduct">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorization"/>
@@ -287,8 +287,14 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;administers"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;evaluates"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>clinical trial</rdfs:label>
@@ -429,7 +435,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;InvestigationalMedicinalProduct">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductRole"/>
 		<rdfs:label>investigational medicinal product</rdfs:label>
 		<skos:definition>pharmaceutical product or combination of pharmaceutical products or placebo(s) being tested or used as a reference in a clinical trial, including products already with a marketing authorization but used or assembled (packaged) in a way different from the authorized form, used for an unauthorized indication, or used to gain further information about the authorized form</skos:definition>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.31</cmns-av:directSource>
@@ -739,6 +745,13 @@
 		<cmns-av:explanatoryNote>When required for expression of strength, the unit of presentation shall be specified in accordance with ISO 11239 and its resulting terminology. The controlled term and a term identifier for the unit of presentation shall be specified in the associated manufactured item or pharmaceutical product. For strength expressed using standard units, the unit of measure symbol and the symbol identifier as defined in ISO 11240 and its resulting controlled vocabulary shall be specified.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;administers">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
+		<rdfs:label>administers</rdfs:label>
+		<dct:source>NC Thesaurus C25382</dct:source>
+		<skos:definition>The act of having given something (e.g., a medication or test).</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizes">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;actsOn"/>
 		<rdfs:label>authorizes</rdfs:label>
@@ -827,6 +840,12 @@
 		<rdfs:label>has strength</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;Strength"/>
 		<skos:definition>indicates the strength of any element in a substance or pharmaceutical product</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredBy">
+		<rdfs:label>is administered by</rdfs:label>
+		<owl:inverseOf rdf:resource="&idmp-mprd;administers"/>
+		<skos:definition>is given or applied by</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedBy">
