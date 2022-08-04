@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
@@ -14,6 +15,7 @@
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
@@ -32,10 +34,11 @@
 		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220701/PartiesAndSituations/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220801/PartiesAndSituations/"/>
 		<skos:note>This ontology was originally designed for use in the Financial Industry Business Ontology (FIBO) for representing complex relationships between parties, such as employment, ownership and control.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2020-2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2020-2022 Thematix Partners LLC</cmns-av:copyright>
@@ -78,6 +81,38 @@
 		</rdfs:subClassOf>
 		<rdfs:label>agent role</rdfs:label>
 		<skos:definition>role that is played by an agent</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-pts;Constituency">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onClass rdf:resource="&cmns-col;Constituent"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasRole"/>
+				<owl:onClass rdf:resource="&cmns-pts;Role"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&owl;Thing"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>constituency</rdfs:label>
+		<skos:definition>relationship that defines something based on its constituent(s) and/or constituent roles that may be context-specific</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;FunctionalRole">
@@ -270,7 +305,6 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasObjectRole">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
 		<rdfs:label>has object role</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:range rdf:resource="&cmns-pts;Role"/>
 		<skos:definition>identifies a person or thing that is affected by, or is a secondary argument in a specific role with respect to a given relation or situation</skos:definition>
 	</owl:ObjectProperty>
