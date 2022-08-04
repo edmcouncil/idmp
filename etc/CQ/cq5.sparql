@@ -1,0 +1,55 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/> 
+prefix idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+prefix cmns-ra:   <https://www.omg.org/spec/Commons/RegistrationAuthorities/> 
+prefix cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+prefix idmp-euctr: <https://spec.pistoiaalliance.org/idmp/ontology/MVP/CT/EuropeanUnionClinicalTrialRegister/>
+prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+prefix cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
+prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+
+SELECT distinct ?clinical_Trial ?trial_Name ?eudraCT_Number ?sponser ?authorized_By ?trial_jurisdiction
+
+WHERE {
+  #Find the Marketing Authorization for the Medicinal Product through Authorized Medicinal Product role
+  ?marketingAuthorization a idmp-mprd:MarketingAuthorization ;
+            cmns-cxtdsg:appliesTo ?authorizedMedicinalProduct .
+  ?authorizedMedicinalProduct cmns-pts:isPlayedBy ?medicinalProduct .
+ 
+  # Match Investigational Medicinal Products that have the same Medicinal Product as the Marketing Authorization
+  ?investigationalMedinicalProduct cmns-pts:isPlayedBy ?medicinalProduct .
+  ?authorizedMedicinalProduct cmns-pts:isPlayedBy ?medicinalProduct .
+  
+  # Use the label of the Authorized Medicinal Product
+  ?medicinalProduct rdfs:label <<LABEL_HERE>>
+  
+  # Find clinical trials that manages the administration of Investigational Medicinal Product from above
+  ?clinical_Trial a idmp-mprd:ClinicalTrial ;
+                  rdfs:label ?trial_Name ;
+                  idmp-mprd:managesAdministrationOf ?investigationalMedinicalProduct .
+
+  #EudraCT Number
+  ?eudraCTNumberUri a idmp-ra:EudraCTNumber ;
+                    cmns-txt:hasTextValue ?eudraCT_Number ;
+                    cmns-id:identifies ?clinical_Trial . 
+  
+  # Meta-Data about the Trial Using the CTA
+  ?cta_uri a idmp-mprd:ClinicalTrialAuthorization ;
+           cmns-cxtdsg:appliesTo ?clinical_Trial ;
+           cmns-cxtdsg:isApplicableIn ?trial_jurisdiction_uri ;
+           idmp-mprd:hasAuthorizedParty ?sponserRole ;
+           idmp-mprd:hasAuthorizingParty ?authorizingRole .
+  
+  #Authorizing Party
+  ?authorizingRole cmns-pts:isPlayedBy ?authorizedByUri .
+  ?authorizedByUri rdfs:label ?authorized_By .
+  
+  #Sponser or Authorized Party
+   ?sponserRole cmns-pts:isPlayedBy ?sponserUri .
+  ?sponserUri rdfs:label ?sponser .
+  
+  #Jursdiction
+  ?trial_jurisdiction_uri rdfs:label ?trial_jurisdiction .
+}

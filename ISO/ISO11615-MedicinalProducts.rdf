@@ -288,13 +288,13 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;administers"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;evaluates"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;evaluates"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;managesAdministrationOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -746,13 +746,6 @@
 		<cmns-av:explanatoryNote>When required for expression of strength, the unit of presentation shall be specified in accordance with ISO 11239 and its resulting terminology. The controlled term and a term identifier for the unit of presentation shall be specified in the associated manufactured item or pharmaceutical product. For strength expressed using standard units, the unit of measure symbol and the symbol identifier as defined in ISO 11240 and its resulting controlled vocabulary shall be specified.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;administers">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
-		<rdfs:label>administers</rdfs:label>
-		<dct:source>NC Thesaurus C25382</dct:source>
-		<skos:definition>The act of having given something (e.g., a medication or test).</skos:definition>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizes">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;actsOn"/>
 		<rdfs:label>authorizes</rdfs:label>
@@ -843,10 +836,10 @@
 		<skos:definition>indicates the strength of any element in a substance or pharmaceutical product</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredBy">
-		<rdfs:label>is administered by</rdfs:label>
-		<owl:inverseOf rdf:resource="&idmp-mprd;administers"/>
-		<skos:definition>is given or applied by</skos:definition>
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredIn">
+		<rdfs:label>is administered in</rdfs:label>
+		<owl:inverseOf rdf:resource="&idmp-mprd;managesAdministrationOf"/>
+		<skos:definition>is given in or applied in</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedBy">
@@ -870,6 +863,13 @@
 		<rdfs:label>is evaluated by</rdfs:label>
 		<owl:inverseOf rdf:resource="&idmp-mprd;evaluates"/>
 		<skos:definition>is ascertained or determined by</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;managesAdministrationOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
+		<rdfs:label>manages administration of</rdfs:label>
+		<dct:source>NC Thesaurus C25382</dct:source>
+		<skos:definition>The act of having given something (e.g., a medication or test).</skos:definition>
 	</owl:ObjectProperty>
 
 </rdf:RDF>
