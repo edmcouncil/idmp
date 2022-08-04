@@ -10,7 +10,7 @@ prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-M
 prefix cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
 prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 
-SELECT distinct ?clinical_Trial ?trial_Name ?eudraCT_Number ?sponser ?authorized_By ?trial_jurisdiction
+SELECT distinct ?clinical_Trial ?trial_Name ?eudraCT_Number ?authorizedParty ?authorized_By ?trial_jurisdiction
 
 WHERE {
   #Find the Marketing Authorization for the Medicinal Product through Authorized Medicinal Product role
@@ -39,16 +39,16 @@ WHERE {
   ?cta_uri a idmp-mprd:ClinicalTrialAuthorization ;
            cmns-cxtdsg:appliesTo ?clinical_Trial ;
            cmns-cxtdsg:isApplicableIn ?trial_jurisdiction_uri ;
-           idmp-mprd:hasAuthorizedParty ?sponserRole ;
+           idmp-mprd:hasAuthorizedParty ?authorizedRole ;
            idmp-mprd:hasAuthorizingParty ?authorizingRole .
   
   #Authorizing Party
   ?authorizingRole cmns-pts:isPlayedBy ?authorizedByUri .
   ?authorizedByUri rdfs:label ?authorized_By .
   
-  #Sponser or Authorized Party
-   ?sponserRole cmns-pts:isPlayedBy ?sponserUri .
-  ?sponserUri rdfs:label ?sponser .
+  #Authorized Party
+  ?authorizedRole cmns-pts:isPlayedBy ?authorizedPartyUri .
+  ?authorizedPartyUri rdfs:label ?authorizedParty .
   
   #Jursdiction
   ?trial_jurisdiction_uri rdfs:label ?trial_jurisdiction .
