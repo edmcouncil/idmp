@@ -10,6 +10,7 @@
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
 	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY lcc-3166-1 "https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/">
@@ -32,6 +33,7 @@
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
 	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
 	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:lcc-3166-1="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"
@@ -48,6 +50,7 @@
 		<dct:abstract>The registration authorities ontology provides the set of registration authorities and related code set definitions that are needed for identification of substances and medicinal products. It is derived from the ISO 11238:2018 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of regulated information on substances standard.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
@@ -346,6 +349,25 @@
 		<lcc-lr:hasTextualName>Drug Bank</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-ra;EudraClinicalTrialsNumber">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ClinicalTrialIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;hasRegistrationAuthority"/>
+				<owl:hasValue rdf:resource="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
+				<owl:hasValue rdf:resource="&idmp-ra;EuropeanUnionClinicalTrialsRegister"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>Eudra clinical trials number</rdfs:label>
+		<skos:definition>unique code assigned to clinical trials in the EU Clinical Trials Register</skos:definition>
+		<cmns-av:abbreviation>EudraCT Number</cmns-av:abbreviation>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-ra;EudraVigilanceCode">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceCode"/>
 		<rdfs:subClassOf>
@@ -484,6 +506,13 @@
 		<skos:definition>decentralised agency of the European Union (EU) responsible for the scientific evaluation, supervision and safety monitoring of medicines in the EU</skos:definition>
 		<cmns-av:abbreviation>EMA</cmns-av:abbreviation>
 		<cmns-av:explanatoryNote>The mission of the European Medicines Agency (EMA) is to foster scientific excellence in the evaluation and supervision of medicines, for the benefit of public and animal health in the European Union (EU).</cmns-av:explanatoryNote>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency">
+		<rdf:type rdf:resource="&idmp-mprd;MedicinesRegulatoryAgency"/>
+		<rdfs:label>European Medicines Agency as medicines regulatory agency</rdfs:label>
+		<skos:definition>European Medicines Agency in its role as a regulatory agency for medicinal products</skos:definition>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-ra;EuropeanMedicinesAgency"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority">
