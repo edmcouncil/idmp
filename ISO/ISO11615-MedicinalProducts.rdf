@@ -294,6 +294,12 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasSponsor"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Sponsor"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;managesAdministrationOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
 			</owl:Restriction>
@@ -439,8 +445,36 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductRole"/>
 		<rdfs:label>investigational medicinal product</rdfs:label>
 		<skos:definition>role of a pharmaceutical product or combination of pharmaceutical products or placebo(s) being tested or used as a reference in a clinical trial, including products already with a marketing authorization but used or assembled (packaged) in a way different from the authorized form, used for an unauthorized indication, or used to gain further information about the authorized form</skos:definition>
+		<cmns-av:abbreviation>IMP</cmns-av:abbreviation>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.31</cmns-av:directSource>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;InvestigationalMedicinalProductIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>investigational medicinal product identifier</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.32</dct:source>
+		<skos:definition>unique identifier allocated to an investigational medicinal product supplementary to any existing identifier as ascribed by a medicines regulatory agency in a region/jurisdiction or a sponsor of a clinical trial</skos:definition>
+		<skos:note>This is an alphanumeric text field.</skos:note>
+		<skos:note>This is for indexing purposes and to contribute to improving patient safety by allowing for the unique identification of medicinal products worldwide.</skos:note>
+		<cmns-av:abbreviation>IMPID</cmns-av:abbreviation>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;IsAdministeredIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isObjectRoleIn"/>
+		<rdfs:label>is administered in</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
+		<rdfs:range rdf:resource="&idmp-mprd;ClinicalTrial"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;managesAdministrationOf"/>
+		<skos:definition>indicates a clinical trial in which a given investigational medicinal product is administered</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&idmp-mprd;ManufacturingAuthorization">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Authorization"/>
@@ -559,6 +593,7 @@
 		<skos:definition>unique identifier allocated to a medicinal product supplementary to any existing authorization number as ascribed by a medicines regulatory agency in a region</skos:definition>
 		<skos:note>This is an alphanumeric text field.</skos:note>
 		<skos:note>This is for indexing purposes and to contribute to improved patient safety by allowing for the unique identification of Medicinal Products worldwide.</skos:note>
+		<cmns-av:abbreviation>MPID</cmns-av:abbreviation>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.53</cmns-av:directSource>
 	</owl:Class>
 	
@@ -623,14 +658,15 @@
 		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product identifier</rdfs:label>
 		<skos:definition>unique identifier for a pharmaceutical product</skos:definition>
+		<cmns-av:abbreviation>PhPID</cmns-av:abbreviation>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.61</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Placebo">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<rdfs:label>placebo</rdfs:label>
 		<dct:source>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C753</dct:source>
-		<skos:definition>role of an inactive substance, treatment or procedure that is intended to provide baseline measurements for the experimental protocol of a clinical trial</skos:definition>
+		<skos:definition>inactive substance, treatment or procedure that is intended to provide baseline measurements for the experimental protocol of a clinical trial</skos:definition>
 		<cmns-av:explanatoryNote>A placebo is essentially a medicinal product, with the same packaging, etc. from a patient perspective as the actual investigational or authorized product used in a clinical trial, but without the active ingredient studied in the trial.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -699,6 +735,37 @@
 		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is used as the reference substance in the context of the target substance or product</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;RegistrationNumber">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ClinicalTrialIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinesRegulatoryAgency"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
+				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>registration number</rdfs:label>
+		<skos:definition>identifier assigned to a clinical trial by a medicines regulatory agency in a region for tracking purposes</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;Sponsor">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;sponsors"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ClinicalTrial"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>sponsor</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.78</dct:source>
+		<skos:definition>individual, company, institution or organization (party), which takes responsibility for the initiation, management and/or financing of a clinical trial</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Strength">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
 		<rdfs:subClassOf>
@@ -745,6 +812,14 @@
 		<skos:note>For solid dose forms, strength (concentration) is generally the same as strength (presentation) and therefore is not required to be expressed separately; the strength (presentation) only is required.</skos:note>
 		<cmns-av:explanatoryNote>When required for expression of strength, the unit of presentation shall be specified in accordance with ISO 11239 and its resulting terminology. The controlled term and a term identifier for the unit of presentation shall be specified in the associated manufactured item or pharmaceutical product. For strength expressed using standard units, the unit of measure symbol and the symbol identifier as defined in ISO 11240 and its resulting controlled vocabulary shall be specified.</cmns-av:explanatoryNote>
 	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;administers">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;provides"/>
+		<rdfs:label>administers</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;isAdministeredBy"/>
+		<skos:definition>indicates a medicinal product that is administered by some party, such as a clinician</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizes">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;actsOn"/>
@@ -829,6 +904,15 @@
 		<skos:definition>relates the concept representing the contituents of a pharmaceutical or medicinal product to something in the role of reference substance that is its underlying basis of strength</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasSponsor">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasActor"/>
+		<rdfs:label>has sponsor</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;ClinicalTrial"/>
+		<rdfs:range rdf:resource="&idmp-mprd;Sponsor"/>
+		<skos:definition>indicates the party that initiates, manages, and/or finances the clinical trial</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.78</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasStrength">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
 		<rdfs:label>has strength</rdfs:label>
@@ -836,10 +920,11 @@
 		<skos:definition>indicates the strength of any element in a substance or pharmaceutical product</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredIn">
-		<rdfs:label>is administered in</rdfs:label>
-		<owl:inverseOf rdf:resource="&idmp-mprd;managesAdministrationOf"/>
-		<skos:definition>is given in or applied in</skos:definition>
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedBy"/>
+		<rdfs:label>is administered by</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<skos:definition>indicates a party, such as a clinician, that administers some medicinal product</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedBy">
@@ -866,9 +951,21 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;managesAdministrationOf">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasObjectRole"/>
 		<rdfs:label>manages administration of</rdfs:label>
-		<skos:definition>indicates the control over the whether something (a medication, test or other treatment) was given</skos:definition>
+		<rdfs:domain rdf:resource="&idmp-mprd;ClinicalTrial"/>
+		<rdfs:range rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
+		<skos:definition>indicates an investigational medicinal product that is administered in the context of a clinical trial</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;sponsors">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;actsIn"/>
+		<rdfs:label>sponsors</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;Sponsor"/>
+		<rdfs:range rdf:resource="&idmp-mprd;ClinicalTrial"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;hasSponsor"/>
+		<skos:definition>indicates the clinical trial that an individual, company, institution or organization (party), initiates, manages and/or finances</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.78</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 
 </rdf:RDF>
