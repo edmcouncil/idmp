@@ -154,6 +154,7 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientActiveMoietyBasisOfStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveMoietyRole"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;BasisOfStrengthSubstanceRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -191,6 +192,18 @@
 				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTIR"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ReferenceStrength"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>active ingredient reference substance basis of strength</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>role of a substance present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients, where another reference substance is the basis of strength</skos:definition>
@@ -203,6 +216,20 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
 				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTI"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ReferenceStrength"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>active ingredient without basis of strength</rdfs:label>
@@ -440,15 +467,6 @@
 		<skos:note>This is for indexing purposes and to contribute to improving patient safety by allowing for the unique identification of medicinal products worldwide.</skos:note>
 		<cmns-av:abbreviation>IMPID</cmns-av:abbreviation>
 	</owl:Class>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;IsAdministeredIn">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isObjectRoleIn"/>
-		<rdfs:label>is administered in</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
-		<rdfs:range rdf:resource="&idmp-mprd;ClinicalTrial"/>
-		<owl:inverseOf rdf:resource="&idmp-mprd;managesAdministrationOf"/>
-		<skos:definition>indicates a clinical trial in which a given investigational medicinal product is administered</skos:definition>
-	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&idmp-mprd;ManufacturingAuthorization">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Authorization"/>
@@ -691,24 +709,6 @@
 		<skos:note>The strength of the active substance(s) and/or specified substance(s) shall be described as a quantity of the substance present in a given unit of the pharmaceutical product or manufactured item.</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;ReferenceSubstanceRole">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;ReferenceStrength"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>reference substance role</rdfs:label>
-		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is used as the reference substance in the context of the target substance or product</skos:definition>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-mprd;RegistrationNumber">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ClinicalTrialIdentifier"/>
 		<rdfs:subClassOf>
@@ -865,17 +865,9 @@
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceSubstance">
 		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasBasisOfStrength"/>
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isPlayedBy"/>
 		<rdfs:label>has reference substance</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a substance in the role of an active ingredient in a pharmaceutical or medicinal product to a reference substance that is its underlying basis of strength</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceSubstanceRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasObjectRole"/>
-		<rdfs:label>has reference substance role</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-mprd;ReferenceSubstanceRole"/>
-		<skos:definition>relates the concept representing the contituents of a pharmaceutical or medicinal product to something in the role of reference substance that is its underlying basis of strength</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasSponsor">
@@ -899,6 +891,15 @@
 		<rdfs:label>is administered by</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<skos:definition>indicates a party, such as a clinician, that administers some medicinal product</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isObjectRoleIn"/>
+		<rdfs:label>is administered in</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
+		<rdfs:range rdf:resource="&idmp-mprd;ClinicalTrial"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;managesAdministrationOf"/>
+		<skos:definition>indicates a clinical trial in which a given investigational medicinal product is administered</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedBy">
