@@ -78,7 +78,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220701/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220801/ISO11238-Substances/"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -1103,19 +1103,6 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:directSource>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;SubstanceAsSubject">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isSubjectRoleIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceConstituency"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>substance as subject</rdfs:label>
-		<skos:definition>functional role played by a substance that is the subject of a substance inclusion relationship</skos:definition>
-		<cmns-av:usageNote>From an implementation (mapping) perspective, this role provides a semantic &apos;hook&apos; for the subject of the relationship, to relate a substance to the complex relationship of &apos;substance realizes something (another substance or moiety)&apos;, where the &apos;something&apos; (i.e., the object in the substance situation) may have some basis of strength, for example, or another feature that applies in a specific context.</cmns-av:usageNote>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;SubstanceCode">
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
@@ -1150,17 +1137,16 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceConstituency">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
-				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
+				<owl:onProperty rdf:resource="&cmns-pts;hasRole"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1173,15 +1159,9 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceAsSubject"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>substance constituency</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.17</dct:source>
-		<skos:definition>situation in which a substance is related to some other substance (ingredient) or moiety, potentially in some amount, in some context</skos:definition>
+		<skos:definition>constituency that defines some substance based on its relationship(s) to some other substance (ingredient) or moiety, potentially in some amount, in some context</skos:definition>
 		<skos:example>The substance, triamcinolone acetonide is the parent (constituent) substance of the specified substance Group 1 substance, triamcinolone acetonide, micronized. In this example, the subject role is played by &apos;triamcinolone acetonide, micronized&apos; and object role by &apos;triamcinolone acetonide&apos;.</skos:example>
 		<skos:note>Constituent component is part of a mixture belonging to a homologous group of individual components, described as parent substances for the manufacture of an allergenic extract. In this example, the subject role would be played by the mixture, whose object role is played by multiple substances (ingredient roles).</skos:note>
 		<skos:note>Constituents can be impurities, degradants, extraction solvents, vehicles, active markers or signature substances, parent substances or single substances mixed together to form a multi-substance material.</skos:note>
@@ -1568,7 +1548,6 @@
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularWeight">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has molecular weight</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3</dct:source>

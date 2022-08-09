@@ -83,6 +83,23 @@
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
+	<owl:Class rdf:about="&idmp-sub;ActiveIngredientRole">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ReferenceStrength"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ActiveMoietyRole">
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.80</dct:source>
 	</owl:Class>
@@ -154,6 +171,7 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientActiveMoietyBasisOfStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveMoietyRole"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;BasisOfStrengthSubstanceRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -189,6 +207,18 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
 				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTIR"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ReferenceStrength"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>active ingredient reference substance basis of strength</rdfs:label>
@@ -366,32 +396,6 @@
 		<skos:definition>set of controlled vocabularies and codes for reporting of medicinal product-related information specified in the ISO/TS 20443 guidelines</skos:definition>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-mprd;IngredientConstituency">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
-				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;IngredientRole"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductAsSubject"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>ingredient constituency</rdfs:label>
-		<skos:definition>situation in which a product incorporates some ingredient, potentially with a given strength, in some context</skos:definition>
-		<cmns-av:usageNote>From an implementation (mapping) perspective, this ingredient constituency class provides the basis for a blank node in the relationship &apos;product realizes ingredient role played by some substance&apos;, where the ingredient role may be that of an active ingredient which, in turn, may have some basis of strength in some context. The same situation could be used to link inactive ingredients to a product in which they are realized. A given product may include multiple active ingredients, each of which may have a different basis of strength.</cmns-av:usageNote>
-	</owl:Class>
-	
 	<owl:NamedIndividual rdf:about="&idmp-mprd;IngredientRole-ACTI">
 		<rdf:type rdf:resource="&idmp-mprd;IngredientRoleCode"/>
 		<rdfs:label>ingredient role - ACTI</rdfs:label>
@@ -466,15 +470,6 @@
 		<skos:note>This is for indexing purposes and to contribute to improving patient safety by allowing for the unique identification of medicinal products worldwide.</skos:note>
 		<cmns-av:abbreviation>IMPID</cmns-av:abbreviation>
 	</owl:Class>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;IsAdministeredIn">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isObjectRoleIn"/>
-		<rdfs:label>is administered in</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
-		<rdfs:range rdf:resource="&idmp-mprd;ClinicalTrial"/>
-		<owl:inverseOf rdf:resource="&idmp-mprd;managesAdministrationOf"/>
-		<skos:definition>indicates a clinical trial in which a given investigational medicinal product is administered</skos:definition>
-	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&idmp-mprd;ManufacturingAuthorization">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Authorization"/>
@@ -678,23 +673,23 @@
 		<cmns-av:synonym>strength (presentation)</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;ProductAsSubject">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductRole"/>
+	<owl:Class rdf:about="&idmp-mprd;ProductConstituency">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isSubjectRoleIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;IngredientConstituency"/>
+				<owl:onProperty rdf:resource="&cmns-pts;hasRole"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IngredientRole"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>product as subject</rdfs:label>
-		<skos:definition>functional role played by a pharmaceutical product that is the subject of an ingredient inclusion relationship</skos:definition>
-		<cmns-av:usageNote>From an implementation (mapping) perspective, this role provides a semantic &apos;hook&apos; for the subject of the relationship, to relate a substance to the complex relationship of &apos;substance realizes something (another substance or moiety)&apos;, where the &apos;something&apos; (i.e., the object in the substance situation) may have some basis of strength, for example, or another feature that applies in a specific context.</cmns-av:usageNote>
+		<rdfs:label>product constituency</rdfs:label>
+		<skos:definition>constituency that defines some product based on its relationship(s) to some other substance(s) (ingredient(s)), potentially with a given strength, in some context</skos:definition>
+		<cmns-av:usageNote>From an implementation (mapping) perspective, this product constituency class provides the basis for a (blank) node in the relationship &apos;product realizes ingredient role played by some substance&apos;, where the ingredient role may be that of an active ingredient which, in turn, may have some basis of strength in some context. The same product constituency could be used to link inactive ingredients to a product in which they are realized. A given product may include multiple active ingredients, each of which may have a different basis of strength.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ProductRole">
@@ -715,24 +710,6 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.72</dct:source>
 		<skos:definition>strength of an active substance(s) and/or specified substance(s) used as a reference from which the strength of an investigational or authorised medicinal product is described</skos:definition>
 		<skos:note>The strength of the active substance(s) and/or specified substance(s) shall be described as a quantity of the substance present in a given unit of the pharmaceutical product or manufactured item.</skos:note>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-mprd;ReferenceSubstanceRole">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;ReferenceStrength"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>reference substance role</rdfs:label>
-		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is used as the reference substance in the context of the target substance or product</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;RegistrationNumber">
@@ -891,17 +868,9 @@
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceSubstance">
 		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasBasisOfStrength"/>
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isPlayedBy"/>
 		<rdfs:label>has reference substance</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a substance in the role of an active ingredient in a pharmaceutical or medicinal product to a reference substance that is its underlying basis of strength</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceSubstanceRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasObjectRole"/>
-		<rdfs:label>has reference substance role</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-mprd;ReferenceSubstanceRole"/>
-		<skos:definition>relates the concept representing the contituents of a pharmaceutical or medicinal product to something in the role of reference substance that is its underlying basis of strength</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasSponsor">
@@ -925,6 +894,15 @@
 		<rdfs:label>is administered by</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<skos:definition>indicates a party, such as a clinician, that administers some medicinal product</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isObjectRoleIn"/>
+		<rdfs:label>is administered in</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
+		<rdfs:range rdf:resource="&idmp-mprd;ClinicalTrial"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;managesAdministrationOf"/>
+		<skos:definition>indicates a clinical trial in which a given investigational medicinal product is administered</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedBy">
