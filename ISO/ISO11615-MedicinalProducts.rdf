@@ -111,6 +111,13 @@
 	<owl:Class rdf:about="&idmp-sub;IngredientRole">
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Strength"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
 				<owl:onClass>
 					<owl:Restriction>
@@ -631,7 +638,8 @@
 				<owl:someValuesFrom>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-						<owl:someValuesFrom rdf:resource="&idmp-sub;IngredientRole"/>
+						<owl:onClass rdf:resource="&idmp-sub;IngredientRole"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 					</owl:Restriction>
 				</owl:someValuesFrom>
 			</owl:Restriction>
@@ -823,7 +831,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasActiveIngredientRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasObjectRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
 		<rdfs:label>has active ingredient role</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;ActiveIngredientRole"/>
 		<skos:definition>relates the concept representing the contituents of a pharmaceutical or medicinal product to something in the role of an active ingredient</skos:definition>
