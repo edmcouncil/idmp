@@ -1468,7 +1468,7 @@
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasMoiety"/>
 		<rdfs:label>has active moiety</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
@@ -1505,6 +1505,24 @@
 		<rdfs:range rdf:resource="&idmp-sub;ConformanceLevel"/>
 		<skos:definition>indicates whether a given class or element is mandatory, conditional, or optional with respect to a given substance type or specified substance group for reporting information per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasConstituentMoiety">
+		<rdfs:label>has constituent moiety</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&idmp-sub;hasMoietyRole">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-pts;isPlayedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a constituency directly to one of its moieties</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMoietyRole">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:label>has moiety role</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;MoietyRole"/>
+		<skos:definition>relates something to a role played by a moiety</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasMolecularFormula">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
@@ -1645,24 +1663,35 @@
 		<skos:definition>describes the nature of valid values for a given class or element in cases where that information is encoded as a string rather than as a value domain per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:ObjectProperty rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/idmp-sub;isMoietyOf">
+		<rdfs:label>is moiety of</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-pts;playsRole">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;isMoietyRoleIn">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a moiety directly to a constituency directly constituency it is part of</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isActiveMoietyOf">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isMoietyOf"/>
 		<rdfs:label>is active moiety of</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
 		<rdfs:domain rdf:resource="&idmp-sub;Moiety"/>
-		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
-		<skos:definition>relates a moiety to a substance for which it is the essential aspect, responsible for its pharmacological activity</skos:definition>
+		<rdfs:range rdf:resource="&idmp-sub;SubstanceConstituency"/>
+		<skos:definition>relates a moiety to a constituency defining a substance for which it is the essential aspect, responsible for its pharmacological activity</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-sub;isMoietyOf">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isConstituentOf"/>
-		<rdfs:label>is moiety of</rdfs:label>
+	<owl:ObjectProperty rdf:about="&idmp-sub;isMoietyRoleIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isRoleOf"/>
+		<rdfs:label>is moiety role in</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
-		<rdfs:domain rdf:resource="&idmp-sub;Moiety"/>
-		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
-		<skos:definition>relates a moiety to a substance that it is a constituent of</skos:definition>
+		<rdfs:domain rdf:resource="&idmp-sub;MoietyRole"/>
+		<rdfs:range rdf:resource="&idmp-sub;SubstanceConstituency"/>
+		<skos:definition>relates something in a moiety role (which may be a substance) to a constituency it is part of</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isParentSubstanceOf">
