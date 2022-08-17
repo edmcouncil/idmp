@@ -86,9 +86,20 @@
 	<owl:Class rdf:about="&cmns-pts;Constituency">
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:allValuesFrom rdf:resource="&owl;Thing"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:onClass rdf:resource="&cmns-col;Constituent"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:allValuesFrom rdf:resource="&cmns-col;Constituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasRole"/>
+				<owl:allValuesFrom rdf:resource="&cmns-pts;Role"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -96,19 +107,6 @@
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
 				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasRole"/>
-				<owl:onClass rdf:resource="&cmns-pts;Role"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom rdf:resource="&owl;Thing"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>constituency</rdfs:label>
@@ -404,6 +402,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;isObjectRoleIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isRoleIn"/>
 		<rdfs:label>is object role in</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Role"/>
 		<rdfs:range rdf:resource="&cmns-pts;Situation"/>
@@ -432,7 +431,15 @@
 		<skos:definition>relates a situation to something that is affected by, or is a secondary argument to in a specific role with respect to a given relation or situation</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-pts;isRoleIn">
+		<rdfs:label>is role in</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;Role"/>
+		<owl:inverseOf rdf:resource="&cmns-pts;hasRole"/>
+		<skos:definition>identifies an agreement, policy, regulation, situation, constituency or other arrangementinvolving the role</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-pts;isSubjectRoleIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isRoleIn"/>
 		<rdfs:label>is subject role in</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Role"/>
 		<rdfs:range rdf:resource="&cmns-pts;Situation"/>
