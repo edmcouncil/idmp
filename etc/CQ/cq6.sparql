@@ -1,0 +1,42 @@
+# Which investigational / authorized medicinal products contain the substance X or its active moiety Y or any other substance related to active moiety Y?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/> 
+prefix idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-ra:   <https://www.omg.org/spec/Commons/RegistrationAuthorities/> 
+prefix cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+prefix cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
+prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+
+SELECT distinct ?medicinalProduct ?productLabel ?substanceLabel from <http://localhost:3030/idmp/data/mvp> from <http://localhost:3030/idmp/data/iso>
+WHERE {
+  	#Find Medicinal Products that play a role of Authorized or Investigational Medicinal Products 
+  	?role cmns-pts:isPlayedBy ?medicinalProduct .
+  	{?role a idmp-mprd:AuthorizedMedicinalProduct} union {?role a idmp-mprd:InvestigationalMedicinalProduct} 
+	?medicinalProduct a idmp-mprd:MedicinalProduct .
+  	?medicinalProduct rdfs:label ?productLabel .
+  	?medicinalProduct cmns-col:comprises ?pharmaceuticalProduct .
+  	
+  	# Get substances of pharmaceutical product comprising the medicinal products
+  {	?pharmaceuticalProduct  cmns-col:comprises ?substanceAsIngredientRole .
+  	?substanceAsIngredientRole  cmns-pts:isPlayedBy ?substance .
+    ?substance rdfs:label <substance_x_label>
+    ?substance idmp-sub:hasActiveMoiety ?activeMoiety .
+    ?activeMoiety rdfs:label <active_moiety_y_label>
+  } 
+  union # Find Pharmaceutical Products that have the same active Moiety
+  { ?pharmaceuticalProduct  cmns-col:comprises ?substanceSharingMoietyAsIngredientRole .
+  	?substanceSharingMoietyAsIngredientRole  cmns-pts:isPlayedBy ?substanceSharingMoiety .
+    ?substanceSharingMoiety idmp-sub:hasActiveMoiety ?activeMoiety .
+  }
+  union  # Find Pharmaceutical Products that have the same active Moiety
+  {
+    ?pharmaceuticalProduct  cmns-col:comprises ?substanceSharingMoietyAsIngredientRole .
+  	?substanceRelatedToMoietyAsIngredientRole  cmns-pts:isPlayedBy ?substanceRelatedToMoiety .
+    ?substanceRelatedToMoiety cmns-col:isRelatedTo ?activeMoiety .
+  }
+}
