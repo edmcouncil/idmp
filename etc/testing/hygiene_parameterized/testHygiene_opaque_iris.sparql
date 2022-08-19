@@ -1,4 +1,5 @@
 prefix afn:   <http://jena.apache.org/ARQ/function#>
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 ##
 # banner We should avoid opaque IRIs
@@ -7,7 +8,10 @@ SELECT DISTINCT ?error ?resource
 WHERE 
 {
   ?resource ?property ?object.
+
   FILTER (REGEX(afn:localname(?resource), "(\\d\\d\\d\\d+$)|([^A-Za-z][A-Za-z][^A-Za-z])"))
   FILTER (REGEX(str(?resource), <HYGIENE_TESTS_FILTER_PARAMETER>))
+  FILTER NOT EXISTS {?resource rdf:type owl:NamedIndividual.}
+
   BIND (concat ("WARN: IRI ", STR(?resource), " may be opaque ") AS ?error)
 }
