@@ -138,10 +138,37 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;Ingredient"/>
+				<owl:onClass>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+						<owl:onClass rdf:resource="&idmp-sub;ManufacturedItem"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+					</owl:Restriction>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.28</dct:source>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onClass>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+						<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+					</owl:Restriction>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isAllergenic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.1.28 and 9.7, Figure 12</dct:source>
 		<skos:note>An ingredient is part of a medicinal product, either alone or in combination with other ingredients. The ingredient is also a component of a pharmaceutical product. Ingredient is equal to a substance with the indication of the specific role it is playing in the product.</skos:note>
 	</owl:Class>
 	
@@ -191,11 +218,16 @@
 	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientActiveMoietyBasisOfStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveMoietyRole"/>
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;BasisOfStrengthSubstanceRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
 				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTIM"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Strength"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>active ingredient active moiety basis of strength</rdfs:label>
@@ -207,11 +239,16 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientEntireSubstanceBasisOfStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;BasisOfStrengthSubstanceRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
 				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTIB"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Strength"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>active ingredient entire substance basis of strength</rdfs:label>
@@ -320,19 +357,6 @@
 		<skos:definition>party that delegates some role, authority, capability, or control to another party</skos:definition>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;BasisOfStrengthSubstanceRole">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;Strength"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>basis of strength role</rdfs:label>
-		<skos:definition>role played by a substance in another substance or pharmaceutical product, medication, or drug that is, the active ingredient or active moiety in a substance or drug that is used to establish the strength of the product</skos:definition>
-		<cmns-av:abbreviation>BOSS</cmns-av:abbreviation>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-mprd;ClinicalTrial">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
@@ -415,39 +439,6 @@
 		<skos:definition>set of controlled vocabularies and codes for reporting of medicinal product-related information specified in the ISO/TS 20443 guidelines</skos:definition>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-mprd;Ingredient">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:onClass rdf:resource="&idmp-sub;ManufacturedItem"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isAllergenic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;boolean"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;IngredientRole"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.7, Figure 12</dct:source>
-		<skos:note>An ingredient is part of a medicinal product, either alone or in combination with other ingredients. The ingredient is also a component of a pharmaceutical product. Ingredient is equal to a substance with the indication of the specific role it is playing in the product.</skos:note>
-	</owl:Class>
-	
 	<owl:NamedIndividual rdf:about="&idmp-mprd;IngredientRole-ACTI">
 		<rdf:type rdf:resource="&idmp-mprd;IngredientRoleCode"/>
 		<rdfs:label>ingredient role - ACTI</rdfs:label>
@@ -488,7 +479,7 @@
 		<rdf:type rdf:resource="&idmp-mprd;IngredientRoleCode"/>
 		<rdfs:label>ingredient role - ADJV</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
-		<skos:definition>code for an adjuvant, an ingredient(s) which augments or promotes the pharmacological effect of the active ingredient(s) without itself being considered active (typically used with vaccines.)</skos:definition>
+		<skos:definition>code for an adjuvant, an ingredient(s) which augments or promotes the pharmacological effect of the active ingredient(s) without itself being considered active (typically used with vaccines)</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO20443-CodeSet"/>
 		<cmns-txt:hasTextValue>ADJV</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -544,7 +535,7 @@
 		<rdf:type rdf:resource="&idmp-mprd;IngredientRoleCode"/>
 		<rdfs:label>ingredient role - IACT</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
-		<skos:definition>code for an inactive ingredient, i.e. ingredients added for a purpose other than the intended pharmacological action.</skos:definition>
+		<skos:definition>code for an inactive ingredient, i.e. ingredients added for a purpose other than the intended pharmacological action</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO20443-CodeSet"/>
 		<cmns-txt:hasTextValue>IACT</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
