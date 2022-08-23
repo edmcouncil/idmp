@@ -773,14 +773,8 @@
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-						<owl:onClass rdf:resource="&idmp-sub;IngredientRole"/>
-						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-					</owl:Restriction>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductConstituency"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product</rdfs:label>
@@ -1042,6 +1036,13 @@
 		<rdfs:label>has strength</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;Strength"/>
 		<skos:definition>indicates the strength of any element in a substance or pharmaceutical product</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasStrengthAsManufactured">
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasStrength"/>
+		<rdfs:label>has strength as manufactured</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;Strength"/>
+		<skos:definition>indicates the strength of any element in a substance or pharmaceutical product as manufactured</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredBy">
