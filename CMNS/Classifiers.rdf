@@ -30,8 +30,8 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220701/Classifiers/"/>
-		<skos:changeNote>https://www.omg.org/spec/Commons/20220501/Classifiers.rdf version of this ontology was modified to eliminate a double space in a note on ClassificationScheme (COMMONS-6) and loosen the constraints on the restriction on Classifier for property classifies (COMMONS-9).</skos:changeNote>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220801/Classifiers/"/>
+		<skos:changeNote>https://www.omg.org/spec/Commons/20220501/Classifiers.rdf version of this ontology was modified to eliminate a double space in a note on ClassificationScheme (COMMONS-6), loosen the constraints on the restriction on Classifier for property classifies (COMMONS-9), and add a boolean property allowing users to state that only one classifier from a particular scheme can be used to classify something (i.e., the classifiers in the scheme are mutually exclusive and only one can apply to the thing being classified).</skos:changeNote>
 		<skos:note>The classifiers ontology conforms with the OWL 2 DL semantics, and is outside of OWL 2 RL due to the inclusion of local some values and minimum cardinality constraints. These constraints could be removed as needed to support OWL RL rule-based applications that cannot be extended to support them.</skos:note>
 		<skos:note>This ontology was originally designed for use in the OMG Languages, Countries and Codes (LCC) specification as part of the broader CountryRepresentation ontology. The concepts have also been used in the Financial Industry Business Ontology (FIBO) for representing industry sectors, financial instrument classifiers (e.g., asset classes), lifecycle states, and so forth.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2014-2022 EDM Council, Inc.</cmns-av:copyright>
@@ -105,5 +105,13 @@
 		<owl:inverseOf rdf:resource="&cmns-cls;classifies"/>
 		<skos:definition>is systematically grouped based on characteristics by</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-cls;isExclusive">
+		<rdfs:label>is exclusive</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates that the classifiers in the scheme are all disjoint and that only one classifier may be used to classify something</skos:definition>
+		<cmns-av:usageNote>This does not exclude classification by other classifiers from other schemes. It is simply a hint to users that whatever is classified by a classifier in this scheme should be classified by at most one of the classifiers in the scheme.</cmns-av:usageNote>
+	</owl:DatatypeProperty>
 
 </rdf:RDF>
