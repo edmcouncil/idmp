@@ -773,14 +773,8 @@
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-						<owl:onClass rdf:resource="&idmp-sub;IngredientRole"/>
-						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-					</owl:Restriction>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductConstituency"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product</rdfs:label>
@@ -978,10 +972,10 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasActiveIngredientRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasIngredientRole"/>
 		<rdfs:label>has active ingredient role</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;ActiveIngredientRole"/>
-		<skos:definition>relates the concept representing the contituents of a pharmaceutical or medicinal product to something in the role of an active ingredient</skos:definition>
+		<skos:definition>relates the constituency representing the contituents of a pharmaceutical or medicinal product to something in the role of an active ingredient</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorization">
@@ -1012,6 +1006,19 @@
 		<rdfs:label>has basis of strength</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a pharmaceutical or medicinal product to a substance that is its basis of strength</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasBasisOfStrengthAsManufactured">
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasActiveIngredientRole"/>
+		<rdfs:label>has basis of strength as manufactured</rdfs:label>
+		<skos:definition>indicates the role of an active ingredient as the basis of strength of any substance or pharmaceutical product as manufactured</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasIngredientRole">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:label>has ingredient role</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;IngredientRole"/>
+		<skos:definition>relates the constituency representing the contituents of a pharmaceutical or medicinal product to something in the role of an ingredient</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceStrength">
