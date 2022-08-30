@@ -1,37 +1,56 @@
+# CQ 3: What are the products that contain substances with common active moiety <active moiety x>?
+
 # What are the products that contain substances with common active moiety <active moiety x>?
-
-#Short cut Method 
-prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
-prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
-prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
-
-SELECT distinct ?productUri ?productLabel 
-{
-	?productUri a idmp-mprd:PharmaceuticalProduct ;
-             rdfs:label ?productLabel ;
-             cmns-col:comprises ?substance .
-  	?substance rdfs:label ?substanceLabel ;
-              idmp-sub:hasActiveMoiety ?activeMoiety .
-  	?activeMoiety rdfs:label <<replace_with_label_for_active_moeity>> . #For example "amlodipine"
-}
-
-# Using the Product Constituancy
-prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
-prefix cmns-des:    <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
 prefix cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
 
-SELECT distinct ?productUri ?productLabel 
+
+SELECT distinct ?pharmaceutrialProduct ?pharmaceutrialProductLabel
 WHERE {
-  	?activeMoietyRoleType rdfs:subClassOf* idmp-sub:ActiveMoietyRole .
-	?activeMoietyRole a ?activeMoietyRoleType .
-  	?activeMoietyRole cmns-pts:isRealizedIn ?productConst .
-  	?productConst cmns-des:defines ?productUri .
-  	?productUri rdfs:label ?productLabel .
-  	?productUri a idmp-mprd:PharmaceuticalProduct .
-  	?activeMoietyRole cmns-pts:isPlayedBy ?activeMoiety .
-  	?activeMoiety rdfs:label <<replace_with_label_for_active_moeity>> . #for example "terlipressin"
+  	# Active Moiety to Substance via substance constituency
+  	?activeMoiety rdfs:label # moiety_label # .
+	?activeMoietyRole a idmp-sub:ActiveMoietyRole .
+    ?activeMoietyRole cmns-pts:isPlayedBy ?activeMoiety .
+  	?substancesConstituency cmns-pts:hasRole ?activeMoietyRole .
+  	?substancesConstituency cmns-dsg:defines ?substance .
+  
+  	# Substances to Pharmaceutial Products via ingredient roles and product constituency
+  	?ingredientRole cmns-pts:isPlayedBy ?substance .
+  	?ingredientRole cmns-pts:isRealizedIn ?productConstituency .
+  	?productConstituency cmns-dsg:defines ?pharmaceutrialProduct .
+  	?pharmaceutrialProduct rdfs:label ?pharmaceutrialProductLabel .
+
 }
+
+# What are the products that contain substances with common active moieties <active moiety x> or <active moiety y>
+prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+
+
+SELECT distinct ?pharmaceutrialProduct ?pharmaceutrialProductLabel
+WHERE {
+  	# Active Moiety to Substance via substance constituency
+  	?activeMoiety rdfs:label ?activeMoietyLabel. 
+	?activeMoietyRole a idmp-sub:ActiveMoietyRole .
+    ?activeMoietyRole cmns-pts:isPlayedBy ?activeMoiety .
+  	?substancesConstituency cmns-pts:hasRole ?activeMoietyRole .
+  	?substancesConstituency cmns-dsg:defines ?substance .
+  
+  	# Substances to Pharmaceutial Products via ingredient roles
+  	?ingredientRole cmns-pts:isPlayedBy ?substance .
+  	?ingredientRole cmns-pts:isRealizedIn ?productConstituency .
+  	?productConstituency cmns-dsg:defines ?pharmaceutrialProduct .
+  	?pharmaceutrialProduct rdfs:label ?pharmaceutrialProductLabel .
+
+  	# Use a Filter to search for multiple moieties.
+  	FILTER( ?activeMoietyLabel in (lcase("Amlodipine"),lcase("terlipressin")) ) .
+}
+
