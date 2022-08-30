@@ -45,7 +45,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220701/RegistrationAuthorities/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220801/RegistrationAuthorities/"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -238,8 +238,8 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;hasRegistrationAuthority">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>has registration authority</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<owl:inverseOf rdf:resource="&cmns-ra;isRegistrationAuthorityFor"/>
@@ -261,16 +261,16 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;isManagedBy">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>is managed by</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
 		<skos:definition>indicates the role of a party that directs the affairs or administration of something or someone</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;isRegisteredBy">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>is registered by</rdfs:label>
 		<rdfs:range>
 			<owl:Class>
@@ -286,21 +286,26 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;isRegisteredIn">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>is registered in</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-ra;Registry"/>
 		<skos:definition>indicates the registry that something is registered in</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-ra;isRegistrationAuthorityFor">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>is registration authority for</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<skos:definition>indicates something (typically an identifier or code) that the registration authority issues</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-ra;isRelatedTo">
+		<rdfs:label>is related to</rdfs:label>
+		<skos:definition>links something or someone to something or someone else</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-ra;manages">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isRelatedTo"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>manages</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
 		<owl:inverseOf rdf:resource="&cmns-ra;isManagedBy"/>

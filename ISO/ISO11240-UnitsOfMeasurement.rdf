@@ -63,33 +63,6 @@
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
-	<owl:Class rdf:about="&idmp-uom;CodeEntry">
-		<rdfs:subClassOf rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-uom;hasRegionCode"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-dtp;hasLanguageCode"/>
-				<owl:someValuesFrom rdf:resource="&lcc-lr;LanguageIdentifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>code entry</rdfs:label>
-		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.2</dct:source>
-		<skos:definition>unique identifier for the unit of measurement entry within the ISO lexicon</skos:definition>
-		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-uom;CodeSystemFullName">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;CodeSystemName"/>
 		<rdfs:subClassOf>
@@ -116,6 +89,33 @@
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.3 Code System, Table 3</dct:source>
 		<skos:definition>globally unique identifier for the code system</skos:definition>
 		<skos:note>Code System Identifier should take the form of an ISO Object Identifier (OID).</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;ISO11240LexiconCodeEntry">
+		<rdfs:subClassOf rdf:resource="&idmp-uom;UnitOfMeasureIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-txt;Text"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-uom;hasRegionCode"/>
+				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasLanguageCode"/>
+				<owl:someValuesFrom rdf:resource="&lcc-lr;LanguageIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ISO 11240 lexicon code entry</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 4.6.2.2</dct:source>
+		<skos:definition>unique identifier for the unit of measurement entry within the ISO lexicon</skos:definition>
+		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;UnitOfMeasureIdentificationScheme">
@@ -180,7 +180,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;UnitOfPresentation">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;Quantity"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
 		<rdfs:label>unit of presentation</rdfs:label>
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.34</dct:source>
 		<skos:definition>qualitative term describing the discrete countable entity in which a pharmaceutical product or manufactured item is presented, in cases where strength or quantity is expressed referring to one instance of this countable entity</skos:definition>
