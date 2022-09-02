@@ -17,3 +17,16 @@ WHERE {
              cmns-txt:hasTextValue ?evCode ;
              cmns-ra:isRegisteredIn idmp-ra:EuropeanMedicinesAgencyRegistrationAuthority
 }
+
+SELECT ?substance ?evCode
+WHERE {
+    ?type rdfs:subClassOf* idmp-sub:Substance .
+    ?substance rdf:type ?type;
+  
+  			rdfs:label "amlodipine" .
+?idType rdfs:subClassOf*  cmns-ra:RegisteredIdentifier.
+?identifier rdf:type  ?idType;
+             cmns-txt:hasTextValue ?evCode ;
+             cmns-ra:isRegisteredBy idmp-ra:AmericanChemicalSocietyRegistrationAuthority;
+	cmns-id:identifies ?substance
+}
