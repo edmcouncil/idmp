@@ -1,0 +1,59 @@
+# CQ 3: What are the products that contain substances with common active moiety <active moiety x>?
+# Intended to run on data from AmlodipineExample.rdf
+
+# What are the products that contain substances with common active moiety <active moiety x>?
+prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+
+
+SELECT distinct ?pharmaceutrialProduct ?pharmaceutrialProductLabel
+WHERE {
+  	# Active Moiety to Substance via substance constituency
+  	?activeMoiety rdfs:label "amlodipine".
+	?activeMoietyRole a idmp-sub:ActiveMoietyRole .
+    ?activeMoietyRole cmns-pts:isPlayedBy ?activeMoiety .
+  	?substancesConstituency cmns-pts:hasRole ?activeMoietyRole .
+  	?substancesConstituency cmns-dsg:defines ?substance .
+  
+  	# Substances to Pharmaceutial Products via ingredient roles and product constituency
+  	?ingredientRole cmns-pts:isPlayedBy ?substance .
+  	?ingredientRole cmns-pts:isRealizedIn ?productConstituency .
+  	?productConstituency cmns-dsg:defines ?pharmaceutrialProduct .
+  	?pharmaceutrialProduct rdfs:label ?pharmaceutrialProductLabel .
+
+}
+
+# What are the products that contain substances with common active moieties <active moiety x> or <active moiety y>
+# Intended to run on data from AmlodipineExample.rdf and TerlipressinExample.rdf
+
+prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+
+
+SELECT distinct ?pharmaceutrialProduct ?pharmaceutrialProductLabel
+WHERE {
+  	# Active Moiety to Substance via substance constituency
+  	?activeMoiety rdfs:label ?activeMoietyLabel. 
+	?activeMoietyRole a idmp-sub:ActiveMoietyRole .
+    ?activeMoietyRole cmns-pts:isPlayedBy ?activeMoiety .
+  	?substancesConstituency cmns-pts:hasRole ?activeMoietyRole .
+  	?substancesConstituency cmns-dsg:defines ?substance .
+  
+  	# Substances to Pharmaceutial Products via ingredient roles
+  	?ingredientRole cmns-pts:isPlayedBy ?substance .
+  	?ingredientRole cmns-pts:isRealizedIn ?productConstituency .
+  	?productConstituency cmns-dsg:defines ?pharmaceutrialProduct .
+  	?pharmaceutrialProduct rdfs:label ?pharmaceutrialProductLabel .
+
+  	# Use a Filter to search for multiple moieties.
+  	FILTER( ?activeMoietyLabel in (lcase("Amlodipine"),lcase("terlipressin")) ) .
+}
+

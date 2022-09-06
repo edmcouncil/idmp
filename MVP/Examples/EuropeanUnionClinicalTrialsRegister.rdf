@@ -8,6 +8,7 @@
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY idmp-amp "https://spec.pistoiaalliance.org/idmp/ontology/MVP/Examples/AmlodipineExample/">
 	<!ENTITY idmp-chg "https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/">
 	<!ENTITY idmp-euctr "https://spec.pistoiaalliance.org/idmp/ontology/MVP/Examples/EuropeanUnionClinicalTrialsRegister/">
 	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
@@ -19,6 +20,7 @@
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
 	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY tex "https://spec.pistoiaalliance.org/idmp/ontology/MVP/20220801/Examples/TerlipressinExample/">
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/MVP/Examples/EuropeanUnionClinicalTrialsRegister/"
@@ -30,6 +32,7 @@
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:idmp-amp="https://spec.pistoiaalliance.org/idmp/ontology/MVP/Examples/AmlodipineExample/"
 	xmlns:idmp-chg="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"
 	xmlns:idmp-euctr="https://spec.pistoiaalliance.org/idmp/ontology/MVP/Examples/EuropeanUnionClinicalTrialsRegister/"
 	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
@@ -41,6 +44,7 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:tex="https://spec.pistoiaalliance.org/idmp/ontology/MVP/20220801/Examples/TerlipressinExample/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	
 	<owl:Ontology rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/MVP/Examples/EuropeanUnionClinicalTrialsRegister/">
@@ -51,6 +55,8 @@
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/MVP/20220801/Examples/AmlodipineExample/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/MVP/20220801/Examples/TerlipressinExample/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
@@ -86,6 +92,28 @@
 		<rdfs:label>hepatitis B surface antigen</rdfs:label>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerGmbH">
+		<rdf:type rdf:resource="&cmns-pts;Party"/>
+		<rdfs:label>Pfizer GmbH</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;Aliskiren">
+		<rdf:type rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+		<rdfs:label>aliskiren</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;AliskirenAsInvestigationalMedicinalProduct">
+		<rdf:type rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
+		<rdfs:label>aliskiren as investigational medicinal product</rdfs:label>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-euctr;AliskirenMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;AliskirenMedicinalProduct">
+		<rdf:type rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:label>aliskiren medicinal product</rdfs:label>
+		<cmns-col:comprises rdf:resource="&idmp-euctr;Aliskiren"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-euctr;AluminumHydroxideAsActiveIngredientRole">
 		<rdf:type rdf:resource="&idmp-sub;ActiveIngredientRole"/>
 		<rdfs:label>aluminum hydroxide in a role as an active ingredient</rdfs:label>
@@ -96,6 +124,15 @@
 		<rdf:type rdf:resource="&idmp-sub;ActiveIngredientRole"/>
 		<rdfs:label>Aluminum Phosphate in a role as an active ingredient</rdfs:label>
 		<cmns-pts:isPlayedBy rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/beaecfe8-eccb-44ab-b842-ae2cc60ff3e4"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;ClinicalTrialAuthorization-2004-002410-11">
+		<rdf:type rdf:resource="&idmp-mprd;ClinicalTrialAuthorization"/>
+		<rdfs:label>clinical trial authorization 2004-002410-11</rdfs:label>
+		<idmp-mprd:hasAuthorizedParty rdf:resource="&idmp-euctr;NovartisPharmaServicesAGAuthorizedParty"/>
+		<idmp-mprd:hasAuthorizingParty rdf:resource="&idmp-ra;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency"/>
+		<cmns-cxtdsg:appliesTo rdf:resource="https://www.clinicaltrialsregister.eu/ctr-search/trial/2004-002410-11/DE"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Germany"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-euctr;ClinicalTrialAuthorization-2010-022372-31">
@@ -160,6 +197,13 @@
 		<rdfs:label>Engerix B PP</rdfs:label>
 		<cmns-col:comprises rdf:resource="&idmp-euctr;AluminumHydroxideAsActiveIngredientRole"/>
 		<cmns-col:comprises rdf:resource="&idmp-euctr;HepatitisBSurfaceAntigenAsActiveIngredient"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;EudraClinicalTrialsNumber-2004-002410-11">
+		<rdf:type rdf:resource="&idmp-ra;EudraClinicalTrialsNumber"/>
+		<rdfs:label>Eudra clinical trials number 2004-002410-11</rdfs:label>
+		<cmns-id:identifies rdf:resource="https://www.clinicaltrialsregister.eu/ctr-search/trial/2004-002410-11/DE"/>
+		<cmns-txt:hasTextValue>2004-002410-11</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-euctr;EudraClinicalTrialsNumber-2010-022372-31">
@@ -257,6 +301,45 @@
 		<cmns-pts:isPlayedBy rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/c9925b82-5d36-4e00-b54d-d3b7189625de"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;NorvascAsAuthorizedMedicinalProduct">
+		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
+		<rdfs:label>Norvasc as authorized medicinal product</rdfs:label>
+		<idmp-mprd:hasAuthorization rdf:resource="&idmp-euctr;NorvascMarketingAuthorizationInGermany"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;NorvascAsInvestigationalMedicinalProduct">
+		<rdf:type rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
+		<rdfs:label>Norvasc as investigational medicinal product</rdfs:label>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;NorvascMarketingAuthorizationInGermany">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<rdfs:label>Norvasc Market Authorization in Germany</rdfs:label>
+		<idmp-mprd:hasAuthorizedParty rdf:resource="&idmp-euctr;PfizerGmbHAsMarketingAuthorizationHolder"/>
+		<idmp-mprd:hasAuthorizingParty rdf:resource="&idmp-ra;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency"/>
+		<cmns-cxtdsg:appliesTo rdf:resource="&idmp-euctr;NorvascAsAuthorizedMedicinalProduct"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Germany"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;NovartisPharmaServicesAG">
+		<rdf:type rdf:resource="&cmns-pts;Party"/>
+		<rdfs:label>Novartis Pharma Services AG</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;NovartisPharmaServicesAGAuthorizedParty">
+		<rdf:type rdf:resource="&idmp-mprd;AuthorizedParty"/>
+		<rdfs:label>Novartis Pharma Services AG As Authorized Party</rdfs:label>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-euctr;NovartisPharmaServicesAG"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-euctr;PfizerGmbHAsMarketingAuthorizationHolder">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorizationHolder"/>
+		<rdfs:label>Pfizer GmbH as Market Authorization Holder</rdfs:label>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-euctr;PfizerGmbH"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-euctr;SheffieldTeachingHospitalsNHSFoundation">
 		<rdf:type rdf:resource="&cmns-pts;Party"/>
 		<rdfs:label>Sheffield Teaching Hospitals NHS Foundation Trust</rdfs:label>
@@ -266,6 +349,13 @@
 		<rdf:type rdf:resource="&idmp-mprd;AuthorizedParty"/>
 		<rdfs:label>Sheffield Teaching Hospitals NHS Foundation Trust As Authorized Party</rdfs:label>
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-euctr;SheffieldTeachingHospitalsNHSFoundation"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://www.clinicaltrialsregister.eu/ctr-search/trial/2004-002410-11/DE">
+		<rdf:type rdf:resource="&idmp-mprd;ClinicalTrial"/>
+		<rdfs:label>A double-blind, randomized, multicenter 8 weeks study to evaluate the efficacy and safety of of valsartan / amlodipine combination based therapy versus amlodipine monotherapy based therapy in patients with stage II hypertension</rdfs:label>
+		<idmp-mprd:managesAdministrationOf rdf:resource="&idmp-euctr;AliskirenAsInvestigationalMedicinalProduct"/>
+		<idmp-mprd:managesAdministrationOf rdf:resource="&idmp-euctr;NorvascAsInvestigationalMedicinalProduct"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="https://www.clinicaltrialsregister.eu/ctr-search/trial/2010-022372-31/DE">
