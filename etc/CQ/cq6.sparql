@@ -14,7 +14,7 @@ prefix cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
 prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 
 SELECT distinct ?medicinalProduct ?medicinalProductLabel ?roleLabel
-from <http://localhost:3030/idmp/data/mvp> from <http://localhost:3030/idmp/data/iso>
+
 WHERE {
   	#Find Medicinal Products that play a role of Authorized or Investigational Medicinal Products 
   	?role cmns-pts:isPlayedBy ?medicinalProduct .
@@ -29,11 +29,11 @@ WHERE {
   	?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
  	  ?substanceInIngredientRole cmns-pts:isRealizedIn ?productConstituency .
   	?substanceInIngredientRole cmns-pts:isPlayedBy ?substance .
-  	?substance rdfs:label "amlodipine besylate" .
+  	?substance rdfs:label #substance x label# .
   	
   	# Find substance X's activeMoiety Y
   	?substance idmp-sub:hasActiveMoiety ?activeMoiety .
-  	?activeMoiety rdfs:label "amlodipine" .
+  	?activeMoiety rdfs:label # active moiety y label #.
 	}
     # Find other medicinal products that contain substances with active moiety Y
     union {
