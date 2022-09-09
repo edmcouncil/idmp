@@ -41,7 +41,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220701/QuantitiesAndUnits/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220901/QuantitiesAndUnits/"/>
 		<cmns-av:copyright>Copyright (c) 2011-2022 Thematix Partners LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</cmns-av:copyright>
@@ -848,6 +848,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasDimension">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has dimension</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;QuantityKind"/>
 		<rdfs:range rdf:resource="&cmns-qtu;QuantityDimension"/>
@@ -965,6 +966,15 @@
 		<rdfs:label>is derived from</rdfs:label>
 		<skos:definition>indicates something from which the subject is obtained or determined</skos:definition>
 		<skos:example>a derived quantity is derived from a base quantity; a derived unit is derived from a base unit</skos:example>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;isDimensionOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;classifies"/>
+		<rdfs:label>is dimension of</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-qtu;QuantityDimension"/>
+		<rdfs:range rdf:resource="&cmns-qtu;QuantityKind"/>
+		<owl:inverseOf rdf:resource="&cmns-qtu;hasDimension"/>
+		<skos:definition>indicates a measurable extent associated with a given quantity kind in some system of quantities, which may be derived, depending on the choice of base quantity</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMaximumInclusive">
