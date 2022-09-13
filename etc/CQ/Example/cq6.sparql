@@ -41,7 +41,7 @@ WHERE {
   		?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
     	?substanceSharingMoietyInIngredientRole cmns-pts:isRealizedIn ?otherProductConstituency .
   		?substanceSharingMoietyInIngredientRole cmns-pts:isPlayedBy ?substanceSharingMoiety .
-      # Link the other substances through the hasActiveMoiety ?activeMoiety ( in this case amlopidine )
+      	# Link the other substances through the hasActiveMoiety ?activeMoiety ( in this case amlopidine )
     	?substanceSharingMoiety  idmp-sub:hasActiveMoiety ?activeMoiety .
     }
     # Find other medicinal products that have substances related to active Moiety Y
@@ -50,8 +50,8 @@ WHERE {
   		?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
     	?substanceSharingMoietyInIngredientRole cmns-pts:isRealizedIn ?otherProductConstituency .
   		?substanceSharingMoietyInIngredientRole cmns-pts:isPlayedBy ?substanceSharingMoiety .
-      # Link the other substances through isRelatedTo property or subproperties.
-      ?relatedToProperty rdfs:subPropertyOf* cmns-col:isRelatedTo .
+      	# Link the other substances through isRelatedTo property or subproperties.
+      	?relatedToProperty rdfs:subPropertyOf* cmns-col:isRelatedTo .
     	?substanceSharingMoiety  ?relatedToProperty ?activeMoiety .
     }
 }
