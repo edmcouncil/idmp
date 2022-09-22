@@ -1,4 +1,5 @@
 # CQ 3: What are the products that contain substances with common active moiety <active moiety x>?
+# Intended to run on data from AmlodipineExample.rdf
 
 # What are the products that contain substances with common active moiety <active moiety x>?
 prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
@@ -11,8 +12,11 @@ prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT distinct ?pharmaceutrialProduct ?pharmaceutrialProductLabel
 WHERE {
+	# Bind the name we want into a variable 
+	BIND("<substance y>" AS ?activeMoietyLabel )
+
   	# Active Moiety to Substance via substance constituency
-  	?activeMoiety rdfs:label # moiety_label # .
+  	?activeMoiety rdfs:label ?activeMoietyLabel .
 	?activeMoietyRole a idmp-sub:ActiveMoietyRole .
     ?activeMoietyRole cmns-pts:isPlayedBy ?activeMoiety .
   	?substancesConstituency cmns-pts:hasRole ?activeMoietyRole .
@@ -27,6 +31,8 @@ WHERE {
 }
 
 # What are the products that contain substances with common active moieties <active moiety x> or <active moiety y>
+# Intended to run on data from AmlodipineExample.rdf and TerlipressinExample.rdf
+
 prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
 prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
 prefix cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
@@ -51,6 +57,6 @@ WHERE {
   	?pharmaceutrialProduct rdfs:label ?pharmaceutrialProductLabel .
 
   	# Use a Filter to search for multiple moieties.
-  	FILTER( ?activeMoietyLabel in (# moiety_label 1 #,# moiety_label 2 #, # moiety_label N # ) .
+  	FILTER( ?activeMoietyLabel in ("amlodipine","terlipressin") ) .
 }
 

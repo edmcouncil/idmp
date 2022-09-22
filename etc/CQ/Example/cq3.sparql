@@ -12,8 +12,11 @@ prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT distinct ?pharmaceutrialProduct ?pharmaceutrialProductLabel
 WHERE {
+	# Bind the name we want into a variable 
+	BIND("amlodipine" AS ?activeMoietyLabel )
+
   	# Active Moiety to Substance via substance constituency
-  	?activeMoiety rdfs:label "amlodipine".
+  	?activeMoiety rdfs:label ?activeMoietyLabel .
 	?activeMoietyRole a idmp-sub:ActiveMoietyRole .
     ?activeMoietyRole cmns-pts:isPlayedBy ?activeMoiety .
   	?substancesConstituency cmns-pts:hasRole ?activeMoietyRole .

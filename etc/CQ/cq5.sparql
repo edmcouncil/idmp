@@ -1,5 +1,4 @@
 # CQ 5: In which clinical trials were the registered products administered
-# Intended for running on AmlodipineExample and EuorpeanUnionClinicalTrialsREgister.rdf data
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/> 
@@ -15,6 +14,9 @@ prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 SELECT distinct ?clinical_Trial ?trial_Name ?eudraCT_Number ?authorizedParty ?authorized_By ?trial_jurisdiction
 
 WHERE {
+  # Bind the name we want into a variable 
+	BIND("<Medicinal Product>" AS ?medicinalProductLabel )
+  
   #Find the Marketing Authorization for the Medicinal Product through Authorized Medicinal Product role
   ?marketingAuthorization a idmp-mprd:MarketingAuthorization ;
             cmns-cxtdsg:appliesTo ?authorizedMedicinalProduct .
@@ -25,7 +27,7 @@ WHERE {
   ?authorizedMedicinalProduct cmns-pts:isPlayedBy ?medicinalProduct .
   
   # Use the label of the Authorized Medicinal Product
-  ?medicinalProduct rdfs:label #product label here# .
+  ?medicinalProduct rdfs:label ?medicinalProductLabel .
   
   # Find clinical trials that manages the administration of Investigational Medicinal Product from above
   ?clinical_Trial a idmp-mprd:ClinicalTrial ;

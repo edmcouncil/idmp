@@ -3,6 +3,7 @@
 prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 select distinct ?substanceUri ?substanceType ?substanceLabel
 
@@ -13,10 +14,10 @@ where {
   	# Need to find all substances that are Substances or it's subclasses
   	?substanceType rdfs:subClassOf* idmp-sub:Substance .
 	  ?substanceUri a ?substanceType .
-  	?substanceUri rdfs:label ?substanceLabel .
+  	?substanceUri skos:prefLabel ?substanceLabel .
   	
   	# Link the substance to the active moiety we are looking for via its label.  
   	# Note that rdfs:labels are all lower case by convention and IDMP Ontology standards.
   	?substanceUri idmp-sub:hasActiveMoiety ?activeMoiety .
-  	?activeMoiety rdfs:label ?ActiveMoietyLabel .
+  	?activeMoiety skos:prefLabel ?activeMoietyLabel .
 }

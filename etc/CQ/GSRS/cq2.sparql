@@ -7,15 +7,16 @@ prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 select distinct ?activeMoiety ?activeMoietyLabel
 
 where {
+
 	# Bind the name we want into a variable 
-	BIND("<substance y>" AS ?substanceLabel )
+	BIND("<substance x>" AS ?substanceLabel )
 
   	# Find a substance or subclass of substance
   	?substanceType rdfs:subClassOf* idmp-sub:Substance .
 	?substanceUri a ?substanceType .
 
     # With a label for substance y
-  	?substanceUri rdfs:label ?substanceLabel .
+  	?substanceUri rdfs:label ?substanceLabel . 
   	
   	# Link the substance to the active moiety
   	?substanceUri idmp-sub:hasActiveMoiety ?activeMoiety .
