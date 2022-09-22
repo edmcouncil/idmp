@@ -12,12 +12,15 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT ?substance ?evCode
 
 WHERE {
+    # Bind the name we want into a variable 
+    BIND("<substance x>" AS ?substanceLabel )
+
     # Find the substance that is a substance or a subclass of susbtance:
     ?type rdfs:subClassOf* idmp-sub:Substance .
     ?substance rdf:type ?type;
 
     # has a label that we are looking for
-    skos:prefLabel "AMLODIPINE" .
+    rdfs:label ?substanceLabel .
 
     # Find the Registered Identifier or a subclass of registered identifier:
     ?idType rdfs:subClassOf*  cmns-ra:RegisteredIdentifier.

@@ -11,6 +11,9 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT distinct ?manufacturedItem ?manufacturedItemLabel
 
 WHERE {
+	# Bind the name we want into a variable 
+	BIND("terlipressin acetate" AS ?substanceLabel )
+
   	# Find Manufactured Items
 	?manufacturedItemType rdfs:subClassOf* idmp-sub:ManufacturedItem .
   	?manufacturedItem rdf:type ?manufacturedItemType .
@@ -25,5 +28,5 @@ WHERE {
   	
   	# Substance in that Role of active ingredient
   	?substanceInActiveIngredientRole cmns-pts:isPlayedBy ?substance .
-  	?substance rdfs:label  "terlipressin acetate" .
+  	?substance rdfs:label  ?substanceLabel .
 }

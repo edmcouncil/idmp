@@ -1,4 +1,4 @@
-# Which investigational / authorized medicinal products contain the substance X or its active moiety Y or any other substance related to active moiety Y?
+# CQ 6: Which investigational / authorized medicinal products contain the substance X or its active moiety Y or any other substance related to active moiety Y?
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/> 
@@ -16,6 +16,12 @@ prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 SELECT distinct ?medicinalProduct ?medicinalProductLabel ?roleLabel
 
 WHERE {
+	# Bind the name we want into a variable 
+	BIND("amlodipine besylate" AS ?substanceLabel )
+
+	# Bind the name we want into a variable 
+	BIND("amlodipine" AS ?activeMoietyLabel )
+
   	#Find Medicinal Products that play a role of Authorized or Investigational Medicinal Products 
   	?role cmns-pts:isPlayedBy ?medicinalProduct .
   	?role rdfs:label ?roleLabel .
@@ -29,11 +35,11 @@ WHERE {
   	?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
  	  ?substanceInIngredientRole cmns-pts:isRealizedIn ?productConstituency .
   	?substanceInIngredientRole cmns-pts:isPlayedBy ?substance .
-  	?substance rdfs:label "amlodipine besylate" .
+  	?substance rdfs:label ?substanceLabel .
   	
   	# Find substance X's activeMoiety Y
   	?substance idmp-sub:hasActiveMoiety ?activeMoiety .
-  	?activeMoiety rdfs:label "amlodipine" .
+  	?activeMoiety rdfs:label ?activeMoietyLabel .
 	}
     # Find other medicinal products that contain substances with active moiety Y
     union {

@@ -11,12 +11,15 @@ prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?substance ?casNumber
 WHERE {
+	# Bind the name we want into a variable 
+	BIND("amlodipine" AS ?substanceLabel )
+
     # Find the substance that is a substance or a subclass of susbtance:
     ?type rdfs:subClassOf* idmp-sub:Substance .
     ?substance rdf:type ?type;
    
-        # has a label that we are looking for
-        rdfs:label "amlodipine" .
+    # has a label that we are looking for
+    rdfs:label ?substanceLabel .
 
     # Find the Registered Identifier or a subclass of registered identifier:
     ?idType rdfs:subClassOf*  cmns-ra:RegisteredIdentifier.

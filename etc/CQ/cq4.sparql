@@ -1,4 +1,5 @@
-# CQ 4: Which EV code (future SMS code) does the substance <substance> have?
+# CQ 4: Which CAS Number does the substance <substance> have?
+# Intended to run on data from AmlodipineExample.rdf
 
 PREFIX cmns-id: 	<https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -8,14 +9,17 @@ prefix idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Reg
 prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
 
-SELECT ?substance ?evCode
+SELECT ?substance ?casNumber
 WHERE {
+	# Bind the name we want into a variable 
+	BIND("<substance>" AS ?substanceLabel )
+
     # Find the substance that is a substance or a subclass of susbtance:
     ?type rdfs:subClassOf* idmp-sub:Substance .
     ?substance rdf:type ?type;
-
+   
     # has a label that we are looking for
-    skos:prefLabel #Substance Label# .
+    rdfs:label ?substanceLabel .
 
     # Find the Registered Identifier or a subclass of registered identifier:
     ?idType rdfs:subClassOf*  cmns-ra:RegisteredIdentifier.
@@ -24,9 +28,10 @@ WHERE {
         # Identifies the substance
         cmns-id:identifies ?substance ;
 
-        # has a code
-        cmns-txt:hasTextValue ?evCode ;
-  
-        # Registered in the EMA
-        cmns-ra:isRegisteredIn idmp-ra:EuropeanMedicinesAgencyRegistrationAuthority .
+        # has text value for the CAS Number
+        cmns-txt:hasTextValue ?casNumber ;
+
+        # Registered By American Chemical Society
+        cmns-ra:isRegisteredBy idmp-ra:AmericanChemicalSocietyRegistrationAuthority;
+	
 }
