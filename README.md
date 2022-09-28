@@ -17,3 +17,6 @@ The final deliverable will provide a solution agnotistic technology for the data
 
 
 More information about the development of this ontology can be found on [our wiki](https://wiki.edmcouncil.org/display/IDMP/Pistoia+Alliance+IDMP+Ontology+-+Phase+1+Home) and on the [Pistoia Alliance website](https://www.pistoiaalliance.org/projects/current-projects/idmp-ontology/).
+
+
+<img src="https://user-images.githubusercontent.com/11171688/192773467-149d843f-9af5-46cf-a2e0-6b83e59d085f.jpeg" width="100" align="left"/> <img src="https://user-images.githubusercontent.com/11171688/192774202-0eb58047-f222-4ce4-af6e-66bce64832ae.png" width="100" align="right"/>
