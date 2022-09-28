@@ -1,0 +1,99 @@
+PREFIX iter: <http://w3id.org/sparql-generate/iter/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX idmp: <https://purl.iso.org/idmp/>
+PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
+PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
+
+GENERATE { 
+
+    #TEMP FIXES to be included in ontology development
+    idmp-ra:EPACompTox rdfs:label "EPA CompTox" .
+    idmp-sub:hasInhibitorTarget rdfs:label "has inhibitor target" .
+
+    # Ontology
+    <https://data.pistoiaalliance.org/idmp/gsrs> a owl:Ontology ;
+        rdfs:label "GSRS Public Data" ;
+        owl:imports <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/> ;
+    .
+
+    # Substance
+    ?Substance a ?SubstanceType ;
+        idmp-sub:hasStructure ?MolecularStructure ;
+        cmns-txt:hasTextValue ?approvalID ;
+    .
+
+    #Molecular Structure
+    ?MolecularStructure a idmp-sub:MolecularStructure ;
+        idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification ?structureSmilesString ;
+        idmp-sub:hasMolecularFormula ?structureFormula ;
+        ?hasMolecularFormulaByMoietyProperty ?structureFormula ;
+        idmp-sub:hasStereochemistry ?Stereochemistry ;
+        idmp-sub:hasMolecularWeight ?structureMolecularWeight ;
+        .
+}
+SOURCE <gsrs-public-data-iteration.json> AS ?source
+
+# General Substance Info + Molecular Structure
+ITERATOR iter:JSONSurfer(?source,
+    "$[*]",
+    "$.approvalID",
+    "$.substanceClass",
+    "$.structure.id",
+    "$.structure.smiles",
+    "$.structure.formula",
+    "$.structure.stereochemistry",
+    "$.structure.mwt"
+    ) AS
+
+?I1 
+?approvalID 
+?substanceClass
+?structureID
+?structureSmilesString
+?structureFormula
+?structureStereochemistry
+?structureMolecularWeight
+
+BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
+BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }> AS ?MolecularStructure )
+
+BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
+
+BIND(
+    IF(str(?substanceClass) = "chemical", idmp-sub:ChemicalSubstance , 
+    IF(str(?substanceClass) = "protein", idmp-sub:ProteinSubstance ,
+    IF(str(?substanceClass) = "nucleicAcid", idmp-sub:NucleicAcidSubstance , 
+    IF(str(?substanceClass) = "mixture", idmp-sub:Mixture ,
+    IF(str(?substanceClass) = "polymer", idmp-sub:PolymerSubstance ,
+    IF(str(?substanceClass) = "structurallyDiverse", idmp-sub:StructurallyDiverseSubstance ,
+    IF(str(?substanceClass) = "specifiedSubstance", idmp-sub:SpecifiedSubstance ,
+    idmp-sub:Substance )))))))
+    AS ?SubstanceType)
+
+BIND(
+    IF(str(?structureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
+    IF(str(?structureStereochemistry) = "ACHIRAL", idmp-sub:Stereochemistry-Achiral ,
+    IF(str(?structureStereochemistry) = "AXIAL", idmp-sub:Stereochemistry-Axial ,
+    IF(str(?structureStereochemistry) = "AXIAL R", idmp-sub:Stereochemistry-AxialR ,
+    IF(str(?structureStereochemistry) = "AXIAL S", idmp-sub:Stereochemistry-AxialS ,
+    IF(str(?structureStereochemistry) = "CHIRAL", idmp-sub:Stereochemistry-Chiral ,
+    IF(str(?structureStereochemistry) = "CIS", idmp-sub:Stereochemistry-Cis ,
+    IF(str(?structureStereochemistry) = "EPIMERIC", idmp-sub:Stereochemistry-Epimeric ,
+    IF(str(?structureStereochemistry) = "MESO", idmp-sub:Stereochemistry-Meso ,
+    IF(str(?structureStereochemistry) = "MIXED", idmp-sub:Stereochemistry-Mixed ,
+    IF(str(?structureStereochemistry) = "OCTAHEDRAL 12", idmp-sub:Stereochemistry-Octahedral12 ,
+    IF(str(?structureStereochemistry) = "OCTAHEDRAL 22", idmp-sub:Stereochemistry-Octahedral22 ,
+    IF(str(?structureStereochemistry) = "OCTAHEDRAL 21", idmp-sub:Stereochemistry-Octahedral21 ,
+    IF(str(?structureStereochemistry) = "RACEMIC", idmp-sub:Stereochemistry-Racemic ,
+    IF(str(?structureStereochemistry) = "SQUARE PLANAR 1", idmp-sub:Stereochemistry-SquarePlanar1 ,
+    IF(str(?structureStereochemistry) = "SQUARE PLANAR 2", idmp-sub:Stereochemistry-SquarePlanar2 ,
+    IF(str(?structureStereochemistry) = "SQUARE PLANAR 3", idmp-sub:Stereochemistry-SquarePlanar3 ,
+    IF(str(?structureStereochemistry) = "SQUARE PLANAR 4", idmp-sub:Stereochemistry-SquarePlanar4 ,
+    IF(str(?structureStereochemistry) = "TETRAHEDRAL", idmp-sub:Stereochemistry-Tetrahedral ,
+    IF(str(?structureStereochemistry) = "TRANS", idmp-sub:Stereochemistry-Trans ,
+    IF(str(?structureStereochemistry) = "UNKNOWN", idmp-sub:Stereochemistry-Unknown ,
+    ?structureStereochemistry )))))))))))))))))))))
+    AS ?Stereochemistry)
