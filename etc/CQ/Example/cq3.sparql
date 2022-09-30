@@ -10,7 +10,7 @@ prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
 
 
-SELECT distinct ?pharmaceutrialProduct ?pharmaceutrialProductLabel
+SELECT distinct ?pharmaceuticalProduct ?pharmaceuticalProductLabel
 WHERE {
 	# Bind the name we want into a variable 
 	BIND("amlodipine" AS ?activeMoietyLabel )
@@ -25,8 +25,8 @@ WHERE {
   	# Substances to Pharmaceutial Products via ingredient roles and product constituency
   	?ingredientRole cmns-pts:isPlayedBy ?substance .
   	?ingredientRole cmns-pts:isRealizedIn ?productConstituency .
-  	?productConstituency cmns-dsg:defines ?pharmaceutrialProduct .
-  	?pharmaceutrialProduct rdfs:label ?pharmaceutrialProductLabel .
+  	?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
+  	?pharmaceuticalProduct rdfs:label ?pharmaceuticalProductLabel .
 
 }
 
@@ -41,7 +41,7 @@ prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
 
 
-SELECT distinct ?pharmaceutrialProduct ?pharmaceutrialProductLabel
+SELECT distinct ?pharmaceuticalProduct ?pharmaceuticalProductLabel
 WHERE {
   	# Active Moiety to Substance via substance constituency
   	?activeMoiety rdfs:label ?activeMoietyLabel. 
@@ -53,8 +53,8 @@ WHERE {
   	# Substances to Pharmaceutial Products via ingredient roles
   	?ingredientRole cmns-pts:isPlayedBy ?substance .
   	?ingredientRole cmns-pts:isRealizedIn ?productConstituency .
-  	?productConstituency cmns-dsg:defines ?pharmaceutrialProduct .
-  	?pharmaceutrialProduct rdfs:label ?pharmaceutrialProductLabel .
+  	?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
+  	?pharmaceuticalProduct rdfs:label ?pharmaceuticalProductLabel .
 
   	# Use a Filter to search for multiple moieties.
   	FILTER( ?activeMoietyLabel in ("amlodipine","terlipressin") ) .
