@@ -1,0 +1,41 @@
+# CQ03.1: What is the basis of strength for <substance x> in <product y>?
+
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix idmp-ucum: 	<https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+prefix cmns-qtu: <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
+
+SELECT distinct ?referenceSubstance ?referenceSubstanceLabel ?referenceStrengthString
+
+WHERE {
+    BIND("Norvasc" AS ?productLabel )
+    BIND("amlodipine mesylate monohydrate" AS ?substanceLabel )
+  
+  	# Start with the pharmaceutical product and link to its active ingredient from the product constituency
+  	?pharmaceuticalProduct rdfs:label ?productLabel .
+  	?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
+	?productConstituency idmp-mprd:hasActiveIngredientRole ?activeIngredient .
+  
+  	# Get the reference substance and strength from the active ingredient
+  	?activeIngredient idmp-mprd:hasReferenceSubstance ?referenceSubstance .
+  	?referenceSubstance rdfs:label ?referenceSubstanceLabel .
+  
+  	# Get the Numerator and Demoniator information from the reference strength
+  	?activeIngredient idmp-mprd:hasReferenceStrength ?referenceStrength .
+  	?referenceStrength cmns-qtu:hasDenominator ?strengthDemoniator .
+  	?strengthDemoniator cmns-qtu:hasNumericValue ?strengthDemoniatorValue .
+  	?strengthDemoniator cmns-qtu:hasMeasurementUnit ?strengthDemoniatorUnit .
+    ?referenceStrength cmns-qtu:hasNumerator ?strengthNumerator .  
+  	?strengthNumerator cmns-qtu:hasNumericValue ?strengthNumeratorValue .
+  	?strengthNumerator cmns-qtu:hasMeasurementUnit ?strengthNumeratorUnit .
+  	?strengthNumeratorUnit rdfs:label ?strengthNumeratorUnitLabel .
+  	?strengthDemoniatorUnit rdfs:label ?strengthDemoniatorUnitLabel .
+  	
+  
+	# Bind the Numerator and Demoniator into a concatianated variables for readability
+  	BIND (concat(str(?strengthNumeratorValue)," ",?strengthNumeratorUnitLabel) as ?strengthNumeratorString )
+  	BIND (concat(str(?strengthDemoniatorValue)," ",?strengthDemoniatorUnitLabel) as ?strengthDemoniatorString )
+  	BIND (concat(?strengthNumeratorString," / ", ?strengthDemoniatorString) as ?referenceStrengthString)
+}
