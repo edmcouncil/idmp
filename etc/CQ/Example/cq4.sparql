@@ -1,8 +1,7 @@
-# CQ 4: Which CAS Number does the substance <substance> have?
+# CQ 4: Which Unique Ingredient Number does the substance <substance> have?
 # Intended to run on data from AmlodipineExample.rdf
 
 PREFIX cmns-id: 	<https://www.omg.org/spec/Commons/Identifiers/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 prefix cmns-ra:   	<https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 prefix cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
 prefix idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/> 
@@ -10,7 +9,7 @@ prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
 prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT ?substance ?casNumber
+SELECT ?substance ?code
 WHERE {
 	# Bind the name we want into a variable 
 	BIND("amlodipine" AS ?substanceLabel )
@@ -30,9 +29,9 @@ WHERE {
         cmns-id:identifies ?substance ;
 
         # has text value for the CAS Number
-        cmns-txt:hasTextValue ?casNumber ;
+        cmns-txt:hasTextValue ?code ;
 
         # Registered By American Chemical Society
-        cmns-ra:isRegisteredBy idmp-ra:AmericanChemicalSocietyRegistrationAuthority;
+        cmns-ra:isRegisteredIn idmp-ra:GlobalSubstanceRegistrySystem;
 	
 }

@@ -22,20 +22,20 @@ WHERE {
   	?activeIngredient idmp-mprd:hasReferenceSubstance ?referenceSubstance .
   	?referenceSubstance rdfs:label ?referenceSubstanceLabel .
   
-  	# Get the Numerator and Demoniator information from the reference strength
+  	# Get the Numerator and  Denominator information from the reference strength
   	?activeIngredient idmp-mprd:hasReferenceStrength ?referenceStrength .
-  	?referenceStrength cmns-qtu:hasDenominator ?strengthDemoniator .
-  	?strengthDemoniator cmns-qtu:hasNumericValue ?strengthDemoniatorValue .
-  	?strengthDemoniator cmns-qtu:hasMeasurementUnit ?strengthDemoniatorUnit .
+  	?referenceStrength cmns-qtu:hasDenominator ?strengthDenominator .
+  	?strengthDenominator cmns-qtu:hasNumericValue ?strengthDenominatorValue .
+  	?strengthDenominator cmns-qtu:hasMeasurementUnit ?strengthDenominatorUnit .
     ?referenceStrength cmns-qtu:hasNumerator ?strengthNumerator .  
   	?strengthNumerator cmns-qtu:hasNumericValue ?strengthNumeratorValue .
   	?strengthNumerator cmns-qtu:hasMeasurementUnit ?strengthNumeratorUnit .
   	?strengthNumeratorUnit rdfs:label ?strengthNumeratorUnitLabel .
-  	?strengthDemoniatorUnit rdfs:label ?strengthDemoniatorUnitLabel .
+  	?strengthDenominatorUnit rdfs:label ?strengthDenominatorUnitLabel .
   	
   
-	# Bind the Numerator and Demoniator into a concatianated variables for readability
+	# Bind the Numerator and  Denominator into a concatianated variables for readability
   	BIND (concat(str(?strengthNumeratorValue)," ",?strengthNumeratorUnitLabel) as ?strengthNumeratorString )
-  	BIND (concat(str(?strengthDemoniatorValue)," ",?strengthDemoniatorUnitLabel) as ?strengthDemoniatorString )
-  	BIND (concat(?strengthNumeratorString," / ", ?strengthDemoniatorString) as ?referenceStrengthString)
+  	BIND (concat(str(?strengthDenominatorValue)," ",?strength DenominatorUnitLabel) as ?strengthDenominatorString )
+  	BIND (concat(?strengthNumeratorString," / ", ?strength DenominatorString) as ?referenceStrengthString)
 }
