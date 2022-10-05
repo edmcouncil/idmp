@@ -9,4 +9,4 @@
   - Set execute permission on your script using the 'chmod +x convert-file-to-json.sh' command and run the './convert-file-to-json.sh' command
 4.3 On MacOS:
   - Run the convert-file-to-json.sh using macOS bash
-6. Upload public_data.json and the gsrs-public-data-substances.rqg, gsrs-public-data-relationships.rqg, gsrs-public-data-names.rqg and gsrs-public-data-identifiers.rqg migration files to Accurids https://pistoiaalliance.dev.accurids.com/
+6. Upload public_data.json and the gsrs-substances.rqg, gsrs-relationships.rqg, gsrs-names.rqg and gsrs-identifiers.rqg migration files to Accurids https://pistoiaalliance.dev.accurids.com/

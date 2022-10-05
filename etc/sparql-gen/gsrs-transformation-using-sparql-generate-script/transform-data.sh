@@ -28,11 +28,11 @@ do
     (( endIndex = (i + 1) * 10000 ))
     echo "The value of \"endIndex\" is $endIndex."
     sed -n -e ''"$startIndex"','"$endIndex"'p' public_data > temp.json
-    ./jq -c -s '.' temp.json > gsrs-public-data-iteration.json
-    java -Xmx20g -jar sparql-generate-2.0.11.jar -l INFO -q gsrs-public-data-substances.rqg -o ./gsrs-transformed/gsrs-public-data-10000-substances-iter-$i.ttl -fo TTL
-    java -Xmx20g -jar sparql-generate-2.0.11.jar -l INFO -q gsrs-public-data-identifiers.rqg -o ./gsrs-transformed/gsrs-public-data-10000-identifiers-iter-$i.ttl -fo TTL
-    java -Xmx20g -jar sparql-generate-2.0.11.jar -l INFO -q gsrs-public-data-relationships.rqg -o ./gsrs-transformed/gsrs-public-data-10000-relationships-iter-$i.ttl -fo TTL
-    java -Xmx20g -jar sparql-generate-2.0.11.jar -l INFO -q gsrs-public-data-names.rqg -o ./gsrs-transformed/gsrs-public-data-10000-names-iter-$i.ttl -fo TTL
+    ./jq -c -s '.' temp.json > public_data.json
+    java -Xmx20g -jar sparql-generate-2.0.12.jar -l INFO -q gsrs-substances.rqg -o ./gsrs-transformed/gsrs-10000-substances-iter-$i.ttl -fo TTL
+    java -Xmx20g -jar sparql-generate-2.0.12.jar -l INFO -q gsrs-identifiers.rqg -o ./gsrs-transformed/gsrs-10000-identifiers-iter-$i.ttl -fo TTL
+    java -Xmx20g -jar sparql-generate-2.0.12.jar -l INFO -q gsrs-relationships.rqg -o ./gsrs-transformed/gsrs-10000-relationships-iter-$i.ttl -fo TTL
+    java -Xmx20g -jar sparql-generate-2.0.12.jar -l INFO -q gsrs-names.rqg -o ./gsrs-transformed/gsrs-10000-names-iter-$i.ttl -fo TTL
 done
 
 cat ./gsrs-transformed/* > ./gsrs-transformed/gsrs-transformed.ttl
