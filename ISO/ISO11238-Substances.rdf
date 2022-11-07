@@ -85,7 +85,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances/"/>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-Substances.rdf version of this ontology was modified to rename &apos;ingredient role&apos; to ingredient for clarification per discussion at the Pistoia Alliance Conference on 3 November 2022.</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-Substances.rdf version of this ontology was modified to rename &apos;ingredient role&apos; to ingredient for clarification per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -102,12 +102,17 @@
 		<skos:note>An acid is also defined in CHEBI as a molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid).</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;ActiveIngredientRole">
+	<owl:Class rdf:about="&idmp-sub;ActiveIngredient">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Ingredient"/>
-		<rdfs:label>active ingredient role</rdfs:label>
+		<rdfs:label>active ingredient</rdfs:label>
 		<skos:definition>role of a substance present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients</skos:definition>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
-		<cmns-av:synonym>active pharmacological ingredient [role]</cmns-av:synonym>
+		<cmns-av:synonym>active pharmacological ingredient</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ActiveIngredientRole">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentClass rdf:resource="&idmp-sub;ActiveIngredient"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ActiveMoietyRole">
@@ -120,13 +125,20 @@
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;AdjuvantRole">
+	<owl:Class rdf:about="&idmp-sub;Adjuvant">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Ingredient"/>
-		<rdfs:label>adjuvant role</rdfs:label>
+		<rdfs:label>adjuvant</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1</dct:source>
 		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C2140"/>
 		<skos:definition>pharmacological role of a component that potentiates the immune response to an antigen and/or modulates it towards the desired immune response</skos:definition>
 		<skos:note>An adjuvant is an agent that enhances the activity or therapeutic effect of another pharmacologic substance without having much, if any, therapeutic impact by itself.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;NamingConformant"/>
+		<cmns-av:explanatoryNote>An adjuvant is defined as a component of a mixture in the ISO 11238 standard rather than as a role that such a component plays, thus this definition is non-conformant.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AdjuvantRole">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentClass rdf:resource="&idmp-sub;Adjuvant"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Base">
@@ -234,13 +246,20 @@
 		<skos:note>Esters are compounds derived from organic or inorganic acids in which at least one hydroxyl group is replaced by an -O-alkyl or another organic group. They can be represented by the structure formula RCOOR&apos; and are usually formed by the reaction between an acid and an alcohol with elimination of water.</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;ExcipientRole">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredientRole"/>
-		<rdfs:label>excipient role</rdfs:label>
+	<owl:Class rdf:about="&idmp-sub;Excipient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label>excipient</rdfs:label>
 		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_75324</dct:source>
 		<skos:definition>pharmacological role of a generally pharmacologically inactive substance that is formulated with the active ingredient of a medication</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;DefinitionallyConformant"/>
+		<cmns-av:explanatoryNote>An excipient is not explicitly defined in the ISO 11238 standard (although clause 8.5 states that an excipient is a non-active ingredient intended to be used in the medicinal product), which this definition conforms with although it is modeled as a role in this ontology.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>bulking agent</cmns-av:synonym>
 		<cmns-av:synonym>filler</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ExcipientRole">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentClass rdf:resource="&idmp-sub;Excipient"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
@@ -264,12 +283,17 @@
 		<skos:definition>set of controlled vocabularies and codes for reporting of substance-related information specified in the ISO/TS 19844 guidelines</skos:definition>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-sub;InactiveIngredientRole">
+	<owl:Class rdf:about="&idmp-sub;InactiveIngredient">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Ingredient"/>
-		<rdfs:label>inactive ingredient role</rdfs:label>
+		<rdfs:label>inactive ingredient</rdfs:label>
 		<skos:definition>role of an ingredient of a given formulation (most frequently, an excipient) that does not exhibit pharmacological activity</skos:definition>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Substances are classified based on their effect on disease progression for a specific disease or condition. In this case, a condition is only related to such compound via the formulation used to affect (treat or diagnose) this condition.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;InactiveIngredientRole">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentClass rdf:resource="&idmp-sub;InactiveIngredient"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;InactiveMoietyRole">
@@ -298,8 +322,8 @@
 		</rdfs:subClassOf>
 		<rdfs:label>ingredient</rdfs:label>
 		<skos:definition>substance role that is specifically part of or used in the preparation of some manufactured item, pharmaceutical product, medication, or drug</skos:definition>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;NonConformant"/>
-		<cmns-av:explantoryNote>An ingredient is defined as a material in the ISO 11238 standard rather than as a role, thus this definition is non-conformant.</cmns-av:explantoryNote>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;NamingConformant"/>
+		<cmns-av:explanatoryNote>An ingredient is defined as a material in the ISO 11238 standard rather than as a role, thus this definition is non-conformant.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>pharmacological role</cmns-av:synonym>
 	</owl:Class>
 	

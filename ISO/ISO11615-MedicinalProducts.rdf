@@ -82,13 +82,13 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11615-MedicinalProducts/"/>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference on 3 November 2022.</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
-	<owl:Class rdf:about="&idmp-sub;ActiveIngredientRole">
+	<owl:Class rdf:about="&idmp-sub;ActiveIngredient">
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
@@ -109,7 +109,7 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.80</dct:source>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;AdjuvantRole">
+	<owl:Class rdf:about="&idmp-sub;Adjuvant">
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
@@ -119,7 +119,7 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.1</dct:source>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;InactiveIngredientRole">
+	<owl:Class rdf:about="&idmp-sub;InactiveIngredient">
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
@@ -217,7 +217,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientActiveMoietyBasisOfStrength">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredient"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveMoietyRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -239,7 +239,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientEntireSubstanceBasisOfStrength">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredient"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
@@ -259,7 +259,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientReferenceSubstanceBasisOfStrength">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredient"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
@@ -285,7 +285,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ActiveIngredientWithoutBasisOfStrength">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ActiveIngredient"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
@@ -990,7 +990,7 @@
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasActiveIngredientRole">
 		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasIngredientRole"/>
 		<rdfs:label>has active ingredient role</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-sub;ActiveIngredientRole"/>
+		<rdfs:range rdf:resource="&idmp-sub;ActiveIngredient"/>
 		<skos:definition>relates the constituency representing the contituents of a pharmaceutical or medicinal product to something in the role of an active ingredient</skos:definition>
 	</owl:ObjectProperty>
 	
