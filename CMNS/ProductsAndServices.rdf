@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-cxtid "https://www.omg.org/spec/Commons/ContextualIdentifiers/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
+	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
@@ -14,7 +18,11 @@
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-cxtid="https://www.omg.org/spec/Commons/ContextualIdentifiers/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
@@ -30,10 +38,14 @@
 		<dct:abstract>This ontology defines fundamental concepts for products, services, and providers of those services. It was derived from the FIBO Foundations Products and Services Ontology and adapted for broader use.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualIdentifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220701/ProductsAndServices/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/ProductsAndServices/"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -72,6 +84,38 @@
 		<rdfs:label>commodity</rdfs:label>
 		<skos:definition>material resource used in commerce that is interchangeable with other commodities of the same type</skos:definition>
 		<cmns-av:explanatoryNote>Commodities are most often used as inputs in the production of other goods or services. The quality of a given commodity may differ slightly, but it is essentially uniform across producers.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&cmns-prd;GS1GeneralSpecifications">
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-doc;ReferenceDocument"/>
+		<rdfs:label>GS1 General Specifications</rdfs:label>
+		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</rdfs:seeAlso>
+		<skos:definition>reference specification and classification scheme that defines how identification keys, data attributes and barcodes must be used in business applications</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&cmns-prd;GlobalTradeItemNumber">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:hasValue rdf:resource="&cmns-prd;GS1GeneralSpecifications"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&cmns-prd;TradeItem"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>global trade item number</rdfs:label>
+		<skos:definition>classifier for something that is traded in the supply chain that conforms with GS1 General Specifications</skos:definition>
+		<skos:note>A GTIN is used to identify any item upon which there is a need to retrieve predefined information and that may be priced, ordered or invoiced at any point in any supply chain. GTINs may be 8, 12, 13 or 14 digits in length.</skos:note>
+		<cmns-av:abbreviation>GTIN</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 2.1; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.25</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;Good">
@@ -153,6 +197,28 @@
 		</rdfs:subClassOf>
 		<rdfs:label>service provider</rdfs:label>
 		<skos:definition>agent that provides professional services, such as consulting, financial, legal, real estate, education, communications, registration, regulatory, manufacturing, storage, processing, or other services</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;TradeItem">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-prd;Good">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-prd;Right">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-prd;Product">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-prd;Service">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label>trade item</rdfs:label>
+		<skos:definition>any item (product or service) upon which there is a need to retrieve predefined information and that may be priced, or ordered, or invoiced at any point in any supply chain</skos:definition>
+		<skos:scopeNote>This definition covers services and products, from raw materials through to end user products, all of which may have predefined characteristics.</skos:scopeNote>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 2.1</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Each trade item that is different from another in design and/or content is allocated a unique identification number, which remains the same as long as it is traded. The same identification number is given to all trade items sharing key characteristics. Such numbers must be treated in their entirety throughout the supply chain.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isIssuedBy">
