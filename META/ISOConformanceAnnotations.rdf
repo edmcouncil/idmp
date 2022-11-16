@@ -31,7 +31,8 @@
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/20221001/ISOConformanceAnnotations/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/20221101/ISOConformanceAnnotations/"/>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISOConformanceAnnotations.rdf version of this ontology was modified to add a distinct conformance level for name and annotations, including the definition, in contrast with naming conformance, which means that the concept has the same name as something in an ISO standard but not the same meaning.</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -63,11 +64,18 @@
 		<cmns-av:explanatoryNote xml:lang="en">There are various cases in the ontologies where a given element will be modeled as a text value with some ISO 21090 Harmonized Datatype encoding, whereas we have modeled it as a named individual with additional semantics in the ontology. A class that in other aspects is modeled as defined in the relevant ISO IDMP specifications that has a relationships with this individual rather than having a text attribute for it would be considered model conformant.</cmns-av:explanatoryNote>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-cmpl;NameAndAnnotationConformant">
+		<rdf:type rdf:resource="&idmp-cmpl;ConformanceToISOLevel"/>
+		<rdfs:label>name and annotation conformant</rdfs:label>
+		<skos:definition xml:lang="en">compliance level indicating that the ontology element is conformant with the corresponding ISO class, property, datatype, or other individual with respect to its name, definition and other annotations, but may not be conformant with respect to how it is modeled</skos:definition>
+		<cmns-av:explanatoryNote xml:lang="en">There are various cases in the ontologies where a given element will be modeled as a class, similarly to what is in the ISO IDMP standard, but whose relationships are specified differently. This may be because of inheritance via the patterns we have implemented, the use of restrictions, or other variations with respect to the modeling approach taken. Other cases include concepts that are modeled as roles in the ontology but as classes or properties in the IDMP standard.</cmns-av:explanatoryNote>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-cmpl;NamingConformant">
 		<rdf:type rdf:resource="&idmp-cmpl;ConformanceToISOLevel"/>
 		<rdfs:label>naming conformant</rdfs:label>
-		<skos:definition xml:lang="en">compliance level indicating that the ontology element is conformant with the corresponding ISO class, property, datatype, or other individual with respect to its name, definition and other annotations, but may not be conformant with respect to how it is modeled</skos:definition>
-		<cmns-av:explanatoryNote xml:lang="en">There are various cases in the ontologies where a given element will be modeled as a class, similarly to what is in the ISO IDMP standard, but whose relationships are specified differently. This may be because of inheritance via the patterns we have implemented, the use of restrictions, or other variations with respect to the modeling approach taken. Other cases include concepts that are modeled as roles in the ontology but as classes or properties in the IDMP standard.</cmns-av:explanatoryNote>
+		<skos:definition xml:lang="en">compliance level indicating that the ontology element is conformant with the corresponding ISO class, property, datatype, or other individual with respect to its name, and possibly other annotations, but not in terms of its definition or with respect to how it is modeled</skos:definition>
+		<cmns-av:explanatoryNote xml:lang="en">One such case identified shortly after the initial 0.1 version of the ontology was released is the concept &apos;ingredient&apos;, which is modeled as a role rather than as a subclass of material and where the definition in ISO 11238 is distinct from the definition in the ontology.</cmns-av:explanatoryNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-cmpl;NonConformant">
