@@ -2,11 +2,13 @@
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-cxtid "https://www.omg.org/spec/Commons/ContextualIdentifiers/">
 	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
@@ -19,11 +21,13 @@
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-cxtid="https://www.omg.org/spec/Commons/ContextualIdentifiers/"
 	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:dct="http://purl.org/dc/terms/"
@@ -35,17 +39,20 @@
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/ProductsAndServices/">
 		<rdfs:label>Commons Products and Services Ontology</rdfs:label>
-		<dct:abstract>This ontology defines fundamental concepts for products, services, and providers of those services. It was derived from the FIBO Foundations Products and Services Ontology and adapted for broader use.</dct:abstract>
+		<dct:abstract>This ontology defines fundamental concepts for products, services, and providers of those services. It also covers well-known identifiers used to support supply chain applications.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualIdentifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/ProductsAndServices/"/>
+		<skos:note>This ontology was originally designed for and has been adapted from the Financial Industry Business Ontology (FIBO) Products and Services Ontology.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -86,15 +93,91 @@
 		<cmns-av:explanatoryNote>Commodities are most often used as inputs in the production of other goods or services. The quality of a given commodity may differ slightly, but it is essentially uniform across producers.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-prd;GS1CompanyPrefix">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtid;ContextualIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:hasValue rdf:resource="&cmns-prd;GS1GeneralSpecifications"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-prd;GS1Member">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-prd;GS1User">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isIssuedBy"/>
+				<owl:onClass rdf:resource="&cmns-prd;GS1CompanyPrefixIssuer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>GS1 company prefix</rdfs:label>
+		<skos:definition>unique string of four to twelve digits used to issue GS1 identification keys</skos:definition>
+		<skos:note>A GS1 Company Prefix starting with a zero (&apos;0&apos;) is used to generate GTIN-12s (as well as the other GS1 identification keys). A GS1 Company Prefix starting with a digit other than zero (&apos;0&apos;) is used to generate GTIN-13s (as well as the other GS1 identification keys).</skos:note>
+		<skos:note>The first digits are a valid GS1 prefix and the length must be at least one longer than the length of the GS1 prefix.</skos:note>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;GS1CompanyPrefixIssuer">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;ServiceProvider"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+						<owl:hasValue rdf:resource="&cmns-prd;GS1GlobalOffice"/>
+					</owl:Restriction>
+					<rdf:Description rdf:about="&cmns-prd;GS1Member">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;issues"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;GS1CompanyPrefix"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>GS1 company prefix issuer</rdfs:label>
+		<skos:definition>service provider that is a GS1 member organization, or GS1 itself, that issues GS1 company prefixes based on a GS1 prefix allocated to that issuer, and allocates the prefix either to a GS1 user company or to itself (e.g., for issuing individual identification keys)</skos:definition>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>GS1 defines issuance in terms of the generation of a GS1 prefix, GS1 company prefix, or GS1 identification key in accordance with GS1 rules and policies by GS1 or a GS1 Member Organisation.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&cmns-prd;GS1GeneralSpecifications">
 		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdf:type rdf:resource="&cmns-doc;ReferenceDocument"/>
+		<rdf:type rdf:resource="&cmns-id;IdentificationScheme"/>
 		<rdfs:label>GS1 General Specifications</rdfs:label>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</rdfs:seeAlso>
-		<skos:definition>reference specification and classification scheme that defines how identification keys, data attributes and barcodes must be used in business applications</skos:definition>
+		<skos:definition>reference specification and scheme that defines how identification keys, data attributes and barcodes must be formulated and used in business applications</skos:definition>
+		<cmns-doc:isAbout rdf:resource="&cmns-prd;TradeItem"/>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&cmns-prd;GlobalTradeItemNumber">
+	<owl:NamedIndividual rdf:about="&cmns-prd;GS1GlobalOffice">
+		<rdf:type rdf:resource="&cmns-org;Organization"/>
+		<rdfs:label>GS1 Global Office</rdfs:label>
+		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.gs1.org/about/what-we-do</rdfs:seeAlso>
+		<skos:definition>neutral, not-for-profit organisation that provides global standards for efficient business communication</skos:definition>
+		<skos:note>The Global Office, located in Brussels (Belgium) and Ewing, NJ (USA) is the guardian, and provides an open, user-driven, forum for ongoing maintenance and development, of the GS1 standards, guidelines and statues.</skos:note>
+		<cmns-av:abbreviation>GS1 GO</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&cmns-prd;GS1IdentificationKey">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
 		<rdfs:subClassOf>
@@ -103,11 +186,79 @@
 				<owl:hasValue rdf:resource="&cmns-prd;GS1GeneralSpecifications"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:label>GS1 identification key</rdfs:label>
+		<skos:definition>unique classifier for a class of objects that conforms with GS1 General Specifications</skos:definition>
+		<skos:scopeNote>GS1 defines an identification key as a unique identifier for a class of objects (e.g., a trade item) or an instance of an object (e.g., a logistic unit). However, from an ontological perspective, a class of objects is quite different from an instance of an object. In the context of this ontology, a GS1 identification key identifies a class of objects.</skos:scopeNote>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 2.1; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;GS1Member">
+		<rdfs:subClassOf rdf:resource="&cmns-org;OrganizationMember"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+						<owl:hasValue rdf:resource="&cmns-prd;GS1GlobalOffice"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>GS1 member</rdfs:label>
+		<skos:definition>organization that is a member of GS1</skos:definition>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;GS1User">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&cmns-org;Organization"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>GS1 user</rdfs:label>
+		<skos:definition>organization that is a user of GS1 standards such as various keys, their definitions, and related data</skos:definition>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Well-known GS1 standards include Global Trade Item Numbers (GTIN), Unique Product Codes (UPC), and extensions that support domain specific supply chain requirements.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;GlobalTradeItemNumber">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;GS1IdentificationKey"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isIssuedBy"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-prd;GS1CompanyPrefixIssuer">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-prd;GS1User">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&cmns-prd;GS1CompanyPrefix"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:onClass rdf:resource="&cmns-prd;TradeItem"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;TradeItem"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;TradeItem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>global trade item number</rdfs:label>
@@ -197,6 +348,14 @@
 		</rdfs:subClassOf>
 		<rdfs:label>service provider</rdfs:label>
 		<skos:definition>agent that provides professional services, such as consulting, financial, legal, real estate, education, communications, registration, regulatory, manufacturing, storage, processing, or other services</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;Supplier">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:label>supplier</rdfs:label>
+		<skos:definition>actor that produces, provides, or furnishes an item or service</skos:definition>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;TradeItem">
