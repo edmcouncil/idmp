@@ -1,16 +1,15 @@
 PREFIX iter: <http://w3id.org/sparql-generate/iter/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX cmns-dsg:  <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
-
-# TODO:
-# include name context: BRAND Name vs SUBSTANCE Name (Novartis as an example)
 
 GENERATE {
 
     # Substance
     ?Substance ?labelProperty ?OfficialSubstanceName ;
+        rdfs:label ?OfficialSubstanceName ;
         cmns-dsg:hasName ?SubstanceName ;
     .
 
