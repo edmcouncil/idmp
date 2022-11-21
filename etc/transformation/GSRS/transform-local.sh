@@ -23,10 +23,12 @@ if [ -f public_data.json ]; then
       -fo TTL"
   done
 
+  result=gsrs-transformed.ttl
+  rm -rf $result
   for query in "${queries[@]}"; do
-    cat $query.ttl >gsrs-transformed.ttl
+    cat $query.ttl >>$result
   done
-  echo "Result available in gsrs-transformed.ttl"
+  echo "Result available in $result"
 
   for query in "${queries[@]}"; do
     rm -rf $query.ttl
