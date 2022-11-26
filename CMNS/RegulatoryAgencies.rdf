@@ -6,6 +6,7 @@
 	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
@@ -24,6 +25,7 @@
 	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
@@ -44,6 +46,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
@@ -51,6 +54,25 @@
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-org;LegalEntity">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rga;isOrganizedIn"/>
+				<owl:onClass rdf:resource="&cmns-rga;Jurisdiction"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-org;LegalPerson">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rga;isRecognizedIn"/>
+				<owl:someValuesFrom rdf:resource="&cmns-rga;Jurisdiction"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-rga;GovernmentIssuedLicense">
 		<rdfs:subClassOf rdf:resource="&cmns-rga;License"/>
@@ -263,6 +285,21 @@
 		<rdfs:domain rdf:resource="&cmns-rga;Jurisdiction"/>
 		<owl:inverseOf rdf:resource="&cmns-rga;hasJurisdiction"/>
 		<skos:definition>relates a jurisdiction to a polity or other government entity or court that has some level of legal authority over it</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rga;isOrganizedIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-rga;isRecognizedIn"/>
+		<rdfs:label>is organized in</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-org;LegalEntity"/>
+		<rdfs:range rdf:resource="&cmns-rga;Jurisdiction"/>
+		<skos:definition>indicates the jurisdiction whose laws a legal entity is organized under</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rga;isRecognizedIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-rga;isGovernedBy"/>
+		<rdfs:label>is recognized in</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-rga;Jurisdiction"/>
+		<skos:definition>indicates the jurisdiction in which a legal person is considered competent to enter into a contract, conduct business, or participate in other activities, or in which an agreement may be acknowledged and possibly enforceable</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-rga;isRegulatedBy">

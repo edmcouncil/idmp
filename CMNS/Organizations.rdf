@@ -7,7 +7,6 @@
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
-	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
@@ -24,7 +23,6 @@
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
-	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -42,7 +40,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/Organizations/"/>
 		<skos:note>This ontology is derived from the Financial Industry Business Ontology (FIBO) Organizations, Formal Organizations, and Legal Persons ontologies.</skos:note>
@@ -86,13 +83,6 @@
 	<owl:Class rdf:about="&cmns-org;LegalEntity">
 		<rdfs:subClassOf rdf:resource="&cmns-org;FormalOrganization"/>
 		<rdfs:subClassOf rdf:resource="&cmns-org;LegalPerson"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-org;isOrganizedIn"/>
-				<owl:onClass rdf:resource="&cmns-rga;Jurisdiction"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>legal entity</rdfs:label>
 		<skos:definition>legal person that is a partnership, corporation, or other organization having the capacity to negotiate contracts, assume financial obligations, and pay off debts, organized under the laws of some jurisdiction</skos:definition>
 		<skos:scopeNote>The term &apos;legal entities&apos; includes, but is not limited to, unique parties that are legally or financially responsible for the performance of financial transactions or have the legal right in their jurisdiction to enter independently into legal contracts, regardless of whether they are incorporated or constituted in some other way (e.g. trust, partnership, contractual). It excludes natural persons, but includes governmental organizations and supranationals.</skos:scopeNote>
@@ -105,12 +95,6 @@
 	
 	<owl:Class rdf:about="&cmns-org;LegalPerson">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Party"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-org;isRecognizedIn"/>
-				<owl:someValuesFrom rdf:resource="&cmns-rga;Jurisdiction"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en">legal person</rdfs:label>
 		<skos:definition>party that is recognized as having rights and obligations under the law, including but not limited to the right to sue and be sued, enter into contracts, own property, and incur financial and other obligations</skos:definition>
 		<cmns-av:explanatoryNote>To have legal personality means to be capable of having legal rights and duties within a certain legal system, such as to enter into contracts, sue, and be sued. Legal personality is a prerequisite to legal capacity, the ability of any legal person to amend (enter into, transfer, etc.) rights and obligations.</cmns-av:explanatoryNote>
@@ -324,21 +308,6 @@
 		<rdfs:range rdf:resource="&cmns-org;Membership"/>
 		<rdfs:seeAlso rdf:resource="https://www.w3.org/TR/vocab-org/#org:role"/>
 		<skos:definition>indicates the context of membership in which some party is an organization member</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&cmns-org;isOrganizedIn">
-		<rdfs:subPropertyOf rdf:resource="&cmns-org;isRecognizedIn"/>
-		<rdfs:label>is organized in</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-org;LegalEntity"/>
-		<rdfs:range rdf:resource="&cmns-rga;Jurisdiction"/>
-		<skos:definition>indicates the jurisdiction whose laws a legal entity is organized under</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&cmns-org;isRecognizedIn">
-		<rdfs:subPropertyOf rdf:resource="&cmns-rga;isGovernedBy"/>
-		<rdfs:label>is recognized in</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-rga;Jurisdiction"/>
-		<skos:definition>indicates the jurisdiction in which a legal person is considered competent to enter into a contract, conduct business, or participate in other activities, or in which an agreement may be acknowledged and possibly enforceable</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-org;isSubUnitOf">
