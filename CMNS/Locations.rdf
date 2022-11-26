@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-loc "https://www.omg.org/spec/Commons/Locations/">
+	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/Commons/Locations/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-loc="https://www.omg.org/spec/Commons/Locations/"
+	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/Locations/">
+		<rdfs:label>Commons Locations Ontology</rdfs:label>
+		<dct:abstract>This ontology provides a very high level definition of geographic region and geopolitical entity related concepts, including, but not limited to, countries, sub-country regions such as states and provinces, municipalities, etc., extending the Object Management Group (OMG)&apos;s Languages, Countries, and Codes (LCC) ontologies. As such, these terms are automatically mapped to the LCC controlled vocabulary representing ISO 3166 country and country subdivision codes, and may be mapped to other de facto standards such as Geonames and the CIA World Factbook.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/Locations/"/>
+		<skos:note>This ontology is derived from the Financial Industry Business Ontology (FIBO) Locations, Facilities, and Virtual Locations ontologies.</skos:note>
+		<cmns-av:copyright>Copyright (c) 2013-2022 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2013-2022 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-loc;BusinessCenter">
+		<rdfs:subClassOf rdf:resource="&cmns-loc;Municipality"/>
+		<rdfs:label>business center</rdfs:label>
+		<skos:definition>municipality where business is conducted, especially one that is considered a financial center</skos:definition>
+		<cmns-av:adaptedFrom>FpML Business Center and related codes, see http://www.fpml.org/coding-scheme/business-center-7-14.xml</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-loc;County">
+		<rdfs:subClassOf rdf:resource="&lcc-cr;CountrySubdivision"/>
+		<rdfs:label xml:lang="en">county</rdfs:label>
+		<skos:definition xml:lang="en">political and administrative division of a country, state or province, providing certain local governmental services</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-loc;FederalCapitalArea">
+		<rdfs:subClassOf rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+		<rdfs:label>federal capital area</rdfs:label>
+		<skos:definition>geopolitical entity that is or includes the municipality or capital city that acts as the seat of the federal government</skos:definition>
+		<skos:example>Examples include the District of Columbia in the US, and the Canberra area in Australia.</skos:example>
+		<cmns-av:explanatoryNote>The capital administrative region of some federations includes those for which the capital is situated other than within one of the states or provinces which make up the country as a whole.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-loc;FederalState">
+		<rdfs:subClassOf rdf:resource="&lcc-cr;CountrySubdivision"/>
+		<rdfs:label>federal state</rdfs:label>
+		<skos:definition>self-governing geopolitical unit which forms part of a wider geopolitical unit that is recognized as a country</skos:definition>
+		<cmns-av:explanatoryNote>This type of entity, variously referred to as a state, province or canton, has a level of self government including its own legal system and court jurisdiction, but cedes a level of autonomy to the federation of which it forms a part.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-loc;Municipality">
+		<rdfs:subClassOf rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+		<rdfs:label>municipality</rdfs:label>
+		<skos:definition>urban administrative division having corporate status and usually powers of self-government or jurisdiction</skos:definition>
+		<skos:example>A municipality can be any political jurisdiction from a sovereign state, such as the Principality of Monaco, or a small village, such as West Hampton Dunes, New York.</skos:example>
+		<skos:scopeNote>The territory over which a municipality has jurisdiction may encompass:
+- only one populated place such as a city, town, or village
+- several of such places (e.g., early jurisdictions in the state of New Jersey (1798-1899) as townships governing several villages, Municipalities of Mexico)
+- only parts of such places, sometimes boroughs of a city such as the 34 municipalities of Santiago, Chile.</skos:scopeNote>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">http://en.wikipedia.org/wiki/Municipality</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>A municipality is a general-purpose administrative subdivision, as opposed to a special-purpose district.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-loc;PhysicalLocation">
+		<rdfs:subClassOf rdf:resource="&lcc-cr;Location"/>
+		<rdfs:label>physical location</rdfs:label>
+		<skos:definition>location in physical space</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-loc;VirtualLocation">
+		<rdfs:subClassOf rdf:resource="&lcc-cr;Location"/>
+		<rdfs:label xml:lang="en">virtual location</rdfs:label>
+		<owl:disjointWith rdf:resource="&cmns-loc;PhysicalLocation"/>
+		<skos:definition>place that is not located in any single physical location; a network location without geographic boundaries</skos:definition>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-loc;hasBusinessCenter">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasMunicipality"/>
+		<rdfs:label>has business center</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-loc;BusinessCenter"/>
+		<skos:definition>identifies a location where business is conducted, and hence the business calendar used to adjust dates</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-loc;hasCityName">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has city name</rdfs:label>
+		<skos:definition>indicates the name of a large, permanent, and densely settled place</skos:definition>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://en.wikipedia.org/wiki/City</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.gleif.org/en/about-lei/common-data-file-format/lei-cdf-format/lei-cdf-format-version-2-1</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Typical working definitions for small-city populations start at around 100,000 people. Common population definitions for an urban area (city or town) range between 1,500 and 50,000 people, with most U.S states using a minimum between 1,500 and 5,000 inhabitants. Some jurisdictions set no such minima.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>This property should be used in cases where a formal individual for the business center or municipality is not available. Note that Geonames could be used as a source in cases where an individual is desired. Use the property cmns-loc;hasMunicipality in cases where an individual is available. Also note that with respect to an address, this property may stand in for any village, town, or city of any size.</cmns-av:usageNote>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-loc;hasCountry">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasRegion"/>
+		<rdfs:label>has country</rdfs:label>
+		<rdfs:range rdf:resource="&lcc-cr;Country"/>
+		<skos:definition>indicates a country, such as one that is recognized by the United Nations</skos:definition>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.gleif.org/en/about-lei/common-data-file-format/lei-cdf-format/lei-cdf-format-version-2-1</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-loc;hasCounty">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasSubdivision"/>
+		<rdfs:label>has county</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-loc;County"/>
+		<skos:definition>indicates a country subdivision providing certain local governmental services</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-loc;hasCoverageArea">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasRegion"/>
+		<rdfs:label>has coverage area</rdfs:label>
+		<rdfs:range rdf:resource="&lcc-cr;GeographicRegion"/>
+		<skos:definition>indicates a geographic region in which some service is provided, or to which some policy applies, or in which something is available</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-loc;hasMunicipality">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasRegion"/>
+		<rdfs:label>has municipality</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-loc;Municipality"/>
+		<skos:definition>indicates a business center, city, or municipality</skos:definition>
+		<cmns-av:usageNote>Note that certain greater metropolitan areas span multiple counties or states (e.g., the greater Washington, D.C. area, which includes parts of Maryland and Virginia, and divided/disputed cities such as Jerusalem), thus hasMunicipality is a subproperty of hasRegion rather than hasSubdivision.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-loc;hasRegion">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;isLocatedAt"/>
+		<rdfs:label>has region</rdfs:label>
+		<rdfs:range rdf:resource="&lcc-cr;GeographicRegion"/>
+		<skos:definition>indicates a demarcated area on the surface of the Earth</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-loc;hasSubdivision">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasRegion"/>
+		<rdfs:label>has subdivision</rdfs:label>
+		<rdfs:range rdf:resource="&lcc-cr;CountrySubdivision"/>
+		<skos:definition>identifies a country subdivision (state, province, region, etc.)</skos:definition>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.gleif.org/en/about-lei/common-data-file-format/lei-cdf-format/lei-cdf-format-version-2-1</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-loc;hasURL">
+		<rdfs:label>has URL</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;anyURI"/>
+		<skos:definition>links something to a web resource that specifies its location on a computer network and a method for retrieving it</skos:definition>
+		<cmns-av:synonym>has uniform resource locator</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-loc;hasWebsite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasURL"/>
+		<rdfs:label>has website</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;anyURI"/>
+		<rdfs:seeAlso rdf:resource="https://www.w3.org/standards/webdesign/"/>
+		<skos:definition>links something to a page or set of related web pages located under a single domain name, typically produced by a single person or organization</skos:definition>
+		<cmns-av:explanatoryNote>Web Design and Applications involve the standards for building and Rendering Web pages, including HTML, CSS, SVG, device APIs, and other technologies for Web Applications (&apos;WebApps&apos;). HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages. HTML provides the structure of the page, CSS the (visual and aural) layout, for a variety of devices and services.</cmns-av:explanatoryNote>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-loc;isLocatedAt">
+		<rdfs:label>is located at</rdfs:label>
+		<rdfs:range rdf:resource="&lcc-cr;Location"/>
+		<skos:definition>relates something to a location, which might be physical or virtual</skos:definition>
+	</owl:ObjectProperty>
+
+</rdf:RDF>
