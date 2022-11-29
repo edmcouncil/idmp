@@ -45,8 +45,8 @@ WHERE {
     union {
     	?pharmaceuticalProduct rdfs:label ?pharmaceuticalProductLabel .
   		?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
-    	?substanceSharingMoietyInIngredientRole cmns-pts:isRealizedIn ?otherProductConstituency .
-  		?substanceSharingMoietyInIngredientRole cmns-pts:isPlayedBy ?substanceSharingMoiety .
+    	?substanceSharingMoietyInIngredient cmns-pts:isRealizedIn ?otherProductConstituency .
+  		?substanceSharingMoietyInIngredient cmns-pts:isPlayedBy ?substanceSharingMoiety .
       	# Link the other substances through the hasActiveMoiety ?activeMoiety ( in this case amlopidine )
     	?substanceSharingMoiety  idmp-sub:hasActiveMoiety ?activeMoiety .
     }
@@ -54,10 +54,10 @@ WHERE {
     union {
     	?pharmaceuticalProduct rdfs:label ?pharmaceuticalProductLabel .
   		?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
-    	?substanceSharingMoietyInIngredientRole cmns-pts:isRealizedIn ?otherProductConstituency .
-  		?substanceSharingMoietyInIngredientRole cmns-pts:isPlayedBy ?substanceSharingMoiety .
-      	# Link the other substances through isRelatedTo property or subproperties.
-      	?relatedToProperty rdfs:subPropertyOf* cmns-col:isRelatedTo .
+    	?substanceSharingMoietyInIngredient cmns-pts:isRealizedIn ?otherProductConstituency .
+  		?substanceSharingMoietyInIngredient cmns-pts:isPlayedBy ?substanceSharingMoiety .
+      	# Link the other substances through isRelatedSubstanceTo property or subproperties.
+      	?relatedToProperty rdfs:subPropertyOf* idmp-sub:isRelatedSubstanceTo .
     	?substanceSharingMoiety  ?relatedToProperty ?activeMoiety .
     }
 }
