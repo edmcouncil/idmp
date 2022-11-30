@@ -4,6 +4,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX cmns-id:   <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX cmns-ra: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
 PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 
@@ -52,17 +53,17 @@ ITERATOR iter:JSONSurfer(?codes,
 BIND(str(?CodeUrl) AS ?SeeAlsoIdentifier)
 
 BIND(
-    IF(str(?CodeCodeSystem) = "CHEMBL", idmp-ra:ChEMBLDatabase ,
+    IF(str(?CodeCodeSystem) = "CHEMBL", idmp-eura:ChemblDatabase ,
     IF(str(?CodeCodeSystem) = "CAS", idmp-ra:ChemicalAbstractsService ,
     IF(str(?CodeCodeSystem) = "WHO-ATC", idmp-ra:AnatomicalTherapeuticChemicalClassificationSystem ,
     IF(str(?CodeCodeSystem) = "WHO-ESSENTIAL MEDICINES LIST", idmp-ra:ModelListOfEssentialMedicines ,
     IF(str(?CodeCodeSystem) = "WHO-SDG", idmp-ra:UnitedNationsSustainableDevelopmentGoals ,
     IF(str(?CodeCodeSystem) = "WHO-VATC", idmp-ra:AnatomicalTherapeuticChemicalClassificationSystem ,
     IF(str(?CodeCodeSystem) = "AUSTRALIAN PLANT NAME INDEX", idmp-ra:AustralianPlantNameIndex ,
-    IF(str(?CodeCodeSystem) = "CHEBI", idmp-ra:ChemicalEntitiesOfBiologicalInterest ,
+    IF(str(?CodeCodeSystem) = "CHEBI", idmp-eura:ChemicalEntitiesOfBiologicalInterest ,
     IF(str(?CodeCodeSystem) = "CODEX ALIMENTARIUS (GSFA)", idmp-ra:CodexGeneralStandardForFoodAdditivesOnlineDatabase ,
     IF(str(?CodeCodeSystem) = "DRUG BANK", idmp-ra:DrugBank ,
-    IF(str(?CodeCodeSystem) = "ECHA (EC/EINECS)", idmp-ra:EuropeanInventoryOfExistingCommercialChemicalSubstances ,
+    IF(str(?CodeCodeSystem) = "ECHA (EC/EINECS)", idmp-eura:EuropeanInventoryOfExistingCommercialChemicalSubstances ,
     IF(str(?CodeCodeSystem) = "JECFA EVALUATION", idmp-ra:EvaluationsOfTheJointExpertCommitteeOnFoodAdditives ,
     IF(str(?CodeCodeSystem) = "JECFA MONOGRAPH", idmp-ra:EvaluationsOfTheJointExpertCommitteeOnFoodAdditives ,
     IF(str(?CodeCodeSystem) = "GRIN", idmp-ra:GermplasmResourcesInformationNetwork ,
@@ -80,14 +81,14 @@ BIND(
     IF(str(?CodeCodeSystem) = "PUBCHEM", idmp-ra:PubChem ,
     IF(str(?CodeCodeSystem) = "USP-MC MONOGRAPH", idmp-ra:USPharmacopeiaMedicinesCompendium ,
     IF(str(?CodeCodeSystem) = "USP-MC VALIDATION RPT", idmp-ra:USPharmacopeiaMedicinesCompendium ,
-    IF(str(?CodeCodeSystem) = "UNIPROT", idmp-ra:UniProt ,
+    IF(str(?CodeCodeSystem) = "UNIPROT", idmp-eura:UniProt ,
     IF(str(?CodeCodeSystem) = "UCSF-FDA TRANSPORTAL", idmp-ra:UniversityOfCaliforniaSanFrancisoFederalDrugAdministrationTransport ,
     IF(str(?CodeCodeSystem) = "WHO INTERNATIONAL PHARMACOPOEIA", idmp-ra:WorldHealthOrganizationInternationalPharmacopoeia ,
     IF(str(?CodeCodeSystem) = "CLINICAL_TRIALS.GOV", idmp-ra:ClinicalTrialsGov ,
     IF(str(?CodeCodeSystem) = "COSMETIC INGREDIENT REVIEW (CIR)", idmp-ra:CosmeticIngredientReviewDatabase ,
-    IF(str(?CodeCodeSystem) = "EVMPD", idmp-ra:ExtendedEudraVigilanceMedicinalProductDictionary ,
-    IF(str(?CodeCodeSystem) = "EMA ASSESSMENT REPORTS", idmp-ra:EuropeanPublicAssessmentReports ,
-    IF(str(?CodeCodeSystem) = "EMA VETERINARY ASSESSMENT REPORTS", idmp-ra:EuropeanPublicAssessmentReports ,
+    IF(str(?CodeCodeSystem) = "EVMPD", idmp-eura:ExtendedEudraVigilanceMedicinalProductDictionary ,
+    IF(str(?CodeCodeSystem) = "EMA ASSESSMENT REPORTS", idmp-eura:EuropeanPublicAssessmentReports ,
+    IF(str(?CodeCodeSystem) = "EMA VETERINARY ASSESSMENT REPORTS", idmp-eura:EuropeanPublicAssessmentReports ,
     IF(str(?CodeCodeSystem) = "FDA ORPHAN DRUG", idmp-ra:OrphanDrugProductDesignationDatabase ,
     IF(str(?CodeCodeSystem) = "FDA UNII", idmp-ra:GlobalSubstanceRegistrationSystem ,
     IF(str(?CodeCodeSystem) = "UNII", idmp-ra:GlobalSubstanceRegistrationSystem ,
