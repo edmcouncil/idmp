@@ -8,6 +8,7 @@
 	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -23,6 +24,7 @@
 	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -38,12 +40,66 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/Organizations/"/>
-		<skos:note>This ontology was originally designed for and is derived from the Financial Industry Business Ontology (FIBO) Organizations Ontology.</skos:note>
+		<skos:note>This ontology is derived from the Financial Industry Business Ontology (FIBO) Organizations, Formal Organizations, and Legal Persons ontologies.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2013-2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2013-2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-org;FormalOrganization">
+		<rdfs:subClassOf rdf:resource="&cmns-org;Organization"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-org;isDomiciledIn"/>
+				<owl:onClass rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>formal organization</rdfs:label>
+		<owl:disjointWith rdf:resource="&cmns-org;InformalOrganization"/>
+		<skos:definition>organization that is recognized in some legal jurisdiction, with associated rights and responsibilities</skos:definition>
+		<skos:example>Examples include a corporation, charity, government or church.</skos:example>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.w3.org/TR/vocab-org/#class-formalorganization</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-org;Group">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:allValuesFrom rdf:resource="&cmns-pts;Agent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>group</rdfs:label>
+		<skos:definition>collection of agents (people, organizations, software agents, etc.) that are considered as a unit</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-org;InformalOrganization">
+		<rdfs:subClassOf rdf:resource="&cmns-org;Organization"/>
+		<rdfs:label>informal organization</rdfs:label>
+		<skos:definition>organization that is not formally constituted in some way</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-org;LegalEntity">
+		<rdfs:subClassOf rdf:resource="&cmns-org;FormalOrganization"/>
+		<rdfs:subClassOf rdf:resource="&cmns-org;LegalPerson"/>
+		<rdfs:label>legal entity</rdfs:label>
+		<skos:definition>legal person that is a partnership, corporation, or other organization having the capacity to negotiate contracts, assume financial obligations, and pay off debts, organized under the laws of some jurisdiction</skos:definition>
+		<skos:scopeNote>The term &apos;legal entities&apos; includes, but is not limited to, unique parties that are legally or financially responsible for the performance of financial transactions or have the legal right in their jurisdiction to enter independently into legal contracts, regardless of whether they are incorporated or constituted in some other way (e.g. trust, partnership, contractual). It excludes natural persons, but includes governmental organizations and supranationals.</skos:scopeNote>
+		<cmns-av:adaptedFrom>ISO 17442, Financial services - Legal Entity Identifier (LEI), first edition, 2012-06-01, section 3.1</cmns-av:adaptedFrom>
+		<cmns-av:synonym>artificial person</cmns-av:synonym>
+		<cmns-av:synonym>juridical entity</cmns-av:synonym>
+		<cmns-av:synonym>juridical person</cmns-av:synonym>
+		<cmns-av:synonym>juristic person</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-org;LegalPerson">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Party"/>
+		<rdfs:label xml:lang="en">legal person</rdfs:label>
+		<skos:definition>party that is recognized as having rights and obligations under the law, including but not limited to the right to sue and be sued, enter into contracts, own property, and incur financial and other obligations</skos:definition>
+		<cmns-av:explanatoryNote>To have legal personality means to be capable of having legal rights and duties within a certain legal system, such as to enter into contracts, sue, and be sued. Legal personality is a prerequisite to legal capacity, the ability of any legal person to amend (enter into, transfer, etc.) rights and obligations.</cmns-av:explanatoryNote>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-org;MemberBearingOrganization">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
@@ -228,6 +284,14 @@
 		<rdfs:seeAlso rdf:resource="https://www.w3.org/TR/vocab-org/#org:hasSubOrganization"/>
 		<owl:inverseOf rdf:resource="&cmns-org;isSubUnitOf"/>
 		<skos:definition>relates an organization to a part of that organization</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-org;isDomiciledIn">
+		<rdfs:label>is domiciled in</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-org;FormalOrganization"/>
+		<rdfs:range rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+		<skos:definition>indicates the principal place where an entity conducts business within some country, such as where its headquarters is located</skos:definition>
+		<cmns-av:explanatoryNote>Corporate domicile refers to a place where a company&apos;s affairs are discharged. It is also typically the legal home of a corporation within a country because the place is considered by law as the center of corporate affairs. In cases where a business has incorporated in one location for convenience, such as for taxation, legal, or regulatory purposes, but operates primarily in one or more other locations, domicile refers to the operational location(s) rather than legal location. Many companies in the US have incorporated in the State of Delaware, for example, but do not have operational facilities in Delaware (or only have small offices there).</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-org;isMembershipPartyIn">

@@ -49,7 +49,7 @@
 	
 	<owl:Ontology rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
 		<rdfs:label>ISO 11238 Registration Authorities Ontology</rdfs:label>
-		<dct:abstract>The registration authorities ontology provides the set of registration authorities and related code set definitions that are needed for identification of substances and medicinal products. It is derived from the ISO 11238:2018 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of regulated information on substances standard.</dct:abstract>
+		<dct:abstract>The registration authorities ontology defines international registration authorities, regulatory agencies and codes required for identification of substances and medicinal products. It is derived from the ISO 11238:2018 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of regulated information on substances standard.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"/>
@@ -66,6 +66,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-RegistrationAuthorities/"/>
+		<skos:scopeNote>Note that jurisdiction-specific counterparties and codes are specified in subordinate ontologies supporting those jurisdictions.</skos:scopeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -205,16 +206,6 @@
 		<cmns-av:usageNote>Although CAS numbers are widely used, they cannot be freely used. CAS has guidelines on the use of CAS registry numbers and has attempted to restrict their use in publicly available databases.</cmns-av:usageNote>
 	</owl:Class>
 	
-	<owl:NamedIndividual rdf:about="&idmp-ra;ChemblDatabase">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>ChEMBL database</rdfs:label>
-		<skos:definition>manually curated database of bioactive molecules with drug-like properties</skos:definition>
-		<cmns-av:abbreviation>ChEMBL</cmns-av:abbreviation>
-		<cmns-av:directSource rdf:resource="https://www.ebi.ac.uk/chembl/"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
-		<lcc-lr:hasTextualName>ChEMBL database</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
 	<owl:NamedIndividual rdf:about="&idmp-ra;ChemicalAbstractsService">
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdfs:label>Chemical Abstracts Service</rdfs:label>
@@ -262,64 +253,6 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.2</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:NamedIndividual rdf:about="&idmp-ra;ChemicalEntitiesOfBiologicalInterest">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>Chemical Entities of Biological Interest</rdfs:label>
-		<skos:definition>freely available dictionary of molecular entities focused on &apos;small&apos; chemical compounds</skos:definition>
-		<cmns-av:directSource rdf:resource="https://www.ncbi.nlm.nih.gov/taxonomy"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;NationalLibraryOfMedicineRegistrationAuthority"/>
-		<lcc-lr:hasTextualName>Chemical Entities of Biological Interest (ChEBI)</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:Class rdf:about="&idmp-ra;ChemicalEntitiesOfBiologicalInterestEntry">
-		<rdfs:subClassOf rdf:resource="&cmns-ra;RegistryEntry"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:hasValue rdf:resource="&idmp-ra;ChemicalEntitiesOfBiologicalInterest"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom rdf:resource="&idmp-ra;ChemicalEntitiesOfBiologicalInterestIdentifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>Chemical Entities of Biological Interest registry entry</rdfs:label>
-		<skos:definition>entry in the Chemical Entities of Biological Interest, that includes the Chemical Entities of Biological Interest Identifier used in electronic listing and other regulatory activities</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-ra;ChemicalEntitiesOfBiologicalInterestIdentifier">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceCode"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
-				<owl:hasValue rdf:resource="&idmp-ra;ChemicalEntitiesOfBiologicalInterest"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;hasRegistrationAuthority"/>
-				<owl:hasValue rdf:resource="&idmp-ra;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>Chemical Entities of Biological Interest identifer</rdfs:label>
-		<skos:definition>numeric string that is used to identify records in the Chemical Entities of Biological Interest registry</skos:definition>
-		<cmns-av:synonym>ChEBI ID</cmns-av:synonym>
-	</owl:Class>
-	
 	<owl:NamedIndividual rdf:about="&idmp-ra;ClinicalTrialsGov">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>ClinicalTrials.gov</rdfs:label>
@@ -355,285 +288,6 @@
 		<lcc-lr:hasTextualName>Drug Bank</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-ra;EudraClinicalTrialsNumber">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;ClinicalTrialIdentifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;hasRegistrationAuthority"/>
-				<owl:hasValue rdf:resource="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
-				<owl:hasValue rdf:resource="&idmp-ra;EuropeanUnionClinicalTrialsRegister"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>Eudra clinical trials number</rdfs:label>
-		<skos:definition>unique code assigned to clinical trials in the EU Clinical Trials Register</skos:definition>
-		<cmns-av:abbreviation>EudraCT Number</cmns-av:abbreviation>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-ra;EudraVigilanceCode">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceCode"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;hasRegistrationAuthority"/>
-				<owl:hasValue rdf:resource="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
-				<owl:hasValue rdf:resource="&idmp-ra;ExtendedEudraVigilanceMedicinalProductDictionary"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>EudraVigilance code</rdfs:label>
-		<skos:definition>unique code assigned to any substance entered in the eXtended EudraVigilance Medicinal Product Dictionary (XEVMPD)</skos:definition>
-		<skos:note>An EV Code for a substance is generated after the substance has been inserted successfully in the XEVMPD via an eXtended EudraVigilance Product Report Message (XEVPRM).</skos:note>
-		<skos:note>The XEVMPD is a format to electronically submit to the European Medicines Agency (EMA) information on substances, referentials and medicinal products for human use authorized in the European Union as referred into the Article 57 (2) of the regulation 726/2004. It was developed by the EMA in collaboration with the EudraVigilance implementation fora.</skos:note>
-		<cmns-av:abbreviation>EV Code</cmns-av:abbreviation>
-		<cmns-av:abbreviation>EVMPD Code</cmns-av:abbreviation>
-		<cmns-av:abbreviation>XEVMPD Code</cmns-av:abbreviation>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:directSource>
-	</owl:Class>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanChemicalsAgency">
-		<rdf:type rdf:resource="&cmns-pts;Party"/>
-		<rdfs:label>European Chemicals Agency</rdfs:label>
-		<rdfs:seeAlso rdf:resource="https://echa.europa.eu/"/>
-		<skos:definition>government agency that implements the European Union&apos;s chemicals legislation to protect health and the environment</skos:definition>
-		<cmns-av:abbreviation>ECHA</cmns-av:abbreviation>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanChemicalsAgencyRegistrationAuthority">
-		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
-		<rdfs:label>European Chemicals Agency registration authority</rdfs:label>
-		<skos:definition>European Chemicals Agency in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-pts:isPlayedBy rdf:resource="&idmp-ra;EuropeanChemicalsAgency"/>
-		<cmns-ra:manages rdf:resource="&idmp-ra;ChemicalEntitiesOfBiologicalInterest"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanCommissionFoodAdditivesDatabase">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>European Commission Food Additives Database</rdfs:label>
-		<skos:definition>database that informs about the food additives approved for use in food in the EU and their conditions of use</skos:definition>
-		<cmns-av:directSource rdf:resource="https://ec.europa.eu/food/safety/food-improvement-agents/additives/database_en"/>
-		<cmns-av:explanatoryNote>It is based on the Union list of food additives.</cmns-av:explanatoryNote>
-		<lcc-lr:hasTextualName>European Commission Food Additives Database</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanCommissionScientificCommitteeOnConsumerSafetyOpinions">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>European Commission Scientific Committee on Consumer Safety Opinions</rdfs:label>
-		<skos:definition>registry that provides opinions on health and safety risks (chemical, biological, mechanical and other physical risks) of non-food consumer products (e.g. cosmetic products and their ingredients, toys, textiles, clothing, personal care and household products) and services (e.g. tattooing, artificial sun tanning)</skos:definition>
-		<cmns-av:directSource rdf:resource="https://ec.europa.eu/health/scientific-committees/scientific-committee-consumer-safety-sccs_en"/>
-		<lcc-lr:hasTextualName>European Commission Scientific Committee on Consumer Safety Opinions</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:Class rdf:about="&idmp-ra;EuropeanCommunityNumber">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceCode"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;hasRegistrationAuthority"/>
-				<owl:hasValue rdf:resource="&idmp-ra;EuropeanChemicalsAgencyRegistrationAuthority"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
-				<owl:hasValue rdf:resource="&idmp-ra;EuropeanInventoryOfExistingCommercialChemicalSubstances"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>European community number</rdfs:label>
-		<skos:definition>unique seven digit identifer assigned to substances for regulatory purposes by the European Chemicals Agency</skos:definition>
-		<cmns-av:synonym>EC number</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanDirectorateForTheQualityOfMedicinesAndHealthcareKnowledgeDatabase">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>European Directorate for the Quality of Medicines and Healthcare Knowledge Database</rdfs:label>
-		<skos:definition>repository managed by the European Directorate for the Quality of Medicines and Healthcare that provides information on a given substance or general method of analysis</skos:definition>
-		<cmns-av:directSource rdf:resource="https://www.edqm.eu/en/knowledge-database"/>
-		<lcc-lr:hasTextualName>European Directorate for the Quality of Medicines and Healthcare Knowledge Database</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanInventoryOfExistingCommercialChemicalSubstances">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>European inventory of existing commercial chemical substances</rdfs:label>
-		<skos:definition>legacy repository consisting of an inventory of substances that were deemed to be available on the European Community market between 1 January 1971 and 18 September 1981</skos:definition>
-		<cmns-av:abbreviation>EINECS</cmns-av:abbreviation>
-		<cmns-av:directSource rdf:resource="https://echa.europa.eu/information-on-chemicals/ec-inventory"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;EuropeanChemicalsAgencyRegistrationAuthority"/>
-		<lcc-lr:hasTextualName>EINECS (European inventory of existing commercial chemical substances)</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:Class rdf:about="&idmp-ra;EuropeanInventoryOfExistingCommercialChemicalSubstancesEntry">
-		<rdfs:subClassOf rdf:resource="&cmns-ra;RegistryEntry"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:hasValue rdf:resource="&idmp-ra;EuropeanInventoryOfExistingCommercialChemicalSubstances"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom rdf:resource="&idmp-ra;EuropeanCommunityNumber"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>European inventory of existing commercial chemical substances entry</rdfs:label>
-		<skos:definition>entry in the European Inventory of Existing Commercial chemical Substances, that includes the European Community Number used in electronic listing and other regulatory activities</skos:definition>
-		<cmns-av:abbreviation>EINECS entry</cmns-av:abbreviation>
-	</owl:Class>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanMedicinesAgency">
-		<rdf:type rdf:resource="&cmns-pts;Party"/>
-		<rdfs:label>European Medicines Agency</rdfs:label>
-		<rdfs:seeAlso rdf:resource="https://www.ema.europa.eu/en"/>
-		<skos:definition>decentralised agency of the European Union (EU) responsible for the scientific evaluation, supervision and safety monitoring of medicines in the EU</skos:definition>
-		<cmns-av:abbreviation>EMA</cmns-av:abbreviation>
-		<cmns-av:explanatoryNote>The mission of the European Medicines Agency (EMA) is to foster scientific excellence in the evaluation and supervision of medicines, for the benefit of public and animal health in the European Union (EU).</cmns-av:explanatoryNote>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency">
-		<rdf:type rdf:resource="&idmp-mprd;MedicinesRegulatoryAgency"/>
-		<rdfs:label>European Medicines Agency as medicines regulatory agency</rdfs:label>
-		<skos:definition>European Medicines Agency in its role as a regulatory agency for medicinal products</skos:definition>
-		<cmns-pts:isPlayedBy rdf:resource="&idmp-ra;EuropeanMedicinesAgency"/>
-		<cmns-rga:hasJurisdiction rdf:resource="&idmp-ra;EuropeanUnionJurisdiction"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority">
-		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
-		<rdfs:label>European Medicines Agency Registration Authority</rdfs:label>
-		<skos:definition>European Medicines Agency (EMA) in its role as a Registration Authority (RA), which is a function of the eXtended EudraVigilance Medicinal Product Dictionary (XEVMPD) for registration of substances</skos:definition>
-		<cmns-av:abbreviation>EMA XEVMPD RA</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
-		<cmns-pts:isPlayedBy rdf:resource="&idmp-ra;EuropeanMedicinesAgency"/>
-		<cmns-ra:manages rdf:resource="&idmp-ra;ExtendedEudraVigilanceMedicinalProductDictionary"/>
-		<cmns-ra:manages rdf:resource="&idmp-ra;SummaryOfProductCharacteristics"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstitute">
-		<rdf:type rdf:resource="&cmns-pts;Party"/>
-		<rdfs:label>European Molecular Biology Laboratory European Bioinformatics Institute</rdfs:label>
-		<rdfs:seeAlso rdf:resource="https://www.ebi.ac.uk/"/>
-		<skos:definition>laboratory that is part of the European Bioinformatics Institute helps scientists realise the potential of big data in biology, exploiting complex information to make discoveries that benefit humankind</skos:definition>
-		<cmns-av:abbreviation>EMBL-EBI</cmns-av:abbreviation>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority">
-		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
-		<rdfs:label>European Molecular Biology Laboratory European Bioinformatics Institute registration authority</rdfs:label>
-		<skos:definition>European Molecular Biology Laboratory European Bioinformatics Institute in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-av:abbreviation>EMBL-EBI RA</cmns-av:abbreviation>
-		<cmns-pts:isPlayedBy rdf:resource="&idmp-ra;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstitute"/>
-		<cmns-ra:manages rdf:resource="&idmp-ra;EuropeanInventoryOfExistingCommercialChemicalSubstances"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanPublicAssessmentReports">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>european public assessment reports</rdfs:label>
-		<cmns-av:directSource rdf:resource="https://www.ema.europa.eu/en/glossary/european-public-assessment-report"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority"/>
-		<lcc-lr:hasTextualName>European public assessment reports</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanUnionClinicalTrialsRegister">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>European Union Clinical Trials Register</rdfs:label>
-		<skos:definition>register that contains information on interventional clinical trials on medicines conducted in the European Union (EU), or the European Economic Area (EEA) which started after 1 May 2004</skos:definition>
-		<cmns-av:directSource rdf:resource="https://www.clinicaltrialsregister.eu/about.html"/>
-		<lcc-lr:hasTextualName>European Union Clinical Trials Register</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanUnionGeopoliticalEntity">
-		<rdf:type rdf:resource="&lcc-cr;GeopoliticalEntity"/>
-		<rdfs:label>European Union geopolitical entity</rdfs:label>
-		<rdfs:seeAlso rdf:resource="https://europa.eu/european-union/about-eu/countries_en"/>
-		<skos:definition>individual representing the federated sovereignty and polity that is the European Union</skos:definition>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Austria"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Belgium"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Bulgaria"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Croatia"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Cyprus"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Czechia"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Denmark"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Estonia"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Finland"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;France"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Germany"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Greece"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Hungary"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Ireland"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Italy"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Latvia"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Lithuania"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Luxembourg"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Malta"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Netherlands"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Poland"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Portugal"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Romania"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Slovakia"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Slovenia"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Spain"/>
-		<lcc-cr:hasSubregion rdf:resource="&lcc-3166-1;Sweden"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;EuropeanUnionJurisdiction">
-		<rdf:type rdf:resource="&cmns-rga;Jurisdiction"/>
-		<rdfs:label>European Union jurisdiction</rdfs:label>
-		<skos:definition>individual representing the overall jurisdiction for the European Union, namely, that of the Court of Justice of the EU and Court of Auditors of the EU as well as regulatory agencies</skos:definition>
-		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://europa.eu/european-union/about-eu/countries_en</cmns-av:adaptedFrom>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Austria"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Belgium"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Bulgaria"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Croatia"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Cyprus"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Czechia"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Denmark"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Estonia"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Finland"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;France"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Germany"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Greece"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Hungary"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Ireland"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Italy"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Latvia"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Lithuania"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Luxembourg"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Malta"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Netherlands"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Poland"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Portugal"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Romania"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Slovakia"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Slovenia"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Spain"/>
-		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;Sweden"/>
-	</owl:NamedIndividual>
-	
 	<owl:NamedIndividual rdf:about="&idmp-ra;EvaluationsOfTheJointExpertCommitteeOnFoodAdditives">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>Evaluations of the Joint FAO/WHO Expert Committee on Food Additives</rdfs:label>
@@ -641,50 +295,6 @@
 		<cmns-av:abbreviation>JECFA</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://apps.who.int/food-additives-contaminants-jecfa-database/"/>
 		<lcc-lr:hasTextualName>Evaluations of the Joint FAO/WHO Expert Committee on Food Additives</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;ExtendedEudraVigilanceMedicinalProductDictionary">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>eXtended EudraVigilance Medicinal Product Dictionary</rdfs:label>
-		<skos:definition>registry that was designed to support the collection, reporting, coding and evaluation of authorized and investigational medicinal product and substance information in a standardized and structured way</skos:definition>
-		<cmns-av:abbreviation>XEVMPD</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority"/>
-		<lcc-lr:hasTextualName>eXtended EudraVigilance Medicinal Product Dictionary</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:Class rdf:about="&idmp-ra;ExtendedEudraVigilanceMedicinalProductDictionaryEntry">
-		<rdfs:subClassOf rdf:resource="&cmns-ra;RegistryEntry"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:hasValue rdf:resource="&idmp-ra;ExtendedEudraVigilanceMedicinalProductDictionary"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom rdf:resource="&idmp-ra;EudraVigilanceCode"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>eXtended EudraVigilance Medicinal Product Dictionary registry entry</rdfs:label>
-		<skos:definition>entry in the eXtended EudraVigilance Medicinal Product Dictionary (XEVMPD) registry, that includes the EudraVigilance codes (EV codes) used in the electronic product dictionary and for other regulatory activities</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
-	</owl:Class>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;ExtendedEudraVigilanceMedicinalProductDictionaryService">
-		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
-		<rdfs:label>eXtended EudraVigilance Medicinal Product Dictionary service</rdfs:label>
-		<skos:definition>service for the collection, reporting, coding and evaluation of authorized and investigational medicinal product and substance information in a standardized and structured way</skos:definition>
-		<cmns-av:abbreviation>XEVMPD service</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
-		<cmns-prd:isProvidedBy rdf:resource="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ra;FoodAndDrugAdministrationRegistrationAuthority">
@@ -843,14 +453,6 @@
 		<cmns-av:abbreviation>INN</cmns-av:abbreviation>
 		<cmns-av:synonym>generic name</cmns-av:synonym>
 	</owl:Class>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;InternationalUnionOfBasicAndClinicalPharmacologyGuide">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>International Union of Basic and Clinical Pharmacology Guide</rdfs:label>
-		<skos:definition>expert-curated resource of ligand-activity-target relationships, the majority of which come from high-quality pharmacological and medicinal chemistry literature</skos:definition>
-		<cmns-av:directSource rdf:resource="https://www.guidetopharmacology.org/"/>
-		<lcc-lr:hasTextualName>International Union of Basic and Clinical Pharmacology Guide</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ra;InventoryOfEffectiveFoodContactSubstanceNotifications">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
@@ -1276,17 +878,6 @@
 		<lcc-lr:hasTextualName>RxNorm</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-ra;SummaryOfProductCharacteristics">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>Summary of Product Characteristics</rdfs:label>
-		<skos:definition>registry that contains documents describing the properties and the officially approved conditions of use of a medicine</skos:definition>
-		<skos:note>Summaries of product characteristics form the basis of information for healthcare professionals on how to use the medicine safely and effectively.</skos:note>
-		<cmns-av:abbreviation>SmPC</cmns-av:abbreviation>
-		<cmns-av:directSource rdf:resource="https://www.ema.europa.eu/en/glossary/summary-product-characteristics"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;EuropeanMedicinesAgencyRegistrationAuthority"/>
-		<lcc-lr:hasTextualName>Summary of Product Characteristics</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
 	<owl:NamedIndividual rdf:about="&idmp-ra;USPharmacopeiaMedicinesCompendium">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>U.S. Pharmacopeia Medicines Compendium</rdfs:label>
@@ -1294,14 +885,6 @@
 		<cmns-av:abbreviation>USP-MC</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://www.uspnf.com/notices/archived-call-candidates-usp-medicines-compendium-biologics-expert-committee#:~:text=The%20USP%20MC%20was%20launched,legally%20marketed%20in%20any%20country"/>
 		<lcc-lr:hasTextualName>U.S. Pharmacopeia Medicines Compendium</lcc-lr:hasTextualName>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;UniProt">
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>UniProt</rdfs:label>
-		<skos:definition>registry that provides the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information</skos:definition>
-		<cmns-av:directSource rdf:resource="https://www.uniprot.org/"/>
-		<lcc-lr:hasTextualName>UniProt</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-ra;UniqueIngredientNumber">
