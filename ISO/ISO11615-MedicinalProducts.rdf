@@ -449,12 +449,6 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Container">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;contains"/>
-				<owl:allValuesFrom rdf:resource="&owl;Thing"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>container</rdfs:label>
 		<skos:definition>object that can be used to hold things</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;NamingConformant"/>
@@ -471,7 +465,6 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-mprd;ImmediateContainer">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ManufacturedItem"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -648,7 +641,6 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;IntermediatePackaging">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ManufacturedItem"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -764,7 +756,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:onClass rdf:resource="&cmns-org;FormalOrganization"/>
+				<owl:onClass rdf:resource="&cmns-org;LegalEntity"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -829,6 +821,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductContainer">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ManufacturedItem"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Container"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -907,7 +900,6 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;OuterPackaging">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ManufacturedItem"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -917,12 +909,11 @@
 		</rdfs:subClassOf>
 		<rdfs:label>outer packaging</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.57</dct:source>
-		<skos:definition>external container in which a Medicinal Product is supplied</skos:definition>
+		<skos:definition>external container in which a medicinal product is supplied</skos:definition>
 		<cmns-av:explanatoryNote>The manufactured item or pharmaceutical product is not in direct contact with the outer packaging except where the outer packaging also serves as the immediate container. An alternative, compatible definition of outer packaging is given in Directive 92/27/EEC.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PackageItem">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ManufacturedItem"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
