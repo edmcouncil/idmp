@@ -1,0 +1,151 @@
+PREFIX iter: <http://w3id.org/sparql-generate/iter/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
+
+GENERATE {
+  <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }>
+    a ?idmpSubstanceType ;
+    skos:prefLabel ?prefLabel ;
+    skos:altLabel ?altLabel ;
+    dct:created ?Created_Date ;
+    dct:modified ?Last_Updated_Date ;
+    cmns-dsg:hasName ?nameURI ;
+    .
+
+  ?nameURI a idmp-sub:SubstanceName ;
+    cmns-txt:hasTextValue ?Substance_Name ;
+    dct:source ?sourceAuthority
+    .
+
+  <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }/XEVMPD/{ ?External_Code_XEVMPD }>
+    a idmp-ra:EudraVigilanceCode ;
+    cmns-id:identifies <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }> ;
+    cmns-txt:hasTextValue ?External_Code_XEVMPD ;
+    .
+}
+ITERATOR iter:CSV(<sms-substances-list.csv>) AS
+?SMS_ID
+?Substance_Name
+?Is_Preferred_Name
+?Language
+?Name_Source
+?Substance_Domain
+?Status
+?Substance_Type
+?Created_Date
+?Last_Updated_Date
+?External_Code_XEVMPD
+?External_Code_SVG
+WHERE {
+  BIND(
+    IF(?Language = "Bulgarian", "bg",
+    IF(?Language = "Croatian", "hr",
+    IF(?Language = "Czech", "cs",
+    IF(?Language = "Danish", "da",
+    IF(?Language = "Dutch", "nl",
+    IF(?Language = "English", "en",
+    IF(?Language = "Estonian", "et",
+    IF(?Language = "Finnish", "fi",
+    IF(?Language = "French", "fr",
+    IF(?Language = "German", "de",
+    IF(?Language = "Greek, Modern (1453-)", "el",
+    IF(?Language = "Hungarian", "hu",
+    IF(?Language = "Icelandic", "is",
+    IF(?Language = "Irish", "ga",
+    IF(?Language = "Italian", "it",
+    IF(?Language = "Latin", "la",
+    IF(?Language = "Latvian", "lv",
+    IF(?Language = "Lithuanian", "lt",
+    IF(?Language = "Maltese", "mt",
+    IF(?Language = "Norwegian", "no",
+    IF(?Language = "Polish", "pl",
+    IF(?Language = "Portuguese", "pt",
+    IF(?Language = "Romanian", "ro",
+    IF(?Language = "Slovak", "sk",
+    IF(?Language = "Slovenian", "sl",
+    IF(?Language = "Spanish", "es",
+    IF(?Language = "Swedish", "sv",
+    ?Language )))))))))))))))))))))))))))
+    AS ?Normalized_Language )
+
+  BIND( STRLANG("{?Substance_Name}","{?Normalized_Language}") AS ?Substance_Name_LangString )
+  BIND( IF(?Is_Preferred_Name = "True", ?Substance_Name_LangString, ?unbound) AS ?prefLabel )
+  BIND( IF(?Is_Preferred_Name = "False", ?Substance_Name_LangString, ?unbound) AS ?altLabel )
+
+  BIND(
+    IF(?Substance_Type = "Chemical", idmp-sub:ChemicalSubstance,
+    IF(?Substance_Type = "Mixture", idmp-sub:Mixture,
+    IF(?Substance_Type = "Nucleic acid", idmp-sub:NucleicAcidSubstance,
+    IF(?Substance_Type = "Polymer", idmp-sub:PolymerSubstance,
+    IF(?Substance_Type = "Protein - Other", idmp-sub:ProteinSubstance,
+    IF(?Substance_Type = "Specified Substance Group 1", idmp-sub:Substance,
+    IF(?Substance_Type = "Specified Substance Group 3", idmp-sub:Substance,
+    IF(?Substance_Type = "Structurally Diverse - Allergen", idmp-sub:StructurallyDiverseSubstance,
+    IF(?Substance_Type = "Structurally Diverse - Cell therapy", idmp-sub:StructurallyDiverseSubstance,
+    IF(?Substance_Type = "Structurally Diverse - Herbal", idmp-sub:StructurallyDiverseSubstance,
+    IF(?Substance_Type = "Structurally Diverse - Other", idmp-sub:StructurallyDiverseSubstance,
+    IF(?Substance_Type = "Structurally Diverse - Plasma derived", idmp-sub:StructurallyDiverseSubstance,
+    IF(?Substance_Type = "Structurally Diverse - Vaccine", idmp-sub:StructurallyDiverseSubstance,
+    ?Substance_Type )))))))))))))
+    AS ?idmpSubstanceType )
+
+  BIND( IF(?Name_Source = "", ?unbound, <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }/{ StrUUID() }>) AS ?nameURI )
+  BIND(
+    IF(?Name_Source = "ADISINSIGHT", idmp-ra:ADISINSIGHT,
+    IF(?Name_Source = "BAN", idmp-ra:BAN,
+    IF(?Name_Source = "BRITISH HERBAL PHARMACOPOEIA", idmp-ra:BritishHerbalPharmacopoeia,
+    IF(?Name_Source = "BRITISH PHARMACOPOEIA", idmp-ra:BritishPharmacopoeia,
+    IF(?Name_Source = "CHEBI", idmp-ra:ChemicalEntitiesOfBiologicalInterest, # valid
+    IF(?Name_Source = "CHEMICAL ABSTRACT SERVICE", idmp-ra:ChemicalAbstractsService, # valid
+    IF(?Name_Source = "CHEMICALBOOK", idmp-ra:CHEMICALBOOK,
+    IF(?Name_Source = "CHEMIDPLUS", idmp-ra:CHEMIDPLUS,
+    IF(?Name_Source = "CHINESE PHARMACOPOEIA", idmp-ra:ChinesePharmacopoeia,
+    IF(?Name_Source = "COLORCON", idmp-ra:COLORCON,
+    IF(?Name_Source = "COMMUNITY HERBAL MONOGRAPHS", idmp-ra:CommunityHerbalMonographs,
+    IF(?Name_Source = "COMMUNITY REGISTER OF THE EUROPEAN COMMISSION", idmp-ra:CommunityRegisterOfTheEuropeanCommission,
+    IF(?Name_Source = "COMPANY SPECIFICATION", idmp-ra:CompanySpecification,
+    IF(?Name_Source = "COSING", idmp-ra:COSING,
+    IF(?Name_Source = "CZECH PHARMACOPOEIA", idmp-ra:CzechPharmacopoeia,
+    IF(?Name_Source = "DEUTSCHES ARZNEIBUCH", idmp-ra:DeutschesArzneibuch,
+    IF(?Name_Source = "ENCYCLOPEDIA OF LIFE (EOL)", idmp-ra:EncyclopediaOfLifeEol,
+    IF(?Name_Source = "EUROPEAN CHEMICALS AGENCY (ECHA)", idmp-ra:EuropeanChemicalsAgency, # valid
+    IF(?Name_Source = "EUROPEAN FOOD SAFETY AUTHORITY (EFSA)", idmp-ra:EuropeanFoodSafetyAuthorityEfsa,
+    IF(?Name_Source = "EUROPEAN PHARMACOPOEIA", idmp-ra:EuropeanPharmacopoeia,
+    IF(?Name_Source = "FDA INACTIVE INGREDIENTS DATABASE", idmp-ra:FdaInactiveIngredientsDatabase,
+    IF(?Name_Source = "FDA SUBSTANCE REGISTRATION SYSTEM", idmp-ra:FoodAndDrugAdministrationRegistrationAuthority, # valid
+    IF(?Name_Source = "FRENCH PHARMACOPOEIA", idmp-ra:FrenchPharmacopoeia,
+    IF(?Name_Source = "GLOBAL DIVERSITY INFORMATION FACILITY", idmp-ra:GlobalDiversityInformationFacility,
+    IF(?Name_Source = "GREEK PHARMACOPOEIA", idmp-ra:GreekPharmacopoeia,
+    IF(?Name_Source = "HAB", idmp-ra:HAB,
+    IF(?Name_Source = "HANDBOOK OF PHARMACEUTICAL EXCIPIENT (2ND EDITION)", idmp-ra:HandbookOfPharmaceuticalExcipient,
+    IF(?Name_Source = "HOMEOPATHIC PHARMACOPOEIA OF THE UNITED STATES", idmp-ra:HomeopathicPharmacopoeiaOfTheUnitedStates,
+    IF(?Name_Source = "INDEX FUNGORUM", idmp-ra:IndexFungorum,
+    IF(?Name_Source = "INFLUENZA RECOMMENDATIONS", idmp-ra:InfluenzaRecommendations,
+    IF(?Name_Source = "INN", idmp-ra:InternationalNonproprietaryName, # valid
+    IF(?Name_Source = "INTERNATIONAL CODE OF NOMENCLATURE OF BACTERIA (ICNB)", idmp-ra:InternationalCodeOfNomenclatureOfBacteria,
+    IF(?Name_Source = "INTERNATIONAL NUMBERING SYSTEM (INS) FOR FOOD ADDITIVES", idmp-ra:InternationalNumberingSystem,
+    IF(?Name_Source = "INVESTIGATOR'S BROCHURE", idmp-ra:InvestigatorBrochure,
+    IF(?Name_Source = "ITALIAN PHARMACOPOEIA", idmp-ra:ItalianPharmacopoeia,
+    IF(?Name_Source = "ITIS (INTEGRATED TAXONOMIC INFORMATION SYSTEM)", idmp-ra:IntegratedTaxonomicInformationSystem, # valid
+    IF(?Name_Source = "JAN", idmp-ra:JAN,
+    IF(?Name_Source = "JAPANESE PHARMACOPOEIA", idmp-ra:JapanesePharmacopoeia,
+    IF(?Name_Source = "KEW GARDEN- IPLANTS DATABASE", idmp-ra:KewGardenIplantsDatabase,
+    IF(?Name_Source = "MARTINDALE", idmp-ra:MARTINDALE,
+    IF(?Name_Source = "POLISH PHARMACOPOEIA", idmp-ra:PolishPharmacopoeia,
+    IF(?Name_Source = "PROTEIN DATA BANK (PDB)", idmp-ra:ProteinDataBankPdb,
+    IF(?Name_Source = "PUBCHEM", idmp-ra:PubChem, # valid
+    IF(?Name_Source = "SPC", idmp-ra:SPC,
+    IF(?Name_Source = "Substance Validation Group", idmp-ra:SubstanceValidationGroup,
+    IF(?Name_Source = "THE MERCK INDEX 20TH EDITION", idmp-ra:MerckIndexOnline, # valid
+    IF(?Name_Source = "THE PLANT LIST", idmp-ra:PlantList,
+    IF(?Name_Source = "USAN", idmp-ra:USAN,
+    IF(?Name_Source = "USP", idmp-ra:USPharmacopeiaMedicinesCompendium, # valid
+    IF(?Name_Source = "WHO", idmp-ra:WorldHealthOrganization, # valid
+    ?Name_Source ))))))))))))))))))))))))))))))))))))))))))))))))))
+    AS ?sourceAuthority )
+}

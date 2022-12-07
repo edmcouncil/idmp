@@ -16,4 +16,4 @@ Instructions for transforming the GSRS data.
 ## Accurids
 
 1. Run `./transform-accurids.sh` from the terminal console.
-1. Upload `public_data.json`, `gsrs-public-data-substances.rqg`, `gsrs-public-data-relationships.rqg`, `gsrs-public-data-names.rqg`, and `gsrs-public-data-identifiers.rqg` files to Accurids https://pistoiaalliance.dev.accurids.com
+1. Upload `public_data.json`, `gsrs-public-data-substances.rqg`, `gsrs-public-data-relationships.rqg`, `gsrs-public-data-names.rqg`, and `gsrs-public-data-identifiers.rqg` files to Accurids https://pistoiaalliance.dev.accurids.com.
