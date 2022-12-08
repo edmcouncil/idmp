@@ -1,0 +1,121 @@
+PREFIX iter: <http://w3id.org/sparql-generate/iter/>
+PREFIX func: <http://w3id.org/sparql-generate/fn/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <https://schema.org/>
+PREFIX cmns-org: <https://www.omg.org/spec/Commons/Organizations/>
+
+GENERATE {
+    # Generate Organisations
+    <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>
+        a cmns-org:LegalEntity ;
+        skos:prefLabel ?Name ;
+        schema:address <https://spor.ema.europa.eu/omswi/#/searchedOrganisations/viewLocation/{ ?Location_ID }>
+        .
+
+    GENERATE {
+        <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>
+            skos:altLabel ?Alternative_Name_LangString ;
+            .
+    }
+    ITERATOR iter:for(0,1,?Alternative_Name_Length) AS ?index
+    WHERE {
+        BIND(func:SplitAtPosition(?Alternative_Name,"¦",?index) as ?Alt_Name)
+        BIND(IF(?index<?Alternative_Name_Language_Normalized_Length, func:SplitAtPosition(?Alternative_Name_Language_Normalized,"¦",?index), "") as ?Alt_Name_Lang)
+        BIND(STRLANG("{?Alt_Name}","{?Alt_Name_Lang}") as ?Alternative_Name_LangString)
+    } .
+
+    # Generate Locations
+    <https://spor.ema.europa.eu/omswi/#/searchedOrganisations/viewLocation/{ ?Location_ID }>
+        a schema:PostalAddress ;
+        skos:prefLabel ?Location_ID ;
+        schema:streetAddress ?Address_Normalized ;
+        schema:postalCode ?Address_Postal_Code ;
+        schema:addressLocality ?City_Normalized ;
+        schema:addressRegion ?State_Normalized ;
+        schema:addressCountry ?Address_Country_Display_Name ;
+        .
+}
+SOURCE <locations.csv> AS ?source
+ITERATOR iter:CSV(?source) AS
+?Organisation_ID
+?Identifier_Code
+?Mapping_Code_System
+?Mapping_Code_System_Name
+?Mapping_Code
+?Mapping_Valid_From
+?Mapping_Valid_To
+?Category_Classification_Category_Code_System_Name
+?Category_Classification_Category_Code
+?Category_Classification_Category_Display_Name
+?Status
+?Name
+?Acronym
+?Alternative_Name
+?Alternative_Name_Language
+?Version_Timestamp
+?Location_ID
+?Location_Link_Href
+?Current_Version
+?Location_Mapping_Code_System
+?Location_Mapping_Code_System_Name
+?Location_Mapping_Code
+?Location_Status
+?Address_PO_Box
+?Address_Postal_Code
+?Address_Country_Code
+?Address_Country_Display_Name
+?Address_GPS_Location
+?Address_Language
+?Address_Line_1
+?Address_Line_2
+?Address_Line_3
+?Address_Line_4
+?Address_City
+?Address_State
+?Address_Region
+?Address_County
+?Communication_Details_Email_Address
+?Communication_Details_Phone_Number_Country_Prefix
+?Communication_Details_Phone_Number
+?Communication_Details_Phone_Number_Extension
+?Communication_Details_Address_PO_Box
+?Communication_Details_Address_Postal_Code
+?Communication_Details_Address_Country_Code
+?Communication_Details_Address_Country_Display_Name
+?Communication_Details_Address_GPS_Location
+?Communication_Details_Address_Language
+?Communication_Details_Address_Line_1
+?Communication_Details_Address_Line_2
+?Communication_Details_Address_Line_3
+?Communication_Details_Address_Line_4
+?Communication_Details_Address_City
+?Communication_Details_Address_State
+?Communication_Details_Address_Region
+?Communication_Details_Address_County
+?Location_Version_Timestamp
+WHERE {
+
+    # Normalized Data
+    BIND(
+        IF(?Alternative_Name_Language = "DE¦" && ?Alternative_Name = "Referat Arzneimittel - Und Apothekenwesen¦Landesverwaltungsamt Sachsen-Anhalt", "DE¦DE",
+        IF(?Alternative_Name_Language = "ES¦" && ?Alternative_Name = "Centro De Farmacovigilancia De Navarra¦Centro de Farmacovigilancia de Navarragilancia de Navarra", "ES¦ES",
+        IF(?Alternative_Name_Language = "SV¦" && ?Alternative_Name = "Rättsmedicinalverket¦Swedish National Board of Forensic Medicine and Karolinska Institute", "SV¦EN",
+        ?Alternative_Name_Language )))
+        AS ?Alternative_Name_Language_Normalized )
+
+    BIND ( IF (BOUND(?Alternative_Name), strlen(replace(?Alternative_Name, "[^¦]", "")) + 1, 0) as ?Alternative_Name_Length)
+    BIND ( IF (BOUND(?Alternative_Name_Language_Normalized), strlen(replace(?Alternative_Name_Language_Normalized, "[^¦]", "")) + 1, 0) as ?Alternative_Name_Language_Normalized_Length)
+
+    BIND (
+        IF (contains(?Address_Line_1, "¦"),
+        IF (regex(?Address_Line_1, "^[^¦]", "i"), func:SplitAtPosition(?Address_Line_1,"¦",0), ?unbound), ?Address_Line_1)
+        as ?Address_Normalized)
+    BIND (
+        IF (contains(?Address_City, "¦"),
+        IF (regex(?Address_City, "^[^¦]", "i"), func:SplitAtPosition(?Address_City,"¦",0), ?unbound), ?Address_City)
+        as ?City_Normalized)
+    BIND (
+        IF (contains(?Address_State, "¦"),
+        IF (regex(?Address_State, "^[^¦]", "i"), func:SplitAtPosition(?Address_State,"¦",0), ?unbound), ?Address_State)
+        as ?State_Normalized)
+}
