@@ -403,6 +403,27 @@
 		<cmns-av:explanatoryNote>A physical site has certain characteristics that contribute to the context it provides, including area, shape, accessibility, and in the case of a geographic site, landforms, soil and ground conditions, climate, and so forth.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-prd;StockKeepingUnit">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;TradeItem"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;TradeItem"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>stock keeping unit</rdfs:label>
+		<skos:definition>unique classifier for a class of items for sale, purchased, and/or tracked in inventory, sometimes represented via a barcode for scanning and tracking, used within the context of an organization</skos:definition>
+		<cmns-av:abbreviation>SKU</cmns-av:abbreviation>
+		<cmns-av:explanatoryNote>SKUs are not regulated or standardized. When a company receives items from a vendor, it has a choice of maintaining the vendor&apos;s SKU or creating its own. This makes them distinct from Global Trade Item Number (GTIN), which are standard, global, tracking units. Uniform Product Code (UPC), European Article Number (EAN), and Australian Product Number (APN) are special cases of GTINs.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-prd;Supplier">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
 		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
@@ -431,6 +452,38 @@
 		<skos:scopeNote>This definition covers services and products, from raw materials through to end user products, all of which may have predefined characteristics.</skos:scopeNote>
 		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 2.1</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Each trade item that is different from another in design and/or content is allocated a unique identification number, which remains the same as long as it is traded. The same identification number is given to all trade items sharing key characteristics. Such numbers must be treated in their entirety throughout the supply chain.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;UPCCompanyPrefix">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;GS1CompanyPrefix"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:onClass rdf:resource="&cmns-prd;GS1CompanyPrefix"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>UPC company prefix</rdfs:label>
+		<skos:definition>unique string of digits derived from a GS1 company prefix that starts with a leading zero, constructed by removing that zero, that is used to construct 12-digit trade item identifiers</skos:definition>
+		<skos:example>For example, the 6-digit U.P.C. Company Prefix 614141 is derived from the 7-digit GS1 Company Prefix 0614141.</skos:example>
+		<skos:note>When a leading zero is added to a U.P.C. Company Prefix, it becomes a GS1 Company Prefix that may be used to issue all other GS1 identification keys.</skos:note>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.6; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-prd;UniformProductCode">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;GlobalTradeItemNumber"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&cmns-prd;UPCCompanyPrefix"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>uniform product code</rdfs:label>
+		<skos:definition>classifier expressed that is a 12-digit GTIN expressed using barcode symbology that conforms with GS1 General Specifications</skos:definition>
+		<cmns-av:abbreviation>UPC</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Along with the related International Article Number (EAN) barcode, the UPC is the barcode mainly used for scanning of trade items at the point of sale, per the specifications of the international GS1 organization.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;Venue">
