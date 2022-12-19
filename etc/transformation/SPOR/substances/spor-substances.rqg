@@ -4,8 +4,10 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
 PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
+PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
 
 GENERATE {
   <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }>
@@ -15,6 +17,10 @@ GENERATE {
     dct:created ?Created_Date ;
     dct:modified ?Last_Updated_Date ;
     cmns-dsg:hasName ?nameURI ;
+    cmns-id:isIdentifiedBy <https://data.pistoiaalliance.org/EVMPD/{ ?External_Code_XEVMPD }> ;
+    cmns-id:isIdentifiedBy <https://data.pistoiaalliance.org/idmp/FDA_UNII/{ ?External_Code_UNII }> ;
+    skos:exactMatch <https://gsrs.ncats.nih.gov/api/v1/substances/{ ?External_Code_UNII }> ;
+    cmns-cls:isClassifiedBy ?idmpSubstanceDomain
     .
 
   ?nameURI a idmp-sub:SubstanceName ;
@@ -22,8 +28,8 @@ GENERATE {
     dct:source ?sourceAuthority
     .
 
-  <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }/XEVMPD/{ ?External_Code_XEVMPD }>
-    a idmp-ra:EudraVigilanceCode ;
+  <https://data.pistoiaalliance.org/EVMPD/{ ?External_Code_XEVMPD }>
+    a idmp-eura:EudraVigilanceCode ;
     cmns-id:identifies <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }> ;
     cmns-txt:hasTextValue ?External_Code_XEVMPD ;
     .
@@ -37,10 +43,12 @@ ITERATOR iter:CSV(<sms-substances-list.csv>) AS
 ?Substance_Domain
 ?Status
 ?Substance_Type
+?Comment
 ?Created_Date
 ?Last_Updated_Date
 ?External_Code_XEVMPD
 ?External_Code_SVG
+?External_Code_UNII
 WHERE {
   BIND(
     IF(?Language = "Bulgarian", "bg",
@@ -83,8 +91,8 @@ WHERE {
     IF(?Substance_Type = "Nucleic acid", idmp-sub:NucleicAcidSubstance,
     IF(?Substance_Type = "Polymer", idmp-sub:PolymerSubstance,
     IF(?Substance_Type = "Protein - Other", idmp-sub:ProteinSubstance,
-    IF(?Substance_Type = "Specified Substance Group 1", idmp-sub:Substance,
-    IF(?Substance_Type = "Specified Substance Group 3", idmp-sub:Substance,
+    IF(?Substance_Type = "Specified Substance Group 1", idmp-sub:SpecifiedSubstance,
+    IF(?Substance_Type = "Specified Substance Group 3", idmp-sub:SpecifiedSubstance,
     IF(?Substance_Type = "Structurally Diverse - Allergen", idmp-sub:StructurallyDiverseSubstance,
     IF(?Substance_Type = "Structurally Diverse - Cell therapy", idmp-sub:StructurallyDiverseSubstance,
     IF(?Substance_Type = "Structurally Diverse - Herbal", idmp-sub:StructurallyDiverseSubstance,
@@ -93,6 +101,13 @@ WHERE {
     IF(?Substance_Type = "Structurally Diverse - Vaccine", idmp-sub:StructurallyDiverseSubstance,
     ?Substance_Type )))))))))))))
     AS ?idmpSubstanceType )
+
+  BIND(
+    IF(?Substance_Domain = "Human use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000012>,
+    IF(?Substance_Domain = "Veterinary use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000013>,
+    IF(?Substance_Domain = "Human and Veterinary use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014>,
+    ?unbound )))
+    AS ?idmpSubstanceDomain )
 
   BIND( IF(?Name_Source = "", ?unbound, <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }/{ StrUUID() }>) AS ?nameURI )
   BIND(
