@@ -356,7 +356,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;isOutputOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;BatchProcess"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;BatchManufacturingProcess"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -373,6 +373,17 @@
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;BatchManufacturingProcess">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
+		<rdfs:label>batch manufacturing process</rdfs:label>
+		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.8)</dct:source>
+		<skos:definition>process that leads to the production of finite quantities of material by subjecting quantities of input materials to an ordered set of processing activities over a finite period of time using one or more pieces of equipment</skos:definition>
+		<skos:editorialNote>This is a starting point that requires extension to include further axioms including relationships with input and output materials, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
+		<skos:note>Batch processes are discontinuous processes, which are neither discrete nor continuous but have characteristics of both.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:synonym>batch process</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;BatchNumber">
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
 		<rdfs:subClassOf>
@@ -387,16 +398,6 @@
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
 		<cmns-av:adaptedFrom>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</cmns-av:adaptedFrom>
 		<cmns-av:synonym>batch identifier</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-mprd;BatchProcess">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
-		<rdfs:label>batch process</rdfs:label>
-		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.8)</dct:source>
-		<skos:definition>process that leads to the production of finite quantities of material by subjecting quantities of input materials to an ordered set of processing activities over a finite period of time using one or more pieces of equipment</skos:definition>
-		<skos:editorialNote>This is a starting point that requires extension to include further axioms including relationships with input and output materials, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
-		<skos:note>Batch processes are discontinuous processes, which are neither discrete nor continuous but have characteristics of both.</skos:note>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ClinicalTrial">
@@ -483,24 +484,26 @@
 		<cmns-av:usageNote>The ISO 11615 definition for &apos;container&apos; is too specific to be a generalization of some of its subordinate concepts, such as intermediate container and other packaging related concepts.</cmns-av:usageNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;ContinuousProcess">
+	<owl:Class rdf:about="&idmp-mprd;ContinuousManufacturingProcess">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
-		<rdfs:label>continuous process</rdfs:label>
+		<rdfs:label>continuous manufacturing process</rdfs:label>
 		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 4.2.2)</dct:source>
 		<skos:definition>process in which materials are passed in a continuous flow through processing equipment</skos:definition>
 		<skos:editorialNote>This is a starting point that requires extension to include further axioms including relationships with input and output materials, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
 		<skos:note>Once established in a steady operating state, the nature of the process is not dependent on the length of time of operation. Start-ups, transitions, and shutdowns are usually treated as separate activities and do not necessarily contribute to achieving the desired processing.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:synonym>continuous process</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;DiscreteProcess">
+	<owl:Class rdf:about="&idmp-mprd;DiscreteManufacturingProcess">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
-		<rdfs:label>discrete process</rdfs:label>
+		<rdfs:label>discrete manufacturing process</rdfs:label>
 		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 4.2.3)</dct:source>
 		<skos:definition>process in which a specified quantity of parts moves as a unit (group of parts) between workstations and each part maintains its unique identity</skos:definition>
 		<skos:editorialNote>This is a starting point that requires extension to include further axioms including relationships with input and output materials, specific quantities thereof, production lots, and so forth, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
 		<skos:note>Products are classified into production lots that are based on common raw materials, production requirements, and production histories.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:synonym>discrete process</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-mprd;ISO20443-CodeSet">
@@ -1558,7 +1561,7 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>is batch of</rdfs:label>
 		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</dct:source>
-		<rdfs:range rdf:resource="&idmp-mprd;BatchProcess"/>
+		<rdfs:range rdf:resource="&idmp-mprd;BatchManufacturingProcess"/>
 		<skos:definition>is produced or has been produced by a single execution of a batch process</skos:definition>
 	</owl:ObjectProperty>
 	
