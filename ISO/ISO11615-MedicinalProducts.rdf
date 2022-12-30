@@ -349,12 +349,6 @@
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isBatchOf"/>
-				<owl:someValuesFrom rdf:resource="&cmns-prd;Product"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;isOutputOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;BatchManufacturingProcess"/>
 			</owl:Restriction>
@@ -363,6 +357,12 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;Product"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>batch</rdfs:label>
@@ -1120,14 +1120,14 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Batch"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isBatchOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;isContainedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isContainedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
+				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1555,14 +1555,6 @@
 		<rdfs:range rdf:resource="&idmp-mprd;Authorization"/>
 		<owl:inverseOf rdf:resource="&idmp-mprd;hasAuthorizedParty"/>
 		<skos:definition>indicates the situation that faciliates endorsement of the authorized party for some purpose</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;isBatchOf">
-		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
-		<rdfs:label>is batch of</rdfs:label>
-		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</dct:source>
-		<rdfs:range rdf:resource="&idmp-mprd;BatchManufacturingProcess"/>
-		<skos:definition>is produced or has been produced by a single execution of a batch process</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isContainedIn">
