@@ -90,8 +90,8 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11615-MedicinalProducts/"/>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298).</skos:changeNote>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts/"/>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298). It was also extended to include concepts such as process, manufacturing process, process identifier, batch, batch identifier, lot, lot number, and others required in support of the regulatory to manufacturing bridge use case.</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -349,28 +349,54 @@
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isBatchOf"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;Product"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isOutputOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;BatchProcess"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>batch</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.8</dct:source>
-		<skos:definition>specific quantity of a drug or other material that is intended to have uniform character and quality, within specified limits, and is produced according to a single manufacturing order during the same cycle of manufacture</skos:definition>
+		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</dct:source>
+		<skos:definition>material that is being produced or that has been produced by a single execution of a batch process</skos:definition>
+		<skos:editorialNote>The restriction with respect to matter should be revised or augmented to define a specific amount (or amounts) of matter used to produce the batch.</skos:editorialNote>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;BatchIdentifier">
-		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
-		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+	<owl:Class rdf:about="&idmp-mprd;BatchNumber">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:onClass rdf:resource="&idmp-mprd;Batch"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:onProperty rdf:resource="&cmns-id;denotes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Batch"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>batch identifier</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.9</dct:source>
-		<skos:definition>identifier assigned to a specific batch of a medicinal product or item resulting from a manufacturing process at a specific point of time</skos:definition>
+		<rdfs:label>batch number</rdfs:label>
+		<skos:definition>identifier assigned to a specific batch of material that is being produced or that has been produced by a single execution of a batch process</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
+		<cmns-av:adaptedFrom>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</cmns-av:adaptedFrom>
+		<cmns-av:synonym>batch identifier</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;BatchProcess">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
+		<rdfs:label>batch process</rdfs:label>
+		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.8)</dct:source>
+		<skos:definition>process that leads to the production of finite quantities of material by subjecting quantities of input materials to an ordered set of processing activities over a finite period of time using one or more pieces of equipment</skos:definition>
+		<skos:editorialNote>This is a starting point that requires extension to include further axioms including relationships with input and output materials, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
+		<skos:note>Batch processes are discontinuous processes, which are neither discrete nor continuous but have characteristics of both.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ClinicalTrial">
@@ -455,6 +481,26 @@
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>https://ncithesaurus.nci.nih.gov/ncitbrowser/pages/home.jsf</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>The ISO 11615 definition for &apos;container&apos; is too specific to be a generalization of some of its subordinate concepts, such as intermediate container and other packaging related concepts.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ContinuousProcess">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
+		<rdfs:label>continuous process</rdfs:label>
+		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 4.2.2)</dct:source>
+		<skos:definition>process in which materials are passed in a continuous flow through processing equipment</skos:definition>
+		<skos:editorialNote>This is a starting point that requires extension to include further axioms including relationships with input and output materials, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
+		<skos:note>Once established in a steady operating state, the nature of the process is not dependent on the length of time of operation. Start-ups, transitions, and shutdowns are usually treated as separate activities and do not necessarily contribute to achieving the desired processing.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;DiscreteProcess">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
+		<rdfs:label>discrete process</rdfs:label>
+		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 4.2.3)</dct:source>
+		<skos:definition>process in which  a specified quantity of parts moves as a unit (group of parts) between workstations and each part maintains its unique identity</skos:definition>
+		<skos:editorialNote>This is a starting point that requires extension to include further axioms including relationships with input and output materials, specific quantities thereof, production lots, and so forth, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
+		<skos:note>Products are classified into production lots that are based on common raw materials, production requirements, and production histories.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-mprd;ISO20443-CodeSet">
@@ -688,6 +734,39 @@
 		<cmns-av:abbreviation>IMPID</cmns-av:abbreviation>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;Lot">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>lot</rdfs:label>
+		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.32)</dct:source>
+		<skos:definition>unique amount of material having a set of common traits</skos:definition>
+		<skos:editorialNote>This is preliminary and needs extension to specify common characteristics of a given lot.</skos:editorialNote>
+		<skos:note>As defined in ANSI/ISA-95 and IEC 62264-1 as material lot: uniquely identifiable amount of a material.</skos:note>
+		<skos:note>Some examples of common traits are material source, the master recipe used to produce the material, and distinct physical properties.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;LotNumber">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;denotes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Lot"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>batch number</rdfs:label>
+		<skos:definition>identifier assigned to a unique amount of material having a set of common traits</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.32)</cmns-av:adaptedFrom>
+		<cmns-av:synonym>lot ID</cmns-av:synonym>
+		<cmns-av:synonym>lot identifier</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;ManufacturingAuthorization">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Authorization"/>
 		<rdfs:subClassOf>
@@ -718,6 +797,16 @@
 		<skos:definition>authorization provided by a medicines regulatory agency to manufacture medicinal products within a region</skos:definition>
 		<skos:note>Such authorization may be required for both total and partial manufacture and for the various processes of dividing up, packaging or presentation. However, such authorization may not be required for preparation, dividing up, changes in packaging or presentation where these processes are carried out, solely for retail supply, by pharmacists in dispensing pharmacies or by persons legally authorized in a region to carry out such processes.</skos:note>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.39</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ManufacturingProcess">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Process"/>
+		<rdfs:label>manufacturing process</rdfs:label>
+		<dct:source>ISO 18629-11:2005(en) Industrial automation systems and integration — Process specification language — Part 11: PSL core - https://www.iso.org/obp/ui/#iso:std:iso:18629:-11:ed-1:v1:en, clause 3.1.15</dct:source>
+		<skos:definition>structured set of activities or operations performed upon material to convert it from the raw material or a semifinished state to a state of further completion</skos:definition>
+		<skos:editorialNote>This is a starting point that requires extension to include further axioms including relationships with input and output materials, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
+		<skos:note>Manufacturing processes may be arranged in process layout, product layout, cellular layout or fixed position layout. Manufacturing processes may be planned to support make-to-stock, make-to-order, assemble-to-order, etc., based on strategic use and placements of inventories. [SOURCE:ISO 15531-1]</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MarketingAuthorization">
@@ -820,6 +909,56 @@
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.50</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductBatchIdentifierForImmediatePackaging">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;BatchNumber"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cxtid;StructuredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductBatchNumber"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dt;ExplicitDate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medicinal product batch identifier for immediate packaging</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.52</dct:source>
+		<skos:definition>unique identifier allocated to a specific batch of a medicinal product, which appears on the immediate packaging, where this is not the outer packaging</skos:definition>
+		<skos:editorialNote>For more explicit modeling of the semanitics we should consider creating a property chain that links the BAID1 through the pharmaceutical product batch identifier, through the pharmaceutical product batch to its expiration date rather than using a disconnected date (future update).</skos:editorialNote>
+		<skos:note>It is constructed by using the batch number assigned by the manufacturer and the expiration date. This is for indexing purposes and to contribute to improving patient safety by allowing for the unique identification of a medicinal product based at the level of the immediate container.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:abbreviation>BAID2</cmns-av:abbreviation>
+		<cmns-av:synonym>medicinal product batch identifier 2</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductBatchIdentifierForOuterPackaging">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;BatchNumber"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cxtid;StructuredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductBatchNumber"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dt;ExplicitDate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medicinal product batch identifier for outer packaging</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.51</dct:source>
+		<skos:definition>unique identifier allocated to a specific batch of a medicinal product, which appears on the outer packaging of the medicinal product</skos:definition>
+		<skos:editorialNote>For more explicit modeling of the semanitics we should consider creating a property chain that links the BAID1 through the pharmaceutical product batch identifier, through the pharmaceutical product batch to its expiration date rather than using a disconnected date (future update).</skos:editorialNote>
+		<skos:note>It is constructed by using the batch number assigned by the manufacturer and the expiration date. This is for indexing purposes and to contribute to improving patient safety by allowing for the unique identification of a medicinal product at the package level.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:abbreviation>BAID1</cmns-av:abbreviation>
+		<cmns-av:synonym>medicinal product batch identifier 1</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductContainer">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ManufacturedItem"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Container"/>
@@ -853,6 +992,17 @@
 		<skos:note>This is for indexing purposes and to contribute to improved patient safety by allowing for the unique identification of Medicinal Products worldwide.</skos:note>
 		<cmns-av:abbreviation>MPID</cmns-av:abbreviation>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.53</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductManufacturingProcess">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
+		<rdfs:label>medicinal product manufacturing process</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.40</dct:source>
+		<skos:definition>process of production for a substance or medicinal product from the acquisition of all materials through all processing stages</skos:definition>
+		<skos:editorialNote>This is a starting point that requires extension to include additional relationships as described in the note.</skos:editorialNote>
+		<skos:note>The critical process, critical process steps, starting and processing materials and critical production parameters are included.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:synonym>manufacturing</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductName">
@@ -963,6 +1113,53 @@
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.60</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductBatch">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Batch"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isBatchOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isContainedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;hasExpirationDate"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dt;ExplicitDate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>pharmaceutical product batch</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.8</dct:source>
+		<skos:definition>specific quantity of a drug or other material that is intended to have uniform character and quality, within specified limits, and is produced according to a single manufacturing order during the same cycle of manufacture</skos:definition>
+		<skos:editorialNote>This definition of batch entails axioms relating the batch to a manufacturing order and identifying the manufacturing cycle, which need to be added.</skos:editorialNote>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductBatchNumber">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;BatchNumber"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductBatch"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>pharmaceutical product batch number</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.9</dct:source>
+		<skos:definition>identifier assigned to a specific batch of a medicinal product or item resulting from a manufacturing process at a specific point of time</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
 		<rdfs:subClassOf>
@@ -991,6 +1188,58 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</dct:source>
 		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass) expressed in units of presentation ...</skos:definition>
 		<cmns-av:synonym>strength (presentation)</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;Process">
+		<rdfs:label>process</rdfs:label>
+		<dct:source>ISO 18629-11:2005(en) Industrial automation systems and integration — Process specification language — Part 11: PSL core - https://www.iso.org/obp/ui/#iso:std:iso:18629:-11:ed-1:v1:en,  clause 3.1.21</dct:source>
+		<skos:definition>structured set of activities involving various enterprise entities, that is designed and organized for a given purpose</skos:definition>
+		<skos:editorialNote>This is a starting point that requires extension to include the activities that comprise the process, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
+		<skos:note>The definition provided here is very close to that given in ISO 10303-49. Nevertheless ISO 15531 needs the notion of structured set of activities, without any predefined reference to the time or steps. In addition, from the point of view of flow management, some empty processes may be needed for a synchronisation purpose although they are not actually doing anything (ghost task). [SOURCE:ISO 15531-1]</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ProcessIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;denotes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Process"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>process identifier</rdfs:label>
+		<skos:definition>identifier assigned to a structured set of activities involving various enterprise entities, that is designed and organized for a given purpose</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 18629-11:2005(en) Industrial automation systems and integration — Process specification language — Part 11: PSL core - https://www.iso.org/obp/ui/#iso:std:iso:18629:-11:ed-1:v1:en,  clause 3.1.21</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ProcessStep">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Process"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>process step</rdfs:label>
+		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</dct:source>
+		<skos:definition>part of a process that usually operates independently from other process stages and that usually results in a planned sequence of chemical or physical changes in the material being processed</skos:definition>
+		<skos:editorialNote>Note that this is an early representation of the concept only, and will likely require extension in future releases.</skos:editorialNote>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ProcessStepIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;denotes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProcessStep"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>process step identifier</rdfs:label>
+		<skos:definition>identifier assigned to a part of a process</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ProductConstituency">
@@ -1305,6 +1554,14 @@
 		<skos:definition>indicates the situation that faciliates endorsement of the authorized party for some purpose</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isBatchOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
+		<rdfs:label>is batch of</rdfs:label>
+		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</dct:source>
+		<rdfs:range rdf:resource="&idmp-mprd;BatchProcess"/>
+		<skos:definition>is produced or has been produced by a single execution of a batch process</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isContainedIn">
 		<rdf:type rdf:resource="&owl;TransitiveProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isPartOf"/>
@@ -1327,6 +1584,18 @@
 		<rdfs:range rdf:resource="&idmp-mprd;Container"/>
 		<owl:inverseOf rdf:resource="&idmp-mprd;immediatelyContains"/>
 		<skos:definition>is held within its volume or area and is in direct contact with</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isInputTo">
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
+		<rdfs:label>is input to</rdfs:label>
+		<skos:definition>is put in, taken in, or operated on by</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isOutputOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
+		<rdfs:label>is output of</rdfs:label>
+		<skos:definition>is produced by or results from some process, process step, action, activity, or other effort</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;managesAdministrationOf">
