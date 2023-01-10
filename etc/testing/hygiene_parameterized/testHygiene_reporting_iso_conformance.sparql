@@ -1,7 +1,7 @@
 prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl:   <http://www.w3.org/2002/07/owl#>
-prefix idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix idmp-cmpl: <https://spec.pistoiaalliance.org/idmp/ontology/META/ISOConformanceAnnotations/>
 
 ##
 # banner Report of ISO conformance levels
@@ -9,7 +9,7 @@ prefix idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Su
 SELECT DISTINCT ?info (COUNT(?resource) as ?count)
 WHERE 
 {
-    ?resource idmp-sub:hasConformanceLevel ?conformanceLevel.
+    ?resource idmp-cmpl:hasConformanceToISOLevel ?conformanceLevel.
 
     BIND (concat ("INFO: ", str(?conformanceLevel)) AS ?info)
 }
