@@ -84,13 +84,12 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances/"/>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-Substances.rdf version of this ontology was modified to rename &apos;ingredient role&apos; to ingredient for clarification per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298). It was also modified to add the concept of matter and to add a specific hasSubstanceName property rather than the more general hasName property in order to accommodate additional semantics. The relationship between a moiety or substance and some of its characteristics was also revised, including the relationship between a structure and its corresponding representation.</skos:changeNote>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230101/ISO11238-Substances/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) and to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;Acid">
@@ -122,6 +121,7 @@
 		<rdfs:label>active moiety role</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
+		<owl:disjointWith rdf:resource="&idmp-sub;InactiveMoietyRole"/>
 		<skos:definition>role of the part of a molecule responsible for the physiological or pharmacological action of the substance</skos:definition>
 		<skos:note>Chemically, the active moiety of a stoichiometric or non-stoichoimetrical substance molecule is considered that part of the molecule that is the base, free acid or ion molecular part of a salt, solvate, chelate, clathrate, molecular complex or ester.</skos:note>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
@@ -222,9 +222,9 @@
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:oneOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;ConformanceLevel-Mandatory">
-					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;ConformanceLevel-Conditional">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ConformanceLevel-Mandatory">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;ConformanceLevel-Optional">
 					</rdf:Description>
@@ -330,7 +330,6 @@
 	<owl:Class rdf:about="&idmp-sub;InactiveMoietyRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MoietyRole"/>
 		<rdfs:label>inactive moiety role</rdfs:label>
-		<owl:disjointWith rdf:resource="&idmp-sub;ActiveMoietyRole"/>
 		<skos:definition>role of an inactive portion of a molecule or substance, i.e., one that that does not exhibit pharmacological activity</skos:definition>
 		<skos:example>Examples include the appended portions of the molecule that cause the drug to be an ester, salt (including a salt with hydrogen or coordination bonds), or other noncovalent derivative (such as a complex, chelate, or clathrate) of the molecule.</skos:example>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
@@ -392,9 +391,9 @@
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -650,6 +649,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:label>nucleic acid substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;PolymerSubstance"/>
+		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single substance that can be defined by a linear sequence of nucleosides typically linked through phosphate or phosphate-like diester bonds</skos:definition>
 		<skos:note>The type of nucleic acid substance, e.g. ribonucleic acid (RNA) and deoxyribonucleic acid (DNA), is also identified. Oligonucleotides and gene elements, e.g. promoters, enhancers, coding sequences and silencers, are defined as nucleic acid substances.</skos:note>
@@ -683,9 +683,9 @@
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
-							</rdf:Description>
 							<rdf:Description rdf:about="&cmns-ra;Registrar">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -829,6 +829,7 @@
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:label>polymer substance</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single polydisperse substance that contains structural repeat units linked by covalent bonds</skos:definition>
 		<skos:note>Monodisperse proteins and nucleic acids with defined sequences shall not be defined using the polymer substance elements.</skos:note>
@@ -838,8 +839,6 @@
 	<owl:Class rdf:about="&idmp-sub;ProteinSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:label>protein substance</rdfs:label>
-		<owl:disjointWith rdf:resource="&idmp-sub;NucleicAcidSubstance"/>
-		<owl:disjointWith rdf:resource="&idmp-sub;PolymerSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single substance with a defined sequence of alpha-amino acids connected through peptide bonds</skos:definition>
 		<skos:note>A protein consists of one or more chains with a length of more than 40 amino acids. A peptide is defined as a linear sequence consisting of 2 to 40 amino acid residues.</skos:note>
@@ -915,7 +914,10 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - absolute</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53</dct:source>
-		<skos:definition>stereochemistry classifier indicating ...</skos:definition>
+		<skos:definition>stereochemistry classifier indicating that the stereochemical description fully describes the spatial arrangement of the atom of a chiral molecular entity (or group)</skos:definition>
+		<cmns-av:adaptedFrom>https://en.wikipedia.org/wiki/Absolute_configuration</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The most common labeling method uses the descriptors R or S and is based on the Cahn-Ingold-Prelog priority rules.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>Until 1951 it was not possible to determine the absolute configuration and configuration were indicated relative to glyceraldehyde with the D/L system.</cmns-av:explanatoryNote>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>ABSOLUTE</cmns-txt:hasTextValue>
 		<cmns-txt:hasTextValue>absolute</cmns-txt:hasTextValue>
@@ -925,7 +927,8 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - achiral</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<skos:definition>stereochemistry classifier indicating ...</skos:definition>
+		<owl:differentFrom rdf:resource="&idmp-sub;Stereochemistry-Chiral"/>
+		<skos:definition>stereochemistry classifier indicating that the molecule is not chiral</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>ACHIRAL</cmns-txt:hasTextValue>
 		<cmns-txt:hasTextValue>achiral</cmns-txt:hasTextValue>
@@ -935,7 +938,7 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - axial</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<skos:definition>stereochemistry classifier indicating ...</skos:definition>
+		<skos:definition>stereochemistry classifier indicating a chirality axis based stereochemistry where, using the Cahn-Ingold-Prelog (CIP) priority rules, ordering can be determined</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>AXIAL</cmns-txt:hasTextValue>
 		<cmns-txt:hasTextValue>axial</cmns-txt:hasTextValue>
@@ -965,6 +968,7 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - chiral</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
+		<owl:differentFrom rdf:resource="&idmp-sub;Stereochemistry-Achiral"/>
 		<skos:definition>stereochemistry classifier indicating an object or molecule that is not superimposable on its mirror image</skos:definition>
 		<skos:note>The classic description of chirality is the comparison of the hand in a mirror, because the mirror image is the opposite. A chiral molecule has one or more chiral centres.</skos:note>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
@@ -976,7 +980,8 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - cis</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<skos:definition>stereochemistry classifier indicating ...</skos:definition>
+		<owl:differentFrom rdf:resource="&idmp-sub;Stereochemistry-Trans"/>
+		<skos:definition>stereochemistry classifier indicating that the functional groups (substituents) are on the same side of some plane</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>CIS</cmns-txt:hasTextValue>
 		<cmns-txt:hasTextValue>cis</cmns-txt:hasTextValue>
@@ -986,7 +991,8 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - epimeric</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<skos:definition>stereochemistry classifier indicating a particular kind of diastereomers that differ in their stereochemistry at only one chiral centre; the stereochemistry at all other chiral centres is identical</skos:definition>
+		<skos:definition>stereochemistry classifier indicating a particular kind of diastereomers that differ in their stereochemistry at only one chiral centre</skos:definition>
+		<cmns-av:explanatoryNote>The stereochemistry at all other chiral centres is identical.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>epimeric centres</cmns-av:synonym>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>EPIMERIC</cmns-txt:hasTextValue>
@@ -997,7 +1003,8 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - meso</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<skos:definition>stereochemistry classifier indicating ...</skos:definition>
+		<skos:definition>stereochemistry classifier indicating that a molecule is a non-optically active member of a set of stereoisomers, at least two of which are optically active</skos:definition>
+		<cmns-av:explanatoryNote>Despite containing two or more stereocenters, the molecule is not chiral (achiral).</cmns-av:explanatoryNote>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>MESO</cmns-txt:hasTextValue>
 		<cmns-txt:hasTextValue>meso</cmns-txt:hasTextValue>
@@ -1007,7 +1014,7 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - mixed</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<skos:definition>stereochemistry classifier indicating ...</skos:definition>
+		<skos:definition>stereochemistry classifier indicating a mixture of substances with different stereochemistries or a combination of stereochemistries at different parts of the molecule</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>MIXED</cmns-txt:hasTextValue>
 		<cmns-txt:hasTextValue>mixed</cmns-txt:hasTextValue>
@@ -1051,6 +1058,7 @@
 		<rdfs:label>stereochemistry - racemic</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
 		<skos:definition>stereochemistry classifier indicating an equimolar mixture of two enantiomers</skos:definition>
+		<skos:example>See example in ISO/TS 19844:2018(E) Figure B.17 racemic Amlodipine structure.</skos:example>
 		<skos:note>A racemate is optically inactive.</skos:note>
 		<cmns-av:synonym>racemate</cmns-av:synonym>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
@@ -1082,7 +1090,7 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - square planar 3</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<skos:definition>stereochemistry classifier indicating a square planar molecular geometry where the Cahn-Ingold-Prelog (CIP) priority of the donor atom directly across from the priority 1 donor atom is 3.</skos:definition>
+		<skos:definition>stereochemistry classifier indicating a square planar molecular geometry where the Cahn-Ingold-Prelog (CIP) priority of the donor atom directly across from the priority 1 donor atom is 3</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>SQUARE PLANAR 3</cmns-txt:hasTextValue>
 		<cmns-txt:hasTextValue>square planar 3</cmns-txt:hasTextValue>
@@ -1112,7 +1120,8 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - trans</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<skos:definition>stereochemistry classifier indicating ...</skos:definition>
+		<owl:differentFrom rdf:resource="&idmp-sub;Stereochemistry-Cis"/>
+		<skos:definition>stereochemistry classifier indicating that the functional groups (substituents) are on opposing (transverse) sides of some plane</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>TRANS</cmns-txt:hasTextValue>
 		<cmns-txt:hasTextValue>trans</cmns-txt:hasTextValue>
