@@ -11,6 +11,8 @@
 Unfortunately this `locations.csv` require some cleanup before we can use it.
 
 1. Remove entry in line `14364` (i.e. `Organisation ID: ORG-100011833`). Reason: Data is too long.
+1. Update entry with Alternative Name `"Ośrodek Diabetologiczny "Popula" Elżbieta Popławska, Grażyna Laszewska Sp. j."` to `"Ośrodek Diabetologiczny 'Popula' Elżbieta Popławska, Grażyna Laszewska Sp. j."`. Reason: Invalid double quote.
+1. Update entry with Alternative Name `""Pharmamagist" Gyógyszeripari, Kereskedelmi És Szolgáltató kft.¦Pharmamagist Ltd."` to `"'Pharmamagist' Gyógyszeripari, Kereskedelmi És Szolgáltató kft.¦Pharmamagist Ltd."`. Reason: Invalid double quote.
 
 # Transformation
 
