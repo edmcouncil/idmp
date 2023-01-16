@@ -1,0 +1,165 @@
+PREFIX iter: <http://w3id.org/sparql-generate/iter/>
+PREFIX func: <http://w3id.org/sparql-generate/fn/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
+PREFIX idmp-spor: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/>
+
+GENERATE {
+    <https://spor.ema.europa.eu/rmswi/#/lists/{ ?Identifier }/terms>
+        a owl:Ontology ;
+        rdfs:label "SPOR RMS - {?Name}" ;
+        skos:scopeNote ?Spor_Domain_URI ;
+        skos:note ?Spor_Status_URI ;
+        dct:modified ?Modified_On ;
+        dct:created ?Created_On ;
+        owl:versionInfo ?Version ;
+        rdfs:comment "Created as part of the IDMP Ontology project using Accurids" ;
+        .
+
+    <https://spor.ema.europa.eu/rmswi/#/lists/{ ?Identifier }>
+        a owl:Class ;
+        rdfs:label ?Name ;
+        rdfs:seeAlso <https://spor.ema.europa.eu/rmswi/#/lists/{ ?Identifier }/terms> ;
+        cmns-dsg:isDefinedIn idmp-spor:ReferentialsManagementServicesClassificationScheme ;
+        .
+
+    GENERATE {
+        <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
+            a <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }> ;
+            skos:prefLabel ?Term_Name_LangString ;
+            skos:altLabel ?Short_Name_LangString ;
+            skos:definition ?Term_Description_LangString ;
+            skos:scopeNote <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/{ ?Domain_ID }> ;
+            skos:broader <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Parent_ID }> ;
+            skos:note ?Spor_Term_Status_URI ;
+            dct:created ?Term_Created_On_ISO ;
+            dct:modified ?Term_Modified_On_ISO ;
+            .
+
+        GENERATE {
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
+                skos:altLabel ?Other_Name_LangString ;
+        }
+        ITERATOR iter:for(0,1,?Other_Name_Length) AS ?index
+        WHERE {
+            BIND(func:SplitAtPosition(?Other_Name,"¦",?index) AS ?Splitted_Other_Name)
+            BIND(STRLANG(?Splitted_Other_Name, ?Language) AS ?Other_Name_LangString)
+        } .
+    }
+    ITERATOR iter:CSV(?source) AS
+    ?List_ID
+    ?Term_ID
+    ?Term_Rowid
+    ?Language
+    ?Term_Name
+    ?Term_Name_Modified_On
+    ?Term_Name_Modified_By
+    ?Term_Name_Translation_Status
+    ?Term_Name_Comments
+    ?Term_Name_Rowid
+    ?Short_Name
+    ?Short_Name_Modified_On
+    ?Short_Name_Modified_By
+    ?Short_Name_Translation_Status
+    ?Short_Name_Comments
+    ?Short_Name_Rowid
+    ?Other_Name
+    ?Other_Name_Modified_On
+    ?Other_Name_Modified_By
+    ?Other_Name_Translation_Status
+    ?Other_Name_Comments
+    ?Other_Name_Rowid
+    ?Term_Description
+    ?Term_Description_Modified_On
+    ?Term_Description_Modified_By
+    ?Term_Description_Translation_Status
+    ?Term_Description_Rowid
+    ?Term_Symbol
+    ?Term_Symbol_Modified_On
+    ?Term_Symbol_Modified_By
+    ?Term_Symbol_Comments
+    ?Term_Symbol_Rowid
+    ?Domain_ID
+    ?Term_Domain_Rowid
+    ?List_Hierarchical_Level_Short_Name
+    ?List_Hierarchical_Level_Name
+    ?Parent_ID
+    ?Parent_Term_Rowid
+    ?Term_Status
+    ?Term_Status_Modified_On
+    ?Term_Status_Modified_By
+    ?Term_Status_Rowid
+    ?Current_Term_ID
+    ?Current_Term_Rowid
+    ?Mapping_Source_ID
+    ?Mapping_Source_Term_ID
+    ?Source_Provided_Name
+    ?Is_Main_Term_Source
+    ?Mapping_Source_Version
+    ?Mapping_Source_Term_Status
+    ?Term_Source_Mapping_Rowid
+    ?Term_Comments
+    ?Applicable_to_Country_ID
+    ?Country_Applicability_Rowid
+    ?Applicable_to_IT_application_ID
+    ?IT_Application_Applicability_Rowid
+    ?Term_Created_On
+    ?Term_Created_By
+    ?Term_Modified_On
+    ?Term_Modified_By
+    ?Version_Number
+    ?Version_Date
+    ?Is_Major_Version
+    ?Term_Visibility
+    WHERE {
+        BIND(STRLANG(?Term_Name, ?Language) AS ?Term_Name_LangString)
+        BIND(STRLANG(?Short_Name, ?Language) AS ?Short_Name_LangString)
+        BIND(IF(BOUND(?Other_Name), strlen(replace(?Other_Name, "[^¦]", "")) + 1, 0) AS ?Other_Name_Length)
+        BIND(STRLANG(?Term_Description, ?Language) AS ?Term_Description_LangString)
+        BIND(
+            IF(?Term_Status = "CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005004>,
+            IF(?Term_Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005005>,
+            IF(?Term_Status = "NON_CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005006>,
+            IF(?Term_Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
+            ?unbound ))))
+        AS ?Spor_Term_Status_URI )
+        BIND(
+            IF(contains(?Term_Created_On, "/"),
+            "{func:SplitAtPosition(func:SplitAtPosition(?Term_Created_On,"/",2)," ",0)}-{func:SplitAtPosition(?Term_Created_On,"/",1)}-{func:SplitAtPosition(?Term_Created_On,"/",0)}T{func:SplitAtPosition(func:SplitAtPosition(?Term_Created_On,"/",2)," ",1)}",
+            ?Term_Created_On)
+        AS ?Term_Created_On_ISO )
+        BIND(
+            IF(contains(?Term_Modified_On, "/"),
+            "{func:SplitAtPosition(func:SplitAtPosition(?Term_Modified_On,"/",2)," ",0)}-{func:SplitAtPosition(?Term_Modified_On,"/",1)}-{func:SplitAtPosition(?Term_Modified_On,"/",0)}T{func:SplitAtPosition(func:SplitAtPosition(?Term_Modified_On,"/",2)," ",1)}",
+            ?Term_Modified_On)
+        AS ?Term_Modified_On_ISO )
+    } .
+}
+ITERATOR iter:CSV(?ontology_source) AS
+?Identifier
+?Name
+?Owner
+?Domain
+?Status
+?Modified_On
+?Created_On
+?Version
+WHERE {
+    BIND(
+        IF(?Domain = "Human use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000012>,
+        IF(?Domain = "Veterinary use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000013>,
+        IF(?Domain = "Human and Veterinary use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014>,
+        ?unbound )))
+    AS ?Spor_Domain_URI )
+
+    BIND(
+        IF(?Status = "CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005004>,
+        IF(?Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005005>,
+        IF(?Status = "NON_CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005006>,
+        IF(?Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
+        ?unbound ))))
+    AS ?Spor_Status_URI )
+}
