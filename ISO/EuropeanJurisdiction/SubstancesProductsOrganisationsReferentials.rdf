@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
@@ -13,6 +14,7 @@
 	<!ENTITY idmp-eurga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/">
 	<!ENTITY idmp-spor "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
+	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -21,6 +23,7 @@
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
@@ -33,6 +36,7 @@
 	xmlns:idmp-eurga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"
 	xmlns:idmp-spor="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
+	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -49,15 +53,17 @@
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:NamedIndividual rdf:about="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority">
@@ -97,9 +103,32 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-spor;ReferentialsManagementServicesClassificationScheme">
 		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:label>Referentials Management Services (RMS) classification scheme</rdfs:label>
-		<skos:definition>classification scheme that includes the set of controlled vocabularies used to classify entities included in the Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) related services and repositories</skos:definition>
+		<skos:definition>classification scheme that includes the controlled vocabularies used to classify entities included in the Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) related services and repositories</skos:definition>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-spor;ReferentialsManagementServicesControlledVocabularyTerm">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>Referentials Management Services (RMS) controlled vocabulary term</rdfs:label>
+		<skos:definition>term in a controlled vocabulary whose values describe some substance or product from a Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) perspective</skos:definition>
+		<cmns-av:abbreviation>RMS controlled vocabulary term</cmns-av:abbreviation>
+	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-spor;ReferentialsManagementServicesRegistry">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
@@ -111,17 +140,18 @@
 		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-spor;SPOR-MarketingStatusClassifier">
+		<rdfs:subClassOf rdf:resource="&idmp-spor;ReferentialsManagementServicesControlledVocabularyTerm"/>
+		<rdfs:label>SPOR marketing status classifier</rdfs:label>
+		<skos:definition>classifier and code element that describes the current status of some substance with respect to whether or not it has been placed on the market from a Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) perspective</skos:definition>
+		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-spor;SPOR-SubstanceDomainClassifier">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-spor;ReferentialsManagementServicesControlledVocabularyTerm"/>
 		<rdfs:label>SPOR substance domain classifier</rdfs:label>
-		<skos:definition>classifier that describes the domain in which a particular substance is used from a Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) perspective</skos:definition>
+		<skos:definition>classifier and code element that describes the domain in which a particular substance is used from a Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) perspective</skos:definition>
+		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms"/>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-spor;SubstanceManagementServices">
@@ -160,59 +190,143 @@
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000012">
 		<rdf:type rdf:resource="&idmp-spor;SPOR-SubstanceDomainClassifier"/>
-		<rdfs:label xml:lang="de">Anwendung am Menschen</rdfs:label>
-		<rdfs:label xml:lang="no">Human bruk</rdfs:label>
-		<rdfs:label xml:lang="en">Human use</rdfs:label>
-		<rdfs:label xml:lang="sv">Humant bruk</rdfs:label>
-		<rdfs:label xml:lang="fr-FR">Usage humain</rdfs:label>
-		<rdfs:label xml:lang="it">uso umano</rdfs:label>
-		<skos:definition>substance domain classifier for a substance that is authorized for use in human populations</skos:definition>
+		<rdfs:label>100000000012</rdfs:label>
 		<cmns-av:abbreviation xml:lang="de">H</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="en">H</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="fr-FR">H</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="it">H</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="sv">H</cmns-av:abbreviation>
+		<cmns-av:synonym xml:lang="de">Human</cmns-av:synonym>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
+		<cmns-dsg:hasDescription xml:lang="en">substance domain classifier for a substance that is authorized for use in human populations</cmns-dsg:hasDescription>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<lcc-lr:hasTextualName xml:lang="de">Anwendung am Menschen</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="no">Human bruk</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="en">Human use</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="sv">Humant bruk</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="lv">Lietošanai cilvēkiem</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="fr-FR">Usage humain</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="it">uso umano</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000013">
 		<rdf:type rdf:resource="&idmp-spor;SPOR-SubstanceDomainClassifier"/>
-		<rdfs:label xml:lang="de">Anwendung am Tier</rdfs:label>
-		<rdfs:label xml:lang="fr-FR">Usage vétérinaire</rdfs:label>
-		<rdfs:label xml:lang="ro">Uz veterinar</rdfs:label>
-		<rdfs:label xml:lang="en">Veterinary use</rdfs:label>
-		<rdfs:label xml:lang="cs">Veterinární použití</rdfs:label>
-		<rdfs:label xml:lang="sv">Veterinärmedicinskt bruk</rdfs:label>
-		<rdfs:label xml:lang="no">Veterinær bruk</rdfs:label>
-		<rdfs:label xml:lang="lv">Veterinārai lietošanai</rdfs:label>
-		<rdfs:label xml:lang="it">uso veterinario</rdfs:label>
-		<skos:definition>substance domain classifier for a substance that is authorized for use in animal populations</skos:definition>
+		<rdfs:label>100000000013</rdfs:label>
 		<cmns-av:abbreviation xml:lang="cs">V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="de">V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="en">V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="fr-FR">V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="it">V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="sv">V</cmns-av:abbreviation>
+		<cmns-av:synonym xml:lang="de">Veterinaer</cmns-av:synonym>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
+		<cmns-dsg:hasDescription xml:lang="en">substance domain classifier for a substance that is authorized for use in animal populations</cmns-dsg:hasDescription>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<lcc-lr:hasTextualName xml:lang="de">Anwendung am Tier</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="fr-FR">Usage vétérinaire</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="ro">Uz veterinar</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="en">Veterinary use</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="cs">Veterinární použití</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="sv">Veterinärmedicinskt bruk</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="no">Veterinær bruk</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="lv">Veterinārai lietošanai</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="it">uso veterinario</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014">
 		<rdf:type rdf:resource="&idmp-spor;SPOR-SubstanceDomainClassifier"/>
-		<rdfs:label xml:lang="de">Anwendung an Mensch und Tier</rdfs:label>
-		<rdfs:label xml:lang="en">Human and Veterinary use</rdfs:label>
-		<rdfs:label xml:lang="no">Human og veterinær bruk</rdfs:label>
-		<rdfs:label xml:lang="sv">Humant och veterinärmedicinskt bruk</rdfs:label>
-		<rdfs:label xml:lang="cs">Humánní a veterinární použití</rdfs:label>
-		<rdfs:label xml:lang="fr-FR">Usage humain et vétérinaire</rdfs:label>
-		<rdfs:label xml:lang="it">uso umano e veterinario</rdfs:label>
-		<skos:definition>substance domain classifier for a substance that is authorized for use in human and veterinary populations</skos:definition>
-		<cmns-av:abbreviation xml:lang="cs">H&amp;V</cmns-av:abbreviation>
+		<rdfs:label>100000000014</rdfs:label>
 		<cmns-av:abbreviation xml:lang="de">H&amp;V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="en">H&amp;V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="fr-FR">H&amp;V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="it">H&amp;V</cmns-av:abbreviation>
 		<cmns-av:abbreviation xml:lang="sv">H&amp;V</cmns-av:abbreviation>
+		<cmns-av:abbreviation xml:lang="cs">H+V</cmns-av:abbreviation>
+		<cmns-av:synonym xml:lang="de">Human &amp; Veterinär</cmns-av:synonym>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
+		<cmns-dsg:hasDescription xml:lang="en">substance domain classifier for a substance that is authorized for use in human and veterinary populations</cmns-dsg:hasDescription>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<lcc-lr:hasTextualName xml:lang="de">Anwendung an Mensch und Tier</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="en">Human and Veterinary use</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="no">Human og veterinær bruk</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="sv">Humant och veterinärmedicinskt bruk</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="cs">Humánní a veterinární použití</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="lv">Lietošanai cilvēkiem un dzīvniekiem</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="fr-FR">Usage humain et vétérinaire</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="it">uso umano e veterinario</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/100000072074">
+		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
+		<rdfs:label>100000072074</rdfs:label>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<cmns-dsg:hasDescription xml:lang="fr-FR">classificateur de statut marketing pour un produit qui bénéficie d’une autorisation de mise sur le marché délivrée et n’est pas mis sur le marché</cmns-dsg:hasDescription>
+		<cmns-dsg:hasDescription xml:lang="en">marketing status classifier for a product that has a marketing authorization granted and is not placed on the market</cmns-dsg:hasDescription>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<lcc-lr:hasTextualName xml:lang="no">Ikke markedsført</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="lv">Nav tirdzniecībā</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="de">Nicht vermarktet</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="fr-FR">Non commercialisé</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="it">Non commercializzato</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="en">Not marketed</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="pt">Não comerc. conf. pelo Titular</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/100000072075">
+		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
+		<rdfs:label>100000072075</rdfs:label>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
+		<cmns-dsg:hasDescription xml:lang="fr-FR">classificateur de statut marketing pour un produit qui dispose d’une autorisation de mise sur le marché délivrée et l’autorité compétente ne sait pas si le produit est mis sur le marché ou non</cmns-dsg:hasDescription>
+		<cmns-dsg:hasDescription xml:lang="it">classificatore dello stato di marketing per un prodotto che ha un&apos;autorizzazione all&apos;immissione in commercio concessa e non è noto all&apos;autorità di regolamentazione se il prodotto è immesso sul mercato o meno</cmns-dsg:hasDescription>
+		<cmns-dsg:hasDescription xml:lang="en">marketing status classifier for a product that has a marketing authorization granted and it is unknown to the regulatory authority if the product is placed on the market or not</cmns-dsg:hasDescription>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<lcc-lr:hasTextualName xml:lang="lv">Dati nav sniegti</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="no">Mangler informasjon</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="it">Nessun dato fornito</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="en">No data provided</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="fr-FR">Pas de données fournies</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="pt">Sem informação disponível</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="de">Vermarktungsstatus unbekannt</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/100000072083">
+		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
+		<rdfs:label>100000072083</rdfs:label>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
+		<cmns-dsg:hasDescription xml:lang="fr-FR">classificateur de statut marketing pour un produit qui bénéficie d&apos;une autorisation de mise sur le marché délivrée et est mis sur le marché</cmns-dsg:hasDescription>
+		<cmns-dsg:hasDescription xml:lang="en">marketing status classifier for a product that has a marketing authorization granted and is placed on the market</cmns-dsg:hasDescription>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<lcc-lr:hasTextualName xml:lang="pt">Comerc. conf. pelo Titular</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="fr-FR">Commercialisé</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="it">Commercializzato</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="lv">Ir tirdzniecībā</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="no">Markedsført</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="en">Marketed</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="de">Vermarktet</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/200000026055">
+		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
+		<rdfs:label>200000026055</rdfs:label>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<lcc-lr:hasTextualName xml:lang="no">Aldri markedsført</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="lv">Nav bijis tirdzniecībā</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="en">Never marketed</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/230000000000">
+		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
+		<rdfs:label>230000000000</rdfs:label>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
+		<lcc-lr:hasTextualName xml:lang="no">Midlertidig utgått</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="fr-FR">Temporairement non disponible</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="it">Temporaneamente non disponibile</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="pt">Temporariamente indisponível</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="en">Temporarily unavailable</lcc-lr:hasTextualName>
+		<lcc-lr:hasTextualName xml:lang="lv">Uz laiku nav pieejamas</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
