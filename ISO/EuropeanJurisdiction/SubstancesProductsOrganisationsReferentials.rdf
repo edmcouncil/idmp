@@ -75,7 +75,7 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdfs:label>Organisation Management Services (OMS)</rdfs:label>
 		<skos:definition>services supporting a central dictionary of organisation data in multiple languages</skos:definition>
-		<idmp-spor:hasSPORShortName>OMS service</idmp-spor:hasSPORShortName>
+		<cmns-av:abbreviation>OMS service</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/"/>
 		<cmns-col:isPartOf rdf:resource="&idmp-spor;SubstancesProductsOrganisationsReferentialsDataManagementServices"/>
 		<cmns-prd:isProvidedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
@@ -85,7 +85,7 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdfs:label>Product Management Services (PMS)</rdfs:label>
 		<skos:definition>services supporting a central dictionary of product data in multiple languages</skos:definition>
-		<idmp-spor:hasSPORShortName>PMS service</idmp-spor:hasSPORShortName>
+		<cmns-av:abbreviation>PMS service</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>https://spor.ema.europa.eu/sporwi/</cmns-av:adaptedFrom>
 		<cmns-col:isPartOf rdf:resource="&idmp-spor;SubstancesProductsOrganisationsReferentialsDataManagementServices"/>
 		<cmns-prd:isProvidedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
@@ -95,7 +95,7 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdfs:label>Referentials Management Services (RMS)</rdfs:label>
 		<skos:definition>services supporting a central dictionary of referentials data in multiple languages</skos:definition>
-		<idmp-spor:hasSPORShortName>RMS service</idmp-spor:hasSPORShortName>
+		<cmns-av:abbreviation>RMS service</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/"/>
 		<cmns-col:isPartOf rdf:resource="&idmp-spor;SubstancesProductsOrganisationsReferentialsDataManagementServices"/>
 		<cmns-prd:isProvidedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
@@ -113,29 +113,39 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-prd;Product">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>Referentials Management Services (RMS) controlled vocabulary term</rdfs:label>
 		<skos:definition>term in a controlled vocabulary whose values describe some substance or product from a Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) perspective</skos:definition>
-		<idmp-spor:hasSPORShortName>RMS controlled vocabulary term</idmp-spor:hasSPORShortName>
+		<cmns-av:abbreviation>RMS controlled vocabulary term</cmns-av:abbreviation>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-spor;ReferentialsManagementServicesRegistry">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>Referentials Management Services (RMS) registry</rdfs:label>
 		<skos:definition>central dictionary of referentials data in multiple languages available through the Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS)</skos:definition>
-		<idmp-spor:hasSPORShortName>SPOR RMS</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName>SPOR-RMS</idmp-spor:hasSPORShortName>
+		<cmns-av:abbreviation>SPOR RMS</cmns-av:abbreviation>
+		<cmns-av:abbreviation>SPOR-RMS</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/"/>
 		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 	</owl:NamedIndividual>
@@ -165,7 +175,7 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdfs:label>Substance Management Services (SMS)</rdfs:label>
 		<skos:definition>services supporting a central dictionary of substance data in multiple languages</skos:definition>
-		<idmp-spor:hasSPORShortName>SMS service</idmp-spor:hasSPORShortName>
+		<cmns-av:abbreviation>SMS service</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/"/>
 		<cmns-col:isPartOf rdf:resource="&idmp-spor;SubstancesProductsOrganisationsReferentialsDataManagementServices"/>
 		<cmns-prd:isProvidedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
@@ -175,8 +185,8 @@
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>Substances Management Services registry</rdfs:label>
 		<skos:definition>central dictionary of substance data in multiple languages available through the Substances Products Organisations Referentials (SPOR) Substances Management Services (SMS)</skos:definition>
-		<idmp-spor:hasSPORShortName>SPOR SMS</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName>SPOR-SMS</idmp-spor:hasSPORShortName>
+		<cmns-av:abbreviation>SPOR SMS</cmns-av:abbreviation>
+		<cmns-av:abbreviation>SPOR-SMS</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/"/>
 		<cmns-av:explanatoryNote>SMS is currently live as an EMA internal system. Until it is onboarded in the SPOR portal, external users should use the following systems: view and search substance data in EUTCT or IRIS; submit substance change requests in the EMA Service Desk portal; Export of substance data are available at https://spor.ema.europa.eu/web-ui-data-backend/download/csv.</cmns-av:explanatoryNote>
 		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
@@ -186,7 +196,7 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdfs:label>Substances Products Organisations Referentials (SPOR) data management services</rdfs:label>
 		<skos:definition>data management services for substances, products, organisations and referentials (SPOR) designed to support regulatory activities in the European Union</skos:definition>
-		<idmp-spor:hasSPORShortName>SPOR data management services</idmp-spor:hasSPORShortName>
+		<cmns-av:abbreviation>SPOR data management services</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/"/>
 		<cmns-col:hasPart rdf:resource="&idmp-spor;OrganisationManagementServices"/>
 		<cmns-col:hasPart rdf:resource="&idmp-spor;ProductManagementServices"/>
