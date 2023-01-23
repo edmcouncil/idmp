@@ -6,12 +6,18 @@ prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238
 prefix idmp-ucum: 	<https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/>
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
 prefix cmns-qtu: <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
+prefix cq3:	<https://spec.pistoiaalliance.org/idmp/cq3/>	
 
-SELECT distinct ?referenceSubstance ?referenceSubstanceLabel ?referenceStrengthString
+ 
+
+SELECT distinct ?referenceSubstance ?property1 ?referenceSubstanceLabel ?property2 ?referenceStrengthString
 
 WHERE {
     BIND("Norvasc" AS ?productLabel )
     BIND("amlodipine mesylate monohydrate" AS ?substanceLabel )
+	BIND(rdfs:label as ?property1)
+	BIND(cq3:hasReferenceStrengthString as ?property2)
+
   
   	# Start with the pharmaceutical product and link to its active ingredient from the product constituency
   	?pharmaceuticalProduct rdfs:label ?productLabel .

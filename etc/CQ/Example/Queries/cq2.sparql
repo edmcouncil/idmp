@@ -4,11 +4,12 @@ prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238
 prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
-select distinct ?activeMoiety ?activeMoietyLabel
+select distinct ?activeMoiety ?property ?activeMoietyLabel
 
 where {
 	# Bind the name we want into a variable 
 	  BIND("amlodipine mesylate monohydrate" AS ?substanceLabel )
+	  BIND(rdfs:label as ?property )
 
   	# Find a substance or subclass of substance
   	?substanceType rdfs:subClassOf* idmp-sub:Substance .

@@ -6,12 +6,14 @@ prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos:        <http://www.w3.org/2004/02/skos/core#>
 
-SELECT DISTINCT ?Substance
+SELECT DISTINCT ?Substance ?property ?object
 
 WHERE {
     # use any name or ID to find a substance. E.g., "Amlodipine" or "SUB05467MIG"
     BIND("Amlodipine" AS ?SubstanceInputReference )
-    
+    BIND(rdf:type as ?property)
+    BIND(idmp-sub:Substance as ?object)
+
     ?Substance rdf:type/rdfs:subClassOf* idmp-sub:Substance .
 
     OPTIONAL {

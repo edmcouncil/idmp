@@ -5,11 +5,13 @@ prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238
 prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
-select distinct ?substanceUri ?substanceType ?substanceLabel
+select distinct ?substanceUri ?property1 ?substanceType ?property2 ?substanceLabel
 
 where {
 	# Bind the name we want into a variable 
 	  BIND("amlodipine" AS ?activeMoietyLabel )
+	  BIND(rdf:type as ?property1)
+	  BIND(rdfs:label as ?property2)
 
   	# Need to find all substances that are Substances or it's subclasses
   	?substanceType rdfs:subClassOf* idmp-sub:Substance .
