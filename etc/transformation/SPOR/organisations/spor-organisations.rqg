@@ -3,13 +3,16 @@ PREFIX func: <http://w3id.org/sparql-generate/fn/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <https://schema.org/>
 PREFIX cmns-org: <https://www.omg.org/spec/Commons/Organizations/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 GENERATE {
     # Generate Organisations
     <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>
         a cmns-org:LegalEntity ;
         skos:prefLabel ?Name ;
-        schema:address <https://spor.ema.europa.eu/omswi/#/searchedOrganisations/viewLocation/{ ?Location_ID }>
+        skos:altLabel ?Acronym ;
+        skos:note ?Spor_Status_URI ;
+        schema:address <https://spor.ema.europa.eu/omswi/#/searchedOrganisations/viewLocation/{ ?Location_ID }> ;
         .
 
     GENERATE {
@@ -24,15 +27,28 @@ GENERATE {
         BIND(STRLANG("{?Alt_Name}","{?Alt_Name_Lang}") as ?Alternative_Name_LangString)
     } .
 
+    # Map to RMS OMS Party Category
+    GENERATE {
+        <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>
+            skos:broader <https://spor.ema.europa.eu/rmswi/#/lists/200000000015/terms/{ ?code }> ;
+            .
+    }
+    ITERATOR iter:for(0,1,?Category_Classification_Category_Code_Length) AS ?index
+    WHERE {
+        BIND(func:SplitAtPosition(?Category_Classification_Category_Code,"¦",?index) as ?code)
+    } .
+
     # Generate Locations
     <https://spor.ema.europa.eu/omswi/#/searchedOrganisations/viewLocation/{ ?Location_ID }>
         a schema:PostalAddress ;
         skos:prefLabel ?Location_ID ;
-        schema:streetAddress ?Address_Normalized ;
+        rdfs:seeAlso ?Location_Link_Href ;
+        schema:streetAddress ?Full_Address ;
         schema:postalCode ?Address_Postal_Code ;
         schema:addressLocality ?City_Normalized ;
         schema:addressRegion ?State_Normalized ;
         schema:addressCountry ?Address_Country_Display_Name ;
+        schema:postOfficeBoxNumber ?Address_PO_Box ;
         .
 }
 SOURCE <locations.csv> AS ?source
@@ -109,7 +125,25 @@ WHERE {
     BIND (
         IF (contains(?Address_Line_1, "¦"),
         IF (regex(?Address_Line_1, "^[^¦]", "i"), func:SplitAtPosition(?Address_Line_1,"¦",0), ?unbound), ?Address_Line_1)
-        as ?Address_Normalized)
+        as ?Address_Line_1_Normalized)
+    BIND (
+        IF (contains(?Address_Line_2, "¦"),
+        IF (regex(?Address_Line_2, "^[^¦]", "i"), func:SplitAtPosition(?Address_Line_2,"¦",0), ?unbound), ?Address_Line_2)
+        as ?Address_Line_2_Normalized)
+    BIND (
+        IF (contains(?Address_Line_3, "¦"),
+        IF (regex(?Address_Line_3, "^[^¦]", "i"), func:SplitAtPosition(?Address_Line_3,"¦",0), ?unbound), ?Address_Line_3)
+        as ?Address_Line_3_Normalized)
+    BIND (
+        IF (contains(?Address_Line_4, "¦"),
+        IF (regex(?Address_Line_4, "^[^¦]", "i"), func:SplitAtPosition(?Address_Line_4,"¦",0), ?unbound), ?Address_Line_4)
+        as ?Address_Line_4_Normalized)
+    BIND (
+        IF (BOUND(?Address_Line_2_Normalized), "{?Address_Line_1_Normalized}\n{?Address_Line_2_Normalized}", ?Address_Line_1_Normalized) as ?Address_Line_1_2_Normalized)
+    BIND (
+        IF (BOUND(?Address_Line_3_Normalized), "{?Address_Line_1_2_Normalized}\n{?Address_Line_3_Normalized}", ?Address_Line_1_2_Normalized) as ?Address_Line_1_2_3_Normalized)
+    BIND (
+        IF (BOUND(?Address_Line_4_Normalized), "{?Address_Line_1_2_3_Normalized}\n{?Address_Line_4_Normalized}", ?Address_Line_1_2_3_Normalized) as ?Full_Address)
     BIND (
         IF (contains(?Address_City, "¦"),
         IF (regex(?Address_City, "^[^¦]", "i"), func:SplitAtPosition(?Address_City,"¦",0), ?unbound), ?Address_City)
@@ -118,4 +152,16 @@ WHERE {
         IF (contains(?Address_State, "¦"),
         IF (regex(?Address_State, "^[^¦]", "i"), func:SplitAtPosition(?Address_State,"¦",0), ?unbound), ?Address_State)
         as ?State_Normalized)
+
+    BIND ( IF (BOUND(?Category_Classification_Category_Code), strlen(replace(?Category_Classification_Category_Code, "[^¦]", "")) + 1, 0) as ?Category_Classification_Category_Code_Length)
+
+    # Map to RMS Organisation Role Status
+    BIND (
+        IF(?Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/220000000026/terms/220000000027>,
+        IF(?Status = "ACTIVE", <https://spor.ema.europa.eu/rmswi/#/lists/220000000026/terms/220000000028>,
+        IF(?Status = "INACTIVE", <https://spor.ema.europa.eu/rmswi/#/lists/220000000026/terms/220000000029>,
+        IF(?Status = "DELETED", <https://spor.ema.europa.eu/rmswi/#/lists/220000000026/terms/220000000030>,
+        ?unbound ))))
+        AS ?Spor_Status_URI )
+
 }
