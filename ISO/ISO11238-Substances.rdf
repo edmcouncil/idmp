@@ -88,8 +88,8 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) and to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
-		<cmns-av:copyright>Copyright (c) 2023 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2023 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;Acid">
@@ -166,20 +166,6 @@
 				<owl:onProperty rdf:resource="&idmp-sub;hasStereochemistry"/>
 				<owl:onClass rdf:resource="&idmp-sub;Stereochemistry"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFormula"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFormulaByMoiety"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -566,6 +552,31 @@
 		<skos:note>The role of the moiety should be specified if there is a specific role the moiety is playing. In addition to the moiety role for chemicals, for many peptides, the moiety role of counter-ions such as acetate should be indicated.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MolecularFormula">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:someValuesFrom rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular formula</rdfs:label>
+		<skos:definition>chemical formula that shows the total number and kind of atoms in a molecule indicating atomic proportional ratios (the numerical proportions of atoms of one type to those of other types) which is a way of expressing information about the proportions of atoms that constitute a particular chemical compound, using a single line of chemical element symbols, numbers, and sometimes other symbols</skos:definition>
+		<skos:note>Inorganic acids and metal salts are shown without charges or bonds: HClO4 and KMnO4 respectively. If metal salts of inorganic acids include several metals, the symbols for the metals are shown in alphabetic order, e.g. K2NaPO4.</skos:note>
+		<skos:note>Molecular formulas are written in accordance with the Hill system / Hill notation such that the number of carbon atoms in a molecule is indicated first, the number of hydrogen atoms next, and then the number of all other chemical elements subsequently, in alphabetic order. When the formula contains no carbon, all the elements, including hydrogen, are listed alphabetically.</skos:note>
+		<skos:note>The molecular formula could contain other symbols, such as parentheses, dashes, brackets, and plus (+) and minus (−) signs. These are limited to a single typographic line of symbols, which may include subscripts and superscripts. A chemical formula contains no words (e.g. Glucose is represented as C6H12O6).</skos:note>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.46</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MolecularFormulaByMoiety">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularFormula"/>
+		<rdfs:label>molecular formula by moiety</rdfs:label>
+		<skos:definition>way of describing of the molecular formula of a stoichiometric or non-stoichiometric substance existing of two or more moieties, the molecular formula of each moiety shall be described separated by a dot</skos:definition>
+		<skos:example>The molecular formula of the chemical salt Amlodipine besilate is described as C20H25ClN2O5.C6H6O3S.</skos:example>
+		<skos:note>In non-cyclic linear structures like sodium nitroprusside: Na2[Fe(CN)5(NO)].2H2O, a non-cyclic structure is constructed in the following order: a) symbol of the central atom placed on the left; b) ionic ligands with cations first then anions; c) neutral ligands.</skos:note>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.47</cmns-av:directSource>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MolecularGraph">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
 		<rdfs:subClassOf>
@@ -876,23 +887,21 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningOpticalActivity"/>
-				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularFormula"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularFormula"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularFormulaByMoiety"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularFormulaByMoiety"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningOpticalActivity"/>
+				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1251,6 +1260,12 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularWeight"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularWeight"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -1265,9 +1280,17 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningCharacteristic"/>
-				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance classifier</rdfs:label>
@@ -1700,6 +1723,49 @@
 		<skos:definition>indicates whether a given class or element is mandatory, conditional, or optional with respect to a given substance type or specified substance group for reporting information per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningMolecularFormula">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
+		<rdfs:label>has defining molecular formula</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularFormula"/>
+		<skos:definition>relates a single substance (classifier) to a formal specification of its molecular formula</skos:definition>
+		<skos:note>Molecular formula is written as a sequence of pairs of atom symbol and stoichiometric number (see example below). This formal notation is essentially a code system. Specified according to the Hill system, i.e. first C, then H, then alphabetical.</skos:note>
+		<skos:note>The messaging requirements can dictate a specific electronic format for the molecular formula and the molecular formula by moiety.</skos:note>
+		<idmp-sub:hasBusinessRules>Can be implicitly derived from the structure; Validity check for identity and structural representation. Molecular formula is not mandatory in the case of a large protein (e.g. more than 10k Da), a large nucleic acid or a large polymer. For small molecules up to molecular weight of 5 000 the unit should be g/mol; above that the Da/kDa is to be used.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningMolecularFormulaByMoiety">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasDefiningMolecularFormula"/>
+		<rdfs:label>has defining molecular formula by moiety</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularFormulaByMoiety"/>
+		<skos:definition>relates a single substance (classifier) to a formal specification of its molecular formula by moiety</skos:definition>
+		<skos:note>In non-cyclic linear structures like sodium nitroprusside: Na2[Fe(CN)5(NO)].2H2O, a non-cyclic structure is constructed in the following order: a) symbol of the central atom placed on the left; b) ionic ligands with cations first then anions; c) neutral ligands.</skos:note>
+		<skos:note>The messaging requirements can dictate a specific electronic format for the molecular formula and the molecular formula by moiety.</skos:note>
+		<skos:note>The molecular formula of the chemical salt Amlodipine besilate is described as C20H25ClN2O5.C6H6O3S.</skos:note>
+		<idmp-sub:hasBusinessRules>Can be implicitly derived from the structure; Validity check for identity and structural representation. For a salt/hydrate the molecular formula of the base or the acid and the salt/hydrate part are separated by a dot per moiety, e.g. Desmopressin Monoacetate Trihydrate: Molecular formula by moiety: C46H64N14O12S2.C2H4O2.3H2O.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.4</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningMolecularWeight">
+		<rdfs:label>has defining molecular weight</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-cls;classifies">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;hasMolecularWeight">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>classifies something that has a specific molecular weight</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.5, Figure 10</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMoiety">
 		<rdfs:label>has moiety</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
@@ -1723,24 +1789,27 @@
 		<skos:definition>relates a substance constituency to a role played by a moiety</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:DatatypeProperty rdf:about="&idmp-sub;hasMolecularFormula">
-		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularFormula">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
 		<rdfs:label>has molecular formula</rdfs:label>
-		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.3</dct:source>
-		<skos:definition>relates a single substance to a formal definition for its molecular formula</skos:definition>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularFormula"/>
+		<skos:definition>relates an actual single substance to a formal specification of its molecular formula</skos:definition>
 		<skos:note>Molecular formula is written as a sequence of pairs of atom symbol and stoichiometric number (see example below). This formal notation is essentially a code system. Specified according to the Hill system, i.e. first C, then H, then alphabetical.</skos:note>
 		<skos:note>The messaging requirements can dictate a specific electronic format for the molecular formula and the molecular formula by moiety.</skos:note>
 		<idmp-sub:hasBusinessRules>Can be implicitly derived from the structure; Validity check for identity and structural representation. Molecular formula is not mandatory in the case of a large protein (e.g. more than 10k Da), a large nucleic acid or a large polymer. For small molecules up to molecular weight of 5 000 the unit should be g/mol; above that the Da/kDa is to be used.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2</cmns-av:adaptedFrom>
-	</owl:DatatypeProperty>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.3</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
 	
-	<owl:DatatypeProperty rdf:about="&idmp-sub;hasMolecularFormulaByMoiety">
-		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularFormulaByMoiety">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasMolecularFormula"/>
 		<rdfs:label>has molecular formula by moiety</rdfs:label>
-		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.4</dct:source>
-		<skos:definition>way of describing of the molecular formula of a stoichiometric or non-stoichiometric substance existing of two or more moieties, the molecular formula of each moiety shall be described separated by a dot</skos:definition>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularFormulaByMoiety"/>
+		<skos:definition>relates an actual single substance to a formal specification of its molecular formula, where that substance has two or more moieties, specified such that the molecular formula of each moiety shall be described separated by a dot</skos:definition>
 		<skos:note>In non-cyclic linear structures like sodium nitroprusside: Na2[Fe(CN)5(NO)].2H2O, a non-cyclic structure is constructed in the following order: a) symbol of the central atom placed on the left; b) ionic ligands with cations first then anions; c) neutral ligands.</skos:note>
 		<skos:note>The messaging requirements can dictate a specific electronic format for the molecular formula and the molecular formula by moiety.</skos:note>
 		<skos:note>The molecular formula of the chemical salt Amlodipine besilate is described as C20H25ClN2O5.C6H6O3S.</skos:note>
@@ -1748,7 +1817,8 @@
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2</cmns-av:adaptedFrom>
-	</owl:DatatypeProperty>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.4</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularWeight">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
