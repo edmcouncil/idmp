@@ -177,13 +177,6 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfMoieties"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;integer"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;isStoichiometric"/>
 				<owl:onDataRange rdf:resource="&xsd;boolean"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -423,7 +416,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Mixture">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
@@ -446,7 +439,21 @@
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFormula"/>
+				<owl:onClass rdf:resource="&idmp-sub;MolecularFormula"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFormulaByMoiety"/>
+				<owl:onClass rdf:resource="&idmp-sub;MolecularFormulaByMoiety"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
 				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
@@ -456,20 +463,6 @@
 				<owl:onProperty rdf:resource="&idmp-sub;hasStereochemistry"/>
 				<owl:onClass rdf:resource="&idmp-sub;Stereochemistry"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFormula"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFormulaByMoiety"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -911,6 +904,13 @@
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningNumberOfMoieties"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>single substance</rdfs:label>
 		<skos:definition>substance classifier that specifies a single representation or set of descriptive elements for a given class of substances</skos:definition>
 		<skos:note>A single substance can be described using one or more of five types of elements: chemical, protein, nucleic acid, polymer or structurally diverse substances.</skos:note>
@@ -1203,6 +1203,13 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
+				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
 				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -1231,6 +1238,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceName"/>
+				<owl:onClass rdf:resource="&idmp-sub;SubstanceName"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;isStoichiometric"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;boolean"/>
@@ -1247,6 +1261,21 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceClassifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance</rdfs:label>
@@ -1274,8 +1303,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceName"/>
-				<owl:onClass rdf:resource="&idmp-sub;SubstanceName"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceName"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1766,6 +1794,40 @@
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.5, Figure 10</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasDefiningNumberOfMoieties">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has defining number of moieties</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.4</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:range rdf:resource="&xsd;integer"/>
+		<skos:definition>indicates the number of moieties that define a substance (classifier) that contains complete chemical structures and definite stoichiometric ratios among moieties</skos:definition>
+		<skos:note>The number of moieties specified should be provided. Non-stoichiometric chemical substances shall have at least two moieties. Each moiety shall be represented by a chemical structure.</skos:note>
+		<idmp-sub:hasBusinessRules>The numeric value shall be always greater than or equal to 2; The value is automatically calculated (Implicit) based on the number of Moieties; if the numeric value is equal to 1, the class Moiety shall not be used.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningOpticalActivity">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has defining optical activity</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:range rdf:resource="&idmp-sub;OpticalActivity"/>
+		<skos:definition>relates a single substance (classifier) to a formal specification of the ability of that substance to rotate the plane of vibration of polarized light to the right or left</skos:definition>
+		<skos:example>(+/-), (+), (-), None, N/A, Unknown</skos:example>
+		<skos:note>The extent of optical rotation is not mandatory at the substance level.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.2</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningStructure">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;hasArrangement"/>
+		<rdfs:label>has defining structure</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2 Figure 10</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2 Figure 3</dct:source>
+		<skos:definition>indicates any arrangement and/or organization of interrelated elements in a classifier for a substance</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMoiety">
 		<rdfs:label>has moiety</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
@@ -1834,14 +1896,26 @@
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has number of moieties</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.4</dct:source>
-		<rdfs:domain rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:range rdf:resource="&xsd;integer"/>
-		<skos:definition>is a chemical substance that contains complete chemical structures and definite stoichiometric ratios among moieties</skos:definition>
+		<skos:definition>indicates the number of moieties that define a substance that contains complete chemical structures and definite stoichiometric ratios among moieties</skos:definition>
 		<skos:note>The number of moieties specified should be provided. Non-stoichiometric chemical substances shall have at least two moieties. Each moiety shall be represented by a chemical structure.</skos:note>
 		<idmp-sub:hasBusinessRules>The numeric value shall be always greater than or equal to 2; The value is automatically calculated (Implicit) based on the number of Moieties; if the numeric value is equal to 1, the class Moiety shall not be used.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasOpticalActivity">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has optical activity</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:range rdf:resource="&idmp-sub;OpticalActivity"/>
+		<skos:definition>relates an actual single substance to a formal specification of the ability of that substance to rotate the plane of vibration of polarized light to the right or left</skos:definition>
+		<skos:example>(+/-), (+), (-), None, N/A, Unknown</skos:example>
+		<skos:note>The extent of optical rotation is not mandatory at the substance level.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.2</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasParentSubstance">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
@@ -1890,7 +1964,7 @@
 		<rdfs:label>has structure</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2 Figure 10</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2 Figure 3</dct:source>
-		<skos:definition>indicates any arrangement and/or organization of interrelated elements in a substance</skos:definition>
+		<skos:definition>indicates any arrangement and/or organization of interrelated elements in an actual substance</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasSubstanceName">
@@ -1898,7 +1972,16 @@
 		<rdfs:label>has substance name</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3, Annex L</dct:source>
-		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;SubstanceClassifier">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
 		<rdfs:range rdf:resource="&idmp-sub;SubstanceName"/>
 		<skos:definition>links a name or company code to the substance it denotes</skos:definition>
 		<skos:example>Amoxicillin; Harpagophytum procumbens (Burch.) DC. ex Meisn., Root</skos:example>
