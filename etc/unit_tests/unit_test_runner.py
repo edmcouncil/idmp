@@ -2,6 +2,7 @@ import argparse
 import json
 import os.path
 import sys
+import shutil
 
 import yaml
 from rdflib import Graph
@@ -49,7 +50,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run unit tests')
     parser.add_argument('--ontology_location', help='Path to ontology location')
     parser.add_argument('--root_folder', help='Path to the root folder')
+    parser.add_argument('--cq_source', help='Path to the sources of cq templates')
     args = parser.parse_args()
+    
+    shutil.copytree(src=args.cq_source, dst=os.path.join(args.root_folder, 'cq_templates/'))
     
     cq_tests_passed = \
         run_unit_test(
