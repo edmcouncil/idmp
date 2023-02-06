@@ -123,14 +123,48 @@ GENERATE {
             FILTER(BOUND(?Short_Name_LangString))
         } .
 
+        # generate skos-xl label for Other Name
         GENERATE {
             <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
-                skos:altLabel ?Other_Name_LangString ;
+                skos-xl:altLabel [
+                    a skos-xl:Label ;
+                    skos-xl:literalForm ?Splitted_Other_Name_LangString ;
+                    dct:modified ?Splitted_Other_Name_Modified_On_ISO ;
+                    dct:contributor ?Splitted_Other_Name_Modified_By ;
+                    cmns-cls:isClassifiedBy ?Spor_Splitted_Other_Name_Translation_Status_URI ;
+                    rdfs:comment ?Splitted_Other_Name_Comments ;
+                ] ;
         }
         ITERATOR iter:for(0,1,?Other_Name_Length) AS ?index
         WHERE {
+            # Normalized data
+            BIND(IF(?Other_Name_Comments = "¦", ?unbound, ?Other_Name_Comments) AS ?Normalized_Other_Name_Comments)
+
             BIND(func:SplitAtPosition(?Other_Name,"¦",?index) AS ?Splitted_Other_Name)
-            BIND(STRLANG(?Splitted_Other_Name, ?Language) AS ?Other_Name_LangString)
+            BIND(func:SplitAtPosition(?Other_Name_Modified_On,"¦",?index) AS ?Splitted_Other_Name_Modified_On)
+            BIND(func:SplitAtPosition(?Other_Name_Modified_By,"¦",?index) AS ?Splitted_Other_Name_Modified_By)
+            BIND(func:SplitAtPosition(?Other_Name_Translation_Status,"¦",?index) AS ?Splitted_Other_Name_Translation_Status)
+            BIND(func:SplitAtPosition(?Normalized_Other_Name_Comments,"¦",?index) AS ?Splitted_Other_Name_Comments)
+
+            BIND(STRLANG(?Splitted_Other_Name, ?Language) AS ?Splitted_Other_Name_LangString)
+
+            # Normalize date to ISO
+            BIND(
+                IF(contains(?Splitted_Other_Name_Modified_On, "/"),
+                "{func:SplitAtPosition(func:SplitAtPosition(?Splitted_Other_Name_Modified_On,"/",2)," ",0)}-{func:SplitAtPosition(?Splitted_Other_Name_Modified_On,"/",1)}-{func:SplitAtPosition(?Splitted_Other_Name_Modified_On,"/",0)}T{func:SplitAtPosition(func:SplitAtPosition(?Splitted_Other_Name_Modified_On,"/",2)," ",1)}",
+                ?Splitted_Other_Name_Modified_On)
+            AS ?Splitted_Other_Name_Modified_On_ISO )
+
+            # Map to SPOR Status
+            BIND(
+                IF(?Splitted_Other_Name_Translation_Status = "CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005004>,
+                IF(?Splitted_Other_Name_Translation_Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005005>,
+                IF(?Splitted_Other_Name_Translation_Status = "NON_CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005006>,
+                IF(?Splitted_Other_Name_Translation_Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
+                ?unbound ))))
+            AS ?Spor_Splitted_Other_Name_Translation_Status_URI )
+
+            FILTER(BOUND(?Splitted_Other_Name_LangString))
         } .
     }
     ITERATOR iter:CSV(?source) AS
