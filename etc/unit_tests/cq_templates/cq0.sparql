@@ -1,0 +1,30 @@
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix cmns-dsg:	  <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-txt: 	  <https://www.omg.org/spec/Commons/TextDatatype/>
+prefix cmns-id:	    <https://www.omg.org/spec/Commons/Identifiers/>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:        <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT ?Substance
+
+WHERE {
+    BIND(cq_0_parameter_1 AS ?SubstanceInputReference )
+    
+    ?Substance rdf:type/rdfs:subClassOf* idmp-sub:Substance .
+
+    OPTIONAL {
+      ?SimpleLabelProperty rdfs:subPropertyOf* rdfs:label .
+      ?Substance ?SimpleLabelProperty ?SubstanceLabel .
+      FILTER(lcase(str(?SubstanceLabel)) = lcase(?SubstanceInputReference))
+    }
+    OPTIONAL {
+      ?Substance cmns-dsg:hasName/cmns-txt:hasTextValue ?SubstanceName .
+      FILTER(lcase(str(?SubstanceName)) = lcase(str(?SubstanceInputReference)))
+    }
+    OPTIONAL {
+      ?Substance cmns-id:isIdentifiedBy/cmns-txt:hasTextValue ?SubstanceIdentifier .
+      FILTER(lcase(str(?SubstanceIdentifier)) = lcase(str(?SubstanceInputReference)))
+    }
+    FILTER(bound(?SubstanceLabel) || bound(?SubstanceName) || bound(?SubstanceIdentifier))
+}
