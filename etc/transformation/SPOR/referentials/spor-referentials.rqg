@@ -3,6 +3,7 @@ PREFIX func: <http://w3id.org/sparql-generate/fn/>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX skos-xl: <http://www.w3.org/2008/05/skos-xl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
@@ -33,12 +34,26 @@ GENERATE {
             a <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }> ;
             rdfs:label ?English_Term_Name_LangString ;
             skos:definition ?Term_Description_LangString ;
-            skos:scopeNote <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/{ ?Domain_ID }> ;
+            skos:notation ?Term_Symbol ;
+            cmns-cls:isClassifiedBy <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/{ ?Domain_ID }> ;
             skos:broader <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Parent_ID }> ;
-            skos:note ?Spor_Term_Status_URI ;
+            cmns-cls:isClassifiedBy ?Spor_Term_Status_URI ;
             dct:created ?Term_Created_On_ISO ;
             dct:modified ?Term_Modified_On_ISO ;
             .
+
+        # generate reification statement for term status
+        GENERATE {
+            [] a rdf:Statement ;
+                rdf:subject <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }> ;
+                rdf:predicate cmns-cls:isClassifiedBy ;
+                rdf:object ?Spor_Term_Status_URI ;
+                dct:modified ?Term_Status_Modified_On ;
+                dct:contributor ?Term_Status_Modified_By ;
+        }
+        WHERE {
+            FILTER(BOUND(?Spor_Term_Status_URI))
+        } .
 
         # generate skos-xl label for Term Name
         GENERATE {
