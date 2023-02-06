@@ -47,7 +47,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     cq_tests_passed = \
-        run_unit_test(ontology_location=args.ontology_location, unit_test_config_file_path='./configs/unit_tests_config.yaml')
+        run_unit_test(ontology_location=args.ontology_location, unit_test_config_file_path='/configs/unit_tests_config.yaml')
     
     if cq_tests_passed:
         sys.exit(0)
