@@ -8,6 +8,8 @@ from rdflib import Graph
 
 
 def get_unit_tests_config(unit_test_config_file_path: str, root_folder: str) -> dict:
+    print(root_folder)
+    print(unit_test_config_file_path)
     print(os.path.join(root_folder, unit_test_config_file_path))
     with open(os.path.join(root_folder, unit_test_config_file_path)) as file:
         config = yaml.safe_load(file)
