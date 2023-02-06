@@ -55,7 +55,7 @@ if __name__ == "__main__":
         run_unit_test(
             ontology_location=args.ontology_location,
             root_folder=args.root_folder,
-            unit_test_config_file_path='/configs/unit_tests_config.yaml')
+            unit_test_config_file_path='configs/unit_tests_config.yaml')
     
     if cq_tests_passed:
         sys.exit(0)
