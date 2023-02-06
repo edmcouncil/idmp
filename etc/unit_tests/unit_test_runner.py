@@ -16,7 +16,7 @@ def get_unit_tests_config(unit_test_config_file_path: str, root_folder: str) -> 
 
 
 def get_sparql_query(config: dict, root_folder: str) -> str:
-    with open(os.path.join(root_folder, config['sparql_template_url'])) as file:
+    with open(os.path.join(root_folder, config['sparql_template'])) as file:
         sparql_template = file.read()
         sparql_parameters = config['parameters']
         file.close()
@@ -35,13 +35,13 @@ def run_unit_test(ontology_location: str, root_folder: str, unit_test_config_fil
         sparql_query = get_sparql_query(config=unit_test_config, root_folder=root_folder)
         query_result = ontology.query(sparql_query)
         query_result_as_dict = json.loads(query_result.serialize(format='json').decode())
-        with open(os.path.join(root_folder, unit_test_config['expected_output_url'])) as file:
+        with open(os.path.join(root_folder, unit_test_config['expected_output'])) as file:
             expected_query_result = json.loads(file.read())
         if not query_result_as_dict == expected_query_result:
-            print('Competency question', unit_test_config['sparql_template_url'], ' run a unit test failed.')
+            print('Competency question', unit_test_config['sparql_template'], ' run a unit test failed.')
             cq_tests_passed = False
         else:
-            print('Competency question', unit_test_config['sparql_template_url'], ' run a unit test passed.')
+            print('Competency question', unit_test_config['sparql_template'], ' run a unit test passed.')
     return cq_tests_passed
 
 
