@@ -9,9 +9,6 @@ from rdflib import Graph
 
 
 def get_unit_tests_config(unit_test_config_file_path: str, root_folder: str) -> dict:
-    print(root_folder)
-    print(unit_test_config_file_path)
-    print(os.path.join(root_folder, unit_test_config_file_path))
     with open(os.path.join(root_folder, unit_test_config_file_path)) as file:
         config = yaml.safe_load(file)
         file.close()
@@ -43,6 +40,8 @@ def run_unit_test(ontology_location: str, root_folder: str, unit_test_config_fil
         if not query_result_as_dict == expected_query_result:
             print('Competency question', unit_test_config['sparql_template_url'], ' run a unit test failed.')
             cq_tests_passed = False
+        else:
+            print('Competency question', unit_test_config['sparql_template_url'], ' run a unit test passed.')
     return cq_tests_passed
 
 
