@@ -36,7 +36,7 @@ jobs:
         robot merge --input AboutIDMPDev.rdf --output AboutIDMPDevMerged.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
     - name: Run hygiene tests using rdflib
       run: |
-        python etc/unit_tests/unit_test_runner --ontology_location /home/runner/work/idmp/idmp/AboutIDMPDevMerged.ttl
+        python etc/unit_tests/unit_test_runner.py --ontology_location /home/runner/work/idmp/idmp/AboutIDMPDevMerged.ttl
         if [ $? != 0 ];
         then
         exit $?
