@@ -32,10 +32,10 @@ jobs:
         sudo wget --no-verbose -m -nH -nd -P /usr/bin https://raw.githubusercontent.com/ontodev/robot/master/bin/robot
         sudo wget --no-verbose -m -nH -nd -P /usr/bin https://github.com/ontodev/robot/releases/latest/download/robot.jar
         sudo chmod +x /usr/bin/robot
-    - name: Merge ontologies with robot
+    - name: Merge all IDMP ontologies with robot
       run: |
         robot merge --input AboutIDMPDev.rdf --output AboutIDMPDevMerged.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
-    - name: Run hygiene tests using rdflib
+    - name: Run unit tests using rdflib
       run: |
         python etc/unit_tests/unit_test_runner.py --ontology_location /home/runner/work/idmp/idmp/AboutIDMPDevMerged.ttl --root_folder /home/runner/work/idmp/idmp/etc/unit_tests/ --cq_source  /home/runner/work/idmp/idmp/etc/CQ/Example/   
         if [ $? != 0 ];
