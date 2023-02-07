@@ -138,12 +138,37 @@ GENERATE {
         ITERATOR iter:for(0,1,?Other_Name_Length) AS ?index
         WHERE {
             # Normalized data
-            BIND(IF(?Other_Name_Comments = "¦", ?unbound, ?Other_Name_Comments) AS ?Normalized_Other_Name_Comments)
+            BIND(
+                IF(?Other_Name_Comments = "¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                ?Other_Name_Comments)))))))))))))))
+            AS ?Normalized_Other_Name_Comments)
 
+            BIND(IF(BOUND(?Other_Name_Modified_On), strlen(replace(?Other_Name_Modified_On, "[^¦]", "")) + 1, 0) AS ?Other_Name_Modified_On_Length)
+            BIND(IF(BOUND(?Other_Name_Translation_Status), strlen(replace(?Other_Name_Translation_Status, "[^¦]", "")) + 1, 0) AS ?Other_Name_Translation_Status_Length)
+
+            # Split the multiple values
             BIND(func:SplitAtPosition(?Other_Name,"¦",?index) AS ?Splitted_Other_Name)
-            BIND(func:SplitAtPosition(?Other_Name_Modified_On,"¦",?index) AS ?Splitted_Other_Name_Modified_On)
+            BIND(IF(?index < ?Other_Name_Modified_On_Length,
+                func:SplitAtPosition(?Other_Name_Modified_On,"¦",?index),
+                ?unbound) AS ?Splitted_Other_Name_Modified_On)
             BIND(func:SplitAtPosition(?Other_Name_Modified_By,"¦",?index) AS ?Splitted_Other_Name_Modified_By)
-            BIND(func:SplitAtPosition(?Other_Name_Translation_Status,"¦",?index) AS ?Splitted_Other_Name_Translation_Status)
+            BIND(IF(?index < ?Other_Name_Translation_Status_Length,
+                func:SplitAtPosition(?Other_Name_Translation_Status,"¦",?index),
+                ?unbound) AS ?Splitted_Other_Name_Translation_Status)
             BIND(func:SplitAtPosition(?Normalized_Other_Name_Comments,"¦",?index) AS ?Splitted_Other_Name_Comments)
 
             BIND(STRLANG(?Splitted_Other_Name, ?Language) AS ?Splitted_Other_Name_LangString)
