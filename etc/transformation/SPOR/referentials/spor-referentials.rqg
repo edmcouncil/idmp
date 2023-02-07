@@ -6,6 +6,7 @@ PREFIX skos-xl: <http://www.w3.org/2008/05/skos-xl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
 PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
 PREFIX idmp-spor: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/>
@@ -16,8 +17,8 @@ GENERATE {
         rdfs:label "SPOR RMS - {?Name}" ;
         skos:scopeNote ?Spor_Domain_URI ;
         skos:note ?Spor_Status_URI ;
-        dct:modified ?Modified_On ;
-        dct:created ?Created_On ;
+        dct:modified "{?Modified_On}"^^xsd:dateTime ;
+        dct:created "{?Created_On}"^^xsd:dateTime ;
         owl:versionInfo ?Version ;
         rdfs:comment "Created as part of the IDMP Ontology project using Accurids" ;
         .
@@ -38,8 +39,8 @@ GENERATE {
             cmns-cls:isClassifiedBy <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/{ ?Domain_ID }> ;
             skos:broader <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Parent_ID }> ;
             cmns-cls:isClassifiedBy ?Spor_Term_Status_URI ;
-            dct:created ?Term_Created_On_ISO ;
-            dct:modified ?Term_Modified_On_ISO ;
+            dct:created "{?Term_Created_On_ISO}"^^xsd:dateTime ;
+            dct:modified "{?Term_Modified_On_ISO}"^^xsd:dateTime ;
             .
 
         # generate reification statement for term status
@@ -49,7 +50,7 @@ GENERATE {
                 rdf:subject <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }> ;
                 rdf:predicate cmns-cls:isClassifiedBy ;
                 rdf:object ?Spor_Term_Status_URI ;
-                dct:modified ?Term_Status_Modified_On ;
+                dct:modified "{?Term_Status_Modified_On}"^^xsd:dateTime ;
                 dct:contributor ?Term_Status_Modified_By ;
         }
         WHERE {
@@ -62,7 +63,7 @@ GENERATE {
                 skos-xl:prefLabel [
                     a skos-xl:Label ;
                     skos-xl:literalForm ?Term_Name_LangString ;
-                    dct:modified ?Term_Name_Modified_On_ISO ;
+                    dct:modified "{?Term_Name_Modified_On_ISO}"^^xsd:dateTime ;
                     dct:contributor ?Term_Name_Modified_By ;
                     cmns-cls:isClassifiedBy ?Spor_Term_Name_Translation_Status_URI ;
                     rdfs:comment ?Term_Name_Comments ;
@@ -96,7 +97,7 @@ GENERATE {
                 skos-xl:altLabel [
                     a skos-xl:Label ;
                     skos-xl:literalForm ?Short_Name_LangString ;
-                    dct:modified ?Short_Name_Modified_On_ISO ;
+                    dct:modified "{?Short_Name_Modified_On_ISO}"^^xsd:dateTime ;
                     dct:contributor ?Short_Name_Modified_By ;
                     cmns-cls:isClassifiedBy ?Spor_Short_Name_Translation_Status_URI ;
                     rdfs:comment ?Short_Name_Comments ;
@@ -130,7 +131,7 @@ GENERATE {
                 skos-xl:altLabel [
                     a skos-xl:Label ;
                     skos-xl:literalForm ?Splitted_Other_Name_LangString ;
-                    dct:modified ?Splitted_Other_Name_Modified_On_ISO ;
+                    dct:modified "{?Splitted_Other_Name_Modified_On_ISO}"^^xsd:dateTime ;
                     dct:contributor ?Splitted_Other_Name_Modified_By ;
                     cmns-cls:isClassifiedBy ?Spor_Splitted_Other_Name_Translation_Status_URI ;
                     rdfs:comment ?Splitted_Other_Name_Comments ;
