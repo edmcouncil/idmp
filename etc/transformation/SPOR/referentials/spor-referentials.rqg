@@ -60,14 +60,17 @@ GENERATE {
         # generate skos-xl label for Term Name
         GENERATE {
             <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
-                skos-xl:prefLabel [
-                    a skos-xl:Label ;
-                    skos-xl:literalForm ?Term_Name_LangString ;
-                    dct:modified "{?Term_Name_Modified_On_ISO}"^^xsd:dateTime ;
-                    dct:contributor ?Term_Name_Modified_By ;
-                    cmns-cls:isClassifiedBy ?Spor_Term_Name_Translation_Status_URI ;
-                    rdfs:comment ?Term_Name_Comments ;
-                ] ;
+                skos-xl:prefLabel <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Term_Name_Rowid }> ;
+                .
+
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Term_Name_Rowid }>
+                a skos-xl:Label ;
+                skos-xl:literalForm ?Term_Name_LangString ;
+                dct:modified "{?Term_Name_Modified_On_ISO}"^^xsd:dateTime ;
+                dct:contributor ?Term_Name_Modified_By ;
+                cmns-cls:isClassifiedBy ?Spor_Term_Name_Translation_Status_URI ;
+                rdfs:comment ?Term_Name_Comments ;
+                .
         }
         WHERE {
             BIND(STRLANG(?Term_Name, ?Language) AS ?Term_Name_LangString)
@@ -94,14 +97,17 @@ GENERATE {
         # generate skos-xl label for Short Name
         GENERATE {
             <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
-                skos-xl:altLabel [
-                    a skos-xl:Label ;
-                    skos-xl:literalForm ?Short_Name_LangString ;
-                    dct:modified "{?Short_Name_Modified_On_ISO}"^^xsd:dateTime ;
-                    dct:contributor ?Short_Name_Modified_By ;
-                    cmns-cls:isClassifiedBy ?Spor_Short_Name_Translation_Status_URI ;
-                    rdfs:comment ?Short_Name_Comments ;
-                ] ;
+                skos-xl:altLabel <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Short_Name_Rowid }> ;
+                .
+
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Short_Name_Rowid }>
+                a skos-xl:Label ;
+                skos-xl:literalForm ?Short_Name_LangString ;
+                dct:modified "{?Short_Name_Modified_On_ISO}"^^xsd:dateTime ;
+                dct:contributor ?Short_Name_Modified_By ;
+                cmns-cls:isClassifiedBy ?Spor_Short_Name_Translation_Status_URI ;
+                rdfs:comment ?Short_Name_Comments ;
+                .
         }
         WHERE {
             BIND(STRLANG(?Short_Name, ?Language) AS ?Short_Name_LangString)
@@ -128,14 +134,17 @@ GENERATE {
         # generate skos-xl label for Other Name
         GENERATE {
             <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
-                skos-xl:altLabel [
-                    a skos-xl:Label ;
-                    skos-xl:literalForm ?Splitted_Other_Name_LangString ;
-                    dct:modified "{?Splitted_Other_Name_Modified_On_ISO}"^^xsd:dateTime ;
-                    dct:contributor ?Splitted_Other_Name_Modified_By ;
-                    cmns-cls:isClassifiedBy ?Spor_Splitted_Other_Name_Translation_Status_URI ;
-                    rdfs:comment ?Splitted_Other_Name_Comments ;
-                ] ;
+                skos-xl:altLabel <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Splitted_Other_Name_Rowid }> ;
+                .
+
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Splitted_Other_Name_Rowid }>
+                a skos-xl:Label ;
+                skos-xl:literalForm ?Splitted_Other_Name_LangString ;
+                dct:modified "{?Splitted_Other_Name_Modified_On_ISO}"^^xsd:dateTime ;
+                dct:contributor ?Splitted_Other_Name_Modified_By ;
+                cmns-cls:isClassifiedBy ?Spor_Splitted_Other_Name_Translation_Status_URI ;
+                rdfs:comment ?Splitted_Other_Name_Comments ;
+                .
         }
         ITERATOR iter:for(0,1,?Other_Name_Length) AS ?index
         WHERE {
@@ -172,6 +181,7 @@ GENERATE {
                 func:SplitAtPosition(?Other_Name_Translation_Status,"¦",?index),
                 ?unbound) AS ?Splitted_Other_Name_Translation_Status)
             BIND(func:SplitAtPosition(?Normalized_Other_Name_Comments,"¦",?index) AS ?Splitted_Other_Name_Comments)
+            BIND(func:SplitAtPosition(?Other_Name_Rowid,"¦",?index) AS ?Splitted_Other_Name_Rowid)
 
             BIND(STRLANG(?Splitted_Other_Name, ?Language) AS ?Splitted_Other_Name_LangString)
 
