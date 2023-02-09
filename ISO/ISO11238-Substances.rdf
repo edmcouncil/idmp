@@ -416,7 +416,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Mixture">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
@@ -831,6 +831,92 @@
 		<cmns-txt:hasTextValue>(+)</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
+				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularWeight"/>
+				<owl:onClass rdf:resource="&idmp-sub;MolecularWeight"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalSubstance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
+				<owl:onClass rdf:resource="&idmp-sub;Structure"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceName"/>
+				<owl:onClass rdf:resource="&idmp-sub;SubstanceName"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isStoichiometric"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfMoieties"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical substance</rdfs:label>
+		<skos:definition>matter of defined composition and having certain common essential characteristics</skos:definition>
+		<skos:note>A substance can be a moiety. A moiety is an entity within a substance that has a complete and continuous molecular structure. The strength of a pharmaceutical product is often based on what is referred to as the active moiety of the molecule, responsible for the physiological or pharmacological action of the drug substance. Chemically, the active moiety of a stoichiometric or non-stoichoimetrical substance molecule is considered that part of the molecule that is the base, free acid or ion molecular part of a salt, solvate, chelate, clathrate, molecular complex or ester.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:label>polymer substance</rdfs:label>
@@ -877,7 +963,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SingleSubstance">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularFormula"/>
@@ -912,7 +998,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>single substance</rdfs:label>
-		<skos:definition>substance classifier that specifies a single representation or set of descriptive elements for a given class of substances</skos:definition>
+		<skos:definition>substance that specifies a single representation or set of descriptive elements for a given class of substances</skos:definition>
 		<skos:note>A single substance can be described using one or more of five types of elements: chemical, protein, nucleic acid, polymer or structurally diverse substances.</skos:note>
 		<skos:note>Racemates and substances with unknown, epimeric or mixed chirality can be defined as single substances because a single structural representation may be generated and the stereochemistry indicated as descriptive text.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
@@ -920,13 +1006,12 @@
 		<cmns-av:synonym>classifier for a single molecular entity</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceClassifier">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
-		<rdfs:label>specified substance classifier</rdfs:label>
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:label>specified substance</rdfs:label>
 		<skos:definition>substance defined by groups of elements that describe multi-substance materials or specify further information on substances relevant to the description of medicinal products</skos:definition>
 		<skos:note>A specified substance is generally a further specification of a substance that captures information on manufacture, specifications, physical form or multi-substance materials that are components of a medicinal product formulation.</skos:note>
 		<skos:note>This could include grade, units of measure, physical form, constituents, manufacturer, critical manufacturing processes (e.g. extraction, synthetic or recombinant processes), specification and the analytical methods used to determine whether a substance is in compliance with a specification. There are four different groups of elements that can be used to define a given specified substance and specific relationships between each group of elements.</skos:note>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-ModelConformant"/>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.78, 6.2</cmns-av:directSource>
 	</owl:Class>
 	
@@ -1200,93 +1285,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Substance">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
-				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularWeight"/>
-				<owl:onClass rdf:resource="&idmp-sub;MolecularWeight"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
-				<owl:onClass rdf:resource="&idmp-sub;Structure"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceName"/>
-				<owl:onClass rdf:resource="&idmp-sub;SubstanceName"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isStoichiometric"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;boolean"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfMoieties"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;integer"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceClassifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>substance</rdfs:label>
-		<skos:definition>matter of defined composition and having certain common essential characteristics</skos:definition>
-		<skos:note>A substance can be a moiety. A moiety is an entity within a substance that has a complete and continuous molecular structure. The strength of a pharmaceutical product is often based on what is referred to as the active moiety of the molecule, responsible for the physiological or pharmacological action of the drug substance. Chemically, the active moiety of a stoichiometric or non-stoichoimetrical substance molecule is considered that part of the molecule that is the base, free acid or ion molecular part of a salt, solvate, chelate, clathrate, molecular complex or ester.</skos:note>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:adaptedFrom>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;SubstanceClassifier">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularWeight"/>
@@ -1295,7 +1294,14 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalSubstance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
 				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -1321,11 +1327,10 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>substance classifier</rdfs:label>
-		<skos:definition>classifier for matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical</skos:definition>
+		<rdfs:label>substance</rdfs:label>
+		<skos:definition>specification for matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical</skos:definition>
 		<skos:note>Discrete existence refers to the ability of a substance to exist independently of any other substance. Substances can either be well-defined entities containing definite chemical structures, synthetic (e.g. isomeric mixtures) or naturally-occurring (e.g. conjugated oestrogens) mixtures of chemicals containing definite molecular structures, or materials derived from plants, animals, microorganisms or inorganic matrices for which the chemical structure may be unknown or difficult to define.</skos:note>
 		<skos:note>Substances are further described as single substances, mixture substances or one of a group of specified substances. Single substances are defined using a minimally sufficient set of data elements divided into five types: chemical, protein, nucleic acid, polymer and structurally diverse. Substances may be salts, solvates, free acids, free bases or mixtures of related compounds that are either isolated or synthesized together. Pharmacopoeial terminology and defining characteristics will be used when available and appropriate. Defining elements are dependent on the type of substance.</skos:note>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Note that while the IDMP standards require a substance name for all substances, the ontology deviates from this by making the name optional in the restriction on substance classifier. This is to enable mapping to various source repositories for substance information that do not necessarily provide names but whose defining characteristics include the molecular structure, which is typically more accurate.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -1349,8 +1354,16 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance code</rdfs:label>
@@ -1409,8 +1422,16 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance identifier</rdfs:label>
@@ -1463,7 +1484,16 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1754,7 +1784,7 @@
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningMolecularFormula">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
 		<rdfs:label>has defining molecular formula</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:range rdf:resource="&idmp-sub;MolecularFormula"/>
 		<skos:definition>relates a single substance (classifier) to a formal specification of its molecular formula</skos:definition>
 		<skos:note>Molecular formula is written as a sequence of pairs of atom symbol and stoichiometric number (see example below). This formal notation is essentially a code system. Specified according to the Hill system, i.e. first C, then H, then alphabetical.</skos:note>
@@ -1768,7 +1798,7 @@
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningMolecularFormulaByMoiety">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasDefiningMolecularFormula"/>
 		<rdfs:label>has defining molecular formula by moiety</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:range rdf:resource="&idmp-sub;MolecularFormulaByMoiety"/>
 		<skos:definition>relates a single substance (classifier) to a formal specification of its molecular formula by moiety</skos:definition>
 		<skos:note>In non-cyclic linear structures like sodium nitroprusside: Na2[Fe(CN)5(NO)].2H2O, a non-cyclic structure is constructed in the following order: a) symbol of the central atom placed on the left; b) ionic ligands with cations first then anions; c) neutral ligands.</skos:note>
@@ -1811,7 +1841,7 @@
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningOpticalActivity">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has defining optical activity</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:range rdf:resource="&idmp-sub;OpticalActivity"/>
 		<skos:definition>relates a single substance (classifier) to a formal specification of the ability of that substance to rotate the plane of vibration of polarized light to the right or left</skos:definition>
 		<skos:example>(+/-), (+), (-), None, N/A, Unknown</skos:example>
@@ -1975,7 +2005,7 @@
 		<rdfs:domain>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;SubstanceClassifier">
+					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;Substance">
 					</rdf:Description>
@@ -2071,14 +2101,14 @@
 		<cmns-av:synonym>is antecedent substance of</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
-	<owl:DatatypeProperty rdf:about="&idmp-sub;isPublicDomain">
+	<owl:DatatypeProperty rdf:about="&idmp-sub;isPublic">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
-		<rdfs:label>is public domain</rdfs:label>
+		<rdfs:label>is public</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<rdfs:domain rdf:resource="&cmns-doc;Reference"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
-		<skos:definition>indicates whether a reference source is available in the public domain</skos:definition>
+		<skos:definition>indicates whether a reference source is publically available</skos:definition>
 		<skos:note>Company codes will only be released if the defining information is associated with the code in a public source such as Chemical Abstracts (CAS), a journal article, or a poster at scientific meeting attributable to the company.</skos:note>
 		<skos:note>Most reference sources other than regulatory submissions will be in the public domain. All regulatory submissions will typically be considered to not be in the public domain. If the reference source is in the public domain, the data elements referenced by the source could be made public. There may be a separate determination whether any portion of the record can be made public. This determination may vary depending on type of substance. Regardless, submitters of information should always explicitly indicate whether data should be considered confidential.</skos:note>
 		<idmp-sub:hasBusinessRules>All regulatory submissions are considered not to be in the public domain. There may be an additional flag that determines whether any information can be released on a given substance.</idmp-sub:hasBusinessRules>
@@ -2090,8 +2120,26 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>is related substance to</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
-		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
-		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
 		<skos:definition>specifies a target substance with which the source has some relationship</skos:definition>
 		<skos:example>The active moiety of the salt amlodipine besilate hydrate (1:1:1) is the related substance amlodipine. The salt amlodipine besilate hydrate contains 69.8 percent w/w of amlodipine. Therefore, the equivalence factor is 0,698, meaning 10 mg amlodipine besilate hydrate salt corresponds to 6,98 (approx to 7 mg) amlodipine active moiety. The Equivalence Factor is captured by the element group Amount in combination with the element group Substance Relationship as Amount Text.</skos:example>
 		<skos:note>Relationships between substances such as the relationship between a salt form and its active moiety or parent substance should be captured. These relationships are often essential to the description of medicinal products, the basis of strength and the classification of substances. These relationships are often obvious and rules will be developed for specifying substances involved in each type of relationship. For example, the active moiety of all sodium salts would be the free acid, conversely the active moiety of a hydrochloride salt would be a free base.</skos:note>
@@ -2115,7 +2163,7 @@
 	<owl:Class rdf:about="&cmns-doc;Reference">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isPublicDomain"/>
+				<owl:onProperty rdf:resource="&idmp-sub;isPublic"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;boolean"/>
 			</owl:Restriction>
