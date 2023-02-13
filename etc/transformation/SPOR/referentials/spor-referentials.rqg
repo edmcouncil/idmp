@@ -1,0 +1,331 @@
+PREFIX iter: <http://w3id.org/sparql-generate/iter/>
+PREFIX func: <http://w3id.org/sparql-generate/fn/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX skos-xl: <http://www.w3.org/2008/05/skos-xl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
+PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
+PREFIX idmp-spor: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/>
+
+GENERATE {
+    <https://spor.ema.europa.eu/rmswi/#/lists/{ ?Identifier }/terms>
+        a owl:Ontology ;
+        rdfs:label "SPOR RMS - {?Name}" ;
+        skos:scopeNote ?Spor_Domain_URI ;
+        skos:note ?Spor_Status_URI ;
+        dct:modified "{?Modified_On}"^^xsd:dateTime ;
+        dct:created "{?Created_On}"^^xsd:dateTime ;
+        owl:versionInfo ?Version ;
+        rdfs:comment "Created as part of the IDMP Ontology project using Accurids" ;
+        .
+
+    <https://spor.ema.europa.eu/rmswi/#/lists/{ ?Identifier }>
+        a owl:Class ;
+        rdfs:label ?Name ;
+        rdfs:seeAlso <https://spor.ema.europa.eu/rmswi/#/lists/{ ?Identifier }/terms> ;
+        cmns-dsg:isDefinedIn idmp-spor:ReferentialsManagementServicesClassificationScheme ;
+        .
+
+    GENERATE {
+        <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
+            a <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }> ;
+            rdfs:label ?English_Term_Name_LangString ;
+            skos:definition ?Term_Description_LangString ;
+            skos:notation ?Term_Symbol ;
+            cmns-cls:isClassifiedBy <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/{ ?Domain_ID }> ;
+            cmns-cls:isClassifiedBy ?Spor_Term_Status_URI ;
+            dct:created "{?Term_Created_On_ISO}"^^xsd:dateTime ;
+            dct:modified "{?Term_Modified_On_ISO}"^^xsd:dateTime ;
+            .
+
+        GENERATE {
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
+                skos:broader <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Splitted_Parent_ID }> ;
+        }
+        ITERATOR iter:for(0,1,?Parent_ID_Length) AS ?index
+        WHERE {
+            BIND(func:SplitAtPosition(?Parent_ID,"¦",?index) AS ?Splitted_Parent_ID)
+        } .
+
+        # generate reification statement for term status
+        GENERATE {
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/termStatus/{ ?Term_Status_Rowid }>
+                a rdf:Statement ;
+                rdf:subject <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }> ;
+                rdf:predicate cmns-cls:isClassifiedBy ;
+                rdf:object ?Spor_Term_Status_URI ;
+                dct:modified "{?Term_Status_Modified_On}"^^xsd:dateTime ;
+                dct:contributor ?Term_Status_Modified_By ;
+        }
+        WHERE {
+            FILTER(BOUND(?Spor_Term_Status_URI))
+        } .
+
+        # generate skos-xl label for Term Name
+        GENERATE {
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
+                skos-xl:prefLabel <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Term_Name_Rowid }> ;
+                .
+
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Term_Name_Rowid }>
+                a skos-xl:Label ;
+                skos-xl:literalForm ?Term_Name_LangString ;
+                dct:modified "{?Term_Name_Modified_On_ISO}"^^xsd:dateTime ;
+                dct:contributor ?Term_Name_Modified_By ;
+                cmns-cls:isClassifiedBy ?Spor_Term_Name_Translation_Status_URI ;
+                rdfs:comment ?Term_Name_Comments ;
+                .
+        }
+        WHERE {
+            BIND(STRLANG(?Term_Name, ?Language) AS ?Term_Name_LangString)
+
+            # Normalize date to ISO
+            BIND(
+                IF(contains(?Term_Name_Modified_On, "/"),
+                "{func:SplitAtPosition(func:SplitAtPosition(?Term_Name_Modified_On,"/",2)," ",0)}-{func:SplitAtPosition(?Term_Name_Modified_On,"/",1)}-{func:SplitAtPosition(?Term_Name_Modified_On,"/",0)}T{func:SplitAtPosition(func:SplitAtPosition(?Term_Name_Modified_On,"/",2)," ",1)}",
+                ?Term_Name_Modified_On)
+            AS ?Term_Name_Modified_On_ISO )
+
+            # Map to SPOR Status
+            BIND(
+                IF(?Term_Name_Translation_Status = "CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005004>,
+                IF(?Term_Name_Translation_Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005005>,
+                IF(?Term_Name_Translation_Status = "NON_CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005006>,
+                IF(?Term_Name_Translation_Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
+                ?unbound ))))
+            AS ?Spor_Term_Name_Translation_Status_URI )
+
+            FILTER(BOUND(?Term_Name_LangString))
+        } .
+
+        # generate skos-xl label for Short Name
+        GENERATE {
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
+                skos-xl:altLabel <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Short_Name_Rowid }> ;
+                .
+
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Short_Name_Rowid }>
+                a skos-xl:Label ;
+                skos-xl:literalForm ?Short_Name_LangString ;
+                dct:modified "{?Short_Name_Modified_On_ISO}"^^xsd:dateTime ;
+                dct:contributor ?Short_Name_Modified_By ;
+                cmns-cls:isClassifiedBy ?Spor_Short_Name_Translation_Status_URI ;
+                rdfs:comment ?Short_Name_Comments ;
+                .
+        }
+        WHERE {
+            BIND(STRLANG(?Short_Name, ?Language) AS ?Short_Name_LangString)
+
+            # Normalize date to ISO
+            BIND(
+                IF(contains(?Short_Name_Modified_On, "/"),
+                "{func:SplitAtPosition(func:SplitAtPosition(?Short_Name_Modified_On,"/",2)," ",0)}-{func:SplitAtPosition(?Short_Name_Modified_On,"/",1)}-{func:SplitAtPosition(?Short_Name_Modified_On,"/",0)}T{func:SplitAtPosition(func:SplitAtPosition(?Short_Name_Modified_On,"/",2)," ",1)}",
+                ?Short_Name_Modified_On)
+            AS ?Short_Name_Modified_On_ISO )
+
+            # Map to SPOR Status
+            BIND(
+                IF(?Short_Name_Translation_Status = "CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005004>,
+                IF(?Short_Name_Translation_Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005005>,
+                IF(?Short_Name_Translation_Status = "NON_CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005006>,
+                IF(?Short_Name_Translation_Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
+                ?unbound ))))
+            AS ?Spor_Short_Name_Translation_Status_URI )
+
+            FILTER(BOUND(?Short_Name_LangString))
+        } .
+
+        # generate skos-xl label for Other Name
+        GENERATE {
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }>
+                skos-xl:altLabel <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Splitted_Other_Name_Rowid }> ;
+                .
+
+            <https://spor.ema.europa.eu/rmswi/#/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Splitted_Other_Name_Rowid }>
+                a skos-xl:Label ;
+                skos-xl:literalForm ?Splitted_Other_Name_LangString ;
+                dct:modified "{?Splitted_Other_Name_Modified_On_ISO}"^^xsd:dateTime ;
+                dct:contributor ?Splitted_Other_Name_Modified_By ;
+                cmns-cls:isClassifiedBy ?Spor_Splitted_Other_Name_Translation_Status_URI ;
+                rdfs:comment ?Splitted_Other_Name_Comments ;
+                .
+        }
+        ITERATOR iter:for(0,1,?Other_Name_Length) AS ?index
+        WHERE {
+            # Normalized data
+            BIND(
+                IF(?Other_Name_Comments = "¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                IF(?Other_Name_Comments = "¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦", ?unbound,
+                ?Other_Name_Comments)))))))))))))))
+            AS ?Normalized_Other_Name_Comments)
+
+            BIND(IF(BOUND(?Other_Name_Modified_On), strlen(replace(?Other_Name_Modified_On, "[^¦]", "")) + 1, 0) AS ?Other_Name_Modified_On_Length)
+            BIND(IF(BOUND(?Other_Name_Translation_Status), strlen(replace(?Other_Name_Translation_Status, "[^¦]", "")) + 1, 0) AS ?Other_Name_Translation_Status_Length)
+            BIND(IF(BOUND(?Other_Name_Rowid), strlen(replace(?Other_Name_Rowid, "[^¦]", "")) + 1, 0) AS ?Other_Name_Rowid_Length)
+
+            # Split the multiple values
+            BIND(func:SplitAtPosition(?Other_Name,"¦",?index) AS ?Splitted_Other_Name)
+            BIND(IF(?index < ?Other_Name_Modified_On_Length,
+                func:SplitAtPosition(?Other_Name_Modified_On,"¦",?index),
+                ?unbound) AS ?Splitted_Other_Name_Modified_On)
+            BIND(func:SplitAtPosition(?Other_Name_Modified_By,"¦",?index) AS ?Splitted_Other_Name_Modified_By)
+            BIND(IF(?index < ?Other_Name_Translation_Status_Length,
+                func:SplitAtPosition(?Other_Name_Translation_Status,"¦",?index),
+                ?unbound) AS ?Splitted_Other_Name_Translation_Status)
+            BIND(func:SplitAtPosition(?Normalized_Other_Name_Comments,"¦",?index) AS ?Splitted_Other_Name_Comments)
+            BIND(IF(?index < ?Other_Name_Rowid_Length,
+                func:SplitAtPosition(?Other_Name_Rowid,"¦",?index),
+                ?unbound) AS ?Splitted_Other_Name_Rowid)
+
+            BIND(STRLANG(?Splitted_Other_Name, ?Language) AS ?Splitted_Other_Name_LangString)
+
+            # Normalize date to ISO
+            BIND(
+                IF(contains(?Splitted_Other_Name_Modified_On, "/"),
+                "{func:SplitAtPosition(func:SplitAtPosition(?Splitted_Other_Name_Modified_On,"/",2)," ",0)}-{func:SplitAtPosition(?Splitted_Other_Name_Modified_On,"/",1)}-{func:SplitAtPosition(?Splitted_Other_Name_Modified_On,"/",0)}T{func:SplitAtPosition(func:SplitAtPosition(?Splitted_Other_Name_Modified_On,"/",2)," ",1)}",
+                ?Splitted_Other_Name_Modified_On)
+            AS ?Splitted_Other_Name_Modified_On_ISO )
+
+            # Map to SPOR Status
+            BIND(
+                IF(?Splitted_Other_Name_Translation_Status = "CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005004>,
+                IF(?Splitted_Other_Name_Translation_Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005005>,
+                IF(?Splitted_Other_Name_Translation_Status = "NON_CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005006>,
+                IF(?Splitted_Other_Name_Translation_Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
+                ?unbound ))))
+            AS ?Spor_Splitted_Other_Name_Translation_Status_URI )
+
+            FILTER(BOUND(?Splitted_Other_Name_LangString))
+        } .
+    }
+    ITERATOR iter:CSV(?source) AS
+    ?List_ID
+    ?Term_ID
+    ?Term_Rowid
+    ?Language
+    ?Term_Name
+    ?Term_Name_Modified_On
+    ?Term_Name_Modified_By
+    ?Term_Name_Translation_Status
+    ?Term_Name_Comments
+    ?Term_Name_Rowid
+    ?Short_Name
+    ?Short_Name_Modified_On
+    ?Short_Name_Modified_By
+    ?Short_Name_Translation_Status
+    ?Short_Name_Comments
+    ?Short_Name_Rowid
+    ?Other_Name
+    ?Other_Name_Modified_On
+    ?Other_Name_Modified_By
+    ?Other_Name_Translation_Status
+    ?Other_Name_Comments
+    ?Other_Name_Rowid
+    ?Term_Description
+    ?Term_Description_Modified_On
+    ?Term_Description_Modified_By
+    ?Term_Description_Translation_Status
+    ?Term_Description_Rowid
+    ?Term_Symbol
+    ?Term_Symbol_Modified_On
+    ?Term_Symbol_Modified_By
+    ?Term_Symbol_Comments
+    ?Term_Symbol_Rowid
+    ?Domain_ID
+    ?Term_Domain_Rowid
+    ?List_Hierarchical_Level_Short_Name
+    ?List_Hierarchical_Level_Name
+    ?Parent_ID
+    ?Parent_Term_Rowid
+    ?Term_Status
+    ?Term_Status_Modified_On
+    ?Term_Status_Modified_By
+    ?Term_Status_Rowid
+    ?Current_Term_ID
+    ?Current_Term_Rowid
+    ?Mapping_Source_ID
+    ?Mapping_Source_Term_ID
+    ?Source_Provided_Name
+    ?Is_Main_Term_Source
+    ?Mapping_Source_Version
+    ?Mapping_Source_Term_Status
+    ?Term_Source_Mapping_Rowid
+    ?Term_Comments
+    ?Applicable_to_Country_ID
+    ?Country_Applicability_Rowid
+    ?Applicable_to_IT_application_ID
+    ?IT_Application_Applicability_Rowid
+    ?Term_Created_On
+    ?Term_Created_By
+    ?Term_Modified_On
+    ?Term_Modified_By
+    ?Version_Number
+    ?Version_Date
+    ?Is_Major_Version
+    ?Term_Visibility
+    WHERE {
+        BIND(IF(?Language = "en", STRLANG(?Term_Name, ?Language), ?unbound) AS ?English_Term_Name_LangString)
+        BIND(IF(BOUND(?Other_Name), strlen(replace(?Other_Name, "[^¦]", "")) + 1, 0) AS ?Other_Name_Length)
+        BIND(STRLANG(?Term_Description, ?Language) AS ?Term_Description_LangString)
+        BIND(IF(BOUND(?Parent_ID), strlen(replace(?Parent_ID, "[^¦]", "")) + 1, 0) AS ?Parent_ID_Length)
+        BIND(
+            IF(?Term_Status = "CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005004>,
+            IF(?Term_Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005005>,
+            IF(?Term_Status = "NON_CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005006>,
+            IF(?Term_Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
+            ?unbound ))))
+        AS ?Spor_Term_Status_URI )
+        BIND(
+            IF(contains(?Term_Created_On, "/"),
+            "{func:SplitAtPosition(func:SplitAtPosition(?Term_Created_On,"/",2)," ",0)}-{func:SplitAtPosition(?Term_Created_On,"/",1)}-{func:SplitAtPosition(?Term_Created_On,"/",0)}T{func:SplitAtPosition(func:SplitAtPosition(?Term_Created_On,"/",2)," ",1)}",
+            ?unbound)
+        AS ?Term_Created_On_ISO )
+        BIND(
+            IF(contains(?Term_Modified_On, "/"),
+            "{func:SplitAtPosition(func:SplitAtPosition(?Term_Modified_On,"/",2)," ",0)}-{func:SplitAtPosition(?Term_Modified_On,"/",1)}-{func:SplitAtPosition(?Term_Modified_On,"/",0)}T{func:SplitAtPosition(func:SplitAtPosition(?Term_Modified_On,"/",2)," ",1)}",
+            ?unbound)
+        AS ?Term_Modified_On_ISO )
+    } .
+}
+ITERATOR iter:CSV(?ontology_source) AS
+?Identifier
+?Name
+?Owner
+?Domain
+?Status
+?Modified_On
+?Created_On
+?Version
+WHERE {
+    BIND(
+        IF(?Domain = "Human use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000012>,
+        IF(?Domain = "Veterinary use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000013>,
+        IF(?Domain = "Human and Veterinary use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014>,
+        ?unbound )))
+    AS ?Spor_Domain_URI )
+
+    BIND(
+        IF(?Status = "CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005004>,
+        IF(?Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005005>,
+        IF(?Status = "NON_CURRENT", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005006>,
+        IF(?Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
+        ?unbound ))))
+    AS ?Spor_Status_URI )
+}
