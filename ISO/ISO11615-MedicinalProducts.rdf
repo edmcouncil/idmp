@@ -92,7 +92,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298). It was also extended to include concepts such as process, manufacturing process, process identifier, batch, batch identifier, lot, lot number, and others required in support of the regulatory to manufacturing bridge use case.</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename product constituency to product composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename product constituency to product composition, which is better understood by the user community, and to move a couple of restrictions from ingredient to substance, including strength and whether or not that substance is potentially allergenic. (IDMP-405)</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -141,6 +141,12 @@
 	<owl:Class rdf:about="&idmp-sub;Ingredient">
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-INGR"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
 				<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -168,13 +174,6 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isAllergenic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;boolean"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;ManufacturedItem"/>
 			</owl:Restriction>
@@ -196,8 +195,42 @@
 		<skos:note>Material is more specifically defined in ISO 11615 to be a &apos;substance or specified substance of which a certain packaging or device is made. This definition applies to a medicinal product package item (container), package (component) and device.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Strength"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isAllergenic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstance">
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.77</dct:source>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Substance">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasDefiningStrength"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Strength"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isDefinedAsPotentiallyAllergenic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;UnitOfPresentation">
@@ -1331,7 +1364,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasDenominator"/>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasNumerator"/>
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1347,7 +1380,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasNumerator"/>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasDenominator"/>
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1464,6 +1497,13 @@
 		<skos:definition>indicates the role of an active ingredient as the basis of strength of any substance or pharmaceutical product as manufactured</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasDefiningStrength">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
+		<rdfs:label>has defining strength</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;Strength"/>
+		<skos:definition>specifies the strength of any element in a substance or pharmaceutical product</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasIngredient">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
 		<rdfs:label>has ingredient</rdfs:label>
@@ -1503,7 +1543,7 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
 		<rdfs:label>has strength</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;Strength"/>
-		<skos:definition>indicates the strength of any element in a substance or pharmaceutical product</skos:definition>
+		<skos:definition>indicates the actual strength of any element in a substance or pharmaceutical product</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;immediatelyContains">
@@ -1569,6 +1609,18 @@
 		<owl:inverseOf rdf:resource="&idmp-mprd;contains"/>
 		<skos:definition>is held within</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;isDefinedAsPotentiallyAllergenic">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
+		<rdfs:label>is defined as potentially allergenic</rdfs:label>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses C.3.16.3 and D.2.2</dct:source>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>is a specification for a device that may contain allergens and/or materials of concern or ingredient that may include a known or suspected allergen</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-BL"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.2.3</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isEvaluatedBy">
 		<rdfs:label>is evaluated by</rdfs:label>
