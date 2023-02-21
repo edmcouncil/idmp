@@ -11,18 +11,16 @@ from rdflib import Graph
 def get_unit_tests_config(unit_test_config_file_path: str, root_folder: str) -> dict:
     with open(os.path.join(root_folder, unit_test_config_file_path)) as file:
         config = yaml.safe_load(file)
-        file.close()
     return config
 
 
 def get_sparql_query(config: dict, root_folder: str) -> str:
     with open(os.path.join(root_folder, config['sparql_template'])) as file:
         sparql_template = file.read()
-        sparql_parameters = config['parameters']
-        file.close()
+    sparql_parameters = config['parameters']
     sparql_query = sparql_template
     for sparql_parameter in sparql_parameters:
-        sparql_query = sparql_query.replace(sparql_parameter, '"' + config['parameters'][sparql_parameter] + '"')
+        sparql_query = sparql_query.replace(sparql_parameter, '"' + sparql_parameters[sparql_parameter] + '"')
     return sparql_query
 
 
