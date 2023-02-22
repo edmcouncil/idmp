@@ -1135,8 +1135,13 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProduct">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
-		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductSpecification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
@@ -1144,10 +1149,11 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product</rdfs:label>
-		<skos:definition>qualitative and quantitative composition of a medicinal product in the dose form approved for administration in line with the regulated product information</skos:definition>
+		<skos:definition>specification for the qualitative and quantitative composition of a medicinal product in the dose form approved for administration in line with the regulated product information</skos:definition>
 		<skos:note>In many instances, the pharmaceutical product is equal to the manufactured item. However, there are instances where the manufactured item shall undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.58</cmns-av:directSource>
-		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.60</cmns-av:directSource>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.58</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.60</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductBatch">
@@ -1161,7 +1167,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalPharmaceuticalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1202,13 +1208,32 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;PhysicalPharmaceuticalProduct">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;PharmaceuticalProduct">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product identifier</rdfs:label>
 		<skos:definition>unique identifier for a pharmaceutical product</skos:definition>
 		<cmns-av:abbreviation>PhPID</cmns-av:abbreviation>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.61</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;PhysicalPharmaceuticalProduct">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
+		<rdfs:label>physical pharmaceutical product</rdfs:label>
+		<skos:definition>qualitative and quantitative composition of a medicinal product in the dose form approved for administration in line with the regulated product information</skos:definition>
+		<skos:note>In many instances, the pharmaceutical product is equal to the manufactured item. However, there are instances where the manufactured item shall undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.58</cmns-av:directSource>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.60</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Placebo">
@@ -1283,20 +1308,23 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:allValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:allValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasRole"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasIngredient"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Ingredient"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;MedicinalProduct">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;PharmaceuticalProduct">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>product composition</rdfs:label>
@@ -1319,6 +1347,12 @@
 		</rdfs:subClassOf>
 		<rdfs:label>product role</rdfs:label>
 		<skos:definition>functional role played by a product that is part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug, or in some investigation</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ProductSpecification">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:label>product specification</rdfs:label>
+		<skos:definition>specification for something that is produced by, results from, or obtained as a consequence of some process or transformation</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ReferenceStrength">
