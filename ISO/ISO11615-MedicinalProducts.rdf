@@ -183,6 +183,12 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalManufacturedItem"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
 	</owl:Class>
 	
@@ -521,6 +527,12 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;ContainerSpecification">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Container"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>container specification</rdfs:label>
 		<skos:definition>specification for an object that can be used to hold things</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
@@ -736,21 +748,6 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;IntermediatePackaging">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;definitionallyContains"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-mprd;PharmaceuticalProduct">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>intermediate packaging</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.29</dct:source>
 		<skos:definition>container between the outer packaging and the immediate container</skos:definition>
@@ -947,6 +944,12 @@
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalMedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>medicinal product</rdfs:label>
 		<skos:definition>specification for a pharmaceutical product or combination of pharmaceutical products that may be administered to human beings (or animals) for treating or preventing disease, with the aim/purpose of making a medical diagnosis or to restore, correct or modify physiological functions</skos:definition>
 		<skos:note>The provisions in this document [ontology] apply to proprietary medicinal products for human use intended to be placed on the market and to industrially manufactured medicinal products, the marketing of which has been authorized by a medicines regulatory agency. However, the provisions do not apply to: i) medicinal products prepared according to prescription (e.g. prepared in a pharmacy from a prescription intended for a specific patient), ii) medicinal products prepared in accordance with an official formula (e.g. prepared in a pharmacy in accordance with the instructions in a pharmacopoeia and intended to be given direct to the patient by the pharmacy), iii) medicinal products intended for research and development trials, and to iv) intermediate products intended for subsequent processing by an authorized manufacturer.</skos:note>
@@ -1009,8 +1012,29 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductSpecification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;definitionallyContains"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;PharmaceuticalProduct">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalMedicinalProductContainer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>medicinal product container</rdfs:label>
@@ -1157,6 +1181,12 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalPharmaceuticalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1410,6 +1440,12 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;ProductSpecification">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;Product"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>product specification</rdfs:label>
 		<skos:definition>specification for something that is produced by, results from, or obtained as a consequence of some process or transformation</skos:definition>
 	</owl:Class>
@@ -1740,10 +1776,10 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isImmediatelyContainedIn">
-		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;isContainedIn"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;isDefinitionallyContainedIn"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isDirectPartOf"/>
 		<rdfs:label>is immediately contained in</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-mprd;Container"/>
+		<rdfs:range rdf:resource="&idmp-mprd;ContainerSpecification"/>
 		<owl:inverseOf rdf:resource="&idmp-mprd;immediatelyContains"/>
 		<skos:definition>is held within its volume or area and is in direct contact with</skos:definition>
 	</owl:ObjectProperty>
