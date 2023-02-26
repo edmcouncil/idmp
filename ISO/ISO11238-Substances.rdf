@@ -866,6 +866,12 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PhysicalSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
 				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -922,7 +928,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isDefinedIn"/>
+				<owl:onProperty rdf:resource="&cmns-doc;isSpecifiedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -942,6 +948,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>physical substance</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>matter of defined composition and having certain common essential characteristics</skos:definition>
 		<skos:note>A substance can be a moiety. A moiety is an entity within a substance that has a complete and continuous molecular structure. The strength of a pharmaceutical product is often based on what is referred to as the active moiety of the molecule, responsible for the physiological or pharmacological action of the drug substance. Chemically, the active moiety of a stoichiometric or non-stoichoimetrical substance molecule is considered that part of the molecule that is the base, free acid or ion molecular part of a salt, solvate, chelate, clathrate, molecular complex or ester.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
@@ -1325,7 +1332,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:onProperty rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
 				<owl:onClass rdf:resource="&idmp-sub;PhysicalSubstance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -1444,7 +1457,7 @@
 		<skos:note>Constituents can be impurities, degradants, extraction solvents, vehicles, active markers or signature substances, parent substances or single substances mixed together to form a multi-substance material.</skos:note>
 		<skos:note>Constituents shall have an associated role and amount at the Specified Substance Group 1 information model. Constituent specifications shall be used to describe components as well as limits on impurities or related substances for a given material.</skos:note>
 		<cmns-av:synonym>substance relationship</cmns-av:synonym>
-		<cmns-av:usageNote>From an implementation (mapping) perspective, this substance constituency class provides the basis for a node in the relationship &apos;substance in the role of a subject realizes an ingredient or moiety role played by some substance or moiety&apos;, where the object may have some amount, limit on impurities, or basis of strength, for example, in a given context. Qualifiers such as the context, purity requirements or limits, basis of strength, amont substance should be added to the constituency node, rather than to the roles.</cmns-av:usageNote>
+		<cmns-av:usageNote>From an implementation (mapping) perspective, substance constituency provides the basis for a node in the relationship &apos;substance in the role of a subject realizes an ingredient or moiety role played by some substance or moiety&apos;, where the object may have some amount, limit on impurities, or basis of strength, for example, in a given context. Qualifiers such as the context, purity requirements or limits, basis of strength, amont substance should be added to the constituency node, rather than to the roles.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceConstituency">
@@ -1906,10 +1919,18 @@
 		<skos:definition>indicates any arrangement and/or organization of interrelated elements in a classifier for a substance</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasIngredient">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:label>has ingredient</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;Ingredient"/>
+		<skos:definition>relates a substance or product composition to an ingredient of that composition</skos:definition>
+		<cmns-av:usageNote>This property should be used primarily in a manufacturing context where differentiation of ingredients in a product from other elements that play roles in the manufacturing context is important.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMoiety">
 		<rdfs:label>has moiety</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-dsg;isDefinedIn">
+			<rdf:Description rdf:about="&cmns-doc;isSpecifiedBy">
 			</rdf:Description>
 			<rdf:Description rdf:about="&idmp-sub;hasMoietyRole">
 			</rdf:Description>
@@ -2114,6 +2135,13 @@
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a moiety to a substance for which it is the essential aspect, responsible for its pharmacological activity</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isIngredientOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isRoleOf"/>
+		<rdfs:label>is ingredient of</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Ingredient"/>
+		<skos:definition>relates an ingredient to a substance or product composition that it is included in</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isMoietyOf">

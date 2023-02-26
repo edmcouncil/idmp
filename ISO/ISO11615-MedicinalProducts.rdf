@@ -185,7 +185,7 @@
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalManufacturedItem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -529,7 +529,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;Container"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -946,7 +946,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalMedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1012,7 +1012,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductSpecification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;definitionallyContains"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;contains"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1033,7 +1033,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalMedicinalProductContainer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1132,7 +1132,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;definitionallyContains"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;contains"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1146,13 +1146,13 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;PhysicalMedicinalProductContainer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;contains"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasPart"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalManufacturedItem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isContainedIn"/>
+				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1166,7 +1166,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;PhysicalMedicinalProduct"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isContainedIn"/>
+				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalMedicinalProductContainer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1185,14 +1185,14 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalPharmaceuticalProduct"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductComposition"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductComposition"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalPharmaceuticalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product</rdfs:label>
@@ -1205,12 +1205,6 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductBatch">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Batch"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isContainedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
@@ -1397,7 +1391,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasIngredient"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasIngredient"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Ingredient"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1442,7 +1436,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
 				<owl:someValuesFrom rdf:resource="&cmns-prd;Product"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1566,18 +1560,8 @@
 		<rdf:type rdf:resource="&owl;TransitiveProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;hasPart"/>
 		<rdfs:label>contains</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-mprd;Container"/>
-		<owl:inverseOf rdf:resource="&idmp-mprd;isContainedIn"/>
-		<skos:definition>holds within its volume or area</skos:definition>
-		<cmns-av:explanatoryNote>Contains implies the actual presence of something, such as some material or substance.</cmns-av:explanatoryNote>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;definitionallyContains">
-		<rdf:type rdf:resource="&owl;TransitiveProperty"/>
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;hasPart"/>
-		<rdfs:label>definitionally contains</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-mprd;ContainerSpecification"/>
-		<owl:inverseOf rdf:resource="&idmp-mprd;isDefinitionallyContainedIn"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;isContainedIn"/>
 		<skos:definition>is specified to hold within its volume or area</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -1588,7 +1572,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasActiveIngredient">
-		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasIngredient"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasIngredient"/>
 		<rdfs:label>has active ingredient</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;ActiveIngredient"/>
 		<skos:definition>relates something representing the contituents of a pharmaceutical or medicinal product to something in the role of an active ingredient</skos:definition>
@@ -1642,16 +1626,9 @@
 		<skos:definition>specifies the strength of any element in a substance or pharmaceutical product</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasIngredient">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
-		<rdfs:label>has ingredient</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-sub;Ingredient"/>
-		<skos:definition>relates something representing the contituents of a pharmaceutical or medicinal product to something in the role of an ingredient</skos:definition>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasIngredientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
-		<owl:equivalentProperty rdf:resource="&idmp-mprd;hasIngredient"/>
+		<owl:equivalentProperty rdf:resource="&idmp-sub;hasIngredient"/>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceStrength">
@@ -1685,7 +1662,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;immediatelyContains">
-		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;definitionallyContains"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;contains"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;hasDirectPart"/>
 		<rdfs:label>immediately contains</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-mprd;ContainerSpecification"/>
@@ -1765,7 +1742,7 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isPartOf"/>
 		<rdfs:label>is definitionally contained in</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;ContainerSpecification"/>
-		<owl:inverseOf rdf:resource="&idmp-mprd;definitionallyContains"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;contains"/>
 		<skos:definition>is specified to be held within</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -1781,7 +1758,7 @@
 		<rdfs:label>is immediately contained in</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;ContainerSpecification"/>
 		<owl:inverseOf rdf:resource="&idmp-mprd;immediatelyContains"/>
-		<skos:definition>is held within its volume or area and is in direct contact with</skos:definition>
+		<skos:definition>is specified to hold within its volume or area and be in direct contact with</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isInputTo">
