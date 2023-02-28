@@ -70,8 +70,8 @@ BIND(
 BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, ?approvalID, ?nothing) AS ?SourceSubstanceApprovalID)
 
 BIND(
-    IF(str(?RelationshipType) = "ACTIVE MOIETY", <https://data.pistoiaalliance.org/idmp/gsrs/role/{ ?RelatedSubstanceApprovalID }_ActiveMoietyRole_FDA_general_{ ?SourceSubstanceApprovalID }>,
-    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", <https://data.pistoiaalliance.org/idmp/gsrs/role/{ ?RelatedSubstanceApprovalID }_ActiveMoietyRole_FDA_patent_exclusive_{ ?SourceSubstanceApprovalID }>,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY", <https://data.pistoiaalliance.org/role/{ ?SourceSubstanceApprovalID }_MoietyRole_FDA_general_{ ?RelatedSubstanceApprovalID }>,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", <https://data.pistoiaalliance.org/role/{ ?SourceSubstanceApprovalID }_MoietyRole_FDA_patent_exclusive_{ ?RelatedSubstanceApprovalID }>,
     ?nothing))
     AS ?ActiveMoietyRole)
 
