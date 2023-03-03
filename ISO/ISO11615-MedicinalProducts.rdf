@@ -185,15 +185,16 @@
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
-				<owl:onClass rdf:resource="&idmp-mprd;ProductComposition"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalManufacturedItem"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalManufacturedItem"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ProductComposition"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
@@ -1731,7 +1732,7 @@
 		<rdf:type rdf:resource="&owl;TransitiveProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isPartOf"/>
 		<rdfs:label>is contained in</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-mprd;Container"/>
+		<rdfs:range rdf:resource="&idmp-mprd;ContainerSpecification"/>
 		<owl:inverseOf rdf:resource="&idmp-mprd;contains"/>
 		<skos:definition>is held within</skos:definition>
 	</owl:ObjectProperty>
@@ -1748,15 +1749,6 @@
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.2.3</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;isDefinitionallyContainedIn">
-		<rdf:type rdf:resource="&owl;TransitiveProperty"/>
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isPartOf"/>
-		<rdfs:label>is definitionally contained in</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-mprd;ContainerSpecification"/>
-		<owl:inverseOf rdf:resource="&idmp-mprd;contains"/>
-		<skos:definition>is specified to be held within</skos:definition>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isEvaluatedBy">
 		<rdfs:label>is evaluated by</rdfs:label>
 		<owl:inverseOf rdf:resource="&idmp-mprd;evaluates"/>
@@ -1764,7 +1756,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isImmediatelyContainedIn">
-		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;isDefinitionallyContainedIn"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;isContainedIn"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isDirectPartOf"/>
 		<rdfs:label>is immediately contained in</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;ContainerSpecification"/>
