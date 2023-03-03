@@ -15,17 +15,17 @@ WHERE {
 	# Bind the name we want into a variable 
 	BIND("amlodipine" AS ?activeMoietyLabel )
 
-  	# Active Moiety to Substance via substance constituency
+  	# Active Moiety to Substance via substance composition
   	?activeMoiety rdfs:label ?activeMoietyLabel .
 	?activeMoietyRole a idmp-sub:ActiveMoietyRole .
     ?activeMoietyRole cmns-pts:isPlayedBy ?activeMoiety .
-  	?substancesConstituency cmns-pts:hasRole ?activeMoietyRole .
-  	?substancesConstituency cmns-dsg:defines ?substance .
+  	?substanceComposition cmns-pts:hasRole ?activeMoietyRole .
+  	?substanceComposition cmns-dsg:defines ?substance .
   
-  	# Substances to Pharmaceutial Products via ingredient roles and product constituency
+  	# Substances to Pharmaceutial Products via ingredient roles and product composition
   	?ingredientRole cmns-pts:isPlayedBy ?substance .
-  	?ingredientRole cmns-pts:isRealizedIn ?productConstituency .
-  	?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
+  	?ingredientRole cmns-pts:isRealizedIn ?productComposition .
+  	?productComposition cmns-dsg:defines ?pharmaceuticalProduct .
   	?pharmaceuticalProduct rdfs:label ?pharmaceuticalProductLabel .
 
 }
