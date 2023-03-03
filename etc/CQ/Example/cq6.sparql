@@ -16,12 +16,10 @@ prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 SELECT distinct ?medicinalProduct ?medicinalProductLabel ?roleLabel
 
 WHERE {
-	# Bind the name we want into a variable 
-	BIND("amlodipine besylate" AS ?substanceLabel )
-
-	# Bind the name we want into a variable 
-	BIND("amlodipine" AS ?activeMoietyLabel )
-
+	# Bind the names we want into variables
+	BIND(cq_6_parameter_1 AS ?substanceLabel) 
+	BIND(cq_6_parameter_2 AS ?activeMoietyLabel) 
+	
   	#Find Medicinal Products that play a role of Authorized or Investigational Medicinal Products 
   	?role cmns-pts:isPlayedBy ?medicinalProduct .
   	?role rdfs:label ?roleLabel .
