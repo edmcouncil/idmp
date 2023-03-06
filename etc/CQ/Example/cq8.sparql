@@ -14,10 +14,17 @@ WHERE {
 	# Bind the name we want into a variable 
 	BIND(cq_8_parameter_1 AS ?manufacturedItemLabel)
 	
-  	# Find Manufactured Items and that have the role of Investigational Medicinal product
+	# Find Manufactured Items
 	?manufacturedItemType rdfs:subClassOf* idmp-sub:ManufacturedItem .
-  	?manufacturedItem rdf:type ?manufacturedItemType .
-  	?manufacturedItem rdfs:label  ?manufacturedItemLabel .
-    ?investigationalMedicinalProduct cmns-pts:isPlayedBy ?manufacturedItem .
+	?manufacturedItem rdf:type ?manufacturedItemType .
+	?manufacturedItem rdfs:label ?manufacturedItemLabel .
+	
+	# Find products that include the manufactured item based on their composition
+	?manufacturedItem cmns-dsg:isDefinedIn ?productComposition .
+	?productComposition cmns-dsg:defines ?pharmaceuticalProduct .
+	?pharmaceuticalProduct cmns-col:isIncludedIn ?medicinalProduct .
+
+  	# Find Manufactured Items and that have the role of Investigational Medicinal product
+    ?investigationalMedicinalProduct cmns-pts:isPlayedBy ?medicinalProduct .
     ?investigationalMedicinalProduct rdf:type idmp-mprd:InvestigationalMedicinalProduct .
 }

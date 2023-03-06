@@ -8,7 +8,7 @@ prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT distinct ?manufacturedItem ?manufacturedItemLabel
+SELECT distinct ?manufacturedItem ?manufacturedItemLabel ?substanceInActiveIngredient
 
 WHERE {
 	# Bind the name we want into a variable
@@ -19,14 +19,14 @@ WHERE {
   	?manufacturedItem rdf:type ?manufacturedItemType .
   	?manufacturedItem rdfs:label ?manufacturedItemLabel .
   
-  	# Find the pharmaceutical products that comprise the manufactured item
-	?manufacturedItem cmns-col:comprises ?pharmaceuticalProduct .
-  
-  	# product constituency link substance as an ingredient to the pharmaceutical product
-  	?productConstituency cmns-dsg:defines ?pharmaceuticalProduct .
-  	?productConstituency idmp-mprd:hasActiveIngredient ?substanceInActiveIngredient .
-  	
+  	# Find products that include the manufactured item based on their composition
+	?manufacturedItem cmns-dsg:isDefinedIn ?productComposition .
+
+  	# product compositions link to substances as ingredients of the pharmaceutical product
+  	?productComposition cmns-dsg:defines ?pharmaceuticalProduct .
+  	?productComposition idmp-mprd:hasActiveIngredient ?substanceInActiveIngredient .
+
   	# Substance as an active ingredient
   	?substanceInActiveIngredient cmns-pts:isPlayedBy ?substance .
-  	?substance rdfs:label  ?substanceLabel .
+  	?substance rdfs:label ?substanceLabel .
 }
