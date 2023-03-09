@@ -28,19 +28,19 @@ GENERATE {
     # Molecular Structure
     ?MolecularStructure a idmp-sub:MolecularStructure ;
         idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification ?structureSmilesString ;
-        idmp-sub:hasMolecularFormula ?structureFormula ;
+        idmp-sub:hasDefiningMolecularFormula ?structureFormula ;
         ?hasMolecularFormulaByMoietyProperty ?structureFormula ;
-        idmp-sub:hasStereochemistry ?Stereochemistry ;
-        idmp-sub:hasMolecularWeight ?structureMolecularWeight ;
+        idmp-sub:hasDefiningStereochemistry ?Stereochemistry ;
+        idmp-sub:hasDefiningMolecularWeight ?structureMolecularWeight ;
         idmp-sub:hasMoiety ?MolecularStructureMoiety ;
         .
 
     # Molecular Structure Moiety
     ?MolecularStructureMoiety a idmp-sub:MolecularStructure ;
         idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification ?moietySmilesString ;
-        idmp-sub:hasMolecularFormula ?moietyFormula ;
-        idmp-sub:hasStereochemistry ?moietyStereochemistryIDMP ;
-        idmp-sub:hasMolecularWeight ?moietyMolecularWeight ;
+        idmp-sub:hasDefiningMolecularFormula ?moietyFormula ;
+        idmp-sub:hasDefiningStereochemistry ?moietyStereochemistryIDMP ;
+        idmp-sub:hasDefiningMolecularWeight ?moietyMolecularWeight ;
         .
 }
 
@@ -70,7 +70,7 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
 BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }> AS ?MolecularStructure )
 
-BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
+BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasDefiningMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
 
 BIND(
     IF(str(?substanceClass) = "chemical", idmp-sub:ChemicalSubstance ,
