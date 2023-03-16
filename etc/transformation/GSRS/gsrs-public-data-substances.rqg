@@ -21,27 +21,24 @@ GENERATE {
 
     # Substance
     ?Substance a ?SubstanceType ;
-        idmp-sub:hasDefiningStructure ?MolecularStructure ;
+        ?hasMolecularFormulaByMoietyProperty ?structureFormula ;
         cmns-txt:hasTextValue ?approvalID ;
+        idmp-sub:hasDefiningMolecularFormula ?structureFormula ;
+        idmp-sub:hasDefiningMolecularWeight ?structureMolecularWeight ;
+        idmp-sub:hasDefiningStereochemistry ?Stereochemistry ;
+        idmp-sub:hasDefiningStructure ?MolecularStructure ;
+        idmp-sub:hasMoiety ?SubstanceMoiety ;
+    .
+
+    # Same substance but using the hash structure as identifier
+    ?AltSubstance a ?SubstanceType ;
+        owl:sameAs ?Substance
     .
 
     # Molecular Structure
     ?MolecularStructure a idmp-sub:MolecularStructure ;
         idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification ?structureSmilesString ;
-        idmp-sub:hasDefiningMolecularFormula ?structureFormula ;
-        ?hasMolecularFormulaByMoietyProperty ?structureFormula ;
-        idmp-sub:hasDefiningStereochemistry ?Stereochemistry ;
-        idmp-sub:hasDefiningMolecularWeight ?structureMolecularWeight ;
-        idmp-sub:hasMoiety ?MolecularStructureMoiety ;
-        .
-
-    # Molecular Structure Moiety
-    ?MolecularStructureMoiety a idmp-sub:MolecularStructure ;
-        idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification ?moietySmilesString ;
-        idmp-sub:hasDefiningMolecularFormula ?moietyFormula ;
-        idmp-sub:hasDefiningStereochemistry ?moietyStereochemistryIDMP ;
-        idmp-sub:hasDefiningMolecularWeight ?moietyMolecularWeight ;
-        .
+    .
 }
 
 # General Substance Info + Molecular Structure
@@ -54,6 +51,7 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
     "$.structure.formula",
     "$.structure.stereochemistry",
     "$.structure.mwt",
+    "$.structure.hash",
     "$.moieties"
     ) AS
 
@@ -65,10 +63,12 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
 ?structureFormula
 ?structureStereochemistry
 ?structureMolecularWeight
+?structureHash
 ?moieties
 
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
-BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }> AS ?MolecularStructure )
+BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?structureHash }> AS ?AltSubstance )
+BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureHash }> AS ?MolecularStructure )
 
 BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasDefiningMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
 
@@ -111,42 +111,9 @@ BIND(
 # Molecular Structure Moieties
 ITERATOR iter:JSONSurfer(?moieties,
     "$[*]",
-    "$.id",
-    "$.smiles",
-    "$.formula",
-    "$.stereochemistry",
-    "$.mwt"
+    "$.hash"
     ) AS
 ?moiety
-?moietyID
-?moietySmilesString
-?moietyFormula
-?moietyStereochemistry
-?moietyMolecularWeight
+?moietyHash
 
-BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?moietyID }> AS ?MolecularStructureMoiety )
-
-BIND(
-    IF(str(?moietyStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
-    IF(str(?moietyStereochemistry) = "ACHIRAL", idmp-sub:Stereochemistry-Achiral ,
-    IF(str(?moietyStereochemistry) = "AXIAL", idmp-sub:Stereochemistry-Axial ,
-    IF(str(?moietyStereochemistry) = "AXIAL R", idmp-sub:Stereochemistry-AxialR ,
-    IF(str(?moietyStereochemistry) = "AXIAL S", idmp-sub:Stereochemistry-AxialS ,
-    IF(str(?moietyStereochemistry) = "CHIRAL", idmp-sub:Stereochemistry-Chiral ,
-    IF(str(?moietyStereochemistry) = "CIS", idmp-sub:Stereochemistry-Cis ,
-    IF(str(?moietyStereochemistry) = "EPIMERIC", idmp-sub:Stereochemistry-Epimeric ,
-    IF(str(?moietyStereochemistry) = "MESO", idmp-sub:Stereochemistry-Meso ,
-    IF(str(?moietyStereochemistry) = "MIXED", idmp-sub:Stereochemistry-Mixed ,
-    IF(str(?moietyStereochemistry) = "OCTAHEDRAL 12", idmp-sub:Stereochemistry-Octahedral12 ,
-    IF(str(?moietyStereochemistry) = "OCTAHEDRAL 22", idmp-sub:Stereochemistry-Octahedral22 ,
-    IF(str(?moietyStereochemistry) = "OCTAHEDRAL 21", idmp-sub:Stereochemistry-Octahedral21 ,
-    IF(str(?moietyStereochemistry) = "RACEMIC", idmp-sub:Stereochemistry-Racemic ,
-    IF(str(?moietyStereochemistry) = "SQUARE PLANAR 1", idmp-sub:Stereochemistry-SquarePlanar1 ,
-    IF(str(?moietyStereochemistry) = "SQUARE PLANAR 2", idmp-sub:Stereochemistry-SquarePlanar2 ,
-    IF(str(?moietyStereochemistry) = "SQUARE PLANAR 3", idmp-sub:Stereochemistry-SquarePlanar3 ,
-    IF(str(?moietyStereochemistry) = "SQUARE PLANAR 4", idmp-sub:Stereochemistry-SquarePlanar4 ,
-    IF(str(?moietyStereochemistry) = "TETRAHEDRAL", idmp-sub:Stereochemistry-Tetrahedral ,
-    IF(str(?moietyStereochemistry) = "TRANS", idmp-sub:Stereochemistry-Trans ,
-    IF(str(?moietyStereochemistry) = "UNKNOWN", idmp-sub:Stereochemistry-Unknown ,
-    ?moietyStereochemistry )))))))))))))))))))))
-    AS ?moietyStereochemistryIDMP)
+BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?moietyHash }> AS ?SubstanceMoiety )
