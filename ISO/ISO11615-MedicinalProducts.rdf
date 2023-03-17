@@ -129,6 +129,14 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.1</dct:source>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Analysis">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Process"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AnalyticalMethod">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProcessSpecification"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;InactiveIngredient">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -209,6 +217,10 @@
 		<skos:note>Material is more specifically defined in ISO 11615 to be a &apos;substance or specified substance of which a certain packaging or device is made. This definition applies to a medicinal product package item (container), package (component) and device.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MaterialClassifier">
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -222,6 +234,42 @@
 				<owl:onProperty rdf:resource="&idmp-mprd;isAllergenic"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ProcessingMaterialRole">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;ManufacturingProcess">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;ProcessStep">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ResultantMaterialRole">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;ManufacturingProcess">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;ProcessStep">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 	</owl:Class>
@@ -1348,8 +1396,8 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;Process">
 		<rdfs:label>process</rdfs:label>
-		<dct:source>ISO 18629-11:2005(en) Industrial automation systems and integration — Process specification language — Part 11: PSL core - https://www.iso.org/obp/ui/#iso:std:iso:18629:-11:ed-1:v1:en, clause 3.1.21</dct:source>
-		<skos:definition>structured set of activities involving various enterprise entities, that is designed and organized for a given purpose</skos:definition>
+		<dct:source>ISO 18629-11:2005(en) Industrial automation systems and integration - Process specification language - Part 11: PSL core - https://www.iso.org/obp/ui/#iso:std:iso:18629:-11:ed-1:v1:en, clause 3.1.21</dct:source>
+		<skos:definition>structured set of activities involving various enterprise entities designed and organized for a given purpose</skos:definition>
 		<skos:editorialNote>This is a starting point that requires extension to include the activities that comprise the process, derived from ANSI/ISA S88 and the ISO Process Specification Language (PSL).</skos:editorialNote>
 		<skos:note>The definition provided here is very close to that given in ISO 10303-49. Nevertheless ISO 15531 needs the notion of structured set of activities, without any predefined reference to the time or steps. In addition, from the point of view of flow management, some empty processes may be needed for a synchronisation purpose although they are not actually doing anything (ghost task). [SOURCE:ISO 15531-1]</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
@@ -1367,6 +1415,14 @@
 		<skos:definition>identifier assigned to a structured set of activities involving various enterprise entities, that is designed and organized for a given purpose</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:adaptedFrom>ISO 18629-11:2005(en) Industrial automation systems and integration — Process specification language — Part 11: PSL core - https://www.iso.org/obp/ui/#iso:std:iso:18629:-11:ed-1:v1:en, clause 3.1.21</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ProcessSpecification">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:label>process specification</rdfs:label>
+		<skos:definition>specification for a structured set of activities involving various enterprise entities designed and organized for a given purpose</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 18629-11:2005(en) Industrial automation systems and integration - Process specification language - Part 11: PSL core - https://www.iso.org/obp/ui/#iso:std:iso:18629:-11:ed-1:v1:en, clause 3.1.21</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ProcessStep">
