@@ -30,11 +30,6 @@ GENERATE {
         idmp-sub:hasMoiety ?SubstanceMoiety ;
     .
 
-    # Same substance but using the hash structure as identifier
-    ?AltSubstance a ?SubstanceType ;
-        owl:sameAs ?Substance
-    .
-
     # Molecular Structure
     ?MolecularStructure a idmp-sub:MolecularStructure ;
         idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification ?structureSmilesString ;
@@ -51,7 +46,6 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
     "$.structure.formula",
     "$.structure.stereochemistry",
     "$.structure.mwt",
-    "$.structure.hash",
     "$.moieties"
     ) AS
 
@@ -63,12 +57,10 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
 ?structureFormula
 ?structureStereochemistry
 ?structureMolecularWeight
-?structureHash
 ?moieties
 
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
-BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?structureHash }> AS ?AltSubstance )
-BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureHash }> AS ?MolecularStructure )
+BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }> AS ?MolecularStructure )
 
 BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasDefiningMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
 
