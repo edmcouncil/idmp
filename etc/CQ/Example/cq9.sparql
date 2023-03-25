@@ -1,0 +1,37 @@
+# CQ 9: What is the molecular structure of substance <S>?"
+
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT distinct ?structureRepresentationType ?structureRepresentationLabel ?structureRepresentationTextValue
+
+WHERE {
+	# Bind the name we want into a variable 
+	BIND(cq_9_parameter_1 AS ?substanceLabel)
+
+    # Find the substance that is a substance or a subclass of susbtance:
+    ?type rdfs:subClassOf* idmp-sub:Substance .
+    ?substance rdf:type ?type;
+   
+    # has a label that we are looking for
+    rdfs:label ?substanceLabel ;
+	
+	# Link Substance to molecular structure
+    idmp-sub:hasDefiningStructure ?substanceStructure .
+
+    # Structure is described by one or more types of structural representations
+    ?substanceStructure cmns-dsg:isDescribedBy ?structureRepresentation .
+
+
+    # Get the type and label of the representation
+    ?structureRepresentation rdf:type ?structureRepresentationType ;
+  	rdfs:label ?structureRepresentationLabel .
+    ?structureRepresentationType rdfs:subClassOf* idmp-sub:StructuralRepresentation ;
+    
+
+    # Get the Text Value of the representation (optional)
+    optional {?structureRepresentation cmns-txt:hasTextValue ?structureRepresentationTextValue } .
+}
