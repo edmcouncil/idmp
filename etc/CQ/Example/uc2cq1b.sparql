@@ -1,0 +1,66 @@
+#CQ 1:In which SKUs is substance <x> used?
+# Intended to run on data from AmlodipineExample.rdf
+
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix idmp-amp: 	<https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+prefix cmns-prd: 	<https://www.omg.org/spec/Commons/ProductsAndServices/>
+prefix cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-col: <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+select distinct ?skuUri ?skuLabel
+from <http://localhost:3030/idmp_2023_q1/data/example>
+from <http://localhost:3030/idmp_2023_q1/data/iso>
+where {
+  	# Bind the name we want into a variable 
+	BIND("amlodipine besylate" AS ?substanceLabel )
+
+  	# Need to get the Substance URI of the label.
+  	?substanceUri rdfs:label ?substanceLabel .
+  
+  	{
+      # Find SKUs where the a packaging is comprised of the substance
+      ?skuUri a cmns-prd:StockKeepingUnit ;
+            rdfs:label ?skuLabel ;
+            cmns-dsg:denotes ?packagingUri ;
+         	cmns-col:comprises ?substanceUri .     
+  } union {
+        # Find SKUs where an intermediate packaging within the SKU's packaging is comprised of the substance (1-step)
+      	?skuUri a cmns-prd:StockKeepingUnit ;
+              rdfs:label ?skuLabel ;
+              cmns-dsg:denotes ?outerPackagingUri .
+      	?outerPackagingUri idmp-mprd:contains ?intermediatePackagingUri .
+    	?intermediatePackagingUri cmns-col:comprises ?substanceUri .   
+  } union {
+    	 # Find SKUs where an intermediate packaging within the SKU's packaging is comprised of the substance (2-step)
+      	?skuUri a cmns-prd:StockKeepingUnit ;
+              rdfs:label ?skuLabel ;
+              cmns-dsg:denotes ?outerPackagingUri .
+      	?outerPackagingUri idmp-mprd:contains ?innerPackagingUri .
+    	?innerPackagingUri idmp-mprd:contains ?intermediatePackagingUri .
+    	?intermediatePackagingUri cmns-col:comprises ?substanceUri .   
+  } union {
+     	 # Find SKUs where a substance is used in the pharmaceutical product contained in an intermediate packaging (1-step)
+      	?skuUri a cmns-prd:StockKeepingUnit ;
+              rdfs:label ?skuLabel ;
+              cmns-dsg:denotes ?outerPackagingUri .
+      	?outerPackagingUri idmp-mprd:contains ?intermediatePackagingUri .
+    	?intermediatePackagingUri idmp-mprd:contains ?pharmaceuticalProduct . 
+    	?pharmaceuticalProductComposition cmns-dsg:defines ?pharmaceuticalProduct .
+    	?pharmaceuticalProductComposition idmp-mprd:hasActiveIngredient ?substanceInActiveIngredientRole .
+    	?substanceInActiveIngredientRole cmns-pts:isPlayedBy ?substanceUri .
+ } union {
+       	 # Find SKUs where a substance is used in the pharmaceutical product contained in an intermediate packaging (2-step)
+      	?skuUri a cmns-prd:StockKeepingUnit ;
+              rdfs:label ?skuLabel ;
+              cmns-dsg:denotes ?outerPackagingUri .
+      	?outerPackagingUri idmp-mprd:contains ?innerPackagingUri .
+    	?innerPackagingUri idmp-mprd:contains ?intermediatePackagingUri .
+    	?intermediatePackagingUri idmp-mprd:contains ?pharmaceuticalProduct . 
+    	?pharmaceuticalProductComposition cmns-dsg:defines ?pharmaceuticalProduct .
+    	?pharmaceuticalProductComposition idmp-mprd:hasActiveIngredient ?substanceInActiveIngredientRole .
+    	?substanceInActiveIngredientRole cmns-pts:isPlayedBy ?substanceUri .
+  } 
+}
