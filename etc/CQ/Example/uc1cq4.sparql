@@ -1,0 +1,32 @@
+# UC1-CQ 4:  What is the identifier for substance <$Substance> in registry <$Registry>
+PREFIX cmns-id: 	<https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX cmns-ra:   	<https://www.omg.org/spec/Commons/RegistrationAuthorities/>
+PREFIX cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+ 
+SELECT DISTINCT ?Code (SAMPLE(?CodeLabel) AS ?CodeName) (SAMPLE(?CodeTextValue) AS ?CodeText) 
+
+WHERE {
+    # Bind Variable Substance <$Substance>
+	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
+  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/Terlipressin>
+    BIND( uc1_cq4_parameter_1 AS $Substance )
+  
+    # Bind Variable registry <$Registry>
+    # Example for EV Code: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/ExtendedEudraVigilanceMedicinalProductDictionary>
+    # Example for GSRS: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/GlobalSubstanceRegistrationSystem>
+    BIND( uc1_cq4_parameter_2 AS $Registry )
+   
+    # A Code identifies the $Substance and is registered in $Registry
+    ?Code cmns-id:identifies $Substance ;
+        cmns-ra:isRegisteredIn $Registry .
+
+  	# Optionally, get the name of the code
+    OPTIONAL{?Code rdfs:label  ?CodeLabel }
+  
+    # Optionally, get the text value of the code
+    OPTIONAL{?Code cmns-txt:hasTextValue  ?CodeTextValue }
+  
+} GROUP BY ?Code

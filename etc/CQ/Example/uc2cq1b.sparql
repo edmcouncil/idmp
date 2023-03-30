@@ -1,4 +1,4 @@
-#CQ 1:In which SKUs is substance <x> used?
+# Use Case 2 CQ 1b:In which SKUs is substance <x> used?
 # Intended to run on data from AmlodipineExample.rdf
 
 prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -11,11 +11,10 @@ prefix cmns-col: <https://www.omg.org/spec/Commons/Collections/>
 prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 select distinct ?skuUri ?skuLabel
-from <http://localhost:3030/idmp_2023_q1/data/example>
-from <http://localhost:3030/idmp_2023_q1/data/iso>
+
 where {
   	# Bind the name we want into a variable 
-	BIND("amlodipine besylate" AS ?substanceLabel )
+	BIND(uc2_cq_1_b_parameter_1 AS ?substanceLabel )
 
   	# Need to get the Substance URI of the label.
   	?substanceUri rdfs:label ?substanceLabel .

@@ -1,0 +1,36 @@
+# UC1-CQ 1: What substances have a common active moiety <$ActiveMoiety>?
+PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+ 
+SELECT DISTINCT ?Substance (SAMPLE(?SubstanceLabel) AS ?SubstanceName)
+
+WHERE {
+    # Bind Variable ActiveMoiety <$ActiveMoiety>
+    # Example for Dataset GSRS: <https://gsrs.ncats.nih.gov/api/v1/substances/1J444QC288>
+	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
+  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/Terlipressin>
+    BIND(uc1_cq1_parameter_1 AS $ActiveMoiety )
+     
+    # Get the Entities that have the defined active moiety
+  	{
+    	# Use the shortcut (isActiveMoietyOf or hasActiveMoiety)
+    	?Substance ^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $ActiveMoiety .
+  	} UNION {
+    	# Use the $ActiveMoiety in a role for composition that defines a substance.
+    	[] cmns-dsg:defines ?Substance ;
+      	 	cmns-pts:hasRole [
+      			a idmp-sub:ActiveMoietyRole ;
+    			cmns-pts:isPlayedBy $ActiveMoiety
+    	] .
+  	}
+     
+    # Make sure that we only return actual substances
+    ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
+     
+    # Optionally, get the name of the substance
+    OPTIONAL{?Substance  rdfs:label  ?SubstanceLabel }
+ 
+} GROUP BY ?Substance
