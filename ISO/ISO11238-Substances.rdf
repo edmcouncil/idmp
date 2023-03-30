@@ -84,9 +84,10 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -148,7 +149,7 @@
 	<owl:Class rdf:about="&idmp-sub;Analysis">
 		<rdfs:label>analysis</rdfs:label>
 		<skos:definition>process of determining the constituency of matter</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 29</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 29</cmns-av:adaptedFrom>
 		<cmns-av:synonym>analytical process</cmns-av:synonym>
 	</owl:Class>
 	
@@ -161,7 +162,16 @@
 		</rdfs:subClassOf>
 		<rdfs:label>analytical method</rdfs:label>
 		<skos:definition>specification of the methodology for performing some analysis</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 29</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 29</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Atom">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
+		<rdfs:label>atom</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+		<skos:definition>smallest particle characterizing a chemical element</skos:definition>
+		<cmns-av:directSource>Nomenclature of Inorganic Chemistry – IUPAC Recommendations 2005, N. G. Connelly, T. Damhus, R. M. Hartshorn, A. T. Hutton (Eds.), Royal Society of Chemistry, Cambridge, U.K., ISBN 0-85404-438-8. 3rd ed., p. 35</cmns-av:directSource>
+		<cmns-av:explanatoryNote>It consists of a nucleus of a positive charge carrying almost all its mass (more than 99.9%) and Z electrons determining its size.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Base">
@@ -187,6 +197,12 @@
 				<owl:onProperty rdf:resource="&idmp-sub;isStoichiometric"/>
 				<owl:onDataRange rdf:resource="&xsd;boolean"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularStructure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>chemical substance</rdfs:label>
@@ -455,7 +471,7 @@
 		<skos:example>biological material</skos:example>
 		<skos:example>botanical material</skos:example>
 		<skos:example>synthetic material</skos:example>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.5.5, figure 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.5.5, Figure 30</cmns-av:adaptedFrom>
 		<cmns-av:synonym>material type</cmns-av:synonym>
 	</owl:Class>
 	
@@ -469,6 +485,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>material role</rdfs:label>
 		<skos:definition>functional role played by a material that is part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MaterialSpecification">
@@ -481,6 +498,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>material specification</rdfs:label>
 		<skos:definition>specification for substances or specified substances that are part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Matter">
@@ -720,6 +738,25 @@
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularWeight">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;MolecularEntity">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>molecular weight</rdfs:label>
 		<skos:definition>mass of one molecule of a homogenous substance or the average mass of molecules that comprise a heterogeneous substance, which is derived from the molecular structure or the molecular formula</skos:definition>
 		<skos:note>For a substance not described in a Pharmacopoeia a mass spectrum may be provided to substantiate the calculated molecular weight.</skos:note>
@@ -728,6 +765,35 @@
 		<skos:note>It is calculated as the sum of the mass of each constituent atom multiplied by the number of atoms of that element in the molecular formula. The unified atomic mass unit is the unit of molecular weight and includes the type of molecular weight (g/mol).</skos:note>
 		<skos:note>The unified atomic mass unit or Dalton is the unit of molecular weight. The type of molecular weight should always be captured.</skos:note>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.50</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Molecule">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;Atom"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularStructure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecule</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+		<skos:definition>electrically neutral entity consisting of more than one atom (n&gt;1)</skos:definition>
+		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1143</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MonodisperseSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:label>monodisperse substance</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;PolydisperseSubstance"/>
+		<skos:definition>single substance that is homogeneous in molecular weight, that is, it does not have a distribution of different molecular weight chains within the total mass</skos:definition>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.51</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidSubstance">
@@ -1066,6 +1132,14 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PolydisperseSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:label>polydisperse substance</rdfs:label>
+		<skos:definition>single substance containing multiple related entities</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.62</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Polydisperse substances include polymers, mixture and structurally diverse material isolated from a single source. Chemical substances, proteins and nucleic acids with defined sequences are not described as polydisperse substances.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:label>polymer substance</rdfs:label>
@@ -1162,6 +1236,22 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>single substance</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;ChemicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;NucleicAcidSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;PolymerSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ProteinSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;StructurallyDiverseSubstance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>substance that specifies a single representation or set of descriptive elements for a given class of substances</skos:definition>
 		<skos:note>A single substance can be described using one or more of five types of elements: chemical, protein, nucleic acid, polymer or structurally diverse substances.</skos:note>
 		<skos:note>Racemates and substances with unknown, epimeric or mixed chirality can be defined as single substances because a single structural representation may be generated and the stereochemistry indicated as descriptive text.</skos:note>
