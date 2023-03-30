@@ -961,7 +961,24 @@
 		</rdfs:subClassOf>
 		<rdfs:label>marketing authorization holder</rdfs:label>
 		<skos:definition>organisation that holds the authorization for marketing a medicinal product in a region</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.41</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MarketingAuthorizationHolderIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorizationHolder"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>marketing authorization holder identifier</rdfs:label>
+		<skos:definition>unique identifier of the marketing authorisation holder (organisation) of the medicinal product</skos:definition>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.2.2.3</cmns-av:directSource>
+		<cmns-av:explanatoryNote>An international coding system for unique marketing authorisation holders (organisations) identifiers can be applied, if available.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MarketingAuthorizationNumber">
@@ -1073,6 +1090,30 @@
 		<cmns-av:synonym>medicinal product batch identifier 1</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductCodeSegment">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProductIdentifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medicinal product code segment</rdfs:label>
+		<skos:definition>code assigned to each package presentation of a medicinal product</skos:definition>
+		<skos:note>It utilises defining attributes to determine a single medicinal product to which a code is assigned. A different medicinal product code segment shall be assigned, leading to a unique MPID, whenever any of the following items of information for a medicinal product are modified, as applicable, per a medicines regulatory agency process(es):
+a) marketing authorisation indicated in a region;
+NOTE The change of a marketing authorization (MA), depending on regional requirements, might not lead to a change of MPID.
+b) legal status of supply as a value/attribute (e.g. prescription only or &apos;over the counter&apos; sale);
+Legal status of supply may be considered a defining element for medicinal product identification per regional requirements as this supports regulatory compliance and pharmacovigilance activities.
+c) medicinal product name;
+d) pharmaceutical dose form;
+e) active ingredient(s)/active moieties and their corresponding strength;
+f) device(s) where a medicinal product is combined with a medical device and where the pharmacological, immunological or metabolic action should be considered as the principal mode of action; the medical device is presented as part of the medicinal product;
+g) therapeutic indication(s) as authorised for the medicinal product.</skos:note>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.3.2</cmns-av:directSource>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductContainer">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ContainerSpecification"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductSpecification"/>
@@ -1117,6 +1158,24 @@
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MarketingAuthorizationHolderIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductCodeSegment"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&lcc-cr;Alpha2Code"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
 				<owl:someValuesFrom>
 					<owl:Class>
@@ -1133,7 +1192,7 @@
 		<rdfs:label>medicinal product identifier</rdfs:label>
 		<skos:definition>unique identifier allocated to a medicinal product supplementary to any existing authorization number as ascribed by a medicines regulatory agency in a region</skos:definition>
 		<skos:note>This is an alphanumeric text field.</skos:note>
-		<skos:note>This is for indexing purposes and to contribute to improved patient safety by allowing for the unique identification of Medicinal Products worldwide.</skos:note>
+		<skos:note>This is for indexing purposes and to contribute to improved patient safety by allowing for the unique identification of medicinal products worldwide.</skos:note>
 		<cmns-av:abbreviation>MPID</cmns-av:abbreviation>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.53</cmns-av:directSource>
 	</owl:Class>
