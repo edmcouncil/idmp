@@ -287,6 +287,24 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.77</dct:source>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;StartingMaterialRole">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;ManufacturingProcess">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;ProcessStep">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Substance">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -1311,17 +1329,26 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PackageItem">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;PhysicalMedicinalProductContainer"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasPart"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalManufacturedItem"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;contains"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;PackageItem">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalMedicinalProduct"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>package item</rdfs:label>
@@ -1334,8 +1361,8 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysicalMedicinalProductContainer"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;contains"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackageItem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>packaged medicinal product</rdfs:label>
