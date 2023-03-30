@@ -1,4 +1,4 @@
-# UC1-CQ 5: In which clinical trials were the authorized medicinal products <$MedicinalProduct> administered?
+# UC1-CQ5: In which clinical trials was <$AuthorizedMedicinalProduct> administered?
 
 PREFIX idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
@@ -8,13 +8,13 @@ SELECT DISTINCT ?ClinicalTrial (SAMPLE(?ClinicalTrialLabel) AS ?ClinicalTrialNam
 
 WHERE {
 
-  # Bind Variable authorized medicinal products  <$MedicinalProduct>
+  # Bind Variable <$AuthorizedMedicinalProduct>
   # Example for European Union Clinical Trials Register: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/EuropeanUnionClinicalTrialsRegister/AliskirenAsInvestigationalMedicinalProduct>
-  BIND(uc1_cq5_parameter_1 AS $MedicinalProduct )
+  BIND(uc1_cq5_parameter_1 AS $AuthorizedMedicinalProduct )
   
   # Find clinical trials that manages the administration of $MedicinalProduct
   ?ClinicalTrial a idmp-mprd:ClinicalTrial ;
-                  idmp-mprd:managesAdministrationOf ?MedicinalProduct .
+                  idmp-mprd:managesAdministrationOf $AuthorizedMedicinalProduct .
 
   # Optionally, get the name of the clinical trial
   OPTIONAL{?ClinicalTrial  rdfs:label  ?ClinicalTrialLabel }
