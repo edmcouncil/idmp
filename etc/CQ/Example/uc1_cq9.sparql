@@ -1,4 +1,4 @@
-# UC1-CQ 9: What is the molecular structure of substance <$Substance>?"
+# UC1-CQ9: What is the molecular structure of <$SUBSTANCE>?"
 
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
@@ -9,13 +9,13 @@ PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?Structure (SAMPLE(?StructureLabel) AS ?StructureName) (SAMPLE(?StructureTextValue) AS ?StructureText)
 
 WHERE {
-    # Bind Variable substance <$Substance>
+    # Bind Variable substance <$SUBSTANCE>
 	  # Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
   	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetate>
-    BIND(uc1_cq9_parameter_1 AS $Substance )
+    BIND(uc1_cq9_parameter_1 AS $SUBSTANCE )
 
 	  # Link Substance to molecular structure
-    $Substance idmp-sub:hasDefiningStructure [ 
+    $SUBSTANCE idmp-sub:hasDefiningStructure [ 
       cmns-dsg:isDescribedBy ?Structure 
     ] .
 
