@@ -1,0 +1,50 @@
+# UC1-CQ 3-1:  What is the basis of strength for <substance x> in <product y>?
+PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX cmns-qtu: <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
+PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX idmp-ucum: 	<https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+ 
+SELECT DISTINCT ?BasisOfStrength 
+(SAMPLE(?BasisOfStrengthLabel) AS ?BasisOfStrengthName)
+(SAMPLE(?StrengthNumeratorValue) AS ?NumeratorValue)
+(SAMPLE(?StrengthNumeratorUnit) AS ?NumeratorUnit)
+(SAMPLE(?StrengthDemoniatorValue) AS ?DemonminatorValue)
+(SAMPLE(?StrengthDemoniatorUnit) AS ?DemonminatorUnit)
+
+WHERE {
+    # Bind Variable Substance <$Substance>
+	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
+  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetate>
+    BIND(uc1_cq3-1_parameter_1 AS $Substance )
+    
+  	# Bind Variable Product <$Product>
+	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Norvasc>
+  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetateSUN>
+    BIND(uc1_cq3-1_parameter_2 AS $Product )
+  
+  	# Get $Product's active ingredient that is played by $Substace that has a Basis Of Strength
+  	[] 	cmns-dsg:defines $Product ;
+      	idmp-mprd:hasActiveIngredient [ 
+    		idmp-mprd:hasStrength ?BasisOfStrength ;
+  			cmns-pts:isPlayedBy $Substance ] .
+  
+  	# Get the Basis of Strength's numerator value and unit
+  	?BasisOfStrength cmns-qtu:hasNumerator [
+    	cmns-qtu:hasNumericValue ?StrengthNumeratorValue ;
+     	cmns-qtu:hasMeasurementUnit ?StrengthNumeratorUnit
+    ] .
+  
+  	# Get the Basis of Strength's numerator value and unit
+  	?BasisOfStrength cmns-qtu:hasDenominator [
+    	cmns-qtu:hasNumericValue ?StrengthDemoniatorValue ;
+     	cmns-qtu:hasMeasurementUnit ?StrengthDemoniatorUnit 
+    ] .
+  
+    # Optionally, get the name of the Basis of Strength
+    OPTIONAL{?BasisOfStrength  rdfs:label  ?BasisOfStrengthLabel }
+
+} GROUP BY ?BasisOfStrength

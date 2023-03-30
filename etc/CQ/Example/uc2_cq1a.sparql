@@ -1,0 +1,34 @@
+# Use Case 2 CQ 1a: In which substances (as active, excipient, packaging) is substance <s> found?
+# Intended to run on data from AmlodipineExample.rdf
+
+
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix idmp-amp: 	<https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+prefix cmns-prd: 	<https://www.omg.org/spec/Commons/ProductsAndServices/>
+prefix cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-col: <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+select distinct ?substanceTypeLabel ?substanceLabel
+
+where {
+  	# Bind the name we want into a variable 
+	BIND(uc2_cq_1_a_parameter_1 AS ?substanceTargetLabel )
+
+  	# Need to get the Substance URI of the label.
+  	?targetSubstance rdfs:label ?substanceTargetLabel .
+  
+  	{
+        # Find substances where target substance is used 
+        ?substance rdf:type ?substanceType;
+        rdfs:label ?substanceLabel;
+        ?substanceType rdfs:subClassOf* idmp-sub:Substance .
+        ?substanceType rfs:label ?substanceTypeLabel .
+
+        ?substanceComposition cmns-dsg:defines ?substance .
+        ?substanceComposition cmns-pts:hasRole ?targetSubstanceInRole .
+        ?targetSubstanceInRole cmns-pts:isPlayedBy ?targetSubstance
+    }
+}

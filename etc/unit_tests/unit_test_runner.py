@@ -17,10 +17,15 @@ def get_unit_tests_config(unit_test_config_file_path: str, root_folder: str) -> 
 def get_sparql_query(config: dict, root_folder: str) -> str:
     with open(os.path.join(root_folder, config['sparql_template'])) as file:
         sparql_template = file.read()
-    sparql_parameters = config['parameters']
+        sparql_parameters = config['parameters']
+        file.close()
     sparql_query = sparql_template
     for sparql_parameter in sparql_parameters:
-        sparql_query = sparql_query.replace(sparql_parameter, '"' + sparql_parameters[sparql_parameter] + '"')
+        sparql_parameter_value = config['parameters'][sparql_parameter]
+        if config['parameters'][sparql_parameter].startswith('<') and config['parameters'][sparql_parameter].endswith('>'):
+            sparql_query = sparql_query.replace(sparql_parameter, sparql_parameter_value)
+        else:
+            sparql_query = sparql_query.replace(sparql_parameter, '"' + sparql_parameter_value + '"')
     return sparql_query
 
 

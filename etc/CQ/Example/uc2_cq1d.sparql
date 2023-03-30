@@ -1,0 +1,52 @@
+# UC2-CQ 1 d: In which packaging is substance <s> used?
+
+prefix cmns-col: <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+prefix cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
+
+select distinct ?packaging ?packagingTypeLabel ?packagingLabel
+
+where {
+    # Bind the name we want into a variable 
+	BIND(uc2_cq_1_d_parameter_1 AS ?substanceTargetLabel )
+  	?targetSubstance rdfs:label ?substanceTargetLabel .
+
+    {
+        # Target Substance Comprises a form of packaging
+        ?packagingType rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
+		?packagingType rdfs:label ?packagingTypeLabel .
+        ?packaging a ?packagingType .
+        ?packaging rdfs:label ?packagingLabel
+        ?packaging cmns-col:comprises ?targetSubstance .
+
+    } union {
+        # Target Substance is apart of another substance that comprises a form of packaging
+        ?packagingType rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
+		?packagingType rdfs:label ?packagingTypeLabel .
+        ?packaging a ?packagingType .
+        ?packaging rdfs:label ?packagingLabel .
+        ?packaging cmns-col:comprises ?substance .
+
+        ?substance rdf:type ?substanceType .
+        ?substanceType rdfs:subClassOf* idmp-sub:Substance .
+        ?substanceComposition cmns-dsg:defines ?substance .
+        ?substanceComposition cmns-pts:hasRole ?targetSubstanceInRole .
+        ?targetSubstanceInRole cmns-pts:isPlayedBy ?targetSubstance
+    } union {
+        # Target Substance is apart of medicinal product that is containted in a form of packaging
+        ?packagingType rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
+		?packagingType rdfs:label ?packagingTypeLabel .
+        ?packaging a ?packagingType .
+        ?packaging rdfs:label ?packagingLabel .
+        ?packaging idmp-mprd:contains ?product .
+
+        ?role rdfs:subPropertyOf* idmp-mprd:hasRole .
+        ?productComposition cmns-dsg:defines ?product .
+        ?productComposition ?role ?targetSubstanceInRole .
+        ?targetSubstanceInRole cmns-pts:isPlayedBy ?targetSubstance   
+    }
+}
