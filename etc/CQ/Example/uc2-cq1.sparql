@@ -1,0 +1,34 @@
+# UC1-CQ1: In which manufactured item is <SUBSTANCE> used?
+
+PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/> 
+PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?ManufacturedItem (SAMPLE(?ManufacturedItemLabel) AS ?ManufacturedItemName)
+
+WHERE {
+    # Bind Variable substance <$SUBSTANCE>
+    # Example: titanium dioxide <https://spor.ema.europa.eu/smswi/#/substances/100000092217>
+    BIND(uc2_cq1_parameter_1 AS $SUBSTANCE ) 
+
+  	# Find Manufactured Items
+	?ManufacturedItem a/rdfs:subClassOf* idmp-sub:ManufacturedItem .
+    
+    {
+	?ManufacturedItem cmns-dsg:isDefinedIn [
+			idmp-mprd:hasIngredient [
+              cmns-pts:isPlayedBy $SUBSTANCE
+			]
+       ].
+    } UNION{
+    ?ManufacturedItem cmns-col:comprises* $SUBSTANCE .
+    }
+
+    # Optionally, get the name of the manufactured item
+    OPTIONAL{?ManufacturedItem  rdfs:label  ?ManufacturedItemLabel }
+ 
+} GROUP BY ?ManufacturedItem
