@@ -8,10 +8,11 @@ PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
 PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
+PREFIX spor-st: <https://spor.ema.europa.eu/rmswi/#/lists/100000075826/terms/>
 
 GENERATE {
   <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }>
-    a ?idmpSubstanceType ;
+    a ?idmpSubstanceType, ?sporRMSSubstanceType ;
     skos:prefLabel ?prefLabel ;
     skos:altLabel ?altLabel ;
     dct:created ?Created_Date ;
@@ -103,6 +104,25 @@ WHERE {
     IF(?Substance_Type = "Structurally Diverse - Vaccine", idmp-sub:StructurallyDiverseSubstance,
     ?Substance_Type )))))))))))))))
     AS ?idmpSubstanceType )
+
+  BIND(
+    IF(?Substance_Type = "Chemical", spor-st:100000075670,
+    IF(?Substance_Type = "Mixture", spor-st:200000005023,
+    IF(?Substance_Type = "Nucleic acid", spor-st:200000005035,
+    IF(?Substance_Type = "Polymer", spor-st:200000005022,
+    IF(?Substance_Type = "Protein", spor-st:200000005020,
+    IF(?Substance_Type = "Specified Substance Group 1", spor-st:200000005031,
+    IF(?Substance_Type = "Specified Substance Group 2", spor-st:200000005032,
+    IF(?Substance_Type = "Specified Substance Group 3", spor-st:200000005033,
+    IF(?Substance_Type = "Specified Substance Group 4", spor-st:200000005034,
+    IF(?Substance_Type = "Structurally Diverse - Allergen", spor-st:200000005026,
+    IF(?Substance_Type = "Structurally Diverse - Cell therapy", spor-st:200000005029,
+    IF(?Substance_Type = "Structurally Diverse - Herbal", spor-st:200000005025,
+    IF(?Substance_Type = "Structurally Diverse - Other", spor-st:200000005030,
+    IF(?Substance_Type = "Structurally Diverse - Plasma derived", spor-st:200000005024,
+    IF(?Substance_Type = "Structurally Diverse - Vaccine", spor-st:200000005027,
+    ?Substance_Type )))))))))))))))
+    AS ?sporRMSSubstanceType )
 
   BIND(
     IF(?Substance_Domain = "Human use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000012>,
