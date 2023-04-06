@@ -1,52 +1,24 @@
-# UC2-CQ 1 d: In which packaging is substance <s> used?
+#UC2-CQ 1d: In which packaging is substance <$Substance> used?
 
-prefix cmns-col: <https://www.omg.org/spec/Commons/Collections/>
-prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
-prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
-prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
-prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
-prefix cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
-select distinct ?packaging ?packagingTypeLabel ?packagingLabel
+SELECT DISTINCT ?Packaging (SAMPLE(?PackagingLabel) AS ?PackagingName)
 
 where {
-    # Bind the name we want into a variable 
-	BIND(uc2_cq_1_d_parameter_1 AS ?substanceTargetLabel )
-  	?targetSubstance rdfs:label ?substanceTargetLabel .
+    # Bind Variable substance <$Substance>
+	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/PolyvinylChloride>
+    BIND( uc2_cq1d_parameter_1 AS $Substance )
 
-    {
-        # Target Substance Comprises a form of packaging
-        ?packagingType rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
-		?packagingType rdfs:label ?packagingTypeLabel .
-        ?packaging a ?packagingType .
-        ?packaging rdfs:label ?packagingLabel
-        ?packaging cmns-col:comprises ?targetSubstance .
+    # Target Substance Comprises a form of packaging
+    ?Packaging cmns-col:comprises $Substance ;
 
-    } union {
-        # Target Substance is apart of another substance that comprises a form of packaging
-        ?packagingType rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
-		?packagingType rdfs:label ?packagingTypeLabel .
-        ?packaging a ?packagingType .
-        ?packaging rdfs:label ?packagingLabel .
-        ?packaging cmns-col:comprises ?substance .
+    # Make sure that we only return actual substances
+    a/rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
+     
+    # Optionally, get the name of the substance
+    OPTIONAL{?Packaging  rdfs:label  ?PackagingLabel }
 
-        ?substance rdf:type ?substanceType .
-        ?substanceType rdfs:subClassOf* idmp-sub:Substance .
-        ?substanceComposition cmns-dsg:defines ?substance .
-        ?substanceComposition cmns-pts:hasRole ?targetSubstanceInRole .
-        ?targetSubstanceInRole cmns-pts:isPlayedBy ?targetSubstance
-    } union {
-        # Target Substance is apart of medicinal product that is containted in a form of packaging
-        ?packagingType rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
-		?packagingType rdfs:label ?packagingTypeLabel .
-        ?packaging a ?packagingType .
-        ?packaging rdfs:label ?packagingLabel .
-        ?packaging idmp-mprd:contains ?product .
-
-        ?role rdfs:subPropertyOf* idmp-mprd:hasRole .
-        ?productComposition cmns-dsg:defines ?product .
-        ?productComposition ?role ?targetSubstanceInRole .
-        ?targetSubstanceInRole cmns-pts:isPlayedBy ?targetSubstance   
-    }
-}
+} GROUP BY ?Packaging
