@@ -15,12 +15,10 @@ WHERE {
     # Bind Variable substance <$Substance>
 	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
     BIND( uc2_cq1b_parameter_1 AS $Substance )
-  
 	{
-		# Find SKUs where the a packaging is comprised of the substance
+		# Find SKUs where the a packaging is comprised of the substance, which is contained in the packaged medicinal product
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes [
-			cmns-col:comprises $Substance ] .
+                    cmns-dsg:denotes [ idmp-mprd:contains [cmns-col:comprises $Substance] ] .
 						
 		# Make sure that we only return actual substances
 		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
@@ -30,10 +28,10 @@ WHERE {
   } union {
 		# Find SKUs where an intermediate packaging within the SKU's packaging is comprised of the substance (1-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes [ idmp-mprd:contains [
+			cmns-dsg:denotes  [ idmp-mprd:contains [ idmp-mprd:contains [
 					cmns-col:comprises $Substance
 				]
-			] .
+      ] ].
 
 		# Make sure that we only return actual substances
 		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
@@ -43,13 +41,13 @@ WHERE {
   } union {
 		# Find SKUs where an intermediate packaging within the SKU's packaging is comprised of the substance (2-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes [ idmp-mprd:contains [ 
+			cmns-dsg:denotes  [ idmp-mprd:contains [ idmp-mprd:contains [ 
 					idmp-mprd:contains
 					[
 						cmns-col:comprises $Substance
 					]		
 			  	]
-			] .
+        ] ] .
 		# Make sure that we only return actual substances
 		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
 
@@ -58,7 +56,8 @@ WHERE {
   } union {
      	# Find SKUs where a substance is used in the pharmaceutical product contained in an intermediate packaging (1-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes $OuterPackaging .
+			cmns-dsg:denotes $PackagedMedicinalProduct .
+    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
       	$OuterPackaging idmp-mprd:contains $IntermediatePackaging .
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
     	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
@@ -74,7 +73,8 @@ WHERE {
  } union {
        	# Find SKUs where a substance is used in the pharmaceutical product contained in an intermediate packaging (2-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes $OuterPackaging .
+			cmns-dsg:denotes $PackagedMedicinalProduct .
+    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
       	$OuterPackaging idmp-mprd:contains $InnerPackaing .
 		$InnerPackaing 	idmp-mprd:contains $IntermediatePackaging .
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
@@ -90,7 +90,8 @@ WHERE {
   } union {
      	# Find SKUs where a substance is an active moiety for a substance used in the pharmaceutical product contained in an intermediate packaging (1-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes $OuterPackaging .
+			cmns-dsg:denotes $PackagedMedicinalProduct .
+    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
       	$OuterPackaging idmp-mprd:contains $IntermediatePackaging .
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
     	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
@@ -108,7 +109,8 @@ WHERE {
  } union {
      	# Find SKUs where a substance is an active moiety for a substance used in the pharmaceutical product contained in an intermediate packaging (2-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes $OuterPackaging .
+			cmns-dsg:denotes $PackagedMedicinalProduct .
+    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
       	$OuterPackaging idmp-mprd:contains $InnerPackaing .
 		$InnerPackaing 	idmp-mprd:contains $IntermediatePackaging .
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
