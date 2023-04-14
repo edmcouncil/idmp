@@ -44,7 +44,7 @@ def run_unit_test(ontology_location: str, root_folder: str, unit_test_config_fil
             expected_query_result = json.loads(file.read())
         if not query_result_as_dict == expected_query_result:
             print('Competency question', unit_test_config['sparql_template'], ' run as a unit test failed.')
-			print('Difference is: ', diff(expected_query_result, query_result_as_dict, syntax='explicit'))
+            print('Difference is: ', diff(expected_query_result, query_result_as_dict, syntax='explicit'))
             cq_tests_passed = False
         else:
             print('Competency question', unit_test_config['sparql_template'], ' run as a unit test passed.')
