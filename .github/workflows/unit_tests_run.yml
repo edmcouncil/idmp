@@ -11,6 +11,12 @@ on:
 permissions:
   contents: read
 
+
+artifacts:
+  when: on_failure
+  paths: 
+  - AboutIDMPDev-ReferenceIndividuals.ttl
+  
 jobs:
   build:
 
@@ -41,9 +47,3 @@ jobs:
         then
         exit $?
         fi
-    - name: Archive merged ontology on failure
-      uses: actions/upload-artifact@v3
-      when: on_failure
-      with:
-        name: merged-ontology
-        path: AboutIDMPDev-ReferenceIndividuals.ttl
