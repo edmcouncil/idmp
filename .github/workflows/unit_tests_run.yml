@@ -34,6 +34,8 @@ jobs:
     - name: Merge all IDMP ontologies with robot
       run: |
         robot merge --input AboutIDMPDev-ReferenceIndividuals.rdf --output AboutIDMPDev-ReferenceIndividuals.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
+    - name: Archive merged ontology
+      uses: actions/upload-artifact@v3
       with:
         name: merged-ontology
         path: AboutIDMPDev-ReferenceIndividuals.ttl
