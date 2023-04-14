@@ -34,11 +34,6 @@ jobs:
     - name: Merge all IDMP ontologies with robot
       run: |
         robot merge --input AboutIDMPDev-ReferenceIndividuals.rdf --output AboutIDMPDev-ReferenceIndividuals.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
-    - name: Archive merged ontology
-      uses: actions/upload-artifact@v3
-      with:
-        name: merged-ontology
-        path: AboutIDMPDev-ReferenceIndividuals.ttl
     - name: Run unit tests using rdflib
       run: |
         python etc/unit_tests/unit_test_runner.py --ontology_location /home/runner/work/idmp/idmp/AboutIDMPDev-ReferenceIndividuals.ttl --root_folder /home/runner/work/idmp/idmp/etc/unit_tests/ --cq_source  /home/runner/work/idmp/idmp/etc/CQ/Example/   
@@ -46,3 +41,9 @@ jobs:
         then
         exit $?
         fi
+    - name: Archive merged ontology on failure
+      uses: actions/upload-artifact@v3
+      when: on_failure
+      with:
+        name: merged-ontology
+        path: AboutIDMPDev-ReferenceIndividuals.ttl
