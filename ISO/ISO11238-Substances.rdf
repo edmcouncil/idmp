@@ -88,7 +88,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances.rdf version of this ontology was modified to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466)</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances.rdf version of this ontology was modified to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466) and to extend the ontology to support all of the required and optional elements from Annex L (IDMP-483)</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -185,7 +185,13 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ChemicalSubstance">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MonodisperseSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-Chemical"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
@@ -512,7 +518,13 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Mixture">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PolydisperseSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-Mixture"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
@@ -527,6 +539,7 @@
 		<skos:example>Glyceryl monoesters could be defined as a mixture of two single substances which differ in the position of esterification.</skos:example>
 		<skos:note>Mixture could be used for a homologous group of structurally diverse single substances used as starting materials in order to prepare an allergen extract. The extract is further described by using the class &apos;Source Material&apos;, element group &apos;Fraction Description&apos; (allergen preparation) obtained from the structurally diverse single substances (starting materials) as parent substances. This substance (allergen extract) is the result of the same (synthetic) process and hence the extract is considered as a mixture substance.</skos:note>
 		<skos:note>Single substances of diverse origin that are brought together and do not undergo a chemical transformation as a result of that combination are defined as multi-substance materials (Specified Substance Group 1) and not as mixture.</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.44</cmns-av:directSource>
 		<cmns-av:synonym>mixture of single molecular entities</cmns-av:synonym>
 	</owl:Class>
@@ -794,17 +807,25 @@
 		<rdfs:label>monodisperse substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<skos:definition>single substance that is homogeneous in molecular weight, that is, it does not have a distribution of different molecular weight chains within the total mass</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.51</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidSubstance">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MonodisperseSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-NucleicAcid"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>nucleic acid substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;PolymerSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single substance that can be defined by a linear sequence of nucleosides typically linked through phosphate or phosphate-like diester bonds</skos:definition>
 		<skos:note>The type of nucleic acid substance, e.g. ribonucleic acid (RNA) and deoxyribonucleic acid (DNA), is also identified. Oligonucleotides and gene elements, e.g. promoters, enhancers, coding sequences and silencers, are defined as nucleic acid substances.</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.54</cmns-av:directSource>
 	</owl:Class>
 	
@@ -818,9 +839,9 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasChangeDate"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasOfficialNameStatusChangeDate"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1168,20 +1189,29 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolydisperseSubstance">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>polydisperse substance</rdfs:label>
-		<skos:definition>single substance containing multiple related entities</skos:definition>
+		<skos:definition>substance containing multiple related entities</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.62</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>Polydisperse substances include polymers, mixture and structurally diverse material isolated from a single source. Chemical substances, proteins and nucleic acids with defined sequences are not described as polydisperse substances.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-Polymer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>polymer substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single polydisperse substance that contains structural repeat units linked by covalent bonds</skos:definition>
 		<skos:note>Monodisperse proteins and nucleic acids with defined sequences shall not be defined using the polymer substance elements.</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.63</cmns-av:directSource>
 	</owl:Class>
 	
@@ -1194,13 +1224,20 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubstance">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MonodisperseSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-Protein"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>protein substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single substance with a defined sequence of alpha-amino acids connected through peptide bonds</skos:definition>
 		<skos:note>A protein consists of one or more chains with a length of more than 40 amino acids. A peptide is defined as a linear sequence consisting of 2 to 40 amino acid residues.</skos:note>
 		<skos:note>Synthetic peptides and proteins with defined sequences, recombinant proteins and highly purified proteins extracted from biological matrices are described as protein substances. Sites of glycosylation, disulphide linkages and glycosylation type (e.g. fungal, plant, anthropoid, avian mammalian, human) are defining elements of protein substances, when known. A graphical molecular structure is also included in the definition of all peptides of 40 amino acid residues or less.</skos:note>
 		<skos:note>The absolute configuration at the a-carbon atom of the a-amino acids is designated by the prefixed small capital letter D or L to indicate a formal relationship to D- or L-serine and thus to D- or L-glyceraldehyde.</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.68</cmns-av:directSource>
 	</owl:Class>
 	
@@ -1310,6 +1347,7 @@
 		<skos:note>Racemates and substances with unknown, epimeric or mixed chirality can be defined as single substances because a single structural representation may be generated and the stereochemistry indicated as descriptive text.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.74</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:synonym>classifier for a single molecular entity</cmns-av:synonym>
 	</owl:Class>
 	
@@ -1802,10 +1840,18 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-StructurallyDiverse"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>structurally diverse substance</rdfs:label>
 		<skos:definition>single polydisperse substance isolated from a single source that is a complex combination which cannot be described as a mixture of a limited number of single substances</skos:definition>
 		<skos:note>Structurally diverse substances are defined based on immutable properties of a given material. Modifications that irreversibly alter the structure of the material, distinctive physical properties or components subsumed into the material, e.g. a gene in gene therapy substances, are defining elements for structurally diverse substances. Fractions derived from source material (oils/juices and extracts) are also captured in the definition. Protein mixtures containing a large number of diverse sequences such as polyclonal immunoglobulins are defined as structurally diverse substances.</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.63</cmns-av:directSource>
 	</owl:Class>
 	
@@ -1849,6 +1895,12 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
 				<owl:someValuesFrom>
 					<owl:Class>
@@ -1867,6 +1919,7 @@
 		<skos:note>Discrete existence refers to the ability of a substance to exist independently of any other substance. Substances can either be well-defined entities containing definite chemical structures, synthetic (e.g. isomeric mixtures) or naturally-occurring (e.g. conjugated oestrogens) mixtures of chemicals containing definite molecular structures, or materials derived from plants, animals, microorganisms or inorganic matrices for which the chemical structure may be unknown or difficult to define.</skos:note>
 		<skos:note>Substances are further described as single substances, mixture substances or one of a group of specified substances. Single substances are defined using a minimally sufficient set of data elements divided into five types: chemical, protein, nucleic acid, polymer and structurally diverse. Substances may be salts, solvates, free acids, free bases or mixtures of related compounds that are either isolated or synthesized together. Pharmacopoeial terminology and defining characteristics will be used when available and appropriate. Defining elements are dependent on the type of substance.</skos:note>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Note that while the IDMP standards require a substance name for all substances, the ontology deviates from this by making the name optional in the restriction on substance classifier. This is to enable mapping to various source repositories for substance information that do not necessarily provide names but whose defining characteristics include the molecular structure, which is typically more accurate.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -1881,9 +1934,9 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasChangeDate"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCodeChangeDate"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -2282,6 +2335,143 @@
 		<skos:note>A pharmacological role is related to the composition, properties, or action of a substance or ingredient in another substance or pharmaceutical product. It covers adjuvant and expedient, which are roles played by the substance components in a pharmaceutical product, but it can also be used for treated disease, patient, packaging and routes of administrations, all of which are roles that are studied in the science of pharmacology and have an impact on the drug&apos;s effects.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SubstanceTypeClassifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>substance type classifier</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier that describes the nature of the substance from a pre-defined ISO 19844 code set</skos:definition>
+		<skos:example>Chemical, Protein, Nucleic acid, Polymer, Structurally Diverse, Mixture</skos:example>
+		<idmp-sub:hasBusinessRules>For each substance type, a qualification is possible, e.g. Structuraly Diverse (Plasma-derived), Structurally Diverse (Herbal Substance), Structurally Diverse (Herbal Drug), Structurally Diverse (Allergen Substance), Polymer (Biopolymer), Protein (Recombinant), Protein (Naturally-derived), Protein (Allergen, Naturally-derived), Chemical (Mineral, naturally occurring substance), Mixture (Homologous Group of Allergen Source Material), etc. In these cases, the qualifier shall also be captured at the Substance Name Type attribute described in and shall always coupled with the substance name.
+Example:
+Substance Type: Structurally Diverse
+Substance Name Type: Plasma-derived
+Substance Name: Human Albumin, Plasma-derived (see also )
+In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plasma-derived&apos; shall have a distinct identifier from &apos;Human Albumin, Recombinant&apos;.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-sub:hasValuesAllowed>Chemical, Protein, Nucleic Acid, Polymer, Structurally Diverse, Mixture, Specified Substance Group 1, Specified Substance Group 2, Specified Substance Group 3, Specified Substance Group 4</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:synonym>substance type</cmns-av:synonym>
+		<cmns-av:synonym>type of substance</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-Chemical">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - chemical</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.11</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a type of substance that can be described as a stoichiometric or non-stoichiometric single molecular entity and is not a protein, nucleic acid or polymer substance</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Chemical</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-Mixture">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - mixture</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.44</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a type of polydisperse substance that is a combination of single substances isolated together or produced in the same synthetic process</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Mixture</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-NucleicAcid">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - nucleic acid</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.54</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a type of substance that can be defined by a linear sequence of nucleosides typically linked through phosphate or phosphate-like diester bonds</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Nucleic Acid</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-Polymer">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - polymer</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.63</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a type of polydisperse substance that contains structural repeat units linked by covalent bonds</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Polymer</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-Protein">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - protein</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.68</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a type of substance with a defined sequence of alpha-amino acids connected through peptide bonds</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Protein</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-SpecifiedSubstanceGroup1">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - specified substance group 1</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.78</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a substance defined by groups of elements that describes multi-substance materials or specifies further information on substances relevant to the description of Medicinal Products</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Specified Substance Group 1</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-SpecifiedSubstanceGroup2">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - specified substance group 2</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.78</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a substance defined by groups of elements that describes multi-substance materials or specifies further information on substances relevant to the description of Medicinal Products</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Specified Substance Group 2</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-SpecifiedSubstanceGroup3">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - specified substance group 3</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.78</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a substance defined by groups of elements that describes multi-substance materials or specifies further information on substances relevant to the description of Medicinal Products</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Specified Substance Group 3</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-SpecifiedSubstanceGroup4">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - specified substance group 4</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.78</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a substance defined by groups of elements that describes multi-substance materials or specifies further information on substances relevant to the description of Medicinal Products</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Specified Substance Group 4</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceTypeClassifier-StructurallyDiverse">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<rdfs:label>substance type classifier - structurally diverse</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.83</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause clause 6.2.1, Table 2</dct:source>
+		<skos:definition>classifier for a type of polydisperse substance isolated from a single source that is a complex combination which cannot be described as a mixture of a limited number of single substances</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-txt:hasTextValue>Structurally Diverse</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasMoiety"/>
 		<rdfs:label>has active moiety</rdfs:label>
@@ -2298,13 +2488,18 @@
 		<skos:definition>describes the nature of the rules to be applied for a given class or element in cases where that element is conditionally required for conformance per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
-	<owl:DatatypeProperty rdf:about="&idmp-sub;hasChangeDate">
-		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
-		<rdfs:label>has change date</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
-		<skos:definition>indicates date on which the status of something has changed as part of the terminology maintenance</skos:definition>
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasCodeChangeDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDateValue"/>
+		<rdfs:label>has code change date</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;SubstanceCode"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>indicates the date on which the status of a substance code has changed</skos:definition>
+		<skos:example>20110601</skos:example>
+		<skos:note>The date at which the code status is changed as part of the terminology maintenance.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-TS"/>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8, Figure 18</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.5.5</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasComment">
@@ -2512,6 +2707,20 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
 	</owl:DatatypeProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasOfficialNameStatusChangeDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDateValue"/>
+		<rdfs:label>has official name status change date</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;OfficialName"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>indicates the date of official name change if known</skos:definition>
+		<skos:example>20110601</skos:example>
+		<skos:note>The change date of the status of the official name shall be specified according to the ISO 8601 date format (the variant without any delimiters).</skos:note>
+		<idmp-sub:hasBusinessRules>If official name status changes the date of the official change should be captured if known.</idmp-sub:hasBusinessRules>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-TS"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.3</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasOpticalActivity">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has optical activity</rdfs:label>
@@ -2630,6 +2839,25 @@
 		<idmp-sub:hasValuesAllowed>Free text, multiple names allowed, each in its own element.</idmp-sub:hasValuesAllowed>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasSubstanceType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has substance type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1, Table 2</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:range rdf:resource="&idmp-sub;SubstanceTypeClassifier"/>
+		<skos:definition>links a substance to a classifier that describes the nature of the substance from a pre-defined ISO 19844 code set</skos:definition>
+		<idmp-sub:hasBusinessRules>For each substance type, a qualification is possible, e.g. Structuraly Diverse (Plasma-derived), Structurally Diverse (Herbal Substance), Structurally Diverse (Herbal Drug), Structurally Diverse (Allergen Substance), Polymer (Biopolymer), Protein (Recombinant), Protein (Naturally-derived), Protein (Allergen, Naturally-derived), Chemical (Mineral, naturally occurring substance), Mixture (Homologous Group of Allergen Source Material), etc. In these cases, the qualifier shall also be captured at the Substance Name Type attribute described in and shall always coupled with the substance name.
+Example:
+Substance Type: Structurally Diverse
+Substance Name Type: Plasma-derived
+Substance Name: Human Albumin, Plasma-derived (see also )
+In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plasma-derived&apos; shall have a distinct identifier from &apos;Human Albumin, Recombinant&apos;.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-sub:hasValuesAllowed>Chemical, Protein, Nucleic Acid, Polymer, Structurally Diverse, Mixture, Specified Substance Group 1, Specified Substance Group 2, Specified Substance Group 3, Specified Substance Group 4</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+	</owl:ObjectProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasValuesAllowed">
 		<rdfs:label>has values allowed</rdfs:label>
