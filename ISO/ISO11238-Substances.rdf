@@ -9,6 +9,7 @@
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-loc "https://www.omg.org/spec/Commons/Locations/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
@@ -39,6 +40,7 @@
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-loc="https://www.omg.org/spec/Commons/Locations/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
@@ -76,6 +78,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Locations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
@@ -1239,6 +1242,188 @@
 		<skos:note>The absolute configuration at the a-carbon atom of the a-amino acids is designated by the prefixed small capital letter D or L to indicate a formal relationship to D- or L-serine and thus to D- or L-glyceraldehyde.</skos:note>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.68</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSource">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isPublic"/>
+				<owl:allValuesFrom rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceSourceURL"/>
+				<owl:onClass rdf:resource="&xsd;anyURI"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceCitation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceClass"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceIdentifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceSourceType"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ReferenceSourceType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source</rdfs:label>
+		<skos:definition>physical or digital reference that provides more information about a topic</skos:definition>
+		<skos:note>All data elements associated with a substance or specified substance should have a reference source. These sources could be regulatory submissions, publications by naming authorities such as INN or USAN, pharmacopoeias, books, journals, web sites, meeting materials or public databases such as chemical abstracts. A source can refer to multiple data elements and a given element can have multiple sources.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSourceCitation">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ReferenceSource"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:someValuesFrom rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source citation</rdfs:label>
+		<skos:definition>unique bibliographic citation for a reference source</skos:definition>
+		<skos:example>Literature reference: Encycl. 3: 429 (1792), WHO Drug Information Vol. 25, no 3, 2011 Recommend INN: list 66</skos:example>
+		<skos:note>A citation should be captured for a literature reference. The specific format for a given citation may be defined at regional level.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSourceClass">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;ReferenceSource"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source class</rdfs:label>
+		<skos:definition>classifier indicating a broad category for the source in which the data elements were found</skos:definition>
+		<skos:example>Regulatory submission, Public Database</skos:example>
+		<skos:note>Each reference information type should be associated with a class. The class will be automatically associated with each type of information.</skos:note>
+		<idmp-sub:hasBusinessRules>Need not be entered as the value is dependent on the Reference Source Type.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-Literature">
+		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
+		<rdfs:label>reference source class - literature</rdfs:label>
+		<skos:definition>classifier for a reference source indicating that the source is domain and topic-specific literature</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-txt:hasTextValue>Literature</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-OfficialNameSource">
+		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
+		<rdfs:label>reference source class - official name source</rdfs:label>
+		<skos:definition>classifier for a reference source indicating that the source is an official, jurisdiction-specific source for an official name</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-txt:hasTextValue>Official Name Source</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-OtherNameSource">
+		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
+		<rdfs:label>reference source class - other name source</rdfs:label>
+		<owl:differentFrom rdf:resource="&idmp-sub;ReferenceSourceClass-OfficialNameSource"/>
+		<skos:definition>classifier for a reference source indicating that the source of information about a name is not an official, jurisdiction-specific source for that name</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-txt:hasTextValue>Other Name Source</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-PublicDatabase">
+		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
+		<rdfs:label>reference source class - public database</rdfs:label>
+		<skos:definition>classifier for a reference source indicating that the source is a publicly available database</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-txt:hasTextValue>Public Database</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-RegulatorySubmission">
+		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
+		<rdfs:label>reference source class - regulatory submission</rdfs:label>
+		<skos:definition>classifier for a reference source indicating that the source is a regulatory submission</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-txt:hasTextValue>Regulatory Submission</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-Web">
+		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
+		<rdfs:label>reference source class - web</rdfs:label>
+		<skos:definition>classifier for a reference source indicating that the source is a web site</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-txt:hasTextValue>Web</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSourceIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ReferenceSource"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source identifier</rdfs:label>
+		<skos:definition>unique identifier for a reference source</skos:definition>
+		<skos:example>IND number, Recommended INN list; PMID (PubMed Identifier)</skos:example>
+		<skos:note>Many sources such as regulatory submissions, INN lists and others should be associated with a number or ID. The ID should be captured.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSourceType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;ReferenceSource"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source type</rdfs:label>
+		<skos:definition>classifier indicating the type of source in which the data elements were actually found</skos:definition>
+		<skos:example>BP, ChemID (NLM), Ph.Eur., USP/NF, IND (Investigational New Drug), Recommended INN List, ITIS, JAN, Journal, JP, KEGG, Martindale, NDA, Personal Care Products Council (PCPC), PubChem, USAN, USP, Web Page, CAS Registry, FDA Global Substance Registration System (FDA GSRS), WHO Collaborating Centre for Drug Statistics Methodology (WHOCC), Chemical Book, Orange Book, Marketing Authorization Application (MAA), WHO/IUIS Allergen Nomenclature, UniProt, Plasma Master File, Homeopathic Pharmacopoeia</skos:example>
+		<skos:note>All reference sources shall be associated with a type. The type shall actually identify the source of the information if it is a public database or naming authority. For official names and defining information, the primary source should be used if available. A single source can be used for many data elements. Public databases particularly those of official naming bodies, regulatory submissions, manufacturer&apos;s technical specifications, scientific journal articles and pharmacopoeias are all sources that can be used.</skos:note>
+		<idmp-sub:hasBusinessRules>All names should have at least one source and hence source type. When the Reference Source Type is a Pharmacopoeial monograph, no reference has to be made to the version. The reference made (for example to Ph.Eur., USP, or JP) shall comply with the latest (current) and valid edition.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;RegulatoryContext">
@@ -2743,6 +2928,35 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<owl:inverseOf rdf:resource="&idmp-sub;isParentSubstanceOf"/>
 		<skos:definition>relates a substance to its parent substance</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasReferenceSourceType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has reference source type</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;ReferenceSource"/>
+		<rdfs:range rdf:resource="&idmp-sub;hasReferenceSourceType"/>
+		<skos:definition>indicates the type of source in which the data elements were actually found</skos:definition>
+		<skos:example>BP, ChemID (NLM), Ph.Eur., USP/NF, IND (Investigational New Drug), Recommended INN List, ITIS, JAN, Journal, JP, KEGG, Martindale, NDA, Personal Care Products Council (PCPC), PubChem, USAN, USP, Web Page, CAS Registry, FDA Global Substance Registration System (FDA GSRS), WHO Collaborating Centre for Drug Statistics Methodology (WHOCC), Chemical Book, Orange Book, Marketing Authorization Application (MAA), WHO/IUIS Allergen Nomenclature, UniProt, Plasma Master File, Homeopathic Pharmacopoeia</skos:example>
+		<skos:note>All reference sources shall be associated with a type. The type shall actually identify the source of the information if it is a public database or naming authority. For official names and defining information, the primary source should be used if available. A single source can be used for many data elements. Public databases particularly those of official naming bodies, regulatory submissions, manufacturer&apos;s technical specifications, scientific journal articles and pharmacopoeias are all sources that can be used.</skos:note>
+		<idmp-sub:hasBusinessRules>All names should have at least one source and hence source type. When the Reference Source Type is a Pharmacopoeial monograph, no reference has to be made to the version. The reference made (for example to Ph.Eur., USP, or JP) shall comply with the latest (current) and valid edition.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.2</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasReferenceSourceURL">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasURL"/>
+		<rdfs:label>has reference source URL</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;ReferenceSource"/>
+		<rdfs:range rdf:resource="&xsd;anyURI"/>
+		<skos:definition>indicates a URL in which the citation was found</skos:definition>
+		<skos:example>http://www.who.int/medicines/publications/druginformation/issues/RL_66.pdf</skos:example>
+		<skos:note>In case the Reference source citation is a Web Page or Public Database, the URL should be provided.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.6</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasRendering">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasReferenceURL"/>
