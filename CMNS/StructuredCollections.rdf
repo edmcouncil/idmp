@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
+	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
+	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
+	<!ENTITY cmns-strcol "https://www.omg.org/spec/Commons/StructuredCollections/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/Commons/StructuredCollections/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
+	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
+	xmlns:cmns-strcol="https://www.omg.org/spec/Commons/StructuredCollections/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/StructuredCollections/">
+		<rdfs:label>Commons Structured Collections Ontology</rdfs:label>
+		<dct:abstract>The collections ontology extends the concept of a structured collection, to include sets, lists, and collections whose elements are ordered by date.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230401/StructuredCollections/"/>
+		<cmns-av:copyright>Copyright (c) 2019-2023 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2021-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-col;Constituent">
+		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>An element is an object constituting part of a set, and can be a concept.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>element</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-strcol;ChronologicallyOrderedCollection">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:someValuesFrom rdf:resource="&cmns-strcol;ChronologicallyOrderedConstituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>chronologically ordered collection</rdfs:label>
+		<skos:definition>structured collection whose elements are ordered by a sequence of dates in time</skos:definition>
+		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Examples include simple schedules, bank statements, and other records that are ordered by time.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-strcol;ChronologicallyOrderedConstituent">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dt;hasObservedDateTime"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dt;CombinedDateTime"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>chronologically ordered constituent</rdfs:label>
+		<skos:definition>element of a collection that is ordered within a collection with respect to a sequence of dates in time</skos:definition>
+		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Note that the use of several options for the representation of a date and time stamp enables extensions for milliseconds, nanoseconds using an xsd:string that has the format of an xsd:dateTime datatype but extends the level of granularity consistently. An example of where this is required is to represent records that are ordered by date and time and security prices that change multiple times in a given day.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-strcol;IndexValue">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:allValuesFrom rdf:resource="&cmns-strcol;IndexingScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
+				<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>index value</rdfs:label>
+		<skos:definition>aspect of a collection or retrieval system indicating the address within a record, list, or document where that element can be found</skos:definition>
+		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>An index may be an indirect shortcut derived from and pointing into, a collection of values, data, information or knowledge or a simple ordinal number.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>For index values that are numeric, use hasNumericValue from the Commons Quantities and Units ontology to specify the value itself. For a more complex string-valued index, use hasTextValue from the Commons TextDatatype ontology to specify the value.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-strcol;IndexedConstituent">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-strcol;hasIndexValue"/>
+				<owl:someValuesFrom rdf:resource="&cmns-strcol;IndexValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>indexed constituent</rdfs:label>
+		<skos:definition>element of a collection that is ordered within that collection with respect to an index</skos:definition>
+		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-strcol;IndexingScheme">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:allValuesFrom rdf:resource="&cmns-strcol;IndexValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>indexing scheme</rdfs:label>
+		<skos:definition>system for indexing values, data, information, or knowledge</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-strcol;List">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:allValuesFrom rdf:resource="&cmns-strcol;IndexedConstituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>list</rdfs:label>
+		<skos:definition>structured collection containing a finite, ordered set of related items, where the same value may occur more than once</skos:definition>
+		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-strcol;Set">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:label>set</rdfs:label>
+		<skos:definition>assembly of distinct objects or concepts considered as a whole</skos:definition>
+		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
+	</owl:Class>
+
+</rdf:RDF>
