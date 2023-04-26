@@ -1248,36 +1248,37 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isPublic"/>
-				<owl:allValuesFrom rdf:resource="&xsd;boolean"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceSourceURL"/>
 				<owl:onClass rdf:resource="&xsd;anyURI"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceCitation"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceClass"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceIdentifier"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isPublic"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1389,6 +1390,104 @@
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>Web</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSourceDocument">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCorrespondingDocument"/>
+				<owl:onClass rdf:resource="&xsd;anyURI"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceDocumentIdentifier"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceSourceDocumentType"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceDocumentType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isPublic"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceDocumentClassification"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source document</rdfs:label>
+		<skos:definition>physical or digital document that provides more information about a topic</skos:definition>
+		<skos:note>All data elements associated with a substance or specified substance should have a reference source. These sources could be regulatory submissions, publications by naming authorities such as INN or USAN, pharmacopoeias, books, journals, web sites, meeting materials or public databases such as chemical abstracts. A source can refer to multiple data elements and a given element can have multiple sources.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSourceDocumentClassification">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;ReferenceSourceDocument"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source document classification</rdfs:label>
+		<skos:definition>classifier indicating a category within a given classification scheme for the reference source document</skos:definition>
+		<skos:example>Chemical structure, NMR spectra, Mass Spectra, In-house/Batch release specification, Plasma Master File (PMF)</skos:example>
+		<skos:note>A classification system will be also developed for documents. The classification system will indicate the type of information contained within the reference document based on a terminology for the classification of reference source documents.</skos:note>
+		<skos:note>The reference document should be classified according to the information contained within.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.7.5</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSourceDocumentIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ReferenceSourceDocument"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source document identifier</rdfs:label>
+		<skos:definition>unique identifier for a reference source document</skos:definition>
+		<skos:example>FR4563 (Artificial ID)</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.7.5</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ReferenceSourceDocumentType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;ReferenceSourceDocument"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>reference source document type</rdfs:label>
+		<skos:definition>classifier indicating the type of document associated with the reference source document</skos:definition>
+		<skos:example>Pharmacopoeial monograph, Regulatory submission, Journal article, Release specification, In-house specification, Text file</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.7.3</cmns-av:adaptedFrom>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ReferenceSourceIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
@@ -2126,6 +2225,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
 				<owl:someValuesFrom>
 					<owl:Class>
@@ -2227,15 +2333,15 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;SubstanceNameDomain"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
-				<owl:onClass rdf:resource="&cmns-doc;Reference"/>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;SubstanceNameDomain"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2701,6 +2807,19 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>indicates whether a given class or element is mandatory, conditional, or optional with respect to a given substance type or specified substance group for reporting information per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasCorrespondingDocument">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasReferenceURL"/>
+		<rdfs:label>has corresponding document</rdfs:label>
+		<skos:definition>indicates a link to the actual physical document associated with the description of a reference source document</skos:definition>
+		<skos:example>PDF, TEXT</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-sub:hasValuesAllowed>The documents can be saved as PDF files or TEXT files. If the documents or data source contains structured data such as spectra, it can be transmitted in a standard format that can be visualized and searched.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ED"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NonConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.7.2</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningMolecularFormula">
 		<rdfs:label>has defining molecular formula</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
@@ -2929,6 +3048,19 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>relates a substance to its parent substance</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasReferenceSourceDocumentType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has reference source document type</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;ReferenceSourceDocument"/>
+		<rdfs:range rdf:resource="&idmp-sub;hasReferenceSourceDocumentType"/>
+		<skos:definition>indicates the type of document</skos:definition>
+		<skos:example>Pharmacopoeial monograph, Regulatory submission, Journal article, Release specification, In-house specification, Text file</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.7.3</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasReferenceSourceType">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has reference source type</rdfs:label>
@@ -3131,15 +3263,19 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
 		<rdfs:label>is public</rdfs:label>
-		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.1</dct:source>
 		<rdfs:domain rdf:resource="&cmns-doc;Reference"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates whether a reference source is publically available</skos:definition>
+		<skos:example>Yes, No</skos:example>
 		<skos:note>Company codes will only be released if the defining information is associated with the code in a public source such as Chemical Abstracts (CAS), a journal article, or a poster at scientific meeting attributable to the company.</skos:note>
 		<skos:note>Most reference sources other than regulatory submissions will be in the public domain. All regulatory submissions will typically be considered to not be in the public domain. If the reference source is in the public domain, the data elements referenced by the source could be made public. There may be a separate determination whether any portion of the record can be made public. This determination may vary depending on type of substance. Regardless, submitters of information should always explicitly indicate whether data should be considered confidential.</skos:note>
 		<idmp-sub:hasBusinessRules>All regulatory submissions are considered not to be in the public domain. There may be an additional flag that determines whether any information can be released on a given substance.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>Yes, No</idmp-sub:hasValuesAllowed>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-BL"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:explanatoryNote>Particular care is advised in the release of company codes. Although the company codes are frequently mentioned in the public domain the release of a company code associated with a Substance ID and the defining information should only be made if all of the defining elements are associated with the company code in a single source in the public domain. For chemicals, the chemical structure should be associated with the company code in the public domain. For proteins, such as monoclonal antibodies, names or company codes could be released to the public only if the target of the antibody is mentioned in the same public source as the name or code. A separate determination will be made as to whether the protein sequence is in the public domain.</cmns-av:explanatoryNote>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isRelatedSubstanceTo">
