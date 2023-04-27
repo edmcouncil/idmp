@@ -1248,13 +1248,6 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceSourceURL"/>
-				<owl:onClass rdf:resource="&xsd;anyURI"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceCitation"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -1272,6 +1265,13 @@
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceIdentifier"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceSourceURL"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;anyURI"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1396,13 +1396,6 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasCorrespondingDocument"/>
-				<owl:onClass rdf:resource="&xsd;anyURI"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceDocumentIdentifier"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -1413,6 +1406,13 @@
 				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceSourceDocumentType"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceDocumentType"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCorrespondingDocument"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;anyURI"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -3052,7 +3052,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has reference source document type</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;ReferenceSourceDocument"/>
-		<rdfs:range rdf:resource="&idmp-sub;hasReferenceSourceDocumentType"/>
+		<rdfs:range rdf:resource="&idmp-sub;ReferenceSourceDocumentType"/>
 		<skos:definition>indicates the type of document</skos:definition>
 		<skos:example>Pharmacopoeial monograph, Regulatory submission, Journal article, Release specification, In-house specification, Text file</skos:example>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
@@ -3065,7 +3065,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has reference source type</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;ReferenceSource"/>
-		<rdfs:range rdf:resource="&idmp-sub;hasReferenceSourceType"/>
+		<rdfs:range rdf:resource="&idmp-sub;ReferenceSourceType"/>
 		<skos:definition>indicates the type of source in which the data elements were actually found</skos:definition>
 		<skos:example>BP, ChemID (NLM), Ph.Eur., USP/NF, IND (Investigational New Drug), Recommended INN List, ITIS, JAN, Journal, JP, KEGG, Martindale, NDA, Personal Care Products Council (PCPC), PubChem, USAN, USP, Web Page, CAS Registry, FDA Global Substance Registration System (FDA GSRS), WHO Collaborating Centre for Drug Statistics Methodology (WHOCC), Chemical Book, Orange Book, Marketing Authorization Application (MAA), WHO/IUIS Allergen Nomenclature, UniProt, Plasma Master File, Homeopathic Pharmacopoeia</skos:example>
 		<skos:note>All reference sources shall be associated with a type. The type shall actually identify the source of the information if it is a public database or naming authority. For official names and defining information, the primary source should be used if available. A single source can be used for many data elements. Public databases particularly those of official naming bodies, regulatory submissions, manufacturer&apos;s technical specifications, scientific journal articles and pharmacopoeias are all sources that can be used.</skos:note>
