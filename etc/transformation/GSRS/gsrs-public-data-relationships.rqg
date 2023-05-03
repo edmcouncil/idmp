@@ -55,15 +55,17 @@ ITERATOR iter:JSONSurfer(?relationships,
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?RelatedSubstanceApprovalID }> AS ?RelatedSubstance)
 
 BIND(
+    IF(?Substance = ?RelatedSubstance, ?nothing, # avoid meaningless triple
     IF(str(?RelationshipType) = "ACTIVE MOIETY" || str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", ?nothing,
     IF(str(?RelationshipType) = "INHIBITOR->TARGET", idmp-sub:hasInhibitorTarget,
-    skos:related))
+    skos:related)))
     AS ?SubstancesRelationshipProperty)
 
 BIND(
+    IF(?Substance = ?RelatedSubstance, ?nothing, # avoid meaningless triple
     IF(str(?RelationshipType) = "ACTIVE MOIETY" || str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-sub:hasActiveMoiety,
     IF(str(?RelationshipType) = "INHIBITOR->TARGET", idmp-sub:hasInhibitorTarget,
-    skos:related))
+    skos:related)))
     AS ?SubstancesRelationship)
 
 # HAS ACTIVE MOIETY ROLE AND CONTEXT
