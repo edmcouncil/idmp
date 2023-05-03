@@ -66,10 +66,11 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-RegistrationAuthorities/"/>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-RegistrationAuthorities.rdf version of this ontology was modified to split the named individual for FDA patent exclusivity into two separate named individuals - one for patent exclusivity and one for FDA exclusivity (IDMP-514)</skos:changeNote>
 		<skos:scopeNote>Note that jurisdiction-specific counterparties and codes are specified in subordinate ontologies supporting those jurisdictions.</skos:scopeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ra;AmericanChemicalSociety">
@@ -848,6 +849,17 @@
 		<lcc-lr:hasTextualName>PubChem</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-ra;RegulatoryContext-ActiveMoietyForFoodAndDrugAdministrationExclusivity">
+		<rdf:type rdf:resource="&idmp-sub;MarketContext"/>
+		<rdf:type rdf:resource="&idmp-sub;RegulatoryContext"/>
+		<rdf:type rdf:resource="&cmns-rga;Jurisdiction"/>
+		<rdfs:label>regulatory context - active moiety (for Food and Drug Administration exclusivity)</rdfs:label>
+		<skos:definition>regulatory reporting context covering the U.S. jurisdiction for which the FDA is the primary regulator reflecting FDA exclusivity was created by Congress to give 5-year market exclusivity to new uses of old drugs whose patents may have expired before an FDA approval, and which contain active moieties never approved by FDA</skos:definition>
+		<skos:note>The &apos;active moiety&apos; definition is contained in statute, regulation, and case law.</skos:note>
+		<cmns-ra:isRelatedTo rdf:resource="&idmp-ra;UnitedStatesFoodAndDrugAdministration"/>
+		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;UnitedStatesOfAmerica"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-ra;RegulatoryContext-FoodAndDrugAdministrationGeneral">
 		<rdf:type rdf:resource="&idmp-sub;RegulatoryContext"/>
 		<rdf:type rdf:resource="&cmns-rga;Jurisdiction"/>
@@ -859,12 +871,16 @@
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ra;RegulatoryContext-FoodAndDrugAdministrationPatentExclusive">
+		<owl:sameAs rdf:resource="&idmp-ra;RegulatoryContext-PatentExclusivity"/>
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;RegulatoryContext-PatentExclusivity">
 		<rdf:type rdf:resource="&idmp-sub;MarketContext"/>
 		<rdf:type rdf:resource="&idmp-sub;RegulatoryContext"/>
 		<rdf:type rdf:resource="&cmns-rga;Jurisdiction"/>
-		<rdfs:label>regulatory context - Food and Drug Administration (patent exclusive)</rdfs:label>
-		<skos:definition>regulatory reporting context covering the U.S. jurisdiction for which the FDA is the primary regulator and which reflects certain legal patent restrictions or indicates a new medical or chemical entity exclusivity in cases where a patent may not yet be in place</skos:definition>
-		<cmns-av:abbreviation>FDA patent exclusive regulatory context</cmns-av:abbreviation>
+		<rdfs:label>regulatory context - patent exclusivity</rdfs:label>
+		<skos:definition>regulatory reporting context covering the U.S. jurisdiction for which the FDA is the primary regulator reflecting patent exclusivity, giving 20-year exclusivity that is not dependent on the &apos;active moiety&apos; concept that FDA uses for NCE determination</skos:definition>
 		<cmns-ra:isRelatedTo rdf:resource="&idmp-ra;UnitedStatesFoodAndDrugAdministration"/>
 		<cmns-rga:hasReach rdf:resource="&lcc-3166-1;UnitedStatesOfAmerica"/>
 	</owl:NamedIndividual>
