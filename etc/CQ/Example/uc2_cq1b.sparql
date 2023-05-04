@@ -11,120 +11,60 @@ PREFIX idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-M
 
 
 SELECT DISTINCT ?StockKeepingUnit (SAMPLE(?StockKeepingUnitLabel) AS ?StockKeepingUnitName)
-WHERE {
-    # Bind Variable substance <$Substance>
-	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
-    BIND( uc2_cq1b_parameter_1 AS $Substance )
-	{
-		# Find SKUs where the a packaging is comprised of the substance, which is contained in the packaged medicinal product
-		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-                    cmns-dsg:denotes [ idmp-mprd:contains [cmns-col:comprises $Substance] ] .
-						
-		# Make sure that we only return actual substances
-		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
+where {
+        
 
-		# Optionally, get the name of the substance
-		OPTIONAL{?StockKeepingUnit  rdfs:label  ?StockKeepingUnitLabel }     
-  } union {
-		# Find SKUs where an intermediate packaging within the SKU's packaging is comprised of the substance (1-step)
-		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes  [ idmp-mprd:contains [ idmp-mprd:contains [
-					cmns-col:comprises $Substance
-				]
-      ] ].
+      # Bind Variable substance <$Substance>
+	  # Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
+	  BIND( uc2_cq1b_parameter_1 AS $Substance )
+        
+        #Get the PharmaceuticalProduct which is connected to SKU via PackagedMedicinalProduct
+		
+  		?StockKeepingUnit a cmns-prd:StockKeepingUnit ; 
+			cmns-dsg:denotes ?PackagedMedicinalProduct. 
+			
+		# Using property path as PharmaceuticalProduct can be contained in multilevel packaging of PackagedMedicinalProduct
+		# idmp-mprd:contains+ could be replaced by idmp-mprd:contains{1,n} where n is number of level of packaging for PharmaceuticalProduct
+		
+        ?PackagedMedicinalProduct idmp-mprd:contains+ ?PharmaceuticalProduct .  
 
-		# Make sure that we only return actual substances
-		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
+         {
+		   #Case1 : 	
+           # PharmaceuticalProduct is comprised of the substance
+		   
+           ?PharmaceuticalProduct cmns-col:comprises $Substance       
+  
+         } 
+         UNION 
+         {
+			
+            #Get the ActiveIngredient which is connected to PharmaceuticalProduct via PharmaceuticalProductComposition
+			
+            $PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
+         	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient ?ActiveIngredient.
+			{
+				#Case 2:	
+				#substance is an active moiety for a substance connected to the pharmaceutical product via ActiveIngredient
+				
+				?ActiveIngredient cmns-pts:isPlayedBy ?ActiveMoiety.
+				?ActiveMoiety ^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $Substance .
+			
+			}
+			UNION
+			{
+				#Case3 :
+				#substance is connected to the pharmaceutical product via ActiveIngredient
+				
+				?ActiveIngredient cmns-pts:isPlayedBy $Substance.
+				
+			}
 
-		# Optionally, get the name of the substance
-		OPTIONAL{?StockKeepingUnit  rdfs:label  ?StockKeepingUnitLabel }
-  } union {
-		# Find SKUs where an intermediate packaging within the SKU's packaging is comprised of the substance (2-step)
-		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes  [ idmp-mprd:contains [ idmp-mprd:contains [ 
-					idmp-mprd:contains
-					[
-						cmns-col:comprises $Substance
-					]		
-			  	]
-        ] ] .
+        }
+        
 		# Make sure that we only return actual substances
-		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
-
-		# Optionally, get the name of the substance
-		OPTIONAL{?StockKeepingUnit  rdfs:label  ?StockKeepingUnitLabel }
-  } union {
-     	# Find SKUs where a substance is used in the pharmaceutical product contained in an intermediate packaging (1-step)
-		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes $PackagedMedicinalProduct .
-    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
-      	$OuterPackaging idmp-mprd:contains $IntermediatePackaging .
-    	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
-    	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
-    	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient[
-			cmns-pts:isPlayedBy $Substance
-		] .
-		# Make sure that we only return actual substances
-		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
+        ?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
 
 		# Optionally, get the name of the substance
 		OPTIONAL{?StockKeepingUnit  rdfs:label  ?StockKeepingUnitLabel }
-
- } union {
-       	# Find SKUs where a substance is used in the pharmaceutical product contained in an intermediate packaging (2-step)
-		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes $PackagedMedicinalProduct .
-    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
-      	$OuterPackaging idmp-mprd:contains $InnerPackaing .
-		$InnerPackaing 	idmp-mprd:contains $IntermediatePackaging .
-    	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
-    	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
-    	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient[
-			cmns-pts:isPlayedBy $Substance
-		] .
-		# Make sure that we only return actual substances
-		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
-
-		# Optionally, get the name of the substance
-		OPTIONAL{?StockKeepingUnit  rdfs:label  ?StockKeepingUnitLabel }
-  } union {
-     	# Find SKUs where a substance is an active moiety for a substance used in the pharmaceutical product contained in an intermediate packaging (1-step)
-		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes $PackagedMedicinalProduct .
-    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
-      	$OuterPackaging idmp-mprd:contains $IntermediatePackaging .
-    	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
-    	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
-    	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient[
-			cmns-pts:isPlayedBy [ 
-				^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $Substance 
-			]
-		] .
-		# Make sure that we only return actual substances
-		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
-
-		# Optionally, get the name of the substance
-		OPTIONAL{?StockKeepingUnit  rdfs:label  ?StockKeepingUnitLabel }
-
- } union {
-     	# Find SKUs where a substance is an active moiety for a substance used in the pharmaceutical product contained in an intermediate packaging (2-step)
-		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes $PackagedMedicinalProduct .
-    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
-      	$OuterPackaging idmp-mprd:contains $InnerPackaing .
-		$InnerPackaing 	idmp-mprd:contains $IntermediatePackaging .
-    	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
-    	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
-       	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient[
-			cmns-pts:isPlayedBy [ 
-				^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $Substance 
-			]
-		] .
-		# Make sure that we only return actual substances
-		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
-
-		# Optionally, get the name of the substance
-		OPTIONAL{?StockKeepingUnit  rdfs:label  ?StockKeepingUnitLabel }
-  }
-
+		
 } GROUP BY $StockKeepingUnit
