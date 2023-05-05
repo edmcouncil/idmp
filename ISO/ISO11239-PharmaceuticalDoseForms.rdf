@@ -5,6 +5,7 @@
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
@@ -30,6 +31,7 @@
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
@@ -63,6 +65,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
@@ -71,8 +74,8 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11239-PharmaceuticalDoseForms/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Preliminary"/>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
@@ -82,7 +85,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-phdf;AdministrationMethod">
-		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProcessSpecification"/>
 		<rdfs:label>administration method</rdfs:label>
 		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.3</dct:source>
 		<skos:definition>general method by which a pharmaceutical product is intended to be administered to the patient</skos:definition>
@@ -114,6 +117,23 @@
 		<skos:definition>description of the modified timing by which an active ingredient is made available in the body after administration of the pharmaceutical product, in comparison with a conventional, direct release of the active ingredient</skos:definition>
 		<skos:example>delayed, extended, none</skos:example>
 	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&idmp-phdf;hasAdministrationMethod">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
+		<rdfs:label>has administration method</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-phdf;AdministrationMethod"/>
+		<skos:definition>specifies a general method by which a pharmaceutical product is intended to be administered to the patient</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.3</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-phdf;hasIntendedSite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isSituatedAt"/>
+		<rdfs:label>has intended site</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-phdf;IntendedSite"/>
+		<skos:definition>specifies a general body site at which a pharmaceutical product is intended to be administered</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.13</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&idmp-mprd;AdministrableDoseForm">
 		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.1</dct:source>
@@ -163,6 +183,32 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalDoseForm">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasDoseForm"/>
+				<owl:onClass rdf:resource="&idmp-phdf;BasicDoseForm"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:onClass rdf:resource="&idmp-phdf;ReleaseCharacteristic"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phdf;hasAdministrationMethod"/>
+				<owl:someValuesFrom rdf:resource="&idmp-phdf;AdministrationMethod"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phdf;hasIntendedSite"/>
+				<owl:someValuesFrom rdf:resource="&idmp-phdf;IntendedSite"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.20</dct:source>
 	</owl:Class>
 	
