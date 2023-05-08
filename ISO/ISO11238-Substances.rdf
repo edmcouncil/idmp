@@ -91,7 +91,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances.rdf version of this ontology was modified to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to extend the ontology to support some of the required and optional elements from Annex L (IDMP-483) for substances and chemical substances, to add restrictions for name and identifier to the moiety class (IDMP-510), to add content related to dose forms (IDMP-531), and to revise the definitions of physical manufactured item and physical substance to add an annotation that they are extensions rather than that they correspond precisely to the IDMP 11238 standard (IDMP-528)</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances.rdf version of this ontology was modified to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to extend the ontology to support some of the required and optional elements from Annex L (IDMP-483) for substances and chemical substances, to add restrictions for name and identifier to the moiety class (IDMP-510), to add content related to dose forms (IDMP-531), to revise the definitions of physical manufactured item and physical substance to add an annotation that they are extensions rather than that they correspond precisely to the IDMP 11238 standard (IDMP-528), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -131,6 +131,14 @@
 		<skos:definition>role of the part of a molecule responsible for the physiological or pharmacological action of the substance</skos:definition>
 		<skos:note>Chemically, the active moiety of a stoichiometric or non-stoichoimetrical substance molecule is considered that part of the molecule that is the base, free acid or ion molecular part of a salt, solvate, chelate, clathrate, molecular complex or ester.</skos:note>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AdditiveIngredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label xml:lang="en-US">additive ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of an inactive ingredient that is any additive in the product</skos:definition>
+		<skos:note>Use only when there is no described pharmacological action and classification as merely &apos;inactive&apos; ingredient is not appropriate.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Adjuvant">
@@ -188,6 +196,14 @@
 		<skos:note>A base is a molecular entity dissolved in a solvent that is capable of accepting a proton (Bronsted base) or forming a covalent bond with a hydron (Lewis base) (SIO).</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;BaseIngredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label xml:lang="en-US">base ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of an inactive ingredient that is the base of a preparation</skos:definition>
+		<skos:example>water, vaseline, ethanol</skos:example>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ChemicalSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonodisperseSubstance"/>
 		<rdfs:subClassOf>
@@ -225,6 +241,15 @@
 		<skos:note>Chemical substances are generally considered &apos;small&apos; molecules which have associated salts, solvates or ions and may be described using a single definitive or representative structure.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.11</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ColorIngredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label xml:lang="en-US">color ingredient</rdfs:label>
+		<rdfs:label xml:lang="en-GB">colour ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of an inactive ingredient added to alter the color appearance</skos:definition>
+		<skos:prefLabel xml:lang="en-US">color ingredient</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConformanceLevel">
@@ -281,6 +306,13 @@
 		<cmns-txt:hasTextValue>OPTIONAL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;ContaminantIngredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label xml:lang="en-US">contaminant ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of an inactive ingredient whose presence is not intended but may not be reasonably avoided given the circumstances of the mixture&apos;s nature or origin</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ElementGroup">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
 		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
@@ -323,6 +355,15 @@
 	<owl:Class rdf:about="&idmp-sub;ExcipientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
 		<owl:equivalentClass rdf:resource="&idmp-sub;Excipient"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;FlavorIngredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label xml:lang="en-US">flavor ingredient</rdfs:label>
+		<rdfs:label xml:lang="en-GB">flavour ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of an inactive ingredient added to alter the taste of the product</skos:definition>
+		<skos:prefLabel xml:lang="en-US">flavor ingredient</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
@@ -384,10 +425,12 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>role of a substance that is specifically part of or used in the preparation of some manufactured item, pharmaceutical product, medication, or drug</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
 		<cmns-av:synonym>pharmacological role</cmns-av:synonym>
 		<cmns-av:usageNote>An ingredient is defined as a material in the ISO 11238 standard rather than as a role, which would make the model inconsistent. Thus this concept is consistent in terms of its name but not in terms of its definition.</cmns-av:usageNote>
+		<cmns-av:usageNote>Note that any inactive ingredient that is described as &apos;ingredient not otherwise specified&apos; in the ISO/TS 20443 implementation guide will simply be classified as an ingredient at this level in the hierarchy in the ontology, or as an inactive ingredient without other differentiation.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;IngredientRole">
@@ -519,6 +562,15 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.41</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Note that the concept of &apos;matter&apos; is used in the definition of substance but not explicitly defined in the IDMP standards. The definition of &apos;material&apos; is close, but adds the notion of consisting of one or more substances, thus this term generalizes both material and substance.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>physical object</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MechanicalIngredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label xml:lang="en-US">mechanical ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of an inactive ingredient which, as a whole, lends a spatial structure to the product, which structure is meaningful to the delivery of the pharmacologically active ingredients near the target site</skos:definition>
+		<skos:example>For example, a collagen matrix used as a base for transplanting skin cells.</skos:example>
+		<skos:note>Such ingredient has a function other than merely delivering the pharmacologically active substances into a systemic compartment (such as, for example, an ordinary capsule would have.)</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Mixture">
@@ -1232,6 +1284,13 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.63</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PreservativeIngredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label xml:lang="en-US">preservative ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of an inactive ingredient added to delay the risk of the product&apos;s spoiling</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ProcessingMaterialRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
 		<rdfs:label>processing material role</rdfs:label>
@@ -1870,6 +1929,15 @@
 		<skos:note>The Specified Substance Group 4 information model consists of four parts: Detailed Manufacturing information, Grade information, Specification and Analytical Data.</skos:note>
 		<skos:note>The specific information described for Specified Substance Group 4 is often submitted in regulatory submissions in a diffuse manner that is difficult to capture and organize.</skos:note>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;StabilizerIngredient">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
+		<rdfs:label xml:lang="en-GB">stabiliser ingredient</rdfs:label>
+		<rdfs:label xml:lang="en-US">stabilizer ingredient</rdfs:label>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<skos:definition>role of an inactive ingredient added to to keep the mixture homogenic (e.g. prevent the phases of an emulsion to separate)</skos:definition>
+		<skos:prefLabel xml:lang="en-US">stabilizer ingredient</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;StartingMaterialRole">
