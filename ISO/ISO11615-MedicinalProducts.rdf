@@ -93,7 +93,7 @@
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11615-MedicinalProducts/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298). It was also extended to include concepts such as process, manufacturing process, process identifier, batch, batch identifier, lot, lot number, and others required in support of the regulatory to manufacturing bridge use case.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename product constituency to product composition, which is better understood by the user community, and to move a couple of restrictions from ingredient to substance, including strength and whether or not that substance is potentially allergenic. (IDMP-405)</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate additional manufacturing and packaging details required for UC-2 (IDMP-465), to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to change the status of this ontology to &apos;release&apos; (IDMP-525), and to add content related to dose forms (IDMP-531, IDMP-538)</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate additional manufacturing and packaging details required for UC-2 (IDMP-465), to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to change the status of this ontology to &apos;release&apos; (IDMP-525), to add content related to dose forms (IDMP-531, IDMP-538), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -120,6 +120,15 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.80</dct:source>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;AdditiveIngredient">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ADTV"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Adjuvant">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -136,6 +145,42 @@
 	
 	<owl:Class rdf:about="&idmp-sub;AnalyticalMethod">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProcessSpecification"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;BaseIngredient">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-BASE"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ColorIngredient">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-COLR"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ContaminantIngredient">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-CNTM"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;FlavorIngredient">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-FLVR"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;InactiveIngredient">
@@ -247,6 +292,15 @@
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MechanicalIngredient">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-MECH"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -260,6 +314,15 @@
 				<owl:onProperty rdf:resource="&idmp-mprd;isAllergenic"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PreservativeIngredient">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-PRSV"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 	</owl:Class>
@@ -302,6 +365,15 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstance">
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.77</dct:source>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;StabilizerIngredient">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-STBL"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;StartingMaterialRole">
