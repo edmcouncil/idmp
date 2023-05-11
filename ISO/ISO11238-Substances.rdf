@@ -197,6 +197,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMethod"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasModificationAgentSubstance"/>
 				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -214,6 +221,12 @@
 				<owl:onProperty rdf:resource="&idmp-sub;hasModificationRole"/>
 				<owl:onClass rdf:resource="&idmp-sub;ModificationRoleType"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAgentModificationType"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AgentModificationType"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -894,6 +907,20 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasResiduesModified"/>
+				<owl:onClass rdf:resource="&idmp-sub;ResiduesModified"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationResidueSite"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
 				<owl:onClass rdf:resource="&idmp-sub;ModificationMethodType"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -1030,7 +1057,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Moiety">
-		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularConstituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
@@ -1145,6 +1172,58 @@
 		<skos:note>The role of the moiety should be specified if there is a specific role the moiety is playing. In addition to the moiety role for chemicals, for many peptides, the moiety role of counter-ions such as acetate should be indicated.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MolecularConstituency">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularConstituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular constituency</rdfs:label>
+		<skos:definition>the constituency of a substance in terms of molecular entities</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MolecularConstituent">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasGranularMolecularPart"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasGranularMolecularPart"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularConstituency"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular constituent</rdfs:label>
+		<skos:definition>scattered molecular entities of the same type that make up the constituency of a substance at the molecular level</skos:definition>
+		<skos:example>Acid substances consist of molecules that play the role of an acid.</skos:example>
+		<skos:example>Ester substances consist of  molecules that have an ester molecular group</skos:example>
+		<skos:example>Water as substance is classified by the scattered water molecules as molecular constituent although it will contain many other molecules, depending on purity or grade.</skos:example>
+		<cmns-av:explanatoryNote>Matter that is classified by the same constituent molecular entity are usually called chemical substances (compounds or elements), but this is a different chemical substance concept than the one defined in the IDMP-O ontology.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MolecularEntity">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:label>molecular entity</rdfs:label>
@@ -1178,6 +1257,85 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.47</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MolecularFragment">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularConstituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularFragmentIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularFragmentName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularStructure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAmount"/>
+				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasGranularMolecularPart"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularGroup"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular fragment</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.48</dct:source>
+		<skos:definition>portion of a molecule that has one or more sites of attachment to other fragments or moieties</skos:definition>
+		<skos:editorialNote>By IDMP definition a molecular fragment is a part of a molecule, but it is referenced by a substance id. The substance here is used as proxy for the type of molecule.</skos:editorialNote>
+		<cmns-av:usageNote>Molecular fragments are used in the description of polymers to represent substituents and in structural modifications to a substance.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MolecularFragmentIdentifier">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularFragment"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular fragment identifier</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.48</dct:source>
+		<skos:definition>unique identifier assigned to the substance representing the fragment based on the ISO 11238 substance controlled vocabulary</skos:definition>
+		<cmns-av:synonym>molecular fragment ID</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MolecularFragmentName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:label>molecular fragment name</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.48</dct:source>
+		<skos:definition>official name of a molecular fragment</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MolecularFragmentRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Undergoer"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularFragment"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;undergoes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Modification"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular fragment role</rdfs:label>
+		<skos:definition>role of the molecular fragment that undergoes a modification</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MolecularGraph">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
 		<rdfs:subClassOf>
@@ -1205,6 +1363,31 @@
 		<rdfs:label>molecular graph identifier</rdfs:label>
 		<skos:definition>unique identifier for a molecular graph representing a single chemical structure</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MolecularGroup">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;Atom"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular group</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24433"/>
+		<skos:definition>defined linked collection of atoms or a single atom within a molecular entity</skos:definition>
+		<cmns-av:adaptedFrom>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1118</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>This use of the term in physical organic and general chemistry is less restrictive than the definition adopted for the purpose of nomenclature of organic compounds.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>portion of a molecule that has one or more sites of attachment to other fragments or moieties</cmns-av:explanatoryNote>
+		<cmns-av:synonym>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.48</cmns-av:synonym>
+		<cmns-av:synonym>chemical group</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularStructure">
@@ -1654,13 +1837,18 @@
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalModification">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Modification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;ModificationMethodType-Physical"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>physical modification</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalModificationMethod">
-		<rdfs:subClassOf></rdfs:subClassOf>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ModificationMethod"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -1673,6 +1861,13 @@
 				<owl:onProperty rdf:resource="&idmp-sub;hasParameter"/>
 				<owl:onClass rdf:resource="&idmp-sub;Parameter"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasPhysicalModificationRole"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -2109,6 +2304,33 @@
 		<skos:definition>context that reflects a regulatory reporting viewpoint</skos:definition>
 		<cmns-av:explanatoryNote>Certain definitions used in the IDMP standards appear to be specific to regulatory reporting, which differ with the perspective of a chemist (scientist) performing analysis. In such cases in this ontology we will attempt to capture both perspectives and identify distinctions to limit ambiguity.</cmns-av:explanatoryNote>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ResiduesModified">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>residues modified</rdfs:label>
+		<skos:definition>description where in a substance a modification is done</skos:definition>
+		<skos:example>Non-specific modifications</skos:example>
+		<skos:example>Random</skos:example>
+		<cmns-av:explanatoryNote>The residues of modification can be specific to a type of residue, optionally at a specific site, in a molecular entity, non-specific or random.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ResiduesModified-NonSpecificModifications">
+		<rdf:type rdf:resource="&idmp-sub;ResiduesModified"/>
+		<rdfs:label>residues modified - non-specific modifications</rdfs:label>
+		<cmns-txt:hasTextValue>Non-specific modifications</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ResiduesModified-Random">
+		<rdf:type rdf:resource="&idmp-sub;ResiduesModified"/>
+		<rdfs:label>residues modified - random</rdfs:label>
+		<cmns-txt:hasTextValue>Random</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;ResultantMaterialRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
@@ -2689,8 +2911,8 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Modification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasStructuralModificationType"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralModificationType"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;ModificationMethodType-Structural"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>structural modification</rdfs:label>
@@ -2709,15 +2931,15 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasAmount"/>
-				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationMoiety"/>
+				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMoiety"/>
-				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModifiedMolecularFragment"/>
+				<owl:onClass rdf:resource="&idmp-sub;MolecularFragment"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -3603,6 +3825,26 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>indicates any arrangement and/or organization of interrelated elements in a specification for a substance</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasGranularMolecularPart">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasGranularPart"/>
+		<rdfs:label>has granular molecular part</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;PhysicalSubstance"/>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularEntity"/>
+		<owl:inverseOf rdf:resource="&idmp-sub;isGranularMolecularPartOf"/>
+		<skos:definition>relates a portion of a physical substance to one of the scattered molecular entities (atoms, ions or molecules) that the physical substance is composed of at the molecular level</skos:definition>
+		<cmns-av:usageNote>This relation is used in formal definitions that use the molecular scope as means for defining matter. A specific molecular entity can not be identified and distinguished from others, so using the property in a data model is usually wrong.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasGranularPart">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:label>has granular part</rdfs:label>
+		<dct:source>Bittner, Thomas &amp; Smith, Barry (2003). A Theory of Granular Partitions. In M. Duckham, M. F. Goodchild &amp; M. F. Worboys (eds.), Foundations of Geographic Information Science. London: Taylor &amp; Francis. pp. 117-151.</dct:source>
+		<owl:inverseOf rdf:resource="&idmp-sub;isGranularPartOf"/>
+		<skos:definition>relation between a collective of granular things to its granular parts</skos:definition>
+		<skos:example>A portion of water has granular part a water molecule.</skos:example>
+		<skos:example>A sack of rice has granular part a rice grain.</skos:example>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasIngredient">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
 		<rdfs:label>has ingredient</rdfs:label>
@@ -3699,6 +3941,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:synonym>has modification agent id</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationMoiety">
+		<rdfs:label>has modification moiety</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;StructuralModificationMethod"/>
+		<rdfs:range rdf:resource="&idmp-sub;Moiety"/>
+		<skos:definition>relates a structural modification of a substance to the moiety that is applied in the modification</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasModificationResidueSite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has modification residue site</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;ModificationMethod"/>
+		<skos:definition>describes the site where the modification happens</skos:definition>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationRole">
 		<rdfs:label>has modification role</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
@@ -3729,12 +3985,17 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationType">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has modification type</rdfs:label>
-		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
-		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10.5.2</dct:source>
 		<rdfs:range rdf:resource="&idmp-sub;ModificationMethodType"/>
 		<skos:definition>relates a modification to its type</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasModifiedMolecularFragment">
+		<rdfs:label>has modified molecular fragment</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;StructuralModificationMethod"/>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularFragment"/>
+		<skos:definition>relates a structural modification of a substance to the molecular fragments that are modified</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMoiety">
@@ -3857,6 +4118,14 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>relates a substance to its parent substance</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasPhysicalModificationRole">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has physical modification role</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;PhysicalModificationMethod"/>
+		<skos:definition>describes the role of the physical modification</skos:definition>
+		<skos:example>Micronization of animal part</skos:example>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasReferenceQuantityValueRange">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
 		<rdfs:label>has reference quantity value range</rdfs:label>
@@ -3911,6 +4180,15 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:range rdf:resource="&xsd;anyURI"/>
 		<skos:definition>has a drawing in perspective of a structure</skos:definition>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasResiduesModified">
+		<rdfs:label>has residues modified</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;ModificationMethod"/>
+		<rdfs:range rdf:resource="&idmp-sub;ResiduesModified"/>
+		<skos:definition>describes the residues in a substance that are modified by the modification</skos:definition>
+		<skos:example>random</skos:example>
+		<skos:example>ε-amino, α-amino, guanidinyl, secondary amino, and hydroxyl groups (in decreasing order of reactivity) of amino acids residues of proteins</skos:example>
+	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSimplifiedMolecularInputLineEntrySpecification">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
@@ -4053,6 +4331,18 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a moiety to a substance for which it is the essential aspect, responsible for its pharmacological activity</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isGranularMolecularPartOf">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isGranularPartOf"/>
+		<rdfs:label>is granular molecular part of</rdfs:label>
+		<skos:definition>inverse of has granular molecular part</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isGranularPartOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isIncludedIn"/>
+		<rdfs:label>is granular part of</rdfs:label>
+		<skos:definition>inverse of has granular part</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isIngredientOf">
