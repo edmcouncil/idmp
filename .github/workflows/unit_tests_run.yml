@@ -1,7 +1,6 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+# This workflow will run test for IDMP project
 
-name: Python application
+name: IDMP Automation Test
 
 on:
   push:
@@ -12,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  IDMP-Ontology:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -34,7 +33,7 @@ jobs:
           robot merge --input AboutIDMPDev-ReferenceIndividuals.rdf --output AboutIDMPDev-ReferenceIndividuals.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
       - name: Run unit tests using rdflib
         run: |
-          python etc/unit_tests/unit_test_runner.py --ontology_location /home/runner/work/idmp/idmp/AboutIDMPDev-ReferenceIndividuals.ttl --root_folder /home/runner/work/idmp/idmp/etc/unit_tests/ --cq_source  /home/runner/work/idmp/idmp/etc/CQ/Example/   
+          python etc/unit_tests/unit_test_runner.py --ontology_location /home/runner/work/idmp/idmp/AboutIDMPDev-ReferenceIndividuals.ttl --root_folder /home/runner/work/idmp/idmp/etc/unit_tests/ --cq_source  /home/runner/work/idmp/idmp/etc/CQ/Example/
           if [ $? != 0 ];
           then
           exit $?
@@ -45,3 +44,21 @@ jobs:
         with:
           name: merged-ontology
           path: AboutIDMPDev-ReferenceIndividuals.ttl
+  GSRS:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Java 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+      - name: Install SPARQL-Generate
+        run: |
+          sudo wget https://github.com/sparql-generate/sparql-generate/releases/download/2.0.12/sparql-generate-2.0.12.jar
+      - name: Download and Extract GSRS
+        run: |
+          sudo wget https://gsrs.ncats.nih.gov/downloads/dump-public-2022-12-15.gsrs
+          gunzip dump-public-2022-12-15.gsrs
+          jq -c -s '.' public_data > public_data.json
+          ls -al
