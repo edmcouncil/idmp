@@ -31,6 +31,7 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
+	xmlns="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
@@ -87,11 +88,12 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230511/ISO11238-Substances/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances.rdf version of this ontology was modified to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to extend the ontology to support some of the required and optional elements from Annex L (IDMP-483) for substances and chemical substances, to add restrictions for name and identifier to the moiety class (IDMP-510), to add content related to dose forms (IDMP-531), to revise the definitions of physical manufactured item and physical substance to add an annotation that they are extensions rather than that they correspond precisely to the IDMP 11238 standard (IDMP-528), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230511/ISO11238-Substances.rdf version of this ontology was modified to integrate modifications. (IDMP-540)</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -112,6 +114,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Ingredient"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
 		<rdfs:label>active ingredient</rdfs:label>
+		<owl:equivalentClass rdf:resource="&idmp-sub;ActiveIngredientRole"/>
 		<skos:definition>ingredient present in a currently or previously marketed drug product indicating that it is or becomes pharmacologically active once delivered to patients</skos:definition>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
 		<cmns-av:synonym>active pharmacological ingredient</cmns-av:synonym>
@@ -119,7 +122,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ActiveIngredientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
-		<owl:equivalentClass rdf:resource="&idmp-sub;ActiveIngredient"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ActiveMoietyRole">
@@ -147,6 +149,7 @@
 		<rdfs:label>adjuvant</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1</dct:source>
 		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C2140"/>
+		<owl:equivalentClass rdf:resource="&idmp-sub;AdjuvantRole"/>
 		<skos:definition>ingredient that potentiates the immune response to an antigen and/or modulates it towards the desired immune response</skos:definition>
 		<skos:note>An adjuvant is an agent that enhances the activity or therapeutic effect of another pharmacologic substance without having much, if any, therapeutic impact by itself.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
@@ -155,8 +158,153 @@
 	
 	<owl:Class rdf:about="&idmp-sub;AdjuvantRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
-		<owl:equivalentClass rdf:resource="&idmp-sub;Adjuvant"/>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Amount">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceQuantityValueRange"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;idmp-sub:hasAmountText"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;idmp-sub:hasNonNumericValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAmountType"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AmountType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>amount</rdfs:label>
+		<skos:definition>physical characteristic that quantifies the absolute or relative mass, volume or amount of substance</skos:definition>
+		<skos:example>the relative mass of material of a specific substance in a mixture</skos:example>
+		<cmns-av:usageNote>The amount can be a range.</cmns-av:usageNote>
+		<cmns-av:usageNote>The amount can be expressed relative to a reference amount.</cmns-av:usageNote>
+		<cmns-av:usageNote>Unbounded ranges must be marked explicitly using &apos;is minimum/maximum unbounded&apos; in the range. Unspecified boundaries in the range are not indicating that no boundary exists as it is done in some datamodels. If the boundary is expressed as a single quantity value, then the amount type &apos;not less than&apos; (NLT)  or &apos;not more than&apos; (NMT) must be specified.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AmountType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Amount"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>amount type</rdfs:label>
+		<skos:definition>classifies a quantity and states how a numeric amount is to be interpreted</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.8.1</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-Approximate">
+		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
+		<rdfs:label>amount type - approximate</rdfs:label>
+		<skos:definition>amount type for quantity values that are approximate</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-Exact">
+		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
+		<rdfs:label>amount type - exact</rdfs:label>
+		<skos:definition>amount type for quantity values that are exact</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NLT">
+		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
+		<rdfs:label>amount type - NLT</rdfs:label>
+		<skos:definition>amount type for quantity values that are a lower bound</skos:definition>
+		<cmns-av:synonym>amount type - not less than</cmns-av:synonym>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NMT">
+		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
+		<rdfs:label>amount type - NMT</rdfs:label>
+		<skos:definition>amount type for quantity values that are an upper bound</skos:definition>
+		<cmns-av:synonym>amount type - not more than</cmns-av:synonym>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;AmountTypeCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;AmountType"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>amount type code</rdfs:label>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountTypeCode-Approximate">
+		<rdf:type rdf:resource="&idmp-sub;AmountTypeCode"/>
+		<rdfs:label>amount type code - approximate</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;AmountType-Approximate"/>
+		<cmns-txt:hasTextValue>approximate</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountTypeCode-Exact">
+		<rdf:type rdf:resource="&idmp-sub;AmountTypeCode"/>
+		<rdfs:label>amount type code - exact</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;AmountType-Exact"/>
+		<cmns-txt:hasTextValue>exact</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountTypeCode-NLT">
+		<rdf:type rdf:resource="&idmp-sub;AmountTypeCode"/>
+		<rdfs:label>amount type code - NLT</rdfs:label>
+		<cmns-av:synonym>amount type code - not less than</cmns-av:synonym>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;AmountType-NLT"/>
+		<cmns-txt:hasTextValue>NLT</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountTypeCode-NMT">
+		<rdf:type rdf:resource="&idmp-sub;AmountTypeCode"/>
+		<rdfs:label>amount type code - NMT</rdfs:label>
+		<cmns-av:synonym>amount type - not more than</cmns-av:synonym>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;AmountType-NMT"/>
+		<cmns-txt:hasTextValue>NMT</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;Analysis">
 		<rdfs:label>analysis</rdfs:label>
@@ -345,6 +493,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;InactiveIngredient"/>
 		<rdfs:label>excipient</rdfs:label>
 		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_75324</dct:source>
+		<owl:equivalentClass rdf:resource="&idmp-sub;ExcipientRole"/>
 		<skos:definition>pharmacological role of a generally pharmacologically inactive substance that is formulated with the active ingredient of a medication</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:explanatoryNote>An excipient is not explicitly defined in the ISO 11238 standard (although clause 8.5 states that an excipient is a non-active ingredient intended to be used in the medicinal product), which this definition conforms with although it is modeled as a role in this ontology.</cmns-av:explanatoryNote>
@@ -354,7 +503,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ExcipientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
-		<owl:equivalentClass rdf:resource="&idmp-sub;Excipient"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;FlavorIngredient">
@@ -391,6 +539,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Ingredient"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
 		<rdfs:label>inactive ingredient</rdfs:label>
+		<owl:equivalentClass rdf:resource="&idmp-sub;InactiveIngredientRole"/>
 		<skos:definition>ingredient of a given formulation (most frequently, an excipient) that does not exhibit pharmacological activity</skos:definition>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Substances are classified based on their effect on disease progression for a specific disease or condition. In this case, a condition is only related to such compound via the formulation used to affect (treat or diagnose) this condition.</cmns-av:explanatoryNote>
@@ -398,7 +547,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;InactiveIngredientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
-		<owl:equivalentClass rdf:resource="&idmp-sub;InactiveIngredient"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;InactiveMoietyRole">
@@ -426,6 +574,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>ingredient</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
+		<owl:equivalentClass rdf:resource="&idmp-sub;IngredientRole"/>
 		<skos:definition>role of a substance that is specifically part of or used in the preparation of some manufactured item, pharmaceutical product, medication, or drug</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
 		<cmns-av:synonym>pharmacological role</cmns-av:synonym>
@@ -435,7 +584,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;IngredientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
-		<owl:equivalentClass rdf:resource="&idmp-sub;Ingredient"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
@@ -1421,6 +1569,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-OfficialNameSource">
 		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
 		<rdfs:label>reference source class - official name source</rdfs:label>
+		<owl:differentFrom rdf:resource="&idmp-sub;ReferenceSourceClass-OtherNameSource"/>
 		<skos:definition>classifier for a reference source indicating that the source is an official, jurisdiction-specific source for an official name</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
@@ -1430,7 +1579,6 @@
 	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-OtherNameSource">
 		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
 		<rdfs:label>reference source class - other name source</rdfs:label>
-		<owl:differentFrom rdf:resource="&idmp-sub;ReferenceSourceClass-OfficialNameSource"/>
 		<skos:definition>classifier for a reference source indicating that the source of information about a name is not an official, jurisdiction-specific source for that name</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
@@ -1631,7 +1779,9 @@
 		<cmns-av:explanatoryNote>Certain definitions used in the IDMP standards appear to be specific to regulatory reporting, which differ with the perspective of a chemist (scientist) performing analysis. In such cases in this ontology we will attempt to capture both perspectives and identify distinctions to limit ambiguity.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;SimplifiedMolecularInputLineEntry">
+	<rdf:Description rdf:about="&idmp-sub;SimplifiedMolecularInputLineEntry">
+		<rdf:type rdf:resource="&owl;AnnotationProperty"/>
+		<rdf:type rdf:resource="&owl;Class"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -1647,7 +1797,7 @@
 		<skos:note>Other linear representation forms for chemical structures include SYBYL line notation (SLN) and the older Wiswesser Line Notation, which was the first line notation for the representation of chemical structures. These other formats are not currently in wide use.</skos:note>
 		<cmns-av:abbreviation>SMILES</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.2.3</cmns-av:adaptedFrom>
-	</owl:Class>
+	</rdf:Description>
 	
 	<owl:Class rdf:about="&idmp-sub;SingleSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
@@ -1763,21 +1913,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedAmount">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Amount"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
@@ -1787,7 +1923,6 @@
 		<rdfs:label>specified amount</rdfs:label>
 		<skos:definition>specifying aspect that quantifies how much of a constituent is part of the constituency</skos:definition>
 		<skos:example>the relative mass of material of a specific substance in a mixture</skos:example>
-		<cmns-av:usageNote>The specified amount can be a range and it can be relative.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedItemCount">
@@ -2026,7 +2161,6 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - chiral</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<owl:differentFrom rdf:resource="&idmp-sub;Stereochemistry-Achiral"/>
 		<skos:definition>stereochemistry classifier indicating an object or molecule that is not superimposable on its mirror image</skos:definition>
 		<skos:note>The classic description of chirality is the comparison of the hand in a mirror, because the mirror image is the opposite. A chiral molecule has one or more chiral centres.</skos:note>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
@@ -2178,7 +2312,6 @@
 		<rdf:type rdf:resource="&idmp-sub;Stereochemistry"/>
 		<rdfs:label>stereochemistry - trans</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
-		<owl:differentFrom rdf:resource="&idmp-sub;Stereochemistry-Cis"/>
 		<skos:definition>stereochemistry classifier indicating that the functional groups (substituents) are on opposing (transverse) sides of some plane</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>TRANS</cmns-txt:hasTextValue>
@@ -2318,9 +2451,9 @@
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -2368,6 +2501,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>substance composition</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.17</dct:source>
+		<owl:equivalentClass rdf:resource="&idmp-sub;SubstanceConstituency"/>
 		<skos:definition>constituency that defines some substance based on its relationship(s) to some other substance (ingredient) or moiety, potentially in some amount, in some context</skos:definition>
 		<skos:example>The substance, triamcinolone acetonide is the parent (constituent) substance of the specified substance Group 1 substance, triamcinolone acetonide, micronized. In this example, the subject role is played by &apos;triamcinolone acetonide, micronized&apos; and object role by &apos;triamcinolone acetonide&apos;.</skos:example>
 		<skos:note>Constituent component is part of a mixture belonging to a homologous group of individual components, described as parent substances for the manufacture of an allergenic extract. In this example, the subject role would be played by the mixture, whose object role is played by multiple substances (ingredient roles).</skos:note>
@@ -2379,7 +2513,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceConstituency">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
-		<owl:equivalentClass rdf:resource="&idmp-sub;SubstanceComposition"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceIdentifier">
@@ -2391,9 +2524,9 @@
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -2453,9 +2586,9 @@
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -2856,6 +2989,14 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>relates a substance directly to an active moiety</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasAmountType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has amount type</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Amount"/>
+		<rdfs:range rdf:resource="&idmp-sub;AmountType"/>
+		<skos:definition>classifies an amount by what the quantity value of the amount expresses</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasBusinessRules">
 		<rdfs:label>has business rules</rdfs:label>
 		<skos:definition>describes the nature of the rules to be applied for a given class or element in cases where that element is conditionally required for conformance per the ISO 19844 guideline</skos:definition>
@@ -3130,6 +3271,12 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>relates a substance to its parent substance</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasReferenceQuantityValueRange">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
+		<rdfs:label>has reference quantity value range</rdfs:label>
+		<skos:definition>relates something (an expression, formula, a quantity value range etc.) to a magnitude expressed as range of numbers together with their unit(s) of measure (if applicable) as reference</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasReferenceSourceDocumentType">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has reference source document type</rdfs:label>
@@ -3292,6 +3439,18 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>describes the nature of valid values for a given class or element in cases where that information is encoded as a string rather than as a value domain per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;idmp-sub:hasAmountText">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has amount text</rdfs:label>
+		<skos:definition>text describing an amount</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;idmp-sub:hasNonNumericValue">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has non-numeric value</rdfs:label>
+		<skos:definition>amount expressed as non-numeric value</skos:definition>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isActiveMoietyOf">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isMoietyOf"/>
 		<rdfs:label>is active moiety of</rdfs:label>
@@ -3302,7 +3461,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isIngredientOf">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isRoleOf"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isRoleIn"/>
 		<rdfs:label>is ingredient of</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;Ingredient"/>
 		<skos:definition>relates an ingredient to a substance or product composition that it is included in</skos:definition>
@@ -3403,6 +3562,9 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<cmns-av:synonym>reference source document</cmns-av:synonym>
 	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;isRoleOf">
+	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&cmns-prd;Good">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
