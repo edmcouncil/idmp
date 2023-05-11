@@ -63,8 +63,10 @@ jobs:
         id: gsrs-public-data
         uses: actions/cache@v3
         with:
-          path: public_data.json
-          key: ${{ runner.os }}-gsrs-public-data-$GSRS_VERSION
+          path: |
+            public_data.json
+            gsrs-transformed.ttl
+          key: gsrs-public-data-$GSRS_VERSION|transformation-files-${{ hashFiles('etc/transformation/GSRS/*.rqg') }}
       - name: Download and Extract GSRS Version $GSRS_VERSION
         if: steps.gsrs-public-data.outputs.cache-hit != 'true'
         run: |
@@ -79,4 +81,8 @@ jobs:
             echo "Transforming $query.rqg"
             java -Xmx5G -jar sparql-generate.jar -l INFO -q etc/transformation/GSRS/$query.rqg -o $query.ttl
           done
-          ls -al
+          result=gsrs-transformed.ttl
+          rm -rf $result
+          for query in "${queries[@]}"; do
+            cat $query.ttl >>$result
+          done
