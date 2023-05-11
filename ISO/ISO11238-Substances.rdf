@@ -1529,6 +1529,47 @@
 		<cmns-av:explanatoryNote>A sample of material able to rotate the plane of polarization of a beam of transmitted plane-polarized light is said to possess optical activity (or to be optically active). This optical rotation is the classical distinguishing characteristic (sufficient but not necessary) of systems containing unequal amounts of corresponding enantiomers. An enantiomer causing rotation in a clockwise direction (when viewed in the direction facing the oncoming light beam) under specified conditions is called dextrorotatory and its chemical name or formula is designated by the prefix (+)-; one causing rotation in the opposite sense is laevorotatory and designated by the prefix (−)-. Materials with optical activity also exhibit other chiroptic phenomena.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Parameter">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAmount"/>
+				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasNumericValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;decimal"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ParameterName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>parameter</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10.6.3, 7.6.4.3, 8.1.7.7 and figures 20, 34, 35, 37</dct:source>
+		<skos:definition>a named expression of a numeric, textual or amount value or range that is input to some method or function, or states metadata or qualifiers about some characteristic</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ParameterName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:label>parameter name</rdfs:label>
+		<skos:definition>name of a parameter</skos:definition>
+		<skos:note>name of a parameter that is unique in the context where the parameter is applied</skos:note>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PharmacopoeialGrade">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:label>pharmacopoeial grade</rdfs:label>
@@ -1625,6 +1666,13 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
 				<owl:hasValue rdf:resource="&idmp-sub;ModificationMethodType-Physical"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasParameter"/>
+				<owl:onClass rdf:resource="&idmp-sub;Parameter"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -3790,6 +3838,12 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:note>The extent of optical rotation is not mandatory at the substance level.</skos:note>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 14</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.2</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasParameter">
+		<rdfs:label>has parameter</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;Parameter"/>
+		<skos:definition>assigns a parameter to something</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasParentSubstance">
