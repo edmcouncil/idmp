@@ -3,7 +3,6 @@
 name: IDMP Automation Test
 
 on:
-  push:
   pull_request:
     branches: ["master"]
 
@@ -58,7 +57,7 @@ jobs:
           sudo wget https://github.com/sparql-generate/sparql-generate/releases/download/2.0.12/sparql-generate-2.0.12.jar
       - name: Download and Extract GSRS
         run: |
-          sudo wget https://gsrs.ncats.nih.gov/downloads/dump-public-2022-12-15.gsrs
-          gunzip dump-public-2022-12-15.gsrs
+          sudo wget -O public_data.gz https://gsrs.ncats.nih.gov/downloads/dump-public-2022-12-15.gsrs
+          gunzip public_data.gz
           jq -c -s '.' public_data > public_data.json
           ls -al
