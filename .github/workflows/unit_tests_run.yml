@@ -60,7 +60,7 @@ jobs:
           url=https://github.com/sparql-generate/sparql-generate/releases/download/$SPARQL_GENERATE_VERSION/sparql-generate-$SPARQL_GENERATE_VERSION.jar
           sudo wget --no-verbose -m -nH -nd -O sparql-generate.jar $url
       - name: Cache Step
-        id: gsrs-public-data
+        id: gsrs-caches
         uses: actions/cache@v3
         with:
           path: |
@@ -68,13 +68,14 @@ jobs:
             gsrs-transformed.ttl
           key: gsrs-public-data-$GSRS_VERSION|transformation-files-${{ hashFiles('etc/transformation/GSRS/*.rqg') }}
       - name: Download and Extract GSRS Version $GSRS_VERSION
-        if: steps.gsrs-public-data.outputs.cache-hit != 'true'
+        if: steps.gsrs-caches.outputs.cache-hit != 'true'
         run: |
           url=https://gsrs.ncats.nih.gov/downloads/dump-public-$GSRS_VERSION.gsrs
           sudo wget --no-verbose -m -nH -nd -O public_data.gz $url
           gunzip public_data.gz
           jq -c -s '.' public_data > public_data.json
       - name: Transform GSRS
+        if: steps.gsrs-caches.outputs.cache-hit != 'true'
         run: |
           queries=(gsrs-public-data-identifiers gsrs-public-data-names gsrs-public-data-relationships gsrs-public-data-substances)
           for query in "${queries[@]}"; do
