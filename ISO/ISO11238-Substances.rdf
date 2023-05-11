@@ -160,6 +160,98 @@
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;AgentModification">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Modification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAgentModificationType"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AgentModificationType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;manifests"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ModificationAgent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>agent modification</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>modification that does not result in the addition of a single well-defined chemical entity</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AgentModificationMethod">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ModificationMethod"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;ModificationMethodType-Agent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAmount"/>
+				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationAgentSubstance"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationAgent"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationAgentType"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationRole"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationRoleType"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAgentModificationType"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AgentModificationType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>agent modification method</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>method of a modification by means of an agent where the chemical modifications are diverse or unclear</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AgentModificationType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;AgentModification">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;AgentModificationMethod">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>agent modification type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>classifier for an agent modfiication</skos:definition>
+		<skos:example>chemical</skos:example>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Amount">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
 		<rdfs:subClassOf>
@@ -748,6 +840,195 @@
 		<cmns-av:synonym>mixture of single molecular entities</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Modification">
+		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/Process"/>
+		<rdfs:label>modification</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10.5.2</dct:source>
+		<skos:definition>process that changes the constituency, structure or a characteristic of matter, while retaining the essential characteristics of the matter with regards to its identity</skos:definition>
+		<cmns-av:explanatoryNote>Whether something is a modification depends on the identity of the entity that is being modified. If the identity is kept, then it is a modification. If is not, then the process is a change, which involves the destruction of identity of the entity before the change and the creation of a new entity.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>modification process</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ModificationAgent">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ModificationAgentType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Modification"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification agent</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<skos:definition>role of something that causes a modification on a substance</skos:definition>
+		<skos:example>A chemical, an enzyme, an organism or UV radiation can play this role.</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10.5.1</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ModificationAgentType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ModificationAgent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification agent type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<skos:definition>type of agent that causes the modification</skos:definition>
+		<skos:example>UV radiation</skos:example>
+		<skos:example>chemical</skos:example>
+		<skos:example>enzymatic</skos:example>
+		<skos:example>immunological</skos:example>
+		<skos:example>organism</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ModificationMethod">
+		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ProcessSpecification"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationMethodType"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Modification"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification method</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>specification of a substance modification</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ModificationMethodType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ModificationMethod"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification method type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>classifier for the method of modification</skos:definition>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodType-Agent">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodType"/>
+		<rdfs:label>modification method type - agent</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodType-Physical">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodType"/>
+		<rdfs:label>modification method type - physical</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodType-Structural">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodType"/>
+		<rdfs:label>modification method type - structural</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;ModificationMethodTypeCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationMethodType"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification method type code</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodTypeCode-Agent">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodTypeCode"/>
+		<rdfs:label>modification method type code - agent</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;ModificationMethodType-Agent"/>
+		<cmns-txt:hasTextValue>agent</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodTypeCode-Physical">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodTypeCode"/>
+		<rdfs:label>modification method type code - physical</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;ModificationMethodType-Physical"/>
+		<cmns-txt:hasTextValue>physical</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodTypeCode-Structural">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodTypeCode"/>
+		<rdfs:label>modification method type code - structural</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;ModificationMethodTypeCode-Structural"/>
+		<cmns-txt:hasTextValue>structural</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;ModificationRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ModificationRoleType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Modification"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification role</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>function of the modification of the substance</skos:definition>
+		<skos:example>antigen</skos:example>
+		<skos:example>antigen priming</skos:example>
+		<skos:example>conjugate</skos:example>
+		<skos:example>end-cap polymerization</skos:example>
+		<skos:example>inactivation</skos:example>
+		<skos:example>inactivation of antigen to reduce allergenicity</skos:example>
+		<skos:example>linker</skos:example>
+		<skos:example>sizing of polysaccharide into oligosaccharides</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ModificationRoleType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ModificationRole"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification role type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10.5.2</dct:source>
+		<skos:definition>classifier for the function of a modification</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Moiety">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
@@ -1328,6 +1609,34 @@
 		<skos:definition>good that embodies the qualitative and quantitative composition of a product as contained in the packaging of the medicinal product</skos:definition>
 		<skos:note>A medicinal product may contain one or more manufactured items. In many instances the manufactured item is equal to the pharmaceutical product. However, there are instances where the manufactured item(s) undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalModification">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Modification"/>
+		<rdfs:label>physical modification</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalModificationMethod">
+		<rdfs:subClassOf></rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ModificationMethod"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;ModificationMethodType-Physical"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalModification"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical modfication method</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>method of modification where no new covalent bonds are formed</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
@@ -2328,6 +2637,88 @@
 		<cmns-txt:hasTextValue>unknown</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;StructuralModification">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Modification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructuralModificationType"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralModificationType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structural modification</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>modification of a substance that changes the molecular structure of a substance</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;StructuralModificationMethod">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ModificationMethod"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;ModificationMethodType-Structural"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAmount"/>
+				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMoiety"/>
+				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructuralModificationType"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralModificationType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralModification"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structural modification method</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>method of modification where the existing molecular structure is discretely modified (either covalent modification, ionic modification including salt and solvate formalation or modification by chelate formation)</skos:definition>
+		<skos:example>Amino Acid Substitution of the peptide/protein, Salt, hydrate, solvate formation, chemical substitution, moiety, amino acid sulphation, nucleic acid base substitution, Reductive Amination</skos:example>
+		<skos:example>Structural modifications are used to describe in principle covalent modifications or essential associations of moieties with a protein, nucleic acid, or structurally diverse material. Covalent modification for a protein, nucleic acid or structurally diverse material typically means an amino acid substitution, a C-/N-terminal modification of a protein or base or 5’-, 3’- modifications of nucleic acids. The tight and/or stoichiometric association of moieties to macromolecular material by ionic forces, chelate formation, van der Waals interactions, or dipole moment interactions are also considered structural modifications since they may affect the tertiary structure of the protein/peptide or are an essential element of the drug substance (e.g. a chelated radionuclide). When peptide or nucleic acid chains are tightly associated either through covalent bonds or strong non-covalent interactions (e.g. Factor VIII: Von-Willebrand Factor interactions, Watson-Crick base pairing) they will be described as subunits of the respective protein or nucleic acid.</skos:example>
+		<skos:example>chemical substitution</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;StructuralModificationType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;StructuralModification">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;StructuralModificationMethod">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structural modification type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<skos:definition>classifier for an structural modfiication</skos:definition>
+		<skos:example>amino acid substitution</skos:example>
+		<skos:example>reductive amination</skos:example>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;StructuralRepresentation">
 		<rdfs:subClassOf rdf:resource="&cmns-dsg;Designation"/>
 		<rdfs:label>structural representation</rdfs:label>
@@ -2989,6 +3380,21 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>relates a substance directly to an active moiety</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasAgentModificationType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has agent modification type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<rdfs:range rdf:resource="&idmp-sub;AgentModificationType"/>
+		<skos:definition>classifies by the type of agent modification</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasAmount">
+		<rdfs:label>has amount</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;Amount"/>
+		<idmp-sub:definition>relates something to a absolute or relative quantification of mass, volume or amount of substance</idmp-sub:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasAmountType">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has amount type</rdfs:label>
@@ -3155,6 +3561,132 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:range rdf:resource="&idmp-sub;Ingredient"/>
 		<skos:definition>relates a substance or product composition to an ingredient of that composition</skos:definition>
 		<cmns-av:usageNote>This property should be used primarily in a manufacturing context where differentiation of ingredients in a product from other elements that play roles in the manufacturing context is important.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasModification">
+		<rdfs:label>has modification</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a substance that has undergone a modification to the modification method or a physical substance to its past modification</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationAgent">
+		<rdfs:label>has modification agent</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;ModificationAgent">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationAgentType">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a modification (or method) to the agent of modification</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationAgentSubstance">
+		<rdfs:label>has modification agent substance</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;ModificationMethod"/>
+		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&idmp-sub;hasModificationAgent">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-pts;isPlayedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>conditional property of a agent modification method relating the modfication to the substance that plays the role of the agent of modification</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10.5.3</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationAgentSubstanceCode">
+		<rdfs:label>has modification agent substance code</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<rdfs:domain rdf:resource="&idmp-sub;AgentModificationMethod"/>
+		<rdfs:range rdf:resource="&idmp-sub;SubstanceCode"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&idmp-sub;hasModificationAgentSubstance">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;hasSubstanceCode">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>conditional property of a agent modification method relating the modfication to the code of the substance that plays the role of the agent of modification</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10.5.3</cmns-av:adaptedFrom>
+		<cmns-av:synonym>has modification agent ID</cmns-av:synonym>
+		<cmns-av:synonym>has modification agent id</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationRole">
+		<rdfs:label>has modification role</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;ModificationRole">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationRoleType">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a modification (or method) to the function of the modification</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has modification type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10.5.2</dct:source>
+		<rdfs:range rdf:resource="&idmp-sub;ModificationMethodType"/>
+		<skos:definition>relates a modification to its type</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMoiety">
@@ -3348,6 +3880,15 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasBusinessRules>When the substance type, as defined in is either chemical or polymer, this class is MANDATORY; for all other cases this class is CONDITIONAL.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasStructuralModificationType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has structural modification type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section 6.10</dct:source>
+		<rdfs:range rdf:resource="&idmp-sub;StructuralModificationType"/>
+		<skos:definition>classifies by the type of structural modification</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasStructure">
@@ -3562,9 +4103,6 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<cmns-av:synonym>reference source document</cmns-av:synonym>
 	</owl:Class>
-	
-	<owl:ObjectProperty rdf:about="&cmns-pts;isRoleOf">
-	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&cmns-prd;Good">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
