@@ -55,9 +55,9 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "11"
-      - name: Install SPARQL-Generate $SPARQL_GENERATE_VERSION
+      - name: Install SPARQL-Generate ${{ env.SPARQL_GENERATE_VERSION }}
         run: |
-          url=https://github.com/sparql-generate/sparql-generate/releases/download/$SPARQL_GENERATE_VERSION/sparql-generate-$SPARQL_GENERATE_VERSION.jar
+          url=https://github.com/sparql-generate/sparql-generate/releases/download/${{ env.SPARQL_GENERATE_VERSION }}/sparql-generate-${{ env.SPARQL_GENERATE_VERSION }}.jar
           sudo wget --no-verbose -m -nH -nd -O sparql-generate.jar $url
       - name: Cache Step
         id: gsrs-caches
@@ -66,11 +66,11 @@ jobs:
           path: |
             public_data.json
             gsrs-transformed.ttl
-          key: gsrs-public-data-$GSRS_VERSION|transformation-files-${{ hashFiles('etc/transformation/GSRS/*.rqg') }}
-      - name: Download and Extract GSRS Version $GSRS_VERSION
+          key: gsrs-public-data-${{ env.GSRS_VERSION }}|transformation-files-${{ hashFiles('etc/transformation/GSRS/*.rqg') }}
+      - name: Download and Extract GSRS Version ${{ env.GSRS_VERSION }}
         if: steps.gsrs-caches.outputs.cache-hit != 'true'
         run: |
-          url=https://gsrs.ncats.nih.gov/downloads/dump-public-$GSRS_VERSION.gsrs
+          url=https://gsrs.ncats.nih.gov/downloads/dump-public-${{ env.GSRS_VERSION }}.gsrs
           sudo wget --no-verbose -m -nH -nd -O public_data.gz $url
           gunzip public_data.gz
           jq -c -s '.' public_data > public_data.json
