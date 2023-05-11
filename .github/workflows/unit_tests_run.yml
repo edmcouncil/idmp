@@ -45,6 +45,9 @@ jobs:
           path: AboutIDMPDev-ReferenceIndividuals.ttl
   GSRS:
     runs-on: ubuntu-latest
+    env:
+      GSRS_VERSION: "2022-12-15"
+      SPARQL_GENERATE_VERSION: "2.0.12"
     steps:
       - uses: actions/checkout@v3
       - name: Set up Java 11
@@ -54,10 +57,19 @@ jobs:
           java-version: "17"
       - name: Install SPARQL-Generate
         run: |
-          sudo wget --no-verbose -m -nH -nd -O sparql-generate.jar https://github.com/sparql-generate/sparql-generate/releases/download/2.0.12/sparql-generate-2.0.12.jar
+          url=https://github.com/sparql-generate/sparql-generate/releases/download/$SPARQL_GENERATE_VERSION/sparql-generate-$SPARQL_GENERATE_VERSION.jar
+          sudo wget --no-verbose -m -nH -nd -O sparql-generate.jar $url
+      - name: Cache Step
+        id: gsrs-public-data
+        uses: actions/cache@v3
+        with:
+          path: public_data.json
+          key: ${{ runner.os }}-gsrs-public-data-$GSRS_VERSION
       - name: Download and Extract GSRS
+        if: steps.gsrs-public-data.outputs.cache-hit != 'true'
         run: |
-          sudo wget --no-verbose -m -nH -nd -O public_data.gz https://gsrs.ncats.nih.gov/downloads/dump-public-2022-12-15.gsrs
+          url=https://gsrs.ncats.nih.gov/downloads/dump-public-$GSRS_VERSION.gsrs
+          sudo wget --no-verbose -m -nH -nd -O public_data.gz $url
           gunzip public_data.gz
           jq -c -s '.' public_data > public_data.json
       - name: Transform GSRS
@@ -65,6 +77,6 @@ jobs:
           queries=(gsrs-public-data-identifiers gsrs-public-data-names gsrs-public-data-relationships gsrs-public-data-substances)
           for query in "${queries[@]}"; do
             echo "Transforming $query.rqg"
-            java -jar sparql-generate.jar -l INFO -q etc/transformation/GSRS/$query.rqg -o $query.ttl
+            java -Xmx5G -jar sparql-generate.jar -l INFO -q etc/transformation/GSRS/$query.rqg -o $query.ttl
           done
           ls -al
