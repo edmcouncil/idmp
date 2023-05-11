@@ -55,7 +55,7 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "17"
-      - name: Install SPARQL-Generate
+      - name: Install SPARQL-Generate $SPARQL_GENERATE_VERSION
         run: |
           url=https://github.com/sparql-generate/sparql-generate/releases/download/$SPARQL_GENERATE_VERSION/sparql-generate-$SPARQL_GENERATE_VERSION.jar
           sudo wget --no-verbose -m -nH -nd -O sparql-generate.jar $url
@@ -65,7 +65,7 @@ jobs:
         with:
           path: public_data.json
           key: ${{ runner.os }}-gsrs-public-data-$GSRS_VERSION
-      - name: Download and Extract GSRS
+      - name: Download and Extract GSRS Version $GSRS_VERSION
         if: steps.gsrs-public-data.outputs.cache-hit != 'true'
         run: |
           url=https://gsrs.ncats.nih.gov/downloads/dump-public-$GSRS_VERSION.gsrs
