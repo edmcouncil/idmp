@@ -232,7 +232,7 @@
 		<rdfs:label>agent modification type</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10</dct:source>
-		<skos:definition>classifier for agent modification</skos:definition>
+		<skos:definition>classifier for modifications whereby the chemical modifications are diverse or unclear</skos:definition>
 		<skos:example>chemical</skos:example>
 	</owl:Class>
 	
@@ -827,6 +827,27 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Modification">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationType"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationMethodType"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasResidueModified"/>
+				<owl:onClass rdf:resource="&idmp-sub;ResidueModified"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasModificationResidueSite"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>modification</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1 and Figure 15</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.5.2</dct:source>
@@ -881,8 +902,8 @@
 	<owl:Class rdf:about="&idmp-sub;ModificationMethod">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasResiduesModified"/>
-				<owl:onClass rdf:resource="&idmp-sub;ResiduesModified"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasResidueModified"/>
+				<owl:onClass rdf:resource="&idmp-sub;ResidueModified"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -917,7 +938,16 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;ModificationMethod"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Modification">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>modification method type</rdfs:label>
@@ -2236,7 +2266,8 @@
 		<cmns-av:explanatoryNote>Certain definitions used in the IDMP standards appear to be specific to regulatory reporting, which differ with the perspective of a chemist (scientist) performing analysis. In such cases in this ontology we will attempt to capture both perspectives and identify distinctions to limit ambiguity.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;ResiduesModified">
+	<owl:Class rdf:about="&idmp-sub;ResidueModified">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;Aspect"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
@@ -2244,23 +2275,36 @@
 				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>residues modified</rdfs:label>
+		<rdfs:label>residue modified</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.2</dct:source>
 		<skos:definition>description where in a substance a modification is done</skos:definition>
-		<skos:example>Non-specific modifications</skos:example>
-		<skos:example>Random</skos:example>
+		<skos:example>lysine; reducing end of Oligosaccharide; ε-amino, α-amino, guanidinyl, secondary amino, and hydroxyl groups (in decreasing order of reactivity) of amino acids residues of proteins</skos:example>
+		<skos:example>non-specific modifications</skos:example>
+		<skos:example>random</skos:example>
+		<idmp-sub:hasBusinessRules>In case of N-Terminal modification and C-Terminal modification of a protein subunit, modification is mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:explanatoryNote>It may be known that lysine residues are modified but the particular lysine in the sequence may not be known. It should be captured for both specific and non-specific modifications, e.g. sizing carbohydrate polymers by hydrolysis.</cmns-av:explanatoryNote>
 		<cmns-av:explanatoryNote>The residues of modification can be specific to a type of residue, optionally at a specific site, in a molecular entity, non-specific or random.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:NamedIndividual rdf:about="&idmp-sub;ResiduesModified-NonSpecificModifications">
-		<rdf:type rdf:resource="&idmp-sub;ResiduesModified"/>
-		<rdfs:label>residues modified - non-specific modifications</rdfs:label>
-		<cmns-txt:hasTextValue>Non-specific modifications</cmns-txt:hasTextValue>
+	<owl:NamedIndividual rdf:about="&idmp-sub;ResidueModified-NonSpecificModifications">
+		<rdf:type rdf:resource="&idmp-sub;ResidueModified"/>
+		<rdfs:label>residue modified - non-specific modifications</rdfs:label>
+		<skos:definition>code for non-specific residue(s) of modification</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.2</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-txt:hasTextValue>non-specific modifications</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-sub;ResiduesModified-Random">
-		<rdf:type rdf:resource="&idmp-sub;ResiduesModified"/>
-		<rdfs:label>residues modified - random</rdfs:label>
-		<cmns-txt:hasTextValue>Random</cmns-txt:hasTextValue>
+	<owl:NamedIndividual rdf:about="&idmp-sub;ResidueModified-Random">
+		<rdf:type rdf:resource="&idmp-sub;ResidueModified"/>
+		<rdfs:label>residue modified - random</rdfs:label>
+		<skos:definition>code for random residue(s) of modification</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.2</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-txt:hasTextValue>random</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;ResultantMaterialRole">
@@ -2879,22 +2923,13 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;StructuralModification">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;StructuralModificationMethod">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralModificationMethod"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>structural modification type</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10</dct:source>
-		<skos:definition>classifier for an structural modfiication</skos:definition>
+		<skos:definition>classifier for a structural modification</skos:definition>
 		<skos:example>amino acid substitution</skos:example>
 		<skos:example>reductive amination</skos:example>
 	</owl:Class>
@@ -3861,8 +3896,24 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasModificationResidueSite">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has modification residue site</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;ModificationMethod"/>
-		<skos:definition>describes the site where the modification happens</skos:definition>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.3</dct:source>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>describes the position of specific residue undergone to modifications</skos:definition>
+		<skos:example>1_20; Protein unit 1, amino acid at position 20; C-Terminal removal</skos:example>
+		<idmp-sub:hasBusinessRules>In case of N-Terminal modification and C-Terminal modification of a Protein subunit, modification is mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationRole">
@@ -4094,13 +4145,29 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>has a drawing in perspective of a structure</skos:definition>
 	</owl:DatatypeProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-sub;hasResiduesModified">
-		<rdfs:label>has residues modified</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;ModificationMethod"/>
-		<rdfs:range rdf:resource="&idmp-sub;ResiduesModified"/>
-		<skos:definition>describes the residues in a substance that are modified by the modification</skos:definition>
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasResidueModified">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
+		<rdfs:label>has residue modified</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.2</dct:source>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&idmp-sub;ResidueModified"/>
+		<skos:definition>describes the residue(s) in a substance that are modified by the modification</skos:definition>
+		<skos:example>Lysine; non-specific modifications; Reducing end of Oligosaccharide; ε-amino, α-amino, guanidinyl, secondary amino, and hydroxyl groups (in decreasing order of reactivity) of amino acids residues of proteins.</skos:example>
 		<skos:example>random</skos:example>
-		<skos:example>ε-amino, α-amino, guanidinyl, secondary amino, and hydroxyl groups (in decreasing order of reactivity) of amino acids residues of proteins</skos:example>
+		<idmp-sub:hasBusinessRules>In case of N-Terminal modification and C-Terminal modification of a protein subunit, modification is mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:explanatoryNote>It may be known that lysine residues are modified but the particular lysine in the sequence may not be known. It should be captured for both specific and non-specific modifications, e.g. sizing carbohydrate polymers by hydrolysis.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSimplifiedMolecularInputLineEntrySpecification">
