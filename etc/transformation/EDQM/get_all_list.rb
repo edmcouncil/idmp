@@ -55,6 +55,7 @@ end
 # Main script
 begin
   klasses = perform_request("https://standardterms.edqm.eu/standardterms/api/v1/classes")
+  return unless klasses
   directory_name = "lists"
   Dir.mkdir(directory_name) unless File.exist?(directory_name)
   klasses["content"].each do |klass|
