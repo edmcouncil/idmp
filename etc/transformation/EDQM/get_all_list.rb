@@ -39,7 +39,7 @@ def perform_request(url)
   begin
     JSON.parse(response.body)
   rescue JSON::ParserError => e
-    puts "Failed to parse JSON response: #{e.message}"
+    p "Failed to parse JSON response: #{e.message}"
     return nil
   end
 end
@@ -48,7 +48,7 @@ def write_to_file(directory_name, code, data)
   begin
     File.write("#{directory_name}/EDQM-#{code}.json", JSON.pretty_generate(data["content"]))
   rescue => e
-    puts "Failed to write to file: #{e.message}"
+    p "Failed to write to file: #{e.message}"
   end
 end
 
@@ -62,10 +62,10 @@ begin
     code = klass["code"]
     url = "https://standardterms.edqm.eu/standardterms/api/v1/full_data_by_class/#{code}/1/1"
     data = perform_request(url)
-    puts "writing #{code} list"
+    p "writing #{code} list"
     write_to_file(directory_name, code, data) if data
   end
-  puts "All data available under ./#{directory_name}/ directory"
+  p "All data available under ./#{directory_name}/ directory"
 rescue => e
-  puts "An error occurred: #{e.message}"
+  p "An error occurred: #{e.message}"
 end
