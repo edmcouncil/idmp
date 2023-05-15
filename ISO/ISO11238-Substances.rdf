@@ -92,7 +92,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances.rdf version of this ontology was modified to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to extend the ontology to support some of the required and optional elements from Annex L (IDMP-483) for substances and chemical substances, to add restrictions for name and identifier to the moiety class (IDMP-510), to add content related to dose forms (IDMP-531), to revise the definitions of physical manufactured item and physical substance to add an annotation that they are extensions rather than that they correspond precisely to the IDMP 11238 standard (IDMP-528), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11238-Substances.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238. (IDMP-540)</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11238-Substances.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide. (IDMP-540)</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -238,6 +238,13 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAmountType"/>
+				<owl:onClass rdf:resource="&idmp-sub;AmountType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
 				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -271,29 +278,14 @@
 				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasAmountType"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;AmountType"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>amount</rdfs:label>
-		<skos:definition>physical characteristic that quantifies the absolute or relative mass, volume or amount of substance</skos:definition>
+		<skos:definition>characteristic that quantifies the absolute or relative mass, volume or amount of substance</skos:definition>
 		<skos:example>the relative mass of material of a specific substance in a mixture</skos:example>
+		<skos:note>The amount concept serves to provide the quantitative or qualitative values that are associated with a variety of elements. The same format will be used for all quantitative, semi-quantitative and qualitative values. Amounts may be a single value or a range (with low or high limits or both). An &apos;amount type&apos; may be associated with an amount to state if the value needs to be interpreted as an average or an exact or approximate quantity. The attribute &apos;Non-numeric Value&apos; is used to carry a value that is purely textual, with no numeric component. The &apos;Amount Text&apos; is used for additional text to explain a numeric value.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.8</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Note that units in the ontology are associated with the quantity or quantity value rather than with the higher level amount concept.</cmns-av:usageNote>
 		<cmns-av:usageNote>The amount can be a range.</cmns-av:usageNote>
 		<cmns-av:usageNote>The amount can be expressed relative to a reference amount.</cmns-av:usageNote>
 		<cmns-av:usageNote>Unbounded ranges must be marked explicitly using &apos;is minimum/maximum unbounded&apos; in the range. Unspecified boundaries in the range are not indicating that no boundary exists as it is done in some datamodels. If the boundary is expressed as a single quantity value, then the amount type &apos;not less than&apos; (NLT) or &apos;not more than&apos; (NMT) must be specified.</cmns-av:usageNote>
@@ -301,27 +293,43 @@
 	
 	<owl:Class rdf:about="&idmp-sub;AmountType">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Amount"/>
+				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>amount type</rdfs:label>
-		<skos:definition>classifies a quantity and states how a numeric amount is to be interpreted</skos:definition>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.8.1</cmns-av:adaptedFrom>
+		<skos:definition>classifies and denotes some quantity and states how a numeric amount is to be interpreted</skos:definition>
+		<skos:example>Exact (the default, when not specified); Approximate; NLT; NMT</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 6.8.1</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-Approximate">
 		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
 		<rdfs:label>amount type - approximate</rdfs:label>
 		<skos:definition>amount type for quantity values that are approximate</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-Exact">
 		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
 		<rdfs:label>amount type - exact</rdfs:label>
 		<skos:definition>amount type for quantity values that are exact</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NLT">
@@ -329,6 +337,8 @@
 		<rdfs:label>amount type - NLT</rdfs:label>
 		<skos:definition>amount type for quantity values that are a lower bound</skos:definition>
 		<cmns-av:synonym>amount type - not less than</cmns-av:synonym>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NMT">
@@ -336,49 +346,8 @@
 		<rdfs:label>amount type - NMT</rdfs:label>
 		<skos:definition>amount type for quantity values that are an upper bound</skos:definition>
 		<cmns-av:synonym>amount type - not more than</cmns-av:synonym>
-	</owl:NamedIndividual>
-	
-	<owl:Class rdf:about="&idmp-sub;AmountTypeCode">
-		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
-				<owl:onClass rdf:resource="&idmp-sub;AmountType"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>amount type code</rdfs:label>
-		<skos:definition>code designating an amount type</skos:definition>
-	</owl:Class>
-	
-	<owl:NamedIndividual rdf:about="&idmp-sub;AmountTypeCode-Approximate">
-		<rdf:type rdf:resource="&idmp-sub;AmountTypeCode"/>
-		<rdfs:label>amount type code - approximate</rdfs:label>
-		<cmns-dsg:denotes rdf:resource="&idmp-sub;AmountType-Approximate"/>
-		<cmns-txt:hasTextValue>approximate</cmns-txt:hasTextValue>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-sub;AmountTypeCode-Exact">
-		<rdf:type rdf:resource="&idmp-sub;AmountTypeCode"/>
-		<rdfs:label>amount type code - exact</rdfs:label>
-		<cmns-dsg:denotes rdf:resource="&idmp-sub;AmountType-Exact"/>
-		<cmns-txt:hasTextValue>exact</cmns-txt:hasTextValue>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-sub;AmountTypeCode-NLT">
-		<rdf:type rdf:resource="&idmp-sub;AmountTypeCode"/>
-		<rdfs:label>amount type code - NLT</rdfs:label>
-		<cmns-av:synonym>amount type code - not less than</cmns-av:synonym>
-		<cmns-dsg:denotes rdf:resource="&idmp-sub;AmountType-NLT"/>
-		<cmns-txt:hasTextValue>NLT</cmns-txt:hasTextValue>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-sub;AmountTypeCode-NMT">
-		<rdf:type rdf:resource="&idmp-sub;AmountTypeCode"/>
-		<rdfs:label>amount type code - NMT</rdfs:label>
-		<cmns-av:synonym>amount type - not more than</cmns-av:synonym>
-		<cmns-dsg:denotes rdf:resource="&idmp-sub;AmountType-NMT"/>
-		<cmns-txt:hasTextValue>NMT</cmns-txt:hasTextValue>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;Analysis">
@@ -3604,7 +3573,11 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:label>has amount type</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;Amount"/>
 		<rdfs:range rdf:resource="&idmp-sub;AmountType"/>
-		<skos:definition>classifies an amount by what the quantity value of the amount expresses</skos:definition>
+		<skos:definition>indicates how a numeric amount is to be interpreted</skos:definition>
+		<skos:example>Exact (the default, when not specified); Approximate; NLT; NMT</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 6.8.1</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasBusinessRules">
@@ -4408,5 +4381,19 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<cmns-av:explanatoryNote>Note that the concept of &apos;good&apos; as used in IDMP and by definition is a physical concept, and includes raw materials, intermediate materials, physical products, and substances of a defined amount.</cmns-av:explanatoryNote>
 	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasQuantityValue">
+		<idmp-sub:hasBusinessRules>A quantity value is an individual value rather than a range, and should not be used with low limit or high limit, or a non-numeric value.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>Exact or approximate quantitative value or an average value for a given element. NOTE The element &apos;Amount Type&apos; is used to distinguish.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasQuantityValueRange">
+		<idmp-sub:hasBusinessRules>Not to be used with Quantity or Non-numeric Value. Both limits must have the same dimension and units.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
+		<cmns-av:explanatoryNote>A quantity value range includes the lower and upper bound which can be mapped, using SPARQL, to the low limit (ISO 19844 clause 6.8.3) and high limit (ISO 19844 clause 6.8.4) and ensures consistency across both limits through common dimensions and units.</cmns-av:explanatoryNote>
+	</owl:ObjectProperty>
 
 </rdf:RDF>
