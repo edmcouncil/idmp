@@ -66,11 +66,19 @@ public class UnitTestRunner {
         FileUtils.copyDirectory(new File(cqSource), new File(rootFolder + "/cq_templates/"));
     }
 
-    private static boolean runUnitTest(String ontologyLocation, String rootFolder, String unitTestConfigFilePath) throws IOException {
-        Model ontology = ModelFactory.createDefaultModel();
+    private static Model loadModel(String filePath) {
+        Model model = ModelFactory.createDefaultModel();
+        try (FileInputStream inputStream = new FileInputStream(filePath)) {
+            model.read(inputStream, null, "TTL");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
 
+    private static boolean runUnitTest(String ontologyLocation, String rootFolder, String unitTestConfigFilePath) throws IOException {
         long startTime = System.currentTimeMillis();
-        ontology.read(ontologyLocation);
+        Model ontology = loadModel(ontologyLocation);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         System.out.println("Parsing ontology " + ontologyLocation + " took " + elapsedTime / 1000.0 + " seconds");
