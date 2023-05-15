@@ -56,16 +56,17 @@ if __name__ == "__main__":
     parser.add_argument('--ontology_location', help='Path to ontology location')
     parser.add_argument('--root_folder', help='Path to the root folder')
     parser.add_argument('--cq_source', help='Path to the sources of cq templates')
+    parser.add_argument('--config_file', help='Path to the config of test definition')
     args = parser.parse_args()
-    
+
     shutil.copytree(src=args.cq_source, dst=os.path.join(args.root_folder, 'cq_templates/'))
-    
+
     cq_tests_passed = \
         run_unit_test(
             ontology_location=args.ontology_location,
             root_folder=args.root_folder,
-            unit_test_config_file_path='configs/unit_tests_config.yaml')
-    
+            unit_test_config_file_path=args.config_file)
+
     if cq_tests_passed:
         sys.exit(0)
     sys.exit(-1)
