@@ -6,6 +6,7 @@ import shutil
 
 import yaml
 import jsondiff
+import time
 
 from rdflib import Graph
 from jsondiff import diff
@@ -34,7 +35,11 @@ def get_sparql_query(config: dict, root_folder: str) -> str:
 def run_unit_test(ontology_location: str, root_folder: str, unit_test_config_file_path: str) -> bool:
     cq_tests_passed = True
     ontology = Graph()
+    start_time = time.time()
     ontology.parse(ontology_location)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print('Parsing ontology', ontology_location, 'took', elapsed_time, 'seconds')
     unit_tests_config = get_unit_tests_config(unit_test_config_file_path, root_folder=root_folder)
     for unit_test_config in unit_tests_config.values():
         sparql_query = get_sparql_query(config=unit_test_config, root_folder=root_folder)
@@ -43,11 +48,11 @@ def run_unit_test(ontology_location: str, root_folder: str, unit_test_config_fil
         with open(os.path.join(root_folder, unit_test_config['expected_output'])) as file:
             expected_query_result = json.loads(file.read())
         if not query_result_as_dict == expected_query_result:
-            print('Competency question', unit_test_config['sparql_template'], ' run as a unit test failed.')
+            print('Competency question', unit_test_config['sparql_template'], 'run as a unit test failed.')
             print('Difference is: ', diff(expected_query_result, query_result_as_dict, syntax='explicit'))
             cq_tests_passed = False
         else:
-            print('Competency question', unit_test_config['sparql_template'], ' run as a unit test passed.')
+            print('Competency question', unit_test_config['sparql_template'], 'run as a unit test passed.')
     return cq_tests_passed
 
 
