@@ -3,6 +3,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX fun: <http://w3id.org/sparql-generate/fn/>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX idmp-phdf: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/>
+PREFIX idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -22,12 +23,11 @@ GENERATE {
         .
 
   <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID }>
-    a idmp-phdf:PharmaceuticalDoseForm;
-    skos:prefLabel ?Name_english;
+    a idmp-mprd:PharmaceuticalDoseForm;
+    skos:prefLabel ?Name_english, ?Lang_label;
     dct:isIdentifiedBy ?FullID;
     skos:definition ?Definition_english;
     dct:modified ?Last_updated;
-    skos:altLabel ?altLabel ;
     dct:created ?Created_Date ;
     rdf:comment ?comment_final;
     cmns-cls:isClassifiedBy ?IdmpSubstanceDomain;
@@ -38,7 +38,7 @@ GENERATE {
     idmp-pdf:hasAdministrationMethod <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_AME }>;
     .
 }
-ITERATOR iter:JSONSurfer(<PDF.json>,
+ITERATOR iter:JSONSurfer(<EDQM-PDF.json>,
   "$[*]",
   "$.class",
   "$.code",
@@ -116,7 +116,7 @@ ITERATOR iter:JSONSurfer(?translations,
 ?lang_version
 ?lang_version_date
 
-BIND(IF(?lang_term,STRLANG("{?lang_term}","{?language}"),?unbound) AS ?altLabel)
+BIND(IF(?lang_term != "-",STRLANG("{?lang_term}","{?language}"),?unbound) AS ?Lang_label)
 
 ITERATOR iter:JSONListKeys(?links) AS ?key
 

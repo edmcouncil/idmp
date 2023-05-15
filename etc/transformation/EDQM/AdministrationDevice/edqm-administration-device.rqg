@@ -23,25 +23,18 @@ GENERATE {
 
   <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID }>
     a idmp-phdf:AdministrationDevice;
-    skos:prefLabel ?Name_english;
+    skos:prefLabel ?Name_english, ?Lang_label;
     dct:isIdentifiedBy ?FullID;
     skos:definition ?Definition_english;
     dct:modified ?Last_updated;
-    skos:altLabel ?altLabel ;
     dct:created ?Created_Date ;
     rdf:comment ?comment_final;
     cmns-cls:isClassifiedBy ?IdmpSubstanceDomain;
-<<<<<<< HEAD:transformations/AdministrationDevice/edqm-administration-device.rqg
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_PAC }>;
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CMT }>;
-=======
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_link }>;
-    #rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CMT }>;
-    <foo> ?link
->>>>>>> 8efcc9ed4b3e7d8597625e33bb9ed3c52bd49109:AdministrationDevice/edqm-administration-device.rqg
+    skos:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_PAC }>;
+    skos:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CMT }>;
     .
 }
-ITERATOR iter:JSONSurfer(<DEV.json>,
+ITERATOR iter:JSONSurfer(<EDQM-DEV.json>,
   "$[*]",
   "$.class",
   "$.code",
@@ -119,23 +112,9 @@ ITERATOR iter:JSONSurfer(?translations,
 ?lang_version
 ?lang_version_date
 
-BIND(IF(?lang_term,STRLANG("{?lang_term}","{?language}"),?unbound) AS ?altLabel)
+BIND(IF(?lang_term,STRLANG("{?lang_term}","{?language}"),?unbound) AS ?Lang_label)
 
 ITERATOR iter:JSONListKeys(?links) AS ?key
-<<<<<<< HEAD:transformations/AdministrationDevice/edqm-administration-device.rqg
-=======
-BIND(fun:JSONPath(?links, '$.{?key}' ) AS ?iterableLinks)
-
-ITERATOR iter:JSONSurfer(?iterableLinks,
-    "$[*]",
-    "$.code",
-    "$.term"
-  ) AS
-  ?IT1_pac
-  ?pac_code
-  ?pac_term
-BIND(CONCAT(CONCAT(?key,"-"),?pac_code) AS ?FullID_link)
->>>>>>> 8efcc9ed4b3e7d8597625e33bb9ed3c52bd49109:AdministrationDevice/edqm-administration-device.rqg
 
 BIND(fun:JSONPath(?links, '$.{?key}' ) AS ?iterableLinks)
 

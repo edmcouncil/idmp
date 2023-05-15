@@ -3,6 +3,7 @@ PREFIX fun: <http://w3id.org/sparql-generate/fn/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX idmp-phdf: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/>
+PREFIX idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -11,7 +12,6 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
 PREFIX idmp-pdf: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/> 
 PREFIX idmp-edqm:  <https://data.pistoiaalliance.org/idmp/edqm/>
-
 
 GENERATE {
   <https://data.pistoiaalliance.org/idmp/edqm/CON> rdf:type owl:Ontology ;
@@ -22,20 +22,19 @@ GENERATE {
         .
 
   <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID }>
-    a idmp-phdf:Container;
-    skos:prefLabel ?Name_english;
+    a idmp-mprd:Container;
+    skos:prefLabel ?Name_english,?Lang_label;
     dct:isIdentifiedBy ?FullID;
     skos:definition ?Definition_english;
     dct:modified ?Last_updated;
-    skos:altLabel ?altLabel ;
     dct:created ?Created_Date ;
     rdf:comment ?comment_final;
     cmns-cls:isClassifiedBy ?IdmpSubstanceDomain;
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_PAC }>;
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CMT }>;
+    skos:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_PAC }>;
+    skos:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CMT }>;
     .
 }
-ITERATOR iter:JSONSurfer(<CON.json>,
+ITERATOR iter:JSONSurfer(<EDQM-CON.json>,
   "$[*]",
   "$.class",
   "$.code",
@@ -112,7 +111,8 @@ ITERATOR iter:JSONSurfer(?translations,
 ?lang_version
 ?lang_version_date
 
-BIND(IF(?lang_term,STRLANG("{?lang_term}","{?language}"),?unbound) AS ?altLabel)
+BIND(IF(?lang_term != "-",STRLANG("{?lang_term}","{?language}"),?unbound) AS ?Lang_label)
+  
 
 ITERATOR iter:JSONListKeys(?links) AS ?key
 

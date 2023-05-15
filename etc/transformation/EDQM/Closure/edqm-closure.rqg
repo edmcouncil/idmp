@@ -23,18 +23,17 @@ GENERATE {
 
   <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID }>
     a idmp-phdf:Closure;
-    skos:prefLabel ?Name_english;
+    skos:prefLabel ?Name_english, ?Lang_label;
     dct:isIdentifiedBy ?FullID;
     skos:definition ?Definition_english;
     dct:modified ?Last_updated;
-    skos:altLabel ?altLabel ;
     dct:created ?Created_Date ;
     rdf:comment ?comment_final;
     cmns-cls:isClassifiedBy ?IdmpSubstanceDomain;
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_PAC }>;
+    skos:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_PAC }>;
     .
 }
-ITERATOR iter:JSONSurfer(<CLO.json>,
+ITERATOR iter:JSONSurfer(<EDQM-CLO.json>,
   "$[*]",
   "$.class",
   "$.code",
@@ -112,7 +111,7 @@ ITERATOR iter:JSONSurfer(?translations,
 ?lang_version
 ?lang_version_date
 
-BIND(IF(?lang_term,STRLANG("{?lang_term}","{?language}"),?unbound) AS ?altLabel)
+BIND(IF(?lang_term,STRLANG("{?lang_term}","{?language}"),?unbound) AS ?Lang_label)
 
 ITERATOR iter:JSONListKeys(?links) AS ?key
 

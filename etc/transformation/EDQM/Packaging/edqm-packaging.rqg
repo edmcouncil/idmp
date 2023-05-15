@@ -23,20 +23,19 @@ GENERATE {
 
   <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID }>
     a idmp-phdf:Packaging;
-    skos:prefLabel ?Name_english;
+    skos:prefLabel ?Name_english, ?Lang_label;
     dct:isIdentifiedBy ?FullID;
     skos:definition ?Definition_english;
     dct:modified ?Last_updated;
-    skos:altLabel ?altLabel ;
     dct:created ?Created_Date ;
     rdf:comment ?comment_final;
     cmns-cls:isClassifiedBy ?IdmpSubstanceDomain;
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CON }>;
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_DEV }>;
-    rdf:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CLO }>;
+    skos:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CON }>;
+    skos:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_DEV }>;
+    skos:related <https://data.pistoiaalliance.org/idmp/edqm/{ ?FullID_CLO }>;
     .
 }
-ITERATOR iter:JSONSurfer(<PAC.json>,
+ITERATOR iter:JSONSurfer(<EDQM-PAC.json>,
   "$[*]",
   "$.class",
   "$.code",
