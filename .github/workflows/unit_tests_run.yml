@@ -85,9 +85,9 @@ jobs:
           done
       - name: Combine GSRS with IDMP
         run: |
-          sudo wget https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-active-moiety.ttl
-          sudo wget https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-dct-identifier.ttl
-          sudo wget https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-skos-altLabel.ttl
+          sudo wget --no-verbose -m -nH -nd https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-active-moiety.ttl
+          sudo wget --no-verbose -m -nH -nd https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-dct-identifier.ttl
+          sudo wget --no-verbose -m -nH -nd https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-skos-altLabel.ttl
           source_files=(gsrs-transformed.ttl AboutIDMPDev-ReferenceIndividuals.ttl gsrs-active-moiety.ttl gsrs-dct-identifier.ttl gsrs-skos-altLabel.ttl)
           output_file=gsrs-final.ttl
           # Loop through the source files and append their contents to the output file
