@@ -43,8 +43,10 @@ public class UnitTestRunner {
             System.exit(cqTestsPassed ? 0 : -1);
         } catch (ParseException e) {
             System.err.println("Error parsing command line arguments: " + e.getMessage());
+            System.exit(-1);
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
+            System.exit(-1);
         }
     }
 
