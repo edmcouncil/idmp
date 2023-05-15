@@ -83,10 +83,21 @@ jobs:
           for query in "${queries[@]}"; do
             cat $query.ttl >>$result
           done
+      - name: Combine GSRS with IDMP
+        run: |
+          sudo wget https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-active-moiety.ttl
+          sudo wget https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-dct-identifier.ttl
+          sudo wget https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-skos-altLabel.ttl
+          source_files=(gsrs-transformed.ttl AboutIDMPDev-ReferenceIndividuals.ttl gsrs-active-moiety.ttl gsrs-dct-identifier.ttl gsrs-skos-altLabel.ttl)
+          output_file=gsrs-final.ttl
+          # Loop through the source files and append their contents to the output file
+          for file in "${source_files[@]}"; do
+            cat $file >> $output_file
+          done
       - name: Run unit tests using Apache Jena
         run: |
           java -Xmx5G -jar etc/unit_tests/target/unit-test-runner-1.0.jar \
-            -ontology_location ./gsrs-transformed.ttl \
+            -ontology_location gsrs-final.ttl \
             -root_folder etc/unit_tests/ \
             -cq_source etc/CQ/Example/ \
             -config_file configs/gsrs_tests_config.yaml
