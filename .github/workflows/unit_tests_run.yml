@@ -14,26 +14,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v3
+      - name: Set up Java 11
+        uses: actions/setup-java@v3
         with:
-          python-version: "3.10"
-      - name: Install python's dependencies
+          distribution: "temurin"
+          java-version: "11"
+          cache: "maven"
+      - name: Install Dependencies & Prepare IDMP Ontologies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r ./etc/unit_tests/requirements.txt
-      - name: Install robot
+          ./etc/unit_tests/dependencies.sh
+      - name: Run unit tests using Apache Jena
         run: |
-          sudo wget --no-verbose -m -nH -nd -P /usr/bin https://raw.githubusercontent.com/ontodev/robot/master/bin/robot
-          sudo wget --no-verbose -m -nH -nd -P /usr/bin https://github.com/ontodev/robot/releases/latest/download/robot.jar
-          sudo chmod +x /usr/bin/robot
-      - name: Merge all IDMP ontologies with robot
-        run: |
-          robot merge --input AboutIDMPDev-ReferenceIndividuals.rdf --output AboutIDMPDev-ReferenceIndividuals.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
-      - name: Run unit tests using rdflib
-        run: |
-          python etc/unit_tests/unit_test_runner.py \
-            --ontology_location AboutIDMPDev-ReferenceIndividuals.ttl \
+          java -Xmx5G -jar etc/unit_tests/target/unit-test-runner-1.0.jar \
+            --ontology_location ./AboutIDMPDev-ReferenceIndividuals.ttl \
             --root_folder etc/unit_tests/ \
             --cq_source  etc/CQ/Example/ \
             --config_file configs/idmp_tests_config.yaml
@@ -51,7 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GSRS_VERSION: "2022-12-15"
-      SPARQL_GENERATE_VERSION: "2.0.12"
     steps:
       - uses: actions/checkout@v3
       - name: Set up Java 11
@@ -60,13 +52,9 @@ jobs:
           distribution: "temurin"
           java-version: "11"
           cache: "maven"
-      - name: Build with Maven
+      - name: Install Dependencies & Prepare IDMP Ontologies
         run: |
-          mvn -B package --file etc/unit_tests/pom.xml
-      - name: Install SPARQL-Generate ${{ env.SPARQL_GENERATE_VERSION }}
-        run: |
-          url=https://github.com/sparql-generate/sparql-generate/releases/download/${{ env.SPARQL_GENERATE_VERSION }}/sparql-generate-${{ env.SPARQL_GENERATE_VERSION }}.jar
-          sudo wget --no-verbose -m -nH -nd -O sparql-generate.jar $url
+          ./etc/unit_tests/dependencies.sh
       - name: GSRS Cache
         id: gsrs-caches
         uses: actions/cache@v3
