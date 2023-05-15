@@ -99,7 +99,7 @@ public class UnitTestRunner {
             }
 
             String expectedOutputPath = (String) unitTestConfig.get("expected_output");
-            String expectedOutput = readFileAsString(expectedOutputPath);
+            String expectedOutput = readFileAsString(new File(rootFolder, expectedOutputPath).getPath());
 
             if (!isResultExpected(queryResultString, expectedOutput)) {
                 System.out.println("Competency question " + unitTestName + " run as a unit test failed.");
