@@ -6,6 +6,12 @@ on:
   push:
   pull_request:
     branches: ["master"]
+  workflow_dispatch:
+    inputs:
+      gsrs_version:
+        description: "GSRS dataset version"
+        required: false
+        default: "2022-12-15"
 
 permissions:
   contents: read
@@ -44,7 +50,7 @@ jobs:
   GSRS:
     runs-on: ubuntu-latest
     env:
-      GSRS_VERSION: "2022-12-15"
+      GSRS_VERSION: ${{ inputs.gsrs_version }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Java 11
