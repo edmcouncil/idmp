@@ -2275,9 +2275,7 @@
 		<cmns-av:explanatoryNote>Certain definitions used in the IDMP standards appear to be specific to regulatory reporting, which differ with the perspective of a chemist (scientist) performing analysis. In such cases in this ontology we will attempt to capture both perspectives and identify distinctions to limit ambiguity.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<rdf:Description rdf:about="&idmp-sub;SimplifiedMolecularInputLineEntry">
-		<rdf:type rdf:resource="&owl;AnnotationProperty"/>
-		<rdf:type rdf:resource="&owl;Class"/>
+	<owl:Class rdf:about="&idmp-sub;SimplifiedMolecularInputLineEntry">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -2293,7 +2291,7 @@
 		<skos:note>Other linear representation forms for chemical structures include SYBYL line notation (SLN) and the older Wiswesser Line Notation, which was the first line notation for the representation of chemical structures. These other formats are not currently in wide use.</skos:note>
 		<cmns-av:abbreviation>SMILES</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.2.3</cmns-av:adaptedFrom>
-	</rdf:Description>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SingleSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
@@ -2311,14 +2309,15 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;OpticalActivity"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Structure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;Structure"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
+				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
