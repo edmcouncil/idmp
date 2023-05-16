@@ -26,15 +26,20 @@ import java.util.Map;
 
 public class UnitTestRunner {
 
+    private static final String ONTOLOGY_LOCATION_OPTION = "ontology_location";
+    private static final String ROOT_FOLDER_OPTION = "root_folder";
+    private static final String CQ_SOURCE_OPTION = "cq_source";
+    private static final String CONFIG_FILE_OPTION = "config_file";
+
     public static void main(String[] args) {
         try {
             Options options = createOptions();
             CommandLine cmd = parseCommandLine(args, options);
 
-            String ontologyLocation = cmd.getOptionValue("ontology_location");
-            String rootFolder = cmd.getOptionValue("root_folder");
-            String cqSource = cmd.getOptionValue("cq_source");
-            String configFilePath = cmd.getOptionValue("config_file");
+            String ontologyLocation = cmd.getOptionValue(ONTOLOGY_LOCATION_OPTION);
+            String rootFolder = cmd.getOptionValue(ROOT_FOLDER_OPTION);
+            String cqSource = cmd.getOptionValue(CQ_SOURCE_OPTION);
+            String configFilePath = cmd.getOptionValue(CONFIG_FILE_OPTION);
 
             copyCqTemplates(cqSource, rootFolder);
 
@@ -52,10 +57,10 @@ public class UnitTestRunner {
 
     private static Options createOptions() {
         Options options = new Options();
-        options.addOption("ontology_location", true, "Path to ontology location");
-        options.addOption("root_folder", true, "Path to the root folder");
-        options.addOption("cq_source", true, "Path to the sources of cq templates");
-        options.addOption("config_file", true, "Path to the config of test definition");
+        options.addOption(ONTOLOGY_LOCATION_OPTION, true, "Path to ontology location");
+        options.addOption(ROOT_FOLDER_OPTION, true, "Path to the root folder");
+        options.addOption(CQ_SOURCE_OPTION, true, "Path to the sources of cq templates");
+        options.addOption(CONFIG_FILE_OPTION, true, "Path to the config of test definition");
         return options;
     }
 
