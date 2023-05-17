@@ -575,7 +575,6 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Ingredient"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
 		<rdfs:label>inactive ingredient</rdfs:label>
-		<owl:equivalentClass rdf:resource="&idmp-sub;InactiveIngredientRole"/>
 		<skos:definition>ingredient of a given formulation (most frequently, an excipient) that does not exhibit pharmacological activity</skos:definition>
 		<cmns-av:adaptedFrom>Inxight Drugs, Natonal Center for Advancing Translational Sciences, National Institutes of Health, derived from Definitions, available at https://drugs.ncats.io/about</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Substances are classified based on their effect on disease progression for a specific disease or condition. In this case, a condition is only related to such compound via the formulation used to affect (treat or diagnose) this condition.</cmns-av:explanatoryNote>
@@ -692,7 +691,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>material</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.41</dct:source>
-		<owl:disjointWith rdf:resource="&idmp-sub;Molecule"/>
+		<owl:disjointWith rdf:resource="&idmp-sub;MolecularEntity"/>
 		<skos:definition>entity that has mass, occupies space and consists of one or more substances</skos:definition>
 		<cmns-av:explanatoryNote>Material is not defined herein at a molecular or astrononomical level and can be described using classical Newtonian physics.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -961,7 +960,7 @@
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.5.2</dct:source>
 		<skos:definition>function of the modification of the substance</skos:definition>
-		<skos:example>antigen, linker, conjugate, inactivation, antigen priming, end-cap polymerization, sizing of Polysaccharide into Oligosaccharides, inactivation of antigen to reduce allergenicity</skos:example>
+		<skos:example>antigen, linker, conjugate, inactivation, antigen priming, end-cap polymerization, sizing of polysaccharide into oligosaccharides, inactivation of antigen to reduce allergenicity</skos:example>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
@@ -973,8 +972,8 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationRole"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;ModificationRole"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>modification role code</rdfs:label>
@@ -986,6 +985,7 @@
 	
 	<owl:Class rdf:about="&idmp-sub;Moiety">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularConstituent"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
@@ -1100,7 +1100,7 @@
 		<skos:note>The role of the moiety should be specified if there is a specific role the moiety is playing. In addition to the moiety role for chemicals, for many peptides, the moiety role of counter-ions such as acetate should be indicated.</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;MolecularConstituency">
+	<owl:Class rdf:about="&idmp-sub;MolecularComposition">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -1114,8 +1114,8 @@
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>molecular constituency</rdfs:label>
-		<skos:definition>the constituency of a substance in terms of molecular entities</skos:definition>
+		<rdfs:label>molecular composition</rdfs:label>
+		<skos:definition>constituency of a substance in terms of its molecular entities</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularConstituent">
@@ -1135,13 +1135,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularConstituency"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularComposition"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>molecular constituent</rdfs:label>
@@ -1155,6 +1149,7 @@
 	<owl:Class rdf:about="&idmp-sub;MolecularEntity">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:label>molecular entity</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;Material"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity</skos:definition>
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1142</cmns-av:directSource>
@@ -3696,10 +3691,21 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasGranularMolecularPart">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasGranularPart"/>
 		<rdfs:label>has granular molecular part</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;PhysicalSubstance"/>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Moiety">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
 		<rdfs:range rdf:resource="&idmp-sub;MolecularEntity"/>
 		<owl:inverseOf rdf:resource="&idmp-sub;isGranularMolecularPartOf"/>
-		<skos:definition>relates a portion of a physical substance to one of the scattered molecular entities (atoms, ions or molecules) that the physical substance is composed of at the molecular level</skos:definition>
+		<skos:definition>relates a portion of a physical substance (or specification thereof) to one of the scattered molecular entities (atoms, ions or molecules) that the substance is composed of at the molecular level</skos:definition>
 		<cmns-av:usageNote>This relation is used in formal definitions that use the molecular scope as means for defining matter. A specific molecular entity can not be identified and distinguished from others, so using the property in a data model is usually wrong.</cmns-av:usageNote>
 	</owl:ObjectProperty>
 	
