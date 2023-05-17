@@ -385,6 +385,13 @@
 		<skos:example>water, vaseline, ethanol</skos:example>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;ChemicalElement">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<rdfs:label>chemical element</rdfs:label>
+		<skos:definition>chemical substance comprised of atoms with the same atomic number</skos:definition>
+		<cmns-av:synonym>chemical element</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ChemicalSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonodisperseSubstance"/>
 		<rdfs:subClassOf>
@@ -494,15 +501,9 @@
 		<skos:definition>role of an inactive ingredient whose presence is not intended but may not be reasonably avoided given the circumstances of the mixture&apos;s nature or origin</skos:definition>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;Element">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalSubstance"/>
-		<rdfs:label>element</rdfs:label>
-		<skos:definition>chemical substance comprised of atoms with the same atomic number</skos:definition>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;ElementGroup">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
-		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
@@ -611,7 +612,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Isotope">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Element"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalElement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasIsotopeSubstitutionType"/>
@@ -2625,7 +2626,7 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
-		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
