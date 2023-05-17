@@ -23,8 +23,10 @@ WHERE {
       FILTER(lcase(str(?SubstanceName)) = lcase(str(?SubstanceInputReference)))
     }
     OPTIONAL {
-      ?Substance cmns-id:isIdentifiedBy/cmns-txt:hasTextValue ?SubstanceIdentifier .
-      FILTER(lcase(str(?SubstanceIdentifier)) = lcase(str(?SubstanceInputReference)))
+      ?nameNode rdf:type/rdfs:subClassOf* idmp-sub:SubstanceName .
+      ?nameNode cmns-dsg:isNameOf ?Substance .
+      ?nameNode cmns-txt:hasTextValue ?textValue .
+      FILTER(lcase(str(?textValue)) = lcase(str(?SubstanceInputReference)))
     }
-    FILTER(bound(?SubstanceLabel) || bound(?SubstanceName) || bound(?SubstanceIdentifier))
+    FILTER(bound(?SubstanceLabel) || bound(?SubstanceName) || bound(?SubstanceIdentifier)|| bound(?textValue))
 }
