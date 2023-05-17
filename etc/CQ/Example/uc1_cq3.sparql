@@ -12,7 +12,7 @@ WHERE {
     # Bind Variable Substance <$ActiveMoiety>
 	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
   	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/Terlipressin>
-    BIND(uc1_cq3_parameter_1 AS $ActiveMoiety )
+    BIND(<urn:biid:cdi4a:1:5407622> AS $ActiveMoiety )
   
   	# Get Substances with active moiety $ActiveMoiety
   	{
@@ -30,15 +30,47 @@ WHERE {
   
     # Make sure that we only return actual substances
     ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
-  
-  	# Connect Substance to Product
-    ?Product cmns-dsg:isDefinedIn|^cmns-dsg:defines [ ?hasRole 
-    	[ 
-      		cmns-pts:isPlayedBy ?Substance;
-      		a/rdfs:subClassOf* idmp-sub:Ingredient
-  		] 
-  	]
+    # Get Product to Substance
+  	{
+        # Using Shortcut 
+        ?Product cmns-dsg:isDefinedIn|^cmns-dsg:defines [ ?hasRole 
+            [ 
+                cmns-pts:isPlayedBy ?Substance;
+                a/rdfs:subClassOf* idmp-sub:Ingredient
+            ] 
+        ]
+    }UNION{
+        # using Product Composition and (In)ActiveIngredient and specifiedSubstance as chain
+        
+        # defining specified Sub
+        ?specifiedSubstanceUri rdf:type/rdfs:subClassOf* idmp-sub:SpecifiedSubstance .
+        ?specifiedSubstanceUri <https://www.omg.org/spec/Commons/QuantitiesAndUnits/specializes> ?Substance .
 
+
+        # get all Ingredients, that are active or inactive
+        {
+            ?ingredientType rdfs:subClassOf* idmp-sub:ActiveIngredient
+        }
+        UNION
+        {
+            ?ingredientType rdfs:subClassOf* idmp-sub:InactiveIngredient
+        }
+        ?IngredientUri rdf:type ?ingredientType .
+                
+        # Ingredient to Specified Substance
+        ?IngredientUri cmns-pts:isPlayedBy ?specifiedSubstanceUri .
+
+        # connect product COmposition to Ingredient
+        ?productCompositionUri idmp-sub:hasIngredient ?IngredientUri .
+        
+        # define product Composition
+        ?productCompositionUri rdf:type/rdfs:subClassOf* idmp-mprd:ProductComposition .
+        
+        #connect Product Composition to Manufactured Item
+        ?Product cmns-dsg:isDefinedIn ?productCompositionUri .
+
+
+    }
     # Optionally, get the name of the Product
     OPTIONAL{?Product  rdfs:label  ?ProductLabel }
   
