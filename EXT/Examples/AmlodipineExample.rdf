@@ -22,6 +22,7 @@
 	<!ENTITY idmp-eura "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/">
 	<!ENTITY idmp-eurga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/">
 	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
+	<!ENTITY idmp-phprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/">
 	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY idmp-ucum "https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/">
@@ -59,6 +60,7 @@
 	xmlns:idmp-eura="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"
 	xmlns:idmp-eurga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"
 	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
+	xmlns:idmp-phprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/"
 	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:idmp-ucum="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/"
@@ -332,6 +334,28 @@
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;AmlodipineEMCComposition"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-TherapeuticIndication-AnginaPectoris">
+		<rdf:type rdf:resource="&idmp-phprd;TherapeuticIndication"/>
+		<idmp-phprd:hasIndication>
+			<rdf:Description>
+				<rdf:nodeId>MedDRAAnginaPectorisId</rdf:nodeId>
+			</rdf:Description>
+		</idmp-phprd:hasIndication>
+		<idmp-phprd:hasIndicationDescription>indicated for the treatment of stable angina</idmp-phprd:hasIndicationDescription>
+		<idmp-phprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;AmlodipineEMC-PharmaceuticalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-TherapeuticIndication-Hypertension">
+		<rdf:type rdf:resource="&idmp-phprd;TherapeuticIndication"/>
+		<idmp-phprd:hasIndication>
+			<rdf:Description>
+				<rdf:nodeId>MedDRAHypertensionId</rdf:nodeId>
+			</rdf:Description>
+		</idmp-phprd:hasIndication>
+		<idmp-phprd:hasIndicationDescription>indicated for the treatment of hypertension</idmp-phprd:hasIndicationDescription>
+		<idmp-phprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;AmlodipineEMC-PharmaceuticalProduct"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMCComposition">
 		<rdf:type rdf:resource="&idmp-mprd;ProductComposition"/>
 		<rdfs:label>Amlodipine EMC composition</rdfs:label>
@@ -569,6 +593,32 @@
 		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eurga;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency"/>
 		<cmns-txt:hasTextValue>EMEA/H/A-30/1288</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-amp;MedDRA-AnginaPectoris">
+		<rdfs:label>Angina pectoris</rdfs:label>
+		<rdf:subClassOf rdf:resource="&idmp-phprd;MedicalCondition"/>
+		<cmns-id:isIdentifiedBy>
+			<idmp-phprd:MedDRAMedicalConditionIdentifier>
+				<rdfs:label>10002383</rdfs:label>
+				<rdf:nodeId>MedDRAAnginaPectorisId</rdf:nodeId>
+				<cmns-ra:isRegisteredIn rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
+				<cmns-txt:hasTextValue>10002383</cmns-txt:hasTextValue>
+			</idmp-phprd:MedDRAMedicalConditionIdentifier>
+		</cmns-id:isIdentifiedBy>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-amp;MedDRA-Hypertension">
+		<rdfs:label>Hypertension</rdfs:label>
+		<rdf:subClassOf rdf:resource="&idmp-phprd;MedicalCondition"/>
+		<cmns-id:isIdentifiedBy>
+			<idmp-phprd:MedDRAMedicalConditionIdentifier>
+				<rdfs:label>10020772</rdfs:label>
+				<rdf:nodeId>MedDRAHypertensionId</rdf:nodeId>
+				<cmns-ra:isRegisteredIn rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
+				<cmns-txt:hasTextValue>10020772</cmns-txt:hasTextValue>
+			</idmp-phprd:MedDRAMedicalConditionIdentifier>
+		</cmns-id:isIdentifiedBy>
+	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;Norvasc-ManufacturedItem">
 		<rdf:type rdf:resource="&idmp-sub;ManufacturedItem"/>
