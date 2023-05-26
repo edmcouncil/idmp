@@ -68,7 +68,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11616-PharmaceuticalProducts/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230526/ISO11616-PharmaceuticalProducts/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11616-PharmaceuticalProducts.rdf version of this ontology was modified to rename &apos;adjuvant role&apos;s to adjuvant for clarification per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Preliminary"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
@@ -125,78 +125,5 @@
 		<skos:note>Strength is also defined as the amount of substance and specified substance constituents of the investigational or authorised medicinal product expressed in a ratio scale.</skos:note>
 		<cmns-av:synonym>quantitative composition</cmns-av:synonym>
 	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-phprd;Contraindication">
-		<rdfs:subClassOf rdf:resource="https://www.omg.org/spec/Commons/Documents/Specification"/>
-		<rdfs:label>contraindication</rdfs:label>
-		<skos:definition>prescription that the presence of a sign, symptom, or medical condition makes of a treatment, test, or procedure inadvisable</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-phprd;MedDRAMedicalConditionIdentifier">
-		<rdfs:subClassOf rdf:resource="&idmp-phprd;MedicalConditionClassifier"/>
-		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
-				<owl:hasValue rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/MedicalDictionaryForRegulatoryActivities"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>MedDRA medical condition identifier</rdfs:label>
-		<skos:definition>identifier for medical condition terms registered in the Medical Dictionary for Regulatory Activities registry</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-phprd;MedicalCondition">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
-		<rdfs:label>medical condition</rdfs:label>
-		<skos:definition>situation in which a patient experiences a pathological condition or disorder that impairs the body&apos;s normal functioning or its parts and is characterized by specific symptoms and/or signs</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-phprd;MedicalConditionClassifier">
-		<rdfs:subClassOf rdf:resource="https://www.omg.org/spec/Commons/Classifiers/Classifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="https://www.omg.org/spec/Commons/Classifiers/classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-phprd;MedicalCondition"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>medical condition classifier</rdfs:label>
-		<skos:definition>classifier for medical conditions</skos:definition>
-		<skos:note>The classifiers for medical conditions are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-phprd;TherapeuticIndication">
-		<rdfs:subClassOf rdf:resource="https://www.omg.org/spec/Commons/Documents/Specification"/>
-		<rdfs:label>therapeutic indication</rdfs:label>
-		<dct:source rdf:resource="https://www.cancer.gov/publications/dictionaries/cancer-terms/def/indication"/>
-		<rdfs:seeAlso rdf:resource="https://www.ema.europa.eu/en/glossary/indication"/>
-		<skos:definition>a specification about a medical condition that leads to the recommendation of a treatment, test, or procedure</skos:definition>
-		<cmns-av:explanatoryNote>A medical condition that a medicine is used for. This can include the treatment, prevention and diagnosis of a disease. (EMA)</cmns-av:explanatoryNote>
-		<cmns-av:synonym>indication</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:ObjectProperty rdf:about="&idmp-phprd;hasIndication">
-		<rdfs:label>has indication</rdfs:label>
-		<skos:definition>relates the therapeutic indication to a code or classifier for medical conditions</skos:definition>
-		<skos:example>MedDRA id of a medical condtion concept</skos:example>
-	</owl:ObjectProperty>
-	
-	<owl:DatatypeProperty rdf:about="&idmp-phprd;hasIndicationDescription">
-		<rdfs:subPropertyOf rdf:resource="https://www.omg.org/spec/Commons/Designators/hasDescription"/>
-		<rdfs:label>has indication description</rdfs:label>
-		<skos:definition>textual description of the medical condition where the treatment is adviced</skos:definition>
-	</owl:DatatypeProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-phprd;hasTherapeuticIndication">
-		<rdfs:label>has therapeutic indication</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-phprd;TherapeuticIndication"/>
-		<owl:inverseOf rdf:resource="&idmp-phprd;isTherapeuticIndicationFor"/>
-		<skos:definition>relates a pharmaceutical product to a therapeutic indication that type of medical conditions where the treatment with the pharmaceutical product is adviced</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-phprd;isTherapeuticIndicationFor">
-		<rdfs:label>is therapeutic indication for</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-phprd;TherapeuticIndication"/>
-		<skos:definition>inverse of has therapeutic indication</skos:definition>
-	</owl:ObjectProperty>
 
 </rdf:RDF>
