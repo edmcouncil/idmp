@@ -16,6 +16,7 @@
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
+	<!ENTITY cmns-stat "https://www.omg.org/spec/Commons/StatisticalMeasures/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-chg "https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/">
@@ -48,6 +49,7 @@
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
+	xmlns:cmns-stat="https://www.omg.org/spec/Commons/StatisticalMeasures/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-chg="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"
@@ -88,6 +90,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/StatisticalMeasures/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/202300601/ISO11615-MedicinalProducts/"/>
@@ -850,8 +853,8 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationSpecifics"/>
-				<owl:onClass rdf:resource="&idmp-mprd;PopulationSpecifics"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasTargetPopulation"/>
+				<owl:onClass rdf:resource="&idmp-mprd;TargetPopulation"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1879,22 +1882,16 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		<cmns-av:explanatoryNote>A placebo is essentially a medicinal product, with the same packaging, etc. from a patient perspective as the actual investigational or authorized product used in a clinical trial, but without the active ingredient studied in the trial.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;Population">
-		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
-		<rdfs:label>population</rdfs:label>
-		<skos:definition>collection of humans or animals sharing something in common or selected for a purpose</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-mprd;PopulationSpecifics">
-		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+	<owl:Class rdf:about="&idmp-mprd;PopulationCharacteristic">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;Population"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;TargetPopulation"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>population specifics</rdfs:label>
-		<skos:definition>specification of a population for use as target of a therapeutic indication or contraindication</skos:definition>
+		<rdfs:label>population characteristic</rdfs:label>
+		<skos:definition>classifier of a target population intended as the target of a therapeutic indication or contraindication</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.5</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -2110,6 +2107,22 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		<cmns-av:explanatoryNote>When required for expression of strength, the unit of presentation shall be specified in accordance with ISO 11239 and its resulting terminology. The controlled term and a term identifier for the unit of presentation shall be specified in the associated manufactured item or pharmaceutical product. For strength expressed using standard units, the unit of measure symbol and the symbol identifier as defined in ISO 11240 and its resulting controlled vocabulary shall be specified.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;TargetPopulation">
+		<rdfs:subClassOf rdf:resource="&cmns-stat;StatisticalPopulation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>target population</rdfs:label>
+		<skos:definition>collection of patients or consumers for which the indication of a medicinal product is authorised or is under investigation</skos:definition>
+		<skos:editorialNote>This definition should be extended to include requirements for membership, such as being a patient and/or consumer, or animal.</skos:editorialNote>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.81</cmns-av:adaptedFrom>
+		<cmns-av:synonym>population specifics</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;TherapeuticIndication">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
@@ -2156,8 +2169,8 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationSpecifics"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PopulationSpecifics"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasTargetPopulation"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;TargetPopulation"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -2380,23 +2393,6 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Annex A, Full Model</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPopulationSpecifics">
-		<rdfs:label>has population specifics</rdfs:label>
-		<rdfs:domain>
-			<owl:Class>
-				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-mprd;Contraindication">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-mprd;TherapeuticIndication">
-					</rdf:Description>
-				</owl:unionOf>
-			</owl:Class>
-		</rdfs:domain>
-		<rdfs:range rdf:resource="&idmp-mprd;PopulationSpecifics"/>
-		<skos:definition>relates a therapeutic indication or contraindication to a population category</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.5</cmns-av:adaptedFrom>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceStrength">
 		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasStrength"/>
 		<rdfs:label>has reference strength</rdfs:label>
@@ -2426,6 +2422,23 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		<rdfs:label>has strength</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;Strength"/>
 		<skos:definition>indicates the actual strength of any element in a substance or pharmaceutical product</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasTargetPopulation">
+		<rdfs:label>has target population</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-mprd;Contraindication">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-mprd;TherapeuticIndication">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&idmp-mprd;TargetPopulation"/>
+		<skos:definition>relates a therapeutic indication or contraindication to its the target population</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.5</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasTherapeuticIndication">
