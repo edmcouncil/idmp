@@ -65,8 +65,8 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-RegistrationAuthorities/"/>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-RegistrationAuthorities.rdf version of this ontology was modified to split the named individual for FDA patent exclusivity into two separate named individuals - one for patent exclusivity and one for FDA exclusivity (IDMP-514)</skos:changeNote>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11238-RegistrationAuthorities/"/>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11238-RegistrationAuthorities.rdf version of this ontology was modified to split the named individual for FDA patent exclusivity into two separate named individuals - one for patent exclusivity and one for FDA exclusivity (IDMP-514) and to add the registry and identifier for the International Medical Dictionary for Regulatory Activities (MeDRA) (IDMP-561).</skos:changeNote>
 		<skos:scopeNote>Note that jurisdiction-specific counterparties and codes are specified in subordinate ontologies supporting those jurisdictions.</skos:scopeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
@@ -435,6 +435,26 @@
 		<cmns-av:synonym>TSN</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-ra;InternationalCouncilForHarmonisationOfTechnicalRequirementsForPharmaceuticalsForHumanUse">
+		<rdf:type rdf:resource="&cmns-pts;Party"/>
+		<rdfs:label>International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use</rdfs:label>
+		<skos:definition>consortium founded by the European Commission in the EU, Food and Drug Administration (FDA) in the United States, and MHLW/PMDA in Japan that supports drug registration worldwide</skos:definition>
+		<cmns-av:abbreviation>ICH</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>https://www.ich.org/page/mission</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use (ICH) is unique in bringing together the regulatory authorities and pharmaceutical industry to discuss scientific and technical aspects of drug registration. Since its inception in 1990, ICH has gradually evolved, to respond to the increasingly global face of drug development. ICH&apos;s mission is to achieve greater harmonisation worldwide to ensure that safe, effective, and high quality medicines are developed and registered in the most resource-efficient manner. Harmonisation is achieved through the development of ICH Guidelines via a process of scientific consensus with regulatory and industry experts working side-by-side. Key to the success of this process is the commitment of the ICH regulators to implement the final Guidelines.</cmns-av:explanatoryNote>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;InternationalCouncilForHarmonisationOfTechnicalRequirementsForPharmaceuticalsForHumanUseRegistrationAuthority">
+		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
+		<rdfs:label>International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use as Registration Authority</rdfs:label>
+		<skos:definition>International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use (ICH) in its role as a Registration Authority (RA), for registration of medicinal products in the Medical Dictionary for Regulatory Activities</skos:definition>
+		<cmns-av:abbreviation>ICH RA</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>https://www.ich.org/</cmns-av:adaptedFrom>
+		<cmns-av:synonym>MeDRA RA</cmns-av:synonym>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-ra;InternationalCouncilForHarmonisationOfTechnicalRequirementsForPharmaceuticalsForHumanUse"/>
+		<cmns-ra:manages rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-ra;InternationalNonproprietaryName">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceName"/>
 		<rdfs:subClassOf>
@@ -482,12 +502,33 @@
 		<lcc-lr:hasTextualName>LiverTox</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-ra;MedDRAMedicalConditionIdentifier">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicalConditionClassifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
+				<owl:hasValue rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>MedDRA medical condition identifier</rdfs:label>
+		<skos:definition>identifier for medical condition terms registered in the Medical Dictionary for Regulatory Activities registry</skos:definition>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-ra;MedNetINN">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>MedNet INN</rdfs:label>
 		<cmns-av:directSource rdf:resource="https://extranet.who.int/soinn/"/>
 		<cmns-ra:isManagedBy rdf:resource="&idmp-ra;WorldHealthOrganizationRegistrationAuthority"/>
 		<lcc-lr:hasTextualName>MedNet INN</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;MedicalDictionaryForRegulatoryActivities">
+		<rdf:type rdf:resource="&cmns-ra;Registry"/>
+		<rdfs:label>Medical Dictionary for Regulatory Activities</rdfs:label>
+		<dct:source rdf:resource="https://www.meddra.org/"/>
+		<skos:definition>The International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use (ICH) developed MedDRA, a rich and highly specific standardised medical terminology to facilitate sharing of regulatory information internationally for medical products used by humans.</skos:definition>
+		<cmns-av:abbreviation>MedDRA</cmns-av:abbreviation>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ra;MedicalSubjectHeadings">
