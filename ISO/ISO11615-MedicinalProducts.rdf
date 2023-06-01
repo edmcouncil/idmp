@@ -1449,7 +1449,7 @@ c) medicinal product name;
 d) pharmaceutical dose form;
 e) active ingredient(s)/active moieties and their corresponding strength;
 f) device(s) where a medicinal product is combined with a medical device and where the pharmacological, immunological or metabolic action should be considered as the principal mode of action; the medical device is presented as part of the medicinal product;
-g) therapeutic indication(s) as authorised for the medicinal product.</skos:note>
+g) therapeutic indication(s) as authorized for the medicinal product.</skos:note>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.3.2</cmns-av:directSource>
 	</owl:Class>
 	
@@ -1556,7 +1556,7 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>medicinal product name</rdfs:label>
-		<skos:definition>name as authorised by a medicines regulatory agency</skos:definition>
+		<skos:definition>name as authorized by a medicines regulatory agency</skos:definition>
 		<skos:note>This may be either an invented name not liable to be confused with the common name, or a common or a scientific name accompanied by a trade mark or any other applicable descriptor.</skos:note>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.54</cmns-av:directSource>
 	</owl:Class>
@@ -1981,6 +1981,8 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-mprd;PharmaceuticalProduct">
 							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;MedicinalProduct">
+							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
 				</owl:someValuesFrom>
@@ -2021,11 +2023,41 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		<skos:definition>specification for something that is produced by, results from, or obtained as a consequence of some process or transformation</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;QualitativeComposition">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductComposition"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>qualitative composition</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.70</dct:source>
+		<skos:definition>composition of all the constituents of the investigational or authorized Medicinal Product), if applicable, before or after reconstitution and functioning of the constituents of:
+- the substance (and specified substance description;
+- the excipients, whatever their nature or the quantity used, including colouring matter, preservatives, adjuvants, stabilizers, thickeners, emulsifiers, flavouring and aromatic substances, etc.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;QuantitativeComposition">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductComposition"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>quantitative composition</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.71</dct:source>
+		<skos:definition>amount of substance and specified substance constituents of the investigational or authorized medicinal product expressed in a ratio scale</skos:definition>
+		<skos:note>It is necessary for the quantitative composition of the substance(s) or the specified substance descriptions of the finished investigational or authorized Medicinal Products (depending on the pharmaceutical form concerned) to specify the mass, or the number of units of biological activity, either per dosage unit or per unit of mass or volume, of each substance or specified substance. Substance or specified substance descriptions present in the form of compounds or derivatives are always designated quantitatively by their total mass and, if necessary or relevant, by the mass of active entity, or entities, of the molecule. The term strength is a synonym of quantitative composition.</skos:note>
+		<cmns-av:usageNote>Note that quantitative composition is modeled as a kind of product composition in the ontology rather than as a quantity value, which is how the strength of a given ingredient is modeled.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;ReferenceStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
 		<rdfs:label>reference strength</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.72</dct:source>
-		<skos:definition>strength of an active substance(s) and/or specified substance(s) used as a reference from which the strength of an investigational or authorised medicinal product is described</skos:definition>
+		<skos:definition>strength of an active substance(s) and/or specified substance(s) used as a reference from which the strength of an investigational or authorized medicinal product is described</skos:definition>
 		<skos:note>The strength of the active substance(s) and/or specified substance(s) shall be described as a quantity of the substance present in a given unit of the pharmaceutical product or manufactured item.</skos:note>
 	</owl:Class>
 	
@@ -2117,7 +2149,7 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>target population</rdfs:label>
-		<skos:definition>collection of patients or consumers for which the indication of a medicinal product is authorised or is under investigation</skos:definition>
+		<skos:definition>collection of patients or consumers for which the indication of a medicinal product is authorized or is under investigation</skos:definition>
 		<skos:editorialNote>This definition should be extended to include requirements for membership, such as being a patient and/or consumer, or animal.</skos:editorialNote>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.81</cmns-av:adaptedFrom>
 		<cmns-av:synonym>population specifics</cmns-av:synonym>
