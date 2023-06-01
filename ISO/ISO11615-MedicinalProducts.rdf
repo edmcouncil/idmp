@@ -2162,9 +2162,9 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasIndicationText"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -2182,10 +2182,11 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		<rdfs:label>therapeutic indication</rdfs:label>
 		<dct:source rdf:resource="https://www.cancer.gov/publications/dictionaries/cancer-terms/def/indication"/>
 		<rdfs:seeAlso rdf:resource="https://www.ema.europa.eu/en/glossary/indication"/>
-		<skos:definition>a specification about a medical condition that leads to the recommendation of a treatment, test, or procedure</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.2</cmns-av:adaptedFrom>
+		<skos:definition>specification that defines the target disease or condition for which the medicinal product is authorized or under investigation</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.2</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>A medical condition that a medicine is used for. This can include the treatment, prevention and diagnosis of a disease. (EMA)</cmns-av:explanatoryNote>
 		<cmns-av:synonym>indication</cmns-av:synonym>
+		<cmns-av:usageNote>This class shall be used to describe the authorized indication(s) for the medicinal product in accordance with the regulated product information. A region may further refine the requirements in relation to the therapeutic indication(s) information at implementation so that this information is to be specified only if required.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;administers">
@@ -2353,14 +2354,6 @@ g) therapeutic indication(s) as authorised for the medicinal product.</skos:note
 		<skos:note>indication as &quot;disease/symptom/procedure&quot;</skos:note>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.2.3</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
-	
-	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasIndicationText">
-		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
-		<rdfs:label>has indication text</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-mprd;TherapeuticIndication"/>
-		<skos:definition>the authorized textual description of the medical condition where the treatment is adviced</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.2.2</cmns-av:adaptedFrom>
-	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasIngredientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
