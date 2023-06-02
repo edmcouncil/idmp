@@ -2262,7 +2262,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasTimingDuration"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-dt;Duration"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2607,11 +2607,15 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasTimingDuration">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDuration"/>
 		<rdfs:label>has timing/duration</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-mprd;TherapeuticIndication"/>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range rdf:resource="&cmns-dt;Duration"/>
 		<skos:definition>timing or duration information described as part of the indication</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.2.7</cmns-av:adaptedFrom>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.2.7 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2.6</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;immediatelyContains">
