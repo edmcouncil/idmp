@@ -22,6 +22,7 @@
 	<!ENTITY idmp-eura "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/">
 	<!ENTITY idmp-eurga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/">
 	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
+	<!ENTITY idmp-phprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/">
 	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY idmp-ucum "https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/">
@@ -59,6 +60,7 @@
 	xmlns:idmp-eura="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"
 	xmlns:idmp-eurga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"
 	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
+	xmlns:idmp-phprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/"
 	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:idmp-ucum="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/"
@@ -105,7 +107,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20230401/Examples/AmlodipineExample/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20230601/Examples/AmlodipineExample/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Informative"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -330,6 +332,28 @@
 		<skos:definition>pharmaceutical product that is a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
 		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;AmlodipineEMCComposition"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-TherapeuticIndication-AnginaPectoris">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<idmp-mprd:hasMedicalCondition>
+			<rdf:Description>
+				<rdf:nodeId>MedDRAAnginaPectorisId</rdf:nodeId>
+			</rdf:Description>
+		</idmp-mprd:hasMedicalCondition>
+		<idmp-mprd:hasTherapeuticIndicationText>indicated for the treatment of stable angina</idmp-mprd:hasTherapeuticIndicationText>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;AmlodipineEMCMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-TherapeuticIndication-Hypertension">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<idmp-mprd:hasMedicalCondition>
+			<rdf:Description>
+				<rdf:nodeId>MedDRAHypertensionId</rdf:nodeId>
+			</rdf:Description>
+		</idmp-mprd:hasMedicalCondition>
+		<idmp-mprd:hasTherapeuticIndicationText>indicated for the treatment of hypertension</idmp-mprd:hasTherapeuticIndicationText>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;AmlodipineEMCMedicinalProduct"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMCComposition">
@@ -569,6 +593,36 @@
 		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eurga;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency"/>
 		<cmns-txt:hasTextValue>EMEA/H/A-30/1288</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-amp;MedDRA-AnginaPectoris">
+		<rdfs:label>Angina pectoris</rdfs:label>
+		<rdf:subClassOf rdf:resource="&idmp-mprd;MedicalCondition"/>
+		<skos:definition>MedDRA concept of angina pectoris medical condition</skos:definition>
+		<cmns-id:isIdentifiedBy>
+			<idmp-ra:MedDRAMedicalConditionIdentifier>
+				<rdfs:label>10002383</rdfs:label>
+				<rdf:nodeId>MedDRAAnginaPectorisId</rdf:nodeId>
+				<skos:definition>MedDRA identifier for angina pectoris medical condition</skos:definition>
+				<cmns-ra:isRegisteredIn rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
+				<cmns-txt:hasTextValue>10002383</cmns-txt:hasTextValue>
+			</idmp-ra:MedDRAMedicalConditionIdentifier>
+		</cmns-id:isIdentifiedBy>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-amp;MedDRA-Hypertension">
+		<rdfs:label>Hypertension</rdfs:label>
+		<rdf:subClassOf rdf:resource="&idmp-mprd;MedicalCondition"/>
+		<skos:definition>MedDRA concept of hypertension medical condition</skos:definition>
+		<cmns-id:isIdentifiedBy>
+			<idmp-ra:MedDRAMedicalConditionIdentifier>
+				<rdfs:label>10020772</rdfs:label>
+				<rdf:nodeId>MedDRAHypertensionId</rdf:nodeId>
+				<skos:definition>MedDRA identifier for hypertension medical condition</skos:definition>
+				<cmns-ra:isRegisteredIn rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
+				<cmns-txt:hasTextValue>10020772</cmns-txt:hasTextValue>
+			</idmp-ra:MedDRAMedicalConditionIdentifier>
+		</cmns-id:isIdentifiedBy>
+	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;Norvasc-ManufacturedItem">
 		<rdf:type rdf:resource="&idmp-sub;ManufacturedItem"/>
