@@ -1,0 +1,40 @@
+#UC3 CQ 1.1 	What substance <S> is part of an authorized medicinal product that is approved for a given therapeutic indication indicated by a MedDRA ID <I>?
+
+PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX idmp-phprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/> 
+PREFIX cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?Substance ?SubstanceLabel
+where {
+
+        # Bind Variable MedDRA ID <I>
+        # Example "MedDRAAnginaPectorisId" for $MedDraId
+        BIND( uc3_cq1.1_parameter_1 AS $MedDraId)
+
+        # Find Nedicinal Product that is approved for the TherapeuticIndication having MedDRA ID
+        ?TherapeuticIndication a idmp-mprd:TherapeuticIndication; 
+           idmp-mprd:isTherapeuticIndicationFor ?MedicinalProduct;
+           idmp-mprd:hasMedicalCondition [
+			rdf:nodeId $MedDraId 
+		   ].
+  
+	
+  	 	# Find the substance that is part of prodcut composition which defines Prodcut that is comprised of MedicinalProduct
+        ?MedicinalProduct cmns-col:comprises ?Product .
+        ?Product ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
+    	?Product ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
+		?SubstanceInIngredientRole cmns-pts:isRealizedIn ?ProductComposition .
+		?SubstanceInIngredientRole cmns-pts:isPlayedBy ?Substance .
+		
+		# Make sure that we only return actual substances
+        ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
+    
+        # Optionally, get the name of the substance
+        OPTIONAL{?Substance  rdfs:label  ?SubstanceLabel }
+}
