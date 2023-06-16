@@ -1,6 +1,7 @@
 # UC1-CQ 3:  What are the products that contain substances with common active moiety <active moiety x>?
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX cmns-qtu:    <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -44,7 +45,7 @@ WHERE {
         
         # defining specified Sub
         ?specifiedSubstanceUri rdf:type/rdfs:subClassOf* idmp-sub:SpecifiedSubstance .
-        ?specifiedSubstanceUri <https://www.omg.org/spec/Commons/QuantitiesAndUnits/specializes> ?Substance .
+        ?specifiedSubstanceUri cmns-qtu:specializes ?Substance .
 
 
         # get all Ingredients, that are active or inactive
