@@ -548,6 +548,27 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;GeneIdentifier"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-sub;GeneName"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-sub;GeneSequenceOrigin"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -566,6 +587,27 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;GeneElementIdentifier"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-sub;GeneElementName"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;GeneElementType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -577,6 +619,118 @@
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.6 and Figure 8</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;GeneElementIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;GeneElement"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>gene element identifier</rdfs:label>
+		<skos:definition>unique identifier for the gene element</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>A unique identifier will be associated with each gene element.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.2 and Figure 8</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;GeneElementName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;GeneElement"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>gene name</rdfs:label>
+		<skos:definition>specific name given for a gene element</skos:definition>
+		<skos:example>SV40 Enhancer</skos:example>
+		<idmp-sub:hasBusinessRules>Implicit from the Gene Element ID from the applicable Gene element controlled vocabulary.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>A unique name will be associated with each gene element.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.3 and Figure 8</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;GeneElementType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;GeneElement"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>gene element type</rdfs:label>
+		<skos:definition>classifier for the gene element</skos:definition>
+		<skos:example>enhancer, promoter, silencer, terminator, repressor, epimerase, polymerase linker, transferase, capsule transporter, synthase, synthetase</skos:example>
+		<skos:note>This should be captured for all genes that are transduced into cells and are intended to be expressed.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.2 and Figure 8</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;GeneIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Gene"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>gene identifier</rdfs:label>
+		<skos:definition>unique identifier associated with the gene of origin</skos:definition>
+		<skos:example>YP_299723.1</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>Typically, from the NCBI Gene database.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.2 and Figure 8</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;GeneName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Gene"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>gene name</rdfs:label>
+		<skos:definition>complete name given for a gene</skos:definition>
+		<skos:example>hIL-10 gene</skos:example>
+		<skos:note>Every gene which has an ID should also have a name.</skos:note>
+		<idmp-sub:hasBusinessRules>Implicit from the Gene ID from the applicable Gene database.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.3 and Figure 8</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;GeneSequenceOrigin">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Gene"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>gene sequence origin</rdfs:label>
+		<skos:definition>common name for the organism from which the final gene sequence originated</skos:definition>
+		<skos:example>Human, Bovine, Human, Humanized, Mouse-Human Chimeric, Mouse, Bacterial, Viral, Plant, Arachnid</skos:example>
+		<skos:note>For monoclonal antibodies, the gene sequence origin should be used to capture species from which the antibody was derived.</skos:note>
+		<idmp-sub:hasBusinessRules>The provision of a Gene Sequence Origin applies primarily to proteins.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>Typically, from the NCBI Gene database.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.3 and Figure 8</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
