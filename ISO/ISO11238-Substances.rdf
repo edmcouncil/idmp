@@ -3732,7 +3732,7 @@
 		<rdfs:label>substance name classifier - preferred name</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.2</dct:source>
-		<skos:definition>substance name classifier for a name that ...</skos:definition>
+		<skos:definition>substance name classifier for a name that is considered to be the best choice in some context</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
 		<cmns-txt:hasTextValue>Preferred Name</cmns-txt:hasTextValue>
@@ -4201,6 +4201,13 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasTargetType"/>
+				<owl:onClass rdf:resource="&idmp-sub;TargetClassifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>target</rdfs:label>
 		<skos:definition>something that a substance is known to interact with and the interaction results in a biological effect or transformation</skos:definition>
 		<skos:note>For monoclonal antibodies, the target shall always be provided. For other types substances, the target may be provided if known. Ideally the target is a substance with its own Substance ID. However, in specific circumstances, the target may be handled as a relationship between two substances.</skos:note>
@@ -4208,6 +4215,27 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4 and Figure 8</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;TargetClassifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-sub;Target"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>target classifier</rdfs:label>
+		<skos:definition>classifier associated with a target of an active substance</skos:definition>
+		<skos:example>The therapeutic target would be HIV-1 protease when ritonavir is used in HIV-related therapy. The metabolic target is Cyp 3A4 and ritonavir is an inhibitor of this target. Ritonavir is also an inhibitor of P-glycoprotein, a drug transporter. In many combination products ritonavir is used strictly to inhibit Cyp 3A4/5 and transporter enzymes.</skos:example>
+		<skos:example>therapeutic, metabolic, toxic, transporter</skos:example>
+		<skos:note>The type is dependent on the substance and also to some extent the use of the substance. A given target-substance interaction can be of more than one type.</skos:note>
+		<idmp-sub:hasBusinessRules>Each target should be associated with a target type when the target can be classified.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.6 and Figure 8</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">
@@ -4493,6 +4521,12 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates a target to a kind of interaction it has with a given substance</skos:definition>
+		<skos:example>AGONIST, INDUCER, INHIBITOR, PARTIAL ANTAGONIST, SUBSTRATE, PRODUCT</skos:example>
+		<skos:note>A controlled vocabulary should be developed to capture these types of interactions. The interaction type should be captured for all substrate-target interactions. A substance can have multiple types of interactions.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasIsotopeSubstitutionType">
@@ -5191,6 +5225,22 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6, 6.6.4.2 and Figure 8</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasTargetType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has target type</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Target"/>
+		<rdfs:range rdf:resource="&idmp-sub;TargetClassifier"/>
+		<skos:definition>links a target to a classifier associated with that target of an active substance</skos:definition>
+		<skos:example>The therapeutic target would be HIV-1 protease when ritonavir is used in HIV-related therapy. The metabolic target is Cyp 3A4 and ritonavir is an inhibitor of this target. Ritonavir is also an inhibitor of P-glycoprotein, a drug transporter. In many combination products ritonavir is used strictly to inhibit Cyp 3A4/5 and transporter enzymes.</skos:example>
+		<skos:example>therapeutic, metabolic, toxic, transporter</skos:example>
+		<skos:note>The type is dependent on the substance and also to some extent the use of the substance. A given target-substance interaction can be of more than one type.</skos:note>
+		<idmp-sub:hasBusinessRules>Each target should be associated with a target type when the target can be classified.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.6 and Figure 8</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasValuesAllowed">
