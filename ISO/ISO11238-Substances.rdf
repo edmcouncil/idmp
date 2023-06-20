@@ -641,6 +641,26 @@
 		<cmns-av:usageNote>Note that any inactive ingredient that is described as &apos;ingredient not otherwise specified&apos; in the ISO/TS 20443 implementation guide will simply be classified as an ingredient at this level in the hierarchy in the ontology, or as an inactive ingredient without other differentiation.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;InteractionType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-sub;SubstrateTargetInteraction"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>interaction type</rdfs:label>
+		<skos:definition>classifier for the kind(s) of interactions that may occur between a substance and its target</skos:definition>
+		<skos:example>AGONIST, INDUCER, INHIBITOR, PARTIAL ANTAGONIST, SUBSTRATE, PRODUCT</skos:example>
+		<skos:note>A controlled vocabulary should be developed to capture these types of interactions. The interaction type should be captured for all substrate-target interactions. A substance can have multiple types of interactions.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Isotope">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalElement"/>
 		<rdfs:subClassOf>
@@ -4095,6 +4115,46 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
 		<cmns-txt:hasTextValue>Structurally Diverse</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;SubstrateTargetInteraction">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;InteractionType"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;Target"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+						<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>substrate target interaction</rdfs:label>
+		<skos:definition>interaction that may occur between a substance and its target</skos:definition>
+		<skos:example>AGONIST, INDUCER, INHIBITOR, PARTIAL ANTAGONIST, SUBSTRATE, PRODUCT</skos:example>
+		<skos:note>A controlled vocabulary should be developed to capture these types of interactions. The interaction type should be captured for all substrate-target interactions. A substance can have multiple types of interactions.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Target">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
