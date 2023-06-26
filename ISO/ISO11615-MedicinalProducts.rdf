@@ -99,20 +99,13 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename product constituency to product composition, which is better understood by the user community, and to move a couple of restrictions from ingredient to substance, including strength and whether or not that substance is potentially allergenic. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate additional manufacturing and packaging details required for UC-2 (IDMP-465), to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to change the status of this ontology to &apos;release&apos; (IDMP-525), to add content related to dose forms (IDMP-531, IDMP-538), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238 (IDMP-540) and to support isotopes and nuclides as in ISO 11238, Figure 14 (IDMP-539).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate content related to therapeutic indications in ISO 11615 (IDMP-561), to clarify the definition of marketing authorization holder (IDMP-395), and to refine restrictions between medicinal products and authorized medicinal products (IDMP-550).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate content related to therapeutic indications in ISO 11615 (IDMP-561), to clarify the definition of marketing authorization holder (IDMP-395), to refine restrictions between medicinal products and authorized medicinal products (IDMP-550), and aligned the ontology with the revised basis of strength pattern (IDMP-582).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;ActiveIngredient">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
@@ -453,8 +446,31 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;ReferenceStrength">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;Moiety"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;Strength"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Moiety"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>active ingredient active moiety basis of strength</rdfs:label>
@@ -470,6 +486,23 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
 				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-ACTIB"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;ReferenceStrength">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -494,14 +527,26 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;ReferenceStrength"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasStrength"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Strength"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;ReferenceStrength">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>active ingredient reference substance basis of strength</rdfs:label>
@@ -2091,6 +2136,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ReferenceStrength"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasIngredient"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Ingredient"/>
 			</owl:Restriction>
@@ -2179,6 +2231,31 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	
 	<owl:Class rdf:about="&idmp-mprd;ReferenceStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceIngredientRole"/>
+				<owl:onClass rdf:resource="&idmp-sub;SubstanceRole"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceSubstance"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Moiety">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>reference strength</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.72</dct:source>
 		<skos:definition>strength of an active substance(s) and/or specified substance(s) used as a reference from which the strength of an investigational or authorized medicinal product is described</skos:definition>
@@ -2589,6 +2666,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Annex A, Full Model</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceIngredientRole">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:label>has reference ingredient role</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;SubstanceRole"/>
+		<skos:definition>indicates a role that the reference substance of an active ingredient in a pharmaceutical or medicinal product plays under certain circumstances</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceStrength">
 		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasStrength"/>
 		<rdfs:label>has reference strength</rdfs:label>
@@ -2599,7 +2683,18 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceSubstance">
 		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasBasisOfStrength"/>
 		<rdfs:label>has reference substance</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Moiety">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
 		<skos:definition>relates a substance in the role of an active ingredient in a pharmaceutical or medicinal product to a reference substance that is its underlying basis of strength</skos:definition>
 	</owl:ObjectProperty>
 	
