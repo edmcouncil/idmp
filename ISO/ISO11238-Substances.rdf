@@ -92,7 +92,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances.rdf version of this ontology was modified to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to extend the ontology to support some of the required and optional elements from Annex L (IDMP-483) for substances and chemical substances, to add restrictions for name and identifier to the moiety class (IDMP-510), to add content related to dose forms (IDMP-531), to revise the definitions of physical manufactured item and physical substance to add an annotation that they are extensions rather than that they correspond precisely to the IDMP 11238 standard (IDMP-528), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230502/ISO11238-Substances.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-540), to support isotopes and nuclides as in ISO 11238, Figure 14 (IDMP-539), to move deprecated elements to a separate ontology, and to support additional reference information from Figure 16 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-522) and addressed punning issues with modification method type.</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230502/ISO11238-Substances.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-540), to support isotopes and nuclides as in ISO 11238, Figure 14 (IDMP-539), to move deprecated elements to a separate ontology, and to support additional reference information from Figure 16 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-522), addressed punning issues with modification method type, aligned the ontology with the revised basis of strength pattern (IDMP-582), and to add an axiom indicating that certain elements have data that can be used for testing purposes.</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -662,7 +662,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;GeneElement"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1435,7 +1435,6 @@
 	<owl:Class rdf:about="&idmp-sub;MolecularEntity">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:label>molecular entity</rdfs:label>
-		<owl:disjointWith rdf:resource="&idmp-sub;Material"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity</skos:definition>
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1142</cmns-av:directSource>
@@ -2356,9 +2355,9 @@
 						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-sub;Moiety">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -3476,11 +3475,11 @@
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Moiety">
+							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
 							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;Moiety">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -4031,9 +4030,9 @@
 						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-sub;Moiety">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -4063,9 +4062,9 @@
 						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-sub;Moiety">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -4611,11 +4610,11 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:domain>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Moiety">
+					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;Substance">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Moiety">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -4660,7 +4659,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasIngredient">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;manifests"/>
 		<rdfs:label>has ingredient</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Ingredient"/>
 		<skos:definition>relates a substance or product composition to an ingredient of that composition</skos:definition>
@@ -4958,9 +4957,9 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:unionOf rdf:parseType="Collection">
 					<rdf:Description rdf:about="&idmp-sub;Moiety">
 					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Substance">
-					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -5016,14 +5015,15 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:unionOf rdf:parseType="Collection">
 					<rdf:Description rdf:about="&idmp-sub;Moiety">
 					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Substance">
-					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:domain>
 		<rdfs:range rdf:resource="&idmp-sub;ReferenceInformation"/>
+		<owl:inverseOf rdf:resource="&idmp-sub;isReferenceInformationFor"/>
 		<skos:definition>specifies informative reference details that may include classification, additional relationships and target information (for active substances)</skos:definition>
 		<skos:note>Genes from which proteins are derived, target information and codes from code systems also constitute reference information for which the ISO 11238 specification provides a consistent structure to capture and link to a substance. Classification systems such as the WHO ATC and the United States Veterans Administration NDF-RT, which code classification information for substances, are particularly important. Target information is important for monoclonal and polyclonal antibodies and small molecules directed against specific molecular targets.</skos:note>
 		<skos:note>Reference information shall be captured for all types of substances and specified substance group 1.</skos:note>
@@ -5089,9 +5089,9 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:unionOf rdf:parseType="Collection">
 					<rdf:Description rdf:about="&idmp-sub;Moiety">
 					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Substance">
-					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -5210,6 +5210,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasSubjectSubstance">
 		<rdfs:label>has subject substance</rdfs:label>
+		<owl:inverseOf rdf:resource="&idmp-sub;isSubjectSubstanceFor"/>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&cmns-col;isIncludedIn">
 			</rdf:Description>
@@ -5441,7 +5442,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isIngredientOf">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isRoleIn"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isManifestedIn"/>
 		<rdfs:label>is ingredient of</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;Ingredient"/>
 		<skos:definition>relates an ingredient to a substance or product composition that it is included in</skos:definition>
@@ -5508,14 +5509,13 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:unionOf rdf:parseType="Collection">
 					<rdf:Description rdf:about="&idmp-sub;Moiety">
 					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;Substance">
-					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:range>
-		<owl:inverseOf rdf:resource="&idmp-sub;hasReferenceInformation"/>
 		<skos:definition>links informative reference details that may include classification, additional relationships and target information (for active substances) to a substance (specification), moiety, or physical substance it describes</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
@@ -5550,7 +5550,6 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isSubjectSubstanceFor">
 		<rdfs:label>is subject substance for</rdfs:label>
-		<owl:inverseOf rdf:resource="&idmp-sub;hasSubjectSubstance"/>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&idmp-sub;hasReferenceInformation">
 			</rdf:Description>
@@ -5598,5 +5597,17 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
 		<cmns-av:explanatoryNote>A quantity value range includes the lower and upper bound which can be mapped, using SPARQL, to the low limit (ISO 19844 clause 6.8.3) and high limit (ISO 19844 clause 6.8.4) and ensures consistency across both limits through common dimensions and units.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
-
+	
+	<owl:Axiom>
+		<owl:annotatedProperty rdf:resource="&rdfs;subClassOf"/>
+		<owl:annotatedSource rdf:resource="&idmp-sub;Molecule"/>
+		<owl:annotatedTarget>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;Atom"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</owl:annotatedTarget>
+		<cmns-av:hasDataSupport rdf:datatype="&xsd;boolean">false</cmns-av:hasDataSupport>
+	</owl:Axiom>
 </rdf:RDF>
