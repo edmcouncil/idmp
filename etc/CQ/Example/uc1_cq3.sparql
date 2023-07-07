@@ -15,18 +15,19 @@ WHERE {
     BIND(uc1_cq3_parameter_1 AS $ActiveMoiety )
   
   	# Get Substances with active moiety $ActiveMoiety
-  	{
-    	# Use the shortcut (isActiveMoietyOf or hasActiveMoiety)
-    	?Substance ^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $ActiveMoiety .
-  	} UNION {
-    	# Use the $ActiveMoiety in a role for composition that defines a substance.
-    	[] cmns-dsg:defines ?Substance ;
-      	 	cmns-pts:hasRole [
-      			a idmp-sub:ActiveMoietyRole ;
-    			cmns-pts:isPlayedBy $ActiveMoiety
-    	] .
-  	}
-    
+        {
+        # Use the shortcut (isActiveMoietyOf or hasActiveMoiety)
+        ?Substance ^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $ActiveMoiety .
+        } UNION {
+        # Use the $ActiveMoiety in a role for composition that defines a substance.
+        [] cmns-dsg:defines ?Substance ;
+                cmns-pts:hasRole [
+                       a idmp-sub:ActiveMoietyRole ;
+                       cmns-pts:isPlayedBy $ActiveMoiety
+        ] .
+        } UNION {
+    BIND($ActiveMoiety AS ?Substance)
+    }
   
     # Make sure that we only return actual substances
     ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
