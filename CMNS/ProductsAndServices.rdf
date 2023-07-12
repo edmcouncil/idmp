@@ -57,17 +57,20 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/ProductsAndServices/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230501/ProductsAndServices/"/>
 		<skos:note>This ontology was originally designed for and has been adapted from the Financial Industry Business Ontology (FIBO) Products and Services Ontology.</skos:note>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-prd;Capability">
 		<rdfs:label>capability</rdfs:label>
-		<skos:definition>ability to perform a directed process towards meeting an objective or according to some specification</skos:definition>
+		<skos:definition>ability to perform or support a function</skos:definition>
+		<cmns-av:adaptedFrom>ISO 22886:2020 Healthcare organization management - Vocabulary</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 6707-1:2020 Buildings and civil engineering works - Vocabulary - Part 1: General terms</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>Value Delivery Modeling Language Specification, http://www.omg.org/spec/VDML/</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Capabilities may involve people with particular skills and knowledge, intellectual property, defined practices, operating facilities, tools and equipment.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>More specifically, a capability can be defined as the ability to perform a directed process towards meeting an objective or according to some specification.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;CommercialProduct">
@@ -95,6 +98,8 @@
 	<owl:Class rdf:about="&cmns-prd;Commodity">
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Good"/>
 		<rdfs:label>commodity</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://money.usnews.com/investing/term/commodity"/>
+		<rdfs:seeAlso rdf:resource="https://www.thoughtco.com/commodity-economics-definition-1146936"/>
 		<skos:definition>material resource used in commerce that is interchangeable with other commodities of the same type</skos:definition>
 		<cmns-av:explanatoryNote>Commodities are most often used as inputs in the production of other goods or services. The quality of a given commodity may differ slightly, but it is essentially uniform across producers.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -155,7 +160,7 @@
 		<skos:definition>unique string of four to twelve digits used to issue GS1 identification keys</skos:definition>
 		<skos:note>A GS1 Company Prefix starting with a zero (&apos;0&apos;) is used to generate GTIN-12s (as well as the other GS1 identification keys). A GS1 Company Prefix starting with a digit other than zero (&apos;0&apos;) is used to generate GTIN-13s (as well as the other GS1 identification keys).</skos:note>
 		<skos:note>The first digits are a valid GS1 prefix and the length must be at least one longer than the length of the GS1 prefix.</skos:note>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, clause 1.4.4; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;GS1CompanyPrefixIssuer">
@@ -180,7 +185,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>GS1 company prefix issuer</rdfs:label>
 		<skos:definition>service provider that is a GS1 member organization, or GS1 itself, that issues GS1 company prefixes based on a GS1 prefix allocated to that issuer, and allocates the prefix either to a GS1 user company or to itself (e.g., for issuing individual identification keys)</skos:definition>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, clause 1.4.4; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>GS1 defines issuance in terms of the generation of a GS1 prefix, GS1 company prefix, or GS1 identification key in accordance with GS1 rules and policies by GS1 or a GS1 Member Organisation.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -189,7 +194,7 @@
 		<rdf:type rdf:resource="&cmns-doc;ReferenceDocument"/>
 		<rdf:type rdf:resource="&cmns-id;IdentificationScheme"/>
 		<rdfs:label>GS1 General Specifications</rdfs:label>
-		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</rdfs:seeAlso>
+		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://ref.gs1.org/standards/genspecs/</rdfs:seeAlso>
 		<skos:definition>reference specification and scheme that defines how identification keys, data attributes and barcodes must be formulated and used in business applications</skos:definition>
 		<cmns-doc:isAbout rdf:resource="&cmns-prd;TradeItem"/>
 	</owl:NamedIndividual>
@@ -201,7 +206,7 @@
 		<skos:definition>neutral, not-for-profit organisation that provides global standards for efficient business communication</skos:definition>
 		<skos:note>The Global Office, located in Brussels (Belgium) and Ewing, NJ (USA) is the guardian, and provides an open, user-driven, forum for ongoing maintenance and development, of the GS1 standards, guidelines and statues.</skos:note>
 		<cmns-av:abbreviation>GS1 GO</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&cmns-prd;GS1IdentificationKey">
@@ -216,7 +221,7 @@
 		<rdfs:label>GS1 identification key</rdfs:label>
 		<skos:definition>unique classifier for a class of objects that conforms with GS1 General Specifications</skos:definition>
 		<skos:scopeNote>GS1 defines an identification key as a unique identifier for a class of objects (e.g., a trade item) or an instance of an object (e.g., a logistic unit). However, from an ontological perspective, a class of objects is quite different from an instance of an object. In the context of this ontology, a GS1 identification key identifies a class of objects.</skos:scopeNote>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 2.1; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, clause 2.1; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;GS1Member">
@@ -234,7 +239,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>GS1 member</rdfs:label>
 		<skos:definition>organization that is a member of GS1</skos:definition>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, clause 1.4.4; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;GS1User">
@@ -247,7 +252,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>GS1 user</rdfs:label>
 		<skos:definition>legal entity that is a user of GS1 standards such as various keys, their definitions, and related data</skos:definition>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, clause 1.4.4; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Well-known GS1 standards include Global Trade Item Numbers (GTIN), Unique Product Codes (UPC), and extensions that support domain specific supply chain requirements.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -292,7 +297,7 @@
 		<skos:definition>classifier for something that is traded in the supply chain that conforms with GS1 General Specifications</skos:definition>
 		<skos:note>A GTIN is used to identify any item upon which there is a need to retrieve predefined information and that may be priced, ordered or invoiced at any point in any supply chain. GTINs may be 8, 12, 13 or 14 digits in length.</skos:note>
 		<cmns-av:abbreviation>GTIN</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 2.1; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, clause 2.1; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.25</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -300,6 +305,7 @@
 		<rdfs:label>good</rdfs:label>
 		<skos:definition>physical, produced item over which ownership rights can be established, whose ownership can be passed from one party to another by engaging in transactions, and that is not money or real estate</skos:definition>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://data.oecd.org/trade/trade-in-goods.htm</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://unstats.un.org/unsd/nationalaccount/glossresults.asp?gID=214</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.law.cornell.edu/ucc/9/9-102#goods</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>An inherently useful and relatively scarce tangible item produced from agricultural, construction, manufacturing, or mining activities. Off-the-shelf products, including off-the-shelf software products and customization of software products, are generally considered to be goods. Energy, such as electricity, is also considered to be a good from a legal perspective, and meets the criteria of being manufactured or produced via some process, including but not limited to a mining process. According to the UN Convention On Contract For The International Sale Of Goods, the term &apos;good&apos; does not include (1) items bought for personal use, (2) items bought at an auction or foreclosure sale, (3) aircraft or ocean-going vessels.</cmns-av:explanatoryNote>
 		<cmns-av:explanatoryNote>From the Universal Commercial Code (UCC) in the United States, the term &apos;good&apos; includes (i) fixtures, (ii) standing timber that is to be cut and removed under a conveyance or contract for sale, (iii) the unborn young of animals, (iv) crops grown, growing, or to be grown, even if the crops are produced on trees, vines, or bushes, and (v) manufactured homes. The term also includes a computer program embedded in goods and any supporting information provided in connection with a transaction relating to the program if (i) the program is associated with the goods in such a manner that it customarily is considered part of the goods, or (ii) by becoming the owner of the goods, a person acquires a right to use the program in connection with the goods. The term does not include a computer program embedded in goods that consist solely of the medium in which the program is embedded. The term also does not include accounts, chattel paper, commercial tort claims, deposit accounts, documents, general intangibles, instruments, investment property, letter-of-credit rights, letters of credit, money, or oil, gas, or other minerals before extraction.</cmns-av:explanatoryNote>
@@ -320,7 +326,12 @@
 	
 	<owl:Class rdf:about="&cmns-prd;Product">
 		<rdfs:label>product</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://schema.org/Product"/>
+		<rdfs:seeAlso rdf:resource="https://unstats.un.org/unsd/nationalaccount/glossresults.asp?gID=662"/>
+		<rdfs:seeAlso rdf:resource="https://www.gs1.org/voc/Product"/>
 		<skos:definition>something that is produced by, results from, or obtained as a consequence of some process or transformation</skos:definition>
+		<cmns-av:explanatoryNote>According to the OECD, products, also called &apos;goods and services&apos;, are the result of production; they are exchanged and used for various purposes: as inputs in the production of other goods and services, as final consumption or for investment.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>From a manufacturing perspective, a product is any item (product or service) upon which there is a need to retrieve pre-defined information and that may be priced, or ordered, or invoiced at any point in any supply chain.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;ProductIdentifier">
@@ -359,9 +370,11 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>service</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://unstats.un.org/unsd/nationalaccount/glossresults.asp?gID=501"/>
 		<skos:definition>intangible activity performed by some party for the benefit of another party</skos:definition>
 		<skos:example>Services include intangible products, such as accounting, banking, cleaning, consultancy, education, insurance, expertise, medical treatment, or transportation services.</skos:example>
 		<cmns-av:explanatoryNote>Sometimes services are difficult to identify because they are closely associated with a good; such as the combination of a diagnosis with the administration of a medicine. No transfer of possession or ownership takes place when services are sold, and they (1) cannot be stored or transported, (2) are instantly perishable, and (3) come into existence at the time they are bought and consumed.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>The OECD defines services as outputs produced to order and which cannot be traded separately from their production; ownership rights cannot be established over services and by the time their production is completed they must have been provided to the consumers. As an exception to this rule there is a group of industries, generally classified as service industries, some of whose outputs have characteristics of goods, i.e. those concerned with the provision, storage, communication and dissemination of information, advice and entertainment in the broadest sense of those terms; the products of these industries, where ownership rights can be established, may be classified either as goods or services depending on the medium by which these outputs are supplied.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;ServiceProvider">
@@ -381,26 +394,27 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Role"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onClass>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-prd;situates"/>
+						<owl:someValuesFrom rdf:resource="&owl;Thing"/>
+					</owl:Restriction>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-loc;isLocatedAt"/>
 				<owl:onClass rdf:resource="&lcc-cr;Location"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-prd;situates"/>
-						<owl:someValuesFrom rdf:resource="&owl;Thing"/>
-					</owl:Restriction>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>site</rdfs:label>
-		<skos:definition>place, setting, or context in which something, such as a facility, is situated</skos:definition>
+		<skos:definition>place, setting, or context in which something is situated or to which something is, or may be, bound</skos:definition>
 		<skos:example>Examples include a structure or building, an archeological dig, the landing location for an aircraft or spacecraft, and the site of a wound. A given site may accommodate multiple facilities.</skos:example>
-		<cmns-av:explanatoryNote>A physical site has certain characteristics that contribute to the context it provides, including area, shape, accessibility, and in the case of a geographic site, landforms, soil and ground conditions, climate, and so forth.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>A physical site has certain characteristics that contribute to the context it provides, including area, shape, accessibility, boundaries, and in the case of a geographic site, landforms, soil and ground conditions, climate, and so forth.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;StockKeepingUnit">
@@ -429,7 +443,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
 		<rdfs:label>supplier</rdfs:label>
 		<skos:definition>actor that produces, provides, or furnishes an item or service</skos:definition>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, clause 1.4.4; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;TradeItem">
@@ -450,7 +464,7 @@
 		<rdfs:label>trade item</rdfs:label>
 		<skos:definition>any item (product or service) upon which there is a need to retrieve predefined information and that may be priced, or ordered, or invoiced at any point in any supply chain</skos:definition>
 		<skos:scopeNote>This definition covers services and products, from raw materials through to end user products, all of which may have predefined characteristics.</skos:scopeNote>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 2.1</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, available at https://ref.gs1.org/standards/genspecs/, clause 2.1</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Each trade item that is different from another in design and/or content is allocated a unique identification number, which remains the same as long as it is traded. The same identification number is given to all trade items sharing key characteristics. Such numbers must be treated in their entirety throughout the supply chain.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -467,7 +481,7 @@
 		<skos:definition>unique string of digits derived from a GS1 company prefix that starts with a leading zero, constructed by removing that zero, that is used to construct 12-digit trade item identifiers</skos:definition>
 		<skos:example>For example, the 6-digit U.P.C. Company Prefix 614141 is derived from the 7-digit GS1 Company Prefix 0614141.</skos:example>
 		<skos:note>When a leading zero is added to a U.P.C. Company Prefix, it becomes a GS1 Company Prefix that may be used to issue all other GS1 identification keys.</skos:note>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.6; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, clause 1.4.6; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;UniformProductCode">
@@ -480,9 +494,9 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>uniform product code</rdfs:label>
-		<skos:definition>classifier expressed that is a 12-digit GTIN expressed using barcode symbology that conforms with GS1 General Specifications</skos:definition>
+		<skos:definition>classifier that is a 12-digit GTIN expressed using barcode symbology that conforms with GS1 General Specifications</skos:definition>
 		<cmns-av:abbreviation>UPC</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>GS1 General Specifications, available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Along with the related International Article Number (EAN) barcode, the UPC is the barcode mainly used for scanning of trade items at the point of sale, per the specifications of the international GS1 organization.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -547,7 +561,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-prd;situates">
 		<rdfs:label>situates</rdfs:label>
 		<owl:inverseOf rdf:resource="&cmns-prd;isSituatedAt"/>
-		<skos:definition>indicates the place, setting, or context in which something is placed</skos:definition>
+		<skos:definition>indicates the place, setting, or context for something or in which something is placed</skos:definition>
 	</owl:ObjectProperty>
 
 </rdf:RDF>

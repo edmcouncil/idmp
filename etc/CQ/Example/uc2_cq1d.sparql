@@ -1,0 +1,24 @@
+#UC2-CQ 1d: In which packaging is substance <$Substance> used?
+
+PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?Packaging (SAMPLE(?PackagingLabel) AS ?PackagingName)
+
+where {
+    # Bind Variable substance <$Substance>
+	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/PolyvinylChloride>
+    BIND( uc2_cq1d_parameter_1 AS $Substance )
+
+    # Target Substance Comprises a form of packaging
+    ?Packaging cmns-col:comprises $Substance ;
+
+    # Make sure that we only return actual substances
+    a/rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
+     
+    # Optionally, get the name of the substance
+    OPTIONAL{?Packaging  rdfs:label  ?PackagingLabel }
+
+} GROUP BY ?Packaging

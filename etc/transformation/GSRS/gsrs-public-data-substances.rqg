@@ -9,7 +9,7 @@ PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
 
 GENERATE {
 
-    #TEMP FIXES to be included in ontology development
+    # TEMP FIXES to be included in ontology development
     idmp-ra:EPACompTox rdfs:label "EPA CompTox" .
     idmp-sub:hasInhibitorTarget rdfs:label "has inhibitor target" .
 
@@ -21,18 +21,19 @@ GENERATE {
 
     # Substance
     ?Substance a ?SubstanceType ;
-        idmp-sub:hasStructure ?MolecularStructure ;
+        ?hasMolecularFormulaByMoietyProperty ?structureFormula ;
         cmns-txt:hasTextValue ?approvalID ;
+        idmp-sub:hasDefiningMolecularFormula ?structureFormula ;
+        idmp-sub:hasDefiningMolecularWeight ?structureMolecularWeight ;
+        idmp-sub:hasDefiningStereochemistry ?Stereochemistry ;
+        idmp-sub:hasDefiningStructure ?MolecularStructure ;
+        idmp-sub:hasMoiety ?SubstanceMoiety ;
     .
 
-    #Molecular Structure
+    # Molecular Structure
     ?MolecularStructure a idmp-sub:MolecularStructure ;
         idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification ?structureSmilesString ;
-        idmp-sub:hasMolecularFormula ?structureFormula ;
-        ?hasMolecularFormulaByMoietyProperty ?structureFormula ;
-        idmp-sub:hasStereochemistry ?Stereochemistry ;
-        idmp-sub:hasMolecularWeight ?structureMolecularWeight ;
-        .
+    .
 }
 
 # General Substance Info + Molecular Structure
@@ -44,7 +45,8 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
     "$.structure.smiles",
     "$.structure.formula",
     "$.structure.stereochemistry",
-    "$.structure.mwt"
+    "$.structure.mwt",
+    "$.moieties"
     ) AS
 
 ?I1
@@ -55,11 +57,12 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
 ?structureFormula
 ?structureStereochemistry
 ?structureMolecularWeight
+?moieties
 
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
 BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }> AS ?MolecularStructure )
 
-BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
+BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasDefiningMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
 
 BIND(
     IF(str(?substanceClass) = "chemical", idmp-sub:ChemicalSubstance ,
@@ -96,3 +99,13 @@ BIND(
     IF(str(?structureStereochemistry) = "UNKNOWN", idmp-sub:Stereochemistry-Unknown ,
     ?structureStereochemistry )))))))))))))))))))))
     AS ?Stereochemistry)
+
+# Molecular Structure Moieties
+ITERATOR iter:JSONSurfer(?moieties,
+    "$[*]",
+    "$.hash"
+    ) AS
+?moiety
+?moietyHash
+
+BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?moietyHash }> AS ?SubstanceMoiety )
