@@ -12,6 +12,7 @@
 	<!ENTITY idmp-chg "https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/">
 	<!ENTITY idmp-eura "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/">
 	<!ENTITY idmp-eurga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/">
+	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
 	<!ENTITY idmp-spor "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
@@ -34,6 +35,7 @@
 	xmlns:idmp-chg="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"
 	xmlns:idmp-eura="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"
 	xmlns:idmp-eurga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"
+	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
 	xmlns:idmp-spor="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
@@ -46,10 +48,11 @@
 	<owl:Ontology rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/">
 		<rdfs:label>Substances, Products, Organisations and Referentials (SPOR) Ontology</rdfs:label>
 		<dct:abstract>The Substances, Products, Organisations and Referentials (SPOR) ontology extends the core IDMP ontologies to define additional content required to support alignment with the European Medicines Agency data management services for substances, products, organisations and referentials.</dct:abstract>
-		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
@@ -60,7 +63,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230101/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -181,6 +184,7 @@
 	
 	<owl:Class rdf:about="&idmp-spor;SPOR-ShelfLifeType">
 		<rdfs:subClassOf rdf:resource="&idmp-spor;ReferentialsManagementServicesControlledVocabularyTerm"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ShelfLifeType"/>
 		<rdfs:label>SPOR shelf life type</rdfs:label>
 		<skos:definition>classifier and code element that describes the point in the life cycle from manufacturing to administration to a patient that a value for shelf life applies to, including potentially with respect to a specific packaging item, from a Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) perspective</skos:definition>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms"/>
@@ -188,6 +192,7 @@
 	
 	<owl:Class rdf:about="&idmp-spor;SPOR-SpecialPrecautionsForStorage">
 		<rdfs:subClassOf rdf:resource="&idmp-spor;ReferentialsManagementServicesControlledVocabularyTerm"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;SpecialPrecautionsForStorage"/>
 		<rdfs:label>SPOR special precautions for storage</rdfs:label>
 		<skos:definition>classifier and code element that provides precise instructions for storage of a substance or product, such as the kind of container, temperature restrictions, container management, and other restrictions on the way something must be handled from a Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) perspective</skos:definition>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000073344/terms"/>
@@ -257,327 +262,5 @@
 		<skos:definition>provides a language-tagged string value that is a textual indicator of the status of the vocabulary term in SPOR</skos:definition>
 		<skos:example>Valid values for status include CURRENT, PROVISIONAL, NULLIFIED and the like.</skos:example>
 	</owl:DatatypeProperty>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000012">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-Domain"/>
-		<rdfs:label>100000000012</rdfs:label>
-		<idmp-spor:hasSPOROtherName xml:lang="de">Human</idmp-spor:hasSPOROtherName>
-		<idmp-spor:hasSPORShortName xml:lang="de">H</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="en">H</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="fr-FR">H</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="it">H</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="sv">H</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">domain classifier for a substance or product that is authorized for use in human populations</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Anwendung am Menschen</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="no">Human bruk</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Human use</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="sv">Humant bruk</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="lv">Lietošanai cilvēkiem</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="fr-FR">Usage humain</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="it">uso umano</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000013">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-Domain"/>
-		<rdfs:label>100000000013</rdfs:label>
-		<idmp-spor:hasSPOROtherName xml:lang="de">Veterinaer</idmp-spor:hasSPOROtherName>
-		<idmp-spor:hasSPORShortName xml:lang="cs">V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="de">V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="en">V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="fr-FR">V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="it">V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="sv">V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">domain classifier for a substance or product that is authorized for use in animal populations</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Anwendung am Tier</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="fr-FR">Usage vétérinaire</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="ro">Uz veterinar</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Veterinary use</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="cs">Veterinární použití</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="sv">Veterinärmedicinskt bruk</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="no">Veterinær bruk</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="lv">Veterinārai lietošanai</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="it">uso veterinario</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-Domain"/>
-		<rdfs:label>100000000014</rdfs:label>
-		<idmp-spor:hasSPOROtherName xml:lang="de">Human &amp; Veterinär</idmp-spor:hasSPOROtherName>
-		<idmp-spor:hasSPORShortName xml:lang="de">H&amp;V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="en">H&amp;V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="fr-FR">H&amp;V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="it">H&amp;V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="sv">H&amp;V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="cs">H+V</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">domain classifier for a substance or product that is authorized for use in human and veterinary populations</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Anwendung an Mensch und Tier</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Human and Veterinary use</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="no">Human og veterinær bruk</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="sv">Humant och veterinärmedicinskt bruk</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="cs">Humánní a veterinární použití</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="lv">Lietošanai cilvēkiem un dzīvniekiem</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="fr-FR">Usage humain et vétérinaire</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="it">uso umano e veterinario</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/100000072074">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
-		<rdfs:label>100000072074</rdfs:label>
-		<idmp-spor:hasSPORTermDescription xml:lang="fr-FR">classificateur de statut marketing pour un produit qui bénéficie d’une autorisation de mise sur le marché délivrée et n’est pas mis sur le marché</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">marketing status classifier for a product that has a marketing authorization granted and is not placed on the market</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="no">Ikke markedsført</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="lv">Nav tirdzniecībā</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="de">Nicht vermarktet</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="fr-FR">Non commercialisé</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="it">Non commercializzato</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Not marketed</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="pt">Não comerc. conf. pelo Titular</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-col:isMemberOf rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/100000072075">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
-		<rdfs:label>100000072075</rdfs:label>
-		<idmp-spor:hasSPORTermDescription xml:lang="fr-FR">classificateur de statut marketing pour un produit qui dispose d’une autorisation de mise sur le marché délivrée et l’autorité compétente ne sait pas si le produit est mis sur le marché ou non</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermDescription xml:lang="it">classificatore dello stato di marketing per un prodotto che ha un&apos;autorizzazione all&apos;immissione in commercio concessa e non è noto all&apos;autorità di regolamentazione se il prodotto è immesso sul mercato o meno</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">marketing status classifier for a product that has a marketing authorization granted and it is unknown to the regulatory authority if the product is placed on the market or not</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="lv">Dati nav sniegti</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="no">Mangler informasjon</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="it">Nessun dato fornito</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">No data provided</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="fr-FR">Pas de données fournies</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="pt">Sem informação disponível</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="de">Vermarktungsstatus unbekannt</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/100000072083">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
-		<rdfs:label>100000072083</rdfs:label>
-		<idmp-spor:hasSPORTermDescription xml:lang="fr-FR">classificateur de statut marketing pour un produit qui bénéficie d&apos;une autorisation de mise sur le marché délivrée et est mis sur le marché</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">marketing status classifier for a product that has a marketing authorization granted and is placed on the market</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="pt">Comerc. conf. pelo Titular</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="fr-FR">Commercialisé</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="it">Commercializzato</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="lv">Ir tirdzniecībā</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="no">Markedsført</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Marketed</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="de">Vermarktet</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/200000026055">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
-		<rdfs:label>200000026055</rdfs:label>
-		<idmp-spor:hasSPORTermName xml:lang="no">Aldri markedsført</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="lv">Nav bijis tirdzniecībā</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Never marketed</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000072052/terms/230000000000">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-MarketingStatusClassifier"/>
-		<rdfs:label>230000000000</rdfs:label>
-		<idmp-spor:hasSPORTermName xml:lang="no">Midlertidig utgått</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="fr-FR">Temporairement non disponible</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="it">Temporaneamente non disponibile</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="pt">Temporariamente indisponível</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Temporarily unavailable</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="lv">Uz laiku nav pieejamas</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/100000073403">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>100000073403</rdfs:label>
-		<idmp-spor:hasSPORShortName xml:lang="en">closed package</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="de">originalverschlossene Packung</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product as packaged for sale</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Haltbarkeit des Arzneimittels in der Originalverpackung</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="et">Kõlblikkusaeg</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf life of the medicinal product as packaged for sale</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/100000073404">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>100000073404</rdfs:label>
-		<idmp-spor:hasSPORShortName xml:lang="en">after first opening</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="de">nach Anbruch</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product after first opening the immediate packaging</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Haltbarkeit nach Anbruch des Arzneimittel-Behältnisses</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="et">Kõlblikkusaeg pärast vahetu pakendi esimest avamist</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf life after first opening the immediate packaging</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/100000073405">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>100000073405</rdfs:label>
-		<idmp-spor:hasSPORShortName xml:lang="en">after reconstitution/dilution</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="de">nach Rekonstitution / Verdünnung</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product after dilution or reconstitution according to directions</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Haltbarkeit nach Auflösen oder Rekonstitution gemäß Anweisung</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="et">Kõlblikkusaeg pärast ravimpreparaadi lahjendamist või manustamiskõlblikuks muutmist</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf life after dilution or reconstitution according to directions</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/100000073406">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>100000073406</rdfs:label>
-		<idmp-spor:hasSPORShortName xml:lang="de">ab Herstellungszeitpunkt</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="en">ab Herstellungszeitpunkt</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="de">from manufacturing time</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="en">from manufacturing time</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product estimated from the time of manufacture and is applicable to radiopharmaceutical products</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Haltbarkeit ab Herstellungszeitpunkt</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="et">Kõlblikkusaeg pärast tootmist</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf life from manufacturing time</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/100000073407">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>100000073407</rdfs:label>
-		<idmp-spor:hasSPOROtherName xml:lang="de">Haltbarkeit nach Kalibrierung</idmp-spor:hasSPOROtherName>
-		<idmp-spor:hasSPORShortName xml:lang="de">ab Aktivitäts-Referenz-Zeitpunkt auf dem Etikett</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="en">from the activity reference time stated on the label</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product from the activity reference time stated on the label</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Haltbarkeit ab dem Aktitvitäts-Referenz-Zeitpunkt angegeben auf dem Etikett</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="et">Kõlblikkusaeg pärast referentsmõõtmist</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf life from the activity reference time stated on the label</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/100000073408">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>100000073408</rdfs:label>
-		<idmp-spor:hasSPORShortName xml:lang="de">bei Einzeldosen-Dispensierung</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="en">in unit-dose dispensing</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product that is used for a specific means of supply - dose dispensing; Dose dispensing means that, usually at a pharmacy or a hospital pharmacy, a medicinal product is placed in a dose container for that specific use. The dose container can contain one or more doses of a single or several medicinal products. Dose dispensing is usually carried out for: -individuals, institutions and companies that, in connection with patient treatment, rescue services etc., use medicinal products for the treatment of patients -certain (named) patients receiving treatment at a hospital or another institution -other certain (named) patients.</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Haltbarkeit der Bulkpackung für Einzeldosen-Dispensierung</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="et">Kõlblikkusaeg pärast personaalset jaendamist</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf life in unit-dose dispensing</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/100000073409">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>100000073409</rdfs:label>
-		<idmp-spor:hasSPORShortName xml:lang="en">after incorporation</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORShortName xml:lang="de">nach Einbringen in Nahrung oder pelletiertes Futter</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product after incorporation into meal or pelleted feed</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="de">Haltbarkeit nach Einbringen in Nahrung oder pelletiertes Futter</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="et">Kõlblikkusaeg pärastsööda või pelleteeritud sööda sisse segamist</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf life after incorporation into meal or pelleted feed</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000013"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/200000002326">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>200000002326</rdfs:label>
-		<idmp-spor:hasSPORShortName xml:lang="en">Before opening at alternative conditions</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product before opening at alternative conditions</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf-life before opening at alternative conditions</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">NULLIFIED</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/100000073343/terms/200000002327">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-ShelfLifeType"/>
-		<rdfs:label>200000002327</rdfs:label>
-		<idmp-spor:hasSPORShortName xml:lang="en">After first opening of protection packaging</idmp-spor:hasSPORShortName>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">shelf life type classifier for a medicinal product after first opening of protection packaging</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="en">Shelf life after first opening of the protection packaging</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">NULLIFIED</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004984">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-DataClassification"/>
-		<rdfs:label>200000004984</rdfs:label>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">data classification for a substance or product that is considered to be confidential from an accessibility perspective</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="en">Confidential</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-DataClassification"/>
-		<rdfs:label>200000004985</rdfs:label>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">data classification for a substance or product that is considered to be public from an accessibility perspective</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="en">Public</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004986">
-		<rdf:type rdf:resource="&idmp-spor;SPOR-DataClassification"/>
-		<rdfs:label>200000004986</rdfs:label>
-		<idmp-spor:hasSPORTermDescription xml:lang="en">data classification for a substance or product that is considered to be restricted from an accessibility perspective</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName xml:lang="en">Restricted</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermStatus xml:lang="en">CURRENT</idmp-spor:hasSPORTermStatus>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014"/>
-		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/#/lists/200000004983/terms/200000004985"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-spor;ReferentialsManagementServicesClassificationScheme"/>
-	</owl:NamedIndividual>
 
 </rdf:RDF>
