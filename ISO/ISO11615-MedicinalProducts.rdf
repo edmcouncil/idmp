@@ -68,7 +68,7 @@
 	<owl:Ontology rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
 		<rdfs:label>ISO 11615 Regulated Medicinal Product Information Ontology</rdfs:label>
 		<dct:abstract>The regulated medicinal product information ontology provides a semantic model representing the definitions for exchanging basic concepts for the unique identification and exchange of regulated medicinal product information. It is derived from the ISO 11615:2017 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of regulated medicinal product information.</dct:abstract>
-		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"/>
@@ -99,6 +99,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate additional manufacturing and packaging details required for UC-2 (IDMP-465), to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to change the status of this ontology to &apos;release&apos; (IDMP-525), to add content related to dose forms (IDMP-531, IDMP-538), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238 (IDMP-540) and to support isotopes and nuclides as in ISO 11238, Figure 14 (IDMP-539).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate content related to therapeutic indications in ISO 11615 (IDMP-561), to clarify the definition of marketing authorization holder (IDMP-395), to refine restrictions between medicinal products and authorized medicinal products (IDMP-550), aligned the ontology with the revised basis of strength pattern (IDMP-582), and loosened a constraint on ingredient with respect to manufactured item (IDMP-602).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add the concept of shelf life / storage per Figure 11 in the ISO 11615 specification (IDMP-371).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -1524,6 +1525,13 @@
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasShelfLife"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ShelfLife"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>medicinal product</rdfs:label>
 		<skos:definition>specification for a pharmaceutical product or combination of pharmaceutical products that may be administered to human beings (or animals) for treating or preventing disease, with the aim/purpose of making a medical diagnosis or to restore, correct or modify physiological functions</skos:definition>
 		<skos:note>The provisions in this document [ontology] apply to proprietary medicinal products for human use intended to be placed on the market and to industrially manufactured medicinal products, the marketing of which has been authorized by a medicines regulatory agency. However, the provisions do not apply to: i) medicinal products prepared according to prescription (e.g. prepared in a pharmacy from a prescription intended for a specific patient), ii) medicinal products prepared in accordance with an official formula (e.g. prepared in a pharmacy in accordance with the instructions in a pharmacopoeia and intended to be given direct to the patient by the pharmacy), iii) medicinal products intended for research and development trials, and to iv) intermediate products intended for subsequent processing by an authorized manufacturer.</skos:note>
@@ -1826,6 +1834,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasShelfLife"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ShelfLife"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
@@ -1989,6 +2004,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:onClass rdf:resource="&idmp-mprd;PhysicalPharmaceuticalProduct"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasShelfLife"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ShelfLife"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2261,6 +2283,90 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:label>registration number</rdfs:label>
 		<skos:definition>identifier assigned to a clinical trial by a medicines regulatory agency in a region for tracking purposes</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ShelfLife">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProduct"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PackageItem"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasSpecialPrecautionsForStorage"/>
+				<owl:onClass rdf:resource="&idmp-mprd;SpecialPrecautionsForStorage"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasShelfLifeTimePeriod"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dt;DatePeriod"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ShelfLifeType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>shelf life</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 11 and clause 9.6.2.11</dct:source>
+		<skos:definition>medicinal product classifier describing the period during which a medicinal product retains its properties and stated performance within specified limits if stored under defined conditions</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.7</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>NCI Thesaurus, see https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&amp;version=23.06d&amp;ns=ncit&amp;code=C70855</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The stability period is determined from the date the product was manufactured. After the end of the product shelf life it is not to be used. The chemical, physical and microbiological aspects of stability are to be considered for a medical product according to 21 CFR Part 211 GMP</cmns-av:explanatoryNote>
+		<cmns-av:synonym>medical product shelf life</cmns-av:synonym>
+		<cmns-av:synonym>shelf life / storage</cmns-av:synonym>
+		<cmns-av:usageNote>Note that while the IDMP standard indicates a single value for shelf life type and time period, because shelf life can apply at the individual package item level as well as at the medicinal product level, there may be cases where more than one value is present. Limiting the number of values to one could cause a logical inconsistency in such cases. There may also be multiple sources for codes related to shelf life for a given product that need to be captured, depending on the jurisdiction.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ShelfLifeType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ShelfLife"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>shelf life type</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 11 and clause 9.6.2.11</dct:source>
+		<skos:definition>classifier for the period during which a medical product retains its properties and stated performance within specified limits if stored under defined conditions, taking into account various scenarios such as shelf life of the packaged medicinal product itself, shelf life after transformation where necessary, shelf life after first opening of a bottle, etc.</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.7</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>NCI Thesaurus, see https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&amp;version=23.06d&amp;ns=ncit&amp;code=C70855</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The shelf life type shall be specified using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;SpecialPrecautionsForStorage">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ShelfLife"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>special precautions for storage</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 11 and clause 9.6.2.11</dct:source>
+		<skos:definition>classifier describing additional storage conditions for a medicinal product or package item, if any</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.7</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Sponsor">
@@ -2591,7 +2697,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:note>The intended effect, aim or strategy to be achieved by the indication can be specified as it is referenced in the regulated product information using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.2.6</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.9.2.2.6 and Figure 14</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
@@ -2604,7 +2709,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:note>It shall be specified as a value and units, and the units shall be specified as a symbol and a symbol identifier as defined in ISO 11240/TS 20440 and the resulting terminology. For solid dose forms and other items that are measured by counting integer quantities, the unit for quantity shall be &apos;unit&apos; and the &apos;unit of presentation&apos; shall be the item that is counted within the immediate container.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 11</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 11 and clause 9.6.2.11</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasMedicalCondition">
@@ -2668,6 +2773,40 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 			</owl:Class>
 		</rdfs:range>
 		<skos:definition>relates a substance in the role of an active ingredient in a pharmaceutical or medicinal product to a reference substance that is its underlying basis of strength</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasShelfLife">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has shelf life</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 11 and clause 9.6.2.11</dct:source>
+		<rdfs:range rdf:resource="&idmp-mprd;ShelfLife"/>
+		<skos:definition>indicates the period during which a medicinal product or package item retains its properties and stated performance within specified limits if stored under defined conditions</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.7</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>NCI Thesaurus, see https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&amp;version=23.06d&amp;ns=ncit&amp;code=C70855</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasShelfLifeTimePeriod">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDatePeriod"/>
+		<rdfs:label>has shelf life time period</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 11 and clause 9.6.2.11</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;ShelfLife"/>
+		<rdfs:range rdf:resource="&cmns-dt;DatePeriod"/>
+		<skos:definition>period during which a medicinal product retains its properties and stated performance within specified limits if stored under defined conditions</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.7</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>NCI Thesaurus, see https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&amp;version=23.06d&amp;ns=ncit&amp;code=C70855</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasSpecialPrecautionsForStorage">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has special precautions for storage</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 11 and clause 9.6.2.11</dct:source>
+		<rdfs:range rdf:resource="&idmp-mprd;ShelfLife"/>
+		<skos:definition>indicates additional storage conditions for a medicinal product or package item, if any</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.7</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasSponsor">
