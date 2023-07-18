@@ -22,6 +22,7 @@
 	<!ENTITY idmp-eura "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/">
 	<!ENTITY idmp-eurga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/">
 	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
+	<!ENTITY idmp-phprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/">
 	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY idmp-ucum "https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/">
@@ -59,6 +60,7 @@
 	xmlns:idmp-eura="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"
 	xmlns:idmp-eurga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"
 	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
+	xmlns:idmp-phprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/"
 	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:idmp-ucum="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/"
@@ -76,7 +78,7 @@
 	<owl:Ontology rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/">
 		<rdfs:label>Amlodipine Example Ontology</rdfs:label>
 		<dct:abstract>This ontology provides an example for some of the data related to the substance, amlodipine, to demonstrate substance and basis of strength representation.</dct:abstract>
-		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"/>
@@ -105,10 +107,11 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20230201/Examples/AmlodipineExample/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20230601/Examples/AmlodipineExample/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Informative"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:usageNote>This example is for illustration purposes only. The data provided may not be up-to-date, and in some cases, &apos;dummy&apos; data has been included. The product information included here shall not be used for any other purpose than for educational purposes regarding the IDMP-O implementation.</cmns-av:usageNote>
 	</owl:Ontology>
 	
 	<owl:NamedIndividual rdf:about="https://chem.nlm.nih.gov/chemidplus/rn/440358-84-9">
@@ -141,9 +144,9 @@
 		<idmp-sub:hasDefiningMolecularFormulaByMoiety rdf:resource="&idmp-amp;AmlodipineMolecularFormula"/>
 		<idmp-sub:hasDefiningMolecularWeight rdf:resource="&idmp-amp;AmlodipineMolecularWeight"/>
 		<idmp-sub:hasDefiningNumberOfMoieties rdf:datatype="&xsd;integer">1</idmp-sub:hasDefiningNumberOfMoieties>
-		<idmp-sub:hasDefiningOpticalActivity rdf:resource="&idmp-sub;OpticalActivity-EitherDirection"/>
 		<idmp-sub:hasDefiningStereochemistry rdf:resource="&idmp-sub;Stereochemistry-Racemic"/>
 		<idmp-sub:hasDefiningStructure rdf:resource="&idmp-amp;AmlodipineMolecularStructure"/>
+		<idmp-sub:hasOpticalActivity rdf:resource="&idmp-sub;OpticalActivity-EitherDirection"/>
 		<idmp-sub:isActiveMoietyOf rdf:resource="&idmp-amp;AmlodipineBesylate"/>
 		<idmp-sub:isActiveMoietyOf rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
 	</owl:NamedIndividual>
@@ -157,20 +160,32 @@
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;Amlodipine"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineAsReferenceSubstanceInAmlodipineEMCStrength">
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineAsReferenceStrengthInAmlodipineEMCStrength">
 		<rdf:type rdf:resource="&idmp-mprd;MassBasedStrength"/>
-		<rdfs:label>amlodipine as reference substance in Amlodipine EMC strength</rdfs:label>
-		<cmns-doc:refersTo rdf:resource="&idmp-amp;Amlodipine"/>
+		<rdf:type rdf:resource="&idmp-mprd;PresentationStrength"/>
+		<rdf:type rdf:resource="&idmp-mprd;ReferenceStrength"/>
+		<rdfs:label>amlodipine as reference strength in Amlodipine EMC strength</rdfs:label>
+		<idmp-mprd:hasReferenceIngredientRole rdf:resource="&idmp-amp;AmlodipineAsReferenceSubstance"/>
+		<idmp-mprd:hasReferenceSubstance rdf:resource="&idmp-amp;Amlodipine"/>
 		<cmns-qtu:hasDenominator rdf:resource="&idmp-amp;AmlodipineDenominatorInAmlodipineEMCPresentationStrength"/>
 		<cmns-qtu:hasNumerator rdf:resource="&idmp-amp;AmlodipineNumeratorInAmlodipineEMCPresentationStrength"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineAsReferenceSubstanceInNorvascPresentationStrength">
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineAsReferenceStrengthInNorvascPresentationStrength">
 		<rdf:type rdf:resource="&idmp-mprd;MassBasedStrength"/>
-		<rdfs:label>amlodipine as reference substance in Norvasc presentation strength</rdfs:label>
-		<cmns-doc:refersTo rdf:resource="&idmp-amp;Amlodipine"/>
+		<rdf:type rdf:resource="&idmp-mprd;PresentationStrength"/>
+		<rdf:type rdf:resource="&idmp-mprd;ReferenceStrength"/>
+		<rdfs:label>amlodipine as reference strength in Norvasc presentation strength</rdfs:label>
+		<idmp-mprd:hasReferenceIngredientRole rdf:resource="&idmp-amp;AmlodipineAsReferenceSubstance"/>
+		<idmp-mprd:hasReferenceSubstance rdf:resource="&idmp-amp;Amlodipine"/>
 		<cmns-qtu:hasDenominator rdf:resource="&idmp-amp;AmlodipineDenominatorInNorvascPresentationStrength"/>
 		<cmns-qtu:hasNumerator rdf:resource="&idmp-amp;AmlodipineNumeratorInNorvascPresentationStrength"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineAsReferenceSubstance">
+		<rdf:type rdf:resource="&idmp-mprd;ActiveIngredientActiveMoietyBasisOfStrength"/>
+		<rdfs:label>amlodipine as reference substance</rdfs:label>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;Amlodipine"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylate">
@@ -185,25 +200,24 @@
 		<idmp-sub:hasDefiningMolecularFormulaByMoiety rdf:resource="&idmp-amp;AmlodipineBesylateMolecularFormulaByMoiety"/>
 		<idmp-sub:hasDefiningMolecularWeight rdf:resource="&idmp-amp;AmlodipineBesylateMolecularWeight"/>
 		<idmp-sub:hasDefiningNumberOfMoieties rdf:datatype="&xsd;integer">2</idmp-sub:hasDefiningNumberOfMoieties>
-		<idmp-sub:hasDefiningOpticalActivity rdf:resource="&idmp-sub;OpticalActivity-EitherDirection"/>
 		<idmp-sub:hasDefiningStereochemistry rdf:resource="&idmp-sub;Stereochemistry-Racemic"/>
 		<idmp-sub:hasDefiningStructure rdf:resource="&idmp-amp;AmlodipineBesylateMolecularStructure"/>
+		<idmp-sub:hasOpticalActivity rdf:resource="&idmp-sub;OpticalActivity-EitherDirection"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateAsActiveIngredientInNorvasc">
 		<rdf:type rdf:resource="&idmp-mprd;ActiveIngredientReferenceSubstanceBasisOfStrength"/>
 		<rdfs:label>amlodipine besylate as active ingredient in Norvasc</rdfs:label>
 		<skos:definition>amlodipine besylate in the role of an active ingredient in the pharmaceutical product, Norvasc, where another substance acts as the reference basis of strength, namely, amlodipine</skos:definition>
-		<idmp-mprd:hasReferenceStrength rdf:resource="&idmp-amp;AmlodipineAsReferenceSubstanceInNorvascPresentationStrength"/>
-		<idmp-mprd:hasReferenceSubstance rdf:resource="&idmp-amp;Amlodipine"/>
+		<idmp-mprd:hasReferenceStrength rdf:resource="&idmp-amp;AmlodipineAsReferenceStrengthInNorvascPresentationStrength"/>
 		<idmp-mprd:hasStrength rdf:resource="&idmp-amp;AmlodipineBesylatePresentationStrengthInNorvasc"/>
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;AmlodipineBesylate"/>
-		<cmns-pts:isRealizedIn rdf:resource="&idmp-amp;NorvascConstituency"/>
+		<cmns-pts:isRealizedIn rdf:resource="&idmp-amp;NorvascComposition"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateConstituency">
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateComposition">
 		<rdf:type rdf:resource="&idmp-sub;SubstanceComposition"/>
-		<rdfs:label>amlodipine besylate constituency</rdfs:label>
+		<rdfs:label>amlodipine besylate composition</rdfs:label>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-ra;RegulatoryContext-FoodAndDrugAdministrationGeneral"/>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&cmns-ge-euj;EuropeanUnionJurisdiction"/>
 		<cmns-dsg:defines rdf:resource="&idmp-amp;AmlodipineBesylate"/>
@@ -236,7 +250,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateMolecularStructure">
 		<rdf:type rdf:resource="&idmp-sub;MolecularStructure"/>
 		<rdfs:label>amlodipine besylate molecular structure</rdfs:label>
-		<idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification>OS(=O)(=O)C1=CC=CC=C1.CCOC(=O)C2=C(COCCN)NC(C)=C(C2C3=C(Cl)C=CC=C3)C(=O)OC</idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification>
+		<cmns-dsg:isDescribedBy rdf:resource="&idmp-amp;AmlodipineBesylateSimplifiedMolecularInputLineEntry"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateMolecularWeight">
@@ -278,6 +292,12 @@
 		<cmns-qtu:hasNumerator rdf:resource="&idmp-amp;AmlodipineBesylateNumeratorInNorvascPresentationStrength"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateSimplifiedMolecularInputLineEntry">
+		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
+		<rdfs:label>amlodipine besylate simplified molecular input line entry</rdfs:label>
+		<idmp-sub:hasSMILESValue>OS(=O)(=O)C1=CC=CC=C1.CCOC(=O)C2=C(COCCN)NC(C)=C(C2C3=C(Cl)C=CC=C3)C(=O)OC</idmp-sub:hasSMILESValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineCommonName">
 		<rdf:type rdf:resource="&idmp-ra;InternationalNonproprietaryName"/>
 		<rdfs:label>amlodipine common name</rdfs:label>
@@ -309,25 +329,63 @@
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">1.0</cmns-qtu:hasNumericValue>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC">
-		<rdf:type rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
-		<rdfs:label>Amlodipine EMC</rdfs:label>
-		<skos:definition>long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;AmlodipineEMCConstituency"/>
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-ManufacturedItem">
+		<rdf:type rdf:resource="&idmp-sub;ManufacturedItem"/>
+		<rdfs:label>Amlodipine EMC - manufactured item</rdfs:label>
+		<skos:definition>manufactured item that is a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
+		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;AmlodipineEMCComposition"/>
+		<cmns-prd:isProducedBy rdf:resource="&idmp-amp;KentPharmaAsManufacturer"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMCConstituency">
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-PharmaceuticalProduct">
+		<rdf:type rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+		<rdfs:label>Amlodipine EMC - pharmaceutical product</rdfs:label>
+		<skos:definition>pharmaceutical product that is a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
+		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;AmlodipineEMCComposition"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-TherapeuticIndication-AnginaPectoris">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<idmp-mprd:hasMedicalCondition>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-ra;MedDRAMedicalConditionIdentifier"/>
+				<rdfs:label>MedDRA id for angina pectoris</rdfs:label>
+				<cmns-txt:hasTextValue>10002383</cmns-txt:hasTextValue>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasMedicalCondition>
+		<idmp-mprd:hasTherapeuticIndicationText>indicated for the treatment of stable angina</idmp-mprd:hasTherapeuticIndicationText>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;AmlodipineEMCMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-TherapeuticIndication-Hypertension">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<idmp-mprd:hasMedicalCondition>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-ra;MedDRAMedicalConditionIdentifier"/>
+				<rdfs:label>MedDRA id for hypertension</rdfs:label>
+				<cmns-txt:hasTextValue>10020772</cmns-txt:hasTextValue>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasMedicalCondition>
+		<idmp-mprd:hasTherapeuticIndicationText>indicated for the treatment of hypertension</idmp-mprd:hasTherapeuticIndicationText>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;AmlodipineEMCMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMCComposition">
 		<rdf:type rdf:resource="&idmp-mprd;ProductComposition"/>
-		<rdfs:label>Amlodipine EMC constituency</rdfs:label>
+		<rdfs:label>Amlodipine EMC composition</rdfs:label>
 		<idmp-mprd:hasActiveIngredient rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrateAsActiveIngredientInAmlodipineEMC"/>
-		<cmns-dsg:defines rdf:resource="&idmp-amp;AmlodipineEMC"/>
+		<cmns-dsg:defines rdf:resource="&idmp-amp;AmlodipineEMC-ManufacturedItem"/>
+		<cmns-dsg:defines rdf:resource="&idmp-amp;AmlodipineEMC-PharmaceuticalProduct"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMCMedicinalProduct">
 		<rdf:type rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<rdfs:label>Amlodipine EMC medicinal product</rdfs:label>
-		<skos:definition>long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
-		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineEMC"/>
+		<skos:definition>medicinal product that is a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
+		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineEMC-ManufacturedItem"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineEMC-PharmaceuticalProduct"/>
 		<cmns-prd:isProducedBy rdf:resource="&idmp-amp;KentPharmaAsManufacturer"/>
 	</owl:NamedIndividual>
 	
@@ -344,9 +402,9 @@
 		<idmp-sub:hasDefiningMolecularFormulaByMoiety rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrateMolecularFormulaByMoiety"/>
 		<idmp-sub:hasDefiningMolecularWeight rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrateMolecularWeight"/>
 		<idmp-sub:hasDefiningNumberOfMoieties rdf:datatype="&xsd;integer">3</idmp-sub:hasDefiningNumberOfMoieties>
-		<idmp-sub:hasDefiningOpticalActivity rdf:resource="&idmp-sub;OpticalActivity-EitherDirection"/>
 		<idmp-sub:hasDefiningStereochemistry rdf:resource="&idmp-sub;Stereochemistry-Racemic"/>
 		<idmp-sub:hasDefiningStructure rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrateMolecularStructure"/>
+		<idmp-sub:hasOpticalActivity rdf:resource="&idmp-sub;OpticalActivity-EitherDirection"/>
 		<cmns-av:synonym>amlodipine mesilate monohydrate</cmns-av:synonym>
 	</owl:NamedIndividual>
 	
@@ -354,11 +412,10 @@
 		<rdf:type rdf:resource="&idmp-mprd;ActiveIngredientReferenceSubstanceBasisOfStrength"/>
 		<rdfs:label>amlodipine mesylate monohydrate as active ingredient in Amlodipine EMC</rdfs:label>
 		<skos:definition>amlodipine mesylate monohydrate in the role of an active ingredient, where amlodipine acts as the reference basis of strength</skos:definition>
-		<idmp-mprd:hasReferenceStrength rdf:resource="&idmp-amp;AmlodipineAsReferenceSubstanceInAmlodipineEMCStrength"/>
-		<idmp-mprd:hasReferenceSubstance rdf:resource="&idmp-amp;Amlodipine"/>
+		<idmp-mprd:hasReferenceStrength rdf:resource="&idmp-amp;AmlodipineAsReferenceStrengthInAmlodipineEMCStrength"/>
 		<idmp-mprd:hasStrength rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrateAsActiveIngredientInAmlodipineEMCPresentationStrength"/>
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
-		<cmns-pts:isRealizedIn rdf:resource="&idmp-amp;AmlodipineEMCConstituency"/>
+		<cmns-pts:isRealizedIn rdf:resource="&idmp-amp;AmlodipineEMCComposition"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateAsActiveIngredientInAmlodipineEMCPresentationStrength">
@@ -369,9 +426,9 @@
 		<cmns-qtu:hasNumerator rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrateNumeratorInAmlodipineEMCPresentationStrength"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateConstituency">
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateComposition">
 		<rdf:type rdf:resource="&idmp-sub;SubstanceComposition"/>
-		<rdfs:label>amlodipine mesylate monohydrate constituency</rdfs:label>
+		<rdfs:label>amlodipine mesylate monohydrate composition</rdfs:label>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-ra;RegulatoryContext-FoodAndDrugAdministrationGeneral"/>
 		<cmns-dsg:defines rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
 		<cmns-pts:hasRole rdf:resource="&idmp-amp;AmlodipineAsActiveMoiety"/>
@@ -405,7 +462,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateMolecularStructure">
 		<rdf:type rdf:resource="&idmp-sub;MolecularStructure"/>
 		<rdfs:label>amlodipine mesylate monohydrate molecular structure</rdfs:label>
-		<idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification>O.CS(O)(=O)=O.CCOC(=O)C1=C(COCCN)NC(C)=C(C1C1=C(Cl)C=CC=C1)C(=O)OC</idmp-sub:hasSimplifiedMolecularInputLineEntrySpecification>
+		<cmns-dsg:isDescribedBy rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrateSimplifiedMolecularInputLineEntry"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateMolecularWeight">
@@ -440,6 +497,12 @@
 		<cmns-rga:isApplicableInJurisdiction rdf:resource="&lcc-3166-1;US"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateSimplifiedMolecularInputLineEntry">
+		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
+		<rdfs:label>amlodipine mesylate monohydrate simplified molecular input line entry</rdfs:label>
+		<idmp-sub:hasSMILESValue>O.CS(O)(=O)=O.CCOC(=O)C1=C(COCCN)NC(C)=C(C1C1=C(Cl)C=CC=C1)C(=O)OC</idmp-sub:hasSMILESValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMolecularFormula">
 		<rdf:type rdf:resource="&idmp-sub;MolecularFormula"/>
 		<rdfs:label>amlodipine molecular formula</rdfs:label>
@@ -461,6 +524,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMolecularStructure">
 		<rdf:type rdf:resource="&idmp-sub;MolecularStructure"/>
 		<rdfs:label>amlodipine molecular structure</rdfs:label>
+		<cmns-dsg:isDescribedBy rdf:resource="&idmp-amp;AmlodipineSimplifiedMolecularInputLineEntry"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMolecularWeight">
@@ -497,6 +561,24 @@
 		<cmns-rga:isApplicableInJurisdiction rdf:resource="&lcc-3166-1;US"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineSimplifiedMolecularInputLineEntry">
+		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
+		<rdfs:label>amlodipine simplified molecular input line entry</rdfs:label>
+		<idmp-sub:hasSMILESValue>CCOC(=O)C1=C(NC(=C(C1C2=CC=CC=C2Cl)C(=O)OC)C)COCCN</idmp-sub:hasSMILESValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;Cardboard">
+		<rdf:type rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
+		<rdfs:label>cardboard</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;CardboardCommonName">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceName"/>
+		<rdfs:label>cardboard common name</rdfs:label>
+		<idmp-sub:hasSubstanceNameValue>cardboard</idmp-sub:hasSubstanceNameValue>
+		<cmns-dsg:isNameOf rdf:resource="&idmp-amp;Cardboard"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;EVMPD-SUB05467MIG">
 		<rdf:type rdf:resource="&idmp-eura;EudraVigilanceCode"/>
 		<rdfs:label>SUB05467MIG</rdfs:label>
@@ -519,20 +601,118 @@
 		<cmns-dsg:hasDescription>pharmaceutical company headquartered at The Bower, 4 Roundwood Avenue, Stockley Park, Heathrow, UB11 1AF</cmns-dsg:hasDescription>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;Norvasc">
-		<rdf:type rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
-		<rdfs:label>Norvasc</rdfs:label>
-		<skos:definition>pharmaceutical product that is a besylate salt of amlodipine, a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;NorvascConstituency"/>
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/MarketingAuthorizationNumber-EMEA/H/A-30/1288">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorizationNumber"/>
+		<rdfs:label>marketing authorization number EMEA/H/A-30/1288</rdfs:label>
+		<cmns-id:identifies rdf:resource="&idmp-amp;NorvascMarketingAuthorizationInGermany"/>
+		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eurga;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency"/>
+		<cmns-txt:hasTextValue>EMEA/H/A-30/1288</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascConstituency">
+	<owl:NamedIndividual rdf:about="&idmp-amp;Norvasc-ManufacturedItem">
+		<rdf:type rdf:resource="&idmp-sub;ManufacturedItem"/>
+		<rdfs:label>Norvasc - manufactured item</rdfs:label>
+		<skos:definition>manufactured item that is a besylate salt of amlodipine, a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
+		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineBesylate"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;NorvascComposition"/>
+		<cmns-prd:isProducedBy rdf:resource="&idmp-amp;PfizerLaboratoriesAsManufacturer"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;Norvasc-PharmaceuticalProduct">
+		<rdf:type rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+		<rdfs:label>Norvasc - pharmaceutical product</rdfs:label>
+		<skos:definition>pharmaceutical product that is a besylate salt of amlodipine, a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
+		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineBesylate"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;NorvascComposition"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsAuthorizedMedicinalProduct">
+		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
+		<rdfs:label>Norvasc as authorized medicinal product</rdfs:label>
+		<idmp-mprd:hasAuthorization rdf:resource="&idmp-amp;NorvascMarketingAuthorizationInGermany"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsStartingMaterial">
+		<rdf:type rdf:resource="&idmp-sub;StartingMaterialRole"/>
+		<rdfs:label>norvasc tablets as starting material</rdfs:label>
+		<cmns-pts:isManifestedIn rdf:resource="&idmp-amp;NorvascPackageTablets"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlister">
+		<rdf:type rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
+		<rdfs:label>Norvasc blister</rdfs:label>
+		<idmp-mprd:contains rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;PolyvinylChloride"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterAsImmediateContainer">
+		<rdf:type rdf:resource="&idmp-mprd;ImmediateContainer"/>
+		<rdfs:label>Norvasc blister As Immediate Container</rdfs:label>
+		<idmp-mprd:immediatelyContains rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterAsStartingMaterial">
+		<rdf:type rdf:resource="&idmp-sub;StartingMaterialRole"/>
+		<rdfs:label>norvasc blisters as starting material</rdfs:label>
+		<cmns-pts:isManifestedIn rdf:resource="&idmp-amp;NorvascPackageTablets"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterPackagingMethod">
+		<rdf:type rdf:resource="&idmp-mprd;ProcessSpecification"/>
+		<rdfs:label>Norvasc blister packaging method</rdfs:label>
+		<cmns-col:comprises rdf:resource="&idmp-amp;NorvascPackageTablets"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBox">
+		<rdf:type rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
+		<rdfs:label>Norvasc Box</rdfs:label>
+		<idmp-mprd:contains rdf:resource="&idmp-amp;NorvascIntermediatePackaging"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;Cardboard"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBoxAsOuterPackaging">
+		<rdf:type rdf:resource="&idmp-mprd;OuterPackaging"/>
+		<rdfs:label>Norvasc box as outer packaging</rdfs:label>
+		<idmp-mprd:immediatelyContains rdf:resource="&idmp-amp;NorvascBlister"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascBox"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBoxConstituency">
+		<rdf:type rdf:resource="&idmp-mprd;ContainerConstituency"/>
+		<rdfs:label>Norvasc box constituency</rdfs:label>
+		<cmns-dsg:defines rdf:resource="&idmp-amp;NorvascBox"/>
+		<cmns-pts:hasRole rdf:resource="&idmp-amp;NorvascBlisterAsImmediateContainer"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascComposition">
 		<rdf:type rdf:resource="&idmp-mprd;ProductComposition"/>
-		<rdfs:label>Norvasc constituency</rdfs:label>
-		<skos:definition>constituency of the pharmaceutical product that is a besylate salt of amlodipine</skos:definition>
+		<rdfs:label>Norvasc composition</rdfs:label>
+		<skos:definition>composition of the pharmaceutical product, Norvasc, that is a besylate salt of amlodipine</skos:definition>
 		<skos:note>NORVASC (amlodipine besylate) Tablets are formulated as white tablets equivalent to 2.5, 5, and 10 mg of amlodipine for oral administration. In addition to the active ingredient, amlodipine besylate, each tablet contains the following inactive ingredients: microcrystalline cellulose, dibasic calcium phosphate anhydrous, sodium starch glycolate, and magnesium stearate.</skos:note>
 		<idmp-mprd:hasActiveIngredient rdf:resource="&idmp-amp;AmlodipineBesylateAsActiveIngredientInNorvasc"/>
-		<cmns-dsg:defines rdf:resource="&idmp-amp;Norvasc"/>
+		<cmns-dsg:defines rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-dsg:defines rdf:resource="&idmp-amp;Norvasc-PharmaceuticalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascIntermediatePackaging">
+		<rdf:type rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
+		<rdfs:label>Norvasc intermediate packaging</rdfs:label>
+		<idmp-mprd:contains rdf:resource="&idmp-amp;NorvascBlister"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;Paperboard"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMarketingAuthorizationInGermany">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<rdfs:label>Norvasc Market Authorization in Germany</rdfs:label>
+		<idmp-mprd:hasAuthorizedParty rdf:resource="&idmp-amp;PfizerGmbHAsMarketingAuthorizationHolder"/>
+		<idmp-mprd:hasAuthorizingParty rdf:resource="&idmp-eurga;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency"/>
+		<cmns-cxtdsg:appliesTo rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProduct"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Germany"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMedicinalProduct">
@@ -542,8 +722,59 @@
 		<dct:source rdf:resource="https://www.dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=abd6a2ca-40c2-485c-bc53-db1c652505ed"/>
 		<skos:definition>pharmaceutical and medicinal product that is a besylate salt of amlodipine, a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
 		<skos:note>NORVASC (amlodipine besylate) Tablets are formulated as white tablets equivalent to 2.5, 5, and 10 mg of amlodipine for oral administration. In addition to the active ingredient, amlodipine besylate, each tablet contains the following inactive ingredients: microcrystalline cellulose, dibasic calcium phosphate anhydrous, sodium starch glycolate, and magnesium stearate.</skos:note>
-		<cmns-col:comprises rdf:resource="&idmp-amp;Norvasc"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;Norvasc-PharmaceuticalProduct"/>
 		<cmns-prd:isProducedBy rdf:resource="&idmp-amp;PfizerLaboratoriesAsManufacturer"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascPackageTablets">
+		<rdf:type rdf:resource="&idmp-mprd;ProcessStep"/>
+		<rdfs:label>Package norvasc tablets process step</rdfs:label>
+		<cmns-col:isIncludedIn rdf:resource="&idmp-amp;NorvascBlisterPackagingMethod"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascPackagedMedicinalProduct">
+		<rdf:type rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
+		<rdfs:label>Norvasc packaged medicinal product</rdfs:label>
+		<idmp-mprd:contains rdf:resource="&idmp-amp;NorvascBox"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascPackagedMedicinalProductConstituency">
+		<rdf:type rdf:resource="&idmp-mprd;ContainerConstituency"/>
+		<rdfs:label>Norvasc packaged medicinal product constituency</rdfs:label>
+		<cmns-dsg:defines rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+		<cmns-pts:hasRole rdf:resource="&idmp-amp;NorvascBoxAsOuterPackaging"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;P015011211">
+		<rdf:type rdf:resource="&cmns-prd;StockKeepingUnit"/>
+		<rdfs:label>P015011211</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+		<cmns-txt:hasTextValue>P015011211</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;Paperboard">
+		<rdf:type rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
+		<rdfs:label>paperboard</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PaperboardCommonName">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceName"/>
+		<rdfs:label>paperboard common name</rdfs:label>
+		<idmp-sub:hasSubstanceNameValue>paperboard</idmp-sub:hasSubstanceNameValue>
+		<cmns-dsg:isNameOf rdf:resource="&idmp-amp;Paperboard"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerGmbH">
+		<rdf:type rdf:resource="&cmns-org;LegalEntity"/>
+		<rdfs:label>Pfizer GmbH</rdfs:label>
+		<cmns-dsg:hasDescription>A research-based pharmaceutical company. The Company discovers, develops, manufactures, and markets medicines for humans and animals. Pfizer offers products such as prescription pharmaceuticals, non-prescription self-medications, and animal health products such as anti-infective medicines and vaccines.</cmns-dsg:hasDescription>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerGmbHAsMarketingAuthorizationHolder">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorizationHolder"/>
+		<rdfs:label>Pfizer GmbH as marketing authorization holder</rdfs:label>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;PfizerGmbH"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerInc">
@@ -556,7 +787,19 @@
 		<rdf:type rdf:resource="&idmp-sub;Manufacturer"/>
 		<rdfs:label>Pfizer Laboratories as manufacturer</rdfs:label>
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;PfizerInc"/>
-		<cmns-prd:produces rdf:resource="&idmp-amp;Norvasc"/>
+		<cmns-prd:produces rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PolyvinalChlorideCommonName">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceName"/>
+		<rdfs:label>polyvinyl chloride common name</rdfs:label>
+		<idmp-sub:hasSubstanceNameValue>PVC</idmp-sub:hasSubstanceNameValue>
+		<cmns-dsg:isNameOf rdf:resource="&idmp-amp;PolyvinylChloride"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PolyvinylChloride">
+		<rdf:type rdf:resource="&idmp-sub;PolymerSubstance"/>
+		<rdfs:label>polyvinyl chloride</rdfs:label>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;UNII-1J444QC288">

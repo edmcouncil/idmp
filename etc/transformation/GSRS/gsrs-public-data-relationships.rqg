@@ -55,15 +55,17 @@ ITERATOR iter:JSONSurfer(?relationships,
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?RelatedSubstanceApprovalID }> AS ?RelatedSubstance)
 
 BIND(
+    IF(?Substance = ?RelatedSubstance, ?nothing, # avoid meaningless triple
     IF(str(?RelationshipType) = "ACTIVE MOIETY" || str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", ?nothing,
     IF(str(?RelationshipType) = "INHIBITOR->TARGET", idmp-sub:hasInhibitorTarget,
-    skos:related))
+    skos:related)))
     AS ?SubstancesRelationshipProperty)
 
 BIND(
+    IF(?Substance = ?RelatedSubstance, ?nothing, # avoid meaningless triple
     IF(str(?RelationshipType) = "ACTIVE MOIETY" || str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-sub:hasActiveMoiety,
     IF(str(?RelationshipType) = "INHIBITOR->TARGET", idmp-sub:hasInhibitorTarget,
-    skos:related))
+    skos:related)))
     AS ?SubstancesRelationship)
 
 # HAS ACTIVE MOIETY ROLE AND CONTEXT
@@ -71,7 +73,7 @@ BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, ?approvalID, ?n
 
 BIND(
     IF(str(?RelationshipType) = "ACTIVE MOIETY", <https://data.pistoiaalliance.org/role/{ ?SourceSubstanceApprovalID }_MoietyRole_FDA_general_{ ?RelatedSubstanceApprovalID }>,
-    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", <https://data.pistoiaalliance.org/role/{ ?SourceSubstanceApprovalID }_MoietyRole_FDA_patent_exclusive_{ ?RelatedSubstanceApprovalID }>,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", <https://data.pistoiaalliance.org/role/{ ?SourceSubstanceApprovalID }_MoietyRole_FDA_granted_exclusivity_{ ?RelatedSubstanceApprovalID }>,
     ?nothing))
     AS ?ActiveMoietyRole)
 
@@ -82,6 +84,6 @@ BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, idmp-sub:isActi
 
 BIND(
     IF(str(?RelationshipType) = "ACTIVE MOIETY", idmp-ra:RegulatoryContext-FoodAndDrugAdministrationGeneral,
-    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-ra:RegulatoryContext-FoodAndDrugAdministrationPatentExclusive,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-ra:RegulatoryContext-ActiveMoietyForFoodAndDrugAdministrationExclusivity,
     ?nothing))
     AS ?RegulatoryContext)

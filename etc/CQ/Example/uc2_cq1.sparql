@@ -1,0 +1,29 @@
+#UC2-CQ 1: In which manufactured item is substance <$Substance> used?
+
+PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?ManufacturedItem (SAMPLE(?ManufacturedItemLabel) AS ?ManufacturedItemName)
+
+WHERE {
+    # Bind Variable substance <$Substance>
+    # Example for Amplodipine: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
+	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetate>
+    BIND( uc2_cq1_parameter_1 AS $Substance )
+
+	# Find products that include the manufactured item based on their composition
+	?ManufacturedItem cmns-dsg:isDefinedIn [ $Role [
+            cmns-pts:isPlayedBy $Substance
+        ]
+    ] .
+  
+    # Make sure that we only return actual substances
+    ?ManufacturedItem a/rdfs:subClassOf* idmp-sub:ManufacturedItem .
+     
+    # Optionally, get the name of the substance
+    OPTIONAL{?ManufacturedItem  rdfs:label  ?ManufacturedItemLabel }
+
+} GROUP BY ?ManufacturedItem

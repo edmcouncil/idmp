@@ -1,0 +1,30 @@
+# UC1-CQ 8: Which investigational medicinal products are related to this manufactured item <$ManufacturedItem>?
+
+prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?InvestigationalMedicinalProduct (SAMPLE(?InvestigationalMedicinalProductLabel) AS ?InvestigationalMedicinalProductName)
+
+WHERE {
+	# Bind Variable manufactured item <$ManufacturedItem> 
+	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetateSUN-ManufacturedItem>
+	BIND(uc1_cq8_parameter_1 AS $ManufacturedItem)
+	
+	# Find products that include the manufactured item based on their composition
+	$ManufacturedItem cmns-dsg:isDefinedIn [ 
+		cmns-dsg:defines [ cmns-col:isIncludedIn $MedicinalProduct ]
+	 ] .
+
+  	# Find Manufactured Items and that have the role of Investigational Medicinal product
+    ?InvestigationalMedicinalProduct cmns-pts:isPlayedBy $MedicinalProduct .
+    ?InvestigationalMedicinalProduct rdf:type idmp-mprd:InvestigationalMedicinalProduct .
+
+	# Optionally, get the name of the Medicinal Product
+ 	OPTIONAL{?InvestigationalMedicinalProduct  rdfs:label  ?InvestigationalMedicinalProductLabel }
+	
+} GROUP BY ?InvestigationalMedicinalProduct

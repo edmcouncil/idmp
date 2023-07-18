@@ -2,8 +2,10 @@
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
@@ -26,8 +28,10 @@
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
@@ -56,36 +60,211 @@
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20220801/ISO11239-PharmaceuticalDoseForms/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11239-PharmaceuticalDoseForms/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Preliminary"/>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
 		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.16</dct:source>
+		<skos:note>In many instances, the manufactured item is equal to the pharmaceutical product. However, there are instances where the manufactured item(s) must undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
+		<skos:note>The manufactured item is not in direct contact with the outer packaging except where the outer packaging also serves as the immediate container.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phdf;AdministrationMethod">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProcessSpecification"/>
+		<rdfs:label>administration method</rdfs:label>
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.3</dct:source>
+		<skos:definition>general method by which a pharmaceutical product is intended to be administered to the patient</skos:definition>
+		<skos:example>application, inhalation, injection</skos:example>
+		<skos:note>The administration method is a general term that is used to group related pharmaceutical dose form concepts, and is not intended to describe a precise method or route of administration.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phdf;BasicDoseForm">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;PharmaceuticalDoseForm"/>
+		<rdfs:label>basic dose form</rdfs:label>
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.4</dct:source>
+		<skos:definition>generalized version of the pharmaceutical dose form, used to group together related pharmaceutical dose forms</skos:definition>
+		<skos:example>capsule, tablet, powder, solution</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phdf;IntendedSite">
+		<rdfs:subClassOf rdf:resource="&cmns-prd;Site"/>
+		<rdfs:label>intended site</rdfs:label>
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.13</dct:source>
+		<skos:definition>general body site at which a pharmaceutical product is intended to be administered</skos:definition>
+		<skos:example>auricular, ocular, oral</skos:example>
+		<skos:note>The intended site is a general term that is used to group related pharmaceutical dose form concepts, and is not intended to describe a precise site or route of administration.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phdf;ReleaseCharacteristic">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:label>release characteristic</rdfs:label>
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.23</dct:source>
+		<skos:definition>description of the modified timing by which an active ingredient is made available in the body after administration of the pharmaceutical product, in comparison with a conventional, direct release of the active ingredient</skos:definition>
+		<skos:example>delayed, extended, none</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phdf;Transformation">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProcessSpecification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalDoseForm"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>transformation</rdfs:label>
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clauses 3.1.26, 5.3.2.6</dct:source>
+		<skos:definition>procedure that is carried out in order to convert a manufactured item that requires such a procedure into a pharmaceutical product, i.e. from its manufactured dose form to its administrable dose form</skos:definition>
+		<skos:example>dilution, dissolution, suspension</skos:example>
+		<skos:note>No transformation is needed if the dose forms of the manufactured item and the pharmaceutical product are equal.</skos:note>
+		<skos:note>Where there is no transformation, the class has an appropriate null value. A transformation is associated with zero to many pharmaceutical dose forms.</skos:note>
+		<cmns-av:explanatoryNote>See also Annex A (Table A.3) for controlled vocabulary examples, and Annex B for medicinal product examples.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&idmp-phdf;hasAdministrationMethod">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
+		<rdfs:label>has administration method</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-phdf;AdministrationMethod"/>
+		<skos:definition>specifies a general method by which a pharmaceutical product is intended to be administered to the patient</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.3</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-phdf;hasBasicDoseForm">
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasDoseForm"/>
+		<rdfs:label>has basic dose form</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;PharmaceuticalDoseForm"/>
+		<rdfs:range rdf:resource="&idmp-phdf;BasicDoseForm"/>
+		<skos:definition>specifies the generalized dose form associated with the pharmaceutical dose form</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.4</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-phdf;hasIntendedSite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isSituatedAt"/>
+		<rdfs:label>has intended site</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-phdf;IntendedSite"/>
+		<skos:definition>specifies a general body site at which a pharmaceutical product is intended to be administered</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.13</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-phdf;hasReleaseCharacteristic">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
+		<rdfs:label>has release characteristic</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-phdf;ReleaseCharacteristic"/>
+		<skos:definition>specifies the description of the modified timing by which an active ingredient is made available in the body after administration of the pharmaceutical product</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.23</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-phdf;hasTransformationProcedure">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
+		<rdfs:label>has transformation procedure</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-phdf;Transformation"/>
+		<skos:definition>specifies a procedure that is carried out in order to convert a manufactured item that requires such a procedure into a pharmaceutical product, i.e. from its manufactured dose form to its administrable dose form</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.26</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&idmp-mprd;AdministrableDoseForm">
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.1</dct:source>
+		<skos:example>solution for injection, tablet for oral use, hard-capsule powder for inhalation</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;CombinedPharmaceuticalDoseForm">
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.8</dct:source>
+		<skos:example>powder and solvent for solution for injection: the medicinal product contains two manufactured items (a powder for solution for injection and a solvent for solution for injection); the pharmaceutical product that is prepared from the two manufactured items is a solution for injection. The combined pharmaceutical dose form for the medicinal product is &apos;powder and solvent for solution for injection&apos;</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;Container">
+		<skos:example>ampoule, bottle, box</skos:example>
+		<skos:note>&apos;Container&apos; is a general concept that groups together the concepts of immediate container, intermediate packaging and outer packaging.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.9</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ImmediateContainer">
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.12</dct:source>
+		<skos:example>ampoule, vial, prefilled syringe, bottle, blister</skos:example>
+		<skos:note>Adapted from ENV 12610:1997.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;IntermediatePackaging">
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.14</dct:source>
+		<skos:example>box</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ManufacturedDoseForm">
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.15</dct:source>
+		<skos:example>powder for solution for injection</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProduct">
 		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.17</dct:source>
+		<skos:note>A medicinal product may consist of one or more manufactured items and one or more pharmaceutical products.</skos:note>
+		<skos:note>In certain jurisdictions, a medicinal product may also be defined as any substance or combination of substances which may be used to make a medical diagnosis.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductIdentifier">
 		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.18</dct:source>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;OuterPackaging">
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.19</dct:source>
+		<skos:example>box</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalDoseForm">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phdf;hasTransformationProcedure"/>
+				<owl:onClass rdf:resource="&idmp-phdf;Transformation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phdf;hasBasicDoseForm"/>
+				<owl:onClass rdf:resource="&idmp-phdf;BasicDoseForm"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phdf;hasReleaseCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-phdf;ReleaseCharacteristic"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phdf;hasAdministrationMethod"/>
+				<owl:someValuesFrom rdf:resource="&idmp-phdf;AdministrationMethod"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phdf;hasIntendedSite"/>
+				<owl:someValuesFrom rdf:resource="&idmp-phdf;IntendedSite"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.20</dct:source>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProduct">
 		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.21</dct:source>
+		<skos:note>A medicinal product may contain one or more pharmaceutical products.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductIdentifier">

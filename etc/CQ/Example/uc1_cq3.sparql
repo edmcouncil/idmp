@@ -1,0 +1,47 @@
+# UC1-CQ 3:  What are the products that contain substances with common active moiety <active moiety x>?
+PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+ 
+SELECT DISTINCT ?Product(SAMPLE(?ProductLabel) AS ?ProductName)
+
+WHERE {
+    # Bind Variable Substance <$ActiveMoiety>
+	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
+  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/Terlipressin>
+    BIND(uc1_cq3_parameter_1 AS $ActiveMoiety )
+  
+  	# Get Substances with active moiety $ActiveMoiety
+        {
+        # Use the shortcut (isActiveMoietyOf or hasActiveMoiety)
+        ?Substance ^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $ActiveMoiety .
+        } UNION {
+        # Use the $ActiveMoiety in a role for composition that defines a substance.
+        [] cmns-dsg:defines ?Substance ;
+                cmns-pts:hasRole [
+                       a idmp-sub:ActiveMoietyRole ;
+                       cmns-pts:isPlayedBy $ActiveMoiety
+        ] .
+        } UNION {
+    BIND($ActiveMoiety AS ?Substance)
+    }
+  
+    # Make sure that we only return actual substances
+    ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
+  
+  	# Connect Substance to Product
+    ?Product cmns-dsg:isDefinedIn|^cmns-dsg:defines [ ?hasRole 
+    	[ 
+      		cmns-pts:isPlayedBy ?Substance;
+      		a/rdfs:subClassOf* idmp-sub:Ingredient
+  		] 
+  	]
+
+    # Optionally, get the name of the Product
+    OPTIONAL{?Product  rdfs:label  ?ProductLabel }
+  
+} GROUP BY ?Product
+ORDER BY ?Product

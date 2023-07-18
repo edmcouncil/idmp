@@ -1,0 +1,30 @@
+# UC1-CQ 9: What is the molecular structure of <$SUBSTANCE>?"
+
+PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?Structure (SAMPLE(?StructureLabel) AS ?StructureName) (SAMPLE(?StructureTextValue) AS ?StructureText)
+
+WHERE {
+    # Bind Variable substance <$SUBSTANCE>
+	  # Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
+  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetate>
+    BIND(uc1_cq9_parameter_1 AS $SUBSTANCE )
+
+	  # Link Substance to molecular structure
+    $SUBSTANCE idmp-sub:hasDefiningStructure [ 
+      cmns-dsg:isDescribedBy ?Structure 
+    ] .
+
+    # Make sure that we only return structural representations
+    ?Structure a/rdfs:subClassOf* idmp-sub:StructuralRepresentation ;
+
+    # Optionally, get the name of the structural representation
+    OPTIONAL{?Structure  rdfs:label  ?StructureLabel }
+    
+    # Get the Text Value of the representation (optional)
+    optional {?Structure idmp-sub:hasSMILESValue ?StructureTextValue } .
+} GROUP BY ?Structure
