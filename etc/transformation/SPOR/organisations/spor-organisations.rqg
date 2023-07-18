@@ -3,6 +3,9 @@ PREFIX func: <http://w3id.org/sparql-generate/fn/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <https://schema.org/>
 PREFIX cmns-org: <https://www.omg.org/spec/Commons/Organizations/>
+PREFIX cmns-reg: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
+PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 GENERATE {
@@ -12,9 +15,17 @@ GENERATE {
         skos:prefLabel ?Name ;
         skos:altLabel ?Acronym ;
         skos:note ?Spor_Status_URI ;
-        schema:identifier ?Organisation_ID ;
         schema:address <https://spor.ema.europa.eu/omswi/#/searchedOrganisations/viewLocation/{ ?Location_ID }> ;
+        cmns-id:isIdentifiedBy <https://data.pistoiaalliance.org/id/OMS/{ ?Organisation_ID }>;
         .
+    
+    <https://data.pistoiaalliance.org/id/OMS/{ ?Organisation_ID }>
+        a cmns-reg:RegisteredIdentifier;
+        cmns-txt:hasTextValue ?Organisation_ID;
+        cmns-id:identifies <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>;
+        cmns-reg:isRegisteredIn <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/OrganisationManagementServices>
+        .
+
 
     GENERATE {
         <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>
