@@ -6,6 +6,7 @@ PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-phprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/> 
 PREFIX cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-ctxdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
 PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
@@ -21,12 +22,25 @@ WHERE {
         BIND( uc3_cq1-1_parameter_1  AS $MedDRAId)
 
         # Find Nedicinal Product that is approved for the TherapeuticIndication having MedDRA ID
-        ?TherapeuticIndication a idmp-mprd:TherapeuticIndication; 
-           idmp-mprd:isTherapeuticIndicationFor ?MedicinalProduct;
-           idmp-mprd:hasMedicalCondition ?MedicalConditionClassifier.
-
-		?MedicalConditionClassifier a idmp-ra:MedDRAMedicalConditionIdentifier;
-                   cmns-txt:hasTextValue $MedDRAId .
+		?TherapeuticIndication a idmp-mprd:TherapeuticIndication . 
+		?TherapeuticIndication idmp-mprd:hasIndicationAsDiseaseSymptomProcedure ?MedicalConditionClassifier.
+		?MedicalConditionClassifier a idmp-ra:MedDRATerm;
+		   (cmns-id:hasIdentifier|^cmnd-id:isIdentifiedBy) ?MedDRAIdentifier .
+		?MedDRAIdentifier cmns-txt:hasTextValue $MedDRAId .
+	
+		{
+			?TherapeuticIndication (idmp-mprd:isTherapeuticIndicationFor|^idmp-mprd:hasTherapeuticIndication) ?MedicinalProduct .
+		} UNION {
+			?TherapeuticIndication cmns-ctxdsg:isApplicableIn ?AuthorizedMedicinalProduct .
+			?AuthorizedMedicinalProduct a idmp-mprd:AuthorizedMedicinalProduct .
+		    ?AuthorizedMedicinalProduct (cmns-pts:isPlayedBy|^cmns-pts:playsRole) ?MedicinalProduct  .
+		} UNION {
+			?TherapeuticIndication cmns-ctxdsg:isApplicableIn ?InvestigationalMedicinalProduct .
+			?InvestigationalMedicinalProduct a idmp-mprd:InvestigationalMedicinalProduct .
+		    ?InvestigationalMedicinalProduct (cmns-pts:isPlayedBy|^cmns-pts:playsRole) ?MedicinalProduct  .
+		}
+	
+		
   	    # Find the substance that is part of prodcut composition which defines Prodcut that is comprised of MedicinalProduct
         ?MedicinalProduct cmns-col:comprises ?Product .
         ?Product ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
