@@ -932,6 +932,26 @@
 		<cmns-av:synonym>continuous process</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;ContraIndicationAsDiseaseSymptomProcedure">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>contraindication as &apos;disease/symptom/procedure&apos;</rdfs:label>
+		<skos:definition>classifier for diseases, symptoms or procedures from medical terminology  that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
+		<skos:note>Classifiers for diseases, symptoms or procedures are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
+		<skos:note>The underlying disease, symptom or procedure of the contraindication should be specified as it is referenced in the regulated product information using an appropriate controlled reference terminology. The controlled term and the controlled term identifier should be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.3.3 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Contraindication">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
@@ -950,8 +970,15 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasDiseaseSymptomProcedure"/>
-				<owl:onClass rdf:resource="&idmp-mprd;DiseaseSymptomProcedureClassifier"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasContraindicationAsDiseaseSymptomProcedure"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ContraindicationAsDiseaseSymptomProcedure"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isContraindicationFor"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProduct"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -964,15 +991,16 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasContraindicationText"/>
-				<owl:onClass rdf:resource="&idmp-mprd;ContraindicationText"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:onProperty rdf:resource="&idmp-mprd;isContraindicationFor"/>
+				<owl:onClass rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isContraindicationFor"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasContraindicationText"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ContraindicationText"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>contraindication</rdfs:label>
@@ -1082,6 +1110,26 @@
 		<skos:note>A pharmaceutical dose form can fulfil the role of an immediate container, e.g. a capsule containing a powder for inhalation; the capsule in this case is not a container.</skos:note>
 		<skos:note>An alternative, compatible definition of immediate container (&apos;immediate packaging) is given in Directive 92/27/EEC.</skos:note>
 		<skos:note>An immediate container can be fitted with or have integrated into it an administration device and/or closure.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;IndicationAsDiseaseSymptomProcedure">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>indication as &apos;disease/symptom/procedure&apos;</rdfs:label>
+		<skos:definition>classifier for diseases, symptoms or procedures from medical terminology  that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
+		<skos:note>Classifiers for diseases, symptoms or procedures are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
+		<skos:note>The underlying disease, symptom or procedure that is the indication for treatment or contraindication should be specified as it is referenced in the regulated product information using an appropriate controlled reference terminology. The controlled term and the controlled term identifier should be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.2.3 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-mprd;IngredientRole-ACTI">
@@ -1494,32 +1542,19 @@
 		<skos:definition>situation in which a patient experiences a pathological condition or disorder that impairs the body&apos;s normal functioning or its parts and is characterized by specific symptoms and/or signs</skos:definition>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;MedicalConditionClassifier">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>medical condition classifier</rdfs:label>
-		<skos:definition>classifier for medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
-		<skos:note>Classifiers for medical conditions are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
-		<skos:note>The underlying disease, symptom or procedure that is the indication for treatment should be specified as it is referenced in the regulated product information using an appropriate controlled reference terminology. The controlled term and the controlled term identifier should be specified.</skos:note>
-		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.2 and Figure 14</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
-		<cmns-av:synonym>indication as &apos;disease/symptom/procedure&apos;</cmns-av:synonym>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProduct">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductSpecification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:onClass rdf:resource="&idmp-sub;ManufacturedItem"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasContraindication"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Contraindication"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1548,6 +1583,20 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasShelfLife"/>
 				<owl:onClass rdf:resource="&idmp-mprd;ShelfLife"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasTherapeuticIndication"/>
+				<owl:onClass rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasUndesirableEffect"/>
+				<owl:onClass rdf:resource="&idmp-mprd;UndesirableEffect"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2495,8 +2544,8 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasDiseaseSymptomProcedure"/>
-				<owl:onClass rdf:resource="&idmp-mprd;DiseaseSymptomProcedureClassifier"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasIndicationAsDiseaseSymptomProcedure"/>
+				<owl:onClass rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2539,8 +2588,98 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>textual description of the therapeutic indications of a medicinal product</rdfs:label>
 		<rdfs:label>therapeutic indication text</rdfs:label>
+		<skos:definition>textual description of the therapeutic indications of a medicinal product</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;UndesirableEffect">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasFrequencyOfOccurrence"/>
+				<owl:onClass rdf:resource="&cmns-cls;Classifier"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isUndesirableEffectOf"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProduct"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasSymptomConditionEffectClassification"/>
+				<owl:onClass rdf:resource="&idmp-mprd;SymptomConditionEffectClassification"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isUndesirableEffectOf"/>
+				<owl:onClass rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasUndesirableEffectAsSymptomConditionEffect"/>
+				<owl:onClass rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasUndesirableEffectText"/>
+				<owl:onClass rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasTargetPopulation"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;TargetPopulation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>undesirable effect</rdfs:label>
+		<skos:definition>specification that defines the undesirable effects of the medicinal product is authorized or under investigation</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.2 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>undesirable effect as &apos;symptom/condition/effect&apos;</rdfs:label>
+		<skos:definition>classifier for symptoms, conditions or effects from medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
+		<skos:note>Classifiers for medical conditions are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
+		<skos:note>The symptom, condition or effect in relation to the undesirable effect as described in the regulated product information can be specified using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.4.3 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+		<cmns-av:synonym></cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;UndesirableEffectText">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>textual description of an undesirable effect of a medicinal product</rdfs:label>
+		<rdfs:label>undesirable effect text</rdfs:label>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;administers">
@@ -2661,8 +2800,21 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:range rdf:resource="&idmp-mprd;Contraindication"/>
 		<owl:inverseOf rdf:resource="&idmp-mprd;isContraindicationFor"/>
 		<skos:definition>relates a product to a situation wherein the medicinal product shall not be given for safety reasons</skos:definition>
-		<skos:note>contraindication as &quot;disease/symptom/procedure&quot;</skos:note>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.17, 9.9.2.3.3</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasContraindicationAsDiseaseSymptomProcedure">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has contraindication as disease/symptom/procedure</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;Contraindication"/>
+		<skos:definition>relates the contraindication to a classifier / code for medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
+		<skos:note>Classifiers for medical conditions are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
+		<skos:note>The underlying disease, symptom or procedure of the contraindication should be specified as it is referenced in the regulated product information using an appropriate controlled reference terminology. The controlled term and the controlled term identifier should be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.3.3 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+		<cmns-av:synonym>contraindication as &apos;disease/symptom/procedure&apos;</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasContraindicationText">
@@ -2704,37 +2856,40 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasDiseaseSymptomProcedure">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
-		<rdfs:label>has disease/symptom/procedure</rdfs:label>
-		<rdfs:domain>
-			<owl:Class>
-				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-mprd;Contraindication">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-mprd;TherapeuticIndication">
-					</rdf:Description>
-				</owl:unionOf>
-			</owl:Class>
-		</rdfs:domain>
-		<skos:definition>relates the contraindication or therapeutic indication to a classifier / code for medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
-		<skos:example>MedDRA term 10002383  for &quot;stable angina pectoris&quot;</skos:example>
-		<skos:example>SNOMED CT term 233819005 for &quot;stable angina&quot;</skos:example>
-		<skos:note>Classifiers for medical conditions are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
-		<skos:note>The underlying disease, symptom or procedure that is the indication for treatment should be specified as it is referenced in the regulated product information using an appropriate controlled reference terminology. The controlled term and the controlled term identifier should be specified.</skos:note>
-		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.2 and Figure 14</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
-		<cmns-av:synonym>indication as &apos;disease/symptom/procedure&apos;</cmns-av:synonym>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasDoseForm">
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
 		<rdfs:label>has dose form</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;PharmaceuticalDoseForm"/>
 		<skos:definition>specifies the physical manifestation of a manufactured item or pharmaceutical product containing the active ingredient(s) and/or inactive ingredient(s) that are intended to be delivered to the patient</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.24</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasFrequencyOfOccurrence">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has frequency of occurrence</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<skos:definition>relates the undesirable effect to a classifier / code for medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products, that is indicating how often the undesirable effect occurs.</skos:definition>
+		<skos:note>The frequency of occurrence of the “symptom/condition/effect” can be specified using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.9.2.4.5 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasIndicationAsDiseaseSymptomProcedure">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has indication as disease/symptom/procedure</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<skos:definition>relates the therapeutic indication to a classifier / code for medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
+		<skos:example>MedDRA term 10002383  for &quot;stable angina pectoris&quot;</skos:example>
+		<skos:example>SNOMED CT term 233819005 for &quot;stable angina&quot;</skos:example>
+		<skos:note>Classifiers for medical conditions are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
+		<skos:note>The underlying disease, symptom or procedure that is the indication for treatment should be specified as it is referenced in the regulated product information using an appropriate controlled reference terminology. The controlled term and the controlled term identifier should be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.2.3 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+		<cmns-av:synonym>indication as &apos;disease/symptom/procedure&apos;</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasIngredientRole">
@@ -2856,6 +3011,19 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>indicates the actual strength of any element in a substance or pharmaceutical product</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasSymptomConditionEffectClassification">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has symptom/condition/effect classification</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<skos:definition>relates the undesirable effect to a classifier / code for medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
+		<skos:note>The classification of the “symptom/condition/effect” can be specified. The controlled term and the controlled term identifier shall be specified using an appropriate controlled vocabulary.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.9.2.4.4 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+		<cmns-av:synonym>undesirable effect as &apos;symptom/condition/effect&apos;</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasTargetPopulation">
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
 		<rdfs:label>has target population</rdfs:label>
@@ -2865,6 +3033,8 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 					<rdf:Description rdf:about="&idmp-mprd;Contraindication">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-mprd;TherapeuticIndication">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-mprd;UndesirableEffect">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -2904,6 +3074,40 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.2.7 and Figure 14</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2.6</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasUndesirableEffect">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
+		<rdfs:label>has undesirable effect</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;isUndesirableEffectOf"/>
+		<skos:definition>relates a medicinal product to undesirable effects that the the medicinal product has on a target population or therapeutic indication</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.17, 9.9.2.4.1</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasUndesirableEffectAsSymptomConditionEffect">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has undesirable effect as symptom/condition/effect</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<skos:definition>relates the undesirable effect to a classifier / code for medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
+		<skos:note>Classifiers for medical conditions are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
+		<skos:note>The symptom, condition or effect in relation to the undesirable effect as described in the regulated product information can be specified using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.9.2.4.3 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+		<cmns-av:synonym>undesirable effect as &apos;symptom/condition/effect&apos;</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasUndesirableEffectText">
+		<rdfs:label>has undesirable effect text</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:range rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<skos:definition>description of an undesirable effect in line with the regulated product information as text</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.4.2 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.3.1</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;immediatelyContains">
@@ -3017,6 +3221,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label>is therapeutic indication for</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-mprd;TherapeuticIndication"/>
 		<skos:definition>inverse of has therapeutic indication</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isUndesirableEffectOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;isSpecifiedBy"/>
+		<rdfs:label>is undesirable effect of</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<skos:definition>inverse of has undesirable effect</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;managesAdministrationOf">
