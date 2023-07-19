@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
@@ -25,6 +26,7 @@
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
@@ -502,8 +504,7 @@
 		<lcc-lr:hasTextualName>LiverTox</lcc-lr:hasTextualName>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-ra;MedDRAMedicalConditionIdentifier">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicalConditionClassifier"/>
+	<owl:Class rdf:about="&idmp-ra;MedDRAIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -511,9 +512,77 @@
 				<owl:hasValue rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>MedDRA medical condition identifier</rdfs:label>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-ra;MedDRATerm"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>MedDRA term identifier</rdfs:label>
 		<skos:definition>identifier for medical condition terms registered in the Medical Dictionary for Regulatory Activities registry</skos:definition>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-ra;MedDRATerm">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
+				<owl:hasValue rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-ra;MedDRATermClassifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>MedDRA term</rdfs:label>
+		<skos:definition>term registeredin the Medical Dictionary for Regulatory Activities registry</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-ra;MedDRATermClassifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass rdf:resource="&idmp-ra;MedDRATerm"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>MedDRA term classifier</rdfs:label>
+		<skos:definition>level in the hierarchy of terms in the Medical Dictionary for Regulatory Activities registry</skos:definition>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;MedDRATermClassifier-HighLevelGroupTerm">
+		<rdf:type rdf:resource="&idmp-ra;MedDRATermClassifier"/>
+		<rdfs:label>high level group term</rdfs:label>
+		<cmns-av:acronym>HLGT</cmns-av:acronym>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;MedDRATermClassifier-HighLevelTerm">
+		<rdf:type rdf:resource="&idmp-ra;MedDRATermClassifier"/>
+		<rdfs:label>high level term</rdfs:label>
+		<cmns-av:acronym>HLT</cmns-av:acronym>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;MedDRATermClassifier-LowestLevelTerm">
+		<rdf:type rdf:resource="&idmp-ra;MedDRATermClassifier"/>
+		<rdfs:label>lowest level term</rdfs:label>
+		<cmns-av:acronym>LLT</cmns-av:acronym>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;MedDRATermClassifier-PreferredTerm">
+		<rdf:type rdf:resource="&idmp-ra;MedDRATermClassifier"/>
+		<rdfs:label>preferred term</rdfs:label>
+		<cmns-av:acronym>PT</cmns-av:acronym>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ra;MedDRATermClassifier-SystemOrganClass">
+		<rdf:type rdf:resource="&idmp-ra;MedDRATermClassifier"/>
+		<rdfs:label>system organ class</rdfs:label>
+		<cmns-av:acronym>SOC</cmns-av:acronym>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ra;MedNetINN">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
