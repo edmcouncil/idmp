@@ -349,32 +349,6 @@
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;AmlodipineEMCComposition"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-TherapeuticIndication-AnginaPectoris">
-		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
-		<idmp-mprd:hasMedicalCondition>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-ra;MedDRAMedicalConditionIdentifier"/>
-				<rdfs:label>MedDRA id for angina pectoris</rdfs:label>
-				<cmns-txt:hasTextValue>10002383</cmns-txt:hasTextValue>
-			</owl:NamedIndividual>
-		</idmp-mprd:hasMedicalCondition>
-		<idmp-mprd:hasTherapeuticIndicationText>indicated for the treatment of stable angina</idmp-mprd:hasTherapeuticIndicationText>
-		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;AmlodipineEMCMedicinalProduct"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMC-TherapeuticIndication-Hypertension">
-		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
-		<idmp-mprd:hasMedicalCondition>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-ra;MedDRAMedicalConditionIdentifier"/>
-				<rdfs:label>MedDRA id for hypertension</rdfs:label>
-				<cmns-txt:hasTextValue>10020772</cmns-txt:hasTextValue>
-			</owl:NamedIndividual>
-		</idmp-mprd:hasMedicalCondition>
-		<idmp-mprd:hasTherapeuticIndicationText>indicated for the treatment of hypertension</idmp-mprd:hasTherapeuticIndicationText>
-		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;AmlodipineEMCMedicinalProduct"/>
-	</owl:NamedIndividual>
-	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineEMCComposition">
 		<rdf:type rdf:resource="&idmp-mprd;ProductComposition"/>
 		<rdfs:label>Amlodipine EMC composition</rdfs:label>
@@ -629,9 +603,17 @@
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;NorvascComposition"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsAuthorizedMedicinalProduct">
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsAuthorizedMedicinalProductInDenmark">
 		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
-		<rdfs:label>Norvasc as authorized medicinal product</rdfs:label>
+		<rdfs:label>Norvasc as authorized medicinal product in Denmark</rdfs:label>
+		<idmp-mprd:hasAuthorization rdf:resource="&idmp-amp;NorvascMarketingAuthorizationInDenmark"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsAuthorizedMedicinalProductInGermany">
+		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
+		<rdfs:label>Norvasc as authorized medicinal product in Germany</rdfs:label>
 		<idmp-mprd:hasAuthorization rdf:resource="&idmp-amp;NorvascMarketingAuthorizationInGermany"/>
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
@@ -660,7 +642,7 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterAsStartingMaterial">
 		<rdf:type rdf:resource="&idmp-sub;StartingMaterialRole"/>
-		<rdfs:label>norvasc blisters as starting material</rdfs:label>
+		<rdfs:label>Norvasc blisters as starting material</rdfs:label>
 		<cmns-pts:isManifestedIn rdf:resource="&idmp-amp;NorvascPackageTablets"/>
 		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
 	</owl:NamedIndividual>
@@ -709,12 +691,20 @@
 		<cmns-col:comprises rdf:resource="&idmp-amp;Paperboard"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMarketingAuthorizationInDenmark">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<rdfs:label>Norvasc Market Authorization in Denmark</rdfs:label>
+		<idmp-mprd:hasAuthorizedParty rdf:resource="&idmp-amp;PfizerApSAsMarketingAuthorizationHolder"/>
+		<cmns-cxtdsg:appliesTo rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProductInDenmark"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Denmark"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMarketingAuthorizationInGermany">
 		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorization"/>
 		<rdfs:label>Norvasc Market Authorization in Germany</rdfs:label>
 		<idmp-mprd:hasAuthorizedParty rdf:resource="&idmp-amp;PfizerGmbHAsMarketingAuthorizationHolder"/>
 		<idmp-mprd:hasAuthorizingParty rdf:resource="&idmp-eurga;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency"/>
-		<cmns-cxtdsg:appliesTo rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProduct"/>
+		<cmns-cxtdsg:appliesTo rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProductInGermany"/>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Germany"/>
 	</owl:NamedIndividual>
 	
@@ -728,6 +718,94 @@
 		<cmns-col:comprises rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
 		<cmns-col:comprises rdf:resource="&idmp-amp;Norvasc-PharmaceuticalProduct"/>
 		<cmns-prd:isProducedBy rdf:resource="&idmp-amp;PfizerLaboratoriesAsManufacturer"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMedicinalProduct-TherapeuticIndication-Denmark">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<rdfs:label>therapeutic indication for Norvasc in Denmark</rdfs:label>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-eura;MedDRATerm"/>
+				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+				<rdfs:label>hypertension</rdfs:label>
+				<rdfs:seeAlso>https://spor.ema.europa.eu/rmswi/#/searchback/lists/100000000006/terms/100000023182</rdfs:seeAlso>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-LowestLevelTerm"/>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-PreferredTerm"/>
+				<cmns-id:isIdentifiedBy>
+					<idmp-eura:MedDRAIdentifier>
+						<cmns-txt:hasTextValue>10020772</cmns-txt:hasTextValue>
+					</idmp-eura:MedDRAIdentifier>
+				</cmns-id:isIdentifiedBy>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-eura;MedDRATerm"/>
+				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+				<rdfs:label>stable angina pectoris</rdfs:label>
+				<rdfs:seeAlso>https://spor.ema.europa.eu/rmswi/#/searchback/lists/100000000006/terms/100000062280</rdfs:seeAlso>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-LowestLevelTerm"/>
+				<cmns-id:isIdentifiedBy>
+					<idmp-eura:MedDRAIdentifier>
+						<cmns-txt:hasTextValue>10002383</cmns-txt:hasTextValue>
+					</idmp-eura:MedDRAIdentifier>
+				</cmns-id:isIdentifiedBy>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasTherapeuticIndicationText rdf:resource="&idmp-amp;NorvascTherapeuticIndicationTextInDenmark"/>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProductInDenmark"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMedicinalProduct-TherapeuticIndication-Germany">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<rdfs:label>therapeutic indication for Norvasc in Germany</rdfs:label>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-eura;MedDRATerm"/>
+				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+				<rdfs:label>hypertension</rdfs:label>
+				<rdfs:seeAlso>https://spor.ema.europa.eu/rmswi/#/searchback/lists/100000000006/terms/100000023182</rdfs:seeAlso>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-LowestLevelTerm"/>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-PreferredTerm"/>
+				<cmns-id:isIdentifiedBy>
+					<idmp-eura:MedDRAIdentifier>
+						<cmns-txt:hasTextValue>10020772</cmns-txt:hasTextValue>
+					</idmp-eura:MedDRAIdentifier>
+				</cmns-id:isIdentifiedBy>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-eura;MedDRATerm"/>
+				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+				<rdfs:label>stable angina pectoris</rdfs:label>
+				<rdfs:seeAlso>https://spor.ema.europa.eu/rmswi/#/searchback/lists/100000000006/terms/100000062280</rdfs:seeAlso>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-LowestLevelTerm"/>
+				<cmns-id:isIdentifiedBy>
+					<idmp-eura:MedDRAIdentifier>
+						<cmns-txt:hasTextValue>10002383</cmns-txt:hasTextValue>
+					</idmp-eura:MedDRAIdentifier>
+				</cmns-id:isIdentifiedBy>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-eura;MedDRATerm"/>
+				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+				<rdfs:label>vasospastic angina</rdfs:label>
+				<rdfs:seeAlso>https://spor.ema.europa.eu/rmswi/#/searchback/lists/100000000006/terms/100000073049</rdfs:seeAlso>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-LowestLevelTerm"/>
+				<cmns-id:isIdentifiedBy>
+					<idmp-eura:MedDRAIdentifier>
+						<cmns-txt:hasTextValue>10067790</cmns-txt:hasTextValue>
+					</idmp-eura:MedDRAIdentifier>
+				</cmns-id:isIdentifiedBy>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasTherapeuticIndicationText rdf:resource="&idmp-amp;NorvascTherapeuticIndicationTextInGermany"/>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProductInGermany"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascPackageTablets">
@@ -749,6 +827,18 @@
 		<cmns-pts:hasRole rdf:resource="&idmp-amp;NorvascBoxAsOuterPackaging"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascTherapeuticIndicationTextInDenmark">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Denmark"/>
+		<cmns-txt:hasTextValue>Hypertension\nChronic stable angina pectoris</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascTherapeuticIndicationTextInGermany">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Germany"/>
+		<cmns-txt:hasTextValue>Hypertension\nChronic stable angina pectoris\nVasospastic (Prinzmetal’s) angina</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;P015011211">
 		<rdf:type rdf:resource="&cmns-prd;StockKeepingUnit"/>
 		<rdfs:label>P015011211</rdfs:label>
@@ -766,6 +856,17 @@
 		<rdfs:label>paperboard common name</rdfs:label>
 		<idmp-sub:hasSubstanceNameValue>paperboard</idmp-sub:hasSubstanceNameValue>
 		<cmns-dsg:isNameOf rdf:resource="&idmp-amp;Paperboard"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerApS">
+		<rdf:type rdf:resource="&cmns-org;LegalEntity"/>
+		<rdfs:label>Pfizer ApS</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerApSAsMarketingAuthorizationHolder">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorizationHolder"/>
+		<rdfs:label>Pfizer ApS as marketing authorization holder</rdfs:label>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-amp;PfizerApS"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerGmbH">
