@@ -2,6 +2,7 @@
 
 PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
 PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX idmp-eura:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-phprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/> 
@@ -24,7 +25,7 @@ WHERE {
         # Find Nedicinal Product that is approved for the TherapeuticIndication having MedDRA ID
 		?TherapeuticIndication a idmp-mprd:TherapeuticIndication . 
 		?TherapeuticIndication idmp-mprd:hasIndicationAsDiseaseSymptomProcedure ?MedicalConditionClassifier.
-		?MedicalConditionClassifier a idmp-ra:MedDRATerm;
+		?MedicalConditionClassifier a idmp-eura:MedDRATerm;
 		   (cmns-id:isIdentifiedBy|^cmns-id:identifies) ?MedDRAIdentifier .
 		?MedDRAIdentifier cmns-txt:hasTextValue $MedDRAId .
 	
