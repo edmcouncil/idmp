@@ -28,6 +28,7 @@ GENERATE {
         rdfs:label ?Name ;
         rdfs:seeAlso <https://spor.ema.europa.eu/rmswi/#/lists/{ ?Identifier }/terms> ;
         cmns-dsg:isDefinedIn idmp-spor:ReferentialsManagementServicesClassificationScheme ;
+        skos:hasExactMacth ?ExactMatch;
         .
 
     GENERATE {
@@ -328,4 +329,8 @@ WHERE {
         IF(?Status = "NULLIFIED", <https://spor.ema.europa.eu/rmswi/#/lists/200000005003/terms/200000005007>,
         ?unbound ))))
     AS ?Spor_Status_URI )
+
+    BIND(IF(?Identifier = 100000073343, <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ShelfLifeType>, 
+    IF(?Identifier = 100000073344,<https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/SpecialPrecautionsForStorage>,
+    ?unbound)) AS ?ExactMatch)
 }
