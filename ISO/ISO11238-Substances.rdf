@@ -853,6 +853,36 @@
 		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-ModificationMethodVocabulary</mvf:hasURI>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-OfficialNameStatusVocabulary">
+		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 11238 - official name status</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.2</dct:source>
+		<skos:definition>controlled vocabulary specifying the nature of the method of modification</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary for the status of an official name from a pre-defined ISO 19844 code set</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>ISO 11238 Official Name Status vocabulary</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-OfficialNameStatusVocabulary</mvf:hasURI>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-OpticalActivityVocabulary">
+		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 11238 - optical activity vocabulary</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 14</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.2</dct:source>
+		<skos:definition>controlled vocabulary the ability of a chemical substance to rotate the plane of vibration of polarized light to the right or left</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary indicating the ability of a chemical substance to rotate the plane of vibration of polarized light to the right or left</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>ISO 11238 Optical Activity vocabulary</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-OpticalActivityVocabulary</mvf:hasURI>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ISO19844-CodeSet">
 		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
@@ -1332,6 +1362,18 @@
 		<rdfs:label>modification method type</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.1</dct:source>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethodType-Agent">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethodType-Physical">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethodType-Structural">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>classifier for the method of modification</skos:definition>
 		<skos:example>structural modification, agent modification, physical modification</skos:example>
 		<idmp-sub:hasBusinessRules>In case of N-Terminal modification and C-Terminal modification of a protein subunit, modification is mandatory.</idmp-sub:hasBusinessRules>
@@ -1413,6 +1455,7 @@
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.5.2</dct:source>
 		<skos:definition>code for the function of a modification</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Moiety">
@@ -1974,16 +2017,38 @@
 	
 	<owl:Class rdf:about="&idmp-sub;OfficialNameStatus">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:onClass rdf:resource="&idmp-sub;SubstanceName"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;OfficialName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;OfficialName"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>official name status</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.2</dct:source>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;OfficialNameStatus-Alternate">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;OfficialNameStatus-Current">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;OfficialNameStatus-Primary">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;OfficialNameStatus-Proposed">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;OfficialNameStatus-Superseded">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>classifier that indicates the status of an official name from a pre-defined ISO 19844 code set</skos:definition>
 	</owl:Class>
 	
@@ -1994,8 +2059,8 @@
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.2</dct:source>
 		<skos:definition>status of an official name that is considered a synonym for the primary official name</skos:definition>
 		<skos:note>The fact that a name is alternate is evident by having more than one name assigned to the same substance by the same authority for the same language, domain, etc.</skos:note>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
 		<cmns-txt:hasTextValue>Alternate</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2005,8 +2070,8 @@
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.2</dct:source>
 		<skos:definition>status of an official name that is presently in use</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
 		<cmns-txt:hasTextValue>Current</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2016,8 +2081,8 @@
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.2</dct:source>
 		<skos:definition>status of an official name that is the main official name approved for use</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
 		<cmns-txt:hasTextValue>Proposed</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2027,8 +2092,8 @@
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.2</dct:source>
 		<skos:definition>status of an official name that has been proposed for use but has not yet be formally adopted</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
 		<cmns-txt:hasTextValue>Proposed</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2038,23 +2103,46 @@
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.6.2</dct:source>
 		<skos:definition>status of an official name that was formerly in use and has been replaced</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OfficialNameStatusVocabulary"/>
 		<cmns-txt:hasTextValue>Superseded</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;OpticalActivity">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;OpticalRotation"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;OpticalRotation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;OpticalRotation"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>optical activity</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 14</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.2</dct:source>
-		<skos:definition>ability of a chemical substance to rotate the plane of vibration of polarized light to the right or left</skos:definition>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;OpticalActivity-EitherDirection">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;OpticalActivity-Left">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;OpticalActivity-None">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;OpticalActivity-NotApplicable">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;OpticalActivity-Right">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>classifier specifying the ability of a chemical substance to rotate the plane of vibration of polarized light to the right or left</skos:definition>
 		<skos:example>(+/-), (+), (-), None, N/A, Unknown</skos:example>
 		<skos:note>The extent of optical rotation is not mandatory at the substance level.</skos:note>
 	</owl:Class>
@@ -2064,7 +2152,8 @@
 		<rdfs:label>optical activity - either direction</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53</dct:source>
 		<skos:definition>optical activity indicating the ability of a chemical substance to rotate the plane of vibration of polarized light either to the right or left</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
 		<cmns-txt:hasTextValue>(+/-)</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2073,7 +2162,8 @@
 		<rdfs:label>optical activity - left</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53</dct:source>
 		<skos:definition>optical activity indicating the ability of a chemical substance to rotate the plane of vibration of polarized light to the left</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
 		<cmns-txt:hasTextValue>(-)</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2082,7 +2172,8 @@
 		<rdfs:label>optical activity - none</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53</dct:source>
 		<skos:definition>optical activity indicating that a chemical substance has no ability to rotate the plane of vibration of polarized light</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
 		<cmns-txt:hasTextValue>None</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2091,7 +2182,8 @@
 		<rdfs:label>optical activity - not applicable</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53</dct:source>
 		<skos:definition>optical activity indicating that optical activity does not apply to a chemical substance</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
 		<cmns-txt:hasTextValue>None</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2100,7 +2192,8 @@
 		<rdfs:label>optical activity - right</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53</dct:source>
 		<skos:definition>optical activity indicating the ability of a chemical substance to rotate the plane of vibration of polarized light to the right</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-OpticalActivityVocabulary"/>
 		<cmns-txt:hasTextValue>(+)</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2197,6 +2290,7 @@
 		<skos:example>USP</skos:example>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause F.3.7.4</cmns-av:adaptedFrom>
 		<cmns-av:synonym>pharmacopoeial grade type</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PharmacopoeialGradeName">
