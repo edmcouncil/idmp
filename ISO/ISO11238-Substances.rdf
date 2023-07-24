@@ -212,7 +212,13 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;AgentModificationMethod"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;AgentModificationMethod"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;AgentModificationMethod"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>agent modification type</rdfs:label>
@@ -222,6 +228,7 @@
 		<skos:example>chemical, enzymatic, immunological, organism, UV radiation</skos:example>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Amount">
@@ -712,6 +719,7 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.2 and Figure 8</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;GeneIdentifier">
@@ -830,6 +838,21 @@
 		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-IsotopicSubstitutionVocabulary</mvf:hasURI>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-ModificationMethodVocabulary">
+		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 11238 - modification method vocabulary</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.1</dct:source>
+		<skos:definition>controlled vocabulary specifying the nature of the method of modification</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary specifying the nature of the method of modification</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>ISO 11238 Modification Method vocabulary</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-ModificationMethodVocabulary</mvf:hasURI>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ISO19844-CodeSet">
 		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
@@ -902,6 +925,7 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Isotope">
@@ -1103,6 +1127,7 @@
 		<skos:example>synthetic material</skos:example>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5.5, Figure 30</cmns-av:adaptedFrom>
 		<cmns-av:synonym>material type</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MaterialRole">
@@ -1289,6 +1314,21 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Modification">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>modification method type</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.1</dct:source>
@@ -1303,12 +1343,11 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodType-Agent">
 		<rdf:type rdf:resource="&idmp-sub;ModificationMethodType"/>
-		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>modification method type - agent</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.1</dct:source>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-ModificationMethodVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/idmp-sub;ISO11238-ModificationMethodVocabulary"/>
 		<cmns-txt:hasTextValue>agent</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1318,8 +1357,8 @@
 		<rdfs:label>modification method type - physical</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.1</dct:source>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-ModificationMethodVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/idmp-sub;ISO11238-ModificationMethodVocabulary"/>
 		<cmns-txt:hasTextValue>physical</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1329,8 +1368,8 @@
 		<rdfs:label>modification method type - structural</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.1</dct:source>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-ModificationMethodVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/idmp-sub;ISO11238-ModificationMethodVocabulary"/>
 		<cmns-txt:hasTextValue>structural</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
