@@ -22,6 +22,7 @@
 	<!ENTITY idmp-dtp "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY idmp-uom "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/">
+	<!ENTITY lcc-639-1 "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/">
 	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
 	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
@@ -54,6 +55,7 @@
 	xmlns:idmp-dtp="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:idmp-uom="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/"
+	xmlns:lcc-639-1="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
 	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
 	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
@@ -88,6 +90,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances/"/>
@@ -284,18 +287,30 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Amount"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
-				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Amount"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>amount type</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;AmountType-Approximate">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;AmountType-Exact">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;AmountType-NLT">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;AmountType-NMT">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>classifies and denotes some quantity and states how a numeric amount is to be interpreted</skos:definition>
 		<skos:example>Exact (the default, when not specified); Approximate; NLT; NMT</skos:example>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
@@ -307,16 +322,16 @@
 		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
 		<rdfs:label>amount type - approximate</rdfs:label>
 		<skos:definition>amount type for quantity values that are approximate</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-Exact">
 		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
 		<rdfs:label>amount type - exact</rdfs:label>
 		<skos:definition>amount type for quantity values that are exact</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NLT">
@@ -324,8 +339,8 @@
 		<rdfs:label>amount type - NLT</rdfs:label>
 		<skos:definition>amount type for quantity values that are a lower bound</skos:definition>
 		<cmns-av:synonym>amount type - not less than</cmns-av:synonym>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NMT">
@@ -333,8 +348,8 @@
 		<rdfs:label>amount type - NMT</rdfs:label>
 		<skos:definition>amount type for quantity values that are an upper bound</skos:definition>
 		<cmns-av:synonym>amount type - not more than</cmns-av:synonym>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ClassificationScheme"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;Analysis">
@@ -469,6 +484,7 @@
 		<skos:definition>conformance level that applies to data elements &apos;within a category&apos; as applicable, that are subject to business rules and may become required by: data rules; process rules; regional rules</skos:definition>
 		<skos:note>Conditional applies when there are alternative data sources for a given data element(s) to identify a Substance/Specified Substance. Regional implementation of the ISO 11238 and ISO/TS 19844 may elevate the conditional conformance categories to &apos;mandatory&apos; per regional requirements.</skos:note>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-ConformanceContext"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ConformanceContext"/>
 		<cmns-txt:hasTextValue>CONDITIONAL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -480,6 +496,7 @@
 		<skos:definition>conformance level that applies to data elements that are required and shall therefore be implemented</skos:definition>
 		<skos:note>Mandatory elements are defining elements necessary for the unique identification of Substances and Specified Substances per the ISO IDMP standards/technical specifications.</skos:note>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-ConformanceContext"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ConformanceContext"/>
 		<cmns-txt:hasTextValue>MANDATORY</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -491,6 +508,7 @@
 		<skos:definition>conformance level that applies to data elements that are informative but not definitional</skos:definition>
 		<skos:note>When listed at the category level (e.g. Specified Substance), optional corresponds to ISO categories or data elements that are not absolutely necessary for the unique identification of Substances/Specified Substances as per ISO 11238. Regional implementation of ISO 11238 and ISO/TS 19844 may elevate the optional conformance categories to &apos;mandatory&apos; or &apos;conditional&apos; per regional requirements.</skos:note>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-ConformanceContext"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ConformanceContext"/>
 		<cmns-txt:hasTextValue>OPTIONAL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -754,6 +772,22 @@
 		<skos:definition>addition compound that contains water in weak chemical combination with another compound</skos:definition>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-AmountTypeVocabulary">
+		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 11238 - amount type vocabulary</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 14-16, 19-25, 27, and 30-32</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.8.1</dct:source>
+		<skos:definition>controlled vocabulary specifying how the value associated with an amount should be interpreted</skos:definition>
+		<skos:note>An &apos;amount type&apos; may be associated with an amount to state if the value needs to be interpreted as an average or an exact or approximate quantity.</skos:note>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary specifying how the value associated with an amount should be interpreted</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>ISO 11238 Amount Type vocabulary</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-AmountTypeVocabulary</mvf:hasURI>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-ClassificationScheme">
 		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:label>ISO 11238 classification scheme</rdfs:label>
@@ -770,6 +804,7 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 5.9</cmns-av:directSource>
 		<cmns-col:isConstituentOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-dsg:hasDescription>controlled vocabulary for the conformance terminology and context as it relates to ISO 11238 and ISO/TS 19844</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 		<mvf:hasTextualName>ISO 11238 Conformance Context</mvf:hasTextualName>
 		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-ConformanceContext</mvf:hasURI>
 	</owl:NamedIndividual>
