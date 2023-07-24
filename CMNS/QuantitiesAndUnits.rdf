@@ -34,6 +34,9 @@
 		<dct:abstract>This ontology provides a core set of concepts for quantities, units, systems of quantities, and systems of units. The most widely accepted, scrutinized, and globally used system of quantities and system of units are the International System of Quantities (ISQ) and the International System of Units (SI). They are formally standardized through [ISO 31] and [IEC 60027]. The harmonization of these two sets of standards into one new set [ISO/IEC 80000] has been published by ISO in 2009 and 2010. This ontology is based on the QUDV model from the Object Management Group (OMG)&apos;s SysML standard and on ISO/IEC 80000-1:2009, which refers normatively to the ISO/IEC Guide 99:2007. It is compatible with and can be mapped directly to the OMG Date Time Vocabulary (DTV) Quantities Ontology, the de-facto QUDT ontology representing Units of Measure, Quantity Kinds, Dimensions and Data Types (see http://www.qudt.org/), the Units of Measurement Ontology (UO) ontology available from the BioPortal (https://bioportal.bioontology.org/ontologies/UO) and others, as well as the QUDV annex of the SysML specification.</dct:abstract>
 		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
 		<dct:contributor>Evan Wallace, U.S. National Institute of Standards and Technology (NIST)</dct:contributor>
+		<dct:contributor>Hans Peter de Koenig, DEKonsult</dct:contributor>
+		<dct:contributor>Roger Burkhart, Thematix Partners LLC</dct:contributor>
+		<dct:contributor>Stuart Chalk, University of North Florida</dct:contributor>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
@@ -41,10 +44,12 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220901/QuantitiesAndUnits/"/>
-		<cmns-av:copyright>Copyright (c) 2011-2022 Thematix Partners LLC</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2015-2022 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</cmns-av:copyright>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230501/QuantitiesAndUnits/"/>
+		<cmns-av:copyright>Copyright (c) 2011-2023 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2015-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2015-2023 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2023 DEKonsult</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2023 University of North Florida</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-qtu;ArbitraryUnit">
@@ -997,6 +1002,14 @@
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates whether something, such as a measurement scale, includes the absolute minimum permissive value or not</skos:definition>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;isValueOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
+		<rdfs:label>is value of</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-qtu;QuantityValue"/>
+		<owl:inverseOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
+		<skos:definition>is the measure that the value represents</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;specializes">
 		<rdfs:label>specializes</rdfs:label>
