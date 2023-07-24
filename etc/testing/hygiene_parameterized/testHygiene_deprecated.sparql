@@ -14,12 +14,12 @@ WHERE
     FILTER regex(str(?resource), <HYGIENE_TESTS_FILTER_PARAMETER>)
     {
         ?resource ?property1 ?object.
-        FILTER (?property1 != owl:equivalentClass && ?property1 != owl:deprecated && ?property1 != rdf:type && ?property1 != owl:equivalentProperty)
+        FILTER (?property1 != owl:equivalentClass && ?property1 != owl:deprecated && ?property1 != rdf:type && ?property1 != owl:equivalentProperty && ?property1 != owl:sameAs)
     }
     UNION
     {
         ?subject ?property2 ?resource .
-        FILTER (?property2 != owl:equivalentClass && ?property2 != owl:deprecated && ?property2 != rdf:type && ?property2 != owl:equivalentProperty)
+        FILTER (?property2 != owl:equivalentClass && ?property2 != owl:deprecated && ?property2 != rdf:type && ?property2 != owl:equivalentProperty && ?property2 != owl:sameAs)
     }
     BIND ("PRODERROR: Deprecated resource " + str(?resource) + " is still in use." as ?error)
 }
