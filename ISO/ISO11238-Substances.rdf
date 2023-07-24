@@ -898,6 +898,21 @@
 		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-ReferenceSourceClassVocabulary/</mvf:hasURI>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-ResidueModifiedVocabulary">
+		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 11238 - residue modified vocabulary</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.2</dct:source>
+		<skos:definition>controlled vocabulary for the residue of a modification</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary for the residue of a modification</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>ISO 11238 Residue Modified vocabulary</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/idmp-sub;ISO11238-ResidueModifiedVocabulary/</mvf:hasURI>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ISO19844-CodeSet">
 		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
@@ -1410,7 +1425,6 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodType-Physical">
 		<rdf:type rdf:resource="&idmp-sub;ModificationMethodType"/>
-		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>modification method type - physical</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.1</dct:source>
@@ -1421,7 +1435,6 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodType-Structural">
 		<rdf:type rdf:resource="&idmp-sub;ModificationMethodType"/>
-		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>modification method type - structural</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.1</dct:source>
@@ -2957,7 +2970,38 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ResidueModified">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Modification">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Modification">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
@@ -2977,6 +3021,7 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:explanatoryNote>It may be known that lysine residues are modified but the particular lysine in the sequence may not be known. It should be captured for both specific and non-specific modifications, e.g. sizing carbohydrate polymers by hydrolysis.</cmns-av:explanatoryNote>
 		<cmns-av:explanatoryNote>The residues of modification can be specific to a type of residue, optionally at a specific site, in a molecular entity, non-specific or random.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>Note that because there may be additional values, over and above those specified, an equivalence to a list of the valid values is not appropriate.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ResidueModified-NonSpecificModifications">
@@ -2984,7 +3029,8 @@
 		<rdfs:label>residue modified - non-specific modifications</rdfs:label>
 		<skos:definition>code for non-specific residue(s) of modification</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.2</cmns-av:adaptedFrom>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-ResidueModifiedVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ResidueModifiedVocabulary"/>
 		<cmns-txt:hasTextValue>non-specific modifications</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -2993,7 +3039,8 @@
 		<rdfs:label>residue modified - random</rdfs:label>
 		<skos:definition>code for random residue(s) of modification</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.2</cmns-av:adaptedFrom>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-ResidueModifiedVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-ResidueModifiedVocabulary"/>
 		<cmns-txt:hasTextValue>random</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
