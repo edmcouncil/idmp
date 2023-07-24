@@ -694,6 +694,12 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;GeneElement"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;GeneElement"/>
 			</owl:Restriction>
@@ -809,6 +815,21 @@
 		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-ConformanceContext</mvf:hasURI>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-IsotopicSubstitutionVocabulary">
+		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 11238 - isotopic substitution</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 14</dct:source>
+		<skos:definition>controlled vocabulary specifying the nature of isotopic substitution by site of substitution</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.3, table 62</cmns-av:adaptedFrom>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary specifying the nature of isotopic substitution by site of substitution</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>ISO 11238 Isotopic Substitution vocabulary</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-IsotopicSubstitutionVocabulary</mvf:hasURI>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ISO19844-CodeSet">
 		<rdf:type rdf:resource="&idmp-sub;ControlledVocabulary"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
@@ -864,8 +885,13 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:onClass rdf:resource="&idmp-sub;SubstrateTargetInteraction"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;SubstrateTargetInteraction"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;SubstrateTargetInteraction"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>interaction type</rdfs:label>
@@ -933,6 +959,8 @@
 		<owl:differentFrom rdf:resource="&idmp-sub;IsotopicSubstitution-Unknown"/>
 		<skos:definition>isotopic substitution where the nuclide is distributed thoughtout molecule or substance</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.3, table 62</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-IsotopicSubstitutionVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-IsotopicSubstitutionVocabulary"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;IsotopicSubstitution-Specific">
@@ -941,6 +969,8 @@
 		<owl:differentFrom rdf:resource="&idmp-sub;IsotopicSubstitution-Unknown"/>
 		<skos:definition>isotopic substitution if the site of attachment/substitution is specific and indicated in the structure</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.3, table 62</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-IsotopicSubstitutionVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-IsotopicSubstitutionVocabulary"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;IsotopicSubstitution-Unknown">
@@ -948,10 +978,19 @@
 		<rdfs:label>isotopic substitution - unknown</rdfs:label>
 		<skos:definition>isotopic substitution where the site of attachment/substitution is unknown</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.3, table 62</cmns-av:adaptedFrom>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-IsotopicSubstitutionVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-IsotopicSubstitutionVocabulary"/>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;IsotopicSubstitutionClassifier">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;IsotopicSubstitution"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
@@ -959,6 +998,18 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>isotopic substitution classifier</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;IsotopicSubstitution-NonSpecific">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;IsotopicSubstitution-Specific">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;IsotopicSubstitution-Unknown">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>classifier for an isotopic substitution by site of substitution</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.3</cmns-av:adaptedFrom>
 	</owl:Class>
