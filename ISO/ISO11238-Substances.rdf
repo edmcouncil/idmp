@@ -31,6 +31,7 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
+	xmlns="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
@@ -5611,20 +5612,11 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:Axiom>
 	<owl:Axiom>
 		<owl:annotatedProperty rdf:resource="&rdfs;subClassOf"/>
-		<owl:annotatedSource rdf:resource="&idmp-sub;Manufacturer"/>
+		<owl:annotatedSource rdf:resource="&idmp-sub;IsotopicSubstitutionClassifier"/>
 		<owl:annotatedTarget>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;produces"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IsotopicSubstitution"/>
 			</owl:Restriction>
 		</owl:annotatedTarget>
 		<idmp-chg:hasDataSupport rdf:datatype="&xsd;boolean">false</idmp-chg:hasDataSupport>
@@ -5648,6 +5640,17 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:onClass rdf:resource="&idmp-sub;Atom"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</owl:annotatedTarget>
+		<idmp-chg:hasDataSupport rdf:datatype="&xsd;boolean">false</idmp-chg:hasDataSupport>
+	</owl:Axiom>
+	<owl:Axiom>
+		<owl:annotatedProperty rdf:resource="&rdfs;subClassOf"/>
+		<owl:annotatedSource rdf:resource="&idmp-sub;OpticalActivity"/>
+		<owl:annotatedTarget>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;OpticalRotation"/>
 			</owl:Restriction>
 		</owl:annotatedTarget>
 		<idmp-chg:hasDataSupport rdf:datatype="&xsd;boolean">false</idmp-chg:hasDataSupport>
