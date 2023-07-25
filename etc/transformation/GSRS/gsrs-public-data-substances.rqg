@@ -6,6 +6,8 @@ PREFIX idmp: <https://purl.iso.org/idmp/>
 PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
+PREFIX idmp-x: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ExtensionTBD/>
 
 GENERATE {
 
@@ -33,6 +35,7 @@ GENERATE {
     # Molecular Structure
     ?MolecularStructure a idmp-sub:MolecularStructure ;
         idmp-sub:hasSMILESValue ?structureSmilesString ;
+        cmns-dsg:isDescribedBy ?structureMolfile;
     .
 }
 
@@ -46,6 +49,7 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
     "$.structure.formula",
     "$.structure.stereochemistry",
     "$.structure.mwt",
+    "$.structure.molfile",
     "$.moieties"
     ) AS
 
@@ -57,6 +61,7 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
 ?structureFormula
 ?structureStereochemistry
 ?structureMolecularWeight
+?structureMolfile
 ?moieties
 
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
