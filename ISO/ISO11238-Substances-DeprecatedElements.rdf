@@ -26,7 +26,7 @@
 		<dct:abstract>This ontology extends the ISO 11238 Substances to incorporate deprecated concepts previously defined in the primary ISO 11238 Regulated Information on Substances Ontology (https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances). It will be eliminated from the released ontologies no later than the 0.6.0 release unless newly deprecated elements are added to this ontology. The motivation for moving these elements is that some tools, such as Protege, move the equivalent class relationships on deprecated elements to the new class when updates are saved, which makes the deprecated elements more difficult to ignore and eventually eliminate.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11238-Substances-DeprecatedElements/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances-DeprecatedElements/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -57,9 +57,19 @@
 		<owl:equivalentClass rdf:resource="&idmp-sub;Ingredient"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SimplifiedMolecularInputLineEntry">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentClass rdf:resource="&idmp-sub;SMILES"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SubstanceConstituency">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
 		<owl:equivalentClass rdf:resource="&idmp-sub;SubstanceComposition"/>
 	</owl:Class>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSimplifiedMolecularInputLineEntrySpecification">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentProperty rdf:resource="&idmp-sub;hasSMILESValue"/>
+	</owl:DatatypeProperty>
 
 </rdf:RDF>

@@ -21,6 +21,7 @@
 	<!ENTITY idmp-eura "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/">
 	<!ENTITY idmp-eurga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/">
 	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
+	<!ENTITY idmp-nara "https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/">
 	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY idmp-trlp "https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/">
@@ -58,6 +59,7 @@
 	xmlns:idmp-eura="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"
 	xmlns:idmp-eurga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"
 	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
+	xmlns:idmp-nara="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"
 	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:idmp-trlp="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/"
@@ -85,6 +87,7 @@
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
@@ -105,7 +108,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20230601/Examples/TerlipressinExample/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20230701/Examples/TerlipressinExample/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Informative"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -113,10 +116,10 @@
 	</owl:Ontology>
 	
 	<owl:NamedIndividual rdf:about="https://chem.nlm.nih.gov/chemidplus/rn/14636-12-5">
-		<rdf:type rdf:resource="&idmp-ra;CASRegistryNumber"/>
+		<rdf:type rdf:resource="&idmp-nara;CASRegistryNumber"/>
 		<rdfs:label>14636-12-5</rdfs:label>
 		<cmns-id:identifies rdf:resource="&idmp-trlp;Terlipressin"/>
-		<cmns-ra:isRegisteredBy rdf:resource="&idmp-ra;AmericanChemicalSocietyRegistrationAuthority"/>
+		<cmns-ra:isRegisteredBy rdf:resource="&idmp-nara;AmericanChemicalSocietyRegistrationAuthority"/>
 		<cmns-ra:isRegisteredIn rdf:resource="&idmp-ra;AnatomicalTherapeuticChemicalClassificationSystem"/>
 		<cmns-txt:hasTextValue>14636-12-5</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -339,14 +342,25 @@
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSUN0.12MgPerMlSolutionForInjectionTherapeuticIndication">
 		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
 		<dct:source>https://www.medicines.org.uk/emc/product/2115/smpc#gref</dct:source>
-		<idmp-mprd:hasMedicalCondition>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
 			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-ra;MedDRAMedicalConditionIdentifier"/>
+				<rdf:type rdf:resource="&idmp-eura;MedDRATerm"/>
+				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
 				<rdfs:label>bleeding esophageal varices</rdfs:label>
-				<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-LowestLevelTerm"/>
+				<cmns-id:isIdentifiedBy>
+					<idmp-eura:MedDRAIdentifier>
+						<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
+					</idmp-eura:MedDRAIdentifier>
+				</cmns-id:isIdentifiedBy>
 			</owl:NamedIndividual>
-		</idmp-mprd:hasMedicalCondition>
-		<idmp-mprd:hasTherapeuticIndicationText>Terlipressin is indicated in the treatment of bleeding oesophageal varices.</idmp-mprd:hasTherapeuticIndicationText>
+		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasTherapeuticIndicationText>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+				<cmns-txt:hasTextValue>Terlipressin is indicated in the treatment of bleeding oesophageal varices.</cmns-txt:hasTextValue>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasTherapeuticIndicationText>
 		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-trlp;TerlipressinAcetateSUN0.12MgPerMlSolutionForInjection"/>
 	</owl:NamedIndividual>
 	
@@ -359,9 +373,9 @@
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSimplifiedMolecularInputLineEntry">
-		<rdf:type rdf:resource="&idmp-sub;SimplifiedMolecularInputLineEntry"/>
+		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
 		<rdfs:label>terlipressin acetate simplified molecular input line entry</rdfs:label>
-		<cmns-txt:hasTextValue>CC(=O)O.CC(=O)O.C1CC(N(C1)C(=O)C2CSSCC(C(=O)NC(C(=O)NC(C(=O)NC(C(=O)NC(C(=O)N2)CC(=O)N)CCC(=O)N)CC3=CC=CC=C3)CC4=CC=C(C=C4)O)NC(=O)CNC(=O)CNC(=O)CN)C(=O)NC(CCCCN)C(=O)NCC(=O)N</cmns-txt:hasTextValue>
+		<idmp-sub:hasSMILESValue>CC(=O)O.CC(=O)O.C1CC(N(C1)C(=O)C2CSSCC(C(=O)NC(C(=O)NC(C(=O)NC(C(=O)NC(C(=O)N2)CC(=O)N)CCC(=O)N)CC3=CC=CC=C3)CC4=CC=C(C=C4)O)NC(=O)CNC(=O)CNC(=O)CN)C(=O)NC(CCCCN)C(=O)NCC(=O)N</idmp-sub:hasSMILESValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateStrengthAsManufacturedInTerlipressinAcetate1MgPerAmpouleSolutionForInjection">
@@ -524,14 +538,25 @@
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjectionTherapeuticIndication">
 		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
 		<dct:source>https://www.geneesmiddeleninformatiebank.nl/smpc/h110384_smpc.pdf</dct:source>
-		<idmp-mprd:hasMedicalCondition>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
 			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-ra;MedDRAMedicalConditionIdentifier"/>
+				<rdf:type rdf:resource="&idmp-eura;MedDRATerm"/>
+				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
 				<rdfs:label>bleeding esophageal varices</rdfs:label>
-				<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-LowestLevelTerm"/>
+				<cmns-id:isIdentifiedBy>
+					<idmp-eura:MedDRAIdentifier>
+						<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
+					</idmp-eura:MedDRAIdentifier>
+				</cmns-id:isIdentifiedBy>
 			</owl:NamedIndividual>
-		</idmp-mprd:hasMedicalCondition>
-		<idmp-mprd:hasTherapeuticIndicationText>Terlipressine is bestemd voor de behandeling van bloedende oesofagusvarices.</idmp-mprd:hasTherapeuticIndicationText>
+		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasTherapeuticIndicationText>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+				<cmns-txt:hasTextValue>Terlipressine is bestemd voor de behandeling van bloedende oesofagusvarices.</cmns-txt:hasTextValue>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasTherapeuticIndicationText>
 		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjection"/>
 	</owl:NamedIndividual>
 	
@@ -555,21 +580,32 @@
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN1MgSolutionForInjectionTherapeuticIndication">
 		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
 		<dct:source>https://docetp.mpa.se/LMF/Terlipressin%20SUN%20solution%20for%20injection%20SmPC_09001bee807a73ff.pdf</dct:source>
-		<idmp-mprd:hasMedicalCondition>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
 			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-ra;MedDRAMedicalConditionIdentifier"/>
+				<rdf:type rdf:resource="&idmp-eura;MedDRATerm"/>
+				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
 				<rdfs:label>bleeding esophageal varices</rdfs:label>
-				<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
+				<cmns-cls:isClassifiedBy rdf:resource="&idmp-eura;MedDRATermClassifier-LowestLevelTerm"/>
+				<cmns-id:isIdentifiedBy>
+					<idmp-eura:MedDRAIdentifier>
+						<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
+					</idmp-eura:MedDRAIdentifier>
+				</cmns-id:isIdentifiedBy>
 			</owl:NamedIndividual>
-		</idmp-mprd:hasMedicalCondition>
-		<idmp-mprd:hasTherapeuticIndicationText>Terlipressin är indicerat för behandlingen av blödande esofagusvaricer.</idmp-mprd:hasTherapeuticIndicationText>
+		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasTherapeuticIndicationText>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+				<cmns-txt:hasTextValue>Terlipressin är indicerat för behandlingen av blödande esofagusvaricer.</cmns-txt:hasTextValue>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasTherapeuticIndicationText>
 		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-trlp;TerlipressinSUN1MgSolutionForInjection"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSimplifiedMolecularInputLineEntry">
-		<rdf:type rdf:resource="&idmp-sub;SimplifiedMolecularInputLineEntry"/>
+		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
 		<rdfs:label>terlipressin simplified molecular input line entry</rdfs:label>
-		<cmns-txt:hasTextValue>O=C(N)CNC(=O)[C@@H](NC(=O)[C@H]4N(C(=O)[C@H]1NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)CNC(=O)CNC(=O)CN)CSSC1)Cc2ccc(O)cc2)Cc3ccccc3)CCC(=O)N)CC(=O)N)CCC4)CCCCN</cmns-txt:hasTextValue>
+		<idmp-sub:hasSMILESValue>O=C(N)CNC(=O)[C@@H](NC(=O)[C@H]4N(C(=O)[C@H]1NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)CNC(=O)CNC(=O)CN)CSSC1)Cc2ccc(O)cc2)Cc3ccccc3)CCC(=O)N)CC(=O)N)CCC4)CCCCN</idmp-sub:hasSMILESValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;UNII-4U092XZF0K">
