@@ -1,0 +1,56 @@
+#UC3 CQ 3 	Has a substance <S> with a specific ingredient role <R> been part of an approved medicinal product <P> dosed by route of administration <A>?
+
+PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+PREFIX cmns-ctxdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
+PREFIX cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX idmp-eura:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
+PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX idmp-phprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/> 
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?Substance ?SubstanceLabel ?IngredientRoleType ?AuthorizedMedicinalProduct ?RouteOfAdminstrationLabel
+WHERE {
+
+        # Bind Variable SPOR RMS ID <A>
+        # Example "100000073619" for $SPORRMSId
+        BIND( uc3_cq3_parameter_1  AS $SPORRMSId)
+
+        # Find Medicinal Product that is approved for the Route of Administration having SPORRMSID
+		?SPORRMSIdentifier a idmp-eura:SPOR-ReferentialsManagementSystemIdentifier;
+			cmns-txt:hasTextValue $SPORRMSId . 
+		
+		?RouteOfAdministration a idmp-mprd:RouteOfAdministration;
+			rdfs:label ?RouteOfAdminstrationLabel ;
+			cmns-id:isIdentifiedBy ?SPORRMSIdentifier .
+		?PharmaceuticalProduct idmp-mprd:hasRouteOfAdministration ?RouteOfAdministration ;
+		    ^cmns-col:comprises ?MedicinalProduct .
+			
+        ?MedicinalProduct (cmns-pts:playsRole|^cmns-pts:isPlayedBy) ?AuthorizedMedicinalProduct .
+		?AuthorizedMedicinalProduct a idmp-mprd:AuthorizedMedicinalProduct .
+
+
+		
+			
+  	    # Find the substance that is part of product composition which defines Product that is comprised of MedicinalProduct
+		?PharmaceuticalProduct ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
+    	?SubstanceInIngredientRole cmns-pts:isRealizedIn ?ProductComposition .
+		?SubstanceInIngredientRole cmns-pts:isPlayedBy ?Substance .
+		
+		# Find most specific ingredient role
+		?SubstanceInIngredientRole a/rdfs:subClassOf* ?IngredientClass .
+		?IngredientClass rdfs:subClassOf* idmp-sub:Ingredient .
+		FILTER NOT EXISTS { ?SubClass rdfs:subClassOf ?IngredientClass }
+		?IngredientClass rdfs:label ?IngredientRoleType .
+		
+		# Make sure that we only return actual substances
+        ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
+
+        # Optionally, get the name of the substance
+        OPTIONAL{?Substance  rdfs:label  ?SubstanceLabel }
+}
+ORDER BY ?AuthorizedMedicinalProduct ?IngredientRoleType ?SubstanceLabel
