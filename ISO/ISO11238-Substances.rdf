@@ -3438,6 +3438,10 @@
 		<skos:definition>relative spatial arrangement of atoms in 3-dimensional space within molecules</skos:definition>
 		<skos:example>absolute, axial r, axial s, square planar 1, square planar 2, square planar 3, square planar 4, tetrahedral, octahedral 12, octahedral 22, octahedral 21, chiral, geometric, achiral, racemic, mixed</skos:example>
 		<skos:note>Stereochemistry is concerned with the 3-dimensional arrangement of atoms in molecules, and stereoisomers are isomers with no difference in connectivity or bond multiplicity, but whose atomicspatial arrangements differ.</skos:note>
+		<idmp-sub:hasBusinessRules>When the Substance type, as defined in is either chemical or polymer, this class is MANDATORY; for all other cases this class is CONDITIONAL.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>ABSOLUTE, AXIAL R, AXIAL S, SQUARE PLANAR 1, SQUARE PLANAR 2, SQUARE PLANAR 3, SQUARE PLANAR 4, TETRAHEDRAL, OCTAHEDRAL 12, OCTAHEDRAL 22, OCTAHEDRAL 21; RACEMIC, MIXED, CHIRAL, ACHIRAL, ABSOLUTE, AXIAL, EPIMERIC, MESO, UNKNOWN, CIS, TRANS</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.80, clause 7.2.2 Figure 14</cmns-av:directSource>
 		<cmns-av:explanatoryNote>Stereochemistry is a structure. In most cases it is also a molecular structure, but the way stereochemistry is defined in IDMP it is not necessarily so because the list in IDMP includes &apos;racemic&apos;, which is a mereological property of a mixture and depends on the stereochemistry of its constituents. The stereochemistry of the molecule is the 3d spatial and topological structure. The stereochemistry can also be represented different ways, so one can define a stereochemical representation along with structural representation, but both are often represented together.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>molecular geometry</cmns-av:synonym>
@@ -4014,6 +4018,7 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceCode">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -4052,12 +4057,17 @@
 		</rdfs:subClassOf>
 		<rdfs:label>substance code</rdfs:label>
 		<skos:definition>sequence of characters denoting a registered code for a given substance that is associated with a publicly recognized code system</skos:definition>
+		<skos:example>11-22-356; ab02sh</skos:example>
 		<skos:example>CAS Registry numbers, EC numbers, FDA UNII codes, EMA XEVMPD codes, ASK numbers, EPA Pesticide codes</skos:example>
 		<skos:example>These codes include Chemical Abstract Service (CAS) Registry Numbers, European Inventory of Existing Commercial Chemical Substances (EINECS), European Drug Codes (XEVMPD) and Japanese Drug Codes.</skos:example>
 		<skos:note>Codes typically facilitate mapping and linking of substances to a variety of information sources.</skos:note>
 		<skos:note>The actual code shall be captured using the same format that is used in the code system. Only codes associated with a code system shall be captured. The code shall be specifically associated with a given substance. Many public and non-public databases identify substances with a code and these codes can be very helpful in mapping substances to various systems. Codes shall always be verified against the source system. Different jurisdictions may require a code from a code system or multiple code systems to be associated and submitted with a substance.</skos:note>
+		<idmp-sub:hasBusinessRules>Only codes from recognized code systems will be captured. The code should specifically link to a substance but need not uniquely link to substance. This code can also be a deprecated Substance ID generated based on ISO 11238.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.5</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Note that although this element is encoded as CD.Code in the ISO/TS 19844 implementation guide, that code type does not exist in the ISO 21090 specification, and this it is modeled as a CD in the ontology.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceComposition">
