@@ -187,21 +187,6 @@
 		</rdfs:subClassOf>
 	</owl:Class>
 	
-	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11615-IngredientRoleVocabulary">
-		<rdf:type rdf:resource="&idmp-dtp;ControlledVocabulary"/>
-		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
-		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
-		<rdfs:label>ISO 11615 - ingredient role vocabulary</rdfs:label>
-		<skos:definition>controlled vocabulary denoting an ingredient role, according to the ISO 20443 implementation guide for ISO 11615</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.7.2.2.2 and Figure 12</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</cmns-av:adaptedFrom>
-		<cmns-col:isConstituentOf rdf:resource="&idmp-mprd;ISO20443-CodeSet"/>
-		<cmns-dsg:hasDescription>controlled vocabulary denoting an ingredient role, according to the ISO 20443 implementation guide for ISO 11615</cmns-dsg:hasDescription>
-		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
-		<mvf:hasTextualName>ISO 11615 Ingredient Role vocabulary</mvf:hasTextualName>
-		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ISO11615-IngredientRoleVocabulary/</mvf:hasURI>
-	</owl:NamedIndividual>
-	
 	<owl:Class rdf:about="&idmp-sub;InactiveIngredient">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -820,6 +805,21 @@
 				</owl:allValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;Contraindication">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;TherapeuticIndication">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>comorbidity</rdfs:label>
 		<skos:definition>classifier for a cooccurring condition or co-infection that is described as part of the indication</skos:definition>
 		<skos:note>If there is any comorbidity (concurrent condition) or co-infection described as part of the indication as it is referenced in the regulated product information, it can be specified here using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
@@ -1027,6 +1027,12 @@
 				<owl:allValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>contraindication as &apos;disease/symptom/procedure&apos;</rdfs:label>
 		<skos:definition>classifier for diseases, symptoms or procedures from medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
 		<skos:note>Classifiers for diseases, symptoms or procedures are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
@@ -1079,6 +1085,21 @@
 				</owl:allValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;Contraindication">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;TherapeuticIndication">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>disease status</rdfs:label>
 		<skos:definition>classifier for the status of a disease or symptom</skos:definition>
 		<skos:note>The status of the disease or symptom of the indication can be specified as it is referenced in the regulated product information using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
@@ -1094,6 +1115,21 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.23</dct:source>
 		<skos:definition>specified quantity of a medicine, to be taken at one time or at stated intervals</skos:definition>
 	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-mprd;ISO11615-IngredientRoleVocabulary">
+		<rdf:type rdf:resource="&idmp-dtp;ControlledVocabulary"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 11615 - ingredient role vocabulary</rdfs:label>
+		<skos:definition>controlled vocabulary denoting an ingredient role, according to the ISO 20443 implementation guide for ISO 11615</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.7.2.2.2 and Figure 12</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</cmns-av:adaptedFrom>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-mprd;ISO20443-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary denoting an ingredient role, according to the ISO 20443 implementation guide for ISO 11615</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>ISO 11615 Ingredient Role vocabulary</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ISO11615-IngredientRoleVocabulary/</mvf:hasURI>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-mprd;ISO20443-CodeSet">
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
@@ -1147,6 +1183,12 @@
 				<owl:allValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>indication as &apos;disease/symptom/procedure&apos;</rdfs:label>
 		<skos:definition>classifier for diseases, symptoms or procedures from medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products</skos:definition>
 		<skos:note>Classifiers for diseases, symptoms or procedures are defined in controlled vocabularies such as SNOMED-CT or MedDRA.</skos:note>
@@ -1162,8 +1204,8 @@
 		<rdfs:label>ingredient role - ACTI</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an active ingredient whose basis of strength cannot be specified</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>ACTI</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1172,8 +1214,8 @@
 		<rdfs:label>ingredient role - ACTIB</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an active ingredient where the entire substance is the basis of strength</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>ACTIB</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1182,8 +1224,8 @@
 		<rdfs:label>ingredient role - ACTIM</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an active ingredient where the active moiety is basis of strength</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>ACTIM</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1192,8 +1234,8 @@
 		<rdfs:label>ingredient role - ACTIR</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an active ingredient where another reference substance is the basis of strength</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>ACTIR</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1202,8 +1244,8 @@
 		<rdfs:label>ingredient role - ADJV</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an adjuvant, an ingredient(s) which augments or promotes the pharmacological effect of the active ingredient(s) without itself being considered active (typically used with vaccines)</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>ADJV</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1213,8 +1255,8 @@
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an ingredient that is any additive added</skos:definition>
 		<skos:note>Use only when there is no described pharmacological action and classification as merely &apos;inactive&apos; ingredient is not appropriate</skos:note>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>ADTV</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1224,8 +1266,8 @@
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an ingredient that is the base of a preparation</skos:definition>
 		<skos:example>water, vaseline, ethanol</skos:example>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>BASE</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1234,8 +1276,8 @@
 		<rdfs:label>ingredient role - CNTM</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for a contaminant, an ingredient whose presence is not intended but may not be reasonably avoided given the circumstances of the mixture&apos;s nature or origin</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>CNTM</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1244,8 +1286,8 @@
 		<rdfs:label>ingredient role - COLR</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an ingredient added to alter the color appearance</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>COLR</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1254,8 +1296,8 @@
 		<rdfs:label>ingredient role - FLVR</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an ingredient added to alter the taste of the product</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>FLVR</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1264,8 +1306,8 @@
 		<rdfs:label>ingredient role - IACT</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an inactive ingredient, i.e. ingredients added for a purpose other than the intended pharmacological action</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>IACT</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1274,8 +1316,8 @@
 		<rdfs:label>ingredient role - INGR</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for an ingredient not otherwise specified, used in cases of devices or foods where further classification is not common</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>INGR</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1286,8 +1328,8 @@
 		<skos:definition>code for a mechanical ingredient, an ingredient which, as a whole, lends a spatial structure to the product, which structure is meaningful to the delivery of the pharmacologically active ingredients near the target site</skos:definition>
 		<skos:example>For example, a collagen matrix used as a base for transplanting skin cells.</skos:example>
 		<skos:note>Such ingredient has a function other than merely delivering the pharmacologically active substances into a systemic compartment (such as, for example, an ordinary capsule would have.)</skos:note>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>MECH</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1296,8 +1338,8 @@
 		<rdfs:label>ingredient role - PRSV</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for a preservative, an ingredient added to delay the risk of the product&apos;s spoiling</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>PRSV</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1306,8 +1348,8 @@
 		<rdfs:label>ingredient role - STBL</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>code for a stabilizer, an ingredient added to keep the mixture homogenic (e.g. prevent the phases of an emulsion to separate)</skos:definition>
-		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-mprd;ISO11615-IngredientRoleVocabulary"/>
 		<cmns-txt:hasTextValue>STBL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
@@ -1376,6 +1418,21 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;Contraindication">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;TherapeuticIndication">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -2507,6 +2564,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 				<owl:allValuesFrom rdf:resource="&idmp-mprd;ShelfLife"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;ShelfLife"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>shelf life type</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 11 and clause 9.6.2.11</dct:source>
 		<skos:definition>classifier for the period during which a medical product retains its properties and stated performance within specified limits if stored under defined conditions, taking into account various scenarios such as shelf life of the packaged medicinal product itself, shelf life after transformation where necessary, shelf life after first opening of a bottle, etc.</skos:definition>
@@ -2522,6 +2585,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;ShelfLife"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom rdf:resource="&idmp-mprd;ShelfLife"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2790,6 +2859,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom rdf:resource="&idmp-mprd;MedicalCondition"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
