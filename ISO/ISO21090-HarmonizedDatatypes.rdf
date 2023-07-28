@@ -14,7 +14,9 @@
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-chg "https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/">
 	<!ENTITY idmp-dtp "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/">
+	<!ENTITY lcc-639-1 "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/">
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
+	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -36,7 +38,9 @@
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-chg="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"
 	xmlns:idmp-dtp="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"
+	xmlns:lcc-639-1="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -49,8 +53,8 @@
 		
 		The implementation of ISO 21090 included herein is an OWL 2 DL compliant representation of the datatypes defined in the ISO specification. This means that it is not a perfect match for the UML (Unified Modeling Language) representation given in the standard, as there is not a one-to-one alignment between UML and OWL. For details on mapping UML to OWL, please refer to the Object Management Group (OMG) specifications for (1) the Ontology Definition Metamode (ODM), available at https://www.omg.org/spec/ODM/, and (2) MOF to RDF Mapping (MOF2RDF), available at https://www.omg.org/spec/MOF2RDF/. As a consequence, this ontology is an indirectly conforming implementation that provides mappings to the XML Schema Datatypes that are supported in OWL 2 for some ISO 21090 datatypes, and encodes others in a manner that is OWL 2 DL compliant. References to ISO 11179 with respect to the representation of codes and code sets are faithful to the 3rd edition of 11179 as well as to revisions to that standard that are part of emerging work in the ISO JTC 1 SC32 WG2 working group to the degree possible.
 		
-		For more information on the ontologies on which this ontology depends, please refer to the Object Management Group (OMG) specifications for (1) the Commons Ontology Library (Commons) specification, available at https://www.omg.org/spec/COMMONS/, and (2) the Languages, Countries and Codes (LCC) specification, available at https://www.omg.org/spec/LCC/. Note that certain Commons ontologies referenced herein, including Documents and Quantities and Units, are not part of the Commons Ontology Library 1.0 Specification but are planned for inclusion in the 1.1 revision planned for late 2022 or early 2023.</dct:abstract>
-		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		For more information on the ontologies on which this ontology depends, please refer to the Object Management Group (OMG) specifications for (1) the Commons Ontology Library (Commons) specification, available at https://www.omg.org/spec/COMMONS/, (2) the Languages, Countries and Codes (LCC) specification, available at https://www.omg.org/spec/LCC/, and (3) the Multiple Vocabulary Facility (MVF) specification, available at https://www.omg.org/spec/MVF/. Note that certain Commons ontologies referenced herein, including Documents and Quantities and Units, are not part of the Commons Ontology Library 1.0 Specification but are planned for inclusion in the 1.1 revision of the Commons planned for late 2023.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
@@ -63,14 +67,35 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO21090-HarmonizedDatatypes/"/>
 		<owl:versionInfo>The IDMP MVP version of this ontology is incomplete, and covers only the parts of the ISO 21090 standard required to support the MVP use cases.</owl:versionInfo>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO21090-HarmonizedDatatypes.rdf version of this ontology was modified to incorporate the Multiple Vocabulary Facility (MVF) for consistent representation of controlled vocabularies and code systems.</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 		<cmns-av:explanatoryNote>The harmonized datatypes ontology provides a set of codes for datatypes and classes used in other standards in the health informatics family of standards, including those published by HL7. These codes need to be referenced via an annotation in the context of the IDMP ontologies due to the fact that any other approach would result in punning.</cmns-av:explanatoryNote>
 	</owl:Ontology>
+	
+	<owl:Class rdf:about="&idmp-dtp;CodeSystem">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ControlledVocabulary"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&cmns-id;Identifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>code system</rdfs:label>
+		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 3.4</dct:source>
+		<skos:definition>managed collection of concept identifiers, usually codes, but sometimes more complex sets of rules and references</skos:definition>
+		<skos:note>They are often described as collections of uniquely identifiable concepts with associated representations, designations, associations and meanings.</skos:note>
+		<cmns-av:usageNote>ISO 21090 does not explicitly define a datatype called CD.CodeSystem (or codeSystem, or codeSystem: Uid, depending on the reference), which is referenced in some of the IDMP standards. The relationship &apos;is member of&apos; some code system, which is a property of every code element, corresponds to CD.CodeSystem, however, and, the UID/OID for the relevant system can be retrieved via SPARQL.</cmns-av:usageNote>
+		<cmns-av:usageNote>The restriction, isIdentifiedBy exactly 1 Identifier corresponds to the &apos;codeSystem : Uid&apos; attribute given in ISO 21090. ISO 21090 requires the code system name to be associated with every code; in this ontology, the name is associated with the code system and a code is a member of that system, thus one can retrieve the code system name via SPARQL. The &apos;codeSystemVersion : String&apos; corresponds with the hasVersion property, and again can be retrieved for any code using SPARQL to query through to the definition of the code system of which it is a member. Both the name and version are inherited from CodeSet.</cmns-av:usageNote>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-dtp;CodeSystemName">
 		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
@@ -85,12 +110,42 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.3</dct:source>
 		<skos:definition>common name of the coding system</skos:definition>
 		<skos:note>The purpose of a code system name is to assist an unaided human interpreter of a code value to understand which code system is referenced.</skos:note>
+		<cmns-av:usageNote>ISO 21090 does not explicitly define a datatype called CD.CodeSystemName (or codeSystemName), which is referenced in some of the IDMP standards. The relationship &apos;has name&apos; some code system name, which is a property of every code set, corresponds to CD.CodeSystemName, however. This element can be retrieved by using SPARQL from any code to the code system of which it is a member.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-dtp;CodingRationale">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;DatatypeFlavor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&cmns-cds;CodeElement"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&cmns-cds;CodeElement"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>coding rationale</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.10</dct:source>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-dtp;CodingRationale-O">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CodingRationale-OR">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CodingRationale-P">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CodingRationale-PR">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CodingRationale-R">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>code element that indicates a reason why a particular CD has been provided, either as the root concept or as one of the translations.</skos:definition>
 		<skos:note>A code is deemed to be post-coded if the user does not assign the code when they first enter the data. codingRationale is not expected to act as a quality review marker on the quality of the coding or the translation processes.</skos:note>
 		<skos:note>A code is required when it is present in the instance to meet some constraints imposed on the instance by the context of use. Information Processing Entities shall not be required to mark a particular translation as required even though it is required by the context of use, but may do so. Information processing entities shall not reject instances because of the presence or absence of the codingRationale flag.</skos:note>
@@ -103,7 +158,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.10</dct:source>
 		<skos:definition>code indicating that the code descriptor represents the originally produced code</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CodingRationaleEnumeration"/>
 		<cmns-dsg:hasDescription>Original</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>O</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -114,7 +169,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.10</dct:source>
 		<skos:definition>code indicating that the code descriptor is an originally produced code and is required by the specification describing the use of the coded concept</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CodingRationaleEnumeration"/>
 		<cmns-dsg:hasDescription>Original and Required</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>OR</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -125,7 +180,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.10</dct:source>
 		<skos:definition>code indicating that the code descriptor was post-coded from free text source</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CodingRationaleEnumeration"/>
 		<cmns-dsg:hasDescription>Post-coded</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>P</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -136,7 +191,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.10</dct:source>
 		<skos:definition>code indicating that the code descriptor is post-coded from free text source and is required by the specification describing the use of the coded concept</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CodingRationaleEnumeration"/>
 		<cmns-dsg:hasDescription>Post-coded and Required</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>PR</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -148,22 +203,48 @@
 		<skos:definition>code indicating that the code descriptor is required by the specification describing the use of the coded concept</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>The exact form of the requirement is not specified here; it may be required by the specification directly, or it may arise as an indirect result of other conformance tools. More than one different requirement may exist simultaineously, so more than one code in a CD complex may be required.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CodingRationaleEnumeration"/>
 		<cmns-dsg:hasDescription>Required</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>R</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;CodingRationaleEnumeration">
-		<rdf:type rdf:resource="&idmp-dtp;CodingRationale"/>
+		<rdf:type rdf:resource="&idmp-dtp;CodeSystem"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:label>coding rationale enumeration</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.10</dct:source>
-		<skos:definition>singleton used for reference to the coding rationale code element class to avoid punning</skos:definition>
+		<skos:definition>controlled vocabulary representing the enumeration for coding rationale as specified in ISO 21090</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary representing the enumeration for coding rationale</cmns-dsg:hasDescription>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-dtp;OID-2.16.840.1.113883.5.1074"/>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>Coding Rationale Enumeration</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/CodingRationaleEnumeration/</mvf:hasURI>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-dtp;CompressionAlgorithm">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;DatatypeFlavor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>compression algorithm</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.8</dct:source>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-dtp;CompressionAlgorithm-BZ">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CompressionAlgorithm-DF">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CompressionAlgorithm-GZ">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CompressionAlgorithm-Z">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CompressionAlgorithm-Z7">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;CompressionAlgorithm-ZL">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>code element that identifies an algorithm, if any, used to compress the raw byte data</skos:definition>
 		<skos:note>If populated, the value of this attribute shall be taken from the HL7 CompressionAlgorithm code system.</skos:note>
 		<skos:note>If the attribute is null, the data are not compressed. Compression only applies to the binary form of the content.</skos:note>
@@ -176,7 +257,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.8</dct:source>
 		<skos:definition>code indicating the bzip-2 compression format. See [http://www.bzip.org/] for more information.</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CompressionAlgorithmEnumeration"/>
 		<cmns-dsg:hasDescription>bzip</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>BZ</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -187,7 +268,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.8</dct:source>
 		<skos:definition>code indicating the deflate compressed data format as specified in IETF RFC 1951</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CompressionAlgorithmEnumeration"/>
 		<cmns-dsg:hasDescription>deflate</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>DF</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -198,7 +279,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.8</dct:source>
 		<skos:definition>code indicating a compressed data format that is compatible with the widely used GZIP utility as specified in IETF RFC 1952 (uses the deflate algorithm)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CompressionAlgorithmEnumeration"/>
 		<cmns-dsg:hasDescription>gzip</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>GZ</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -209,7 +290,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.8</dct:source>
 		<skos:definition>code indicating the original UNIX compress algorithm and file format using the LZC algorithm (a variant of LZW). Patent encumbered and less efficient than deflate</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CompressionAlgorithmEnumeration"/>
 		<cmns-dsg:hasDescription>compress</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>Z</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -220,7 +301,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.8</dct:source>
 		<skos:definition>code indicating the 7z compression file format. See [http://www.7-zip.org/7z.html] for more information.</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CompressionAlgorithmEnumeration"/>
 		<cmns-dsg:hasDescription>Z7</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>Z7</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -231,17 +312,34 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.8</dct:source>
 		<skos:definition>code indicating a compressed data format that also uses the deflate algorithm. Specified as IETF RFC 1950</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CompressionAlgorithmEnumeration"/>
 		<cmns-dsg:hasDescription>zlib</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>ZL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;CompressionAlgorithmEnumeration">
-		<rdf:type rdf:resource="&idmp-dtp;CompressionAlgorithm"/>
+		<rdf:type rdf:resource="&idmp-dtp;CodeSystem"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:label>compression algorithm enumeration</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.8</dct:source>
-		<skos:definition>singleton used for reference to the compression algorithm code element class to avoid punning</skos:definition>
+		<skos:definition>controlled vocabulary representing the enumeration for compression algorithms as specified in ISO 21090</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary representing the enumeration for compression algorithms as specified in ISO 21090</cmns-dsg:hasDescription>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-dtp;OID-2.16.840.1.113883.5.1009"/>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>Compression Algorithm Enumeration</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/CompressionAlgorithmEnumeration/</mvf:hasURI>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-dtp;ControlledVocabulary">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ValueDomain"/>
+		<rdfs:subClassOf rdf:resource="&mvf;Vocabulary"/>
+		<rdfs:label>controlled vocabulary</rdfs:label>
+		<skos:definition>finite set of values that represent the only allowed values for a data item</skos:definition>
+		<skos:note>The allowed values can be codes, text or numeric.</skos:note>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.18</cmns-av:directSource>
+		<cmns-av:directSource>ISO 11240:2012 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.5</cmns-av:directSource>
+	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;DatatypeCode-ANY">
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
@@ -705,11 +803,21 @@
 	
 	<owl:Class rdf:about="&idmp-dtp;IntegrityCheckAlgorithm">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;DatatypeFlavor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>integrity check algorithm</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.10</dct:source>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-dtp;IntegrityCheckAlgorithm-SHA1">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;IntegrityCheckAlgorithm-SHA256">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>code element that identifies the algorithm used to compute the integrityCheck value</skos:definition>
 		<skos:note>If populated, the value of this attribute shall be taken from the HL7 IntegrityCheckAlgorithm code system.</skos:note>
-		<cmns-av:synonym>integrity check algorithm enumeration</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;IntegrityCheckAlgorithm-SHA1">
@@ -718,7 +826,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.10</dct:source>
 		<skos:definition>code indicating the algorithm defined in FIPS PUB 180-1: Secure Hash Standard, As of April 17, 1995</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;IntegrityCheckAlgorithmEnumeration"/>
 		<cmns-dsg:hasDescription>secure hash algorithm - 1</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>SHA1</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -729,26 +837,69 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.10</dct:source>
 		<skos:definition>code indicating the algorithm defined in FIPS PUB 180-2: Secure Hash Standard</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;IntegrityCheckAlgorithmEnumeration"/>
 		<cmns-dsg:hasDescription>secure hash algorithm - 256</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>SHA256</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;IntegrityCheckAlgorithmEnumeration">
-		<rdf:type rdf:resource="&idmp-dtp;IntegrityCheckAlgorithm"/>
+		<rdf:type rdf:resource="&idmp-dtp;CodeSystem"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:label>integrity check algorithm enumeration</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.10</dct:source>
-		<skos:definition>singleton used for reference to the integrity check algorithm code element class to avoid punning</skos:definition>
+		<skos:definition>controlled vocabulary representing the enumeration for integrity check algorithms as specified in ISO 21090</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary representing the enumeration for integrity check algorithms as specified in ISO 21090</cmns-dsg:hasDescription>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-dtp;OID-2.16.840.1.113883.5.1010"/>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>Integrity Check Algorithm Enumeration</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/IntegrityCheckAlgorithmEnumeration/</mvf:hasURI>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-dtp;NullFlavor">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;DatatypeFlavor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>null flavor</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-ASKU">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-DER">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-INV">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-MSK">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-NA">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-NASK">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-NAV">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-NI">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-NINF">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-OTH">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-PINF">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-QS">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-TRC">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-UNC">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;NullFlavor-UNK">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>code element that provides a general framework for handling incomplete data which is often encountered in healthcare information collection, use and analysis</skos:definition>
 		<skos:note>Some of the Null flavors are not generally applicable to all datatypes. The NullFlavors NINF, PINF, QS, and TRC shall only be used in association with QTY types. The NullFlavor UNC shall only be used with any type that has an originalText, and when UNC is used the originalText property shall be populated. When the NullFlavor DER is used, an expression shall be provided.</skos:note>
 		<skos:note>The nullFlavor property may also play a special role in conformance frameworks in specifications that make use of these types.</skos:note>
-		<cmns-av:synonym>null flavor enumeration</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;NullFlavor-ASKU">
@@ -757,7 +908,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value for which information was sought but not found (e.g. patient was asked but did not know).</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Asked but unknown</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-UNK"/>
 		<cmns-txt:hasTextValue>ASKU</cmns-txt:hasTextValue>
@@ -769,7 +920,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for value for which no attempt has been made to encode the information correctly but the raw source information is represented (usually in originalText)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Derived</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-INV"/>
 		<cmns-txt:hasTextValue>DER</cmns-txt:hasTextValue>
@@ -781,7 +932,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value as represented in the instance that is not a member of the set of permitted data values in the constrained value domain of a variable</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">2</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Invalid</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-NI"/>
 		<cmns-txt:hasTextValue>INV</cmns-txt:hasTextValue>
@@ -795,7 +946,7 @@
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">2</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>There may be an alternate mechanism for gaining access to this information.</cmns-av:explanatoryNote>
 		<cmns-av:explanatoryNote>Warning: Using this Nullflavor does provide information that may be a breach of confidentiality, even though no detailed data are provided. Its primary purpose is for those circumstances where it is necessary to inform the receiver that the information does exist without providing any detail.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Masked</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-NI"/>
 		<cmns-txt:hasTextValue>MSK</cmns-txt:hasTextValue>
@@ -807,7 +958,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value for which no proper value is applicable in this context (e.g. last menstrual period for a male)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">2</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Not applicable</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-NI"/>
 		<cmns-txt:hasTextValue>NA</cmns-txt:hasTextValue>
@@ -819,7 +970,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value for which information has not been sought (e.g. patient was not asked)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Not asked</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-UNK"/>
 		<cmns-txt:hasTextValue>NASK</cmns-txt:hasTextValue>
@@ -831,7 +982,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value for which information is not available at this time but it is expected that it would be available later</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">4</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Temporarily unavailable</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-ASKU"/>
 		<cmns-txt:hasTextValue>NAV</cmns-txt:hasTextValue>
@@ -844,7 +995,7 @@
 		<skos:definition>code for a value that is exceptional (missing, omitted, incomplete, improper)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>No information as to the reason for being an exceptional value is provided. This is the most general exceptional value. It is also the default exceptional value.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>No information</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>NI</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -855,7 +1006,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value that is part of a value domain including a negative infinity of numbers</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">4</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Negative infinity</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-OTH"/>
 		<cmns-txt:hasTextValue>NINF</cmns-txt:hasTextValue>
@@ -867,7 +1018,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for an actual value that is not a member of the set of permitted data values in the constrained value domain of a variable (e.g. concept not provided by required code system)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Other</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-INV"/>
 		<cmns-txt:hasTextValue>OTH</cmns-txt:hasTextValue>
@@ -879,7 +1030,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value that is part of a value domain including a positive infinity of numbers</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">4</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Positive infinity</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-OTH"/>
 		<cmns-txt:hasTextValue>PINF</cmns-txt:hasTextValue>
@@ -891,7 +1042,7 @@
 		<skos:definition>code for a value for which a specific quantity is not known, but is known to be non-zero and is not specified because it makes up the bulk of the material</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>&apos;Add 10 mg of ingredient X, 50 mg of ingredient Y, and sufficient quantity of water to 100 ml.&apos; The null flavor would be used to express the quantity of water.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Sufficient quantity</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-UNK"/>
 		<cmns-txt:hasTextValue>QS</cmns-txt:hasTextValue>
@@ -902,7 +1053,7 @@
 		<rdfs:label>null flavor TRC</rdfs:label>
 		<skos:definition>code for a value for which content is greater than zero, but too small to be quantified</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Trace</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-UNK"/>
 		<cmns-txt:hasTextValue>TRC</cmns-txt:hasTextValue>
@@ -914,7 +1065,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value for which an actual value may exist, but it must be derived from the information provided (usually an expression is provided directly)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Unencoded</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-INV"/>
 		<cmns-txt:hasTextValue>UNC</cmns-txt:hasTextValue>
@@ -926,17 +1077,24 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
 		<skos:definition>code for a value for which proper value is applicable, but not known</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">2</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Unknown</cmns-dsg:hasDescription>
 		<cmns-qtu:specializes rdf:resource="&idmp-dtp;NullFlavor-NI"/>
 		<cmns-txt:hasTextValue>UNK</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;NullFlavorEnumeration">
-		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
+		<rdf:type rdf:resource="&idmp-dtp;CodeSystem"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:label>null flavor enumeration</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
-		<skos:definition>singleton used for reference to the null flavor code element class to avoid punning</skos:definition>
+		<skos:definition>controlled vocabulary representing the enumeration for null flavor codes as specified in ISO 21090</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary representing the enumeration for null flavor codes as specified in ISO 21090</cmns-dsg:hasDescription>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-dtp;OID-2.16.840.1.113883.5.1008"/>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>Null Flavor Enumeration</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/NullFlavorEnumeration/</mvf:hasURI>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;OID-2.16.840.1.113883.5.1008">
@@ -1001,11 +1159,31 @@
 	
 	<owl:Class rdf:about="&idmp-dtp;UpdateMode">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;DatatypeFlavor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>update mode</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.3.3.2</dct:source>
-		<skos:definition>code element that allows a sending system to identify the role that thevcattribute plays in processing the instance that is being represented</skos:definition>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-dtp;UpdateMode-A">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;UpdateMode-AR">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;UpdateMode-D">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;UpdateMode-K">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;UpdateMode-N">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;UpdateMode-R">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-dtp;UpdateMode-U">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>code element that allows a sending system to identify the role that the attribute plays in processing the instance that is being represented</skos:definition>
 		<skos:note>If populated, the value of this attribute shall be taken from the HL7 UpdateMode code system.</skos:note>
-		<cmns-av:synonym>update mode enumeration</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;UpdateMode-A">
@@ -1015,7 +1193,7 @@
 		<skos:definition>code indicating that an item was (or is to be) added, having not been present immediately before</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>If it is already present, this may be treated as an error condition.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
 		<cmns-dsg:hasDescription>Add</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>A</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -1027,7 +1205,7 @@
 		<skos:definition>code indicating that an item was (or is to be) either added or replaced</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>No assertion is made as to whether the item previously existed.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
 		<cmns-dsg:hasDescription>Add or replace</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>AR</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -1039,7 +1217,7 @@
 		<skos:definition>code indicating that an item item was (or is to be) removed (sometimes referred to as deleted)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>If the item is part of a collection, delete any matching items.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
 		<cmns-dsg:hasDescription>Remove</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>D</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -1050,7 +1228,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.3.3.2</dct:source>
 		<skos:definition>code indicating that the item is part of the identifying information for the object that contains it</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
 		<cmns-dsg:hasDescription>Key</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>K</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -1062,7 +1240,7 @@
 		<skos:definition>code indicating that there was (or is to be) no change to the item</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>This is primarily used when this element has not changed, but other attributes in the instance have changed.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
 		<cmns-dsg:hasDescription>No change</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>N</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -1074,7 +1252,7 @@
 		<skos:definition>code indicating that an item existed previously and has been (or is to be) revised</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
 		<cmns-av:explanatoryNote>If an item does not already exist, this may be treated as an error condition.</cmns-av:explanatoryNote>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
 		<cmns-dsg:hasDescription>Replace</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>R</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
@@ -1085,16 +1263,23 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.3.3.2</dct:source>
 		<skos:definition>code indicating that it is not specified whether or what kind of change has occurred to the item, or whether the item is present as a reference or identifying property</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;UpdateModeEnumeration"/>
 		<cmns-dsg:hasDescription>Unknown</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>U</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-dtp;UpdateModeEnumeration">
-		<rdf:type rdf:resource="&idmp-dtp;UpdateMode"/>
+		<rdf:type rdf:resource="&idmp-dtp;CodeSystem"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:label>update mode enumeration</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.3.3.2</dct:source>
-		<skos:definition>singleton used for reference to the update mode code element class to avoid punning</skos:definition>
+		<skos:definition>controlled vocabulary representing the enumeration for update mode codes as specified in ISO 21090</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary representing the enumeration for update mode codes as specified in ISO 21090</cmns-dsg:hasDescription>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-dtp;OID-2.16.840.1.113883.5.57"/>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>Update Mode Enumeration</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/UpdateModeEnumeration/</mvf:hasURI>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-dtp;ValueDomain">

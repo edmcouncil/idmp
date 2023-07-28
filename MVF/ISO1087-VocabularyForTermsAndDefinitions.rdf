@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
+	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
+	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
+	<!ENTITY mvf-trm "https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
+	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
+	xmlns:mvf-trm="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/">
+		<rdfs:label>Multiple Vocabulary Facility (MVF) Terms and Definitions Ontology</rdfs:label>
+		<dct:abstract>The MVF ontology consists of three components:
+- a core ontology corresponding to the MVF metamodel,
+- an extension representing the subset of the ISO 1087 reference vocabulary used in other ISO standards for vocabulary representation (this ontology), 
+- an extension that incorporates additional vocabulary from ISO 1087 for terminology science. 
+MVF also reuses several ontologies from the OMG Commons library for specific patterns, including designations, collections, and classifiers.</dct:abstract>
+		<dct:contributor>Ed Barkmeyer, Thematix Partners LLC</dct:contributor>
+		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
+		<dct:contributor>Jim Odell, Thematix Partners LLC</dct:contributor>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/MVF/20230501/ISO1087-VocabularyForTermsAndDefinitions/"/>
+		<skos:scopeNote>Note that the set of ontologies provided for MVF do not provide exhaustive coverage of ISO 1087. We have not incorporated the terms related to data validation or natural language processing in the latest version of the standard, and certain classes under the heading of concept relation in the standard are handled as properties herein.</skos:scopeNote>
+		<cmns-av:copyright>Copyright (c) 2011-2023 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2023 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-cls;Aspect">
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.1.3, 3.2.1</dct:source>
+		<skos:example>&apos;Being made of wood&apos; as a property of a given &apos;table&apos;; &apos;Belonging to person A&apos; as a property of a given &apos;pet&apos;; &apos;Having been formulated by Einstein&apos; as a property of the equation &apos;E = mc squared&apos;</skos:example>
+		<skos:note>Characteristics are used for describing concepts.</skos:note>
+		<cmns-av:synonym>property</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-col;hasPart">
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.2.14, 3.2.21</dct:source>
+		<skos:note>hasPart is a concept relation between a comprehensive concept and a partitive concept.</skos:note>
+		<cmns-av:synonym>partitive concept relation</cmns-av:synonym>
+		<cmns-av:synonym>partitive relation</cmns-av:synonym>
+		<cmns-av:synonym>whole-part relation</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-col;isPartOf">
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.22</dct:source>
+		<skos:example>A partitive relation exists between the concepts &apos;bicycle&apos; and &apos;wheel&apos;, &apos;molecule&apos; and &apos;atom&apos;.</skos:example>
+		<skos:note>isPartOf is a concept relation between a partitive concept and a comprehensive concept.</skos:note>
+		<cmns-av:synonym>part-of relation</cmns-av:synonym>
+		<cmns-av:synonym>part-whole relation</cmns-av:synonym>
+		<cmns-av:synonym>partitive concept relation</cmns-av:synonym>
+		<cmns-av:synonym>partitive relation</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-dt;precedes">
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-dt;succeeds">
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&cmns-dsg;Name">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&lcc-lr;NaturalLanguage">
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.1.7</dct:source>
+		<skos:note>A natural language is a language that is or was in active use in a community of people, and the rules of which are mainly deduced from usage.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;AcceptabilityRating">
+		<rdfs:subClassOf rdf:resource="&mvf;TermStatus"/>
+		<rdfs:label>acceptability rating</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.18</dct:source>
+		<skos:definition>rating that allows for designations to be placed in order of preference as a guide to users</skos:definition>
+		<skos:note>The following ratings are common: preferred term, admitted term, deprecated term.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Acronym">
+		<rdfs:subClassOf rdf:resource="&mvf;Abbreviation"/>
+		<rdfs:label>acronym</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.15</dct:source>
+		<skos:definition>abbreviation that is made up of the initial letters of the components of the full form of a term or proper name or from syllables of the full form and that is pronounced syllabically</skos:definition>
+		<skos:example>Examples of acronyms are: laser, ISO, GATT, UNESCO, UNICEF</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;AdmittedTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;RatedTerm"/>
+		<rdfs:label>admitted term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.20</dct:source>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;hasAcceptabilityRating"/>
+				<owl:hasValue rdf:resource="&mvf-trm;admitted"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<skos:definition>term that is a synonym for a preferred term, but not rated according to the acceptability rating scale as a preferred term</skos:definition>
+		<skos:example>With regard to the concept &apos;terminology science&apos;, &quot;terminology studies&quot; is an admitted term, whereas &quot;terminology science&quot; is the preferred term, and &quot;terminology&quot; is a deprecated term.</skos:example>
+		<skos:note>There can be more than one admitted term. By analogy, &quot;admitted&quot; can also apply to appellations, proper names, and symbols.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Appellation">
+		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
+		<rdfs:label>appellation</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.3</dct:source>
+		<skos:definition>term that is applied to a group of objects whose relevant properties are identical</skos:definition>
+		<skos:example>Examples of appellations are: &apos;Nokia 7 Plus®&apos; (mobile phone), &apos;Adobe® Acrobat® X Pro&apos; (software), &apos;Road King®&apos; (motorcycle).</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Blend">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<rdfs:label>blend</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.13</dct:source>
+		<skos:definition>designation that is formed by clipping and combining two or more words</skos:definition>
+		<skos:example>Examples of blends are: infotainment, cyberspace, quasar</skos:example>
+		<cmns-av:synonym>blended designation</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;BorrowedTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<rdfs:label>borrowed term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.11</dct:source>
+		<skos:definition>term taken from another language or from another domain or subject</skos:definition>
+		<skos:example>The term &apos;virus&apos; was originally used in biology and later transferred to information. The English term &apos;internet&apos; has been borrowed by many other languages.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ClippedTerm">
+		<rdfs:subClassOf rdf:resource="&mvf;Abbreviation"/>
+		<rdfs:label>clipped term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.17</dct:source>
+		<skos:definition>abbreviation that is made up of a truncated term</skos:definition>
+		<skos:example>vet school (veterinarian school)</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ComplexTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<rdfs:label>complex term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.9, 3.4.10</dct:source>
+		<skos:definition>term that consists of more than one word or lexical unit</skos:definition>
+		<skos:example>Examples of complex terms are: computer mouse, fault recognition circuit.</skos:example>
+		<cmns-av:synonym>multi-word term</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;CompoundTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<rdfs:label>compound term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.8</dct:source>
+		<skos:definition>simple term that can be split morphologically into separate components</skos:definition>
+		<skos:example>Examples of compound terms are: steamship, blackbird, afterbirth.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ConceptDiagram">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Diagram"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
+				<owl:someValuesFrom rdf:resource="&mvf-trm;ConceptSystem"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;depicts"/>
+				<owl:someValuesFrom rdf:resource="&mvf;MVFEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>concept diagram</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.29</dct:source>
+		<skos:definition>graphic representation of a concept system</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ConceptField">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:allValuesFrom rdf:resource="&mvf;MVFEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isUsedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&mvf-trm;Domain">
+							</rdf:Description>
+							<rdf:Description rdf:about="&mvf-trm;Subject">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>concept field</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.10</dct:source>
+		<skos:definition>unstructured set of concepts belonging to the same domain or subject</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ConceptModel">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;ConceptDiagram"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:someValuesFrom rdf:resource="&mvf-trm;FormalLanguage"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>concept model</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.30</dct:source>
+		<dct:source>ISO 24156-1:2014 Graphic notations for concept modelling in terminology work and its relationship with UML - Part 1: Guidelines for using UML notation in terminology work</dct:source>
+		<skos:definition>concept diagram formed by means of a formal language</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ConceptSystem">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isUsedBy"/>
+				<owl:onClass rdf:resource="&mvf-trm;Domain"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&mvf;MVFEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>concept system</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.28</dct:source>
+		<skos:definition>set of concepts structured in one or more related domains according to the concept relations among its concepts</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Definition">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:onClass rdf:resource="&mvf;MVFEntry"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>definition</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.3.1</dct:source>
+		<skos:definition>representation of a concept by an expression that describes it and differentiates it from related concepts</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;DelimitingCharacteristic">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;EssentialCharacteristic"/>
+		<rdfs:label>delimiting characteristic</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.5</dct:source>
+		<skos:definition>essential characteristic used for distinguishing a concept from related concepts</skos:definition>
+		<skos:example>The delimiting characteristic &apos;support for the back&apos; may be used for distinguishing the concepts stool and chair.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;DeprecatedTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;RatedTerm"/>
+		<rdfs:label>deprecated term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.21</dct:source>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;hasAcceptabilityRating"/>
+				<owl:hasValue rdf:resource="&mvf-trm;deprecated"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<skos:definition>term which is a synonym for a preferred term, but rated according to the acceptability rating scale as undesired</skos:definition>
+		<skos:example>With regard to the concept &apos;terminology science, &apos;terminology&apos; is a deprecated term, whereas &apos;terminology science&apos; is the preferred term, and &apos;terminology studies&apos; is an admitted term.</skos:example>
+		<skos:note>There can be more than one deprecated term. By analogy, &apos;deprecated&apos; can also apply to appellations, proper names and symbols.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Diagram">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;depicts"/>
+				<owl:someValuesFrom rdf:resource="&owl;Thing"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>diagram</rdfs:label>
+		<skos:definition>two-dimensional geometric, symbolic representation of information that shows the appearance, structure, or workings of something</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Domain">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;Context"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;uses"/>
+				<owl:onClass rdf:resource="&mvf-trm;SpecialLanguage"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>domain</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09,clause 3.1.4</dct:source>
+		<skos:definition>field of special knowledge</skos:definition>
+		<skos:scopeNote>The borderlines and the granularity of a domain are determined from a purpose-related point of view. If a domain is subdivided, the result is again a domain.</skos:scopeNote>
+		<cmns-av:synonym>subject field</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;EssentialCharacteristic">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:someValuesFrom rdf:resource="&mvf;MVFEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>essential characteristic</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.3</dct:source>
+		<skos:definition>characteristic of a concept that is indispensable to understand that concept</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ExtensionalDefinition">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Definition"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&mvf-trm;Object"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>extensional definition</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.1.2, 3.3.3</dct:source>
+		<skos:definition>definition that enumerates the objects to which a concept corresponds under one criterion of subdivision</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;FormalLanguage">
+		<rdfs:subClassOf rdf:resource="&lcc-lr;Language"/>
+		<rdfs:label>formal language</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.1.10</dct:source>
+		<skos:definition>language whose rules are explicitly established before its use</skos:definition>
+		<skos:example>Web Ontology Language (OWL); the structured English informative language that is specified in the Semantics For Business Vocabulary and Rules (SBVR) Specification</skos:example>
+		<skos:note>A formal language is a collection of expressions, following formal rules of well-formedness. See the Distributed Ontology, Model, and Specification Language (DOL) specification for additional criteria and classification, available at https://www.omg.org/spec/DOL/.</skos:note>
+		<skos:scopeNote>The purpose of formal language is to assure exact communication of information.</skos:scopeNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;GeneralConcept">
+		<rdfs:subClassOf rdf:resource="&mvf;MVFEntry"/>
+		<rdfs:label>general concept</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.9</dct:source>
+		<owl:disjointWith rdf:resource="&mvf-trm;IndividualConcept"/>
+		<skos:definition>concept that corresponds to a potentially unlimited number of objects which form a group by reason of shared properties</skos:definition>
+		<skos:example>Examples of general concepts are &apos;planet&apos;, &apos;tower&apos;, &apos;Nobel Prize in Physics&apos;, &apos;moon&apos;.</skos:example>
+		<skos:note>For a general concept it is essential that a number of corresponding objects greater than 1 can be perceived or conceived of. For example &apos;spaceship&apos; has been a general concept before such a material object existed, at the time when there existed only 1 such object, and later, when there existed several such objects.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;GeneralLanguage">
+		<rdfs:subClassOf rdf:resource="&lcc-lr;NaturalLanguage"/>
+		<rdfs:label>general language</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.1.8</dct:source>
+		<skos:definition>natural language characterized by the use of linguistic means of expression independent of any specific domain</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;GenericExtensionalDefinition">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;ExtensionalDefinition"/>
+		<rdfs:label>generic extensional definition</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.3.4</dct:source>
+		<skos:definition>extensional definition that enumerates all the specific concepts of a generic concept under one criterion of subdivision on the same hierarchical level</skos:definition>
+		<skos:example>noble gas - helium, neon, argon, crypton, xenon or radon</skos:example>
+		<skos:note>A generic extensional definition is based on a generic relation, and the enumeration ends with the operator &apos;or&apos;; [i.e., a disjoint union of the subordinate concepts].</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;IndividualConcept">
+		<rdfs:subClassOf rdf:resource="&mvf;MVFEntry"/>
+		<rdfs:label>individual concept</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.8</dct:source>
+		<skos:definition>concept that corresponds to a unique object</skos:definition>
+		<skos:example>Examples of individual concepts are &apos;Saturn&apos;, &apos;Eiffel Tower&apos;, &apos;Moon&apos;, &apos;serial number FRHR603928&apos;, &apos;2016 Nobel Prize in Physics&apos;.</skos:example>
+		<skos:note>Individual concepts are represented by proper names. In a UML model or similar context, an individual concept corresponds to a singleton class.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Initialism">
+		<rdfs:subClassOf rdf:resource="&mvf;Abbreviation"/>
+		<rdfs:label>initialism</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.16</dct:source>
+		<skos:definition>abbreviation that is made up of the initial letters of the components of the full form of a term or proper name or from syllables of the full form and that is pronounced letter by letter</skos:definition>
+		<skos:example>Examples of initialisms are: UN, ASTM, IEC, US, EU, DNA</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;IntensionalDefinition">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Definition"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;hasDelimitingCharacteristic"/>
+				<owl:allValuesFrom rdf:resource="&mvf-trm;DelimitingCharacteristic"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-cls;Aspect"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>intensional definition</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.2.6, 3.3.2</dct:source>
+		<skos:definition>definition that conveys the intension of a concept by stating the immediate generic concept and its characteristics, including any delimiting characteristic(s)</skos:definition>
+		<skos:example>mechanical mouse: computer mouse in which movements are detected by rollers and a ball</skos:example>
+		<skos:example>optical mouse: computer mouse in which movements are detected by light sensors</skos:example>
+		<skos:note>Intensional definitions are preferable to other types of definitions because they clearly reveal the characteristics of a concept within a concept system: they should be used whenever possible.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;NewTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<rdfs:label>new term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.12</dct:source>
+		<skos:definition>term that is specifically coined for a given general concept</skos:definition>
+		<skos:example>smartwatch</skos:example>
+		<skos:note>A new term may supersede an older term or may designate a new concept.</skos:note>
+		<cmns-av:synonym>neonym</cmns-av:synonym>
+		<cmns-av:synonym>neoterm</cmns-av:synonym>
+		<cmns-av:synonym>terminological neologism</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;NonEssentialCharacteristic">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:label>non-essential characteristic</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09,claue 3.2.4</dct:source>
+		<skos:definition>characteristic of a concept that is not indispensable to understand that concept</skos:definition>
+		<skos:example>For defining the concept &apos;traffic light&apos;, the colour &apos;red&apos;, &apos;green&apos; or &apos;amber&apos; is an essential characteristic, while for defining the concept &apos;computer mouse&apos;, the colour (e.g. &apos;ivory&apos;, &apos;blue&apos; or &apos;red&apos;) is a non-essential characteristic.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Object">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>object</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.1.1</dct:source>
+		<skos:definition>anything perceivable or conceivable</skos:definition>
+		<skos:note>Objects may be material (e.g. an engine, a sheet of paper, a diamond), immaterial (e.g. conversion ratio, a project plan) or imagined (e.g. a unicorn). Objects correspond to individuals in an ontology, instances in many programming languages.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ObsoleteTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;RatedTerm"/>
+		<rdfs:label>obsolete term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.22</dct:source>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;hasAcceptabilityRating"/>
+				<owl:hasValue rdf:resource="&mvf-trm;obsolete"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<skos:definition>term which is no longer in common use</skos:definition>
+		<skos:note>By analogy, &apos;obsolete&apos; can also apply to appellations, proper names and symbols.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;PartitiveExtensionalDefinition">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;ExtensionalDefinition"/>
+		<rdfs:label>partitive extensional definition</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.3.5</dct:source>
+		<skos:definition>extensional definition that enumerates all the partitive concepts of a comprehensive concept on the same hierarchical level</skos:definition>
+		<skos:example>Family 18 in the Periodic Table: helium, neon, argon, crypton, xenon and radon.</skos:example>
+		<skos:note>A partitive extensional definition is based on a partitive relation, and the enumeration ends with the operator &apos;and&apos;; [i.e., a union that is disjoint and covering of all parts of the whole].</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;PreferredTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;RatedTerm"/>
+		<rdfs:label>preferred term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.19</dct:source>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;hasAcceptabilityRating"/>
+				<owl:hasValue rdf:resource="&mvf-trm;preferred"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<skos:definition>term rated according to the acceptability rating as the primary term for a given concept</skos:definition>
+		<skos:example>With regard to the concept &apos;terminology science&apos; the preferred term is &apos;terminology science&apos;, whereas &apos;terminology studies&apos; is an admitted term, and &apos;terminology&apos; is a deprecated term.</skos:example>
+		<skos:note>By analogy, &apos;preferred&apos; can also apply to appellations, proper names and symbols.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ProperName">
+		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
+		<rdfs:label>proper name</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.4</dct:source>
+		<skos:definition>designation that represents an individual concept</skos:definition>
+		<skos:example>&apos;International Organization for Standardization&apos;, &apos;IBM®&apos;, &apos;British Isles&apos;, &apos;United Nations&apos;</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;RatedTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;hasAcceptabilityRating"/>
+				<owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>rated term</rdfs:label>
+		<skos:definition>term rated according to an acceptability rating scale that allows for designations to be placed in order of preference as a guide to users</skos:definition>
+		<skos:note>The following ratings are common: preferred term, admitted term, deprecated term.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;ShortForm">
+		<rdfs:subClassOf rdf:resource="&mvf;Abbreviation"/>
+		<rdfs:label>short form</rdfs:label>
+		<skos:definition>abbreviatiated form for a very long complex term or appellation, using fewer words to designate the same concept</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;SimpleTerm">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<rdfs:label>simple term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.6, 3.4.7</dct:source>
+		<skos:definition>term that consists of a single word or lexical unit</skos:definition>
+		<skos:example>Examples of simple terms are: sound, light, barrier, accessory, accessorize, virus, viral.</skos:example>
+		<cmns-av:synonym>single word term</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;SpecialLanguage">
+		<rdfs:subClassOf rdf:resource="&lcc-lr;NaturalLanguage"/>
+		<rdfs:subClassOf rdf:resource="&mvf-trm;ConceptSystem"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isUsedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&mvf-trm;Domain">
+							</rdf:Description>
+							<rdf:Description rdf:about="&mvf-trm;Subject">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>special language</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.1.9</dct:source>
+		<skos:definition>natural language used in communication between experts in a domain and characterized by the use of specific linguistic means of expression</skos:definition>
+		<skos:scopeNote>The specific linguistic means of expression always include domain-specific terminology and phraseology and also can cover stylistic or syntactic features.</skos:scopeNote>
+		<cmns-av:synonym>LSP</cmns-av:synonym>
+		<cmns-av:synonym>language for special purposes</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Subject">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;Context"/>
+		<rdfs:label>subject</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.1.5</dct:source>
+		<skos:definition>area of interest or expertise</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Symbol">
+		<rdfs:subClassOf rdf:resource="&mvf;VocabularyEntry"/>
+		<rdfs:label>symbol</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.5</dct:source>
+		<skos:definition>designation that represents a concept by non-linguistic means</skos:definition>
+		<skos:note>From section 7.5, ISO 704, symbols are an important aid to international communication because their visual representation of concepts functions independently of any given language. They can communicate information directly under difficult circumstances (e.g., traffic signs).
+
+Iconic symbols should bear some visual resemblance to the concept they represent. Generally their meaning should be directly apparent without explanation. In some cases, however, the visual resemblance of the symbol is less pronounced or completely lost. Its meaning may be no longer directly recognizable and may be supported only by general agreement.
+
+Terms using the letters of the alphabet as iconic symbols to communicate the shape of the letter itself rather than its sound shall not be considered a symbol.
+
+Characters that replace words or parts of words, such as mathematical symbols or currency symbols, are considered symbols.</skos:note>
+		<skos:note>There are several types of symbols such as graphical symbols (ISO 3864, all parts) and letter symbols (ISO 80000, all parts).</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-trm;Term">
+		<rdfs:subClassOf rdf:resource="&mvf;VocabularyEntry"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&mvf-trm;GeneralConcept"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>term</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.2</dct:source>
+		<skos:definition>verbal designation of a general concept in a specific subject field</skos:definition>
+		<skos:note>A term may contain symbols and can have variants, e.g. different forms of spelling.</skos:note>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&mvf-trm;admitted">
+		<rdf:type rdf:resource="&mvf-trm;AcceptabilityRating"/>
+		<rdfs:label>admitted</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.20</dct:source>
+		<skos:definition>term rated as a synonym for a preferred term</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;associates">
+		<rdfs:label>associates</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.23</dct:source>
+		<skos:definition>relates two concepts having a non-hierarchical, thematic connection by virtue of experience</skos:definition>
+		<skos:example>An associative relation exists between the concepts education and teaching, baking and oven.</skos:example>
+		<skos:note>Associative relations are evidence that the terms are semantically or conceptually associated to the degree that it is important to make the connection explicit, on the grounds that it may suggest additional terms for use in indexing or retrieval.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;causes">
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>causes</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.27</dct:source>
+		<skos:definition>makes something happen or gives rise to some action, condition, or phenomenon as a consequence</skos:definition>
+		<skos:example>A causal relation exists between the concepts action and reaction, nuclear explosion and fall-out.</skos:example>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;depicts">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
+		<rdfs:label>depicts</rdfs:label>
+		<skos:definition>illustrates via an image</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:NamedIndividual rdf:about="&mvf-trm;deprecated">
+		<rdf:type rdf:resource="&mvf-trm;AcceptabilityRating"/>
+		<rdfs:label>deprecated</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.21</dct:source>
+		<skos:definition>term rated as undesired</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;extends">
+		<rdfs:label>extends</rdfs:label>
+		<skos:definition>supplements or augments</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasAcceptabilityRating">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
+		<rdfs:label>has acceptability rating</rdfs:label>
+		<rdfs:range rdf:resource="&mvf-trm;AcceptabilityRating"/>
+		<skos:definition>relates to a rating indicating its status with respect to the vocabulary</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasAntonym">
+		<rdf:type rdf:resource="&owl;SymmetricProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>has antonym</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.25</dct:source>
+		<skos:definition>relates a designation to another representing a coordinate concept viewed as its logical complement or opposite</skos:definition>
+		<skos:example>Antonymy exists between the terms encoding and decoding, positive and negative.</skos:example>
+		<skos:note>Designations in the relation of antonymy are called &apos;antonyms&apos;.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasDelimitingCharacteristic">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
+		<rdfs:label>has delimiting characteristic</rdfs:label>
+		<skos:definition>indicates a defining feature of</skos:definition>
+		<skos:note>A delimiting characteristic is a necessary condition for class membership.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasExtension">
+		<rdfs:label>has extension</rdfs:label>
+		<owl:inverseOf rdf:resource="&mvf-trm;extends"/>
+		<skos:definition>specifies something that supplements this entity</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasHomonym">
+		<rdf:type rdf:resource="&owl;SymmetricProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>has homonym</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.29</dct:source>
+		<skos:definition>relates a designation to antoher that has common spelling and pronunciation but represents a different concept, i.e., has different meaning and origin</skos:definition>
+		<skos:example>The term &apos;bark&apos; represents three unrelated concepts: 1) the concept &apos;bark&apos; corresponding to certain vocal repertoires of dogs; 2) the concept &apos;bark&apos; corresponding to the outside coverings of stems of woody plants; 3) the concept &apos;bark&apos; corresponding to some sailing vessels.</skos:example>
+		<skos:note>Designations in the relation of homonymy are called &apos;homonyms&apos;.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasIntension">
+		<rdfs:label>has intension</rdfs:label>
+		<skos:definition>specifies something that explains the entity in terms of meaning</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasMononym">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isSignifiedBy"/>
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>has mononym</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.26</dct:source>
+		<skos:definition>has as its singular (only) designation</skos:definition>
+		<skos:note>Mononymic relations between a concept and a term (designation, vocabulary entry) in a given language are those in which a given concept has only one designation. Designations in the relation of mononymy are called &apos;mononyms&apos;.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasSuperordinateConcept">
+		<rdf:type rdf:resource="&owl;TransitiveProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&mvf;hasNarrowerEntry"/>
+		<rdfs:label>has superordinate concept</rdfs:label>
+		<skos:definition>indicates a broader, ancestral concept</skos:definition>
+		<cmns-av:synonym>is narrower transitive than</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;hasSynonym">
+		<rdf:type rdf:resource="&owl;SymmetricProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>has synonym</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.23</dct:source>
+		<skos:definition>relates a vocabulary entry (designation) to another in a given natural language representing the same concept</skos:definition>
+		<skos:example>Synonymy exists between &apos;deuterium&apos; and &apos;heavy hydrogen&apos;, between &apos;United Nations&apos; and &apos;UN&apos;.</skos:example>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;isCausedBy">
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>is caused by</rdfs:label>
+		<owl:inverseOf rdf:resource="&mvf-trm;causes"/>
+		<skos:definition>is a consequence of</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;isCoordinateWith">
+		<rdfs:label>is coordinate with</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.2.17, 3.2.18</dct:source>
+		<skos:definition>indicates a concept that results from the same criterion of subdivision as another subordinate concept with the same immediate superordinate [parent] concept</skos:definition>
+		<skos:example>Applying &apos;layer of clothing&apos; as a criterion of subdivision to &apos;clothing&apos; yields &apos;outerwear&apos; and &apos;underwear&apos; as specific concepts. These concepts are coordinate concepts in relation to their generic concept &apos;clothing&apos;.</skos:example>
+		<skos:example>For the concept system &apos;computer mouse&apos; according to ISO 704:2009, 5.5.2.2.1, Example 4 the type of characteristic &apos;computer connection&apos; is used as a criterion of subdivision to divide the generic concept &apos;computer mouse into specific concepts such as &apos;cord mouse&apos; and &apos;cordless mouse&apos;.</skos:example>
+		<skos:example>For the concept system &apos;computer&apos; the type of characteristic &apos;function&apos; is used as a criterion of subdivision to divide the comprehensive concept &apos;computer&apos; into partitive concepts such as &apos;main board&apos;, &apos;display adapter&apos;, &apos;power supply&apos;, &apos;storage device&apos; and &apos;input device&apos;.</skos:example>
+		<skos:example>For the concept system &apos;safety sign&apos; according to ISO 3864-1:2011, 5, Table 1, the type of characteristic &apos;geometric shape&apos; is used as a criterion of subdivision to divide the generic concept &apos;safety sign&apos; into specific concepts such as &apos;mandatory action sign&apos; and &apos;safe condition sign&apos;.</skos:example>
+		<skos:note>A criterion of subdivision is a type of characteristic [aspect] according to which a superordinate concept is divided into subordinate concepts.</skos:note>
+		<cmns-av:synonym>is a sibling of</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;isDepictionOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
+		<rdfs:label>is depiction of</rdfs:label>
+		<owl:inverseOf rdf:resource="&mvf-trm;depicts"/>
+		<skos:definition>is an illustration of</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;isManagedBy">
+		<rdfs:label>is managed by</rdfs:label>
+		<skos:definition>indicates an entity that administers, oversees, and potentially maintains or operates it</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;isMonosemeFor">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;denotes"/>
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>is monoseme for</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.27</dct:source>
+		<skos:definition>is the sole designation for</skos:definition>
+		<skos:note>Designations in the relation of monosemy are called &apos;monosemes&apos;.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;isPolysemeFor">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;denotes"/>
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>is polyseme for</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.28</dct:source>
+		<skos:definition>relates a designation to more than one concept for which it has a different sense (meaning)</skos:definition>
+		<skos:example>The term &apos;bridge&apos; represents three concepts that are related in form and/or function: 1) the concept &apos;bridge&apos; corresponding to structures to carry traffic over a gap; 2) the concept &apos;bridge&apos; corresponding to certain wooden parts of string instruments; 3) the concept &apos;bridge&apos; corresponding to dental plates.</skos:example>
+		<skos:note>Designations in the relation of polysemy are called &apos;polysemes&apos;.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-trm;manages">
+		<rdfs:label>manages</rdfs:label>
+		<owl:inverseOf rdf:resource="&mvf-trm;isManagedBy"/>
+		<skos:definition>administers, oversees and possibly maintains and/or operates</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:NamedIndividual rdf:about="&mvf-trm;obsolete">
+		<rdf:type rdf:resource="&mvf-trm;AcceptabilityRating"/>
+		<rdfs:label>obsolete</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.22</dct:source>
+		<skos:definition>term that is no longer in common use</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&mvf-trm;preferred">
+		<rdf:type rdf:resource="&mvf-trm;AcceptabilityRating"/>
+		<rdfs:label>preferred</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.19</dct:source>
+		<skos:definition>term rated as the primary term for a given concept</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&mvf;Abbreviation">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<cmns-av:synonym>abbreviated form</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;MVFEntry">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:onClass rdf:resource="&mvf-trm;Definition"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&mvf-trm;GeneralConcept">
+					</rdf:Description>
+					<rdf:Description rdf:about="&mvf-trm;IndividualConcept">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<cmns-av:synonym>concept</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;VocabularyEntry">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:onClass rdf:resource="&mvf-trm;Definition"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&mvf;MVFEntry"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasBroaderEntry">
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.15</dct:source>
+		<skos:example>&apos;furniture&apos; is a superordinate concept to &apos;table&apos; and &apos;chair&apos; in a generic relation; &apos;tree&apos; is a superordinate concept to &apos;root&apos; or &apos;branch&apos; in a partitive relation.</skos:example>
+		<skos:note>hasBroaderEntry relates a generic or comprehensive concept to one that is more specific.</skos:note>
+		<cmns-av:synonym>is a broader concept than</cmns-av:synonym>
+		<cmns-av:synonym>is a superordinate concept of</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasNarrowerEntry">
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.16</dct:source>
+		<skos:note>hasNarrowerEntry relates a specific or partitive concept to one that is more general.</skos:note>
+		<cmns-av:synonym>is a narrower concept than</cmns-av:synonym>
+		<cmns-av:synonym>is a subordinate concept of</cmns-av:synonym>
+	</owl:ObjectProperty>
+
+</rdf:RDF>
