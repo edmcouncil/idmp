@@ -93,13 +93,14 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230301/ISO11238-Substances.rdf version of this ontology was modified to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to extend the ontology to support some of the required and optional elements from Annex L (IDMP-483) for substances and chemical substances, to add restrictions for name and identifier to the moiety class (IDMP-510), to add content related to dose forms (IDMP-531), to revise the definitions of physical manufactured item and physical substance to add an annotation that they are extensions rather than that they correspond precisely to the IDMP 11238 standard (IDMP-528), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230502/ISO11238-Substances.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-540), to support isotopes and nuclides as in ISO 11238, Figure 14 (IDMP-539), to move deprecated elements to a separate ontology, and to support additional reference information from Figure 16 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-522), addressed punning issues with modification method type, aligned the ontology with the revised basis of strength pattern (IDMP-582), and to add an axiom indicating that certain elements have data that can be used for testing purposes.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11238-Substances.rdf version of this ontology was modified to rename hasSimplifiedMolecularInputLineEntrySpecification to hasSMILES and to incorporate the ability to define controlled vocabularies that may or may not be jurisdiction-specific (IDMP-533).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances.rdf version of this ontology was modified to incorporate additional content for structurally diverse substances (IDMP-635).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -3207,14 +3208,43 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isManifestedIn"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ProteinSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PolymerSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;StructurallyDiverseSubstance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Material">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>source material role</rdfs:label>
 		<skos:definition>role of material from which a substance is derived, which is defined based on taxonomic and anatomical origins</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.76 and clause 8.5.5, Figure 30</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause G.3.14</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define proteins and polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. Information defining the nature of the source material is required for naturally derived proteins and polymers (e.g. starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or intraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedItemCount">
@@ -3763,6 +3793,12 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
 				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-StructurallyDiverse"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;manifests"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SourceMaterialRole"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>structurally diverse substance</rdfs:label>
