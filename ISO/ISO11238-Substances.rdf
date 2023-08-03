@@ -907,6 +907,21 @@
 		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ISO11238-StereochemistryVocabulary/</mvf:hasURI>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-StructuralRepresentationVocabulary">
+		<rdf:type rdf:resource="&idmp-dtp;ControlledVocabulary"/>
+		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>ISO 11238 - structural representation vocabulary</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.1</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.6 and Figure 10</dct:source>
+		<skos:definition>controlled vocabulary for representing the arrangement of atoms for describing chemical structures</skos:definition>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
+		<cmns-dsg:hasDescription>controlled vocabulary for representing the arrangement of atoms for describing chemical structures</cmns-dsg:hasDescription>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:hasTextualName>ISO 11238 Structural Representation vocabulary</mvf:hasTextualName>
+		<mvf:hasURI rdf:datatype="&xsd;anyURI">https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/idmp-sub;ISO11238-StructuralRepresentationVocabulary/</mvf:hasURI>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;ISO11238-SubstanceNameClassifierVocabulary">
 		<rdf:type rdf:resource="&idmp-dtp;ControlledVocabulary"/>
 		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
@@ -933,6 +948,12 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;StructuralRepresentationType-InChI"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasInChIValue"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
@@ -948,6 +969,12 @@
 	
 	<owl:Class rdf:about="&idmp-sub;IUPACInternationalChemicalIdentifierKey">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;StructuralRepresentationType-InChIKey"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasInChIKeyValue"/>
@@ -1857,27 +1884,6 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasInChIKeyValue"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasInChIValue"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasSMILESValue"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralRepresentation"/>
 			</owl:Restriction>
@@ -1961,6 +1967,12 @@
 	
 	<owl:Class rdf:about="&idmp-sub;Molfile">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;StructuralRepresentationType-Molfile"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-loc;hasURL"/>
@@ -3143,6 +3155,12 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;StructuralRepresentationType-SMILES"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasSMILESValue"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
@@ -3824,13 +3842,80 @@
 	
 	<owl:Class rdf:about="&idmp-sub;StructuralRepresentation">
 		<rdfs:subClassOf rdf:resource="&cmns-dsg;Designation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;StructuralRepresentationType"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>structural representation</rdfs:label>
-		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3</dct:source>
-		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.6</dct:source>
-		<skos:definition>representation of the arrangement of atoms for drawing chemical structures</skos:definition>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.1</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.6 and Figure 10</dct:source>
+		<skos:definition>representation of the arrangement of atoms for describing chemical structures</skos:definition>
 		<skos:note>Structural information is an essential element for all chemical substances, polymers and for other types of substances that have structurally definable elements or modifications. The representation should contain structural information in one or more of the standardized formats as indicated. A graphical image of the molecular structure should also be provided if available. A complete representation of the structure should be provided and is usually sufficient to define chemical substances.</skos:note>
 		<skos:note>Structural representations can be in a variety of formats or even multiple formats. The commonly used formats include molfile, SMILES, InChI, and cdx. Indication of a preferred structural representation may be defined at regional level. Although most chemical substances may be represented by a single unambiguous structural representation, there are also many substances that can be represented by multiple structural representations or as a mixture of single substances.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;StructuralRepresentationType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralRepresentation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structural representation type</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.1</dct:source>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.6 and Figure 10</dct:source>
+		<skos:definition>classifier for representing the arrangement of atoms for describing chemical structures</skos:definition>
+		<skos:example>classifier for representing the arrangement of atoms for describing chemical structures</skos:example>
+		<idmp-sub:hasBusinessRules>A structure can only be of one type. Field is mandatory when structural elements are present.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;StructuralRepresentationType-InChI">
+		<rdf:type rdf:resource="&idmp-sub;StructuralRepresentationType"/>
+		<rdfs:label>structural representation type - InChI</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.6 and Figure 10</dct:source>
+		<skos:definition>structural representation classifier indicating that the format of the representation is a linear, layered representation of a chemical structure, comprised of up to four layers: (1) constitutional - expresses pure connectivity of the atoms, (2) stereochemical - includes conventional C-atom sp2 and sp3 stereochemistry, (3) isotopic - enables isotopes to be distinguished, and (4) tautomeric - implements simple forms of rapid H-migration isomerization</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-StructuralRepresentationVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-StructuralRepresentationVocabulary"/>
+		<cmns-txt:hasTextValue>InChI</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;StructuralRepresentationType-InChIKey">
+		<rdf:type rdf:resource="&idmp-sub;StructuralRepresentationType"/>
+		<rdfs:label>structural representation type - InChIKey</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.6 and Figure 10</dct:source>
+		<skos:definition>structural representation classifier indicating that the format of the representation is a fixed length (25 characters) condensed digital representation of an InChI</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-StructuralRepresentationVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-StructuralRepresentationVocabulary"/>
+		<cmns-txt:hasTextValue>InChIKey</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;StructuralRepresentationType-Molfile">
+		<rdf:type rdf:resource="&idmp-sub;StructuralRepresentationType"/>
+		<rdfs:label>structural representation type - molfile</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.6 and Figure 10</dct:source>
+		<skos:definition>structural representation classifier indicating that the format of the representation is a molfile</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-StructuralRepresentationVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-StructuralRepresentationVocabulary"/>
+		<cmns-txt:hasTextValue>Molfile</cmns-txt:hasTextValue>
+		<cmns-txt:hasTextValue>molfile</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;StructuralRepresentationType-SMILES">
+		<rdf:type rdf:resource="&idmp-sub;StructuralRepresentationType"/>
+		<rdfs:label>structural representation type - SMILES</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.6 and Figure 10</dct:source>
+		<skos:definition>structural representation classifier indicating that the format of the representation is that of an unambiguous linear representation of chemical or molecular structures using ASCII characters</skos:definition>
+		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-StructuralRepresentationVocabulary"/>
+		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-StructuralRepresentationVocabulary"/>
+		<cmns-txt:hasTextValue>SMILES</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolydisperseSubstance"/>
