@@ -7,7 +7,7 @@ prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos:        <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?Substance
-
+ 
 WHERE {
     BIND(cq0_parameter_1 AS ?SubstanceInputReference )
     
@@ -23,8 +23,10 @@ WHERE {
       FILTER(lcase(str(?SubstanceName)) = lcase(str(?SubstanceInputReference)))
     }
     OPTIONAL {
-      ?Substance cmns-id:isIdentifiedBy/cmns-txt:hasTextValue ?SubstanceIdentifier .
-      FILTER(lcase(str(?SubstanceIdentifier)) = lcase(str(?SubstanceInputReference)))
+      ?nameNode rdf:type/rdfs:subClassOf* idmp-sub:SubstanceName .
+      ?nameNode cmns-dsg:isNameOf ?Substance .
+      ?nameNode cmns-txt:hasTextValue ?textValue .
+      FILTER(lcase(str(?textValue)) = lcase(str(?SubstanceInputReference)))
     }
-    FILTER(bound(?SubstanceLabel) || bound(?SubstanceName) || bound(?SubstanceIdentifier))
+    FILTER(bound(?SubstanceLabel) || bound(?SubstanceName) || bound(?SubstanceIdentifier)|| bound(?textValue))
 }

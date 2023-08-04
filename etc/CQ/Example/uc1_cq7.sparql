@@ -1,29 +1,39 @@
-# UC1-CQ 7: Which manufactured items contain <$SUBSTANCE> as ingredient of type “active”?
-
-PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
-PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
-PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
-PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
-PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+# CQ 7: Which manufactured items contain substance <x> as ingredient of type “active”?
+prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+prefix cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+prefix cmns-qtu:    <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
+prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/> 
+prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT distinct ?ManufacturedItem (SAMPLE(?ManufacturedItemLabel) AS ?ManufacturedItemName)
+SELECT Distinct ?ManufacturedItem (SAMPLE(?ManufacturedItemLabel) AS ?ManufacturedItemName)
 
 WHERE {
-    # Bind Variable substance <$Substance>
-	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
-  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetate>
-    BIND(  uc1_cq7_parameter_1 AS $SUBSTANCE )
-
-  	# Find Manufactured Items
-	?ManufacturedItem a/rdfs:subClassOf* idmp-sub:ManufacturedItem ;
-		cmns-dsg:isDefinedIn [
-			idmp-mprd:hasActiveIngredient [
-				cmns-pts:isPlayedBy $SUBSTANCE
-			]
-		] .
-
-    # Optionally, get the name of the manufactured item
+    # Bind the name we want into a variable
+    BIND(uc1_cq7_parameter_1 AS $SUBSTANCE ) 
+    { 
+        # When Prod to Sub is modelled the followuing then we can query it now:
+        #:manufacturedItem :isDefinedIn : ProductComposition :hasIngredient :Ingredient :isPlayedBy :SpecifiedSubstance :specializes :Substance :hasActiveMoiety :Substance
+        ?ManufacturedItem rdf:type/rdfs:subClassOf* idmp-sub:ManufacturedItem ;
+            cmns-dsg:isDefinedIn[
+                idmp-sub:hasIngredient [
+                    cmns-pts:isPlayedBy [
+                        cmns-qtu:specializes $SUBSTANCE
+                    ]
+                ]
+            ] .
+    } UNION {
+        # Find Manufactured Items
+        ?ManufacturedItem a/rdfs:subClassOf* idmp-sub:ManufacturedItem ;
+            cmns-dsg:isDefinedIn [
+                idmp-mprd:hasActiveIngredient [
+                    cmns-pts:isPlayedBy $SUBSTANCE
+                ]
+            ] .
+    }
+    # Optionally, get name of manufactured item
     OPTIONAL{?ManufacturedItem  rdfs:label  ?ManufacturedItemLabel }
- 
+    
 } GROUP BY ?ManufacturedItem
