@@ -7,6 +7,7 @@ PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
 PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
+PREFIX idmp-x: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ExtensionTBD/>
 
 GENERATE {
     # Substance
@@ -18,6 +19,7 @@ GENERATE {
         cmns-ra:isRegisteredIn ?Registry ;
         rdfs:seeAlso ?SeeAlsoIdentifier ;
         cmns-id:identifies ?Substance ;
+        idmp-x:hasCodeType ?CodeType ;
         .
 }
 
@@ -113,6 +115,8 @@ BIND(
 
 BIND(
     IF(str(?CodeCodeSystem) = "NCI_THESAURUS", <http://purl.obolibrary.org/obo/NCIT_{ ?CodeCode }>,
+    IF(str(?CodeCodeSystem) = "WHO-ATC", <http://purl.bioontology.org/ontology/ATC/{ ?CodeCode }>,
+    IF(str(?CodeCodeSystem) = "WHO-VATC", <http://purl.bioontology.org/ontology/ATC/{ ?CodeCode }>,
     IF(str(?CodeType) = "ALTERNATIVE", <https://data.pistoiaalliance.org/id/{ ?CodeCodeSystemWithoutSpace }/{ ?CodeCodeWithoutSpace }>,
     IF(str(?CodeType) = "GENERIC (FAMILY)", <https://data.pistoiaalliance.org/id/{ ?CodeCodeSystemWithoutSpace }/{ ?CodeCodeWithoutSpace }>,
     IF(str(?CodeType) = "NON-SPECIFIC STEREOCHEMISTRY", <https://data.pistoiaalliance.org/id/{ ?CodeCodeSystemWithoutSpace }/{ ?CodeCodeWithoutSpace }>,
@@ -122,7 +126,7 @@ BIND(
     IF(str(?CodeType) = "SECONDARY", <https://data.pistoiaalliance.org/id/{ ?CodeCodeSystemWithoutSpace }/{ ?CodeCodeWithoutSpace }>,
     IF(str(?CodeType) = "SUPERSEDED", <https://data.pistoiaalliance.org/id/{ ?CodeCodeSystemWithoutSpace }/{ ?CodeCodeWithoutSpace }>,
     IF(str(?CodeType) = "CONCEPT", <https://data.pistoiaalliance.org/id/{ ?CodeCodeSystemWithoutSpace }/{ ?CodeCodeWithoutSpace }>,
-    ?nothing ))))))))))
+    ?nothing ))))))))))))
     AS ?SubstanceObjectBasedOnCodeType )
 
 BIND(
