@@ -35,14 +35,19 @@ GENERATE {
     # Molecular Structure
     ?MolecularStructure a idmp-sub:MolecularStructure ;
         idmp-sub:hasSMILESValue ?structureSmilesString ;
-        cmns-dsg:isDescribedBy ?structureMolfile;
+        cmns-dsg:isDescribedBy ?MolfileURI;
     .
+
+    ?MolfileURI a idmp-sub:Molfile;
+        idmp-sub:hasStructuralRepresentationAttachment ?structureMolfile;
+    .
+
 
     GENERATE{
         ?Substance idmp-sub:hasMoiety ?SubstanceMoiety;
         .
 
-        ?SubstanceMoiety 
+        ?SubstanceMoiety a idmp-sub:Moiety; 
             rdfs:label ?moietyFormula;
             idmp-sub:hasDefiningStructure ?MoietyMolecularStructure;
             idmp-sub:hasDefiningMolecularWeight ?MoietyStructureMolecularWeight ;
@@ -75,9 +80,10 @@ GENERATE {
     ?MoietyStructureMolecularWeight
     ?moietyStructureID
 
-    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/moiety/{ ?moietyHash }> AS ?SubstanceMoiety )
+    BIND(str(StrUUID()) as ?MoietyUUID)
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?RelatedSubstanceApprovalID }/{ ?MoietyUUID }> AS ?SubstanceMoiety )
 
-    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?moietyStructureID }> AS ?MoietyMolecularStructure )
+    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?MoietyUUID }> AS ?MoietyMolecularStructure )
 
     BIND(IF(str(?MoietystructureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
     IF(str(?MoietystructureStereochemistry) = "ACHIRAL", idmp-sub:Stereochemistry-Achiral ,
@@ -139,7 +145,7 @@ GENERATE {
 
 }
 # General Substance Info + Molecular Structure
-ITERATOR iter:JSONSurfer(<public_data.json>,
+ITERATOR iter:JSONSurfer(<result.json>,
     "$[*]",
     "$.approvalID",
     "$.substanceClass",
@@ -204,4 +210,5 @@ BIND(IF(str(?structureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Ab
     ?structureStereochemistry )))))))))))))))))))))
     AS ?Stereochemistry)
 
+ BIND(IF(?structureMolfile != "",<https://data.pistoiaalliance.org/idmp/gsrs/molfile/{ StrUUID() }>, ?unbound) as ?MolfileURI)
 
