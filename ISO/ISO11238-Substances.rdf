@@ -3,6 +3,7 @@
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
+	<!ENTITY cmns-cmp "https://www.omg.org/spec/Commons/Composites/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
@@ -36,6 +37,7 @@
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns:cmns-cmp="https://www.omg.org/spec/Commons/Composites/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
@@ -77,6 +79,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Composites/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
@@ -93,7 +96,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230813/ISO11238-Substances/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
@@ -101,6 +104,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230502/ISO11238-Substances.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-540), to support isotopes and nuclides as in ISO 11238, Figure 14 (IDMP-539), to move deprecated elements to a separate ontology, and to support additional reference information from Figure 16 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-522), addressed punning issues with modification method type, aligned the ontology with the revised basis of strength pattern (IDMP-582), and to add an axiom indicating that certain elements have data that can be used for testing purposes.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11238-Substances.rdf version of this ontology was modified to rename hasSimplifiedMolecularInputLineEntrySpecification to hasSMILES and to incorporate the ability to define controlled vocabularies that may or may not be jurisdiction-specific (IDMP-533).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances.rdf version of this ontology was modified to add structural representations including molfile.</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances.rdf version of this ontology was modified to reflect the migration of some content in Commons from the Parties and Situations ontology to a new Composites ontology at OMG (IDMP-642).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -1010,10 +1014,10 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Ingredient">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 				<owl:onClass>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
@@ -1253,10 +1257,10 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MaterialRole">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1358,17 +1362,17 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ModificationAgent">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isManifestedIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Modification"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1495,7 +1499,7 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;ModificationRole">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
@@ -1505,7 +1509,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isManifestedIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Modification"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1647,10 +1651,10 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MoietyRole">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -1670,7 +1674,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularComposition">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cmp;Composition"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
@@ -1813,7 +1817,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Undergoer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularFragment"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -3295,7 +3299,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -3458,7 +3462,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -4243,7 +4247,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceComposition">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cmp;Composition"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
@@ -4252,13 +4256,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasRole"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;hasRole"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -4269,6 +4267,12 @@
 						</owl:unionOf>
 					</owl:Class>
 				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance composition</rdfs:label>
@@ -4802,10 +4806,10 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceRole">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -4965,7 +4969,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
 				<owl:someValuesFrom>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+						<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 						<owl:someValuesFrom rdf:resource="&idmp-sub;Target"/>
 					</owl:Restriction>
 				</owl:someValuesFrom>
@@ -4976,7 +4980,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
 				<owl:someValuesFrom>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+						<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
 						<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 					</owl:Restriction>
@@ -5387,7 +5391,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasIngredient">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;manifests"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;manifests"/>
 		<rdfs:label>has ingredient</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Ingredient"/>
 		<skos:definition>relates a substance or product composition to an ingredient of that composition</skos:definition>
@@ -5511,7 +5515,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasModificationRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;hasRole"/>
 		<rdfs:label>has modification role</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.5.2</dct:source>
@@ -5560,14 +5564,14 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 			</rdf:Description>
 			<rdf:Description rdf:about="&idmp-sub;hasMoietyRole">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-pts;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates a substance directly to a moiety that defines it via a substance composition</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMoietyRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;hasRole"/>
 		<rdfs:label>has moiety role</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.1</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
@@ -6216,7 +6220,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isIngredientOf">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isManifestedIn"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;isManifestedIn"/>
 		<rdfs:label>is ingredient of</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;Ingredient"/>
 		<skos:definition>relates an ingredient to a substance or product composition that it is included in</skos:definition>
@@ -6225,7 +6229,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	<owl:ObjectProperty rdf:about="&idmp-sub;isMoietyOf">
 		<rdfs:label>is moiety of</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-pts;playsRole">
+			<rdf:Description rdf:about="&cmns-cmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&idmp-sub;isMoietyRoleIn">
 			</rdf:Description>
@@ -6237,7 +6241,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isMoietyRoleIn">
-		<rdfs:subPropertyOf rdf:resource="&cmns-pts;isRoleIn"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;isRoleIn"/>
 		<rdfs:label>is moiety role in</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;MoietyRole"/>
 		<rdfs:range rdf:resource="&idmp-sub;SubstanceComposition"/>
