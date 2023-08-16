@@ -1,6 +1,7 @@
 #UC3 CQ 1.1 	What substance <S> is part of an authorized medicinal product that is approved for a given therapeutic indication indicated by a MedDRA ID <I>?
 
 PREFIX idmp-eura:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
+PREFIX idmp-meddra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -26,7 +27,7 @@ WHERE {
         # Find Nedicinal Product that is approved for the TherapeuticIndication having MedDRA ID
 		?TherapeuticIndication a idmp-mprd:TherapeuticIndication . 
 		?TherapeuticIndication idmp-mprd:hasIndicationAsDiseaseSymptomProcedure ?MedicalConditionClassifier.
-		?MedicalConditionClassifier a idmp-eura:MedDRATerm;
+		?MedicalConditionClassifier a idmp-meddra:MedDRATerm;
 		   (cmns-id:isIdentifiedBy|^cmns-id:identifies) ?MedDRAIdentifier .
 		?MedDRAIdentifier cmns-txt:hasTextValue $MedDRAId .
 	
