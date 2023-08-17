@@ -7,6 +7,7 @@
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
@@ -34,6 +35,7 @@
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
@@ -70,6 +72,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
@@ -79,27 +82,6 @@
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;InternationalCouncilForHarmonisationOfTechnicalRequirementsForPharmaceuticalsForHumanUseRegistrationAuthority">
-		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
-		<rdfs:label>International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use as Registration Authority</rdfs:label>
-		<skos:definition>International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use (ICH) in its role as a Registration Authority (RA), for registration of terms in the Medical Dictionary for Regulatory Activities</skos:definition>
-		<cmns-av:abbreviation>ICH RA</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>https://www.ich.org/</cmns-av:adaptedFrom>
-		<cmns-av:synonym>MedDRA RA</cmns-av:synonym>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-ra;InternationalCouncilForHarmonisationOfTechnicalRequirementsForPharmaceuticalsForHumanUse"/>
-		<cmns-ra:manages rdf:resource="&idmp-ra;MedicalDictionaryForRegulatoryActivities"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-ra;MedicalDictionaryForRegulatoryActivities">
-		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
-		<rdf:type rdf:resource="&cmns-ra;Registry"/>
-		<rdfs:label>Medical Dictionary for Regulatory Activities</rdfs:label>
-		<skos:definition>MedDRA is a rich and highly specific standardised medical terminology developed by ICH to facilitate sharing of regulatory information internationally for medical products used by humans.</skos:definition>
-		<cmns-av:abbreviation>MedDRA</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>https://www.ich.org/page/meddra</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>https://www.meddra.org/</cmns-av:adaptedFrom>
-	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRAHighLevelGroupTerm">
 		<rdfs:subClassOf rdf:resource="&idmp-meddra;MedDRATerm"/>
@@ -168,6 +150,8 @@
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA identifier</rdfs:label>
 		<skos:definition>identifier for terms defining medical condition that are registered in the Medical Dictionary for Regulatory Activities registry</skos:definition>
+		<skos:note>The MedDRA code is an eight digit numeric code. MedDRA codes are unique and are never reused.</skos:note>
+		<cmns-av:synonym>MedDRA code</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRALowestLevelTerm">
@@ -196,6 +180,16 @@
 		<skos:definition>most specific designation (term) that is registered in the Medical Dictionary for Regulatory Activities registry</skos:definition>
 		<skos:note>MedDRA LLTs can be used in ISO IDMP as concept descriptors in many places. Some jurisdictions require the use of MedDRA LLTs for specific properties in ISO IDMP.</skos:note>
 	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-meddra;MedDRAMaintenanceAndSupportServicesOrganization">
+		<rdf:type rdf:resource="&cmns-org;Organization"/>
+		<rdfs:label>MedDRA Maintenance and Support Services Organization</rdfs:label>
+		<skos:definition>Under the oversight of the ICH MedDRA Management Committee, the key function of the MSSO is to maintain, distribute, and support MedDRA on behalf of MedDRA users.</skos:definition>
+		<cmns-av:abbreviation>MSSO</cmns-av:abbreviation>
+		<cmns-av:abbreviation>MedDRA MSSO</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>https://www.meddra.org/about-meddra/organisation/msso</cmns-av:adaptedFrom>
+		<cmns-org:isSubUnitOf rdf:resource="&idmp-ra;InternationalCouncilForHarmonisationOfTechnicalRequirementsForPharmaceuticalsForHumanUse"/>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRAPreferredTerm">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
@@ -237,6 +231,15 @@
 		<skos:note>Each preferred term contains at least itself as lower level term.</skos:note>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-meddra;MedDRARegistrationAuthority">
+		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
+		<rdfs:label>MedDRA registration authority</rdfs:label>
+		<skos:definition>Registration authority (RA) for registration of terms or concepts in the Medical Dictionary for Regulatory Activities (MedDRA) played by the MedDRA Maintenance and Support Services Organization (MSSO)</skos:definition>
+		<cmns-av:abbreviation>MedDRA RA</cmns-av:abbreviation>
+		<cmns-cmp:isPlayedBy rdf:resource="&idmp-meddra;MedDRAMaintenanceAndSupportServicesOrganization"/>
+		<cmns-ra:manages rdf:resource="&idmp-meddra;MedicalDictionaryForRegulatoryActivities"/>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-meddra;MedDRASystemOrganClass">
 		<rdfs:subClassOf rdf:resource="&idmp-meddra;MedDRATerm"/>
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
@@ -273,6 +276,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA term</rdfs:label>
 		<skos:definition>designation, term or concept that is registered in the Medical Dictionary for Regulatory Activities registry</skos:definition>
+		<skos:note>The MedDRA term name is a 100 character alphanumeric field used to describe the concept or term.</skos:note>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-meddra;MedDRATermClassificationScheme">
@@ -373,6 +377,23 @@
 		<cmns-av:acronym>SOC</cmns-av:acronym>
 		<cmns-av:adoptedFrom>https://www.meddra.org/how-to-use/basics/hierarchy</cmns-av:adoptedFrom>
 		<cmns-txt:hasTextValue>SOC</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-meddra;MedicalDictionaryForRegulatoryActivities">
+		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+		<rdf:type rdf:resource="&cmns-ra;Registry"/>
+		<rdfs:label>Medical Dictionary for Regulatory Activities</rdfs:label>
+		<skos:definition>MedDRA is a rich and highly specific standardised medical terminology developed by ICH to facilitate sharing of regulatory information internationally for medical products used by humans.</skos:definition>
+		<cmns-av:abbreviation>MedDRA</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>https://www.ich.org/page/meddra</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>https://www.meddra.org/</cmns-av:adaptedFrom>
+		<cmns-id:isIdentifiedBy>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+				<rdf:type rdf:resource="&cmns-id;RegisteredIdentifier"/>
+				<cmns-txt:hasTextValue>2.16.840.1.113883.6.163</cmns-txt:hasTextValue>
+			</owl:NamedIndividual>
+		</cmns-id:isIdentifiedBy>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
