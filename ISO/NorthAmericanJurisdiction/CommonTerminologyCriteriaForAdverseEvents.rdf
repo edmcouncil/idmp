@@ -114,9 +114,60 @@
 treatment or procedure that may or may not be considered related to the medical treatment or procedure.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-ctcae;CTCAE-Grade1">
+		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
+		<rdfs:label>Grade 1</rdfs:label>
+		<skos:definition>Mild; asymptomatic or mild symptoms; clinical or diagnostic observations only; intervention not indicated.</skos:definition>
+		<idmp-dtp:hasDisplayName>Grade 1</idmp-dtp:hasDisplayName>
+		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
+		<cmns-txt:hasTextValue>Grade 1</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ctcae;CTCAE-Grade2">
+		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
+		<rdfs:label>Grade 2</rdfs:label>
+		<skos:definition>Moderate; minimal, local or noninvasive intervention indicated; limiting ageappropriate instrumental ADL.</skos:definition>
+		<idmp-dtp:hasDisplayName>Grade 2</idmp-dtp:hasDisplayName>
+		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
+		<cmns-txt:hasTextValue>Grade 2</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ctcae;CTCAE-Grade3">
+		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
+		<rdfs:label>Grade 3</rdfs:label>
+		<skos:definition>Severe or medically significant but not immediately life-threatening; hospitalization or prolongation of hospitalization indicated; disabling; limiting self care ADL.</skos:definition>
+		<idmp-dtp:hasDisplayName>Grade 3</idmp-dtp:hasDisplayName>
+		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
+		<cmns-txt:hasTextValue>Grade 3</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ctcae;CTCAE-Grade4">
+		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
+		<rdfs:label>Grade 4</rdfs:label>
+		<skos:definition>Life-threatening consequences; urgent intervention indicated.</skos:definition>
+		<idmp-dtp:hasDisplayName>Grade 4</idmp-dtp:hasDisplayName>
+		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
+		<cmns-txt:hasTextValue>Grade 4</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-ctcae;CTCAE-Grade5">
+		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
+		<rdfs:label>Grade 5</rdfs:label>
+		<skos:definition>Death related to AE.</skos:definition>
+		<idmp-dtp:hasDisplayName>Grade 5</idmp-dtp:hasDisplayName>
+		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
+		<cmns-txt:hasTextValue>Grade 5</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-ctcae;CTCAE-GradeTerm">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:hasValue rdf:resource="&idmp-ctcae;CommonTerminologyCriteraForAdverseEventsAdverseEventClassificationScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>Common Terminology Criteria for Adverse Events grade term</rdfs:label>
 		<owl:equivalentClass>
 			<owl:Class>
@@ -139,9 +190,11 @@ treatment or procedure that may or may not be considered related to the medical 
 		<cmns-av:adoptedFrom>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:adoptedFrom>
 	</owl:Class>
 	
-	<owl:NamedIndividual rdf:about="&idmp-ctcae;CommonTerminologyCriteraForAdverseEventsClassificationScheme">
+	<owl:NamedIndividual rdf:about="&idmp-ctcae;CommonTerminologyCriteraForAdverseEventsAdverseEventClassificationScheme">
+		<rdfs:label>Common Terminology Criteria for Adverse Events adverse events classification scheme</rdfs:label>
 		<rdfs:type rdf:resource="&cmns-cls;ClassificationScheme"/>
-		<skos:definition>NCI Common Terminology Criteria for Adverse Events classification scheme describes criteria for the classification of adverse events by severity</skos:definition>
+		<skos:definition>The NCI Common Terminology Criteria for Adverse Events classification scheme describes criteria for the classification of adverse events by severity</skos:definition>
+		<cmns-ra:isManagedBy rdf:resource="&idmp-nara;NationalCancerInstitute"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-ctcae;CommonTerminologyCriteraForAdverseEventsVocabulary">
@@ -153,51 +206,6 @@ treatment or procedure that may or may not be considered related to the medical 
 		<cmns-av:synonym>CTCAE terminology</cmns-av:synonym>
 		<cmns-av:synonym>Common Terminology Criteria for Adverse Events terminology</cmns-av:synonym>
 		<cmns-ra:isManagedBy rdf:resource="&idmp-nara;NationalCancerInstitute"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/CommonTerminologyCriteriaForAdverseEvents/idmp-ctcae;CTCAE-Grade1">
-		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
-		<rdfs:label>Grade 1</rdfs:label>
-		<skos:definition>Mild; asymptomatic or mild symptoms; clinical or diagnostic observations only; intervention not indicated.</skos:definition>
-		<idmp-dtp:hasDisplayName>Grade 1</idmp-dtp:hasDisplayName>
-		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
-		<cmns-txt:hasTextValue>Grade 1</cmns-txt:hasTextValue>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/CommonTerminologyCriteriaForAdverseEvents/idmp-ctcae;CTCAE-Grade2">
-		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
-		<rdfs:label>Grade 2</rdfs:label>
-		<skos:definition>Moderate; minimal, local or noninvasive intervention indicated; limiting ageappropriate instrumental ADL.</skos:definition>
-		<idmp-dtp:hasDisplayName>Grade 2</idmp-dtp:hasDisplayName>
-		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
-		<cmns-txt:hasTextValue>Grade 2</cmns-txt:hasTextValue>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/CommonTerminologyCriteriaForAdverseEvents/idmp-ctcae;CTCAE-Grade3">
-		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
-		<rdfs:label>Grade 3</rdfs:label>
-		<skos:definition>Severe or medically significant but not immediately life-threatening; hospitalization or prolongation of hospitalization indicated; disabling; limiting self care ADL.</skos:definition>
-		<idmp-dtp:hasDisplayName>Grade 3</idmp-dtp:hasDisplayName>
-		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
-		<cmns-txt:hasTextValue>Grade 3</cmns-txt:hasTextValue>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/CommonTerminologyCriteriaForAdverseEvents/idmp-ctcae;CTCAE-Grade4">
-		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
-		<rdfs:label>Grade 4</rdfs:label>
-		<skos:definition>Life-threatening consequences; urgent intervention indicated.</skos:definition>
-		<idmp-dtp:hasDisplayName>Grade 4</idmp-dtp:hasDisplayName>
-		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
-		<cmns-txt:hasTextValue>Grade 4</cmns-txt:hasTextValue>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/CommonTerminologyCriteriaForAdverseEvents/idmp-ctcae;CTCAE-Grade5">
-		<rdf:type rdf:resource="&idmp-ctcae;CTCAE-GradeTerm"/>
-		<rdfs:label>Grade 5</rdfs:label>
-		<skos:definition>Death related to AE.</skos:definition>
-		<idmp-dtp:hasDisplayName>Grade 5</idmp-dtp:hasDisplayName>
-		<cmns-av:directSource>https://ctep.cancer.gov/protocoldevelopment/electronic_applications/docs/CTCAE_v5_Quick_Reference_5x7.pdf</cmns-av:directSource>
-		<cmns-txt:hasTextValue>Grade 5</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
