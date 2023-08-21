@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
+	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
+	<!ENTITY mvf-trm "https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/">
+	<!ENTITY mvf-tsc "https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
+	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
+	xmlns:mvf-trm="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"
+	xmlns:mvf-tsc="https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/">
+		<rdfs:label>Multiple Vocabulary Facility (MVF) Terminologies Ontology</rdfs:label>
+		<dct:abstract>The MVF ontology consists of three components:
+- a core ontology corresponding to the MVF metamodel,
+- an extension representing the subset of the ISO 1087 reference vocabulary used in other ISO standards for vocabulary representation, 
+- an extension that incorporates additional vocabulary from ISO 1087 for terminology science. 
+MVF also reuses several ontologies from the OMG Commons library for specific patterns, including designations, collections, and classifiers (this ontology).</dct:abstract>
+		<dct:contributor>Ed Barkmeyer, Thematix Partners LLC</dct:contributor>
+		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/MVF/20230501/ISO1087-TerminologyScience/"/>
+		<skos:scopeNote>Note that the set of ontologies provided for MVF do not provide exhaustive coverage of ISO 1087. We have not incorporated the terms related to data validation or natural language processing in the latest version of the standard, and certain classes under the heading of concept relation in the standard are handled as properties herein.</skos:scopeNote>
+		<cmns-av:copyright>Copyright (c) 2011-2023 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2023 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-col;StructuredCollection">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasArrangement"/>
+				<owl:onClass rdf:resource="&mvf-tsc;Macrostructure"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<skos:example>collection of artifacts, books, periodicals, artwork, terms, or other objects that form the core basis for a vocabulary, exhibit, library, or other organization</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;BaseList">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyResource"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dsg;Designation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>base list</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.5.7</dct:source>
+		<skos:definition>list of designations resulting from term extraction</skos:definition>
+		<skos:note>A base list usually gives rise to further terminology work.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Borrowing">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>borrowing</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.32</dct:source>
+		<skos:definition>method for the formation of designations in which a designation is adopted from another natural language or another domain or subject</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;ConceptHarmonization">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>concept harmonization</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.5.4</dct:source>
+		<skos:definition>terminology work aimed at the establishment of a correspondence between two or more closely related or overlapping concepts to eliminate or reduce minor differences between them</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Conversion">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>conversion</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.39</dct:source>
+		<skos:definition>method for the formation of designations in which the syntactic category of an existing word or lexical unit is changed</skos:definition>
+		<skos:example>The conversion of &apos;constant&apos; as an adjective to &apos;constant&apos; as a noun in the domain of mathematics; the conversion of &apos;output&apos; as a noun to &apos;output&apos; as a verb in the domain of economics.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;DataCategory">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:label>data category</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.6.3</dct:source>
+		<skos:definition>specification of a type of terminological data that is used for structuring terminological entries or terminology resources</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Derivation">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>derivation</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.38</dct:source>
+		<skos:definition>method for the formation of designations in which a designation is formed by adding one or more morphological elements to a word or lexical unit</skos:definition>
+		<skos:example>Terms formed by derivation: &apos;printer&apos; (print | -er), &apos;disassembly&apos; (assemble | dis- | -y), &apos;hormonal&apos; (hormon | -al).</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Glossary">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologicalDictionary"/>
+		<rdfs:label>glossary</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.6</dct:source>
+		<skos:definition>terminological dictionary that contains designations from one or more domains or subjects together with equivalents in one or more natural languages</skos:definition>
+		<skos:note>In English common language usage, glossary can refer to a monolingual list of designations and definitions in a domain or subject.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;LanguageSpecificOrder">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Macrostructure"/>
+		<rdfs:label>language-specific order</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.12</dct:source>
+		<skos:definition>macrostructure in which the terminological entries reflect the ordering conventions specific to a given natural language or script</skos:definition>
+		<skos:note>Alphabetical order in a monolingual terminology resource.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;LoanTranslation">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>loan translation</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.35</dct:source>
+		<skos:definition>method for the formation of designations in which the elements of a designation in another natural language are translated literally into the recipient language</skos:definition>
+		<skos:example>Loan translations in English are &apos;flea market&apos; (from French marché aux puces), &apos;loan translation&apos; (from German Lehnübersetzung).</skos:example>
+		<cmns-av:synonym>calque translation</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Macrostructure">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
+		<rdfs:label>macrostructure</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.8</dct:source>
+		<skos:definition>selection and arrangement of terminological entries in a collection</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Microstructure">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
+		<rdfs:label>microstructure</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.9</dct:source>
+		<skos:definition>selection and arrangement of terminological data in each terminological entry of a collection</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;MixedOrder">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Macrostructure"/>
+		<rdfs:label>mixed order</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.13</dct:source>
+		<skos:definition>macrostructure which is a combination of systematic order, thematic order, and language-specific order</skos:definition>
+		<cmns-av:synonym>mixed arrangement</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Nomenclature">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Terminology"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasArrangement"/>
+				<owl:someValuesFrom rdf:resource="&mvf-tsc;SystematicOrder"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>nomenclature</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.7</dct:source>
+		<skos:definition>terminology structured systematically according to pre-established naming rules</skos:definition>
+		<skos:example>International Code of Virus Classification and Nomenclature</skos:example>
+		<skos:note>Nomenclatures have been elaborated in various domains (3.1.4), such as biology, medicine, and chemistry.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;SystematicOrder">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Macrostructure"/>
+		<rdfs:label>systematic order</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.10</dct:source>
+		<skos:definition>macrostructure in which the terminological entries reflect the underlying concept system</skos:definition>
+		<cmns-av:synonym>systematic arrangement</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TermBank">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyResource"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&mvf-tsc;TerminologicalDatabase"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>term bank</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.3</dct:source>
+		<skos:definition>collection of terminology databases including the organizational framework for recording, processing and disseminating terminological data</skos:definition>
+		<cmns-av:synonym>terminological data bank</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TermExtraction">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-tsc;produces"/>
+				<owl:someValuesFrom rdf:resource="&mvf-tsc;BaseList"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-tsc;produces"/>
+				<owl:someValuesFrom rdf:resource="&mvf-tsc;TerminologicalConcordance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-tsc;reflects"/>
+				<owl:someValuesFrom rdf:resource="&mvf-tsc;TextCorpus"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>term extraction</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.5.6</dct:source>
+		<skos:definition>terminology work that involves the identification and excerption of terminological data by searching through a text corpus</skos:definition>
+		<skos:note>Term extraction is often supported by dedicated software tools.</skos:note>
+		<skos:note>Terminological data of primary interest are typically designations, definitions and contexts.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TermFormation">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>term harmonization</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.31</dct:source>
+		<skos:definition>terminology work aimed at creating new terms using one or more of a variety of methods</skos:definition>
+		<skos:note>By analogy, &apos;term formation&apos; can apply also to appellations, proper names and symbols.</skos:note>
+		<skos:note>Methods of term formation may among others include transdisciplinary borrowing, translingual borrowing, loan translation, transliteration, transcription, derivation, or conversion, the creation of abbreviations or blends.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TermHarmonization">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>term harmonization</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.5.5</dct:source>
+		<skos:definition>terminology work leading to the selection of designations for harmonized concepts either in different natural languages or within the same natural language</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Terminography">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>terminography</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.5.5</dct:source>
+		<skos:definition>terminology work aimed at creating and maintaining terminology resources</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TerminologicalConcordance">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyResource"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dsg;Designation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-tsc;reflects"/>
+				<owl:someValuesFrom rdf:resource="&mvf-tsc;TextCorpus"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>terminological concordance</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.5.8</dct:source>
+		<skos:definition>list of designations extracted from a text corpus together with a context and a source reference</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TerminologicalDatabase">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-trm;isManagedBy"/>
+				<owl:allValuesFrom rdf:resource="&mvf-tsc;TermBank"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:allValuesFrom rdf:resource="&mvf-tsc;TerminologyResource"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>terminological database</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.7.2</dct:source>
+		<skos:definition>database comprising a terminology resource</skos:definition>
+		<cmns-av:synonym>termbase</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TerminologicalDictionary">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyResource"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&mvf;VocabularyEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasArrangement"/>
+				<owl:someValuesFrom rdf:resource="&mvf-tsc;Macrostructure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;uses"/>
+				<owl:someValuesFrom rdf:resource="&mvf-trm;SpecialLanguage"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>terminological dictionary</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.7.4</dct:source>
+		<skos:definition>terminology resource that is designed to be used as a reference work</skos:definition>
+		<cmns-av:abbreviation>LSP dictionary</cmns-av:abbreviation>
+		<cmns-av:synonym>special-language dictionary</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Terminologization">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf-tsc;produces"/>
+				<owl:allValuesFrom rdf:resource="&mvf-trm;Term"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>terminologization</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.30</dct:source>
+		<skos:definition>process by which a general language word or lexical unit is being used more and more as a term in a specific domain or subject</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;Terminology">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isUsedBy"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&mvf-trm;Domain">
+							</rdf:Description>
+							<rdf:Description rdf:about="&mvf-trm;Subject">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dsg;Designation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&mvf;MVFEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>terminology</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.1.11</dct:source>
+		<skos:definition>set of designations and concepts belonging to one domain or subject</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TerminologyPlanning">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyWork"/>
+		<rdfs:label>terminology planning</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.5.3</dct:source>
+		<skos:definition>terminology work aimed at developing, improving, implementing and disseminating the terminology of a domain or subject</skos:definition>
+		<skos:note>Terminology planning involves all aspects of terminology work and has among other objectives the objective of achieving vocabulary control through such normative documents as thesauri and terminology standards.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TerminologyProcessing">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Terminography"/>
+		<rdfs:label>terminology processing</rdfs:label>
+		<dct:source>ISO 1087-1, paragraph 3.6.3</dct:source>
+		<skos:definition>part of terminography concerned with computer aspects of database creation, maintenance and extraction of terminology from texts</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TerminologyResource">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&mvf;VocabularyEntry"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>terminology resource</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.7.1</dct:source>
+		<skos:definition>collection of terminological entries</skos:definition>
+		<skos:note>Terminology resources may be in paper or electronic format, e.g. paper dictionaries or glossaries, CDs, DVDs, databases or term banks.</skos:note>
+		<cmns-av:abbreviation>TDC</cmns-av:abbreviation>
+		<cmns-av:synonym>terminological data collection</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TerminologyScience">
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Domain"/>
+		<rdfs:label>terminology science</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.1.12</dct:source>
+		<skos:definition>science studying terminologies, aspects of terminology work, the resulting terminology resources, and terminological data</skos:definition>
+		<cmns-av:synonym>terminology studies</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TerminologyWork">
+		<rdfs:label>terminology work</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.5.1</dct:source>
+		<skos:definition>work concerned with the systematic collection, description, processing and presentation of concepts and their designations</skos:definition>
+		<skos:note>Terminology work often aims at creating and maintaining terminology resources.</skos:note>
+		<skos:note>Terminology work often aims at terminology planning and can involve all of concept harmonization, term harmonization, and term formation.</skos:note>
+		<cmns-av:synonym>terminology management</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TextCorpus">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:label>text corpus</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.6.4</dct:source>
+		<skos:definition>collection of natural language data</skos:definition>
+		<cmns-av:synonym>corpus</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;ThematicOrder">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Macrostructure"/>
+		<rdfs:label>thematic order</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.7.11</dct:source>
+		<skos:definition>macrostructure in which the terminological entries are grouped in accordance with a relational theme</skos:definition>
+		<skos:example>In a human resource vocabulary, one group of terminological entries relates to recruitment processes, while another group relates to employee assessment.</skos:example>
+		<cmns-av:synonym>thematic arrangement</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TransdisciplinaryBorrowing">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Borrowing"/>
+		<rdfs:label>transdisciplinary borrowing</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.33</dct:source>
+		<skos:definition>borrowing from another domain or subject</skos:definition>
+		<skos:example>The term &apos;virus&apos; was originally used in biology and later transferred to information technology.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf-tsc;TranslingualBorrowing">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Borrowing"/>
+		<rdfs:label>translingual borrowing</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.34</dct:source>
+		<skos:definition>borrowing from another natural language</skos:definition>
+		<skos:example>An example of a direct borrowing into English is the French term &apos;calque&apos;.</skos:example>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&mvf-tsc;excerpts">
+		<rdfs:label>excerpts</rdfs:label>
+		<skos:definition>selects for quoting (from a passage), extracts</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-tsc;informs">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;characterizes"/>
+		<rdfs:label>informs</rdfs:label>
+		<skos:definition>gives character or essence to, communicates knowledge to</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-tsc;makesTransparent">
+		<rdfs:subPropertyOf rdf:resource="&mvf-tsc;informs"/>
+		<rdfs:label>makes transparent</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.4.40</dct:source>
+		<skos:definition>expresses one or more characteristics of</skos:definition>
+		<skos:note>Designations in the relation of transparency are called &apos;transparent&apos; designations or &apos;motivated&apos; designations. Designations lacking transparency are called &apos;unmotivated&apos; designations.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-tsc;produces">
+		<rdfs:subPropertyOf rdf:resource="&mvf-trm;associates"/>
+		<rdfs:label>produces</rdfs:label>
+		<skos:definition>causes something to exist, makes something available, manufactures</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-tsc;reflects">
+		<rdfs:label>reflects</rdfs:label>
+		<skos:definition>makes manifest or apparent, shows</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf-tsc;studies">
+		<rdfs:label>studies</rdfs:label>
+		<skos:definition>application of the mental faculties to the acquisition of knowledge 
+- such application in a particular field or to a specific subject 
+- careful or extended consideration 
+- a careful examination or analysis of a phenomenon, development, or question</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&mvf-trm;SpecialLanguage">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologyResource"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;Vocabulary">
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;TerminologicalDictionary"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.7.5</dct:source>
+		<skos:note>A vocabulary is a terminological dictionary that contains designations and definitions from one or more domains or subjects.</skos:note>
+		<skos:note>A vocabulary may be monolingual, bilingual or multilingual. A vocabulary is a terminological dictionary that contains designations (vocabulary entries) and definitions from one or more specific subject fields.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;VocabularyEntry">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasArrangement"/>
+				<owl:onClass rdf:resource="&mvf-tsc;Microstructure"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&mvf-trm;Subject"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clauses 3.6.2</dct:source>
+		<skos:note>A terminological entry prepared in accordance with the principles and methods given in ISO 704 follows the same structural principles whether it is monolingual or multilingual.</skos:note>
+		<skos:note>From a terminology perspective, a vocabulary entry is a collection of terminological data related to only one concept</skos:note>
+		<cmns-av:explanatoryNote>Notes on vocabulary entries can be represented using the skos:note annotation or any of its subproperties or other annotations as appropriate.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>terminological entry</cmns-av:synonym>
+	</owl:Class>
+
+</rdf:RDF>

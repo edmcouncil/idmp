@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
+	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
+	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
+	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
+		<rdfs:label>Multiple Vocabulary Facility (MVF) Ontology</rdfs:label>
+		<dct:abstract>The MVF ontology consists of three components:
+- a core ontology corresponding to the MVF metamodel (this ontology)
+- an extension representing the subset of the ISO 1087 reference vocabulary used in other ISO standards for vocabulary representation, 
+- an extension that incorporates additional vocabulary from ISO 1087 for terminology science. 
+MVF also reuses several ontologies from the OMG Commons library for specific patterns, including designations, collections, and classifiers.</dct:abstract>
+		<dct:contributor>Davide Sottara, Mayo Clinic</dct:contributor>
+		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
+		<dct:contributor>Evan Wallace, U.S. National Institute of Standards and Technology (NIST)</dct:contributor>
+		<dct:contributor>Pete Rivett, agnos.ai U.K. Ltd</dct:contributor>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/MVF/20230501/MultipleVocabularyFacility/"/>
+		<cmns-av:copyright>Copyright (c) 2019-2023 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2019-2023 agnos.ai U.K. Ltd</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2023 Mayo Clinic</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2023 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 QuoteWell Insurance Services, LLC</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&mvf;Abbreviation">
+		<rdfs:subClassOf rdf:resource="&mvf;VocabularyEntry"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;isAbbreviation"/>
+				<owl:hasValue rdf:datatype="&xsd;boolean">true</owl:hasValue>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>abbreviation</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.4.14</dct:source>
+		<skos:definition>vocabulary entry formed by omitting parts from its full form and that represents the same concept</skos:definition>
+		<skos:note>Abbreviations can be created by removing individual words, or can be acronyms, initialisms, or clipped terms.</skos:note>
+		<skos:note>An abbreviation could link directly to an MVF entry. If it is an abbreviation for a vocabulary entry then it must be linked to the MVF entry for that same vocabulary entry.</skos:note>
+		<skos:scopeNote>Good writing practice dictates that both the full form of a term and the abbreviated form be indicated the first time a potentially unfamiliar abbreviated form is used in a text. In general, an abbreviated form should be easy to pronounce.</skos:scopeNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;Community">
+		<rdfs:subClassOf rdf:resource="&mvf;MVFElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;uses"/>
+				<owl:onClass rdf:resource="&mvf;Vocabulary"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>community</rdfs:label>
+		<skos:definition>group of individuals that share a natural language and have a shared set of terms used to express concepts in their domain of interest</skos:definition>
+		<skos:note>We refer to a set of terms that is distinguished from general use of the natural language as a vernacular. The community may include people that share a profession, are members of the same enterprise or organization or are collaborating on a particular technology.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;MVFDictionary">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf rdf:resource="&mvf;MVFElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&mvf;MVFEntry"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&mvf;Vocabulary"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>MVF dictionary</rdfs:label>
+		<skos:definition>collection (by reference, or possibly inclusion) of vocabularies that share a set of MVFEntries</skos:definition>
+		<skos:note>Each vocabulary is a container for vocabulary entries that each represent the association of a term in that vocabulary with one of the MVFEntries identified in that dictionary. A modeling environment may include multiple dictionaries, but they must address mutually exclusive concepts. Typically, one dictionary will address concepts of the modeling language metamodel, and another dictionary will address concepts of user-defined modeling elements.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;MVFElement">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasURI"/>
+				<owl:onDataRange rdf:resource="&xsd;anyURI"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasTextualName"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>MVF element</rdfs:label>
+		<skos:definition>abstract entity in a multiple vocabulary facility model or ontology</skos:definition>
+		<cmns-av:explanatoryNote>An MVF element corresponds roughly to an element in category theory, namely one that can be an object of any category, and to &apos;entity&apos; in many top level ontologies.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>Use the Dublin Core &apos;references&apos; annotation for any relevant citations or other references, corresponding to the &apos;reference&apos; property in the MVF metamodel.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;MVFEntry">
+		<rdfs:subClassOf rdf:resource="&mvf;MVFElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasBroaderEntry"/>
+				<owl:allValuesFrom rdf:resource="&mvf;MVFEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasContextualEntry"/>
+				<owl:allValuesFrom rdf:resource="&mvf;MVFEntry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:onClass rdf:resource="&mvf;VocabularyEntry"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasSemanticReference"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;anyURI"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:onClass rdf:resource="&mvf;MVFDictionary"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>MVF entry</rdfs:label>
+		<dct:source>ISO 1087 Terminology work and terminology science - Vocabulary, Second edition, 2019-09, clause 3.2.7</dct:source>
+		<skos:definition>unit of knowledge created by a unique combination of characteristics</skos:definition>
+		<skos:note>An MVF entry is linked to one or more model elements that represent that concept in the modeling environment.</skos:note>
+		<skos:note>Concepts [MVF entries] are not necessarily bound to particular natural languages. They are, however, influenced by the social or cultural background which often leads to different categorizations.</skos:note>
+		<skos:note>From an ISO 1087 perspective, this is the concept &apos;concept&apos; as used and designated by the term &apos;concept&apos; in terminology work. It is a very different concept from that designated by other domains such as industrial automation or marketing.</skos:note>
+		<skos:note>Note that instances of a class will all reference the same class name and will all have attributes and associations with the same names. It is possible that not every concept is mapped to an entry in every vocabulary, or that not all of the terms and definitions are associated with model elements in the active modeling environment.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;TermStatus">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&mvf;MVFElement"/>
+		<rdfs:label>term status</rdfs:label>
+		<skos:definition>classifier for the standing of a term within its vocabulary</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;Vocabulary">
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
+		<rdfs:subClassOf rdf:resource="&mvf;MVFElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isUsedBy"/>
+				<owl:onClass rdf:resource="&mvf;Community"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;imports"/>
+				<owl:onClass rdf:resource="&mvf;Vocabulary"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasVocabularyEntry"/>
+				<owl:onClass rdf:resource="&mvf;VocabularyEntry"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasLanguage"/>
+				<owl:onClass rdf:resource="&lcc-lr;Language"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>vocabulary</rdfs:label>
+		<skos:definition>set of representations of concepts (terms and definitions) for the language of a particular speech community that is expressed in a specified natural language</skos:definition>
+		<skos:editorialNote>This representation does not address the ordering of imports, which may require an intervening class that has an attribute that is an ordinal number representing the ordering.</skos:editorialNote>
+		<skos:note>A speech community may create a vocabulary by specializing an existing vocabulary and overriding selected terms, adding terms for new concepts and incorporating the remaining terms and definitions of the existing vocabulary. This mechanism may be employed to introduce synonyms as the primary terms of the specializing community. Both vocabularies should be in the same natural language so that definitions remain meaningful.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;VocabularyEntry">
+		<rdfs:subClassOf rdf:resource="&cmns-dsg;Designation"/>
+		<rdfs:subClassOf rdf:resource="&mvf;MVFElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasStatus"/>
+				<owl:onClass rdf:resource="&mvf;TermStatus"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;isAbbreviation"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;isPreferred"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&mvf;MVFEntry"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:onClass rdf:resource="&mvf;Vocabulary"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>vocabulary entry</rdfs:label>
+		<skos:definition>element of a vocabulary (designation) that denotes exactly one concept (MVF entry) in the context of that vocabulary</skos:definition>
+		<skos:note>The definition and term(s) are expressed in the natural language associated with that vocabulary and the associated user community.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&mvf;Workspace">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf rdf:resource="&mvf;MVFElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&mvf;MVFDictionary"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&mvf;Vocabulary"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>workspace</rdfs:label>
+		<skos:definition>a set of consistent MVF dictionaries and vocabularies which can be activated in a modeling environment</skos:definition>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&mvf;abbreviates">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;denotes"/>
+		<rdfs:label>abbreviates</rdfs:label>
+		<rdfs:domain rdf:resource="&mvf;Abbreviation"/>
+		<owl:inverseOf rdf:resource="&mvf;hasAbbreviation"/>
+		<skos:definition>is a shortened designation for a term that is used synonymously with that term in the context of a given vocabulary or dictionary</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasAbbreviation">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isSignifiedBy"/>
+		<rdfs:label>has abbreviation</rdfs:label>
+		<rdfs:range rdf:resource="&mvf;Abbreviation"/>
+		<owl:inverseOf rdf:resource="&mvf;abbreviates"/>
+		<skos:definition>has a shortened designation used synonymously in the context of the given vocabulary or dictionary</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasBroaderEntry">
+		<rdfs:label>has broader entry</rdfs:label>
+		<skos:definition>has a more general MVF entry than the subject</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasContextualEntry">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+		<rdfs:label>has contextual entry</rdfs:label>
+		<rdfs:range rdf:resource="&mvf;MVFEntry"/>
+		<skos:definition>scopes in the context of</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasCurrentMVFEntry">
+		<rdfs:subPropertyOf rdf:resource="&mvf;hasMVFEntry"/>
+		<rdfs:label>has current MVF entry</rdfs:label>
+		<rdfs:range rdf:resource="&mvf;MVFEntry"/>
+		<skos:definition>indicates the applicable MVF entry from the active MVF workspace</skos:definition>
+		<skos:note>This property will be implicitly updated when the current workspace changes.</skos:note>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasLanguage">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;uses"/>
+		<rdfs:label>has language</rdfs:label>
+		<rdfs:range rdf:resource="&lcc-lr;Language"/>
+		<skos:definition>has a natural language in which a vocabulary is expressed</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasMVFEntry">
+		<rdfs:label>has MVF entry</rdfs:label>
+		<rdfs:range rdf:resource="&mvf;MVFEntry"/>
+		<skos:altLabel>has multiple vocabulary facility entry</skos:altLabel>
+		<skos:definition>links a model element to the corresponding MVF entry (concept), providing a name and definition for that model element</skos:definition>
+		<skos:note>There could be many of these in different dictionaries.</skos:note>
+		<cmns-av:explanatoryNote>hasMVFEntry is a property used to relate an element in any model to a corresponding MVF entry. It corresponds to the property ElementEntry in the metamodel. That property has a UML Element in its domain, which cannot be modeled in the ontology.</cmns-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasNarrowerEntry">
+		<rdfs:label>has narrower entry</rdfs:label>
+		<owl:inverseOf rdf:resource="&mvf;hasBroaderEntry"/>
+		<skos:definition>has a more specialized MVF entry than the subject</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&mvf;hasSemanticReference">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has semantic reference</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>has a relevant reference that provides meaning but is not explicitly part of the vocabulary (i.e., document, web site, or other resource)</skos:definition>
+		<skos:note>This property is string valued as the reference need not be dereferenceable at a URL.</skos:note>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasStatus">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;classifies"/>
+		<rdfs:label>has status</rdfs:label>
+		<rdfs:range rdf:resource="&mvf;TermStatus"/>
+		<skos:definition>associates a rating with respect to readiness or acceptability for usage with a vocabulary or MVF entry</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&mvf;hasTextualName">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has textual name</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>indicates a text version of something that an MVF element is known by</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&mvf;hasURI">
+		<rdfs:label>has URI</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;anyURI"/>
+		<skos:definition>links something to a unique sequence of characters that identifies a logical or physical resource on a network</skos:definition>
+		<cmns-av:synonym>has uniform resource identifier</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;hasVocabularyEntry">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;hasMember"/>
+		<rdfs:label>has vocabulary entry</rdfs:label>
+		<rdfs:range rdf:resource="&mvf;VocabularyEntry"/>
+		<skos:definition>has a designation (term) in this vocabulary</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;imports">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;hasConstituent"/>
+		<rdfs:label>imports</rdfs:label>
+		<skos:definition>contains as an intrinsic part</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&mvf;isAbbreviation">
+		<rdfs:label>is abbreviation</rdfs:label>
+		<rdfs:domain rdf:resource="&mvf;VocabularyEntry"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>whether the term for this vocabulary entry is an shortened form of another</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&mvf;isInVocabulary">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isMemberOf"/>
+		<rdfs:label>is in vocabulary</rdfs:label>
+		<rdfs:range rdf:resource="&mvf;Vocabulary"/>
+		<owl:inverseOf rdf:resource="&mvf;hasVocabularyEntry"/>
+		<skos:definition>has containing vocabulary</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&mvf;isPreferred">
+		<rdfs:label>is preferred</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>is the best term to use in the context of the vocabulary for some concept</skos:definition>
+		<skos:note>The preferred flag is used to select a term (vocabulary entry) if there are multiple vocabulary entries (i.e., synonyms) available to map to a given model element in the current context.</skos:note>
+	</owl:DatatypeProperty>
+
+</rdf:RDF>

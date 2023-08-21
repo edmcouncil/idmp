@@ -11,6 +11,7 @@ prefix cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
 prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
 prefix idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 prefix cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
+prefix cmns-cmp: <https://www.omg.org/spec/Commons/Composites/>
 prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 
 SELECT DISTINCT ?MedicinalProduct (SAMPLE(?MedicinalProductLabel) AS ?MedicinalProductName)
@@ -22,7 +23,7 @@ WHERE {
 	$Substance idmp-sub:hasActiveMoiety $ActiveMoiety .
 
  	#Find Medicinal Products that play a role of Authorized or Investigational Medicinal Products 
-  	$AuthorizationRole cmns-pts:isPlayedBy ?MedicinalProduct .
+  	$AuthorizationRole cmns-cmp:isPlayedBy ?MedicinalProduct .
 	?MedicinalProduct a idmp-mprd:MedicinalProduct .
 	{ $AuthorizationRole a idmp-mprd:AuthorizedMedicinalProduct} union { $AuthorizationRole a idmp-mprd:InvestigationalMedicinalProduct } .
   	?MedicinalProduct cmns-col:comprises $PharmaceuticalProduct .
@@ -31,12 +32,12 @@ WHERE {
 		# Find pharmaceutical products that have $Substance as an Ingredient 
 		$PharmaceuticalProduct ^cmns-dsg:defines|cmns-dsg:isDefinedIn $ProductComposition .
 		$SubstanceInIngredientRole cmns-pts:isRealizedIn $ProductComposition .
-		$SubstanceInIngredientRole cmns-pts:isPlayedBy $Substance .
+		$SubstanceInIngredientRole cmns-cmp:isPlayedBy $Substance .
 	} UNION {
   		# Find other medicinal products that contain substances with $ActiveMoiety
     	$PharmaceuticalProduct ^cmns-dsg:defines|cmns-dsg:isDefinedIn $ProductComposition .
 		$SubstanceInIngredientRole cmns-pts:isRealizedIn $ProductComposition .
-		$SubstanceInIngredientRole cmns-pts:isPlayedBy $SubstanceSharingMoiety .
+		$SubstanceInIngredientRole cmns-cmp:isPlayedBy $SubstanceSharingMoiety .
     	$SubstanceSharingMoiety  idmp-sub:hasActiveMoiety $ActiveMoiety .
   	}
     
