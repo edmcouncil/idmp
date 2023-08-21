@@ -1,17 +1,18 @@
 #UC3 CQ 1.1 	What substance <S> is part of an authorized medicinal product that is approved for a given therapeutic indication indicated by a MedDRA ID <I>?
 
-PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
-PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 PREFIX idmp-eura:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-phprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/> 
-PREFIX cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+PREFIX cmns-cmp: <https://www.omg.org/spec/Commons/Composites/>
 PREFIX cmns-ctxdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
-PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
-PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
+
 PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -34,11 +35,11 @@ WHERE {
 		} UNION {
 			?TherapeuticIndication cmns-ctxdsg:isApplicableIn ?AuthorizedMedicinalProduct .
 			?AuthorizedMedicinalProduct a idmp-mprd:AuthorizedMedicinalProduct .
-		    ?AuthorizedMedicinalProduct (cmns-pts:isPlayedBy|^cmns-pts:playsRole) ?MedicinalProduct  .
+		    ?AuthorizedMedicinalProduct (cmns-cmp:isPlayedBy|^cmns-cmp:playsRole) ?MedicinalProduct  .
 		} UNION {
 			?TherapeuticIndication cmns-ctxdsg:isApplicableIn ?InvestigationalMedicinalProduct .
 			?InvestigationalMedicinalProduct a idmp-mprd:InvestigationalMedicinalProduct .
-		    ?InvestigationalMedicinalProduct (cmns-pts:isPlayedBy|^cmns-pts:playsRole) ?MedicinalProduct  .
+		    ?InvestigationalMedicinalProduct (cmns-cmp:isPlayedBy|^cmns-cmp:playsRole) ?MedicinalProduct  .
 		}
 	
 		
@@ -47,7 +48,7 @@ WHERE {
         ?Product ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
     	?Product ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
 		?SubstanceInIngredientRole cmns-pts:isRealizedIn ?ProductComposition .
-		?SubstanceInIngredientRole cmns-pts:isPlayedBy ?Substance .
+		?SubstanceInIngredientRole cmns-cmp:isPlayedBy ?Substance .
 
 		# Make sure that we only return actual substances
         ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
