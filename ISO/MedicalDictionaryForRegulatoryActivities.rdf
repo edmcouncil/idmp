@@ -197,14 +197,23 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
-				<owl:allValuesFrom rdf:resource="&idmp-meddra;MedDRAHighLevelTerm"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:allValuesFrom rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
-				<owl:allValuesFrom rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:oneOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-meddra;MedDRAHighLevelTerm">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-meddra;MedDRAPreferredTerm">
+							</rdf:Description>
+						</owl:oneOf>
+					</owl:Class>
+				</owl:allValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
