@@ -1,6 +1,7 @@
 PREFIX iter: <http://w3id.org/sparql-generate/iter/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX cmns-cstdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
+PREFIX cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
+PREFIX cmns-cmp: <https://www.omg.org/spec/Commons/Composites/>
 PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -11,20 +12,20 @@ GENERATE {
     ?Substance ?SubstancesRelationshipProperty ?RelatedSubstance .
 
     # Has Active Moiety Role and Concept
-    ?RelatedSubstanceAssociatedWithActiveMoietyRole cmns-pts:playsRole ?ActiveMoietyRole .
+    ?RelatedSubstanceAssociatedWithActiveMoietyRole cmns-cmp:playsRole ?ActiveMoietyRole .
 
     # Is Active Moiety Of
     # ?RelatedSubstance ?IsActiveMoietyOfProperty ?Substance .
 
     ?ActiveMoietyRole a ?MoietyRole ;
-        cmns-cstdsg:isApplicableIn ?RegulatoryContext;
-        cmns-pts:isPlayedBy ?RelatedSubstanceAssociatedWithActiveMoietyRole ;
-        cmns-pts:isManifestedIn ?SubstanceAssociatedWithActiveMoietyRole ;
+        cmns-cxtdsg:isApplicableIn ?RegulatoryContext;
+        cmns-cmp:isPlayedBy ?RelatedSubstanceAssociatedWithActiveMoietyRole ;
+        cmns-cmp:isManifestedIn ?SubstanceAssociatedWithActiveMoietyRole ;
         .
 
-    ?SubstanceAssociatedWithActiveMoietyRole cmns-pts:manifests ?ActiveMoietyRole .
+    ?SubstanceAssociatedWithActiveMoietyRole cmns-cmp:manifests ?ActiveMoietyRole .
 
-    ?RegulatoryContext cmns-cstdsg:appliesTo ?ActiveMoietyRole .
+    ?RegulatoryContext cmns-cxtdsg:appliesTo ?ActiveMoietyRole .
 
 }
 
@@ -73,7 +74,7 @@ BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, ?approvalID, ?n
 
 BIND(
     IF(str(?RelationshipType) = "ACTIVE MOIETY", <https://data.pistoiaalliance.org/role/{ ?SourceSubstanceApprovalID }_MoietyRole_FDA_general_{ ?RelatedSubstanceApprovalID }>,
-    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", <https://data.pistoiaalliance.org/role/{ ?SourceSubstanceApprovalID }_MoietyRole_FDA_patent_exclusive_{ ?RelatedSubstanceApprovalID }>,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", <https://data.pistoiaalliance.org/role/{ ?SourceSubstanceApprovalID }_MoietyRole_FDA_granted_exclusivity_{ ?RelatedSubstanceApprovalID }>,
     ?nothing))
     AS ?ActiveMoietyRole)
 
@@ -84,6 +85,6 @@ BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, idmp-sub:isActi
 
 BIND(
     IF(str(?RelationshipType) = "ACTIVE MOIETY", idmp-ra:RegulatoryContext-FoodAndDrugAdministrationGeneral,
-    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-ra:RegulatoryContext-FoodAndDrugAdministrationPatentExclusive,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-ra:RegulatoryContext-ActiveMoietyForFoodAndDrugAdministrationExclusivity,
     ?nothing))
     AS ?RegulatoryContext)

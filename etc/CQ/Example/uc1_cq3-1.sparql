@@ -1,6 +1,6 @@
 # UC1-CQ 3-1:  What is the basis of strength for <substance x> in <product y>?
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
-PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX cmns-cmp:    <https://www.omg.org/spec/Commons/Composites/>
 PREFIX cmns-qtu: <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -23,14 +23,14 @@ WHERE {
     
   	# Bind Variable Product <$Product>
 	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Norvasc-ManufacturedItem>
-  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetateSUN>
+  	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetateSUN-PharmaceuticalProduct>
     BIND(uc1_cq3-1_parameter_2 AS $Product )
   
   	# Get $Product's active ingredient that is played by $Substace that has a Basis Of Strength
   	[] 	cmns-dsg:defines $Product ;
       	idmp-mprd:hasActiveIngredient [ 
     		idmp-mprd:hasStrength ?BasisOfStrength ;
-  			cmns-pts:isPlayedBy $Substance ] .
+  			cmns-cmp:isPlayedBy $Substance ] .
   
   	# Get the Basis of Strength's numerator value and unit
   	?BasisOfStrength cmns-qtu:hasNumerator [
