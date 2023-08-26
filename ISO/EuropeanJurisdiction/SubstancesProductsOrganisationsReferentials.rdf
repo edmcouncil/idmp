@@ -18,6 +18,7 @@
 	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
 	<!ENTITY idmp-spor "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
+	<!ENTITY lcc-639-1 "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/">
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
 	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
 	<!ENTITY mvf-trm "https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/">
@@ -46,6 +47,7 @@
 	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
 	xmlns:idmp-spor="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
+	xmlns:lcc-639-1="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
 	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
 	xmlns:mvf-trm="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"
@@ -75,6 +77,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
@@ -145,18 +148,107 @@
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/v1/lists/200000004983"/>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-spor;SPOR-DataClassificationVocabulary">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabulary"/>
+		<rdfs:label>SPOR data classification vocabulary</rdfs:label>
+		<skos:definition>controlled vocabulary used to classify the nature of any data element in terms of accessibility from a Substances Products Organisations Referentials (SPOR) perspective</skos:definition>
+		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/v1/lists/200000004983"/>
+		<cmns-av:synonym>SPOR RMS data classification list</cmns-av:synonym>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-spor;SPOR-Domain">
 		<rdfs:subClassOf rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
 		<rdfs:label>SPOR domain</rdfs:label>
 		<skos:definition>classifier and code element that describes the domain in which a particular substance or product is used from a Substances Products Organisations Referentials (SPOR) perspective</skos:definition>
 		<cmns-av:adaptedFrom rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000004"/>
+		<cmns-col:isIncludedIn rdf:resource="&idmp-spor;SPOR-DomainVocabulary"/>
 	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-spor;SPOR-DomainVocabulary">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabulary"/>
+		<rdfs:label>SPOR domain vocabulary</rdfs:label>
+		<skos:definition>controlled vocabulary used to classify the domain in which a particular substance or product is used from a Substances Products Organisations Referentials (SPOR) perspective</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000004"/>
+		<cmns-av:synonym>SPOR RMS domain list</cmns-av:synonym>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-spor;SPOR-DomainVocabulary-Name"/>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-spor;SPOR-L-100000000004"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-spor;SPOR-DomainVocabulary-Name">
+		<rdf:type rdf:resource="&idmp-spor;SPORListName"/>
+		<rdfs:label>SPOR Domain Vocabulary name</rdfs:label>
+		<skos:definition>SPOR list name for the domain vocabulary</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000004"/>
+		<cmns-col:isIncludedIn rdf:resource="&idmp-spor;SPOR-DomainVocabulary"/>
+		<cmns-dsg:isNameOf rdf:resource="&idmp-spor;SPOR-DomainVocabulary"/>
+		<cmns-txt:hasTextValue>Domain</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-spor;SPOR-L-100000000004">
+		<rdf:type rdf:resource="&idmp-spor;SPORListIdentifier"/>
+		<rdfs:label>SPOR L-100000000004</rdfs:label>
+		<skos:definition>SPOR list identifier for the domain vocabulary</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000004"/>
+		<cmns-id:identifies rdf:resource="&idmp-spor;SPOR-DomainVocabulary"/>
+		<cmns-ra:hasRegistrationDate>2022-12-12T05:55:17</cmns-ra:hasRegistrationDate>
+		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+		<cmns-txt:hasTextValue>100000000004</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-spor;SPOR-L-200000005003">
+		<rdf:type rdf:resource="&idmp-spor;SPORListIdentifier"/>
+		<rdfs:label>SPOR L-200000005003</rdfs:label>
+		<skos:definition>SPOR list identifier for the record status vocabulary</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://spor.ema.europa.eu/v1/lists/200000005003"/>
+		<cmns-id:identifies rdf:resource="&idmp-spor;SPOR-RecordStatusVocabulary"/>
+		<cmns-ra:hasRegistrationDate>2021-09-09T00:25:04</cmns-ra:hasRegistrationDate>
+		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+		<cmns-txt:hasTextValue>200000005003</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-spor;SPOR-MarketingStatusClassifier">
 		<rdfs:subClassOf rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
 		<rdfs:label>SPOR marketing status classifier</rdfs:label>
 		<skos:definition>classifier and code element that describes the current status of some substance with respect to whether or not it has been placed on the market from a Substances Products Organisations Referentials (SPOR) perspective</skos:definition>
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/v1/lists/100000072052"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-spor;SPOR-RecordStatus">
+		<rdfs:subClassOf rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
+		<rdfs:subClassOf rdf:resource="&mvf;TermStatus"/>
+		<rdfs:label>SPOR record status</rdfs:label>
+		<skos:definition>classifier and code element that describes the state of something in a Substances Products Organisations Referentials (SPOR) registry as of some point in time</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://spor.ema.europa.eu/v1/lists/200000005003"/>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-spor;SPOR-RecordStatusVocabulary">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabulary"/>
+		<rdfs:label>SPOR record status vocabulary</rdfs:label>
+		<skos:definition>controlled vocabulary used to provide an indication of the status of any vocabulary (list) or term in Substances Products Organisations Referentials (SPOR)</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://spor.ema.europa.eu/v1/lists/200000005003"/>
+		<cmns-av:synonym>SPOR RMS record status list</cmns-av:synonym>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-spor;SPOR-RecordStatusVocabulary-Name"/>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-spor;SPOR-L-200000005003"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-spor;SPOR-RecordStatusVocabulary-Name">
+		<rdf:type rdf:resource="&idmp-spor;SPORListName"/>
+		<rdfs:label>SPOR Record Status Vocabulary name</rdfs:label>
+		<skos:definition>SPOR list name for the record status vocabulary</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://spor.ema.europa.eu/v1/lists/200000005003"/>
+		<cmns-col:isIncludedIn rdf:resource="&idmp-spor;SPOR-RecordStatusVocabulary"/>
+		<cmns-dsg:isNameOf rdf:resource="&idmp-spor;SPOR-RecordStatusVocabulary"/>
+		<cmns-txt:hasTextValue>Record Status</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-spor;SPOR-RouteOfAdministration">
+		<rdfs:subClassOf rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;RouteOfAdministration"/>
+		<rdfs:label>SPOR route of administration</rdfs:label>
+		<skos:definition>classifier and code element that describes the path by which the pharmaceutical product is taken into or makes contact with the body from a Substances Products Organisations Referentials (SPOR) perspective</skos:definition>
+		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073345"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-spor;SPOR-ShelfLifeType">
@@ -175,13 +267,6 @@
 		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073344"/>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-spor;SPOR-Status">
-		<rdfs:subClassOf rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
-		<rdfs:subClassOf rdf:resource="&mvf;TermStatus"/>
-		<rdfs:label>SPOR status</rdfs:label>
-		<skos:definition>classifier and code element that describes the state of something in a Substances Products Organisations Referentials (SPOR) registry as of some point in time</skos:definition>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-spor;SPOR-Visibility">
 		<rdfs:subClassOf rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
 		<rdfs:label>SPOR visibility</rdfs:label>
@@ -196,27 +281,6 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
 				<owl:hasValue rdf:resource="&idmp-spor;ReferentialsManagementServicesRegistry"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-spor;hasSPORVisibility"/>
-				<owl:onClass rdf:resource="&idmp-spor;SPOR-Visibility"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-spor;hasSPORDomain"/>
-				<owl:onClass rdf:resource="&idmp-spor;SPOR-Domain"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-spor;hasSPORStatus"/>
-				<owl:onClass rdf:resource="&idmp-spor;SPOR-Status"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -303,7 +367,14 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-spor;hasSPORStatus"/>
-				<owl:onClass rdf:resource="&idmp-spor;SPOR-Status"/>
+				<owl:onClass rdf:resource="&idmp-spor;SPOR-RecordStatus"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-spor;SPORTermIdentifier"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -328,12 +399,6 @@
 	
 	<owl:Class rdf:about="&idmp-spor;SPORListIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredBy"/>
-				<owl:hasValue rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
@@ -380,6 +445,24 @@
 		</rdfs:subClassOf>
 		<rdfs:label>SPOR list name</rdfs:label>
 		<skos:definition>name for a controlled vocabulary (list) managed in the Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) registry</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-spor;SPORTermIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:hasValue rdf:resource="&idmp-spor;ReferentialsManagementServicesRegistrationScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
+				<owl:hasValue rdf:resource="&idmp-spor;ReferentialsManagementServicesRegistry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>SPOR term identifier</rdfs:label>
+		<skos:definition>contextual identifier for a term in a controlled vocabulary (list) that is registered in the Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) registry</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-spor;SPORTermName">
@@ -473,7 +556,7 @@
 	<owl:ObjectProperty rdf:about="&idmp-spor;hasSPORStatus">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has SPOR status</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-spor;SPOR-Status"/>
+		<rdfs:range rdf:resource="&idmp-spor;SPOR-RecordStatus"/>
 		<skos:definition>indicates the status of the vocabulary term in Substances Products Organisations Referentials (SPOR)</skos:definition>
 	</owl:ObjectProperty>
 	
