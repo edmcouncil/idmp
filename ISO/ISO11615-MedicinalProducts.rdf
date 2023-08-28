@@ -621,14 +621,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasAgeDurationRange"/>
-				<owl:onClass rdf:resource="&idmp-uom;DurationRange"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasAgeQuantityValueRange"/>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
 				<owl:onClass rdf:resource="&idmp-uom;TimeQuantityValueRange"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -637,6 +630,13 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;AgeClassifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dt;hasDurationRange"/>
+				<owl:onClass rdf:resource="&cmns-dt;DurationRange"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1191,7 +1191,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Organism"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>gender</rdfs:label>
@@ -1209,7 +1209,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>gender population characteristic</rdfs:label>
-		<skos:definition>classifier for a statistical population based on the gender (sex) of the members of a population</skos:definition>
+		<skos:definition>classifier for a statistical population based on the gender (sex) its members</skos:definition>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-mprd;ISO11615-IngredientRoleVocabulary">
@@ -2441,7 +2441,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isExperiencedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Organism"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>physiological condition</rdfs:label>
@@ -2457,7 +2457,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>physiological condition population characteristic</rdfs:label>
-		<skos:definition>classifier for a statistical population based on the physiological condition of the members of a population</skos:definition>
+		<skos:definition>classifier for a statistical population based on the physiological condition its members</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Placebo">
@@ -2470,6 +2470,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	
 	<owl:Class rdf:about="&idmp-mprd;PopulationCharacteristic">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationClassifiedBy"/>
+				<owl:onClass rdf:resource="&cmns-cls;Classifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
@@ -2660,11 +2667,11 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Organism"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>race</rdfs:label>
-		<skos:definition>race or ethnicity of a human or other organism</skos:definition>
+		<rdfs:label>race or ethnicity</rdfs:label>
+		<skos:definition>a subdivision of human population based on common culture or descent or a subspecies of animals</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;RaceOrEthnicityPopulationCharacteristic">
@@ -2676,7 +2683,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>race or ethnicity population characteristic</rdfs:label>
-		<skos:definition>classifier for a statistical population based on the race or ethnicity of the members of a population</skos:definition>
+		<skos:definition>classifier for a statistical population based on the race or ethnicity of its members</skos:definition>
 		<cmns-av:usageNote>HL7 uses PHIN-VADS Race &amp; Ethnicity - CDC as vocabulary for this</cmns-av:usageNote>
 	</owl:Class>
 	
@@ -2914,6 +2921,34 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AgePopulationCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;GenderPopulationCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PhysiologicalConditionPopulationCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;RaceOrEthnicityPopulationCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
@@ -2921,7 +2956,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:label>target population</rdfs:label>
 		<skos:definition>collection of patients or consumers for which the indication of a medicinal product is authorized or is under investigation</skos:definition>
-		<skos:editorialNote>This definition should be extended to include requirements for membership, such as being a patient and/or consumer, or animal.</skos:editorialNote>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.81</cmns-av:adaptedFrom>
 		<cmns-av:synonym>population specifics</cmns-av:synonym>
 	</owl:Class>
@@ -3460,6 +3494,20 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label>has package item quantity</rdfs:label>
 		<skos:definition>indicates the number/quantity of items of the same type in a container</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Annex A, Full Model</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPopulationCharacteristic">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has population characteristic</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
+		<skos:definition>relates a target population to classifiers that narrow down the population to a specific subset</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPopulationClassifiedBy">
+		<rdfs:label>has population classified by</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
+		<rdfs:range rdf:resource="&cmns-cls;Classifier"/>
+		<skos:definition>relates a population characteristic with a classifier for aspects of the population members or a common situation that the population member experience</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceIngredientRole">
