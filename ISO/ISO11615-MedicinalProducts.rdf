@@ -596,16 +596,47 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;Age">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf rdf:resource="&cmns-dt;Duration"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Quantity"/>
 		<rdfs:label>age</rdfs:label>
-		<skos:definition>time since the creation or birth of something</skos:definition>
+		<skos:definition>time (duration or quantity) since the creation or birth of something</skos:definition>
+		<cmns-av:usageNote>The age is both a duration and a quantity. Its magnitude value can be expressed as quantity value with a time unit or as an ISO 8601 duration expression. Which way of expression is preferred depends on the domain.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AgeClassifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Age"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>age classifier</rdfs:label>
+		<skos:definition>classifier for ages</skos:definition>
+		<skos:example>adult</skos:example>
+		<skos:example>elderly</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AgePopulationCharacteristic">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasAgeRange"/>
-				<owl:onClass rdf:resource="&idmp-uom;TimeRange"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasAgeDurationRange"/>
+				<owl:onClass rdf:resource="&idmp-uom;DurationRange"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasAgeQuantityValueRange"/>
+				<owl:onClass rdf:resource="&idmp-uom;TimeQuantityValueRange"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AgeClassifier"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -616,7 +647,8 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>age population characteristic</rdfs:label>
-		<skos:definition>classifier for a statistical population based on the age of the members of a population</skos:definition>
+		<skos:definition>classifier for a statistical population based on the age of its members</skos:definition>
+		<cmns-av:usageNote>The age is either expressed as an explicit range of ages or by an age classifier from a controlled vocabulary.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Authorization">
@@ -2876,6 +2908,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-stat;StatisticalPopulation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
@@ -3207,20 +3245,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasActiveIngredientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
 		<owl:equivalentProperty rdf:resource="&idmp-mprd;hasActiveIngredient"/>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAge">
-		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
-		<rdfs:label>has age</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-uom;TimeValue"/>
-		<skos:definition>relates to the age of something</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAgeRange">
-		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
-		<rdfs:label>has age range</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-uom;TimeRange"/>
-		<skos:definition>relates to the lower and upper bounds of the age of something</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorization">

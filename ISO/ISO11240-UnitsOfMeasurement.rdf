@@ -119,40 +119,65 @@
 		<skos:note>This code represents the unit of measurement concept and shall be used as the unit of measurement identifier in electronic communication. This identifier shall be a Unified Code for Units of Measure (UCUM). A valid code shall be provided for each concept included in an implementation of this International Standard. The OID of the coding system for the unit of measurement identifier is 2.16.840.1.113883.6.8.</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-uom;TimeRange">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValueRange"/>
+	<owl:Class rdf:about="&idmp-uom;TimeQuantity">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Quantity"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasLowerBound"/>
-				<owl:allValuesFrom rdf:resource="&idmp-uom;TimeValue"/>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
+				<owl:hasValue rdf:resource="&idmp-uom;TimeQuantityKind"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasUpperBound"/>
-				<owl:allValuesFrom rdf:resource="&idmp-uom;TimeValue"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>time value</rdfs:label>
-		<skos:definition>quantity value expressing time or duration</skos:definition>
+		<rdfs:label>time quantity</rdfs:label>
+		<skos:definition>fundamental scalar physical property that expresses the duration separating two events</skos:definition>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-uom;TimeUnit">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;PhysicalUnit"/>
-		<rdfs:label>time unit</rdfs:label>
-		<skos:definition>measurement unit for time or duration</skos:definition>
-	</owl:Class>
+	<owl:NamedIndividual rdf:about="&idmp-uom;TimeQuantityKind">
+		<rdf:type rdf:resource="&cmns-qtu;QuantityKind"/>
+		<rdfs:label>time quantity kind</rdfs:label>
+		<skos:definition>quantity kind for the amount of time passed between two events</skos:definition>
+	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-uom;TimeValue">
+	<owl:Class rdf:about="&idmp-uom;TimeQuantityValue">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;expressesTheMagnitudeOf"/>
+				<owl:allValuesFrom rdf:resource="&idmp-uom;TimeQuantity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementUnit"/>
 				<owl:allValuesFrom rdf:resource="&idmp-uom;TimeUnit"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>time value</rdfs:label>
-		<skos:definition>quantity value expressing time or duration</skos:definition>
+		<rdfs:label>time quantity value</rdfs:label>
+		<skos:definition>quantity value expressing the amount of time passed (duration)</skos:definition>
+		<cmns-av:usageNote>Durations outside of the domain of the natural sciences will be usually using an instance of Duration from the CMNS Dates and Times ontology. Duration uses the ISO 8601 temporal duration notation to express the time passed.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;TimeQuantityValueRange">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValueRange"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasLowerBound"/>
+				<owl:allValuesFrom rdf:resource="&idmp-uom;TimeQuantityValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasUpperBound"/>
+				<owl:allValuesFrom rdf:resource="&idmp-uom;TimeQuantityValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>time quantity value range</rdfs:label>
+		<skos:definition>quantity value range expressing upper and lower bounds on time (duration) values</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-uom;TimeUnit">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;PhysicalUnit"/>
+		<rdfs:label>time unit</rdfs:label>
+		<skos:definition>measurement unit for passed time or duration</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-uom;UnitOfMeasureIdentificationScheme">

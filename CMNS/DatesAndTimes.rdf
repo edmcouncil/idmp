@@ -148,6 +148,35 @@
 		<skos:note>The &apos;has duration value&apos; property is absent if the duration is not (yet) known.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&cmns-dt;DurationRange">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-dt;MinimumDuration">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-dt;MaximumDuration">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dt;hasMaximumDuration"/>
+				<owl:onClass rdf:resource="&cmns-dt;Duration"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dt;hasMinimumDuration"/>
+				<owl:onClass rdf:resource="&cmns-dt;Duration"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>duration range</rdfs:label>
+		<skos:definition>range expressing upper and lower bounds on durations</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&cmns-dt;ExplicitDate">
 		<rdfs:subClassOf rdf:resource="&cmns-dt;Date"/>
 		<rdfs:subClassOf>
@@ -203,6 +232,32 @@
 		<rdfs:label>explicit duration</rdfs:label>
 		<skos:definition>duration for which the &apos;has duration value&apos; property must have a value</skos:definition>
 		<skos:note>This class is used when a duration is guaranteed to be known when it is created.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-dt;MaximumDuration">
+		<rdfs:subClassOf rdf:resource="&cmns-dt;Duration"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dt;hasMaximumDuration"/>
+				<owl:onClass rdf:resource="&cmns-dt;Duration"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>maximum duration</rdfs:label>
+		<skos:definition>upper bound of duration</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-dt;MinimumDuration">
+		<rdfs:subClassOf rdf:resource="&cmns-dt;Duration"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dt;hasMinimumDuration"/>
+				<owl:onClass rdf:resource="&cmns-dt;Duration"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>minimum duration</rdfs:label>
+		<skos:definition>lower bound of duration</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-dt;ProperInterval">
@@ -310,6 +365,12 @@
 		<skos:note>This duration may be omitted or unknown if either the start or end Date of the DatePeriod is an ExplicitDate.</skos:note>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-dt;hasDurationRange">
+		<rdfs:label>has duration range</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-dt;DurationRange"/>
+		<skos:definition>relates to a range of durations</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&cmns-dt;hasDurationValue">
 		<rdfs:label>has duration value</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-dt;Duration"/>
@@ -338,6 +399,18 @@
 		<rdfs:label>has explicit date</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-dt;ExplicitDate"/>
 		<skos:definition>indicates a stated date, as opposed to a calculated or unknown date, associated with something</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-dt;hasMaximumDuration">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDuration"/>
+		<rdfs:label>has maximum duration</rdfs:label>
+		<skos:definition>relates to the highest amount of time passed in a duration range</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-dt;hasMinimumDuration">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDuration"/>
+		<rdfs:label>has minimum duration</rdfs:label>
+		<skos:definition>relates to the lowest amount of time passed in a duration range</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-dt;hasObservedDateTime">
