@@ -651,6 +651,12 @@
 		<cmns-av:usageNote>The age is either expressed as an explicit range of ages or by an age classifier from a controlled vocabulary.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;AgeRange">
+		<rdfs:subClassOf rdf:resource="&idmp-uom;TimeQuantityValueRange"/>
+		<rdfs:label>age range</rdfs:label>
+		<skos:definition>upper and lower bounds of age</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Authorization">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
@@ -3279,6 +3285,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasActiveIngredientRole">
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
 		<owl:equivalentProperty rdf:resource="&idmp-mprd;hasActiveIngredient"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAgeRange">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
+		<rdfs:label>has age range</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;AgeRange"/>
+		<skos:definition>relates to a range of ages by specifying lower and upper bounds as time quantity value</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorization">
