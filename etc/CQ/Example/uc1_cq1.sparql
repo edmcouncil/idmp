@@ -1,6 +1,6 @@
 # UC1-CQ 1: What substances have a common active moiety <$ActiveMoiety>?
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
-PREFIX cmns-pts:    <https://www.omg.org/spec/Commons/PartiesAndSituations/>
+PREFIX cmns-cmp:    <https://www.omg.org/spec/Commons/Composites/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
@@ -21,9 +21,9 @@ WHERE {
   	} UNION {
     	# Use the $ActiveMoiety in a role for composition that defines a substance.
     	[] cmns-dsg:defines ?Substance ;
-      	 	cmns-pts:hasRole [
+      	 	cmns-cmp:hasRole [
       			a idmp-sub:ActiveMoietyRole ;
-    			cmns-pts:isPlayedBy $ActiveMoiety
+    			cmns-cmp:isPlayedBy $ActiveMoiety
     	] .
   	}
      

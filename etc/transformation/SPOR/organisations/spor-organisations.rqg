@@ -10,25 +10,25 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 GENERATE {
     # Generate Organisations
-    <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>
+    <https://spor.ema.europa.eu/v1/organisations/{ ?Organisation_ID }>
         a cmns-org:LegalEntity ;
         skos:prefLabel ?Name ;
         skos:altLabel ?Acronym ;
         skos:note ?Spor_Status_URI ;
-        schema:address <https://spor.ema.europa.eu/omswi/#/searchedOrganisations/viewLocation/{ ?Location_ID }> ;
+        schema:address <https://spor.ema.europa.eu/v1/locations/{ ?Location_ID }> ;
         cmns-id:isIdentifiedBy <https://data.pistoiaalliance.org/id/OMS/{ ?Organisation_ID }>;
         .
-    
+
     <https://data.pistoiaalliance.org/id/OMS/{ ?Organisation_ID }>
         a cmns-reg:RegisteredIdentifier;
         cmns-txt:hasTextValue ?Organisation_ID;
-        cmns-id:identifies <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>;
+        cmns-id:identifies <https://spor.ema.europa.eu/v1/organisations/{ ?Organisation_ID }>;
         cmns-reg:isRegisteredIn <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/OrganisationManagementServices>
         .
 
 
     GENERATE {
-        <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>
+        <https://spor.ema.europa.eu/v1/organisations/{ ?Organisation_ID }>
             skos:altLabel ?Alternative_Name_LangString ;
             .
     }
@@ -41,8 +41,8 @@ GENERATE {
 
     # Map to RMS OMS Party Category
     GENERATE {
-        <https://spor.ema.europa.eu/omswi/#/organisations/{ ?Organisation_ID }>
-            skos:broader <https://spor.ema.europa.eu/rmswi/#/lists/200000000015/terms/{ ?code }> ;
+        <https://spor.ema.europa.eu/v1/organisations/{ ?Organisation_ID }>
+            skos:broader <https://spor.ema.europa.eu/v1/lists/200000000015/terms/{ ?code }> ;
             .
     }
     ITERATOR iter:for(0,1,?Category_Classification_Category_Code_Length) AS ?index
@@ -51,7 +51,7 @@ GENERATE {
     } .
 
     # Generate Locations
-    <https://spor.ema.europa.eu/omswi/#/searchedOrganisations/viewLocation/{ ?Location_ID }>
+    <https://spor.ema.europa.eu/v1/locations/{ ?Location_ID }>
         a schema:PostalAddress ;
         skos:prefLabel ?Location_ID ;
         rdfs:seeAlso ?Location_Link_Href ;
@@ -169,10 +169,10 @@ WHERE {
 
     # Map to RMS Organisation Role Status
     BIND (
-        IF(?Status = "PROVISIONAL", <https://spor.ema.europa.eu/rmswi/#/lists/220000000026/terms/220000000027>,
-        IF(?Status = "ACTIVE", <https://spor.ema.europa.eu/rmswi/#/lists/220000000026/terms/220000000028>,
-        IF(?Status = "INACTIVE", <https://spor.ema.europa.eu/rmswi/#/lists/220000000026/terms/220000000029>,
-        IF(?Status = "DELETED", <https://spor.ema.europa.eu/rmswi/#/lists/220000000026/terms/220000000030>,
+        IF(?Status = "PROVISIONAL", <https://spor.ema.europa.eu/v1/lists/220000000026/terms/220000000027>,
+        IF(?Status = "ACTIVE", <https://spor.ema.europa.eu/v1/lists/220000000026/terms/220000000028>,
+        IF(?Status = "INACTIVE", <https://spor.ema.europa.eu/v1/lists/220000000026/terms/220000000029>,
+        IF(?Status = "DELETED", <https://spor.ema.europa.eu/v1/lists/220000000026/terms/220000000030>,
         ?unbound ))))
         AS ?Spor_Status_URI )
 
