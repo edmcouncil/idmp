@@ -21,6 +21,7 @@
 	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
+	<!ENTITY mvf-trm "https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -49,6 +50,7 @@
 	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+	xmlns:mvf-trm="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -77,7 +79,8 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230815/MedicalDictionaryForRegulatoryActivities/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/MedicalDictionaryForRegulatoryActivities/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -130,7 +133,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA high level term</rdfs:label>
-		<skos:definition>term that groups related preferred terms based upon anatomy, pathology, physiology, aetiology or function.</skos:definition>
+		<skos:definition>term that groups related preferred terms based upon anatomy, pathology, physiology, aetiology or function</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRAIdentifier">
@@ -184,7 +187,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-meddra;MedDRAMaintenanceAndSupportServicesOrganization">
 		<rdf:type rdf:resource="&cmns-org;Organization"/>
 		<rdfs:label>MedDRA Maintenance and Support Services Organization</rdfs:label>
-		<skos:definition>organization under the oversight of the ICH MedDRA Management Committee, the key function of the MSSO is to maintain, distribute, and support MedDRA on behalf of MedDRA users.</skos:definition>
+		<skos:definition>organization under the oversight of the ICH MedDRA Management Committee, the key function of the MSSO is to maintain, distribute, and support MedDRA on behalf of MedDRA users</skos:definition>
 		<cmns-av:abbreviation>MSSO</cmns-av:abbreviation>
 		<cmns-av:abbreviation>MedDRA MSSO</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>https://www.meddra.org/about-meddra/organisation/msso</cmns-av:adaptedFrom>
@@ -236,7 +239,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA preferred term</rdfs:label>
-		<skos:definition>a distinct descriptor (single medical concept) for a symptom, sign, disease diagnosis, therapeutic indication, investigation, surgical or medical procedure, and medical social or family history characteristic.</skos:definition>
+		<skos:definition>distinct descriptor (single medical concept) for a symptom, sign, disease diagnosis, therapeutic indication, investigation, surgical or medical procedure, and medical social or family history characteristic</skos:definition>
 		<skos:note>Each preferred term contains at least itself as lower level term.</skos:note>
 	</owl:Class>
 	
@@ -265,11 +268,11 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA system organ class</rdfs:label>
-		<skos:definition>grouping of higher level group terms by aetiology, manifestation site or purpose. In addtion there is a SOC to contain issues pertaining to products and one to contain social circumstances.</skos:definition>
+		<skos:definition>grouping of higher level group terms by aetiology, manifestation site or purpose. In addtion there is a SOC to contain issues pertaining to products and one to contain social circumstances</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRATerm">
-		<rdfs:subClassOf rdf:resource="&cmns-dsg;Designation"/>
+		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
@@ -341,7 +344,7 @@
 		<rdf:type rdf:resource="&idmp-meddra;MedDRATermClassifier"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>MedDRA term classifier - high level group term</rdfs:label>
-		<skos:definition>classifier for terms that groups together related High Level Terms (HLGT).</skos:definition>
+		<skos:definition>classifier for terms that groups together related High Level Terms (HLGT)</skos:definition>
 		<cmns-av:acronym>HLGT</cmns-av:acronym>
 		<cmns-av:adoptedFrom>https://www.meddra.org/how-to-use/basics/hierarchy</cmns-av:adoptedFrom>
 		<cmns-txt:hasTextValue>HLGT</cmns-txt:hasTextValue>
@@ -351,7 +354,7 @@
 		<rdf:type rdf:resource="&idmp-meddra;MedDRATermClassifier"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>MedDRA term classifier - high level term</rdfs:label>
-		<skos:definition>classifier for terms that group together related Preferred Terms (PT)s based upon anatomy, pathology, physiology, aetiology or function. HLTs, related to each other by anatomy, pathology, physiology, aetiology or function.</skos:definition>
+		<skos:definition>classifier for terms that group together related Preferred Terms (PT)s based upon anatomy, pathology, physiology, aetiology or function. HLTs, related to each other by anatomy, pathology, physiology, aetiology or function</skos:definition>
 		<cmns-av:acronym>HLT</cmns-av:acronym>
 		<cmns-av:adoptedFrom>https://www.meddra.org/how-to-use/basics/hierarchy</cmns-av:adoptedFrom>
 		<cmns-txt:hasTextValue>HLT</cmns-txt:hasTextValue>
@@ -361,7 +364,7 @@
 		<rdf:type rdf:resource="&idmp-meddra;MedDRATermClassifier"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>MedDRA term classifier - lowest level term</rdfs:label>
-		<skos:definition>classifier for terms that are the most specific level in the MedDRA hierarchy.</skos:definition>
+		<skos:definition>classifier for terms that are the most specific level in the MedDRA hierarchy</skos:definition>
 		<cmns-av:acronym>LLT</cmns-av:acronym>
 		<cmns-av:adoptedFrom>https://www.meddra.org/how-to-use/basics/hierarchy</cmns-av:adoptedFrom>
 		<cmns-txt:hasTextValue>LLT</cmns-txt:hasTextValue>
@@ -371,7 +374,7 @@
 		<rdf:type rdf:resource="&idmp-meddra;MedDRATermClassifier"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>MedDRA term classifier - preferred term</rdfs:label>
-		<skos:definition>classifier for terms that are a distinct descriptor (single medical concept) for a symptom, sign, disease diagnosis, therapeutic indication, investigation, surgical or medical procedure, and medical social or family history characteristic.</skos:definition>
+		<skos:definition>classifier for terms that are a distinct descriptor (single medical concept) for a symptom, sign, disease diagnosis, therapeutic indication, investigation, surgical or medical procedure, and medical social or family history characteristic</skos:definition>
 		<skos:note>Each LLT is linked to only one PT. Each PT has at least one LLT (itself) as well as synonyms and lexical variants (e.g., abbreviations, different word order).</skos:note>
 		<cmns-av:acronym>PT</cmns-av:acronym>
 		<cmns-av:adoptedFrom>https://www.meddra.org/how-to-use/basics/hierarchy</cmns-av:adoptedFrom>
@@ -382,27 +385,34 @@
 		<rdf:type rdf:resource="&idmp-meddra;MedDRATermClassifier"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>MedDRA term classifier - system organ class</rdfs:label>
-		<skos:definition>classifier for groupings of related High Level Group Terms (HLGT) by aetiology, manifestation site or purpose. In addtion there is a SOC to contain issues pertaining to products and one to contain social circumstances.</skos:definition>
+		<skos:definition>classifier for groupings of related High Level Group Terms (HLGT) by aetiology, manifestation site or purpose. In addtion there is a SOC to contain issues pertaining to products and one to contain social circumstances</skos:definition>
 		<cmns-av:acronym>SOC</cmns-av:acronym>
 		<cmns-av:adoptedFrom>https://www.meddra.org/how-to-use/basics/hierarchy</cmns-av:adoptedFrom>
 		<cmns-txt:hasTextValue>SOC</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-meddra;MedicalDictionaryForRegulatoryActivities">
+		<rdf:type rdf:resource="&idmp-dtp;ControlledVocabulary"/>
 		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>Medical Dictionary for Regulatory Activities</rdfs:label>
-		<skos:definition>a rich and highly specific standardised medical terminology developed by ICH to facilitate sharing of regulatory information internationally for medical products used by humans.</skos:definition>
+		<skos:definition>rich and highly specific standardised medical terminology developed by ICH to facilitate sharing of regulatory information internationally for medical products used by humans</skos:definition>
 		<cmns-av:abbreviation>MedDRA</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>https://www.ich.org/page/meddra</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>https://www.meddra.org/</cmns-av:adaptedFrom>
-		<cmns-id:isIdentifiedBy>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
-				<rdf:type rdf:resource="&cmns-id;RegisteredIdentifier"/>
-				<cmns-txt:hasTextValue>2.16.840.1.113883.6.163</cmns-txt:hasTextValue>
-			</owl:NamedIndividual>
-		</cmns-id:isIdentifiedBy>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-meddra;OID-2.16.840.1.113883.6.163"/>
+		<cmns-ra:isManagedBy rdf:resource="&idmp-meddra;MedDRARegistrationAuthority"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-meddra;OID-2.16.840.1.113883.6.163">
+		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+		<rdf:type rdf:resource="&cmns-id;RegisteredIdentifier"/>
+		<rdfs:label>object identifier 2.16.840.1.113883.6.163</rdfs:label>
+		<skos:definition>object identifier for the Medical Dictionary for Regulatory Activities</skos:definition>
+		<cmns-av:adaptedFrom>https://www.ich.org/page/meddra</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>https://www.meddra.org/</cmns-av:adaptedFrom>
+		<cmns-id:identifies rdf:resource="&idmp-meddra;MedicalDictionaryForRegulatoryActivities"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.6.163</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
