@@ -5,6 +5,7 @@
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
 	<!ENTITY cmns-cmp "https://www.omg.org/spec/Commons/Composites/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
@@ -34,6 +35,7 @@
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-cmp="https://www.omg.org/spec/Commons/Composites/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
@@ -72,6 +74,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
@@ -88,7 +91,6 @@
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRAHighLevelGroupTerm">
 		<rdfs:subClassOf rdf:resource="&idmp-meddra;MedDRATerm"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
@@ -108,12 +110,11 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA high level group term</rdfs:label>
-		<skos:definition>term that groups related high level terms.</skos:definition>
+		<skos:definition>term that groups related high level terms</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRAHighLevelTerm">
 		<rdfs:subClassOf rdf:resource="&idmp-meddra;MedDRATerm"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
@@ -197,7 +198,6 @@
 	<owl:Class rdf:about="&idmp-meddra;MedDRAPreferredTerm">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
 		<rdfs:subClassOf rdf:resource="&idmp-meddra;MedDRATerm"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
@@ -209,12 +209,12 @@
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
 				<owl:allValuesFrom>
 					<owl:Class>
-						<owl:oneOf rdf:parseType="Collection">
+						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-meddra;MedDRAHighLevelTerm">
 							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-meddra;MedDRAPreferredTerm">
 							</rdf:Description>
-						</owl:oneOf>
+						</owl:unionOf>
 					</owl:Class>
 				</owl:allValuesFrom>
 			</owl:Restriction>
@@ -234,8 +234,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
-				<owl:onClass rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA preferred term</rdfs:label>
@@ -254,7 +253,6 @@
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRASystemOrganClass">
 		<rdfs:subClassOf rdf:resource="&idmp-meddra;MedDRATerm"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
@@ -269,10 +267,11 @@
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA system organ class</rdfs:label>
 		<skos:definition>grouping of higher level group terms by aetiology, manifestation site or purpose. In addtion there is a SOC to contain issues pertaining to products and one to contain social circumstances</skos:definition>
+		<skos:note>In addition, there is a SOC to contain issues pertaining to products and one to contain social. circumstances</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-meddra;MedDRATerm">
-		<rdfs:subClassOf rdf:resource="&mvf-trm;Term"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
