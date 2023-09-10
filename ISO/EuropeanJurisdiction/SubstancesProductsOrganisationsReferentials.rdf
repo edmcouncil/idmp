@@ -1298,6 +1298,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-spor;hasSPORTermDescription"/>
+				<owl:onClass rdf:resource="&idmp-spor;SPORTermDescription"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-spor;hasSPOROtherName"/>
 				<owl:onClass rdf:resource="&idmp-spor;SPORTermName"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -1420,6 +1427,31 @@
 		<skos:definition>name for a controlled vocabulary (list) managed in the Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) registry</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-spor;SPORTermDescription">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:hasValue rdf:resource="&idmp-spor;SubstancesProductsOrganisationsReferentialsDataManagementServices"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasLanguage"/>
+				<owl:onClass rdf:resource="&lcc-lr;Language"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>SPOR term description</rdfs:label>
+		<skos:definition>description of a term in a controlled vocabulary (list) that is registered in the Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) registry</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-spor;SPORTermIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
 		<rdfs:subClassOf>
@@ -1528,9 +1560,10 @@
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-spor;hasSPORTermDescription">
-		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
 		<rdfs:label>has SPOR term description</rdfs:label>
-		<skos:definition>provides a language-tagged string value that is a textual statement describing the term</skos:definition>
+		<rdfs:range rdf:resource="&idmp-spor;SPORTermDescription"/>
+		<skos:definition>provides a language-specific statement describing the term</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-spor;hasSPORTermName">
