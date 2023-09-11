@@ -11,6 +11,9 @@ on:
       gsrs_version:
         description: "GSRS dataset version"
         required: false
+      gsrs_cache_rebuild:
+        description: "Whether to rebuild cache"
+        required: false
 
 permissions:
   contents: read
@@ -69,7 +72,7 @@ jobs:
             gsrs-transformed.ttl
           key: gsrs-public-data-${{ env.GSRS_VERSION }}|transformation-files-${{ hashFiles('etc/transformation/GSRS/*.rqg') }}
       - name: Download and Extract GSRS Version ${{ env.GSRS_VERSION }}
-        if: steps.gsrs-caches.outputs.cache-hit != 'true'
+        if: steps.gsrs-caches.outputs.cache-hit != 'true' || gsrs_cache_rebuild = 'true'
         run: |
           url=https://gsrs.ncats.nih.gov/downloads/dump-public-${{ env.GSRS_VERSION }}.gsrs
           sudo wget --no-verbose -m -nH -nd -O public_data.gz $url
