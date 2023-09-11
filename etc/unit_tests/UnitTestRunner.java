@@ -152,7 +152,8 @@ public class UnitTestRunner {
             JsonNode expectedJson = objectMapper.readTree(expected);
 
             JsonNode diff = JsonDiff.asJson(actualJson, expectedJson);
-
+            System.out.println(actualJson);
+            System.out.println(expectedJson);
             if (diff.size() > 0) {
                 System.out.println("Differences found:");
                 System.out.println(diff);
