@@ -163,12 +163,6 @@
 		<rdfs:subClassOf rdf:resource="&idmp-meddra;MedDRATerm"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
-				<owl:allValuesFrom rdf:resource="&idmp-meddra;MedDRAPreferredTerm"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:hasValue rdf:resource="&idmp-meddra;MedDRATermClassifier-LowestLevelTerm"/>
 			</owl:Restriction>
@@ -177,7 +171,7 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
 				<owl:onClass rdf:resource="&idmp-meddra;MedDRAPreferredTerm"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA lowest level term</rdfs:label>
@@ -198,12 +192,6 @@
 	<owl:Class rdf:about="&idmp-meddra;MedDRAPreferredTerm">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
 		<rdfs:subClassOf rdf:resource="&idmp-meddra;MedDRATerm"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
-				<owl:allValuesFrom rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
@@ -281,8 +269,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-meddra;MedDRATermClassifier"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-meddra;MedDRATermClassifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MedDRA term</rdfs:label>
