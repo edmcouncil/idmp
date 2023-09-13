@@ -4142,6 +4142,42 @@
 		<cmns-txt:hasTextValue>SMILES</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseGlycosylation">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;StructurallyDiverseGlycosylationType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structurally diverse glycosylation</rdfs:label>
+		<skos:definition>description of not-specific sites of glycosylation in structurally diverse material</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5.6</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 23</cmns-av:directSource>
+		<cmns-av:synonym>SD glycosylation</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseGlycosylationType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructurallyDiverseGlycosylation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structurally diverse glycosylation type</rdfs:label>
+		<skos:definition>classifier for the glycan, specified based on a controlled vocabulary</skos:definition>
+		<skos:example>human, old world monkey, mammalian, avian, reptilian, fungal, bacterial, plant, insect, mammalian afucosylated, yeast humanized</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5.6</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 23</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
@@ -4149,6 +4185,13 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasSubstanceType"/>
 				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-StructurallyDiverse"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;StructurallyDiverseGlycosylation"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
