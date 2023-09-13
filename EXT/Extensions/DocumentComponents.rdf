@@ -92,6 +92,10 @@
 		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
 	</rdf:Description>
 	
+	<rdf:Description rdf:about="http://purl.org/spar/doco/TableOfContents">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+	</rdf:Description>
+	
 	<rdf:Description rdf:about="&po;Structured">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
 	</rdf:Description>
@@ -241,6 +245,13 @@
 		<cmns-av:synonym>row header</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-doco;containsText">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>contains text</rdfs:label>
+		<rdfs:domain rdf:resource="&po;TextualElement"/>
+		<skos:definition>relates a textual element to a part of its literal text</skos:definition>
+	</owl:DatatypeProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableColumnIndex">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has table column index</rdfs:label>
@@ -250,6 +261,8 @@
 					<rdf:Description rdf:about="&idmp-doco;TableBodyCell">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-doco;TableColumnHeaderCell">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-doco;TableColumn">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -270,6 +283,8 @@
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-doco;TableRowHeaderCell">
 					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-doco;TableRow">
+					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:domain>
@@ -277,6 +292,20 @@
 		<skos:definition>vertical position of a table body cell or table row header cell</skos:definition>
 		<skos:note>row indexes start with 1 and are ordered top to bottom</skos:note>
 		<cmns-av:synonym>has row index</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-doco;hasText">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has text</rdfs:label>
+		<rdfs:domain rdf:resource="&po;TextualElement"/>
+		<skos:definition>relates a textual element to its exact literal text</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTextualContent">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has textual content</rdfs:label>
+		<skos:definition>relates a document element to its textual content</skos:definition>
+		<cmns-av:usageNote>If the element contains mixed content, then the text may be different from the literal text value.</cmns-av:usageNote>
 	</owl:DatatypeProperty>
 
 </rdf:RDF>
