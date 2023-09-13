@@ -84,83 +84,105 @@
 		<cmns-ra:isManagedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/CentersForDiseaseControlAndPreventionRegistrationAuthority"/>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-phin;PublicHealthInformationNetworkVocabularyAccessAndDistributionSystemClassificationScheme">
+	<owl:Class rdf:about="&idmp-phin;VADS-RaceAndEthnicityCDC-Type">
+		<rdfs:subClassOf rdf:resource="&idmp-phin;VADSCodeSystemConcept"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/PublicHealthInformationNetwork/cmns-col;isIncludedIn"/>
+				<owl:hasValue rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>Race &amp; Ethnicity - CDS type</rdfs:label>
+		<skos:definition>classifier that describes the race and ethnicity of humans</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phin;VADSCode">
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
 				<owl:hasValue rdf:resource="&idmp-phin;PublicHealthInformationNetworkVocabularyAccessAndDistributionSystem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdf:label>Public Health Information Network Vocabulary Access and Distribution System classification scheme</rdf:label>
-		<rdf:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
-		<skos:definition>classification scheme registered in the Public Health Information Network Vocabulary Access and Distribution System</skos:definition>
-		<cmns-av:abbreviation>PHIN-VADS classification scheme</cmns-av:abbreviation>
+		<rdfs:label>PHIN-VADS code</rdfs:label>
+		<skos:definition>code registered in Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS) for a vocabulary</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:NamedIndividual rdf:about="&idmp-phin;VADS-RaceAndEthnicityCDC">
-		<rdfs:label>PHIN-VADS Race and Ethnicity - CDC</rdfs:label>
-		<rdfs:type rdf:resource="&idmp-phin;PublicHealthInformationNetworkVocabularyAccessAndDistributionSystemClassificationScheme"/>
-		<skos:definition>code system for race and ethnicity managed in PHIN-VADS</skos:definition>
-		<cmns-av:directSource>https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238</cmns-av:directSource>
-		<cmns-id:isIdentifiedBy>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-phin;VADS-CodeSystemCode"/>
-				<cmns-txt:hasTextValue>PH_RaceAndEthnicity_CDC</cmns-txt:hasTextValue>
-			</owl:NamedIndividual>
-		</cmns-id:isIdentifiedBy>
-		<cmns-id:isIdentifiedBy>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-phin;VADS-CodeSystemOID"/>
-				<cmns-txt:hasTextValue>2.16.840.1.113883.6.238</cmns-txt:hasTextValue>
-			</owl:NamedIndividual>
-		</cmns-id:isIdentifiedBy>
-		<mvf:hasURI>https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238</mvf:hasURI>
-	</owl:NamedIndividual>
-	
-	<owl:Class rdf:about="&idmp-phin;VADS-RaceAndEthnicityCDC-Type">
-		<rdfs:subClassOf rdf:resource="&idmp-phin;VADS-CodeSystemConcept"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/PublicHealthInformationNetwork/cmns-col;isIncludedIn"/>
-				<owl:hasValue rdf:resource="&idmp-phin;VADS-RaceAndEthnicityCDC"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>Race &amp; Ethnicity - CDS type</rdfs:label>
-		<skos:definition>classifier and code element that describes the race and ethnicity of humans</skos:definition>
-		<cmns-av:usageNote>can be used for the characterization of target populations</cmns-av:usageNote>
-	</owl:Class>
-	
-	<rdf:Description rdf:about="&idmp-phin;VADSCodeSystem">
-		<rdf:type rdf:resource="&owl;Class"/>
-		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
-		<rdf:type rdf:resource="&cmns-cds;CodeSet"/>
+	<owl:Class rdf:about="&idmp-phin;VADSCodeSystem">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ControlledVocabulary"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystemCode"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:onProperty rdf:resource="&mvf;hasVocabularyEntry"/>
+				<owl:allValuesFrom rdf:resource="&idmp-phin;VADSCodeSystemConcept"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
+				<owl:hasValue rdf:resource="&idmp-phin;PublicHealthInformationNetworkVocabularyAccessAndDistributionSystem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystemOID"/>
+				<owl:onClass rdf:resource="&idmp-dtp;ObjectIdentifier"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>Public Health Information Network Vocababulary and Distribution System (PHIN-VADS) coding scheme</rdfs:label>
-		<skos:definition>classification scheme in the Public Health Information Network Vocababulary and Distribution System</skos:definition>
-	</rdf:Description>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phin;hasVADSStatus"/>
+				<owl:onClass rdf:resource="&idmp-phin;VADSStatus"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>Public Health Information Network Vocabulary and Distribution System (PHIN-VADS) code system</rdfs:label>
+		<skos:definition>code system managed in the Public Health Information Network Vocabulary and Distribution System</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC">
+		<rdfs:label>PHIN-VADS code system - Race and Ethnicity - CDC</rdfs:label>
+		<rdfs:type rdf:resource="&idmp-phin;VADSCodeSystem"/>
+		<skos:definition>code system for race and ethnicity managed in Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS)</skos:definition>
+		<cmns-av:directSource>https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238</cmns-av:directSource>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-Code"/>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-OID"/>
+		<mvf:hasURI>https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238</mvf:hasURI>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-Code">
+		<rdf:type rdf:resource="&idmp-phin;VADSCodeSystemCode"/>
+		<cmns-txt:hasTextValue>PH_RaceAndEthnicity_CDC</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-OID">
+		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.6.238</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-phin;VADSCodeSystemCode">
+		<rdfs:subClassOf rdf:resource="&idmp-phin;VADSCode"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystem"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>PHIN-VADS code system code</rdfs:label>
+		<skos:definition>PHIN-VADS code for a code system</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-phin;VADSCodeSystemConcept">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf rdf:resource="&mvf;MVFEntry"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-phin;VADSPreferredConceptName"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-phin;VADSPreferredName"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -173,41 +195,49 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-phin;VADSConceptName"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-phin;VADSName"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystemConceptCode"/>
+				<owl:onProperty rdf:resource="&idmp-phin;hasVADSStatus"/>
+				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystemConceptStatus"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>Public Health Information Network Vocababulary and Distribution System (PHIN-VADS) code system concept</rdfs:label>
-		<skos:definition>concept in a controlled vocabulary (code system) managed by the Public Health Information Network initiative</skos:definition>
-		<cmns-av:abbreviation>PHIN-VADS coding scheme concept</cmns-av:abbreviation>
+		<rdfs:label>Public Health Information Network Vocabulary and Distribution System (PHIN-VADS) code system concept</rdfs:label>
+		<skos:definition>concept in a code system registered in the Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS)</skos:definition>
+		<cmns-av:abbreviation>PHIN-VADS code system concept</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-phin;VADSCodeSystemOID">
-		<rdfs:subClassOf rdf:resource="&idmp-dtp;ObjectIdentifier"/>
-		<rdfs:subClassOf rdf:resource="&cmns-id;RegisteredIdentifier"/>
+	<owl:Class rdf:about="&idmp-phin;VADSCodeSystemConceptCode">
+		<rdfs:subClassOf rdf:resource="&idmp-phin;VADSCode"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
-				<owl:onDatatype rdf:resource="&cmns-txt;text"/>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystemConcept"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>PHIN-VADS code system OID</rdfs:label>
-		<skos:definition>registered identifier in an ISO OID registry for a concept system in PHIN-VADS</skos:definition>
+		<rdfs:label>PHIN-VADS code system concept code</rdfs:label>
+		<skos:definition>PHIN-VADS code for a code system concept</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-phin;VADSConceptName">
+	<owl:Class rdf:about="&idmp-phin;VADSCodeSystemConceptStatus">
+		<rdfs:subClassOf rdf:resource="&idmp-phin;VADSStatus"/>
+		<rdfs:subClassOf rdf:resource="&mvf;TermStatus"/>
+		<rdfs:label>PHIN-VADS code system concept status</rdfs:label>
+		<skos:definition>classifier of code system concepts registered in the Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS) by its publication state</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phin;VADSName">
 		<rdfs:subClassOf rdf:resource="&cmns-dsg;Name"/>
-		<rdfs:subClassOf rdf:resource="&mvf;VocabularyEntry"/>
-		<rdfs:label>PHIN-VADS concept name</rdfs:label>
+		<rdfs:label>PHIN-VADS name</rdfs:label>
 		<rdf:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
@@ -220,45 +250,96 @@
 				<owl:allValuesFrom rdf:resource="&idmp-phin;VADSCodeSystemConcept"/>
 			</owl:Restriction>
 		</rdf:subClassOf>
-		<skos:definition>name designating a concept in a PHIN-VADS code system</skos:definition>
+		<skos:definition>name designating a concept in a Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS)</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-phin;VADSConceptSystemCode">
-		<rdfs:subClassOf rdf:resource="&cmns-id;RegisteredIdentifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
-				<owl:onDatatype rdf:resource="&cmns-txt;text"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>PHIN-VADS code system code</rdfs:label>
-		<skos:definition>registered identifier in the PHIN-VADS registry for a concept system in PHIN-VADS</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-phin;VADSConceptSystemConceptCode">
-		<rdfs:subClassOf rdf:resource="&mvf;TermStatus"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
-				<owl:onDatatype rdf:resource="&cmns-txt;text"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>PHIN-VADS code system concept code</rdfs:label>
-		<skos:definition>registered identifier in the PHIN-VADS registry for a concept in a PHIN-VADS concept scheme</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-phin;VADSPreferredConceptName">
-		<rdfs:subClassOf rdf:resource="&idmp-phin;VADSConceptName"/>
+	<owl:Class rdf:about="&idmp-phin;VADSPreferredName">
+		<rdfs:subClassOf rdf:resource="&idmp-phin;VADSName"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&mvf;isPreferred"/>
 				<owl:hasValue rdf:datatype="&xsd;boolean">true</owl:hasValue>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>PHIN-VADS preferred concept name</rdfs:label>
-		<skos:definition>preferred name designating a concept in a PHIN-VADS code system</skos:definition>
+		<rdfs:label>PHIN-VADS preferred name</rdfs:label>
+		<skos:definition>preferred name designating a concept in a Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS)</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phin;VADSStatus">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:label>PHIN-VADS status</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-phin;VADSStatus-UnPublished">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-phin;VADSStatus-Published">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-phin;VADSStatus-Retired">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>classifier of an entity registered in the Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS) by its publication state</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-phin;VADSStatus-Published">
+		<rdf:type rdf:resource="&idmp-phin;VADSStatus"/>
+		<rdfs:label>PHIN-VADS status - Published</rdfs:label>
+		<skos:definition>status of a PHIN-VADS entity that is available to the public</skos:definition>
+		<mvf:hasTextualName>Published</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-phin;VADSStatus-Retired">
+		<rdf:type rdf:resource="&idmp-phin;VADSStatus"/>
+		<rdfs:label>PHIN-VADS status - Retired</rdfs:label>
+		<skos:definition>status of a PHIN-VADS entity that is no longer in use</skos:definition>
+		<mvf:hasTextualName>Retired</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-phin;VADSStatus-UnPublished">
+		<rdf:type rdf:resource="&idmp-phin;VADSStatus"/>
+		<rdfs:label>PHIN-VADS status - Un-Published</rdfs:label>
+		<skos:definition>status of a PHIN-VADS entity that is not available to the public yet</skos:definition>
+		<mvf:hasTextualName>Un-Published</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-phin;VADSValueSet">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>Public Health Information Network Vocabulary and Distribution System (PHIN-VADS) value set</rdfs:label>
+		<skos:definition>controlled set of concepts managed in the Public Health Information Network Vocabulary and Distribution System</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phin;VADSValueSetCode">
+		<rdfs:subClassOf rdf:resource="&idmp-phin;VADSCode"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-phin;VADSValueSet"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>PHIN-VADS value set code</rdfs:label>
+		<skos:definition>PHIN-VADS code for a value set</skos:definition>
+		<cmns-av:adaptedFrom>Webservice v2.1 API.doc retrieved from https://phinvads.cdc.gov/vads/DownloadHotTopicDetailFile.action?filename=5B9E6712-86AD-E011-A440-0050568D00F8&quot;</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&idmp-phin;hasVADSStatus">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has PHIN-VADS status</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-phin;VADSStatus"/>
+		<skos:definition>relates the publication status of entities in the Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS)</skos:definition>
+	</owl:ObjectProperty>
 
 </rdf:RDF>
