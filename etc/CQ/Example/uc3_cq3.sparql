@@ -25,9 +25,12 @@ WHERE {
 		?SPORRMSIdentifier a idmp-spor:SPORTermIdentifier;
 			cmns-txt:hasTextValue $SPORRMSId . 
 		
-		?RouteOfAdministration a idmp-mprd:RouteOfAdministration;
-			rdfs:label ?RouteOfAdminstrationLabel ;
-			cmns-id:isIdentifiedBy ?SPORRMSIdentifier .
+		?RouteOfAdministration a idmp-spor:SPOR-RouteOfAdministration;
+		    idmp-spor:hasSPORTermName   ?RouteOfAdministrationTermName;
+			cmns-id:isIdentifiedBy      ?SPORRMSIdentifier .
+	
+		?RouteOfAdministrationTermName a idmp-spor:TermName;
+		    cmns-txt:hasTextValue ?RouteOfAdminstrationLabel .
 			
 		?PharmaceuticalProduct idmp-mprd:hasRouteOfAdministration ?RouteOfAdministration ;
 		    ^cmns-col:comprises ?MedicinalProduct .
