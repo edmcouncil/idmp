@@ -1,1 +1,0 @@
-The SPAR ontologies here were retrieved from https://sparontologies.github.io/ on 2023-09-05.
