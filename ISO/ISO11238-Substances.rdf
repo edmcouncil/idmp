@@ -104,7 +104,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230502/ISO11238-Substances.rdf version of this ontology was modified to integrate content related to modifications from Figure 15 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-540), to support isotopes and nuclides as in ISO 11238, Figure 14 (IDMP-539), to move deprecated elements to a separate ontology, and to support additional reference information from Figure 16 in ISO 11238, corresponding to clause 6.6 and Figure 8 in the implementation guide (IDMP-522), addressed punning issues with modification method type, aligned the ontology with the revised basis of strength pattern (IDMP-582), and to add an axiom indicating that certain elements have data that can be used for testing purposes.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11238-Substances.rdf version of this ontology was modified to rename hasSimplifiedMolecularInputLineEntrySpecification to hasSMILES and to incorporate the ability to define controlled vocabularies that may or may not be jurisdiction-specific (IDMP-533).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances.rdf version of this ontology was modified to add structural representations including molfile.</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances.rdf version of this ontology was modified to reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to incorporate additional content for structurally diverse substances (IDMP-635), and to rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, per the Commons 1.1 release (IDMP-655).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances.rdf version of this ontology was modified to reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to incorporate additional content for structurally diverse substances (IDMP-635), and to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, and (2) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -248,21 +248,21 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceQuantityValueRange"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValueRange"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValueRange"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1089,7 +1089,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasHalfLife"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1920,7 +1920,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularWeight">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
@@ -2371,7 +2371,7 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;OpticalRotation">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty>
@@ -2818,7 +2818,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasHalfLife"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -5601,7 +5601,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:domain>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<skos:definition>for a single radioactive decay process, the time required for the activity to decrease to half its value by that process</skos:definition>
 		<skos:example>109,77 min (¹⁸F)</skos:example>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.4</cmns-av:adaptedFrom>
