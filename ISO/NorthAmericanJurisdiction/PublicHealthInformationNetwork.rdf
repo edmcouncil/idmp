@@ -74,6 +74,16 @@
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
+	<owl:NamedIndividual rdf:about="&idmp-phin;OID-2.16.840.1.113883.6.238">
+		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
+		<rdfs:label>OID 2.16.840.1.113883.6.238</rdfs:label>
+		<skos:definition>object identifier for the VADS code system race and ethnicity code set defined by the U.S. Centers for Disease Control (CDC)</skos:definition>
+		<cmns-av:directSource>https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238</cmns-av:directSource>
+		<cmns-col:compliesWith rdf:resource="&idmp-phin;VADSCodeSystem"/>
+		<cmns-id:identifies rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC"/>
+		<cmns-txt:hasTextValue>2.16.840.1.113883.6.238</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-phin;PublicHealthInformationNetworkVocabularyAccessAndDistributionSystem">
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
@@ -92,12 +102,18 @@
 				<owl:hasValue rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>Race &amp; Ethnicity - CDS type</rdfs:label>
+		<rdfs:label>Race &amp; Ethnicity - CDC type</rdfs:label>
 		<skos:definition>classifier that describes the race and ethnicity of humans</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-phin;VADSCode">
 		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:hasValue rdf:resource="&idmp-phin;PublicHealthInformationNetworkVocabularyAccessAndDistributionSystem"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
@@ -147,18 +163,18 @@
 		<rdfs:type rdf:resource="&idmp-phin;VADSCodeSystem"/>
 		<skos:definition>code system for race and ethnicity managed in Public Health Information Network Vocabulary Access and Distribution System (PHIN-VADS)</skos:definition>
 		<cmns-av:directSource>https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238</cmns-av:directSource>
-		<cmns-id:isIdentifiedBy rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-Code"/>
-		<cmns-id:isIdentifiedBy rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-OID"/>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-Code"/>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-phin;OID-2.16.840.1.113883.6.238"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-Code">
 		<rdf:type rdf:resource="&idmp-phin;VADSCodeSystemCode"/>
+		<rdfs:label>VADS code system, race and ethnicity (CDC) code</rdfs:label>
+		<skos:definition>VADS code system code for the VADS code system race and ethnicity code set defined by the U.S. Centers for Disease Control (CDC)</skos:definition>
+		<cmns-av:directSource>https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238</cmns-av:directSource>
+		<cmns-col:compliesWith rdf:resource="&idmp-phin;VADSCodeSystem"/>
+		<cmns-dsg:denotes rdf:resource="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC"/>
 		<cmns-txt:hasTextValue>PH_RaceAndEthnicity_CDC</cmns-txt:hasTextValue>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-phin;VADSCodeSystem-RaceAndEthnicityCDC-OID">
-		<rdf:type rdf:resource="&idmp-dtp;ObjectIdentifier"/>
-		<cmns-txt:hasTextValue>2.16.840.1.113883.6.238</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-phin;VADSCodeSystemCode">
@@ -187,23 +203,21 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-phin;hasVADSStatus"/>
+				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystemConceptStatus"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystem"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-phin;VADSCodeSystem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
-				<owl:onClass rdf:resource="&idmp-phin;VADSName"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-phin;hasVADSStatus"/>
-				<owl:onClass rdf:resource="&idmp-phin;VADSCodeSystemConceptStatus"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-phin;VADSName"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>Public Health Information Network Vocabulary and Distribution System (PHIN-VADS) code system concept</rdfs:label>
