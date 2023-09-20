@@ -109,7 +109,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230501/ISO11615-MedicinalProducts.rdf version of this ontology was modified to (1) integrate content related to modifications from Figure 15 in ISO 11238 (IDMP-540), (2) support isotopes and nuclides as in ISO 11238, Figure 14 (IDMP-539), (3) integrate content related to therapeutic indications in ISO 11615 (IDMP-561), (4) clarify the definition of marketing authorization holder (IDMP-395), (5) refine restrictions between medicinal products and authorized medicinal products (IDMP-550), (6) aligne the ontology with the revised basis of strength pattern (IDMP-582), and (7) loosen a constraint on ingredient with respect to manufactured item (IDMP-602).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11615-MedicinalProducts.rdf version of this ontology was modified to (1) make indication texts as nodes instead of literals (IDMP-591), (2) add the concept of shelf life / storage per Figure 11 in the ISO 11615 specification (IDMP-371), (3) add undesirable effect per Figure 14 in the ISO 11615 specification (IDMP-591), (4) rename &apos;has medical condition&apos; to use a more aligned label with ISO 11615 (IDMP-591), (5) add the concept of route of administration (IDMP-614), and (6) integrate the refined pattern for controlled vocabularies (IDMP-533).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11615-MedicinalProducts.rdf version of this ontology was modified to extend the definition of product role to relate to product specifications in addition to products (IDMP-633).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add other therapy specifics (IDMP-639), and to (1) reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), and (1) to rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, and (2) incorporate hasExpirationDate, which was simplified out of the OMG Commons ontology for the Commons 1.1 release (IDMP-655).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add other therapy specifics (IDMP-639), and to (1) reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), and (1) to rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, (2) incorporate hasExpirationDate, which was simplified out of the OMG Commons ontology, and (3) to rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -283,7 +283,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasManufacturedItemQuantity"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
@@ -893,7 +893,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1122,7 +1122,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Dose">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>dose</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.23</dct:source>
 		<skos:definition>specified quantity of a medicine, to be taken at one time or at stated intervals</skos:definition>
@@ -2167,7 +2167,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2246,7 +2246,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product batch</rdfs:label>
@@ -2715,9 +2715,9 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+							<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValue">
 							</rdf:Description>
-							<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+							<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValueRange">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -2731,9 +2731,9 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+							<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValue">
 							</rdf:Description>
-							<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+							<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValueRange">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
