@@ -2,7 +2,6 @@
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
-	<!ENTITY cmns-cmp "https://www.omg.org/spec/Commons/Composites/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-cxtid "https://www.omg.org/spec/Commons/ContextualIdentifiers/">
@@ -13,6 +12,7 @@
 	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
+	<!ENTITY cmns-rlcmp "https://www.omg.org/spec/Commons/RolesAndCompositions/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
@@ -24,7 +24,6 @@
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
-	xmlns:cmns-cmp="https://www.omg.org/spec/Commons/Composites/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-cxtid="https://www.omg.org/spec/Commons/ContextualIdentifiers/"
@@ -35,6 +34,7 @@
 	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
+	xmlns:cmns-rlcmp="https://www.omg.org/spec/Commons/RolesAndCompositions/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -50,7 +50,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Composites/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualIdentifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
@@ -59,6 +58,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Locations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230801/ProductsAndServices/"/>
 		<skos:note>This ontology was originally designed for and has been adapted from the Financial Industry Business Ontology (FIBO) Products and Services Ontology.</skos:note>
@@ -108,7 +108,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;Facility">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
@@ -172,7 +172,7 @@
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+						<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 						<owl:hasValue rdf:resource="&cmns-prd;GS1GlobalOffice"/>
 					</owl:Restriction>
 					<rdf:Description rdf:about="&cmns-prd;GS1Member">
@@ -231,7 +231,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-org;OrganizationMember"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
@@ -249,7 +249,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&cmns-org;LegalEntity"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -315,8 +315,8 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;Producer">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-prd;produces"/>
@@ -381,8 +381,8 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;ServiceProvider">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf rdf:resource="&cmns-pts;AgentRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
@@ -394,10 +394,10 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;Site">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;Role"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Role"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:onClass>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-prd;situates"/>
@@ -442,8 +442,8 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;Supplier">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:label>supplier</rdfs:label>
 		<skos:definition>actor that produces, provides, or furnishes an item or service</skos:definition>
 		<cmns-av:adaptedFrom>GS1 General Specifications, clause 1.4.4; available at https://ref.gs1.org/standards/genspecs/</cmns-av:adaptedFrom>

@@ -1,7 +1,7 @@
 # CQ 7: Which manufactured items contain substance <x> as ingredient of type “active”?
 prefix cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
 prefix cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
-prefix cmns-cmp:    <https://www.omg.org/spec/Commons/Composites/>
+prefix cmns-rlcmp:    <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 prefix cmns-qtu:    <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
 prefix idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/> 
 prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -19,7 +19,7 @@ WHERE {
         ?ManufacturedItem rdf:type/rdfs:subClassOf* idmp-sub:ManufacturedItem ;
             cmns-dsg:isDefinedIn[
                 idmp-sub:hasIngredient [
-                    cmns-cmp:isPlayedBy [
+                    cmns-rlcmp:isPlayedBy [
                         cmns-qtu:specializes $SUBSTANCE
                     ]
                 ]
@@ -29,7 +29,7 @@ WHERE {
         ?ManufacturedItem a/rdfs:subClassOf* idmp-sub:ManufacturedItem ;
             cmns-dsg:isDefinedIn [
                 idmp-mprd:hasActiveIngredient [
-                    cmns-cmp:isPlayedBy $SUBSTANCE
+                    cmns-rlcmp:isPlayedBy $SUBSTANCE
                 ]
             ] .
     }
