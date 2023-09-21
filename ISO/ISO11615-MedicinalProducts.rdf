@@ -3,7 +3,6 @@
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
-	<!ENTITY cmns-cmp "https://www.omg.org/spec/Commons/Composites/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-cxtid "https://www.omg.org/spec/Commons/ContextualIdentifiers/">
@@ -17,6 +16,7 @@
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
+	<!ENTITY cmns-rlcmp "https://www.omg.org/spec/Commons/RolesAndCompositions/">
 	<!ENTITY cmns-stat "https://www.omg.org/spec/Commons/StatisticalMeasures/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
@@ -39,7 +39,6 @@
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
-	xmlns:cmns-cmp="https://www.omg.org/spec/Commons/Composites/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-cxtid="https://www.omg.org/spec/Commons/ContextualIdentifiers/"
@@ -53,6 +52,7 @@
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
+	xmlns:cmns-rlcmp="https://www.omg.org/spec/Commons/RolesAndCompositions/"
 	xmlns:cmns-stat="https://www.omg.org/spec/Commons/StatisticalMeasures/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
@@ -84,7 +84,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/CodesAndCodeSets/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Composites/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualIdentifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
@@ -97,6 +96,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/StatisticalMeasures/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
@@ -210,14 +210,14 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isManifestedIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
 				<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isManifestedIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
 				<owl:onClass rdf:resource="&idmp-sub;ManufacturedItem"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -231,7 +231,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:onClass>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
@@ -353,7 +353,7 @@
 	<owl:Class rdf:about="&idmp-sub;ProcessingMaterialRole">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isManifestedIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -375,7 +375,7 @@
 	<owl:Class rdf:about="&idmp-sub;ResultantMaterialRole">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isManifestedIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -406,7 +406,7 @@
 	<owl:Class rdf:about="&idmp-sub;StartingMaterialRole">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isManifestedIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -476,7 +476,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Moiety"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -621,7 +621,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -854,7 +854,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ContainerConstituency">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;Composition"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Composition"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
@@ -1151,10 +1151,10 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-mprd;ImmediateContainer">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&idmp-mprd;immediatelyContains"/>
@@ -1174,7 +1174,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isRoleIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isRoleIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;ContainerConstituency"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1468,16 +1468,16 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;IntermediatePackaging">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isRoleIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isRoleIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;ContainerConstituency"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1631,7 +1631,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;AuthorizedParty"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:onClass rdf:resource="&cmns-org;LegalEntity"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -1696,7 +1696,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Medication">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
@@ -1709,7 +1709,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isManifestedIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicationTherapy"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1742,7 +1742,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Therapy"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;manifests"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;manifests"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;Medication"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1783,7 +1783,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;playsRole"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;playsRole"/>
 				<owl:onClass rdf:resource="&idmp-mprd;ProductRole"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -2051,16 +2051,16 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;OuterPackaging">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isRoleIn"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isRoleIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;ContainerConstituency"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2442,7 +2442,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ProductComposition">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;Composition"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Composition"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasReferenceStrength"/>
@@ -2479,10 +2479,10 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ProductRole">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;FunctionalRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -3322,7 +3322,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceIngredientRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;hasRole"/>
 		<rdfs:label>has reference ingredient role</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;SubstanceRole"/>
 		<skos:definition>indicates a role that the reference substance of an active ingredient in a pharmaceutical or medicinal product plays under certain circumstances</skos:definition>

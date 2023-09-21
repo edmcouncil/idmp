@@ -1,5 +1,5 @@
 #UC3 CQ 3 	Has a substance <S> with a specific ingredient role <R> been part of an approved medicinal product <P> dosed by route of administration <A>?
-PREFIX cmns-cmp:    <https://www.omg.org/spec/Commons/Composites/>
+PREFIX cmns-rlcmp:    <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
 PREFIX cmns-ctxdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
@@ -35,7 +35,7 @@ WHERE {
 		?PharmaceuticalProduct idmp-mprd:hasRouteOfAdministration ?RouteOfAdministration ;
 		    ^cmns-col:comprises ?MedicinalProduct .
 			
-        ?MedicinalProduct (cmns-cmp:playsRole|^cmns-cmp:isPlayedBy) ?AuthorizedMedicinalProduct .
+        ?MedicinalProduct (cmns-rlcmp:playsRole|^cmns-rlcmp:isPlayedBy) ?AuthorizedMedicinalProduct .
 		?AuthorizedMedicinalProduct a idmp-mprd:AuthorizedMedicinalProduct .
 
 
@@ -44,7 +44,7 @@ WHERE {
   	    # Find the substance that is part of product composition which defines Product that is comprised of MedicinalProduct
 		?PharmaceuticalProduct ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
     	?SubstanceInIngredientRole cmns-pts:isRealizedIn ?ProductComposition .
-		?SubstanceInIngredientRole cmns-cmp:isPlayedBy ?Substance .
+		?SubstanceInIngredientRole cmns-rlcmp:isPlayedBy ?Substance .
 		
 		# Find most specific ingredient role
 		?SubstanceInIngredientRole a/rdfs:subClassOf* ?IngredientClass .
