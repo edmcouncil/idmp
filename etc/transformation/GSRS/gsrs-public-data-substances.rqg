@@ -47,7 +47,7 @@ GENERATE {
         ?Substance idmp-sub:hasMoiety ?SubstanceMoiety;
         .
 
-        ?SubstanceMoiety a idmp-sub:Moiety; 
+        ?SubstanceMoiety a idmp-sub:Moiety;
             rdfs:label ?moietyFormula;
             idmp-sub:hasDefiningStructure ?MoietyMolecularStructure;
             idmp-sub:hasDefiningMolecularWeight ?MoietyStructureMolecularWeight ;
@@ -113,17 +113,17 @@ GENERATE {
 
     GENERATE{
         # Relationships
-        ?Substance ?SubstancesRelationshipProperty ?RelatedSubstance; 
+        ?Substance ?SubstancesRelationshipProperty ?RelatedSubstance;
         .
         # Is Active Moiety Of
-        ?RelatedSubstance ?IsActiveMoietyOfProperty ?Substance; 
+        ?RelatedSubstance ?IsActiveMoietyOfProperty ?Substance;
         .
     }
-    ITERATOR iter:JSONSurfer(?relationships, 
+    ITERATOR iter:JSONSurfer(?relationships,
         "$[*]",
         "$.type",
         "$.relatedSubstance.approvalID"
-    ) AS 
+    ) AS
     ?Relationship
     ?RelationshipType
     ?RelatedSubstanceApprovalID
