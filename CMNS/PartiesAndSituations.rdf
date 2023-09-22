@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
-	<!ENTITY cmns-cmp "https://www.omg.org/spec/Commons/Composites/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
+	<!ENTITY cmns-rlcmp "https://www.omg.org/spec/Commons/RolesAndCompositions/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -16,12 +16,12 @@
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
-	xmlns:cmns-cmp="https://www.omg.org/spec/Commons/Composites/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
+	xmlns:cmns-rlcmp="https://www.omg.org/spec/Commons/RolesAndCompositions/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -37,10 +37,10 @@
 		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Composites/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230801/PartiesAndSituations/"/>
 		<skos:note>This ontology was originally designed for use in the Financial Industry Business Ontology (FIBO) for representing complex relationships between parties, such as employment, ownership and control. It has since been extended based on usage in other projects, such as the Pistoia Alliance Identification of Medicinal Products (IDMP) ontology project.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2020-2023 EDM Council, Inc.</cmns-av:copyright>
@@ -48,6 +48,7 @@
 		<cmns-av:copyright>Copyright (c) 2020-2023 Working Ontologist LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:usageNote>Note that inference with respect to property chains, which this ontology makes extensive use of, requires a knowledge graph solution that understands these chains, or requires running a reasoner outside of the graph database and asserting the inferences in order to make use of them.</cmns-av:usageNote>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-pts;Actor">
@@ -58,7 +59,7 @@
 		<cmns-av:adaptedFrom>ISO 14813-1:2015(en), Intelligent transport systems - Reference model architecture(s) for the ITS sector - Part 1: ITS service domains, service groups and services, clause 3.1</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO 23234:2021(en), Buildings and civil engineering works - Security - Planning of security measures in the built environment, clause 3.4</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TR 21965:2019(en), Information and documentation - Records management in enterprise architecture, clause 3.2.1</cmns-av:adaptedFrom>
-		<cmns-av:explanatoryNote>The concept of actor here is in a more linuistic sense, from core semantic theories reflecting actor/undergoer/null roles of an argument in an expression.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>The concept of actor here is in a more linguistic sense, from core semantic theories reflecting actor/undergoer/null roles of an argument in an expression.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;Agent">
@@ -72,7 +73,7 @@
 		<rdfs:label>agent</rdfs:label>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">http://www.jamesodell.com/WhatIsAnAgent.pdf</rdfs:seeAlso>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">http://www.jamesodell.com/WhyShouldWeCareAboutAgents.pdf</rdfs:seeAlso>
-		<owl:disjointWith rdf:resource="&cmns-cmp;Role"/>
+		<owl:disjointWith rdf:resource="&cmns-rlcmp;Role"/>
 		<skos:definition>something autonomous that can adapt to and interact with its environment</skos:definition>
 		<skos:note>Agents can be human beings, organizations, software agents, robots and living things other than plants. They are defined as having the following three important properties: autonomy, interactive behavior, and adaptability. (1) Autonomy - an agent is capable of acting without direct external intervention. This includes software or other agents that have some degree of control over their internal state and can act based on their own experiences. They can also possess their own set of internal responsibilities and capabilities that enable them to act without any external choreography. This definition excludes agents that act on on behalf of (or as a proxy for) some person or thing (see AgentRole). (2) Interactive behavior - they are capable of exchanging communicating with other things in their environment. This includes, in the case of software agents, messages that can support requests for services and other kinds of resources, as well as event detection and notification. They can be synchronous or asynchronous in nature. The interaction can also be conversational in nature, such as negotiating contracts, marketplace-style bidding, or simply making a query. (3) Adaptability - an agent is capable of responding to other agents and/or its environment. Agents can react to communications and events and then respond appropriately. Software agents can be designed to make difficult decisions and even modify their behavior based on their experiences. In other words, they can learn and evolve.</skos:note>
 		<skos:note>Note that this does not necessarily imply that an agent is free to act as it sees fit, without constraint. Rather, an agent in the sense meant here is something which may or may not be subject to controls and constraints but is self-actualizing in its behavior in response to any such constraints.</skos:note>
@@ -80,10 +81,10 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;AgentRole">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;Role"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Role"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:onClass rdf:resource="&cmns-pts;Agent"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -109,7 +110,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cmp;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:onClass rdf:resource="&cmns-pts;Party"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -117,20 +118,13 @@
 		<rdfs:label>party role</rdfs:label>
 		<skos:definition>role played by an organization or individual that may be time bound</skos:definition>
 		<skos:example>Examples include organization member, employee, issuer, owner, partner in a partnership, shareholder, and so forth.</skos:example>
-		<skos:note>Note that there may be cases whre the identity of the party playing the role is not known, as well as cases where in some situation, such as ownership, there may be more than one party playing the role of owner.</skos:note>
+		<skos:note>Note that there may be cases where the identity of the party playing the role is not known, as well as cases where in some situation, such as ownership, there may be more than one party playing the role of owner.</skos:note>
 		<skos:scopeNote>The concept of a party role is used in contexts in which one would call someone a &apos;party to something&apos;, such as party to a contract or to a transaction, a supplier, buyer, customer, student, employee, and so forth. More specific roles such as those that are performed in the context of some activity or process are actors in that situation.</skos:scopeNote>
 		<cmns-av:adaptedFrom>ISO 14813-1:2015(en), Intelligent transport systems - Reference model architecture(s) for the ITS sector - Part 1: ITS service domains, service groups and services, clause 3.1</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO 23234:2021(en), Buildings and civil engineering works - Security - Planning of security measures in the built environment, clause 3.4</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;Situation">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
-				<owl:onClass rdf:resource="&cmns-cmp;Role"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;holdsDuring"/>
@@ -140,8 +134,15 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
+				<owl:onClass rdf:resource="&cmns-rlcmp;Role"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
-				<owl:someValuesFrom rdf:resource="&cmns-cmp;Role"/>
+				<owl:someValuesFrom rdf:resource="&cmns-rlcmp;Role"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>situation</rdfs:label>
@@ -159,7 +160,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-pts;Undergoer">
-		<rdfs:subClassOf rdf:resource="&cmns-cmp;Role"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Role"/>
 		<rdfs:label>undergoer</rdfs:label>
 		<skos:definition>something that plays the role of the object or recipient in a situation, i.e., the thing (or party) that the situation impacts, affects, or that otherwise plays a passive recipient / patient or thematic role</skos:definition>
 		<skos:example>Examples include something that is owned or controlled.</skos:example>
@@ -193,7 +194,7 @@
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;hasUndergoer">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-rlcmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates an actor in a given situation to the thing (or party) that they impact under the circumstances</skos:definition>
@@ -202,7 +203,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;experiences">
 		<rdfs:label>experiences</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-cmp;playsRole">
+			<rdf:Description rdf:about="&cmns-rlcmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;undergoes">
 			</rdf:Description>
@@ -213,13 +214,13 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;experiencesDirectly">
 		<rdfs:label>experiences directly</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-cmp;playsRole">
+			<rdf:Description rdf:about="&cmns-rlcmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;undergoes">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;hasActor">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-rlcmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates something directly to a party that drives a situation involving it</skos:definition>
@@ -228,7 +229,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;experiencesWith">
 		<rdfs:label>experiences with</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-cmp;playsRole">
+			<rdf:Description rdf:about="&cmns-rlcmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;undergoes">
 			</rdf:Description>
@@ -244,7 +245,7 @@
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&cmns-pts;hasActor">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-rlcmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates a situation to the person or organization acting in a primary (agentive) role</skos:definition>
@@ -256,7 +257,7 @@
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&cmns-pts;hasSubjectRole">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-rlcmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates a situation to something that is acting in a primary (agentive) role</skos:definition>
@@ -272,19 +273,19 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasObjectRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;hasRole"/>
 		<rdfs:label>has object role</rdfs:label>
 		<rdfs:domain>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&cmns-cmp;Composition">
+					<rdf:Description rdf:about="&cmns-rlcmp;Composition">
 					</rdf:Description>
 					<rdf:Description rdf:about="&cmns-pts;Situation">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:domain>
-		<rdfs:range rdf:resource="&cmns-cmp;Role"/>
+		<rdfs:range rdf:resource="&cmns-rlcmp;Role"/>
 		<skos:definition>identifies a person or thing that is affected by, or is a secondary argument in a specific role with respect to a given relation or situation</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -295,26 +296,26 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasPartyRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;hasRole"/>
 		<rdfs:label>has party role</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
 		<skos:definition>identifies a specific role played by some person or organization as related to a situation, agreement, contract, policy, regulation, activity or other relationship</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasRelatedPartyRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;hasRole"/>
 		<rdfs:label>has related party role</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
 		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
 		<skos:definition>relates a party acting in a specific role directly to another party acting in the same or another role</skos:definition>
-		<skos:note>This property is intended as an abstract property, whose subproperties may or may not be symmetric, but could be inverses of one another.</skos:note>
+		<cmns-av:usageNote>This property is intended as an abstract property, whose subproperties may or may not be symmetric, but could be inverses of one another.</cmns-av:usageNote>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;hasSubjectRole">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;hasRole"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;hasRole"/>
 		<rdfs:label>has subject role</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;Situation"/>
-		<rdfs:range rdf:resource="&cmns-cmp;Role"/>
+		<rdfs:range rdf:resource="&cmns-rlcmp;Role"/>
 		<skos:definition>identifies the person or thing that is being discussed, described, dealt with, or is the main topic in a specific role with respect to a given situation</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -358,7 +359,7 @@
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;hasActor">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-rlcmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates an undergoer in a given situation to the person or organization that has an impact on them under the circumstances</skos:definition>
@@ -370,20 +371,20 @@
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&cmns-pts;hasUndergoer">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-rlcmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates a situation to something that is directly involved in or affected by it</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;isObjectRoleIn">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;isRoleIn"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;isRoleIn"/>
 		<rdfs:label>is object role in</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-cmp;Role"/>
+		<rdfs:domain rdf:resource="&cmns-rlcmp;Role"/>
 		<rdfs:range>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&cmns-cmp;Composition">
+					<rdf:Description rdf:about="&cmns-rlcmp;Composition">
 					</rdf:Description>
 					<rdf:Description rdf:about="&cmns-pts;Situation">
 					</rdf:Description>
@@ -400,16 +401,16 @@
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&cmns-pts;hasObjectRole">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-rlcmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates a situation or constituency to something that is affected by, or is a secondary argument to in a specific role with respect to a given relation or situation</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-pts;isSubjectRoleIn">
-		<rdfs:subPropertyOf rdf:resource="&cmns-cmp;isRoleIn"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;isRoleIn"/>
 		<rdfs:label>is subject role in</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-cmp;Role"/>
+		<rdfs:domain rdf:resource="&cmns-rlcmp;Role"/>
 		<rdfs:range rdf:resource="&cmns-pts;Situation"/>
 		<owl:inverseOf rdf:resource="&cmns-pts;hasSubjectRole"/>
 		<skos:definition>indicates a situation in which the role is the primary topic</skos:definition>
@@ -418,7 +419,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;playsActivePartyIn">
 		<rdfs:label>plays active party in</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-cmp;playsRole">
+			<rdf:Description rdf:about="&cmns-rlcmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;actsIn">
 			</rdf:Description>
@@ -429,7 +430,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;playsActiveRoleIn">
 		<rdfs:label>plays active role in</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-cmp;playsRole">
+			<rdf:Description rdf:about="&cmns-rlcmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;isSubjectRoleIn">
 			</rdf:Description>
@@ -441,7 +442,7 @@
 		<rdfs:label>plays active role that affects</rdfs:label>
 		<owl:inverseOf rdf:resource="&cmns-pts;isDirectlyAffectedBy"/>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-cmp;playsRole">
+			<rdf:Description rdf:about="&cmns-rlcmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;actsIn">
 			</rdf:Description>
@@ -455,13 +456,13 @@
 		<rdfs:label>plays active role that directly affects</rdfs:label>
 		<owl:inverseOf rdf:resource="&cmns-pts;experiencesDirectly"/>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-cmp;playsRole">
+			<rdf:Description rdf:about="&cmns-rlcmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;actsIn">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;hasUndergoer">
 			</rdf:Description>
-			<rdf:Description rdf:about="&cmns-cmp;isPlayedBy">
+			<rdf:Description rdf:about="&cmns-rlcmp;isPlayedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
 		<skos:definition>relates a person or organization to something they have a direct impact on under the circumstances</skos:definition>
@@ -470,7 +471,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-pts;realizes">
 		<rdfs:label>realizes</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
-			<rdf:Description rdf:about="&cmns-cmp;playsRole">
+			<rdf:Description rdf:about="&cmns-rlcmp;playsRole">
 			</rdf:Description>
 			<rdf:Description rdf:about="&cmns-pts;isObjectRoleIn">
 			</rdf:Description>

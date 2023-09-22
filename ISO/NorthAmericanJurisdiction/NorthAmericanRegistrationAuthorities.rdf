@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
-	<!ENTITY cmns-cmp "https://www.omg.org/spec/Commons/Composites/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
@@ -12,6 +11,7 @@
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
+	<!ENTITY cmns-rlcmp "https://www.omg.org/spec/Commons/RolesAndCompositions/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-chg "https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/">
 	<!ENTITY idmp-nara "https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/">
@@ -27,7 +27,6 @@
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
-	xmlns:cmns-cmp="https://www.omg.org/spec/Commons/Composites/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
@@ -38,6 +37,7 @@
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
+	xmlns:cmns-rlcmp="https://www.omg.org/spec/Commons/RolesAndCompositions/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-chg="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"
 	xmlns:idmp-nara="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"
@@ -60,7 +60,6 @@
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Composites/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/GovernmentEntities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
@@ -69,9 +68,10 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"/>
 		<skos:scopeNote>Note that jurisdiction-specific counterparties and codes are specified in subordinate ontologies supporting those jurisdictions.</skos:scopeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
@@ -94,9 +94,9 @@
 		<skos:definition>American Chemical Society (ACS) in its role as a Registration Authority (RA), which is a function of the ACS for registration of substances in the CAS Registry</skos:definition>
 		<cmns-av:abbreviation>ACS RA</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.2</cmns-av:adaptedFrom>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-nara;AmericanChemicalSociety"/>
 		<cmns-prd:provides rdf:resource="&idmp-nara;ChemicalAbstractsService"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;ChemicalAbstractsServiceRegistry"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-nara;AmericanChemicalSociety"/>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-nara;CASRegistryNumber">
@@ -128,6 +128,21 @@
 		<cmns-av:synonym>CAS number</cmns-av:synonym>
 		<cmns-av:usageNote>Although CAS numbers are widely used, they cannot be freely used. CAS has guidelines on the use of CAS registry numbers and has attempted to restrict their use in publicly available databases.</cmns-av:usageNote>
 	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-nara;CentersForDiseaseControlAndPrevention">
+		<rdf:type rdf:resource="&cmns-ge;GovernmentAgency"/>
+		<rdfs:label>Centers for Disease Control and Prevention</rdfs:label>
+		<cmns-av:acronym>CDC</cmns-av:acronym>
+		<cmns-av:directSource rdf:resource="https://www.cdc.gov/"/>
+		<cmns-col:isConstituentOf rdf:resource="&idmp-nara;DepartmentOfHealthAndHumanServices"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-nara;CentersForDiseaseControlAndPreventionRegistrationAuthority">
+		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
+		<rdfs:label>Centers for Disease Control and Prevention Registration Authority</rdfs:label>
+		<skos:definition>Centers for Disease Control and Prevention in its role as a Registration Authority (RA)</skos:definition>
+		<cmns-pts:isPlayedBy rdf:resource="&idmp-nara;CentersForDiseaseControlAndPrevention"/>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-nara;ChemicalAbstractsService">
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
@@ -209,16 +224,22 @@
 		<rdfs:label>Cosmetic Ingredient Review Registration Authority</rdfs:label>
 		<skos:definition>Cosmetic Ingredient Review (CIR) in its role as a Registration Authority (RA), for content that reflects the review and assessment of the safety of ingredients</skos:definition>
 		<cmns-av:abbreviation>CIR RA</cmns-av:abbreviation>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-narga;UnitedStatesFoodAndDrugAdministration"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;CosmeticIngredientReviewDatabase"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-narga;UnitedStatesFoodAndDrugAdministration"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-nara;DepartmentOfAgricultureRegistrationAuthority">
 		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<rdfs:label>Department of Agriculture Registration Authority</rdfs:label>
 		<skos:definition>United States Department of Agriculture in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-narga;UnitedStatesDepartmentOfAgriculture"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;GermplasmResourcesInformationNetwork"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-narga;UnitedStatesDepartmentOfAgriculture"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-nara;DepartmentOfHealthAndHumanServices">
+		<rdf:type rdf:resource="&cmns-ge;GovernmentDepartment"/>
+		<rdfs:label>U.S. Department of Health and Human Services</rdfs:label>
+		<cmns-av:directSource rdf:resource="https://www.hhs.gov"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-nara;DrugBank">
@@ -236,8 +257,8 @@
 		<skos:definition>Food and Drug Administration (FDA) in its role as a Registration Authority (RA), which is a function of the G-SRS for registration of substances in the FDA/USP Global Substance Registry System</skos:definition>
 		<cmns-av:abbreviation>FDA G-SRS RA</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.5</cmns-av:adaptedFrom>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-narga;UnitedStatesFoodAndDrugAdministration"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;GlobalSubstanceRegistrationSystem"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-narga;UnitedStatesFoodAndDrugAdministration"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-nara;GermplasmResourcesInformationNetwork">
@@ -345,8 +366,8 @@
 		<rdfs:label>Integrated Taxonomic Information System Registration Authority</rdfs:label>
 		<skos:definition>Integrated Taxonomic Information System (ITIS) in its role as a Registration Authority (RA), which is multi-agency organization that involves specialists from around the world to assemble scientific names and their taxonomic relationships, and distribute that data through publicly available software</skos:definition>
 		<cmns-av:abbreviation>ITIS</cmns-av:abbreviation>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-nara;IntegratedTaxonomicInformationSystemOrganization"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;IntegratedTaxonomicInformationSystem"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-nara;IntegratedTaxonomicInformationSystemOrganization"/>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-nara;IntegratedTaxonomicInformationSystemTaxonomicSerialNumber">
@@ -459,8 +480,8 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<rdfs:label>National Cancer Institute registration authority</rdfs:label>
 		<skos:definition>National Cancer Institute in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-nara;NationalCancerInstitute"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;NationalCancerInstituteThesaurus"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-nara;NationalCancerInstitute"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-nara;NationalCancerInstituteThesaurus">
@@ -546,8 +567,8 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<rdfs:label>National Center For Biotechnology Information registration authority</rdfs:label>
 		<skos:definition>National Center For Biotechnology Information in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-nara;NationalCenterForBiotechnologyInformation"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;NationalCenterForBiotechnologyInformationTaxonomyDatabase"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-nara;NationalCenterForBiotechnologyInformation"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-nara;NationalCenterForBiotechnologyInformationTaxonomyDatabase">
@@ -631,8 +652,8 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<rdfs:label>National Library of Medicine Registration Authority</rdfs:label>
 		<skos:definition>National Library of Medicine (NLM) in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-nara;NationalLibraryOfMedicine"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;MedicalSubjectHeadings"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-nara;NationalLibraryOfMedicine"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-nara;NationalPlantDataTeam">
@@ -656,8 +677,8 @@
 		<rdfs:label>OMx Personal Health Analytics, Inc. as registration authority</rdfs:label>
 		<rdfs:seeAlso rdf:resource="https://www.drugbank.com/"/>
 		<skos:definition>OMx Personal Health Analytics in its role as the registration authority for the DrugBank Online repository</skos:definition>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-nara;OMxPersonalHealthAnalyticsInc"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;DrugBank"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-nara;OMxPersonalHealthAnalyticsInc"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-nara;OrphanDrugProductDesignationDatabase">
@@ -803,8 +824,8 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<rdfs:label>Veterans Health Administration Registration Authority</rdfs:label>
 		<skos:definition>Veterans Health Administration in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-nara;VeteransHealthAdministration"/>
 		<cmns-ra:manages rdf:resource="&idmp-nara;NationalDrugFileReferenceTerminology"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-nara;VeteransHealthAdministration"/>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
