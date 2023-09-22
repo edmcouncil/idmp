@@ -2,7 +2,6 @@
 <!DOCTYPE rdf:RDF [
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
-	<!ENTITY cmns-cmp "https://www.omg.org/spec/Commons/Composites/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
@@ -15,6 +14,7 @@
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
 	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
+	<!ENTITY cmns-rlcmp "https://www.omg.org/spec/Commons/RolesAndCompositions/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY idmp-amp "https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/">
@@ -46,7 +46,6 @@
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
-	xmlns:cmns-cmp="https://www.omg.org/spec/Commons/Composites/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
@@ -59,6 +58,7 @@
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
 	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
+	xmlns:cmns-rlcmp="https://www.omg.org/spec/Commons/RolesAndCompositions/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:idmp-amp="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/"
@@ -107,7 +107,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Composites/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
@@ -119,6 +118,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
@@ -172,9 +172,9 @@
 		<rdf:type rdf:resource="&idmp-sub;ActiveMoietyRole"/>
 		<rdfs:label>amlodipine as active moiety</rdfs:label>
 		<skos:definition>amlodipine in the role of an active moiety</skos:definition>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;Amlodipine"/>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-narga;RegulatoryContext-FoodAndDrugAdministrationGeneral"/>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&cmns-ge-euj;EuropeanUnionJurisdiction"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;Amlodipine"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineAsReferenceStrengthInAmlodipineEMCStrength">
@@ -202,7 +202,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineAsReferenceSubstance">
 		<rdf:type rdf:resource="&idmp-mprd;ActiveIngredientActiveMoietyBasisOfStrength"/>
 		<rdfs:label>amlodipine as reference substance</rdfs:label>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;Amlodipine"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;Amlodipine"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylate">
@@ -228,21 +228,21 @@
 		<skos:definition>amlodipine besylate in the role of an active ingredient in the pharmaceutical product, Norvasc, where another substance acts as the reference basis of strength, namely, amlodipine</skos:definition>
 		<idmp-mprd:hasReferenceStrength rdf:resource="&idmp-amp;AmlodipineAsReferenceStrengthInNorvascPresentationStrength"/>
 		<idmp-mprd:hasStrength rdf:resource="&idmp-amp;AmlodipineBesylatePresentationStrengthInNorvasc"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;AmlodipineBesylate"/>
 		<cmns-pts:isRealizedIn rdf:resource="&idmp-amp;NorvascComposition"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;AmlodipineBesylate"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateComposition">
 		<rdf:type rdf:resource="&idmp-sub;SubstanceComposition"/>
 		<rdfs:label>amlodipine besylate composition</rdfs:label>
-		<cmns-cmp:hasRole rdf:resource="&idmp-amp;AmlodipineAsActiveMoiety"/>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-narga;RegulatoryContext-FoodAndDrugAdministrationGeneral"/>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&cmns-ge-euj;EuropeanUnionJurisdiction"/>
 		<cmns-dsg:defines rdf:resource="&idmp-amp;AmlodipineBesylate"/>
+		<cmns-rlcmp:hasRole rdf:resource="&idmp-amp;AmlodipineAsActiveMoiety"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateDenominatorInNorvascPresentationStrength">
-		<rdf:type rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdf:type rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>amlodipine besylate denominator in Norvasc presentation strength</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;Tablet"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">1.0</cmns-qtu:hasNumericValue>
@@ -278,7 +278,7 @@
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineBesylateNumeratorInNorvascPresentationStrength">
-		<rdf:type rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdf:type rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>amlodipine besylate numerator in Norvasc presentation strength</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;Milligram"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">6.94</cmns-qtu:hasNumericValue>
@@ -333,14 +333,14 @@
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineDenominatorInAmlodipineEMCPresentationStrength">
-		<rdf:type rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdf:type rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>amlodipine denominator in Amlodipine EMC presentation strength</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;Tablet"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">1.0</cmns-qtu:hasNumericValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineDenominatorInNorvascPresentationStrength">
-		<rdf:type rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdf:type rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>amlodipine denominator in Norvasc presentation strength</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;Tablet"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">1.0</cmns-qtu:hasNumericValue>
@@ -405,8 +405,8 @@
 		<skos:definition>amlodipine mesylate monohydrate in the role of an active ingredient, where amlodipine acts as the reference basis of strength</skos:definition>
 		<idmp-mprd:hasReferenceStrength rdf:resource="&idmp-amp;AmlodipineAsReferenceStrengthInAmlodipineEMCStrength"/>
 		<idmp-mprd:hasStrength rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrateAsActiveIngredientInAmlodipineEMCPresentationStrength"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
 		<cmns-pts:isRealizedIn rdf:resource="&idmp-amp;AmlodipineEMCComposition"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateAsActiveIngredientInAmlodipineEMCPresentationStrength">
@@ -420,13 +420,13 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateComposition">
 		<rdf:type rdf:resource="&idmp-sub;SubstanceComposition"/>
 		<rdfs:label>amlodipine mesylate monohydrate composition</rdfs:label>
-		<cmns-cmp:hasRole rdf:resource="&idmp-amp;AmlodipineAsActiveMoiety"/>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-narga;RegulatoryContext-FoodAndDrugAdministrationGeneral"/>
 		<cmns-dsg:defines rdf:resource="&idmp-amp;AmlodipineMesylateMonohydrate"/>
+		<cmns-rlcmp:hasRole rdf:resource="&idmp-amp;AmlodipineAsActiveMoiety"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateDenominatorInAmlodipineEMCPresentationStrength">
-		<rdf:type rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdf:type rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>amlodipine mesylate monohydrate denominator in Amlodipine EMC presentation strength</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;Tablet"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">1.0</cmns-qtu:hasNumericValue>
@@ -464,7 +464,7 @@
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineMesylateMonohydrateNumeratorInAmlodipineEMCPresentationStrength">
-		<rdf:type rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdf:type rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>amlodipine mesylate monohydrate numerator in Amlodipine EMC presentation strength</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;Milligram"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">6.41</cmns-qtu:hasNumericValue>
@@ -526,14 +526,14 @@
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineNumeratorInAmlodipineEMCPresentationStrength">
-		<rdf:type rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdf:type rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>amlodipine numerator in Amlodipine EMC presentation strength</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;Milligram"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">5.0</cmns-qtu:hasNumericValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;AmlodipineNumeratorInNorvascPresentationStrength">
-		<rdf:type rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdf:type rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>amlodipine numerator in Norvasc presentation strength</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;Milligram"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">5.0</cmns-qtu:hasNumericValue>
@@ -582,8 +582,8 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;KentPharmaAsManufacturer">
 		<rdf:type rdf:resource="&idmp-sub;Manufacturer"/>
 		<rdfs:label>Kent Pharma UK Ltd. as manufacturer</rdfs:label>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;KentPharmaUKLtd"/>
 		<cmns-prd:produces rdf:resource="&idmp-amp;AmlodipineEMCMedicinalProduct"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;KentPharmaUKLtd"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;KentPharmaUKLtd">
@@ -639,23 +639,23 @@
 		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
 		<rdfs:label>Norvasc as authorized medicinal product in Denmark</rdfs:label>
 		<idmp-mprd:hasAuthorization rdf:resource="&idmp-amp;NorvascMarketingAuthorizationInDenmark"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsAuthorizedMedicinalProductInGermany">
 		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
 		<rdfs:label>Norvasc as authorized medicinal product in Germany</rdfs:label>
 		<idmp-mprd:hasAuthorization rdf:resource="&idmp-amp;NorvascMarketingAuthorizationInGermany"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsStartingMaterial">
 		<rdf:type rdf:resource="&idmp-sub;StartingMaterialRole"/>
 		<rdfs:label>norvasc tablets as starting material</rdfs:label>
-		<cmns-cmp:isManifestedIn rdf:resource="&idmp-amp;NorvascPackageTablets"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-rlcmp:isManifestedIn rdf:resource="&idmp-amp;NorvascPackageTablets"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlister">
@@ -669,14 +669,14 @@
 		<rdf:type rdf:resource="&idmp-mprd;ImmediateContainer"/>
 		<rdfs:label>Norvasc blister As Immediate Container</rdfs:label>
 		<idmp-mprd:immediatelyContains rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterAsStartingMaterial">
 		<rdf:type rdf:resource="&idmp-sub;StartingMaterialRole"/>
 		<rdfs:label>Norvasc blisters as starting material</rdfs:label>
-		<cmns-cmp:isManifestedIn rdf:resource="&idmp-amp;NorvascPackageTablets"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
+		<cmns-rlcmp:isManifestedIn rdf:resource="&idmp-amp;NorvascPackageTablets"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterPackagingMethod">
@@ -696,14 +696,14 @@
 		<rdf:type rdf:resource="&idmp-mprd;OuterPackaging"/>
 		<rdfs:label>Norvasc box as outer packaging</rdfs:label>
 		<idmp-mprd:immediatelyContains rdf:resource="&idmp-amp;NorvascBlister"/>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;NorvascBox"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascBox"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBoxConstituency">
 		<rdf:type rdf:resource="&idmp-mprd;ContainerConstituency"/>
 		<rdfs:label>Norvasc box constituency</rdfs:label>
-		<cmns-cmp:hasRole rdf:resource="&idmp-amp;NorvascBlisterAsImmediateContainer"/>
 		<cmns-dsg:defines rdf:resource="&idmp-amp;NorvascBox"/>
+		<cmns-rlcmp:hasRole rdf:resource="&idmp-amp;NorvascBlisterAsImmediateContainer"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascComposition">
@@ -848,8 +848,8 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascPackagedMedicinalProductConstituency">
 		<rdf:type rdf:resource="&idmp-mprd;ContainerConstituency"/>
 		<rdfs:label>Norvasc packaged medicinal product constituency</rdfs:label>
-		<cmns-cmp:hasRole rdf:resource="&idmp-amp;NorvascBoxAsOuterPackaging"/>
 		<cmns-dsg:defines rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+		<cmns-rlcmp:hasRole rdf:resource="&idmp-amp;NorvascBoxAsOuterPackaging"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascTherapeuticIndicationTextInDenmark">
@@ -891,7 +891,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerApSAsMarketingAuthorizationHolder">
 		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorizationHolder"/>
 		<rdfs:label>Pfizer ApS as marketing authorization holder</rdfs:label>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;PfizerApS"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;PfizerApS"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerGmbH">
@@ -903,7 +903,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerGmbHAsMarketingAuthorizationHolder">
 		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorizationHolder"/>
 		<rdfs:label>Pfizer GmbH as marketing authorization holder</rdfs:label>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;PfizerGmbH"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;PfizerGmbH"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerInc">
@@ -915,8 +915,8 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerLaboratoriesAsManufacturer">
 		<rdf:type rdf:resource="&idmp-sub;Manufacturer"/>
 		<rdfs:label>Pfizer Laboratories as manufacturer</rdfs:label>
-		<cmns-cmp:isPlayedBy rdf:resource="&idmp-amp;PfizerInc"/>
 		<cmns-prd:produces rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;PfizerInc"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;PolyvinalChlorideCommonName">
