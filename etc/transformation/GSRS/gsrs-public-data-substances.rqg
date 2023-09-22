@@ -86,9 +86,9 @@ GENERATE {
     ?MoietyStructureMolecularWeight
     ?moietyStructureID
 
-    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/{ ?moietyStructureID }> AS ?SubstanceMoiety )
-    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?moietyStructureID }> AS ?MoietyMolecularStructure )
-    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?moietyStructureID }/molfile> AS ?MoietyMolfileURI )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })> AS ?SubstanceMoiety )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure> AS ?MoietyMolecularStructure )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure/molfile> AS ?MoietyMolfileURI )
 
     BIND(IF(str(?MoietystructureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
     IF(str(?MoietystructureStereochemistry) = "ACHIRAL", idmp-sub:Stereochemistry-Achiral ,
@@ -177,8 +177,8 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
 ?relationships
 
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
-BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }> AS ?MolecularStructure )
-BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }/molfile> AS ?StructureMolfileURI )
+BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/structure> AS ?MolecularStructure )
+BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/structure/molfile> AS ?StructureMolfileURI )
 
 BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasDefiningMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
 
