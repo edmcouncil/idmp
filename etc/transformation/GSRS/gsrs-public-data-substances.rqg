@@ -35,10 +35,11 @@ GENERATE {
     # Molecular Structure
     ?MolecularStructure a idmp-sub:MolecularStructure ;
         idmp-sub:hasSMILESValue ?structureSmilesString ;
-        cmns-dsg:isDescribedBy ?MolfileURI;
+        cmns-dsg:isDescribedBy ?StructureMolfileURI;
     .
 
-    ?MolfileURI a idmp-sub:Molfile;
+    # Molecular Structure Molfile
+    ?StructureMolfileURI a idmp-sub:Molfile;
         idmp-sub:hasStructuralRepresentationText ?structureMolfile;
     .
 
@@ -57,7 +58,11 @@ GENERATE {
 
         ?MoietyMolecularStructure a idmp-sub:MolecularStructure ;
             idmp-sub:hasSMILESValue ?MoietyStructureSmilesString ;
-            cmns-dsg:isDescribedBy ?MoietyStructureMolfile;
+            cmns-dsg:isDescribedBy ?MoietyMolfileURI;
+        .
+
+        ?MoietyMolfileURI a idmp-sub:Molfile;
+            idmp-sub:hasStructuralRepresentationText ?MoietyStructureMolfile;
         .
     }
     # Molecular Structure Moieties
@@ -81,10 +86,9 @@ GENERATE {
     ?MoietyStructureMolecularWeight
     ?moietyStructureID
 
-    BIND(str(StrUUID()) as ?MoietyUUID)
-    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?RelatedSubstanceApprovalID }/{ ?MoietyUUID }> AS ?SubstanceMoiety )
-
-    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?MoietyUUID }> AS ?MoietyMolecularStructure )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/{ ?moietyStructureID }> AS ?SubstanceMoiety )
+    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?moietyStructureID }> AS ?MoietyMolecularStructure )
+    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?moietyStructureID }/molfile> AS ?MoietyMolfileURI )
 
     BIND(IF(str(?MoietystructureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
     IF(str(?MoietystructureStereochemistry) = "ACHIRAL", idmp-sub:Stereochemistry-Achiral ,
@@ -174,6 +178,7 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
 
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
 BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }> AS ?MolecularStructure )
+BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }/molfile> AS ?StructureMolfileURI )
 
 BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasDefiningMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
 
@@ -210,6 +215,3 @@ BIND(IF(str(?structureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Ab
     IF(str(?structureStereochemistry) = "UNKNOWN", idmp-sub:Stereochemistry-Unknown ,
     ?structureStereochemistry )))))))))))))))))))))
     AS ?Stereochemistry)
-
- BIND(IF(?structureMolfile != "",<https://data.pistoiaalliance.org/idmp/gsrs/molfile/{ StrUUID() }>, ?unbound) as ?MolfileURI)
-
