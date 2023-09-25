@@ -6,7 +6,7 @@ PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX cmns-prd: 	<https://www.omg.org/spec/Commons/ProductsAndServices/>
 PREFIX cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-col: <https://www.omg.org/spec/Commons/Collections/>
-PREFIX cmns-cmp: <https://www.omg.org/spec/Commons/Composites/>
+PREFIX cmns-rlcmp: <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 
 
@@ -62,7 +62,7 @@ WHERE {
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
     	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
     	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient[
-			cmns-cmp:isPlayedBy $Substance
+			cmns-rlcmp:isPlayedBy $Substance
 		] .
 		# Make sure that we only return actual substances
 		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
@@ -80,7 +80,7 @@ WHERE {
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
     	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
     	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient[
-			cmns-cmp:isPlayedBy $Substance
+			cmns-rlcmp:isPlayedBy $Substance
 		] .
 		# Make sure that we only return actual substances
 		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
@@ -96,7 +96,7 @@ WHERE {
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
     	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
     	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient[
-			cmns-cmp:isPlayedBy [ 
+			cmns-rlcmp:isPlayedBy [ 
 				^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $Substance 
 			]
 		] .
@@ -116,7 +116,7 @@ WHERE {
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
     	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
        	$PharmaceuticalProductComposition idmp-mprd:hasActiveIngredient[
-			cmns-cmp:isPlayedBy [ 
+			cmns-rlcmp:isPlayedBy [ 
 				^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $Substance 
 			]
 		] .
