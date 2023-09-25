@@ -3,6 +3,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX cmns-id:   <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX cmns-ra: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
+PREFIX idmp-nara: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/>
 PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
 PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -91,8 +92,8 @@ BIND(
     IF(str(?CodeCodeSystem) = "EMA ASSESSMENT REPORTS", idmp-eura:EuropeanPublicAssessmentReports ,
     IF(str(?CodeCodeSystem) = "EMA VETERINARY ASSESSMENT REPORTS", idmp-eura:EuropeanPublicAssessmentReports ,
     IF(str(?CodeCodeSystem) = "FDA ORPHAN DRUG", idmp-ra:OrphanDrugProductDesignationDatabase ,
-    IF(str(?CodeCodeSystem) = "FDA UNII", idmp-ra:GlobalSubstanceRegistrationSystem ,
-    IF(str(?CodeCodeSystem) = "UNII", idmp-ra:GlobalSubstanceRegistrationSystem ,
+    IF(str(?CodeCodeSystem) = "FDA UNII", idmp-nara:GlobalSubstanceRegistrationSystem ,
+    IF(str(?CodeCodeSystem) = "UNII", idmp-nara:GlobalSubstanceRegistrationSystem ,
     IF(str(?CodeCodeSystem) = "INN", idmp-ra:MedNetINN,
     ?CodeCodeSystem ))))))))))))))))))))))))))))))))))))))))
     AS ?Registry)
