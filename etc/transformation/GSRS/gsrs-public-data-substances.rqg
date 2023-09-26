@@ -58,10 +58,10 @@ GENERATE {
 
         ?MoietyMolecularStructure a idmp-sub:MolecularStructure ;
             idmp-sub:hasSMILESValue ?MoietyStructureSmilesString ;
-            cmns-dsg:isDescribedBy ?MoietyMolfileURI;
+            cmns-dsg:isDescribedBy ?MoietyStructureMolfileURI;
         .
 
-        ?MoietyMolfileURI a idmp-sub:Molfile;
+        ?MoietyStructureMolfileURI a idmp-sub:Molfile;
             idmp-sub:hasStructuralRepresentationText ?MoietyStructureMolfile;
         .
     }
@@ -88,7 +88,7 @@ GENERATE {
 
     BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })> AS ?SubstanceMoiety )
     BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure> AS ?MoietyMolecularStructure )
-    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure/molfile> AS ?MoietyMolfileURI )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure/molfile> AS ?MoietyStructureMolfileURI )
 
     BIND(IF(str(?MoietystructureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
     IF(str(?MoietystructureStereochemistry) = "ACHIRAL", idmp-sub:Stereochemistry-Achiral ,
