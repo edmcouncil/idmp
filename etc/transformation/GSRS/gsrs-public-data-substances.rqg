@@ -45,18 +45,18 @@ GENERATE {
 
 
     GENERATE{
-        ?Substance idmp-sub:hasMoiety ?SubstanceMoiety;
+        ?Substance idmp-sub:hasMoiety ?Moiety;
         .
 
-        ?SubstanceMoiety a idmp-sub:Moiety;
+        ?Moiety a idmp-sub:Moiety;
             rdfs:label ?moietyFormula;
-            idmp-sub:hasDefiningStructure ?MoietyMolecularStructure;
+            idmp-sub:hasDefiningStructure ?MoietyStructure;
             idmp-sub:hasDefiningMolecularWeight ?MoietyStructureMolecularWeight ;
             idmp-sub:hasDefiningMolecularFormula ?moietyFormula ;
             idmp-sub:hasDefiningStereochemistry ?MoietyStereochemistry ;
         .
 
-        ?MoietyMolecularStructure a idmp-sub:MolecularStructure ;
+        ?MoietyStructure a idmp-sub:MolecularStructure ;
             idmp-sub:hasSMILESValue ?MoietyStructureSmilesString ;
             cmns-dsg:isDescribedBy ?MoietyStructureMolfileURI;
         .
@@ -86,8 +86,8 @@ GENERATE {
     ?MoietyStructureMolecularWeight
     ?moietyStructureID
 
-    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })> AS ?SubstanceMoiety )
-    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure> AS ?MoietyMolecularStructure )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })> AS ?Moiety )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure> AS ?MoietyStructure )
     BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure/molfile> AS ?MoietyStructureMolfileURI )
 
     BIND(IF(str(?MoietystructureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
