@@ -2132,7 +2132,38 @@ For the description of nucleic acids, the following information can be used to a
 — Linkage (typically phosphate);
 — Nucleic Acid Type (RNA, DNA, plasmid, single or double stranded);
 — Any Modifications to the substance either sequence specific (i.e. modified or unnatural base, sugar, phosphate linkage) or non-sequence specific modifications.</skos:note>
+		<skos:note>The sequence of the nucleic acid, the type (RNA, DNA, plasmid, single or double stranded), sugar or sugar-like entities, linkage (typically phosphate), together with any modifications that affect the molecular structure, shall be the defining elements for nucleic acid substances.</skos:note>
 		<skos:note>The type of nucleic acid substance, e.g. ribonucleic acid (RNA) and deoxyribonucleic acid (DNA), is also identified. Oligonucleotides and gene elements, e.g. promoters, enhancers, coding sequences and silencers, are defined as nucleic acid substances.</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 6.2.1 and 7.3 and Figures 5 and 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.54, 7.5</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;NucleicAcidSubunit">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSequenceLength"/>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubunitIndex"/>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNucleotideSequence"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>nucleic acid subunit</rdfs:label>
+		<skos:definition>constituent of a nucleic acid</skos:definition>
+		<skos:note>Subunits are listed in order of decreasing length; sequences of the same length will be ordered by molecular weight; subunits that have identical sequences will be repeated multiple times.</skos:note>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 6.2.1 and 7.3 and Figures 5 and 27</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.54, 7.5</cmns-av:directSource>
 	</owl:Class>
@@ -6081,6 +6112,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>has an amount expressed as non-numeric value</skos:definition>
 	</owl:DatatypeProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNucleotideSequence">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has nucleotide sequence</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies the actual nucleotide sequence notation from 5&apos; to 3&apos; end using standard single letter codes</skos:definition>
+		<skos:example>GATTCA</skos:example>
+		<skos:note>In addition to the base sequence, sugar and type of phosphate or non-phosphate linkage should also be captured.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-sub:hasValuesAllowed>Sequence of the letters G, C, T, A, and U</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasNuclideName">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasName"/>
 		<rdfs:label>has nuclide name</rdfs:label>
@@ -6435,6 +6480,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:synonym>has simplified molecular input line entry specification value</cmns-av:synonym>
 	</owl:DatatypeProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSequenceLength">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has sequence length</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;NucleicAcidSubunit"/>
+		<rdfs:range rdf:resource="&xsd;integer"/>
+		<skos:definition>indicates the length of a particular linear sequence</skos:definition>
+		<skos:example>5</skos:example>
+		<idmp-sub:hasBusinessRules>The sequence length is implicitly derived by the sequence description.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasStereochemistry">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasStructure"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
@@ -6624,6 +6683,21 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasValuesAllowed>Chemical, Protein, Nucleic Acid, Polymer, Structurally Diverse, Mixture, Specified Substance Group 1, Specified Substance Group 2, Specified Substance Group 3, Specified Substance Group 4</idmp-sub:hasValuesAllowed>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSubunitIndex">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has subunit index</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;NucleicAcidSubunit"/>
+		<rdfs:range rdf:resource="&xsd;integer"/>
+		<skos:definition>indicates the index (ordering) of a particular linear sequence</skos:definition>
+		<skos:example>1, 2, 3 (..)</skos:example>
+		<skos:note>Sequences are ordered by decreasing length. Sequences of the same length will be ordered by molecular weight. Subunits that have identical sequences will be repeated and have sequential subscripts.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasTargetIdentifier">
 		<rdfs:subPropertyOf rdf:resource="&cmns-id;isIdentifiedBy"/>
