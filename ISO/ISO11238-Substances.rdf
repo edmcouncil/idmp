@@ -2116,6 +2116,12 @@
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;NucleicAcidSubunit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>nucleic acid substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;PolymerSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
@@ -2140,6 +2146,12 @@ For the description of nucleic acids, the following information can be used to a
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidSubunit">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSequenceAttachment"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasSequenceLength"/>
@@ -6478,6 +6490,18 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 		<cmns-av:synonym>has simplified molecular input line entry specification value</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSequenceAttachment">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
+		<rdfs:label>has sequence attachment</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-doc;Reference"/>
+		<skos:definition>provides an &apos;enriched&apos; string, a document or image representing the sequence</skos:definition>
+		<idmp-sub:hasBusinessRules>The element Sequence is always mandatory; the element Sequence Attachment may be provided based on jurisdictional guidance. Either the sequence is provided as ST or/and as an attachment as ED.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ED"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSequenceLength">
