@@ -5553,6 +5553,13 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasResidueSite"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>sugar</rdfs:label>
 		<skos:definition>short chain carbohydrate molecule that has hydroxyl groups attached to each carbon atom unit with the exception of one carbon that has a doubly-bond aldehyde or ketone oxygen</skos:definition>
 		<skos:note>As a chemical term, &apos;sugar&apos; typically refers to carbohydrates of the general formula Cn(H2O)n.</skos:note>
@@ -6606,6 +6613,19 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:explanatoryNote>It may be known that lysine residues are modified but the particular lysine in the sequence may not be known. It should be captured for both specific and non-specific modifications, e.g. sizing carbohydrate polymers by hydrolysis.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasResidueSite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has residue site</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>describes the residues that contain a given sugar entity</skos:definition>
+		<skos:example>1_1-1_20 would indicate that residues 1-20 of a given strand contain a particular sugar.</skos:example>
+		<skos:note>The residues that contain a given sugar shall be captured. The order of given residues will be captured in the 5&apos;-3&apos; direction consistent with the base sequences.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause and 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasSMILES">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
