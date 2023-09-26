@@ -1179,6 +1179,14 @@
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Linkage">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:label>linkage</rdfs:label>
+		<skos:definition>connection between sugar residues</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -2197,6 +2205,20 @@ For the description of nucleic acids, the following information can be used to a
 					</owl:Class>
 				</owl:onClass>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isRelatedTo"/>
+				<owl:onClass rdf:resource="&idmp-sub;Linkage"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
+				<owl:onClass rdf:resource="&idmp-sub;Sugar"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -5506,6 +5528,40 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Sugar">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSugarName"/>
+				<owl:onClass rdf:resource="&idmp-sub;SubstanceName"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSugarIdentifier"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>sugar</rdfs:label>
+		<skos:definition>short chain carbohydrate molecule that has hydroxyl groups attached to each carbon atom unit with the exception of one carbon that has a doubly-bond aldehyde or ketone oxygen</skos:definition>
+		<skos:note>As a chemical term, &apos;sugar&apos; typically refers to carbohydrates of the general formula Cn(H2O)n.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>Medical Subject Headings (MeSH, see http://purl.bioontology.org/ontology/MESH/D000073893</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>In the context of the ISO 11238 standard, the term &apos;sugar&apos; is used to mean &apos;sugar or sugar-like entity&apos;.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Target">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
@@ -6806,6 +6862,43 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasSugarIdentifier">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceIdentifier"/>
+		<rdfs:label>has sugar identifier</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>indicates the unique substance identifier for the sugar or sugar-like component that makes up the nucleotide</skos:definition>
+		<skos:example>UNII code for ribose</skos:example>
+		<skos:note>For naturally occurring nucleic acids the sugar is typically either .beta.-D-ribose or .beta.-D-deoxyribose. The actual configuration of the sugar shall be captured.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-sub:hasValuesAllowed>ISO 11238 Substance ID</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause and 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasSugarName">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceName"/>
+		<rdfs:label>has sugar name</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;SubstanceName"/>
+		<skos:definition>indicates the name of the sugar or sugar-like component that makes up the nucleotide</skos:definition>
+		<skos:example>Ribose, deoxyribose, 2,5-dihydroxy-morphilino</skos:example>
+		<idmp-sub:hasBusinessRules>This is implicit and derived from the Sugar ID. The preferred name is the default value.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-sub:hasValuesAllowed>ISO 11238 Substance Name</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause and 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasTargetIdentifier">
 		<rdfs:subPropertyOf rdf:resource="&cmns-id;isIdentifiedBy"/>
