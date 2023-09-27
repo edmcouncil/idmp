@@ -2112,6 +2112,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;NucleotideSequenceType"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -2216,7 +2223,7 @@ For the description of nucleic acids, the following information can be used to a
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
+				<owl:onProperty rdf:resource="&idmp-sub;isSupportedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;Sugar"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -6536,14 +6543,14 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:unionOf rdf:parseType="Collection">
 					<rdf:Description rdf:about="&idmp-sub;Moiety">
 					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+					<rdf:Description rdf:about="&idmp-sub;Matter">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;Substance">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:range>
-		<skos:definition>relates something, such as a substance relationship, to the substance, moiety, or physical substance that is the target of the relationship</skos:definition>
+		<skos:definition>relates something, such as a substance relationship, to the substance, moiety, or matter, including a molecular entity or physical substance that is the target of the relationship</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6 and Figure 8</cmns-av:adaptedFrom>
@@ -6557,7 +6564,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 			<rdf:Description rdf:about="&cmns-id;isIdentifiedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
-		<skos:definition>relates a substance that is the target in a substance relationship to an identifier for that substance, moiety, or physical substance</skos:definition>
+		<skos:definition>relates a substance that is the target of something, such as a substance relationship, to an identifier for that substance, moiety, or matter</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-sub:hasValuesAllowed>ISO 11238 Substance ID</idmp-sub:hasValuesAllowed>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
@@ -6573,7 +6580,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 			<rdf:Description rdf:about="&idmp-sub;hasSubstanceName">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
-		<skos:definition>relates a substance that is the target in a substance relationship relationship to a preferred term or primary name for that substance, moiety, or physical substance</skos:definition>
+		<skos:definition>relates a substance that is the target of something, such as a substance relationship, to a preferred term or primary name for that substance, moiety, or matter</skos:definition>
 		<idmp-sub:hasBusinessRules>The preferred term of the related substance is captured; this information is required when there is a &apos;Substance Relationship&apos;; The substance name is implicit and derived from the Substance ID.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-sub:hasValuesAllowed>Based on ISO 11238 substance name</idmp-sub:hasValuesAllowed>
@@ -7137,9 +7144,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>is related substance to</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
-		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
-		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
-		<skos:definition>specifies a target substance with which the source has some relationship</skos:definition>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Moiety">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Matter">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<owl:inverseOf rdf:resource="&idmp-sub;hasRelatedSubstance"/>
+		<skos:definition>specifies something, possibly a target substance, moiety, or matter with which the source substance, moiety, or matter has some relationship</skos:definition>
 		<skos:example>The active moiety of the salt amlodipine besilate hydrate (1:1:1) is the related substance amlodipine. The salt amlodipine besilate hydrate contains 69.8 percent w/w of amlodipine. Therefore, the equivalence factor is 0,698, meaning 10 mg amlodipine besilate hydrate salt corresponds to 6,98 (approx to 7 mg) amlodipine active moiety. The Equivalence Factor is captured by the element group Amount in combination with the element group Substance Relationship as Amount Text.</skos:example>
 		<skos:note>Relationships between substances such as the relationship between a salt form and its active moiety or parent substance should be captured. These relationships are often essential to the description of medicinal products, the basis of strength and the classification of substances. These relationships are often obvious and rules will be developed for specifying substances involved in each type of relationship. For example, the active moiety of all sodium salts would be the free acid, conversely the active moiety of a hydrochloride salt would be a free base.</skos:note>
 		<idmp-sub:hasBusinessRules>The Equivalence Factor shall be less than or equal to 1,00. It is formed by dividing the molecular weight of the (parent) substance (active moiety)/molecular weight of the corresponding salt or salt hydrate or hydrate.</idmp-sub:hasBusinessRules>
@@ -7170,6 +7188,25 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>links a substance, moiety, or physical substance to a substance relationship that it is the subject of</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6 and Figure 8</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isSupportedBy">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstance"/>
+		<rdfs:label>is supported by</rdfs:label>
+		<skos:definition>relates something, such as a nucleic acid subunit, to a substance, moiety or matter that supports it</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause and 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;supports">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isRelatedSubstanceTo"/>
+		<rdfs:label>supports</rdfs:label>
+		<owl:inverseOf rdf:resource="&idmp-sub;isSupportedBy"/>
+		<skos:definition>relates a substance, moiety or matter to something, such as a nucleic acid subunit, that it enables</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause and 7.3 and Figure 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
 	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&cmns-doc;Reference">
