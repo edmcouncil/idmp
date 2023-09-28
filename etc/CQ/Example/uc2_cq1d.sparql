@@ -12,13 +12,14 @@ where {
 	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/PolyvinylChloride>
     BIND( uc2_cq1d_parameter_1 AS $Substance )
 
-    # Target Substance Comprises a form of packaging
-    ?Packaging cmns-col:comprises $Substance ;
-
-    # Make sure that we only return actual substances
-    a/rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
-     
+    ?Packaging a/rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
     # Optionally, get the name of the substance
     OPTIONAL{?Packaging  rdfs:label  ?PackagingLabel }
 
+    # A package is made of a single material no components, e.g. the paperboard box
+    # or the package is made of components, e.g. the form and lidding of a blister
+    # cmns-col:comprises may have subproperties for material and alternate material
+    # IDMP allows any material from a controlled vocabulary, that need not be substances in the defintion of IDMP
+    ?Packaging idmp-mprd:hasPackageComponent*/cmns-col:comprises $Substance .
+	
 } GROUP BY ?Packaging
