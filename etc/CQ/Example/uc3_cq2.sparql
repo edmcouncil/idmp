@@ -1,13 +1,14 @@
 #UC3 CQ 2 	What ingredient role (excipient, ...) played by a substance <S> is part of what (authorized, investigational) medicinal product that has a therapeutic indication indicated by a MedDRA ID <I>?
 
 PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
-PREFIX cmns-cmp: <https://www.omg.org/spec/Commons/Composites/>
+PREFIX cmns-rlcmp: <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX cmns-ctxdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
 PREFIX cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX idmp-eura:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
+PREFIX idmp-meddra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-phprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/> 
@@ -24,7 +25,7 @@ WHERE {
         # Find Medicinal Product that is approved for the TherapeuticIndication having MedDRA ID
 		?TherapeuticIndication a idmp-mprd:TherapeuticIndication . 
 		?TherapeuticIndication idmp-mprd:hasIndicationAsDiseaseSymptomProcedure ?MedicalConditionClassifier.
-		?MedicalConditionClassifier a idmp-eura:MedDRATerm;
+		?MedicalConditionClassifier a/rdfs:subClassOf* idmp-meddra:MedDRATerm;
 		   (cmns-id:isIdentifiedBy|^cmns-id:identifies) ?MedDRAIdentifier .
 		?MedDRAIdentifier cmns-txt:hasTextValue $MedDRAId .
 	
@@ -32,12 +33,12 @@ WHERE {
 		{
 			?TherapeuticIndication cmns-ctxdsg:isApplicableIn ?ProductRole .
 			?ProductRole a idmp-mprd:AuthorizedMedicinalProduct .
-		    ?ProductRole (cmns-cmp:isPlayedBy|^cmns-cmp:playsRole) ?MedicinalProduct  .
+		    ?ProductRole (cmns-rlcmp:isPlayedBy|^cmns-rlcmp:playsRole) ?MedicinalProduct  .
 			idmp-mprd:AuthorizedMedicinalProduct rdfs:label ?ProductRoleType .
 		} UNION {
 			?TherapeuticIndication cmns-ctxdsg:isApplicableIn ?ProductRole .
 			?ProductRole a idmp-mprd:InvestigationalMedicinalProduct .
-		    ?ProductRole (cmns-cmp:isPlayedBy|^cmns-cmp:playsRole) ?MedicinalProduct  .
+		    ?ProductRole (cmns-rlcmp:isPlayedBy|^cmns-rlcmp:playsRole) ?MedicinalProduct  .
 			idmp-mprd:InvestigationalMedicinalProduct rdfs:label ?ProductRoleType .
 		}
 	
@@ -47,7 +48,7 @@ WHERE {
         ?Product ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
     	?Product ^cmns-dsg:defines|cmns-dsg:isDefinedIn ?ProductComposition .
 		?SubstanceInIngredientRole cmns-pts:isRealizedIn ?ProductComposition .
-		?SubstanceInIngredientRole cmns-cmp:isPlayedBy ?Substance .
+		?SubstanceInIngredientRole cmns-rlcmp:isPlayedBy ?Substance .
 		
 		# Find most specific ingredient role
 		?SubstanceInIngredientRole a/rdfs:subClassOf* ?IngredientClass .

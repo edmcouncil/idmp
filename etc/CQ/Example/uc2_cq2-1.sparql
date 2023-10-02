@@ -1,7 +1,7 @@
 #UC2 CQ 2.1 	Which Marketing Authorization Number(s) does a sellable article (Material in ERP) have?
 PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
 PREFIX cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
-PREFIX cmns-cmp: <https://www.omg.org/spec/Commons/Composites/>
+PREFIX cmns-rlcmp: <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -16,7 +16,7 @@ WHERE {
 	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/NorvascMedicinalProduct>
     BIND( uc2_cq2-1_parameter_1 AS $SellalbeArticle )
 
-    $AuthorizedMedicinalProduct cmns-cmp:isPlayedBy $SellalbeArticle .
+    $AuthorizedMedicinalProduct cmns-rlcmp:isPlayedBy $SellalbeArticle .
     $AuthorizedMedicinalProduct idmp-mprd:hasAuthorization $Authorization .
     $Authorization cmns-cxtdsg:isApplicableIn ?Jurisdiction . 
     ?MarketingAuthorizationNumber cmns-id:identifies $Authorization 
