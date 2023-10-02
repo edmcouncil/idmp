@@ -2132,6 +2132,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPackageItemType"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PackageItemType"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasShelfLife"/>
 				<owl:onClass rdf:resource="&idmp-mprd;ShelfLife"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2147,6 +2154,21 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.58</dct:source>
 		<skos:definition>individual, distinct item contained in a packaged medicinal product that acts as a container for one or more manufactured item(s)</skos:definition>
 		<cmns-av:explanatoryNote>The manufactured item or pharmaceutical product is not in direct contact with the outer packaging except where the outer packaging also serves as the immediate container. An alternative, compatible definition of outer packaging is given in Directive 92/27/EEC.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;PackageItemType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackageItem"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>package item type</rdfs:label>
+		<skos:definition>classifier for package items (containers)</skos:definition>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.6.2.3.2</cmns-av:directSource>
+		<cmns-av:synonym>container type</cmns-av:synonym>
+		<cmns-av:synonym>package item (container) type</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PackagedMedicinalProduct">
@@ -3319,6 +3341,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label>has package item quantity</rdfs:label>
 		<skos:definition>indicates the number/quantity of items of the same type in a container</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Annex A, Full Model</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPackageItemType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has package item type</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;PackageItemType"/>
+		<skos:definition>relates a package item to its type of container</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceIngredientRole">
