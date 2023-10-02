@@ -7,13 +7,14 @@ import sys
 from rdflib import Graph, Literal
 from spellchecker import SpellChecker
 
-ONTOLOGY_IRI_FILTER = 'spec.pistoiaalliance.org'
+# ONTOLOGY_IRI_FILTER = 'spec.pistoiaalliance.org'
 HTTP_REGEX = re.compile(pattern='http[^\s]+')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run spelling check')
     parser.add_argument('--spell', help='Path to file with new spells', metavar='SPELL')
     parser.add_argument('--ontology', help='Path to ontology file', metavar='ONTOLOGY')
+    parser.add_argument('--filter', help='IRI filter', metavar='FILTER')
     args = parser.parse_args()
     
     logging.basicConfig(
@@ -31,7 +32,7 @@ if __name__ == "__main__":
     misspelled_words_in_triples = set()
     
     for (subject, predicate, object) in ontology:
-        if ONTOLOGY_IRI_FILTER in str(subject):
+        if args.filter in str(subject):
             if isinstance(object, Literal):
                 literal = object
                 literal_value = literal.value
