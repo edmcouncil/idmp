@@ -1,0 +1,37 @@
+# This workflow will run spellchecking for IDMP project
+
+name: IDMP Spellcheck Test
+
+on:
+  push:
+  pull_request:
+    branches: ["master"]
+
+permissions:
+  contents: read
+
+jobs:
+  IDMP:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install robot
+        run: |
+          sudo wget --no-verbose -m -nH -nd -P /usr/bin https://raw.githubusercontent.com/ontodev/robot/master/bin/robot
+          sudo wget --no-verbose -m -nH -nd -P /usr/bin https://github.com/ontodev/robot/releases/latest/download/robot.jar
+          sudo chmod +x /usr/bin/robot
+      - name: Merge all IDMP ontologies with robot
+        run: |
+          robot merge --input AboutIDMPDev-ReferenceIndividuals.rdf --output AboutIDMPDev-ReferenceIndividuals.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
+    - name: Run spellchecker
+      run: |
+        python etc/spelling/onto_spellchecker.py --ontology /home/runner/work/idmp/idmp/AboutIDMPDev-ReferenceIndividuals.ttl --spell etc/spelling/spell.json
+        if [ $? != 0 ];
+        then
+        exit $?
+        fi
+      
