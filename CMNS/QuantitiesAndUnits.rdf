@@ -31,24 +31,26 @@
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 		<rdfs:label>Commons Quantities and Units Ontology</rdfs:label>
-		<dct:abstract>This ontology provides a core set of concepts for quantities, units, systems of quantities, and systems of units. The most widely accepted, scrutinized, and globally used system of quantities and system of units are the International System of Quantities (ISQ) and the International System of Units (SI). They are formally standardized through [ISO 31] and [IEC 60027]. The harmonization of these two sets of standards into one new set [ISO/IEC 80000] has been published by ISO in 2009 and 2010. This ontology is based on the QUDV model from the Object Management Group (OMG)&apos;s SysML standard and on ISO/IEC 80000-1:2009, which refers normatively to the ISO/IEC Guide 99:2007. It is compatible with and can be mapped directly to the OMG Date Time Vocabulary (DTV) Quantities Ontology, the de-facto QUDT ontology representing Units of Measure, Quantity Kinds, Dimensions and Data Types (see http://www.qudt.org/), the Units of Measurement Ontology (UO) ontology available from the BioPortal (https://bioportal.bioontology.org/ontologies/UO) and others, as well as the QUDV annex of the SysML specification.</dct:abstract>
+		<dct:abstract>This ontology provides a core set of concepts for quantities, units, systems of quantities, and systems of units. The most widely accepted, scrutinized, and globally used system of quantities and system of units are the International System of Quantities (ISQ) and the International System of Units (SI). They are formally standardized through [ISO 31] and [IEC 60027]. The harmonization of these two sets of standards into one new set [ISO/IEC 80000] has been published by ISO in 2009 and 2010. This ontology is based on the Object Management Group (OMG)&apos;s SysML standard and on ISO/IEC 80000-1:2009, which refers normatively to the ISO/IEC Guide 99:2007. It is compatible with and can be mapped directly to the OMG Date Time Vocabulary (DTV) Quantities Ontology, the de-facto QUDT ontology representing Units of Measure, Quantity Kinds, Dimensions and Data Types (see http://www.qudt.org/), the Units of Measurement Ontology (UO) ontology available from the BioPortal (https://bioportal.bioontology.org/ontologies/UO) and others, as well as the quantities and units library in the SysML specification.</dct:abstract>
+		<dct:contributor>Davide Sottara, Mayo Clinic</dct:contributor>
 		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
 		<dct:contributor>Evan Wallace, U.S. National Institute of Standards and Technology (NIST)</dct:contributor>
 		<dct:contributor>Hans Peter de Koenig, DEKonsult</dct:contributor>
 		<dct:contributor>Roger Burkhart, Thematix Partners LLC</dct:contributor>
 		<dct:contributor>Stuart Chalk, University of North Florida</dct:contributor>
-		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230501/QuantitiesAndUnits/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230801/QuantitiesAndUnits/"/>
 		<cmns-av:copyright>Copyright (c) 2011-2023 Thematix Partners LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2023 Object Management Group, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023 DEKonsult</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2023 Mayo Clinic</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023 University of North Florida</cmns-av:copyright>
 	</owl:Ontology>
 	
@@ -79,7 +81,7 @@
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.1</dct:source>
 		<owl:disjointWith rdf:resource="&cmns-qtu;PhysicalUnit"/>
 		<skos:definition>arbitrarily defined unit of measurement, where a relation of the unit to a physical unit of the SI does not exist or is unknown</skos:definition>
-		<skos:note>Arbitrary units represent references to materials or procedures that are defined outside the SI system. A quantity value is arbitrarily assigned to the reference preparation or the result of a measurement procedure, usually specific for a particular substance. This generally precludes comparability of quantity values across different systems and components for this type of units.</skos:note>
+		<skos:note>Arbitrary units represent references to materials or procedures that are defined outside of the SI system. A quantity value is arbitrarily assigned to the reference preparation or the result of a measurement procedure, usually specific for a particular substance. This generally precludes comparability of quantity values across different systems and components for this type of units.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;BaseQuantityKind">
@@ -125,7 +127,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Constant">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>constant</rdfs:label>
 		<skos:definition>symbol that represents a value that does not change (i.e., is fixed) with respect to a formula or expression</skos:definition>
 	</owl:Class>
@@ -158,6 +160,15 @@
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.6</dct:source>
 		<dct:source>ISO 80000-1:2009 Quantities and units - Part 1: General, clause 3.24</dct:source>
 		<skos:definition>ratio of two measurement units for quantities of the same kind</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;CyclicRatioScale">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;RatioScale"/>
+		<rdfs:label>cyclic ratio scale</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>measurement scale that represents a ratio scale with a periodic cycle</skos:definition>
+		<skos:example>&apos;cyclic degree&apos; (to express planar angular measures) with modulus = 360 and unit &apos;degree&apos;</skos:example>
+		<skos:example>&apos;hour of day&apos; with modulus = 24 and unit &apos;hour&apos;</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;DerivedQuantityKind">
@@ -319,14 +330,14 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasMaximumPermissiveValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasMinimumPermissiveValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -355,11 +366,12 @@
 		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>ordered set of quantity values of quantities of a given kind of quantity used in ranking, according to magnitude, quantities of that kind</skos:definition>
+		<skos:note>Note that the majority of scalar quantities can be expressed by just using a MeasurementUnit directly as its measurement reference. This implies expression of a scalar quantity value on a ratio scale. However, for full coverage of all quantity value expressions, additional explicit measurement scales with additional semantics are needed, such as ordinal scale, interval scale, ratio scale with additional limit values, cyclic ratio scale and logarithmic scale.</skos:note>
 		<cmns-av:synonym>quantity-value scale</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;Quantity"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantity"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;specializes"/>
@@ -402,7 +414,7 @@
 		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4589638/</dct:source>
 		<skos:definition>measurement scale that represents objects as belonging to classes that have no particular order</skos:definition>
-		<skos:example>Many nominal scales are qualitative in nature. A common example of a nominal scale is that of gender identity, which is a way of describing one&apos;s persistent inner concept of their gender. While the terminology from a psychological and medical perspective continues to evolve, the scale covers individuals who self identify as male or female as well as those that have an indeterminate perspective, such as transsexual or non-binary.</skos:example>
+		<skos:example>Many nominal scales are qualitative in nature. A common example of a nominal scale is that of gender identity, which is a way of describing one&apos;s persistent inner concept of their gender. While the terminology from a psychological and medical perspective continues to evolve, the scale covers individuals who self identify as male or female as well as those that have a less determinant perspective, such as transsexual or non-binary.</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;OrdinalScale">
@@ -470,30 +482,6 @@
 		<rdfs:label>prefixed unit</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
 		<skos:definition>conversion-based unit that is defined with respect to another measurement reference unit through a linear conversion relationship with a named prefix that represents a multiple or submultiple of a unit</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-qtu;Quantity">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityName"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKind"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>quantity</rdfs:label>
-		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.24</dct:source>
-		<dct:source>ISO 80000-1:2009 Quantities and units - Part 1: General, clause 3.1</dct:source>
-		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
-		<skos:definition>property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed by means of a number and a reference</skos:definition>
-		<skos:example>second, kilogram, joule, meter</skos:example>
-		<skos:note>A quantity as defined in ISO 80000 is a scalar. However, a vector or a tensor, the components of which are quantities, is also considered to be a quantity.</skos:note>
-		<skos:note>A reference can be a measurement unit, a measurement procedure, a reference material, or a combination of such.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;QuantityDimension">
@@ -602,7 +590,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;Quantity"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;ScalarQuantity"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>quantity name</rdfs:label>
@@ -610,11 +598,83 @@
 		<skos:note>A number of systems of quantities and units encode a quantity, such as a unit of measure, via a generally accepted abbreviation. URIs representing such quantities are very useful in applications that require globally unique, machine readable names, but are less accessible to people. This concept is intended to provide the corresponding name for a given quantity in the context of a specific system of quantities and units for human consumption.</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-qtu;QuantityValue">
+	<owl:Class rdf:about="&cmns-qtu;Ratio">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasDenominator"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasNumerator"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>ratio</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://stats.oecd.org/glossary/detail.asp?ID=6688</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www150.statcan.gc.ca/n1/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#r</dct:source>
+		<skos:definition>proportional relationship between two different quantity values that gives rise to a datum of a specific quantity kind</skos:definition>
+		<skos:note>A ratio is a quantity measured with respect to some other quantity, or in mathematics a quotient of two numbers or expressions, arrived at by dividing one by the other.</skos:note>
+		<cmns-av:synonym>rate</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;RatioScale">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementScale"/>
+		<rdfs:label>ratio scale</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>measurement scale that represents quantitative values, allows comparison of differences in values, has a fixed zero value and is invariant under multiplication by a positive number</skos:definition>
+		<skos:example>The Kelvin scale is a ratio scale, as are the familiar scales representing mass in kilograms, length in meters and duration in seconds.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;RatioScaleWithAdditionalLimitValues">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;RatioScale"/>
+		<rdfs:label>ratio scale with additional limit values</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>measurement scale that that represents a ratio scale that has additional limit values</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;ReferenceMaterial">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
+		<rdfs:label>reference material</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.26</dct:source>
+		<skos:definition>material, sufficiently homogeneous and stable with reference to specified properties, which has been established to be fit for its intended use in measurement or in examination of nominal properties</skos:definition>
+		<skos:note>Some reference materials have assigned quantity values that are metrologically traceable to a measurement unit outside a system of units. Such materials include vaccines to which International Units (IU) have been assigned by the World Health Organization (WHO).</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;ScalarQuantity">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityName"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityKind"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKind"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>scalar quantity</rdfs:label>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.24</dct:source>
+		<dct:source>ISO 80000-1:2009 Quantities and units - Part 1: General, clause 3.1</dct:source>
+		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<skos:definition>property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed by means of a number and a reference</skos:definition>
+		<skos:example>second, kilogram, joule, meter</skos:example>
+		<skos:note>A quantity as defined in ISO 80000 is a scalar. However, a vector or a tensor, the components of which are quantities, is also considered to be a quantity.</skos:note>
+		<skos:note>A reference can be a measurement unit, a measurement procedure, a reference material, or a combination of such.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;ScalarQuantityValue">
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;expressesTheMagnitudeOf"/>
-				<owl:onClass rdf:resource="&cmns-qtu;Quantity"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantity"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -631,7 +691,7 @@
 				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementUnit"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>quantity value</rdfs:label>
+		<rdfs:label>scalar quantity value</rdfs:label>
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clauses 3.1.19, 3.1.25</dct:source>
 		<dct:source>ISO 80000-1:2009 Quantities and units - Part 1: General, clause 3.19</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
@@ -644,65 +704,24 @@
 		<cmns-av:synonym>value of a quantity</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-qtu;QuantityValueRange">
+	<owl:Class rdf:about="&cmns-qtu;ScalarQuantityValueRange">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasLowerBound"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasUpperBound"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>quantity value range</rdfs:label>
-		<skos:definition>expression of the lowest possible value and highest possible value for some quantity</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-qtu;Ratio">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasDenominator"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasNumerator"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>ratio</rdfs:label>
-		<dct:source rdf:datatype="&xsd;anyURI">https://stats.oecd.org/glossary/detail.asp?ID=6688</dct:source>
-		<dct:source rdf:datatype="&xsd;anyURI">https://www150.statcan.gc.ca/n1/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#r.</dct:source>
-		<skos:definition>proportional relationship between two different quantity values that gives rise to a datum of a specific quantity kind</skos:definition>
-		<skos:note>A ratio is a quantity measured with respect to some other quantity, or in mathematics a quotient of two numbers or expressions, arrived at by dividing one by the other.</skos:note>
-		<cmns-av:synonym>rate</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-qtu;RatioScale">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementScale"/>
-		<rdfs:label>ratio scale</rdfs:label>
-		<dct:source rdf:datatype="&xsd;anyURI">https://plato.stanford.edu/entries/measurement-science/</dct:source>
-		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
-		<skos:definition>measurement scale that represents quantitative values, allows comparison of differences in values, has a fixed zero value and is invariant under multiplication by a positive number</skos:definition>
-		<skos:example>The Kelvin scale is a ratio scale, as are the familiar scales representing mass in kilograms, length in meters and duration in seconds.</skos:example>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-qtu;ReferenceMaterial">
-		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
-		<rdfs:label>reference material</rdfs:label>
-		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.26</dct:source>
-		<skos:definition>material, sufficiently homogeneous and stable with reference to specified properties, which has been established to be fit for its intended use in measurement or in examination of nominal properties</skos:definition>
-		<skos:note>Some reference materials have assigned quantity values that are metrologically traceable to a measurement unit outside a system of units. Such materials include vaccines to which International Units (IU) have been assigned by the World Health Organization (WHO).</skos:note>
+		<rdfs:label>scalar quantity value range</rdfs:label>
+		<skos:definition>expression of the lowest possible value and/or highest possible value for some scalar quantity</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;SystemOfQuantities">
@@ -800,7 +819,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;Variable">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<rdfs:label>variable</rdfs:label>
 		<skos:definition>symbol that represents a parameter in a formula or expression</skos:definition>
 	</owl:Class>
@@ -814,7 +833,7 @@
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;expressesTheMagnitudeOf">
 		<rdfs:label>expresses the magnitude of</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;Quantity"/>
+		<rdfs:range rdf:resource="&cmns-qtu;ScalarQuantity"/>
 		<skos:definition>specifies the quantity that some quantity value reflects</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -823,9 +842,9 @@
 		<rdfs:range>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+					<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValue">
 					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+					<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValueRange">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -841,9 +860,9 @@
 		<rdfs:range>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+					<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValue">
 					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+					<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValueRange">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -891,7 +910,7 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has lower bound</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<skos:definition>specifies the quantity value that is the lower value of a pair of values representing a range</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -900,7 +919,7 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has maximum permissive value</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<skos:definition>indicates the maximum allowed value for a measurement on the given scale</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -915,7 +934,7 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has minimum permissive value</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<skos:definition>indicates the minimum allowed value for a measurement on the given scale</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -926,9 +945,9 @@
 		<rdfs:range>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+					<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValue">
 					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+					<rdf:Description rdf:about="&cmns-qtu;ScalarQuantityValueRange">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -954,14 +973,14 @@
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasQuantityValue">
 		<rdfs:label>has quantity value</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<skos:definition>relates something (an expression, formula, etc.) to its magnitude expressed as a number together with its unit of measure (if applicable)</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasQuantityValueRange">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
 		<rdfs:label>has quantity value range</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValueRange"/>
+		<rdfs:range rdf:resource="&cmns-qtu;ScalarQuantityValueRange"/>
 		<skos:definition>relates something (an expression, formula, etc.) to its magnitude expressed as range of numbers together with their unit(s) of measure (if applicable)</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -970,7 +989,7 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has upper bound</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:range rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<skos:definition>specifies the quantity value that is the higher value of a pair of values representing a range</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -1006,7 +1025,7 @@
 	<owl:ObjectProperty rdf:about="&cmns-qtu;isValueOf">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
 		<rdfs:label>is value of</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-qtu;QuantityValue"/>
+		<rdfs:domain rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
 		<owl:inverseOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<skos:definition>is the measure that the value represents</skos:definition>
 	</owl:ObjectProperty>
