@@ -16,15 +16,7 @@ def __get_local_name_from_iri(iri: URIRef) -> str:
     return local_name
 
 
-def check_spelling_in_ontology(new_spell_file_path: str, ontology_location: str, resource_filter: str):
-    spell = SpellChecker()
-    with open(file=new_spell_file_path) as new_spell_file:
-        new_spell_words = json.load(new_spell_file)
-    spell.word_frequency.load_words(new_spell_words)
-    
-    ontology = Graph()
-    ontology.parse(ontology_location)
-    
+def __get_local_names(ontology: Graph) -> set:
     local_names_in_ontology = set()
     for (subject, predicate, object) in ontology:
         if isinstance(subject, URIRef):
@@ -33,8 +25,10 @@ def check_spelling_in_ontology(new_spell_file_path: str, ontology_location: str,
             local_names_in_ontology.add(__get_local_name_from_iri(iri=predicate))
         if isinstance(object, URIRef):
             local_names_in_ontology.add(__get_local_name_from_iri(iri=object))
-    spell.word_frequency.load_words(local_names_in_ontology)
-    
+    return local_names_in_ontology
+
+
+def __get_misspellings(ontology: Graph, resource_filter: str, spell) -> set():
     misspelled_words_in_triples = set()
     misspelled_words = set()
     for (subject, predicate, object) in ontology:
@@ -68,7 +62,19 @@ def check_spelling_in_ontology(new_spell_file_path: str, ontology_location: str,
                                 if word not in misspelled_words:
                                     print(word, 'is possibly misspelled.')
                                 misspelled_words.add(word)
-    
+    return misspelled_words_in_triples
+
+
+def check_spelling_in_ontology(new_spell_file_path: str, ontology_location: str, resource_filter: str):
+    spell = SpellChecker()
+    with open(file=new_spell_file_path) as new_spell_file:
+        new_spell_words = json.load(new_spell_file)
+    spell.word_frequency.load_words(new_spell_words)
+    ontology = Graph()
+    ontology.parse(ontology_location)
+    local_names_in_ontology = __get_local_names(ontology=ontology)
+    spell.word_frequency.load_words(local_names_in_ontology)
+    misspelled_words_in_triples = __get_misspellings(ontology=ontology, spell=spell, resource_filter=resource_filter)
     misspelled_words_in_triples = list(misspelled_words_in_triples)
     misspelled_words_in_triples.sort()
     for word_in_triple in misspelled_words_in_triples:
@@ -78,21 +84,19 @@ def check_spelling_in_ontology(new_spell_file_path: str, ontology_location: str,
         print('Possible spelling errors found - for the details consult spellcheck_log.log file')
         sys.exit(1)
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run spelling check')
     parser.add_argument('--spell', help='Path to file with new spells', metavar='SPELL')
     parser.add_argument('--ontology', help='Path to ontology file', metavar='ONTOLOGY')
     parser.add_argument('--filter', help='IRI filter', metavar='FILTER')
     args = parser.parse_args()
-
+    
     logging.basicConfig(
         format='%(message)s',
         filename='spellcheck_log.log')
-
-    check_spelling_in_ontology(new_spell_file_path=args.spell, ontology_location=args.ontology, resource_filter=args.filter)
-
     
-# check_spelling_in_ontology(
-#     new_spell_file_path='spell.json',
-#     ontology_location='https://spec.pistoiaalliance.org/idmp/ontology/master/latest/QuickIDMPDev.ttl',
-#     resource_filter='spec.pistoiaalliance.org')
+    check_spelling_in_ontology(
+        new_spell_file_path=args.spell,
+        ontology_location=args.ontology,
+        resource_filter=args.filter)
