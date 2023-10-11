@@ -3133,7 +3133,7 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:label>protein substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single substance with a defined sequence of alpha-amino acids connected through peptide bonds</skos:definition>
-		<skos:note>A protein consists of a defined sequence of alpha-amino acids connected through peptide bonds folded into 3-dimensional structures and consists of one or more chains where each chain is a separate sub-unit. A protein consists of one or more chains with a length of more than 40 amino acids. A peptide is defined as a linear sequence consisting of 2 to 40 amino acid residues.</skos:note>
+		<skos:note>A protein consists of one or more chains with a length of more than 40 amino acids. A peptide is defined as a linear sequence consisting of 2 to 40 amino acid residues.</skos:note>
 		<skos:note>Mixtures of proteins, such as immunoglobulins, that have a large number of individual proteins with diverse sequences will be described as structurally diverse substances.</skos:note>
 		<skos:note>Synthetic peptides and proteins with defined sequences, recombinant proteins and highly purified proteins extracted from biological matrices are described as protein substances. Sites of glycosylation, disulphide linkages and glycosylation type (e.g. fungal, plant, anthropoid, avian mammalian, human) are defining elements of protein substances, when known. A graphical molecular structure is also included in the definition of all peptides of 40 amino acid residues or less.</skos:note>
 		<skos:note>The absolute configuration at the a-carbon atom of the a-amino acids is designated by the prefixed small capital letter D or L to indicate a formal relationship to D- or L-serine and thus to D- or L-glyceraldehyde.</skos:note>
@@ -3161,6 +3161,13 @@ For the description of nucleic acids, the following information can be used to a
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasSubunitIndex"/>
 				<owl:onDataRange rdf:resource="&xsd;integer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasProteinSequence"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -6613,6 +6620,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.11</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasProteinSequence">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has protein sequence</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies the order and identity of amino acids within a protein or peptide</skos:definition>
+		<skos:note>Protein sequences will be represented by single letter Dayhoff codes and listed from the N-terminal to the C-terminal.</skos:note>
+		<skos:note>The sequence information shall be provided enumerating the amino acids from N- to C-terminal end using standard single-letter amino acid codes. Uppercase shall be used for L-amino acids and lowercase for D-amino acids. Transcribed proteins will always be described using the translated sequence; for synthetic peptide containing amino acids that are not represented with a single letter code an X should be used within the sequence. The modified amino acids will be distinguished by their position in the sequence.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.67 and 7.4</cmns-av:directSource>
+		<cmns-av:synonym>protein sequence</cmns-av:synonym>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasReferenceInformation">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
