@@ -29,6 +29,7 @@ def __get_local_names(ontology: Graph) -> set:
 
 
 def __check_word(
+        annotation_value: str,
         word: str,
         misspelled_words_in_triples: set,
         misspelled_words: set,
@@ -49,7 +50,7 @@ def __check_word(
     
     if word not in spellchecker and word[:-1] not in spellchecker and not word.lower() in spellchecker:
         if len(word) > 2:
-            triple = '|'.join([triple_subject, triple_predicate, object])
+            triple = '|'.join([triple_subject, triple_predicate, annotation_value])
             misspelled_words_in_triples.add('|'.join([word, triple]))
             if word not in misspelled_words:
                 print(word, 'is possibly misspelled.')
@@ -78,7 +79,8 @@ def __get_misspellings(ontology: Graph, resource_filter: str, spellchecker: Spel
                             misspelled_words=misspelled_words,
                             spellchecker=spellchecker,
                             triple_subject=triple_subject,
-                            triple_predicate=triple_predicate)
+                            triple_predicate=triple_predicate,
+                            annotation_value=triple_object)
     return misspelled_words_in_triples
 
 
@@ -86,7 +88,7 @@ def check_spelling_in_ontology(new_spell_file_path: str, ontology_location: str,
     spell = SpellChecker()
     with open(file=new_spell_file_path) as new_spell_file:
         new_spell_words = json.load(new_spell_file)
-        spell.word_frequency.load_words(new_spell_words)
+    spell.word_frequency.load_words(new_spell_words)
     ontology = Graph()
     ontology.parse(ontology_location)
     local_names_in_ontology = __get_local_names(ontology=ontology)
@@ -102,7 +104,7 @@ def check_spelling_in_ontology(new_spell_file_path: str, ontology_location: str,
         logging.warning(msg=word_in_triple)
     
     if len(misspelled_words_in_triples) > 0:
-        print('Possible spelling errors found - for the details consult spellcheck_errors.log file')
+        print('Possible spelling errors found - for the details consult spellcheck_log.log file')
         sys.exit(1)
 
 
@@ -112,11 +114,11 @@ if __name__ == "__main__":
     parser.add_argument('--ontology', help='Path to ontology file', metavar='ONTOLOGY')
     parser.add_argument('--filter', help='IRI filter', metavar='FILTER')
     args = parser.parse_args()
-    
+
     logging.basicConfig(
         format='%(message)s',
-        filename='spellcheck_errors.log')
-    
+        filename='spellcheck_log.log')
+
     check_spelling_in_ontology(
         new_spell_file_path=args.spell,
         ontology_location=args.ontology,
