@@ -3095,6 +3095,32 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;ProteinSequenceType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;ProteinSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;ProteinSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>protein sequence type</rdfs:label>
+		<skos:definition>classifier that indicates the nature of the protein sequence</skos:definition>
+		<skos:example>complete, partial</skos:example>
+		<skos:note>The protein descriptive elements will only be used when a complete or partial amino acid sequence is available or derivable from a nucleic acid sequence.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonodisperseSubstance"/>
 		<rdfs:subClassOf>
@@ -3115,6 +3141,20 @@ For the description of nucleic acids, the following information can be used to a
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDisulfideLinkage"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ProteinSequenceType"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -5986,6 +6026,21 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		</owl:propertyChainAxiom>
 		<skos:definition>indicates any arrangement and/or organization of interrelated elements in a specification for a substance</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasDisulfideLinkage">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has disulfide linkage</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies a disulfide bond between two cysteine residues either on the same subunit or on two different subunits</skos:definition>
+		<skos:example>&apos;Subunit 1 position 10 — Subunit 2 position 16&apos; refers to a disulfide linkage between the residue of cysteine in the position 10 and 16 respectively of the first and second subunit. A convenient shorthand such as 1_10-2_16 could also be used.</skos:example>
+		<skos:note>Disulfide linkages imply that two cysteines connect forming a sulfur to sulfur linkage. There are also instances where disulfide linkages can be formed through other modified or substituted acids or amino acids containing a thiol.</skos:note>
+		<skos:note>The position of the disulfide bonds in the protein shall be listed in increasing order of subunit number and position within subunit followed by the abbreviation of the amino acids involved. The disulfide linkage positions shall actually contain the amino acid Cysteine at the respective positions.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>The values have to be separated with semi-colons as defined in the examples.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:directSource>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasFivePrimeSubstanceIdentifier">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceIdentifier"/>
