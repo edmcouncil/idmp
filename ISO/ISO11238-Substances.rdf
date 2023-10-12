@@ -2840,6 +2840,13 @@ For the description of nucleic acids, the following information can be used to a
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfParameters"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasParameter"/>
 				<owl:onClass rdf:resource="&idmp-sub;Parameter"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2848,8 +2855,8 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasPhysicalModificationRole"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>physical modification method</rdfs:label>
@@ -3183,6 +3190,20 @@ For the description of nucleic acids, the following information can be used to a
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubunit">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCTerminalModification"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationMethod"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNTerminalModification"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationMethod"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasCTerminalModificationName"/>
@@ -5928,6 +5949,25 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>describes the nature of the rules to be applied for a given class or element in cases where that element is conditionally required for conformance per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasCTerminalModification">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasModification"/>
+		<rdfs:label>has C-terminal modification</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a protein subunit to the modification made at the c-terminal of the protein</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasCTerminalModificationIdentifier">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceIdentifier"/>
 		<rdfs:label>has C-terminal modification identifier</rdfs:label>
@@ -6551,6 +6591,25 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasNTerminalModification">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasModification"/>
+		<rdfs:label>has N-terminal modification</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a protein subunit to the modification made at the n-terminal of the protein</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasNTerminalModificationIdentifier">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceIdentifier"/>
 		<rdfs:label>has N-terminal modification identifier</rdfs:label>
@@ -6647,6 +6706,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasBusinessRules>The numeric value shall be always greater than or equal to 2; The value is automatically calculated (Implicit) based on the number of Moieties; if the numeric value is equal to 1, the class Moiety shall not be used.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfParameters">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has number of parameters</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;integer"/>
+		<skos:definition>indicates the number of arguments a given function takes or that are relevant conditions of some physical state of affairs</skos:definition>
+		<skos:example>For thermal denaturation two parameters, temperature and time, are typically captured.</skos:example>
+		<idmp-sub:hasBusinessRules>This number can be counted and is never explicitly represented. This value is calculated implicitly.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10 and Figure 20</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3 and Figure 15</cmns-av:directSource>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfSubunits">
