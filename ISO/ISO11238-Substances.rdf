@@ -763,6 +763,44 @@
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.3 and Figure 8</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Glycosylation">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;GlycosylationType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>glycosylation</rdfs:label>
+		<skos:definition>description of the type and sites of post-translational modification involving the addition of glycosyl radicals to a protein or structurally diverse substance</skos:definition>
+		<skos:example>Examples of glycosylation types include fungal, plant, anthropoid, avian, mammalian and human.</skos:example>
+		<skos:note>Glycosylation is both variable and heterogeneous. Glycosylation sites typically have multiple glycans attached to them and even differ on the extent of glycosylation on a given site. For Glycosylated proteins, the type and sites of glycosylation should be provided. Glycosylation is applicable to both proteins and structurally diverse substances. Although sites of N-glycosylation can generally be predicted from the amino acid sequence, sites of O-glycosylation and C-glycosylation are usually determined experimentally and may not be completely known at the time of submission and can be added to a substance record when known. Generally, all sites that have occupancy greater than 5% should be submitted to define the glycoprotein. Although analytical techniques are evolving to better characterize the glycans attached to proteins this data will not be required to define a substance but could be captured at the Specified Substance Group 1 level. There can be substantial differences in glycosylation that are often dependent on the particular clone of a cell line that is used to produce a protein or even vary on a batch to batch basis.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 20 and 23</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.8 and 7.5.6</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;GlycosylationType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Glycosylation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>glycosylation type</rdfs:label>
+		<skos:definition>classifier for the glycan, specified based on a controlled vocabulary</skos:definition>
+		<skos:example>human, old world monkey, mammalian, avian, reptilian, fungal, bacterial, plant, insect, mammalian afucosylated, yeast humanized</skos:example>
+		<skos:note>The different glycosylation types are determined by the cell that either the protein or Specified Substance was synthesized in. The different types are based on consistent differences in the glycosylation. Human glycosylation differs from mammalian glycosylation in several ways. Human glycans do not contain glycolic acid residues on terminal sialic acid and they do not contain terminal .alpha.1-&gt; 3-galactose. Old world monkeys also lack the ability to form .alpha. 1-&gt; 3-galactose, but do have glycolic acid esters on terminal sialic acid residues. Other glycosylation types typically have substantial differences in both glycans used and the extent of site occupancy. Glycosylation type may also be captured for structurally diverse substances, particularly vaccines which may be produced in either human, mammalian or old-world monkey cells. The glycosylation type will often have substantial effects on the immunogenicity of the protein or vaccine.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 20 and 23</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.8 and 7.5.6</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>hydrate</rdfs:label>
@@ -3146,6 +3184,13 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Glycosylation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -4628,39 +4673,13 @@ For the description of nucleic acids, the following information can be used to a
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseGlycosylation">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;StructurallyDiverseGlycosylationType"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Glycosylation"/>
 		<rdfs:label>structurally diverse glycosylation</rdfs:label>
 		<skos:definition>description of not-specific sites of glycosylation in structurally diverse material</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5.6</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 23</cmns-av:directSource>
 		<cmns-av:synonym>SD glycosylation</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseGlycosylationType">
-		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;StructurallyDiverseGlycosylation"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>structurally diverse glycosylation type</rdfs:label>
-		<skos:definition>classifier for the glycan, specified based on a controlled vocabulary</skos:definition>
-		<skos:example>human, old world monkey, mammalian, avian, reptilian, fungal, bacterial, plant, insect, mammalian afucosylated, yeast humanized</skos:example>
-		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5.6</cmns-av:adaptedFrom>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 23</cmns-av:directSource>
-		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseSubstance">
