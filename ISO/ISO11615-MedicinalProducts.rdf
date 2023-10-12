@@ -252,7 +252,7 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductSpecification"/>
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;WithPhysicalCharacteristics"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ThingWithPhysicalCharacteristics"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-uom;hasUnitOfPresentation"/>
@@ -1813,7 +1813,7 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicalDevice">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialSpecification"/>
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;WithPhysicalCharacteristics"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ThingWithPhysicalCharacteristics"/>
 		<rdfs:label>medical device</rdfs:label>
 		<skos:definition>specification of an instrument, apparatus, contrivance, implant, in vitro reagent or similar article intended for use in the diagnosis of a disease or other conditions, or in the cure, mitigation, treatment, or prevention fo disease</skos:definition>
 		<skos:note>Devices may be of several types such as separate administration devices, an integral administration device or a part of a Medicinal Product. Where a Medicinal Product is combined with a medical device and where the pharmacological, immunological or metabolic action should be considered as the principal mode of action, the medical device is presented as part of the pharmaceutical product.</skos:note>
@@ -2199,7 +2199,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	
 	<owl:Class rdf:about="&idmp-mprd;PackageComponent">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialComponentSpecification"/>
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;WithPhysicalCharacteristics"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ThingWithPhysicalCharacteristics"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasManufacturer"/>
@@ -2259,7 +2259,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	<owl:Class rdf:about="&idmp-mprd;PackageItem">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialSpecification"/>
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;WithPhysicalCharacteristics"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ThingWithPhysicalCharacteristics"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;contains"/>
@@ -3130,6 +3130,97 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:synonym>therapy</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;ThingWithPhysicalCharacteristics">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasColor"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ColorCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasDepth"/>
+				<owl:onClass rdf:resource="&idmp-mprd;DepthCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasExternalDiameter"/>
+				<owl:onClass rdf:resource="&idmp-mprd;DiameterCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasHeight"/>
+				<owl:onClass rdf:resource="&idmp-mprd;HeightCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasImage"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Image"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasImprint"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Imprint"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasScoring"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Scoring"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasShape"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Shape"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasNominalVolume"/>
+				<owl:onClass rdf:resource="&idmp-mprd;VolumeCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasWeight"/>
+				<owl:onClass rdf:resource="&idmp-mprd;WeightCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasWidth"/>
+				<owl:onClass rdf:resource="&idmp-mprd;WidthCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>thing with physical characteristics</rdfs:label>
+		<skos:definition>something with a set of physical characteristics as specified in ISO 11615:2017</skos:definition>
+		<skos:note>Some image and scoring are not physical characteristics in the strict semantic sense.</skos:note>
+		<cmns-av:adoptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.6.2.20</cmns-av:adoptedFrom>
+		<cmns-av:usageNote>This class is intended to be used internally to the ontology only.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;UndesirableEffect">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
@@ -3284,97 +3375,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.3</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_000001595</cmns-av:adaptedFrom>
 		<cmns-av:synonym>width</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-mprd;WithPhysicalCharacteristics">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasColor"/>
-				<owl:onClass rdf:resource="&idmp-mprd;ColorCharacteristic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasDepth"/>
-				<owl:onClass rdf:resource="&idmp-mprd;DepthCharacteristic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasExternalDiameter"/>
-				<owl:onClass rdf:resource="&idmp-mprd;DiameterCharacteristic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasHeight"/>
-				<owl:onClass rdf:resource="&idmp-mprd;HeightCharacteristic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasImage"/>
-				<owl:onClass rdf:resource="&idmp-mprd;Image"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasImprint"/>
-				<owl:onClass rdf:resource="&idmp-mprd;Imprint"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasScoring"/>
-				<owl:onClass rdf:resource="&idmp-mprd;Scoring"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasShape"/>
-				<owl:onClass rdf:resource="&idmp-mprd;Shape"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasNominalVolume"/>
-				<owl:onClass rdf:resource="&idmp-mprd;VolumeCharacteristic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasWeight"/>
-				<owl:onClass rdf:resource="&idmp-mprd;WeightCharacteristic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasWidth"/>
-				<owl:onClass rdf:resource="&idmp-mprd;WidthCharacteristic"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>with physical characteristics</rdfs:label>
-		<skos:definition>something with a set of physical characteristics as specified in ISO 11615:2017</skos:definition>
-		<skos:note>Some image and scoring are not physical characteristics in the strict semantic sense.</skos:note>
-		<cmns-av:adoptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.6.2.20</cmns-av:adoptedFrom>
-		<cmns-av:usageNote>This class is intended to be used internally to the ontology only.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;administers">
