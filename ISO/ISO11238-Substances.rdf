@@ -96,7 +96,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11238-Substances/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
@@ -105,6 +105,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11238-Substances.rdf version of this ontology was modified to rename hasSimplifiedMolecularInputLineEntrySpecification to hasSMILES and to incorporate the ability to define controlled vocabularies that may or may not be jurisdiction-specific (IDMP-533).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances.rdf version of this ontology was modified to add structural representations including molfile.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances.rdf version of this ontology was modified to reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to incorporate additional content for structurally diverse substances (IDMP-635), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, and (2) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to augment the definition of nucleic acid substance to complete the requirements specified in clause 7.5 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-592).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of protein substance to complete the requirements specified in clause 7.4 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-594).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -760,6 +761,65 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.3 and Figure 8</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Glycosylation">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;GlycosylationType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCGlycosylationSite"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNGlycosylationSite"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasOGlycosylationSite"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>glycosylation</rdfs:label>
+		<skos:definition>description of the type and sites of post-translational modification involving the addition of glycosyl radicals to a protein or structurally diverse substance</skos:definition>
+		<skos:example>Examples of glycosylation types include fungal, plant, anthropoid, avian, mammalian and human.</skos:example>
+		<skos:note>Glycosylation is both variable and heterogeneous. Glycosylation sites typically have multiple glycans attached to them and even differ on the extent of glycosylation on a given site. For Glycosylated proteins, the type and sites of glycosylation should be provided. Glycosylation is applicable to both proteins and structurally diverse substances. Although sites of N-glycosylation can generally be predicted from the amino acid sequence, sites of O-glycosylation and C-glycosylation are usually determined experimentally and may not be completely known at the time of submission and can be added to a substance record when known. Generally, all sites that have occupancy greater than 5% should be submitted to define the glycoprotein. Although analytical techniques are evolving to better characterize the glycans attached to proteins this data will not be required to define a substance but could be captured at the Specified Substance Group 1 level. There can be substantial differences in glycosylation that are often dependent on the particular clone of a cell line that is used to produce a protein or even vary on a batch to batch basis.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 20 and 23</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.8 and 7.5.6</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;GlycosylationType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Glycosylation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>glycosylation type</rdfs:label>
+		<skos:definition>classifier for the glycan, specified based on a controlled vocabulary</skos:definition>
+		<skos:example>human, old world monkey, mammalian, avian, reptilian, fungal, bacterial, plant, insect, mammalian afucosylated, yeast humanized</skos:example>
+		<skos:note>The different glycosylation types are determined by the cell that either the protein or Specified Substance was synthesized in. The different types are based on consistent differences in the glycosylation. Human glycosylation differs from mammalian glycosylation in several ways. Human glycans do not contain glycolic acid residues on terminal sialic acid and they do not contain terminal .alpha.1-&gt; 3-galactose. Old world monkeys also lack the ability to form .alpha. 1-&gt; 3-galactose, but do have glycolic acid esters on terminal sialic acid residues. Other glycosylation types typically have substantial differences in both glycans used and the extent of site occupancy. Glycosylation type may also be captured for structurally diverse substances, particularly vaccines which may be produced in either human, mammalian or old-world monkey cells. The glycosylation type will often have substantial effects on the immunogenicity of the protein or vaccine.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 20 and 23</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.8 and 7.5.6</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
@@ -2940,6 +3000,13 @@ For the description of nucleic acids, the following information can be used to a
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfParameters"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasParameter"/>
 				<owl:onClass rdf:resource="&idmp-sub;Parameter"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2948,8 +3015,8 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasPhysicalModificationRole"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>physical modification method</rdfs:label>
@@ -3195,6 +3262,32 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;ProteinSequenceType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;ProteinSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;ProteinSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>protein sequence type</rdfs:label>
+		<skos:definition>classifier that indicates the nature of the protein sequence</skos:definition>
+		<skos:example>complete, partial</skos:example>
+		<skos:note>The protein descriptive elements will only be used when a complete or partial amino acid sequence is available or derivable from a nucleic acid sequence.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonodisperseSubstance"/>
 		<rdfs:subClassOf>
@@ -3203,14 +3296,160 @@ For the description of nucleic acids, the following information can be used to a
 				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-Protein"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasComment"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Glycosylation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDisulfideLinkage"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ProteinSequenceType"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfSubunits"/>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinSubunit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>protein substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single substance with a defined sequence of alpha-amino acids connected through peptide bonds</skos:definition>
 		<skos:note>A protein consists of one or more chains with a length of more than 40 amino acids. A peptide is defined as a linear sequence consisting of 2 to 40 amino acid residues.</skos:note>
+		<skos:note>Mixtures of proteins, such as immunoglobulins, that have a large number of individual proteins with diverse sequences will be described as structurally diverse substances.</skos:note>
 		<skos:note>Synthetic peptides and proteins with defined sequences, recombinant proteins and highly purified proteins extracted from biological matrices are described as protein substances. Sites of glycosylation, disulphide linkages and glycosylation type (e.g. fungal, plant, anthropoid, avian mammalian, human) are defining elements of protein substances, when known. A graphical molecular structure is also included in the definition of all peptides of 40 amino acid residues or less.</skos:note>
 		<skos:note>The absolute configuration at the a-carbon atom of the a-amino acids is designated by the prefixed small capital letter D or L to indicate a formal relationship to D- or L-serine and thus to D- or L-glyceraldehyde.</skos:note>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.68</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ProteinSubunit">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCTerminalModification"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationMethod"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNTerminalModification"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationMethod"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCTerminalModificationName"/>
+				<owl:onClass rdf:resource="&idmp-sub;SubstanceName"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNTerminalModificationName"/>
+				<owl:onClass rdf:resource="&idmp-sub;SubstanceName"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSequenceAttachment"/>
+				<owl:onClass rdf:resource="&cmns-doc;Reference"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCTerminalModificationIdentifier"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNTerminalModificationIdentifier"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSequenceLength"/>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubunitIndex"/>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasProteinSequence"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>protein subunit</rdfs:label>
+		<skos:definition>linear sequence of amino acids linked through peptide bonds</skos:definition>
+		<skos:note>The Protein Subunit information shall be provided when the finished protein is a complex of multiple sequences; subunits are not used to delineate domains within a single sequence. Subunits are listed in order of decreasing length; sequences of the same length will be ordered by decreasing molecular weight; subunits that have identical sequences will be repeated multiple times.</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.68, 7.4</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;RadioactiveDecay">
@@ -4556,39 +4795,13 @@ For the description of nucleic acids, the following information can be used to a
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseGlycosylation">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;StructurallyDiverseGlycosylationType"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Glycosylation"/>
 		<rdfs:label>structurally diverse glycosylation</rdfs:label>
 		<skos:definition>description of not-specific sites of glycosylation in structurally diverse material</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5.6</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 23</cmns-av:directSource>
 		<cmns-av:synonym>SD glycosylation</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseGlycosylationType">
-		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;StructurallyDiverseGlycosylation"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>structurally diverse glycosylation type</rdfs:label>
-		<skos:definition>classifier for the glycan, specified based on a controlled vocabulary</skos:definition>
-		<skos:example>human, old world monkey, mammalian, avian, reptilian, fungal, bacterial, plant, insect, mammalian afucosylated, yeast humanized</skos:example>
-		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5.6</cmns-av:adaptedFrom>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 23</cmns-av:directSource>
-		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseSubstance">
@@ -5895,6 +6108,75 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>describes the nature of the rules to be applied for a given class or element in cases where that element is conditionally required for conformance per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasCGlycosylationSite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has c-glycosylation site</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies a site of c-glycosylation (tryptophan)</skos:definition>
+		<skos:example>Position 45 of this Subunit, a Tryptophan</skos:example>
+		<skos:note>The consensus sequence for C-glycosylation is WxxW/F where the first tryptophan undergoes C-mannosylation.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 20</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasCTerminalModification">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasModification"/>
+		<rdfs:label>has C-terminal modification</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a protein subunit to the modification made at the c-terminal of the protein</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasCTerminalModificationIdentifier">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceIdentifier"/>
+		<rdfs:label>has C-terminal modification identifier</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a protein subunit to an identifier for the molecular fragment modified at the c-terminal of the protein based on the ISO 11238 Substance ID</skos:definition>
+		<skos:example>UNII code, K3Z4F99H6 (UNII), Lysine (K)</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>If a C-terminal modification exists, this element becomes mandatory. The preferred name as specified in ISO 11238 is the default value. The value is implicit and derived based on the C_Terminal Modification ID.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:directSource>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasCTerminalModificationName">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceName"/>
+		<rdfs:label>has C-terminal modification name</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;SubstanceName"/>
+		<skos:definition>relates a protein subunit to the name of the molecular fragment modified at the c-terminal of the protein</skos:definition>
+		<skos:example>Glycinamid, Lysine</skos:example>
+		<idmp-sub:hasBusinessRules>If a C-terminal modification exists, this element becomes mandatory. The preferred name as specified in ISO 11238 is the default value. The value is implicit and derived based on the C_Terminal Modification ID.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>ISO 11238 substance names</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:directSource>
+		<cmns-av:synonym>has C-terminal modification</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasCodeChangeDate">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDateValue"/>
 		<rdfs:label>has code change date</rdfs:label>
@@ -6039,6 +6321,21 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		</owl:propertyChainAxiom>
 		<skos:definition>indicates any arrangement and/or organization of interrelated elements in a specification for a substance</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasDisulfideLinkage">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has disulfide linkage</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies a disulfide bond between two cysteine residues either on the same subunit or on two different subunits</skos:definition>
+		<skos:example>&apos;Subunit 1 position 10 — Subunit 2 position 16&apos; refers to a disulfide linkage between the residue of cysteine in the position 10 and 16 respectively of the first and second subunit. A convenient shorthand such as 1_10-2_16 could also be used.</skos:example>
+		<skos:note>Disulfide linkages imply that two cysteines connect forming a sulfur to sulfur linkage. There are also instances where disulfide linkages can be formed through other modified or substituted acids or amino acids containing a thiol.</skos:note>
+		<skos:note>The position of the disulfide bonds in the protein shall be listed in increasing order of subunit number and position within subunit followed by the abbreviation of the amino acids involved. The disulfide linkage positions shall actually contain the amino acid Cysteine at the respective positions.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>The values have to be separated with semi-colons as defined in the examples.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:directSource>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasFivePrimeSubstanceIdentifier">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceIdentifier"/>
@@ -6492,6 +6789,76 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNGlycosylationSite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has n-glycosylation site</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies a site of n-glycosylation, typically predicted from the amino acid sequence</skos:definition>
+		<skos:example>Position 34 of this Subunit, an Asparagine; for a single subunit protein 1_34</skos:example>
+		<skos:note>The sequence NX(S/T) which indicates an asparagine followed any amino acid other than proline and then followed by either a serine or threonine will typically be a site of N-glycosylation; N-glycosylation is to be listed according to the protein sequence.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>The position of that subunit shall actually contain an amino acid that can have N-linked glycosylation.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 20</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasNTerminalModification">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasModification"/>
+		<rdfs:label>has N-terminal modification</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Modification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ModificationMethod">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a protein subunit to the modification made at the n-terminal of the protein</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasNTerminalModificationIdentifier">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceIdentifier"/>
+		<rdfs:label>has N-terminal modification identifier</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a protein subunit to an identifier for the molecular fragment modified at the n-terminal of the protein based on the ISO 11238 Substance ID</skos:definition>
+		<skos:example>UNII code; SZB8301W42 (UNII)</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>If an N-terminal modification exists, this element becomes mandatory. The preferred name as specified in ISO 11238 is the default value. The value is implicit and derived based on the N_Terminal Modification ID.</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:directSource>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasNTerminalModificationName">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceName"/>
+		<rdfs:label>has N-terminal modification name</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;SubstanceName"/>
+		<skos:definition>relates a protein subunit to the name of the molecular fragment modified at the n-terminal of the protein</skos:definition>
+		<skos:example>Pyroglutamic acid (pE), 3-Mercaptopropionic acid</skos:example>
+		<idmp-sub:hasBusinessRules>If an N-terminal modification exists, this element becomes mandatory. The preferred name as specified in ISO 11238 is the default value. The value is implicit and derived based on the N_Terminal Modification ID.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>ISO 11238 substance names</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4</cmns-av:directSource>
+		<cmns-av:synonym>has N-terminal modification</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNeutronNumber">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has neutron number</rdfs:label>
@@ -6553,21 +6920,58 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
 	</owl:DatatypeProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfParameters">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has number of parameters</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;integer"/>
+		<skos:definition>indicates the number of arguments a given function takes or that are relevant conditions of some physical state of affairs</skos:definition>
+		<skos:example>For thermal denaturation two parameters, temperature and time, are typically captured.</skos:example>
+		<idmp-sub:hasBusinessRules>This number can be counted and is never explicitly represented. This value is calculated implicitly.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10 and Figure 20</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3 and Figure 15</cmns-av:directSource>
+	</owl:DatatypeProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfSubunits">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has number of subunits</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;NucleicAcidSubstance"/>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;NucleicAcidSubstance">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ProteinSubstance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
 		<rdfs:range rdf:resource="&xsd;integer"/>
-		<skos:definition>indicates the number of linear sequences of nucleotides linked through phosphodiester bonds</skos:definition>
+		<skos:definition>indicates the number of linear sequences of nucleotides linked through phosphodiester bonds or amino acids linked through peptide bonds</skos:definition>
 		<skos:example>1, 2, or 3</skos:example>
-		<skos:note>If not specified in the reference source, the assumption is that there is 1 subunit.</skos:note>
-		<skos:note>Subunits would be strands of nucleic acids that are tightly associated typically through Watson-Crick base pairing.</skos:note>
-		<idmp-sub:hasBusinessRules>This number is implicit and derived from number of nucleic acid subunits.</idmp-sub:hasBusinessRules>
+		<skos:note>For nucleic acids, if not specified in the reference source, the assumption is that there is 1 subunit. Subunits would be strands of nucleic acids that are tightly associated typically through Watson-Crick base pairing.</skos:note>
+		<skos:note>For proteins, although many proteins form multimeric complexes, particularly at high concentrations, subunits are typically either connected through disulfide linkages or other covalent linkages or have strong non-covalent interactions with defined stoichiometry largely independent of concentration. It is possible that the number of subunits can be variable.</skos:note>
+		<idmp-sub:hasBusinessRules>This number is implicit and derived from number of nucleic acid or protein subunits.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2 and 7.3, and Figures 26 and 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.4 and 7.5</cmns-av:directSource>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasOGlycosylationSite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has o-glycosylation site</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies a site of o-glycosylation (serine, threonine, tyrosine, hydroxylysine, hydroxyproline)</skos:definition>
+		<skos:example>Position 34 of this Subunit, a Serine.</skos:example>
+		<skos:note>The sites of O-glycosylation cannot typically be predicted from the sequence alone and are discovered through analytical methods. Sites may become identified at later stages in clinical development. The Substance ID typically should not change as new sites are identified but the version of the substance would.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>The position of that subunit shall actually contain an amino acid with an OH group (i.e. serine or threonine or tyrosine).</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 20</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.8</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasOfficialNameStatusChangeDate">
@@ -6690,6 +7094,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.11</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasProteinSequence">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has protein sequence</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies the order and identity of amino acids within a protein or peptide</skos:definition>
+		<skos:note>Protein sequences will be represented by single letter Dayhoff codes and listed from the N-terminal to the C-terminal.</skos:note>
+		<skos:note>The sequence information shall be provided enumerating the amino acids from N- to C-terminal end using standard single-letter amino acid codes. Uppercase shall be used for L-amino acids and lowercase for D-amino acids. Transcribed proteins will always be described using the translated sequence; for synthetic peptide containing amino acids that are not represented with a single letter code an X should be used within the sequence. The modified amino acids will be distinguished by their position in the sequence.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6 and Figure 26</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.67 and 7.4</cmns-av:directSource>
+		<cmns-av:synonym>protein sequence</cmns-av:synonym>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasReferenceInformation">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
@@ -6897,22 +7315,31 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-sub:hasBusinessRules>The element Sequence is always mandatory; the element Sequence Attachment may be provided based on jurisdictional guidance. Either the sequence is provided as ST or/and as an attachment as ED.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ED"/>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2 and 7.3 and Figures 26 and 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.4 and 7.5</cmns-av:directSource>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasSequenceLength">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has sequence length</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;NucleicAcidSubunit"/>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;NucleicAcidSubunit">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ProteinSubunit">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
 		<rdfs:range rdf:resource="&xsd;integer"/>
 		<skos:definition>indicates the length of a particular linear sequence</skos:definition>
 		<skos:example>5</skos:example>
-		<idmp-sub:hasBusinessRules>The sequence length is implicitly derived by the sequence description.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasBusinessRules>The sequence length is implicitly derived by the sequence description or from the linear sequences of amino acids contained in the subunit.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2 and 7.3 and Figures 26 and 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.4 and 7.5</cmns-av:directSource>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasStereochemistry">
@@ -7109,15 +7536,24 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has subunit index</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-sub;NucleicAcidSubunit"/>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;NucleicAcidSubunit">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ProteinSubunit">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
 		<rdfs:range rdf:resource="&xsd;integer"/>
 		<skos:definition>indicates the index (ordering) of a particular linear sequence</skos:definition>
 		<skos:example>1, 2, 3 (..)</skos:example>
 		<skos:note>Sequences are ordered by decreasing length. Sequences of the same length will be ordered by molecular weight. Subunits that have identical sequences will be repeated and have sequential subscripts.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3 and Figure 27</cmns-av:adaptedFrom>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2 and 7.3 and Figures 26 and 27</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.4 and 7.5</cmns-av:directSource>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasSugarIdentifier">
