@@ -128,6 +128,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>table cell</rdfs:label>
 		<skos:definition>element in a table that are arranged in a tabular layout, and is part of a table row, a table column or both</skos:definition>
+		<skos:note>This is similar to the HTML td element.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-doco;TableColumn">
@@ -269,8 +270,28 @@
 		</rdfs:domain>
 		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
 		<skos:definition>horizontal position of a table body cell or table column header cell</skos:definition>
-		<skos:note>row indexes start with 1 and are ordered left to right</skos:note>
-		<cmns-av:synonym>has column index</cmns-av:synonym>
+		<skos:note>Column indexes start with 1 and are ordered left to right</skos:note>
+		<cmns-av:synonym>has table column index</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableColumnSpan">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has table row index</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-doco;TableBodyCell">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-doco;TableRowHeaderCell">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
+		<skos:definition>number of columns the table cell should span</skos:definition>
+		<skos:note>The column span is counted beginning with and is including the left most column.</skos:note>
+		<skos:note>This is similar to the HTML colspan attribute.</skos:note>
+		<cmns-av:synonym>has table column span</cmns-av:synonym>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableRowIndex">
@@ -290,8 +311,8 @@
 		</rdfs:domain>
 		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
 		<skos:definition>vertical position of a table body cell or table row header cell</skos:definition>
-		<skos:note>row indexes start with 1 and are ordered top to bottom</skos:note>
-		<cmns-av:synonym>has row index</cmns-av:synonym>
+		<skos:note>Row indexes start with 1 and are ordered top to bottom</skos:note>
+		<cmns-av:synonym>has table row index</cmns-av:synonym>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasText">
