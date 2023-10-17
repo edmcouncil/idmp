@@ -8,10 +8,10 @@ PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
 PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
-PREFIX spor-st: <https://spor.ema.europa.eu/rmswi/#/lists/100000075826/terms/>
+PREFIX spor-st: <https://spor.ema.europa.eu/v1/lists/100000075826/terms/>
 
 GENERATE {
-  <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }>
+  <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }>
     a ?idmpSubstanceType, ?sporRMSSubstanceType ;
     skos:prefLabel ?prefLabel ;
     skos:altLabel ?altLabel ;
@@ -31,7 +31,7 @@ GENERATE {
 
   <https://data.pistoiaalliance.org/id/EVMPD/{ ?External_Code_XEVMPD }>
     a idmp-eura:EudraVigilanceCode ;
-    cmns-id:identifies <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }> ;
+    cmns-id:identifies <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }> ;
     cmns-txt:hasTextValue ?External_Code_XEVMPD ;
     .
 }
@@ -128,13 +128,13 @@ WHERE {
     AS ?sporRMSSubstanceType )
 
   BIND(
-    IF(?Substance_Domain = "Human use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000012>,
-    IF(?Substance_Domain = "Veterinary use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000013>,
-    IF(?Substance_Domain = "Human and Veterinary use", <https://spor.ema.europa.eu/rmswi/#/lists/100000000004/terms/100000000014>,
+    IF(?Substance_Domain = "Human use", <https://spor.ema.europa.eu/v1/lists/100000000004/terms/100000000012>,
+    IF(?Substance_Domain = "Veterinary use", <https://spor.ema.europa.eu/v1/lists/100000000004/terms/100000000013>,
+    IF(?Substance_Domain = "Human and Veterinary use", <https://spor.ema.europa.eu/v1/lists/100000000004/terms/100000000014>,
     ?unbound )))
     AS ?idmpSubstanceDomain )
 
-  BIND( IF(?Name_Source = "", ?unbound, <https://spor.ema.europa.eu/smswi/#/substances/{ ?SMS_ID }/{ StrUUID() }>) AS ?nameURI )
+  BIND( IF(?Name_Source = "", ?unbound, <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }/{ StrUUID() }>) AS ?nameURI )
   BIND(
     IF(?Name_Source = "ADISINSIGHT", idmp-ra:ADISINSIGHT,
     IF(?Name_Source = "BAN", idmp-ra:BAN,
