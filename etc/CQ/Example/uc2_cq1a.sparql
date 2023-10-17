@@ -1,7 +1,7 @@
 #UC2-CQ 1a: In which products (as active, excipient, packaging) is substance <$TargetSubstance> found?
 
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
-PREFIX cmns-cmp:    <https://www.omg.org/spec/Commons/Composites/>
+PREFIX cmns-rlcmp:    <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -11,12 +11,12 @@ SELECT DISTINCT ?Product (SAMPLE(?ProductLabel) AS ?ProductName)
 
 WHERE {
     # Bind Variable substance <$TargetSubstance>
-	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
+	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
     BIND( uc2_cq1a_parameter_1 AS $TargetSubstance )
 
     [] cmns-dsg:defines ?Product ;
     $Role [
-        cmns-cmp:isPlayedBy $TargetSubstance
+        cmns-rlcmp:isPlayedBy $TargetSubstance
     ] .
   
       # Make sure that we only return actual substances

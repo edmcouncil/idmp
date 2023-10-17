@@ -11,6 +11,9 @@ on:
       gsrs_version:
         description: "GSRS dataset version"
         required: false
+      gsrs_cache_rebuild:
+        description: "Whether to rebuild cache"
+        required: false
 
 permissions:
   contents: read
@@ -69,14 +72,14 @@ jobs:
             gsrs-transformed.ttl
           key: gsrs-public-data-${{ env.GSRS_VERSION }}|transformation-files-${{ hashFiles('etc/transformation/GSRS/*.rqg') }}
       - name: Download and Extract GSRS Version ${{ env.GSRS_VERSION }}
-        if: steps.gsrs-caches.outputs.cache-hit != 'true'
+        if: steps.gsrs-caches.outputs.cache-hit != 'true' || inputs.gsrs_cache_rebuild == 'true'
         run: |
           url=https://gsrs.ncats.nih.gov/downloads/dump-public-${{ env.GSRS_VERSION }}.gsrs
           sudo wget --no-verbose -m -nH -nd -O public_data.gz $url
           gunzip public_data.gz
           jq -c -s '.' public_data > public_data.json
       - name: Transform GSRS
-        if: steps.gsrs-caches.outputs.cache-hit != 'true'
+        if: steps.gsrs-caches.outputs.cache-hit != 'true' || inputs.gsrs_cache_rebuild == 'true'
         run: |
           queries=(gsrs-public-data-identifiers gsrs-public-data-names gsrs-public-data-relationships gsrs-public-data-substances)
           for query in "${queries[@]}"; do
@@ -90,10 +93,7 @@ jobs:
           done
       - name: Combine GSRS with IDMP
         run: |
-          sudo wget --no-verbose -m -nH -nd https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-active-moiety.ttl
-          sudo wget --no-verbose -m -nH -nd https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-dct-identifier.ttl
-          sudo wget --no-verbose -m -nH -nd https://idmp-datasets.s3.eu-central-1.amazonaws.com/GSRS/gsrs-skos-altLabel.ttl
-          source_files=(gsrs-transformed.ttl AboutIDMPDev-ReferenceIndividuals.ttl gsrs-active-moiety.ttl gsrs-dct-identifier.ttl gsrs-skos-altLabel.ttl)
+          source_files=(gsrs-transformed.ttl AboutIDMPDev-ReferenceIndividuals.ttl)
           output_file=gsrs-final.ttl
           # Loop through the source files and append their contents to the output file
           for file in "${source_files[@]}"; do

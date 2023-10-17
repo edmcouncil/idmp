@@ -1,7 +1,7 @@
 #UC2 CQ 1.2 	In which production/manufacturing steps is substance <S> used?
 
 PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
-PREFIX cmns-cmp: <https://www.omg.org/spec/Commons/Composites/>
+PREFIX cmns-rlcmp: <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -12,22 +12,22 @@ SELECT DISTINCT ?ProcessStep (SAMPLE(?ProcessStepLabel) AS ?ProcessStepName)
 
 WHERE {
     # Bind Variable substance <$Substance>
-	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
+	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
     BIND( uc2_cq1-2_parameter_1 AS $Substance )
 
   {
     # Substance directly plays a roll of a Material 
   	$MaterialRole  
       a/rdfs:subClassOf* idmp-sub:MaterialRole ;
-      cmns-cmp:isManifestedIn ?ProcessStep ;
-      cmns-cmp:isPlayedBy $Substance .
+      cmns-rlcmp:isManifestedIn ?ProcessStep ;
+      cmns-rlcmp:isPlayedBy $Substance .
       
   } UNION  {
     # Substance comprises something that is used as a material
     $MaterialRole  
       a/rdfs:subClassOf* idmp-sub:MaterialRole ;
-      cmns-cmp:isManifestedIn ?ProcessStep ;
-      cmns-cmp:isPlayedBy [ cmns-col:comprises $Substance ]
+      cmns-rlcmp:isManifestedIn ?ProcessStep ;
+      cmns-rlcmp:isPlayedBy [ cmns-col:comprises $Substance ]
   }
   
     # Make sure that we only return actual process steps

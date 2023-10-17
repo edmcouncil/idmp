@@ -70,7 +70,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO21090-HarmonizedDatatypes/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/2023001/ISO21090-HarmonizedDatatypes/"/>
 		<owl:versionInfo>The IDMP MVP version of this ontology is incomplete, and covers only the parts of the ISO 21090 standard required to support the MVP use cases.</owl:versionInfo>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO21090-HarmonizedDatatypes.rdf version of this ontology was modified to incorporate the Multiple Vocabulary Facility (MVF) for consistent representation of controlled vocabularies and code systems, and to align representations of URI-related properties (IDMP-636).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
@@ -94,7 +94,7 @@
 		<skos:definition>managed collection of concept identifiers, usually codes, but sometimes more complex sets of rules and references</skos:definition>
 		<skos:note>They are often described as collections of uniquely identifiable concepts with associated representations, designations, associations and meanings.</skos:note>
 		<cmns-av:usageNote>ISO 21090 does not explicitly define a datatype called CD.CodeSystem (or codeSystem, or codeSystem: Uid, depending on the reference), which is referenced in some of the IDMP standards. The relationship &apos;is member of&apos; some code system, which is a property of every code element, corresponds to CD.CodeSystem, however, and, the UID/OID for the relevant system can be retrieved via SPARQL.</cmns-av:usageNote>
-		<cmns-av:usageNote>The restriction, isIdentifiedBy exactly 1 Identifier corresponds to the &apos;codeSystem : Uid&apos; attribute given in ISO 21090. ISO 21090 requires the code system name to be associated with every code; in this ontology, the name is associated with the code system and a code is a member of that system, thus one can retrieve the code system name via SPARQL. The &apos;codeSystemVersion : String&apos; corresponds with the hasVersion property, and again can be retrieved for any code using SPARQL to query through to the definition of the code system of which it is a member. Both the name and version are inherited from CodeSet.</cmns-av:usageNote>
+		<cmns-av:usageNote>The restriction, isIdentifiedBy exactly 1 Identifier corresponds to the &apos;codeSystem : Uid&apos; attribute given in ISO 21090. ISO 21090 requires the code system name to be associated with every code; in this ontology, the name is associated with the code system and a code is a member of that system, thus one can retrieve the code system name via SPARQL. The &apos;codeSystem : String&apos; corresponds with the hasVersion property, and again can be retrieved for any code using SPARQL to query through to the definition of the code system of which it is a member. Both the name and version are inherited from CodeSet.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-dtp;CodeSystemName">
@@ -202,7 +202,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.5.2.4.10</dct:source>
 		<skos:definition>code indicating that the code descriptor is required by the specification describing the use of the coded concept</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">1</idmp-dtp:hasLevelInHierarchy>
-		<cmns-av:explanatoryNote>The exact form of the requirement is not specified here; it may be required by the specification directly, or it may arise as an indirect result of other conformance tools. More than one different requirement may exist simultaineously, so more than one code in a CD complex may be required.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>The exact form of the requirement is not specified here; it may be required by the specification directly, or it may arise as an indirect result of other conformance tools. More than one different requirement may exist simultaneously, so more than one code in a CD complex may be required.</cmns-av:explanatoryNote>
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;CodingRationaleEnumeration"/>
 		<cmns-dsg:hasDescription>Required</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>R</cmns-txt:hasTextValue>
@@ -444,7 +444,7 @@
 		<rdf:type rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:label>datatype code PQ</rdfs:label>
 		<skos:definition>code for a physical quantity</skos:definition>
-		<cmns-av:explanatoryNote>This code denotes a complex concept, i.e., a named individual of type cmns-qtu:QuantityValue that has an inherent unit of measure and numeric value.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>This code denotes a complex concept, i.e., a named individual of type cmns-qtu:ScalarQuantityValue that has an inherent unit of measure and numeric value.</cmns-av:explanatoryNote>
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;ISO21090-CodeSet"/>
 		<cmns-dsg:hasDescription>physical quantity</cmns-dsg:hasDescription>
 		<cmns-txt:hasTextValue>PQ</cmns-txt:hasTextValue>
@@ -688,7 +688,7 @@
 		<skos:definition>classifier that provides the top-level, abstract definition of a datatype, which is set of distinct values, characterized by properties of those values, and by operations on those values, according to the ISO 20190 specification</skos:definition>
 		<skos:note>Because of the way that the types are defined, a number of attributes of the datatypes have values with a type derived from HXIT (i.e., from this abstract class definition corresponding to HXIT). In these cases the HXIT attributes are constrained to null. The only case where the HXIT attributes are allowed within a datatype is on items in a collection (DSET, LIST, BAG, HIST). The use of these attributes is generally subject to further constraints in the specifications that make use of these types.</skos:note>
 		<skos:note>This concept corresponds to the HXIT datatype, which is abstract and private from a UML perspective - this datatype is not for use outside the datatypes in this International Standard.</skos:note>
-		<skos:note>Together, the root and extension identify a particular record of a real world event that may supply additional information about the value such as who made the change, when it was made, why it was made, what system originated the change. These attributes exist because sometimes this information is required, but the value is being represented in an external context that does not contain a proper relationship to the control information for the value itself. The record need not be directly or easily resolvable. Conformance statements may make additional statements about these two properties, or about how such a reference should be resolved. If a controlInformationExtension is provided, a ControlInformationRoot shall also be provided.</skos:note>
+		<skos:note>Together, the root and extension identify a particular record of a real world event that may supply additional information about the value such as who made the change, when it was made, why it was made, what system originated the change. These attributes exist because sometimes this information is required, but the value is being represented in an external context that does not contain a proper relationship to the control information for the value itself. The record need not be directly or easily resolvable. Conformance statements may make additional statements about these two properties, or about how such a reference should be resolved. If a hasControlInformationExtension value is provided, a ControlInformationRoot shall also be provided.</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-HXIT"/>
 	</owl:Class>
 	
@@ -816,7 +816,7 @@
 				</owl:oneOf>
 			</owl:Class>
 		</owl:equivalentClass>
-		<skos:definition>code element that identifies the algorithm used to compute the integrityCheck value</skos:definition>
+		<skos:definition>code element that identifies the algorithm used to compute the IntegrityCheckAlgorithm value</skos:definition>
 		<skos:note>If populated, the value of this attribute shall be taken from the HL7 IntegrityCheckAlgorithm code system.</skos:note>
 	</owl:Class>
 	
@@ -898,7 +898,7 @@
 			</owl:Class>
 		</owl:equivalentClass>
 		<skos:definition>code element that provides a general framework for handling incomplete data which is often encountered in healthcare information collection, use and analysis</skos:definition>
-		<skos:note>Some of the Null flavors are not generally applicable to all datatypes. The NullFlavors NINF, PINF, QS, and TRC shall only be used in association with QTY types. The NullFlavor UNC shall only be used with any type that has an originalText, and when UNC is used the originalText property shall be populated. When the NullFlavor DER is used, an expression shall be provided.</skos:note>
+		<skos:note>Some of the Null flavors are not generally applicable to all datatypes. The NullFlavors NINF, PINF, QS, and TRC shall only be used in association with QTY types. The NullFlavor UNC shall only be used with any type that has an hasOriginalText value, and when UNC is used the hasOriginalText property shall be populated. When the NullFlavor DER is used, an expression shall be provided.</skos:note>
 		<skos:note>The nullFlavor property may also play a special role in conformance frameworks in specifications that make use of these types.</skos:note>
 	</owl:Class>
 	
@@ -918,7 +918,7 @@
 		<rdf:type rdf:resource="&idmp-dtp;NullFlavor"/>
 		<rdfs:label>null flavor DER</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.1.4</dct:source>
-		<skos:definition>code for value for which no attempt has been made to encode the information correctly but the raw source information is represented (usually in originalText)</skos:definition>
+		<skos:definition>code for value for which no attempt has been made to encode the information correctly but the raw source information is represented (usually in hasOriginalText property)</skos:definition>
 		<idmp-dtp:hasLevelInHierarchy rdf:datatype="&xsd;nonNegativeInteger">3</idmp-dtp:hasLevelInHierarchy>
 		<cmns-col:isMemberOf rdf:resource="&idmp-dtp;NullFlavorEnumeration"/>
 		<cmns-dsg:hasDescription>Derived</cmns-dsg:hasDescription>
@@ -1388,7 +1388,7 @@
 		<rdfs:domain rdf:resource="&idmp-dtp;ISO21090-AnyDatatype"/>
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>indicates a name, title, or representation for the code or expression as it exists in the code system</skos:definition>
-		<skos:note>If populated, the displayName shall be a valid human readable representation of the concept as defined by the code system at the time of data entry.</skos:note>
+		<skos:note>If populated, the hasDisplayName shall be a valid human readable representation of the concept as defined by the code system at the time of data entry.</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 	</owl:DatatypeProperty>
 	
@@ -1430,7 +1430,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.4.2.3.9</dct:source>
 		<rdfs:range rdf:resource="&xsd;base64Binary"/>
 		<skos:definition>indicates a checksum calculated over the binary data</skos:definition>
-		<skos:note>The purpose of this property, when communicated with a reference is for anyone to validate later whether or not the reference still resolved to the same content that the reference resolved to when the encapsulated data value with reference was created. If the attribute is null, there is no integrityCheck. It is an error if the data resolved through the reference does not match the integrity check.</skos:note>
+		<skos:note>The purpose of this property, when communicated with a reference is for anyone to validate later whether or not the reference still resolved to the same content that the reference resolved to when the encapsulated data value with reference was created. If the attribute is null, there is no IntegrityCheckAlgorithm. It is an error if the data resolved through the reference does not match the integrity check.</skos:note>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasIntegrityCheckAlgorithm">
@@ -1439,7 +1439,7 @@
 		<rdfs:label>has integrity check algorithm</rdfs:label>
 		<dct:source>ISO 11240:2021, clause 7.4.2.3.10</dct:source>
 		<rdfs:range rdf:resource="&idmp-dtp;IntegrityCheckAlgorithm"/>
-		<skos:definition>indicates the algorithm used to compute the integrityCheck value</skos:definition>
+		<skos:definition>indicates the algorithm used to compute the IntegrityCheckAlgorithm value</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasLanguageCode">
@@ -1482,7 +1482,7 @@
 		<rdfs:range rdf:resource="&xsd;string"/>
 		<skos:definition>indicates the text as seen and/or selected by the user who entered the data which represents the intended meaning of the user</skos:definition>
 		<skos:note>Local implementations might influence what is required to represent that original text.</skos:note>
-		<skos:note>The original text shall be an excerpt of the relevant information in the original sources, rather than a pointer or exact reproduction. Thus the original text shall be represented in plain text form. In specific circumstances, when the context of use is clearly described, the originalText may be a reference to some other text artefact for which the resolution scope is clearly described.</skos:note>
+		<skos:note>The original text shall be an excerpt of the relevant information in the original sources, rather than a pointer or exact reproduction. Thus the original text shall be represented in plain text form. In specific circumstances, when the context of use is clearly described, the hasOriginalText value may be a reference to some other text artefact for which the resolution scope is clearly described.</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ED"/>
 	</owl:DatatypeProperty>
 	
@@ -1547,7 +1547,7 @@
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.2.3.2</dct:source>
 		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
 		<skos:definition>indicates the time that the given information ceased or will cease to be correct</skos:definition>
-		<skos:note>Both validTimeLow and validTimeHigh shall be valid timestamps using the format described in 7.8.13.3.1 (TS.value).</skos:note>
+		<skos:note>Both hasValidTimeLow and hasValidTimeHigh shall be valid timestamps using the format described in 7.8.13.3.1 (TS.value).</skos:note>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-TS"/>
 	</owl:DatatypeProperty>
 	

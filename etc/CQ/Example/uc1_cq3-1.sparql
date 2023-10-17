@@ -1,6 +1,6 @@
 # UC1-CQ 3-1:  What is the basis of strength for <substance x> in <product y>?
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
-PREFIX cmns-cmp:    <https://www.omg.org/spec/Commons/Composites/>
+PREFIX cmns-rlcmp:    <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX cmns-qtu: <https://www.omg.org/spec/Commons/QuantitiesAndUnits/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -12,17 +12,17 @@ SELECT DISTINCT ?BasisOfStrength
 (SAMPLE(?BasisOfStrengthLabel) AS ?BasisOfStrengthName)
 (SAMPLE(?StrengthNumeratorValue) AS ?NumeratorValue)
 (SAMPLE(?StrengthNumeratorUnit) AS ?NumeratorUnit)
-(SAMPLE(?StrengthDemoniatorValue) AS ?DemonminatorValue)
-(SAMPLE(?StrengthDemoniatorUnit) AS ?DemonminatorUnit)
+(SAMPLE(?StrengthDenominatorValue) AS ?DenominatorValue)
+(SAMPLE(?StrengthDenominatorUnit) AS ?DenominatorUnit)
 
 WHERE {
     # Bind Variable Substance <$Substance>
-	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
+	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
   	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetate>
     BIND(uc1_cq3-1_parameter_1 AS $Substance )
     
   	# Bind Variable Product <$Product>
-	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Norvasc-ManufacturedItem>
+	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Norvasc-ManufacturedItem>
   	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetateSUN-PharmaceuticalProduct>
     BIND(uc1_cq3-1_parameter_2 AS $Product )
   
@@ -30,7 +30,7 @@ WHERE {
   	[] 	cmns-dsg:defines $Product ;
       	idmp-mprd:hasActiveIngredient [ 
     		idmp-mprd:hasStrength ?BasisOfStrength ;
-  			cmns-cmp:isPlayedBy $Substance ] .
+  			cmns-rlcmp:isPlayedBy $Substance ] .
   
   	# Get the Basis of Strength's numerator value and unit
   	?BasisOfStrength cmns-qtu:hasNumerator [
@@ -40,8 +40,8 @@ WHERE {
   
   	# Get the Basis of Strength's numerator value and unit
   	?BasisOfStrength cmns-qtu:hasDenominator [
-    	cmns-qtu:hasNumericValue ?StrengthDemoniatorValue ;
-     	cmns-qtu:hasMeasurementUnit ?StrengthDemoniatorUnit 
+    	cmns-qtu:hasNumericValue ?StrengthDenominatorValue ;
+     	cmns-qtu:hasMeasurementUnit ?StrengthDenominatorUnit 
     ] .
   
     # Optionally, get the name of the Basis of Strength
