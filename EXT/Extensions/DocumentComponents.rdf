@@ -104,6 +104,37 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
 	</rdf:Description>
 	
+	<owl:Class rdf:about="&idmp-doco;FigureCaption">
+		<rdfs:subClassOf rdf:resource="&po;Block"/>
+		<rdfs:subClassOf>
+			<rdf:Description>
+				<rdf:resourcec>http://purl.org/spar/deo/Caption</rdf:resourcec>
+			</rdf:Description>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&idmp-doco;hasCaption"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:allValuesFrom rdf:resource="&doco;Figure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&idmp-doco;hasCaption"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:someValuesFrom rdf:resource="&doco;Figure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>figure caption</rdfs:label>
+		<skos:definition>caption on a figure</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-doco;TableBodyCell">
 		<rdfs:subClassOf rdf:resource="&idmp-doco;TableCell"/>
 		<rdfs:label>table body cell</rdfs:label>
@@ -112,6 +143,37 @@
 		<skos:definition>a table cell that is not a row or column header</skos:definition>
 		<cmns-av:synonym>body cell</cmns-av:synonym>
 		<cmns-av:synonym>inner cell</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-doco;TableCaption">
+		<rdfs:subClassOf rdf:resource="&po;Block"/>
+		<rdfs:subClassOf>
+			<rdf:Description>
+				<rdf:resourcec>http://purl.org/spar/deo/Caption</rdf:resourcec>
+			</rdf:Description>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&idmp-doco;hasCaption"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:allValuesFrom rdf:resource="&doco;Table"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&idmp-doco;hasCaption"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:someValuesFrom rdf:resource="&doco;Table"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>table caption</rdfs:label>
+		<skos:definition>caption on a table</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-doco;TableCell">
@@ -141,7 +203,7 @@
 						<owl:inverseOf rdf:resource="&po;contains"/>
 					</rdf:Description>
 				</owl:onProperty>
-				<owl:allValuesFrom rdf:resource="&idmp-doco;Table"/>
+				<owl:allValuesFrom rdf:resource="&doco;Table"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -163,7 +225,7 @@
 						<owl:inverseOf rdf:resource="&po;contains"/>
 					</rdf:Description>
 				</owl:onProperty>
-				<owl:someValuesFrom rdf:resource="&idmp-doco;Table"/>
+				<owl:someValuesFrom rdf:resource="&doco;Table"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>table column</rdfs:label>
@@ -199,7 +261,7 @@
 						<owl:inverseOf rdf:resource="&po;contains"/>
 					</rdf:Description>
 				</owl:onProperty>
-				<owl:allValuesFrom rdf:resource="&idmp-doco;Table"/>
+				<owl:allValuesFrom rdf:resource="&doco;Table"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -221,7 +283,7 @@
 						<owl:inverseOf rdf:resource="&po;contains"/>
 					</rdf:Description>
 				</owl:onProperty>
-				<owl:someValuesFrom rdf:resource="&idmp-doco;Table"/>
+				<owl:someValuesFrom rdf:resource="&doco;Table"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>table row</rdfs:label>
@@ -252,6 +314,13 @@
 		<rdfs:domain rdf:resource="&po;TextualElement"/>
 		<skos:definition>relates a textual element to a part of its literal text</skos:definition>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-doco;hasCaption">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
+		<rdfs:label>has caption</rdfs:label>
+		<rdfs:range rdf:resource="&deo;Caption"/>
+		<skos:definition>relates a document element to a caption on it</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableColumnIndex">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
