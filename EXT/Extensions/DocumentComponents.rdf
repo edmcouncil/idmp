@@ -104,6 +104,37 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
 	</rdf:Description>
 	
+	<owl:Class rdf:about="&idmp-doco;FigureCaption">
+		<rdfs:subClassOf rdf:resource="&po;Block"/>
+		<rdfs:subClassOf>
+			<rdf:Description>
+				<rdf:resourcec>http://purl.org/spar/deo/Caption</rdf:resourcec>
+			</rdf:Description>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&idmp-doco;hasCaption"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:allValuesFrom rdf:resource="&doco;Figure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&idmp-doco;hasCaption"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:someValuesFrom rdf:resource="&doco;Figure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>figure caption</rdfs:label>
+		<skos:definition>caption on a figure</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-doco;TableBodyCell">
 		<rdfs:subClassOf rdf:resource="&idmp-doco;TableCell"/>
 		<rdfs:label>table body cell</rdfs:label>
@@ -112,6 +143,37 @@
 		<skos:definition>a table cell that is not a row or column header</skos:definition>
 		<cmns-av:synonym>body cell</cmns-av:synonym>
 		<cmns-av:synonym>inner cell</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-doco;TableCaption">
+		<rdfs:subClassOf rdf:resource="&po;Block"/>
+		<rdfs:subClassOf>
+			<rdf:Description>
+				<rdf:resourcec>http://purl.org/spar/deo/Caption</rdf:resourcec>
+			</rdf:Description>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&idmp-doco;hasCaption"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:allValuesFrom rdf:resource="&doco;Table"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&idmp-doco;hasCaption"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:someValuesFrom rdf:resource="&doco;Table"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>table caption</rdfs:label>
+		<skos:definition>caption on a table</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-doco;TableCell">
@@ -128,6 +190,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>table cell</rdfs:label>
 		<skos:definition>element in a table that are arranged in a tabular layout, and is part of a table row, a table column or both</skos:definition>
+		<skos:note>This is similar to the HTML td element.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-doco;TableColumn">
@@ -252,6 +315,13 @@
 		<skos:definition>relates a textual element to a part of its literal text</skos:definition>
 	</owl:DatatypeProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-doco;hasCaption">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
+		<rdfs:label>has caption</rdfs:label>
+		<rdfs:range rdf:resource="&deo;Caption"/>
+		<skos:definition>relates a document element to a caption on it</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableColumnIndex">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has table column index</rdfs:label>
@@ -269,8 +339,28 @@
 		</rdfs:domain>
 		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
 		<skos:definition>horizontal position of a table body cell or table column header cell</skos:definition>
-		<skos:note>row indexes start with 1 and are ordered left to right</skos:note>
-		<cmns-av:synonym>has column index</cmns-av:synonym>
+		<skos:note>Column indexes start with 1 and are ordered left to right, with header cells first. Both header and body cells are counted with respect to the index, so if there is a single row header column then the leftmost body cell has a column index of 2.</skos:note>
+		<cmns-av:synonym>has table column index</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableColumnSpan">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has table row index</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-doco;TableBodyCell">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-doco;TableRowHeaderCell">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
+		<skos:definition>number of columns the table cell should span</skos:definition>
+		<skos:note>The column span is counted beginning with and is including the left most column.</skos:note>
+		<skos:note>This is similar to the HTML colspan attribute.</skos:note>
+		<cmns-av:synonym>has table column span</cmns-av:synonym>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableRowIndex">
@@ -290,8 +380,28 @@
 		</rdfs:domain>
 		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
 		<skos:definition>vertical position of a table body cell or table row header cell</skos:definition>
-		<skos:note>row indexes start with 1 and are ordered top to bottom</skos:note>
-		<cmns-av:synonym>has row index</cmns-av:synonym>
+		<skos:note>Row indexes start with 1 and are ordered top to bottom with header cells first. Both header and body cells are counted with respect to the index, so if there is a single header row, then the topmost body cells has a row index of 2.</skos:note>
+		<cmns-av:synonym>has table row index</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableRowSpan">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has table row index</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-doco;TableBodyCell">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-doco;TableRowHeaderCell">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
+		<skos:definition>number of rows the table cell should span</skos:definition>
+		<skos:note>The row span is counted beginning with and is including the top most row.</skos:note>
+		<skos:note>This is similar to the HTML rowspan attribute.</skos:note>
+		<cmns-av:synonym>has table row span</cmns-av:synonym>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasText">
