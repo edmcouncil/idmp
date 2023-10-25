@@ -1377,6 +1377,63 @@
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MaterialComponent">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>material component</rdfs:label>
+		<skos:definition>material that is part of some material</skos:definition>
+		<cmns-av:synonym>component</cmns-av:synonym>
+		<cmns-av:synonym>module</cmns-av:synonym>
+		<cmns-av:synonym>part</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MaterialComponentClassifier">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialClassifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MaterialComponent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>material component classifier</rdfs:label>
+		<skos:definition>classifier for components of some material</skos:definition>
+		<skos:note>Classifiers for material components are usually by function or by build-up that describes the kind of component.</skos:note>
+		<cmns-av:synonym>component classifier</cmns-av:synonym>
+		<cmns-av:synonym>component type</cmns-av:synonym>
+		<cmns-av:synonym>material component type</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MaterialComponentSpecification">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialSpecification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:allValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+					</owl:Restriction>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMaterialComponentType"/>
+				<owl:onClass rdf:resource="&idmp-sub;MaterialComponentClassifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>material component specification</rdfs:label>
+		<skos:definition>specification of a component or part of a material</skos:definition>
+		<skos:note>Material components in the context of IDMP are packaging (container) components or device components.</skos:note>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MaterialRole">
 		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
@@ -1395,11 +1452,54 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Material"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMaterial"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;MaterialClassifier">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAlternateMaterial"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;MaterialClassifier">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>material specification</rdfs:label>
 		<skos:definition>specification for substances or specified substances that are part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
+		<skos:definition>specification of a material</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
@@ -2855,6 +2955,8 @@ For the description of nucleic acids, the following information can be used to a
 		<skos:example>a matching mass spectrum</skos:example>
 		<skos:example>a specified mass range</skos:example>
 		<skos:example>a specified optical activity</skos:example>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>The properties are characterized by specific or ranges of quantity values, but can be also more complex properties such as statistical distributions or a match with some reference spectrum.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -5932,6 +6034,24 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasAlternateMaterial">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:label>has alternate material</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;MaterialClassifier">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a material specification to a another material specification, material classifier or substance, that is allowed to be alternatively used when manufacturing the material</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasAmount">
 		<rdfs:label>has amount</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Amount"/>
@@ -6449,6 +6569,32 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:symbol>m</cmns-av:symbol>
 		<cmns-av:synonym>has nucleon number</cmns-av:synonym>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMaterial">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:label>has material</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;MaterialClassifier">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Substance">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates a material specification or material to a another material specification, material classifier or substance that the material is made of.</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMaterialComponentType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has material component type</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;MaterialClassifier"/>
+		<skos:definition>relates a material component specification to the type of component used for the material component</skos:definition>
+		<cmns-av:synonym>has component type</cmns-av:synonym>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasModification">
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
