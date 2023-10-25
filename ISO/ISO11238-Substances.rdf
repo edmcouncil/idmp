@@ -105,7 +105,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11238-Substances.rdf version of this ontology was modified to rename hasSimplifiedMolecularInputLineEntrySpecification to hasSMILES and to incorporate the ability to define controlled vocabularies that may or may not be jurisdiction-specific (IDMP-533).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances.rdf version of this ontology was modified to add structural representations including molfile.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances.rdf version of this ontology was modified to reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to incorporate additional content for structurally diverse substances (IDMP-635), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, and (2) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to augment the definition of nucleic acid substance to complete the requirements specified in clause 7.5 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-592).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of protein substance to complete the requirements specified in clause 7.4 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-594).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of protein substance to complete the requirements specified in clause 7.4 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-594)and to build out the definition of polymer substance to complete the requirements specified in clause 7.6 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-673).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -517,6 +517,31 @@
 		<rdfs:label xml:lang="en-US">contaminant ingredient</rdfs:label>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, table D.1, clause D.2.1</dct:source>
 		<skos:definition>role of an inactive ingredient whose presence is not intended but may not be reasonably avoided given the circumstances of the mixture&apos;s nature or origin</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;CopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>copolymer connectivity</rdfs:label>
+		<skos:definition>classifier that specifies the connectivity of the polymer, typically describing the manner in which the SRUs (Structural Repeat Units) connect to each other</skos:definition>
+		<skos:example>random, alternating, block, graft, statistical, periodic, mixed, cross, N/A</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4.3 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ElementGroup">
@@ -3118,6 +3143,56 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:usageNote>Polydisperse substances include polymers, mixture and structurally diverse material isolated from a single source. Chemical substances, proteins and nucleic acids with defined sequences are not described as polydisperse substances.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PolymerClass">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>polymer class</rdfs:label>
+		<skos:definition>classifier that indicates the nature of the polymer substance</skos:definition>
+		<skos:example>homopolymer, copolymer</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4.1 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PolymerGeometry">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>polymer geometry</rdfs:label>
+		<skos:definition>classifier that indicates the geometry of the polymer substance</skos:definition>
+		<skos:example>linear, branched, cross-linked, network, dendritic, star, comb, brush</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4.2 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
@@ -3127,13 +3202,49 @@ For the description of nucleic acids, the following information can be used to a
 				<owl:hasValue rdf:resource="&idmp-sub;SubstanceTypeClassifier-Polymer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasComment"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;PolymerClass"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;PolymerGeometry"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>polymer substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single polydisperse substance that contains structural repeat units linked by covalent bonds</skos:definition>
+		<skos:example>Polymers containing polyethylene glycol structural repeat units are defined based on either degree of polymerization or molecular weight. A generic polyethylene glycol substance is not defined as a substance because of the wide variation in the functionality of these types of materials and safety concerns related to the degree of polymerization.</skos:example>
 		<skos:note>Monodisperse proteins and nucleic acids with defined sequences shall not be defined using the polymer substance elements.</skos:note>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.63</cmns-av:directSource>
+		<skos:note>Polymers shall be defined using a combination of controlled vocabularies and representations of the molecular structure of the structural repeat units, substituents that are attached to the structural repeat unit, which are described as either fragment or moiety modifications, molecular weight or the polydispersity of the material. The degree of polymerization, monomer description, polymer starting material used to synthesize synthetic polymers or copolymers, the source material for naturally derived polymers, polymeric end groups, and physical or biological properties shall also be captured when known and needed to distinguish material. Polymers shall be defined to the level of specificity needed to distinguish materials, and broad polymeric definitions shall be discouraged.</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.63 and 7.6</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PreservativeIngredient">
