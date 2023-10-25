@@ -2351,8 +2351,40 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.51</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MonomerAmountType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MonomerSetDescription"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MonomerSetDescription"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>monomer amount type</rdfs:label>
+		<skos:definition>classifier that indicates how the ratio of the monomer or the structural repeat unit (SRU) to the entire polymer is captured</skos:definition>
+		<skos:example>Monomer/Polymer ratio, SRU/Polymer Ratio</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MonomerSetDescription">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;MonomerAmountType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfMonomers"/>
@@ -3282,51 +3314,6 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;PolymerStructuralRepeat">
-		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;StructuralRepeatUnitAmountType"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasAverageMolecularFormulaByRepeatUnit"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
-				<owl:onClass rdf:resource="&idmp-sub;PolymerSubstance"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfStructuralRepeatUnits"/>
-				<owl:onDataRange rdf:resource="&xsd;integer"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralRepeatUnit"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>polymer structural repeat</rdfs:label>
-		<skos:definition>constituent of the definition of a polymer substance that specifies and quantifies the repeated units and their configuration</skos:definition>
-		<skos:note>The structure wherever possible should be representative of the structural repeat units that make up the polymer. The structure should be contained within brackets. The end-groups or an asterisk indicating connectivity to another structural repeat unit should be drawn outside the brackets. For random copolymers, each structural repeat unit should be drawn in the same structural representation, but not directly connected to each other. For block copolymers, the structural repeating units will be directly connected to each other. End-groups, when known, should also be attached to the structural repeat units. MolFile are the preferred format for the molecular structure of the repeat unit.</skos:note>
-		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
-		<cmns-av:synonym>structural repeat</cmns-av:synonym>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
@@ -3380,7 +3367,7 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerStructuralRepeat"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralRepeat"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>polymer substance</rdfs:label>
@@ -4959,6 +4946,51 @@ For the description of nucleic acids, the following information can be used to a
 		<skos:example>reductive amination</skos:example>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;StructuralRepeat">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;StructuralRepeatUnitAmountType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAverageMolecularFormulaByRepeatUnit"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
+				<owl:onClass rdf:resource="&idmp-sub;PolymerSubstance"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfStructuralRepeatUnits"/>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralRepeatUnit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structural repeat</rdfs:label>
+		<skos:definition>constituent of the definition of a polymer substance that specifies and quantifies the repeated units and their configuration</skos:definition>
+		<skos:note>The structure wherever possible should be representative of the structural repeat units that make up the polymer. The structure should be contained within brackets. The end-groups or an asterisk indicating connectivity to another structural repeat unit should be drawn outside the brackets. For random copolymers, each structural repeat unit should be drawn in the same structural representation, but not directly connected to each other. For block copolymers, the structural repeating units will be directly connected to each other. End-groups, when known, should also be attached to the structural repeat units. MolFile are the preferred format for the molecular structure of the repeat unit.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+		<cmns-av:synonym>structural repeat</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;StructuralRepeatUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
@@ -4985,7 +5017,7 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
-				<owl:onClass rdf:resource="&idmp-sub;PolymerStructuralRepeat"/>
+				<owl:onClass rdf:resource="&idmp-sub;StructuralRepeat"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -5017,13 +5049,13 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerStructuralRepeat"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;StructuralRepeat"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerStructuralRepeat"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;StructuralRepeat"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>structural repeat unit amount type</rdfs:label>
