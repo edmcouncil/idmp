@@ -3193,6 +3193,38 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PolymerStructuralRepeat">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;StructuralRepeatUnitAmountType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAverageMolecularFormulaByRepeatUnit"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasNumberOfStructuralRepeatUnits"/>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>polymer structural repeat</rdfs:label>
+		<skos:definition>constituent of the definition of a polymer substance that specifies and quantifies the repeated units and their configuration</skos:definition>
+		<skos:note>The structure wherever possible should be representative of the structural repeat units that make up the polymer. The structure should be contained within brackets. The end-groups or an asterisk indicating connectivity to another structural repeat unit should be drawn outside the brackets. For random copolymers, each structural repeat unit should be drawn in the same structural representation, but not directly connected to each other. For block copolymers, the structural repeating units will be directly connected to each other. End-groups, when known, should also be attached to the structural repeat units. MolFile are the preferred format for the molecular structure of the repeat unit.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+		<cmns-av:synonym>structural repeat</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
@@ -3236,6 +3268,12 @@ For the description of nucleic acids, the following information can be used to a
 				<owl:someValuesFrom rdf:resource="&idmp-sub;CopolymerConnectivity"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerStructuralRepeat"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>polymer substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
@@ -3243,6 +3281,7 @@ For the description of nucleic acids, the following information can be used to a
 		<skos:example>Polymers containing polyethylene glycol structural repeat units are defined based on either degree of polymerization or molecular weight. A generic polyethylene glycol substance is not defined as a substance because of the wide variation in the functionality of these types of materials and safety concerns related to the degree of polymerization.</skos:example>
 		<skos:note>Monodisperse proteins and nucleic acids with defined sequences shall not be defined using the polymer substance elements.</skos:note>
 		<skos:note>Polymers shall be defined using a combination of controlled vocabularies and representations of the molecular structure of the structural repeat units, substituents that are attached to the structural repeat unit, which are described as either fragment or moiety modifications, molecular weight or the polydispersity of the material. The degree of polymerization, monomer description, polymer starting material used to synthesize synthetic polymers or copolymers, the source material for naturally derived polymers, polymeric end groups, and physical or biological properties shall also be captured when known and needed to distinguish material. Polymers shall be defined to the level of specificity needed to distinguish materials, and broad polymeric definitions shall be discouraged.</skos:note>
+		<skos:note>Values for polymer class would include homopolymer, copolymer; values for polymer geometry would include linear, branched, cross-linked and network or dendritic; values for copolymer sequence type would include random, statistical, alternating, periodic, block, mixed, graft or cross. Dispersity is usually determined from the ratio of the weight average molecular weight to the number average molecular weight. Properties such as viscosity, light scattering or sedimentation velocity, which are indicative of molecular weight, and biological properties such as enzymatic inhibition can also be distinguishing properties.</skos:note>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.63 and 7.6</cmns-av:directSource>
 	</owl:Class>
@@ -4811,6 +4850,31 @@ For the description of nucleic acids, the following information can be used to a
 		<skos:example>reductive amination</skos:example>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;StructuralRepeatUnitAmountType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerStructuralRepeat"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PolymerStructuralRepeat"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structural repeat unit amount type</rdfs:label>
+		<skos:definition>classifier that indicates how the quantitative amount of structural repeat units is captured</skos:definition>
+		<skos:example>Exact, Numeric, Average</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;StructuralRepresentation">
 		<rdfs:subClassOf rdf:resource="&cmns-dsg;Designation"/>
 		<rdfs:subClassOf>
@@ -6215,6 +6279,19 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:synonym>has proton number</cmns-av:synonym>
 	</owl:DatatypeProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasAverageMolecularFormulaByRepeatUnit">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has average molecular formula by repeat unit</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies representation of an (average) molecular formula from a polymer</skos:definition>
+		<skos:example>HO(C2H4O)141(C3H6O)44(C2H4O)141H</skos:example>
+		<idmp-sub:hasBusinessRules>The element shall be captured for polymers only. The structural repeat unit shall have a distinct stoichiometric composition. When the substituents within SRU are variable the information may not be provided.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+	</owl:DatatypeProperty>
+	
 	<owl:AnnotationProperty rdf:about="&idmp-sub;hasBusinessRules">
 		<rdfs:label>has business rules</rdfs:label>
 		<skos:definition>describes the nature of the rules to be applied for a given class or element in cases where that element is conditionally required for conformance per the ISO 19844 guideline</skos:definition>
@@ -7044,6 +7121,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10 and Figure 20</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.3 and Figure 15</cmns-av:directSource>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfStructuralRepeatUnits">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has number of structural repeat units</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;integer"/>
+		<skos:definition>indicates the number of diverse structural repeated units represented in the structure of the polymer</skos:definition>
+		<skos:example>Homopolymers will only have 1 Structural Repeat Unit; copolymers will typically have more than 1.</skos:example>
+		<idmp-sub:hasBusinessRules>Implicitly derived</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-INT"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4 and Figure 29</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfSubunits">
