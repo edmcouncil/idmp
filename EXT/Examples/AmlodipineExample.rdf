@@ -153,6 +153,18 @@
 		<cmns-txt:hasTextValue>88150-42-9</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;Aluminium">
+		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<rdfs:label>Aluminium</rdfs:label>
+		<idmp-sub:hasDefiningMolecularFormula>Al</idmp-sub:hasDefiningMolecularFormula>
+		<idmp-sub:hasDefiningStructure>
+			<idmp-sub:MolecularStructure>
+				<idmp-sub:hasInChIKeyValue>XAGFODPZIPBFFR-UHFFFAOYSA-N</idmp-sub:hasInChIKeyValue>
+				<idmp-sub:hasSMILESValue>[Al]</idmp-sub:hasSMILESValue>
+			</idmp-sub:MolecularStructure>
+		</idmp-sub:hasDefiningStructure>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;Amlodipine">
 		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
 		<rdf:type rdf:resource="&idmp-sub;Moiety"/>
@@ -676,33 +688,18 @@
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;Norvasc-DoseForm">
-		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
 		<rdf:type rdf:resource="&idmp-mprd;AdministrableDoseForm"/>
-		<rdfs:label>Norvasc - administrable dose form</rdfs:label>
-		<skos:definition>A type of solid pharmaceutical dose form consisting of a mass that is formed by compression of uniform volumes of particulate solids, or by other means such as extrusion or moulding.</skos:definition>
-		<idmp-spor:hasSPORTermDescription>
-			<idmp-spor:SPORTermDescription>
-				<cmns-txt:hasTextValue>A type of solid pharmaceutical dose form consisting of a mass that is formed by compression of uniform volumes of particulate solids, or by other means such as extrusion or moulding.</cmns-txt:hasTextValue>
-				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
-			</idmp-spor:SPORTermDescription>
-		</idmp-spor:hasSPORTermDescription>
-		<idmp-spor:hasSPORTermName>
-			<idmp-spor:SPORTermName>
-				<cmns-txt:hasTextValue>Tablet</cmns-txt:hasTextValue>
-				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
-			</idmp-spor:SPORTermName>
-		</idmp-spor:hasSPORTermName>
-		<cmns-id:isIdentifiedBy>
-			<idmp-spor:SPORTermIdentifier>
-				<cmns-txt:hasTextValue>200000002102</cmns-txt:hasTextValue>
-			</idmp-spor:SPORTermIdentifier>
-		</cmns-id:isIdentifiedBy>
+		<rdf:type rdf:resource="&idmp-mprd;ManufacturedDoseForm"/>
+		<rdfs:label>Norvasc - dose form tablet</rdfs:label>
+		<cmns-qtu:specializes rdf:resource="https://spor.ema.europa.eu/v1/lists/200000000009/terms/200000002102"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;Norvasc-ManufacturedItem">
+	<owl:NamedIndividual rdf:about="&idmp-amp;Norvasc-ManufacturedItem-5mgTablet">
 		<rdf:type rdf:resource="&idmp-sub;ManufacturedItem"/>
-		<rdfs:label>Norvasc - manufactured item</rdfs:label>
+		<rdfs:label>Norvasc - manufactured item - 5mg tablet</rdfs:label>
 		<skos:definition>manufactured item that is a besylate salt of amlodipine, a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
+		<idmp-uom:hasUnitOfPresentation rdf:resource="https://spor.ema.europa.eu/v1/lists/200000000014/terms/200000002152"/>
+		<idmp-mprd:hasDoseForm rdf:resource="&idmp-amp;Norvasc-DoseForm"/>
 		<cmns-col:comprises rdf:resource="&idmp-amp;AmlodipineBesylate"/>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;NorvascComposition"/>
 		<cmns-prd:isProducedBy rdf:resource="&idmp-amp;PfizerLaboratoriesAsManufacturer"/>
@@ -745,6 +742,11 @@
 			</cmns-dt:Duration>
 		</idmp-mprd:hasShelfLifeTimePeriod>
 		<idmp-mprd:hasShelfLifeType rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073343/terms/100000073403"/>
+		<idmp-mprd:hasSpecialPrecautionsForStorage>
+			<owl:NamedIndividual>
+				<cmns-txt:hasTextValue>Do not store above 25°C.</cmns-txt:hasTextValue>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasSpecialPrecautionsForStorage>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsAuthorizedMedicinalProductInDenmark">
@@ -767,14 +769,14 @@
 		<rdf:type rdf:resource="&idmp-sub;StartingMaterialRole"/>
 		<rdfs:label>Norvasc tablets as starting material</rdfs:label>
 		<cmns-rlcmp:isManifestedIn rdf:resource="&idmp-amp;NorvascPackageTablets"/>
-		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;Norvasc-ManufacturedItem-5mgTablet"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlister">
 		<rdf:type rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdf:type rdf:resource="&idmp-mprd;PackageItem"/>
 		<rdfs:label>Norvasc blister</rdfs:label>
-		<idmp-mprd:contains rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<idmp-mprd:contains rdf:resource="&idmp-amp;Norvasc-ManufacturedItem-5mgTablet"/>
 		<idmp-mprd:hasPackageComponent rdf:resource="&idmp-amp;NorvascBlisterFormComponent"/>
 		<idmp-mprd:hasPackageComponent rdf:resource="&idmp-amp;NorvascBlisterLiddingComponent"/>
 		<idmp-mprd:hasPackageItemType rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073346/terms/100000073496"/>
@@ -783,7 +785,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterAsImmediateContainer">
 		<rdf:type rdf:resource="&idmp-mprd;ImmediateContainer"/>
 		<rdfs:label>Norvasc blister as immediate container</rdfs:label>
-		<idmp-mprd:immediatelyContains rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<idmp-mprd:immediatelyContains rdf:resource="&idmp-amp;Norvasc-ManufacturedItem-5mgTablet"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
 	</owl:NamedIndividual>
 	
@@ -860,7 +862,7 @@
 		<skos:definition>composition of the pharmaceutical product, Norvasc, that is a besylate salt of amlodipine</skos:definition>
 		<skos:note>NORVASC (amlodipine besylate) Tablets are formulated as white tablets equivalent to 2.5, 5, and 10 mg of amlodipine for oral administration. In addition to the active ingredient, amlodipine besylate, each tablet contains the following inactive ingredients: microcrystalline cellulose, dibasic calcium phosphate anhydrous, sodium starch glycolate, and magnesium stearate.</skos:note>
 		<idmp-mprd:hasActiveIngredient rdf:resource="&idmp-amp;AmlodipineBesylateAsActiveIngredientInNorvasc"/>
-		<cmns-dsg:defines rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-dsg:defines rdf:resource="&idmp-amp;Norvasc-ManufacturedItem-5mgTablet"/>
 		<cmns-dsg:defines rdf:resource="&idmp-amp;Norvasc-PharmaceuticalProduct"/>
 	</owl:NamedIndividual>
 	
@@ -889,7 +891,7 @@
 		<skos:definition>pharmaceutical and medicinal product that is a besylate salt of amlodipine, a long-acting long-acting calcium channel blocker (CCB), used to treat high blood pressure (hypertension) and a type of chest pain called angina</skos:definition>
 		<skos:note>NORVASC (amlodipine besylate) Tablets are formulated as white tablets equivalent to 2.5, 5, and 10 mg of amlodipine for oral administration. In addition to the active ingredient, amlodipine besylate, each tablet contains the following inactive ingredients: microcrystalline cellulose, dibasic calcium phosphate anhydrous, sodium starch glycolate, and magnesium stearate.</skos:note>
 		<idmp-mprd:hasShelfLife rdf:resource="&idmp-amp;Norvasc-ShelfLife"/>
-		<cmns-col:comprises rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;Norvasc-ManufacturedItem-5mgTablet"/>
 		<cmns-col:comprises rdf:resource="&idmp-amp;Norvasc-PharmaceuticalProduct"/>
 		<cmns-prd:isProducedBy rdf:resource="&idmp-amp;PfizerLaboratoriesAsManufacturer"/>
 	</owl:NamedIndividual>
@@ -996,16 +998,68 @@
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerLaboratoriesAsManufacturer">
 		<rdf:type rdf:resource="&idmp-sub;Manufacturer"/>
 		<rdfs:label>Pfizer Laboratories as manufacturer</rdfs:label>
-		<cmns-prd:produces rdf:resource="&idmp-amp;Norvasc-ManufacturedItem"/>
+		<cmns-prd:produces rdf:resource="&idmp-amp;Norvasc-ManufacturedItem-5mgTablet"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;PfizerInc"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-amp;PolyvinylideneChlorideCommonName">
-		<rdf:type rdf:resource="&idmp-sub;SubstanceName"/>
-		<rdfs:label>polyvinylidene chloride common name</rdfs:label>
-		<idmp-sub:hasSubstanceNameValue>PVDC</idmp-sub:hasSubstanceNameValue>
-		<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
-		<cmns-dsg:isNameOf rdf:resource="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000171187"/>
+	<owl:NamedIndividual rdf:about="&idmp-amp;PolyvinylChloride">
+		<rdf:type rdf:resource="&idmp-sub;PolymerSubstance"/>
+		<rdfs:label>Poly(vinyl chloride)</rdfs:label>
+		<idmp-sub:hasSubstanceName>
+			<idmp-sub:SubstanceName>
+				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-CommonName"/>
+				<idmp-sub:hasSubstanceNameValue>PVC</idmp-sub:hasSubstanceNameValue>
+				<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+			</idmp-sub:SubstanceName>
+		</idmp-sub:hasSubstanceName>
+		<idmp-sub:hasSubstanceName>
+			<idmp-sub:SubstanceName>
+				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-DisplayName"/>
+				<idmp-sub:hasSubstanceNameValue>PVC</idmp-sub:hasSubstanceNameValue>
+				<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+			</idmp-sub:SubstanceName>
+		</idmp-sub:hasSubstanceName>
+		<idmp-sub:hasSubstanceName>
+			<idmp-sub:SubstanceName>
+				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-OfficialName"/>
+				<idmp-sub:hasSubstanceNameValue>Poly(vinyl chloride)</idmp-sub:hasSubstanceNameValue>
+				<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+			</idmp-sub:SubstanceName>
+		</idmp-sub:hasSubstanceName>
+		<idmp-sub:hasSubstanceName>
+			<idmp-sub:SubstanceName>
+				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-OtherName"/>
+				<idmp-sub:hasSubstanceNameValue>POLYVINYL CHLORIDE</idmp-sub:hasSubstanceNameValue>
+				<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+				<cmns-av:directSource>EUROPEAN PHARMACOPOEIA</cmns-av:directSource>
+			</idmp-sub:SubstanceName>
+		</idmp-sub:hasSubstanceName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PolyvinylideneChloride">
+		<rdf:type rdf:resource="&idmp-sub;PolymerSubstance"/>
+		<rdfs:label>Polyvinylidene chloride</rdfs:label>
+		<idmp-sub:hasSubstanceName>
+			<idmp-sub:SubstanceName>
+				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-CommonName"/>
+				<idmp-sub:hasSubstanceNameValue>PVDC</idmp-sub:hasSubstanceNameValue>
+				<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+			</idmp-sub:SubstanceName>
+		</idmp-sub:hasSubstanceName>
+		<idmp-sub:hasSubstanceName>
+			<idmp-sub:SubstanceName>
+				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-DisplayName"/>
+				<idmp-sub:hasSubstanceNameValue>PVDC</idmp-sub:hasSubstanceNameValue>
+				<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+			</idmp-sub:SubstanceName>
+		</idmp-sub:hasSubstanceName>
+		<idmp-sub:hasSubstanceName>
+			<idmp-sub:SubstanceName>
+				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-OfficialName"/>
+				<idmp-sub:hasSubstanceNameValue>Polyvinylidene chloride</idmp-sub:hasSubstanceNameValue>
+				<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+			</idmp-sub:SubstanceName>
+		</idmp-sub:hasSubstanceName>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;SodiumAmylopectinGlycolateTypeA">
@@ -1302,6 +1356,24 @@
 		<cmns-txt:hasTextValue>OP1R32D61U</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/id/CHEBI/2668">
+		<rdf:type rdf:resource="&idmp-eura;ChemicalEntitiesOfBiologicalInterestIdentifier"/>
+		<rdfs:label>CHEBI:2668</rdfs:label>
+		<cmns-id:identifies rdf:resource="&idmp-amp;Amlodipine"/>
+		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eura;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-eura;ChemicalEntitiesOfBiologicalInterest"/>
+		<cmns-txt:hasTextValue>CHEBI:2668</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/id/CHEBI/53243">
+		<rdf:type rdf:resource="&idmp-eura;ChemicalEntitiesOfBiologicalInterestIdentifier"/>
+		<rdfs:label>CHEBI:53243</rdfs:label>
+		<cmns-id:identifies rdf:resource="&idmp-amp;PolyvinylChloride"/>
+		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eura;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-eura;ChemicalEntitiesOfBiologicalInterest"/>
+		<cmns-txt:hasTextValue>CHEBI:53243</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10002383">
 		<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
 		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
@@ -1534,6 +1606,60 @@ In respect to MSSO copyright policies:
 		</cmns-id:isIdentifiedBy>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000000004">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabulary"/>
+		<rdfs:label>SPOR pharmaceutical dose form</rdfs:label>
+		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanAndVeterinaryUse"/>
+		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
+		<cmns-dsg:isSignifiedBy>
+			<idmp-spor:SPORListName>
+				<cmns-txt:hasTextValue>Pharmaceutical Dose Form</cmns-txt:hasTextValue>
+				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+			</idmp-spor:SPORListName>
+		</cmns-dsg:isSignifiedBy>
+		<cmns-id:isIdentifiedBy>
+			<idmp-spor:SPORListIdentifier>
+				<cmns-txt:hasTextValue>200000000004</cmns-txt:hasTextValue>
+			</idmp-spor:SPORListIdentifier>
+		</cmns-id:isIdentifiedBy>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000000009">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabulary"/>
+		<rdfs:label>SPOR basic dose form</rdfs:label>
+		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanAndVeterinaryUse"/>
+		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
+		<cmns-dsg:isSignifiedBy>
+			<idmp-spor:SPORListName>
+				<cmns-txt:hasTextValue>Basic Dose Form</cmns-txt:hasTextValue>
+				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+			</idmp-spor:SPORListName>
+		</cmns-dsg:isSignifiedBy>
+		<cmns-id:isIdentifiedBy>
+			<idmp-spor:SPORListIdentifier>
+				<cmns-txt:hasTextValue>200000000009</cmns-txt:hasTextValue>
+			</idmp-spor:SPORListIdentifier>
+		</cmns-id:isIdentifiedBy>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000000009/terms/200000002102">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
+		<rdf:type rdf:resource="&idmp-mprd;BasicDoseForm"/>
+		<rdfs:label>SPOR basic dose form 200000002102 - tablet</rdfs:label>
+		<idmp-spor:hasSPORTermName>
+			<idmp-spor:SPORTermName>
+				<cmns-txt:hasTextValue>Tablet</cmns-txt:hasTextValue>
+				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+			</idmp-spor:SPORTermName>
+		</idmp-spor:hasSPORTermName>
+		<cmns-col:isIncludedIn rdf:resource="https://spor.ema.europa.eu/v1/lists/200000000009"/>
+		<cmns-id:isIdentifiedBy>
+			<idmp-spor:SPORTermIdentifier>
+				<cmns-txt:hasTextValue>200000002102</cmns-txt:hasTextValue>
+			</idmp-spor:SPORTermIdentifier>
+		</cmns-id:isIdentifiedBy>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000000014">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabulary"/>
 		<rdfs:label>SPOR units of presentation</rdfs:label>
@@ -1555,7 +1681,6 @@ In respect to MSSO copyright policies:
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000000014/terms/200000002109">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
 		<rdf:type rdf:resource="&idmp-uom;UnitOfPresentation"/>
-		<rdf:type rdf:resource="&cmns-qtu;MeasurementUnit"/>
 		<rdfs:label>SPOR units of presentation 200000002109 - blister</rdfs:label>
 		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanAndVeterinaryUse"/>
 		<idmp-spor:hasSPORTermName>
@@ -1614,10 +1739,7 @@ In respect to MSSO copyright policies:
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000003199/terms/200000003200">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
-		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
 		<rdf:type rdf:resource="&idmp-sub;MaterialSpecification"/>
-		<rdfs:label>Aluminum</rdfs:label>
-		<rdfs:label>SPOR material 200000003200 - Aluminum</rdfs:label>
 		<rdfs:label>SPOR material 200000003200 - aluminium</rdfs:label>
 		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanAndVeterinaryUse"/>
 		<idmp-spor:hasSPORTermName>
@@ -1626,27 +1748,9 @@ In respect to MSSO copyright policies:
 				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName>
-			<idmp-spor:SPORTermName>
-				<cmns-txt:hasTextValue>Aluminum</cmns-txt:hasTextValue>
-				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
-			</idmp-spor:SPORTermName>
-		</idmp-spor:hasSPORTermName>
 		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
-		<idmp-sub:hasDefiningMolecularFormula>Al</idmp-sub:hasDefiningMolecularFormula>
-		<idmp-sub:hasDefiningStructure>
-			<idmp-sub:MolecularStructure>
-				<idmp-sub:hasInChIKeyValue>XAGFODPZIPBFFR-UHFFFAOYSA-N</idmp-sub:hasInChIKeyValue>
-				<idmp-sub:hasSMILESValue>[Al]</idmp-sub:hasSMILESValue>
-			</idmp-sub:MolecularStructure>
-		</idmp-sub:hasDefiningStructure>
 		<cmns-col:comprises rdf:resource="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000092806"/>
 		<cmns-col:isIncludedIn rdf:resource="https://spor.ema.europa.eu/v1/lists/200000003199"/>
-		<cmns-id:isIdentifiedBy>
-			<idmp-spor:SPORTermIdentifier>
-				<cmns-txt:hasTextValue>200000003200</cmns-txt:hasTextValue>
-			</idmp-spor:SPORTermIdentifier>
-		</cmns-id:isIdentifiedBy>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
 				<cmns-txt:hasTextValue>200000003200</cmns-txt:hasTextValue>
@@ -1657,7 +1761,6 @@ In respect to MSSO copyright policies:
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000003199/terms/200000003222">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
 		<rdf:type rdf:resource="&idmp-sub;MaterialSpecification"/>
-		<rdfs:label>SPOR material 200000003222 - PolyVinyl Chloride</rdfs:label>
 		<rdfs:label>SPOR material 200000003222 - polyvinyl chloride</rdfs:label>
 		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanAndVeterinaryUse"/>
 		<idmp-spor:hasSPORShortName>
@@ -1672,20 +1775,9 @@ In respect to MSSO copyright policies:
 				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName>
-			<idmp-spor:SPORTermName>
-				<cmns-txt:hasTextValue>PolyVinyl Chloride</cmns-txt:hasTextValue>
-				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
-			</idmp-spor:SPORTermName>
-		</idmp-spor:hasSPORTermName>
 		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
-		<cmns-col:comprises rdf:resource="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000131565"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;PolyvinylChloride"/>
 		<cmns-col:isIncludedIn rdf:resource="https://spor.ema.europa.eu/v1/lists/200000003199"/>
-		<cmns-id:isIdentifiedBy>
-			<idmp-spor:SPORTermIdentifier>
-				<cmns-txt:hasTextValue>200000003222</cmns-txt:hasTextValue>
-			</idmp-spor:SPORTermIdentifier>
-		</cmns-id:isIdentifiedBy>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
 				<cmns-txt:hasTextValue>200000003222</cmns-txt:hasTextValue>
@@ -1717,7 +1809,7 @@ In respect to MSSO copyright policies:
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
 		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
-		<cmns-col:comprises rdf:resource="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000171187"/>
+		<cmns-col:comprises rdf:resource="&idmp-amp;PolyvinylideneChloride"/>
 		<cmns-col:isIncludedIn rdf:resource="https://spor.ema.europa.eu/v1/lists/200000003199"/>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
@@ -1729,9 +1821,7 @@ In respect to MSSO copyright policies:
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000003199/terms/200000003529">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
 		<rdf:type rdf:resource="&idmp-sub;MaterialSpecification"/>
-		<rdf:type rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<rdfs:label>SPOR material 200000003529 - cardboard</rdfs:label>
-		<rdfs:label>paperboard</rdfs:label>
 		<idmp-spor:hasSPORTermName>
 			<idmp-spor:SPORTermName>
 				<cmns-txt:hasTextValue>Cardboard</cmns-txt:hasTextValue>
@@ -1746,16 +1836,9 @@ In respect to MSSO copyright policies:
 		</cmns-id:isIdentifiedBy>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/200000003199/terms/200000003529CommonName">
-		<rdf:type rdf:resource="&idmp-sub;SubstanceName"/>
-		<rdfs:label>paperboard common name</rdfs:label>
-		<idmp-sub:hasSubstanceNameValue>paperboard</idmp-sub:hasSubstanceNameValue>
-		<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
-		<cmns-dsg:isNameOf rdf:resource="https://spor.ema.europa.eu/v1/lists/200000003199/terms/200000003529"/>
-	</owl:NamedIndividual>
-	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000078231">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
+		<rdf:type rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>SPOR substance 100000078231 - CELLULOSE, MICROCRYSTALLINE</rdfs:label>
 		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanUse"/>
 		<idmp-spor:hasSPOROtherName>
@@ -1771,12 +1854,12 @@ In respect to MSSO copyright policies:
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
 		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
+		<cmns-dsg:denotes rdf:resource="&idmp-amp;MicrocrystallineCellulose"/>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
 				<cmns-txt:hasTextValue>100000078231</cmns-txt:hasTextValue>
 			</idmp-spor:SPORTermIdentifier>
 		</cmns-id:isIdentifiedBy>
-		<cmns-ra:isRelatedTo rdf:resource="&idmp-amp;MicrocrystallineCellulose"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000087353">
@@ -1800,24 +1883,18 @@ In respect to MSSO copyright policies:
 				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPOROtherName>
-		<idmp-spor:hasSPOROtherName>
-			<idmp-spor:SPORTermName>
-				<cmns-txt:hasTextValue>DIBASIC CALCIUM PHOSPHATE, ANHYDROUS</cmns-txt:hasTextValue>
-				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
-			</idmp-spor:SPORTermName>
-		</idmp-spor:hasSPOROtherName>
 		<idmp-spor:hasSPORTermName>
 			<idmp-spor:SPORTermName>
 				<cmns-txt:hasTextValue>Calcium hydrogen phosphate (anhydrous)</cmns-txt:hasTextValue>
 				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
+		<cmns-dsg:denotes rdf:resource="&idmp-amp;AnhydrousDibasicCalciumPhosphate"/>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
 				<cmns-txt:hasTextValue>100000087353</cmns-txt:hasTextValue>
 			</idmp-spor:SPORTermIdentifier>
 		</cmns-id:isIdentifiedBy>
-		<cmns-ra:isRelatedTo rdf:resource="&idmp-amp;AnhydrousDibasicCalciumPhosphate"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000089773">
@@ -1829,12 +1906,12 @@ In respect to MSSO copyright policies:
 				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
+		<cmns-dsg:denotes rdf:resource="&idmp-amp;AnhydrousDibasicCalciumPhosphate"/>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
 				<cmns-txt:hasTextValue>100000089773</cmns-txt:hasTextValue>
 			</idmp-spor:SPORTermIdentifier>
 		</cmns-id:isIdentifiedBy>
-		<cmns-ra:isRelatedTo rdf:resource="&idmp-amp;AnhydrousDibasicCalciumPhosphate"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000092806">
@@ -1847,6 +1924,7 @@ In respect to MSSO copyright policies:
 				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
+		<cmns-dsg:denotes rdf:resource="&idmp-amp;Aluminium"/>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
 				<cmns-txt:hasTextValue>100000092806</cmns-txt:hasTextValue>
@@ -1856,8 +1934,6 @@ In respect to MSSO copyright policies:
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000131565">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
-		<rdf:type rdf:resource="&idmp-sub;PolymerSubstance"/>
-		<rdfs:label>SPOR substance 100000080121 - Poly(vinyl chloride)</rdfs:label>
 		<rdfs:label>SPOR substance 100000131565 - Poly(vinyl chloride)</rdfs:label>
 		<idmp-spor:hasSPOROtherName>
 			<idmp-spor:SPORTermName>
@@ -1871,35 +1947,7 @@ In respect to MSSO copyright policies:
 				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
-		<idmp-spor:hasSPORTermName>
-			<idmp-spor:SPORTermName>
-				<cmns-txt:hasTextValue>Poly(vinyl chloride)</cmns-txt:hasTextValue>
-				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
-			</idmp-spor:SPORTermName>
-		</idmp-spor:hasSPORTermName>
-		<idmp-sub:hasSubstanceName>
-			<idmp-sub:SubstanceName>
-				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-CommonName"/>
-				<idmp-sub:hasSubstanceNameValue>PVC</idmp-sub:hasSubstanceNameValue>
-			</idmp-sub:SubstanceName>
-		</idmp-sub:hasSubstanceName>
-		<idmp-sub:hasSubstanceName>
-			<idmp-sub:SubstanceName>
-				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-DisplayName"/>
-				<idmp-sub:hasSubstanceNameValue>PVC</idmp-sub:hasSubstanceNameValue>
-			</idmp-sub:SubstanceName>
-		</idmp-sub:hasSubstanceName>
-		<idmp-sub:hasSubstanceName>
-			<idmp-sub:SubstanceName>
-				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-OfficialName"/>
-				<idmp-sub:hasSubstanceNameValue>Poly(vinyl chloride)</idmp-sub:hasSubstanceNameValue>
-			</idmp-sub:SubstanceName>
-		</idmp-sub:hasSubstanceName>
-		<cmns-id:isIdentifiedBy>
-			<idmp-spor:SPORTermIdentifier>
-				<cmns-txt:hasTextValue>100000131565</cmns-txt:hasTextValue>
-			</idmp-spor:SPORTermIdentifier>
-		</cmns-id:isIdentifiedBy>
+		<cmns-dsg:denotes rdf:resource="&idmp-amp;PolyvinylChloride"/>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
 				<cmns-txt:hasTextValue>100000131565</cmns-txt:hasTextValue>
@@ -1909,7 +1957,6 @@ In respect to MSSO copyright policies:
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v2/SubstanceDefinition/100000171187">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
-		<rdf:type rdf:resource="&idmp-sub;PolymerSubstance"/>
 		<rdfs:label>SPOR substance 100000171187 - Polyvinylidene chloride</rdfs:label>
 		<idmp-spor:hasSPOROtherName>
 			<idmp-spor:SPORTermName>
@@ -1935,43 +1982,12 @@ In respect to MSSO copyright policies:
 				<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 			</idmp-spor:SPORTermName>
 		</idmp-spor:hasSPORTermName>
-		<idmp-sub:hasSubstanceName>
-			<idmp-sub:SubstanceName>
-				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-CommonName"/>
-				<idmp-sub:hasSubstanceNameValue>PVDC</idmp-sub:hasSubstanceNameValue>
-			</idmp-sub:SubstanceName>
-		</idmp-sub:hasSubstanceName>
-		<idmp-sub:hasSubstanceName>
-			<idmp-sub:SubstanceName>
-				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-DisplayName"/>
-				<idmp-sub:hasSubstanceNameValue>PVDC</idmp-sub:hasSubstanceNameValue>
-			</idmp-sub:SubstanceName>
-		</idmp-sub:hasSubstanceName>
-		<idmp-sub:hasSubstanceName>
-			<idmp-sub:SubstanceName>
-				<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-OfficialName"/>
-				<idmp-sub:hasSubstanceNameValue>Polyvinylidene chloride</idmp-sub:hasSubstanceNameValue>
-			</idmp-sub:SubstanceName>
-		</idmp-sub:hasSubstanceName>
+		<cmns-dsg:denotes rdf:resource="&idmp-amp;PolyvinylideneChloride"/>
 		<cmns-id:isIdentifiedBy>
 			<idmp-spor:SPORTermIdentifier>
 				<cmns-txt:hasTextValue>100000171187</cmns-txt:hasTextValue>
 			</idmp-spor:SPORTermIdentifier>
 		</cmns-id:isIdentifiedBy>
-		<cmns-id:isIdentifiedBy>
-			<idmp-spor:SPORTermIdentifier>
-				<cmns-txt:hasTextValue>100000171187</cmns-txt:hasTextValue>
-			</idmp-spor:SPORTermIdentifier>
-		</cmns-id:isIdentifiedBy>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="https://www.ebi.ac.uk/chebi/chebiOntology.do?chebiId=CHEBI:2668">
-		<rdf:type rdf:resource="&idmp-eura;ChemicalEntitiesOfBiologicalInterestIdentifier"/>
-		<rdfs:label>CHEBI:2668</rdfs:label>
-		<cmns-id:identifies rdf:resource="&idmp-amp;Amlodipine"/>
-		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eura;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
-		<cmns-ra:isRegisteredIn rdf:resource="&idmp-eura;ChemicalEntitiesOfBiologicalInterest"/>
-		<cmns-txt:hasTextValue>CHEBI:2668</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
