@@ -660,7 +660,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
-				<owl:onClass rdf:resource="&idmp-uom;AgeValueRange"/>
+				<owl:onClass rdf:resource="&idmp-uom;AgeRangeValue"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -686,6 +686,30 @@
 		<rdfs:subClassOf rdf:resource="&idmp-uom;TimeQuantityValueRange"/>
 		<rdfs:label>age range</rdfs:label>
 		<skos:definition>upper and lower bounds of age</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AgeRangeValue">
+		<rdfs:subClassOf rdf:resource="&idmp-uom;TimeQuantityValueRange"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasLowerBound"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;AgeValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasUpperBound"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;AgeValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>age range value</rdfs:label>
+		<skos:definition>time quantity value range expressing the upper and lower bounds amount of time passed since creation of something</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AgeValue">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;TimeQuantityValue"/>
+		<rdfs:label>age value</rdfs:label>
+		<skos:definition>time quantity value expressing the amount of time passed since creation of something</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Authorization">
@@ -914,7 +938,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -929,7 +953,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
