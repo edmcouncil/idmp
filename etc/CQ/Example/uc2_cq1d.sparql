@@ -7,9 +7,9 @@ PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?Packaging (SAMPLE(?PackagingLabel) AS ?PackagingName)
 
-where {
+WHERE {
     # Bind Variable substance <$Substance>
-	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/PolyvinylChloride>
+	# Example substance PVC: <https://spor.ema.europa.eu/v2/SubstanceDefinition/100000131565>
     BIND( uc2_cq1d_parameter_1 AS $Substance )
 
     ?Packaging a/rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
@@ -23,4 +23,5 @@ where {
 	# The material itself should be comprised of a substance for the query to work
     ?Packaging idmp-mprd:hasPackageComponent*/cmns-col:comprises+ $Substance .
 	
-} GROUP BY ?Packaging
+} 
+GROUP BY ?Packaging
