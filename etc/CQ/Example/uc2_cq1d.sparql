@@ -20,6 +20,7 @@ where {
     # or the package is made of components, e.g. the form and lidding of a blister
     # cmns-col:comprises may have subproperties for material and alternate material
     # IDMP allows any material from a controlled vocabulary, that need not be substances in the defintion of IDMP
-    ?Packaging idmp-mprd:hasPackageComponent*/cmns-col:comprises $Substance .
+	# The material itself should be comprised of a substance for the query to work
+    ?Packaging idmp-mprd:hasPackageComponent*/cmns-col:comprises+ $Substance .
 	
 } GROUP BY ?Packaging
