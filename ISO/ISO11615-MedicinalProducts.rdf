@@ -110,7 +110,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11615-MedicinalProducts.rdf version of this ontology was modified to (1) make indication texts as nodes instead of literals (IDMP-591), (2) add the concept of shelf life / storage per Figure 11 in the ISO 11615 specification (IDMP-371), (3) add undesirable effect per Figure 14 in the ISO 11615 specification (IDMP-591), (4) rename &apos;has medical condition&apos; to use a more aligned label with ISO 11615 (IDMP-591), (5) add the concept of route of administration (IDMP-614), and (6) integrate the refined pattern for controlled vocabularies (IDMP-533).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11615-MedicinalProducts.rdf version of this ontology was modified to extend the definition of product role to relate to product specifications in addition to products (IDMP-633).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add other therapy specifics (IDMP-639), and to (1) reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, (2) incorporate hasExpirationDate, which was simplified out of the OMG Commons ontology, and (3) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to restructure the inheritance hierarchy with respect to Batch and Lot definitions (IDMP-632).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add package components, devices, and physical characteristics (IDMP-659).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add package components, devices, and physical characteristics (IDMP-659) and to eliminate default codes on Ingredient and InactiveIngredient (IDMP-634).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -193,22 +193,7 @@
 		</rdfs:subClassOf>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;InactiveIngredient">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
-				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-IACT"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;Ingredient">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
-				<owl:hasValue rdf:resource="&idmp-mprd;IngredientRole-INGR"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
