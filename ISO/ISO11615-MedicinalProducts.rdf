@@ -110,7 +110,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230601/ISO11615-MedicinalProducts.rdf version of this ontology was modified to (1) make indication texts as nodes instead of literals (IDMP-591), (2) add the concept of shelf life / storage per Figure 11 in the ISO 11615 specification (IDMP-371), (3) add undesirable effect per Figure 14 in the ISO 11615 specification (IDMP-591), (4) rename &apos;has medical condition&apos; to use a more aligned label with ISO 11615 (IDMP-591), (5) add the concept of route of administration (IDMP-614), and (6) integrate the refined pattern for controlled vocabularies (IDMP-533).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11615-MedicinalProducts.rdf version of this ontology was modified to extend the definition of product role to relate to product specifications in addition to products (IDMP-633).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add other therapy specifics (IDMP-639), and to (1) reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, (2) incorporate hasExpirationDate, which was simplified out of the OMG Commons ontology, and (3) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to restructure the inheritance hierarchy with respect to Batch and Lot definitions (IDMP-632).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add package components, devices, and physical characteristics (IDMP-659) and to eliminate default codes on Ingredient and InactiveIngredient (IDMP-634).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add package components, devices, and physical characteristics (IDMP-659), to eliminate default codes on Ingredient and InactiveIngredient (IDMP-634), and add characteristics for target populations (IDMP-640).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -617,6 +617,86 @@
 		<cmns-av:synonym>pharmaceutical administrable dose form</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;Age">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf rdf:resource="&cmns-dt;Duration"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantity"/>
+		<rdfs:label>age</rdfs:label>
+		<skos:definition>time (duration or quantity) since the creation or birth of something</skos:definition>
+		<cmns-av:usageNote>The age is both a duration and a quantity. Its magnitude value can be expressed as quantity value with a time unit or as an ISO 8601 duration expression. Which way of expression is preferred depends on the domain.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AgeClassifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Age"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>age classifier</rdfs:label>
+		<skos:definition>classifier for ages</skos:definition>
+		<skos:example>adult</skos:example>
+		<skos:example>elderly</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AgePopulationCharacteristic">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AgeClassifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AgeRangeValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Age"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>age population characteristic</rdfs:label>
+		<skos:definition>classifier for a statistical population based on the age of its members</skos:definition>
+		<cmns-av:usageNote>The age is either expressed as an explicit range of ages or by an age classifier from a controlled vocabulary.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AgeRange">
+		<rdfs:subClassOf rdf:resource="&idmp-uom;TimeQuantityValueRange"/>
+		<rdfs:label>age range</rdfs:label>
+		<skos:definition>upper and lower bounds of age</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AgeRangeValue">
+		<rdfs:subClassOf rdf:resource="&idmp-uom;TimeQuantityValueRange"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasLowerBound"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;AgeValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasUpperBound"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;AgeValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>age range value</rdfs:label>
+		<skos:definition>time quantity value range expressing the upper and lower bounds amount of time passed since creation of something</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AgeValue">
+		<rdfs:subClassOf rdf:resource="&idmp-uom;TimeQuantityValue"/>
+		<rdfs:label>age value</rdfs:label>
+		<skos:definition>time quantity value expressing the amount of time passed since creation of something</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Authorization">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
@@ -843,7 +923,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -858,7 +938,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1218,6 +1298,32 @@
 		<rdfs:label>dose</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.23</dct:source>
 		<skos:definition>specified quantity of a medicine, to be taken at one time or at stated intervals</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;Gender">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>gender</rdfs:label>
+		<skos:definition>biological sex of an organism or for humans the characteristics of women, men, girls and boys that are socially constructed</skos:definition>
+		<cmns-av:adaptedFrom>WHO Gender and Health https://www.who.int/health-topics/gender</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>ISO IDMP recommends the use of ISO 5128 concept descriptors for this</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;GenderPopulationCharacteristic">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;Gender"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>gender population characteristic</rdfs:label>
+		<skos:definition>classifier for a statistical population based on the gender (sex) of its members</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;HeightCharacteristic">
@@ -2543,6 +2649,30 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.60</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;PhysiologicalCondition">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isExperiencedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physiological condition</rdfs:label>
+		<skos:definition>condition of the external or internal milieu for an organism</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;PhysiologicalConditionPopulationCharacteristic">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PhysiologicalCondition"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physiological condition population characteristic</rdfs:label>
+		<skos:definition>classifier for a statistical population based on the physiological condition its members</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Placebo">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductRole"/>
 		<rdfs:label>placebo</rdfs:label>
@@ -2555,8 +2685,15 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationClassifiedBy"/>
+				<owl:onClass rdf:resource="&cmns-cls;Classifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;TargetPopulation"/>
+				<owl:someValuesFrom rdf:resource="&cmns-stat;StatisticalPopulation"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>population characteristic</rdfs:label>
@@ -2745,6 +2882,31 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>amount of substance and specified substance constituents of the investigational or authorized medicinal product expressed in a ratio scale</skos:definition>
 		<skos:note>It is necessary for the quantitative composition of the substance(s) or the specified substance descriptions of the finished investigational or authorized Medicinal Products (depending on the pharmaceutical form concerned) to specify the mass, or the number of units of biological activity, either per dosage unit or per unit of mass or volume, of each substance or specified substance. Substance or specified substance descriptions present in the form of compounds or derivatives are always designated quantitatively by their total mass and, if necessary or relevant, by the mass of active entity, or entities, of the molecule. The term strength is a synonym of quantitative composition.</skos:note>
 		<cmns-av:usageNote>Note that quantitative composition is modeled as a kind of product composition in the ontology rather than as a quantity value, which is how the strength of a given ingredient is modeled.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;RaceOrEthnicity">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>race or ethnicity</rdfs:label>
+		<skos:definition>a subdivision of human population based on common culture or descent or a subspecies of animals</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;RaceOrEthnicityPopulationCharacteristic">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;RaceOrEthnicity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>race or ethnicity population characteristic</rdfs:label>
+		<skos:definition>classifier for a statistical population based on the race or ethnicity of its members</skos:definition>
+		<cmns-av:usageNote>HL7 uses PHIN-VADS Race &amp; Ethnicity - CDC as vocabulary for this</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ReferenceStrength">
@@ -2997,6 +3159,40 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-stat;StatisticalPopulation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AgePopulationCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;GenderPopulationCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PhysiologicalConditionPopulationCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;RaceOrEthnicityPopulationCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
@@ -3004,7 +3200,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:label>target population</rdfs:label>
 		<skos:definition>collection of patients or consumers for which the indication of a medicinal product is authorized or is under investigation</skos:definition>
-		<skos:editorialNote>This definition should be extended to include requirements for membership, such as being a patient and/or consumer, or animal.</skos:editorialNote>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.81</cmns-av:adaptedFrom>
 		<cmns-av:synonym>population specifics</cmns-av:synonym>
 	</owl:Class>
@@ -3373,6 +3568,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>relates something representing the constituents of a pharmaceutical or medicinal product to something in the role of an active ingredient</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAgeRange">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
+		<rdfs:label>has age range</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;AgeRange"/>
+		<skos:definition>relates to a range of ages by specifying lower and upper bounds as time quantity value</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorization">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
 		<rdfs:label>has authorization</rdfs:label>
@@ -3701,6 +3903,20 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>specifies a physical characteristic of some specification for a container, product or material, or of actual physical material</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NonConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.20</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPopulationCharacteristic">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has population characteristic</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
+		<skos:definition>relates a target population to classifiers that narrow down the population to a specific subset</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPopulationClassifiedBy">
+		<rdfs:label>has population classified by</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
+		<rdfs:range rdf:resource="&cmns-cls;Classifier"/>
+		<skos:definition>relates a population characteristic with a classifier for aspects of the population members or a common situation that the population member experience</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceIngredientRole">
