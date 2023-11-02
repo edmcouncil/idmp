@@ -14,7 +14,6 @@ PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
 PREFIX cmns-reg: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
-PREFIX idmp-pdf: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/>
 PREFIX idmp-edqm:  <https://data.pistoiaalliance.org/idmp/edqm/>
 
 GENERATE {
@@ -89,11 +88,11 @@ GENERATE {
     ?link_code
     ?link_term
 
-    BIND(IF(?class = "PDF" && ?key = "AME", idmp-pdf:hasAdministrationMethod,
-    IF(?class = "PDF" && ?key = "BDF", idmp-pdf:hasBasicDoseForm,
-    IF(?class = "PDF" && ?key = "ISI", idmp-pdf:hasIntendedSite,
-    IF(?class = "PDF" && ?key = "RCA", idmp-pdf:hasReleaseCharacteristic,
-    IF(?class = "PDF" && ?key = "TRA", idmp-pdf:hasTransformationProcedure,
+    BIND(IF(?class = "PDF" && ?key = "AME", idmp-phdf:hasAdministrationMethod,
+    IF(?class = "PDF" && ?key = "BDF", idmp-phdf:hasBasicDoseForm,
+    IF(?class = "PDF" && ?key = "ISI", idmp-phdf:hasIntendedSite,
+    IF(?class = "PDF" && ?key = "RCA", idmp-phdf:hasReleaseCharacteristic,
+    IF(?class = "PDF" && ?key = "TRA", idmp-phdf:hasTransformationProcedure,
     skos:related))))) AS ?link_predicate)
 
     BIND(CONCAT(?key,"-",?link_code)  AS ?FullID_Link)
