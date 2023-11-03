@@ -5,12 +5,12 @@ PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238
 PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
  
-SELECT DISTINCT ?Substance (SAMPLE(?SubstanceLabel) AS ?SubstanceName)
+SELECT DISTINCT ?Substance (SAMPLE(LCASE(?SubstanceLabel)) AS ?SubstanceName)
 
 WHERE {
     # Bind Variable ActiveMoiety <$ActiveMoiety>
     # Example for Dataset GSRS: <https://gsrs.ncats.nih.gov/api/v1/substances/1J444QC288>
-	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
+	# Example for AMLODIPINE: <https://spor.ema.europa.eu/v2/SubstanceDefinition/100000085259>
   	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/Terlipressin>
     BIND(uc1_cq1_parameter_1 AS $ActiveMoiety )
      
@@ -30,7 +30,29 @@ WHERE {
     # Make sure that we only return actual substances
     ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
      
-    # Optionally, get the name of the substance
-    OPTIONAL{?Substance  rdfs:label  ?SubstanceLabel }
+    # Optionally, get one of the official names of the substance
+    OPTIONAL{
+		?Substance  idmp-sub:hasSubstanceName ?SubstanceName .
+	    ?SubstanceLabel idmp-sub:hasSubstanceNameValue ?OfficialName .
+	    ?SubstanceLabel idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-OfficialName 
+	}
+    # Optionally, get one of the common names of the substance
+    OPTIONAL{
+		?Substance  idmp-sub:hasSubstanceName ?SubstanceName .
+	    ?SubstanceLabel idmp-sub:hasSubstanceNameValue ?CommonName .
+	    ?SubstanceLabel idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-CommonName 
+	}
+    # Optionally, get any name of the substance
+    OPTIONAL{
+		?Substance  idmp-sub:hasSubstanceName ?SubstanceName .
+	    ?SubstanceLabel idmp-sub:hasSubstanceNameValue ?AnyName .
+	}
+	BIND(IF(BOUND(?OfficialName),
+			?OfficalName, 
+			IF(BOUND(?CommonName),
+				?CommonName,
+				IF(BOUND(?AnyName)
+					?AnyName,
+					""))) AS ?SubstanceLabel)
  
 } GROUP BY ?Substance
