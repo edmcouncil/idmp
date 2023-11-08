@@ -45,7 +45,10 @@
 		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
 		<dct:creator>Thomas Weber, OSTHUS, a PHARMALEX Company</dct:creator>
 		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="http://purl.org/orb/1.0/"/>
+		<owl:imports rdf:resource="http://purl.org/spar/deo"/>
 		<owl:imports rdf:resource="http://purl.org/spar/doco"/>
+		<owl:imports rdf:resource="http://www.essepuntato.it/2008/12/pattern"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
@@ -88,8 +91,16 @@
 		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
 	</rdf:Description>
 	
+	<rdf:Description rdf:about="&po;Block">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="&po;HeadedContainer">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+	</rdf:Description>
+	
 	<rdf:Description rdf:about="&po;Structured">
-		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="&po;contains">
@@ -275,7 +286,7 @@
 	<owl:DatatypeProperty rdf:about="&idmp-doco;containsText">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>contains text</rdfs:label>
-		<rdfs:domain rdf:resource="&po;TextualElement"/>
+		<rdfs:domain rdf:resource="&po;Textual"/>
 		<skos:definition>relates a textual element to a part of its literal text</skos:definition>
 	</owl:DatatypeProperty>
 	
@@ -289,7 +300,7 @@
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasExactText">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has exact text</rdfs:label>
-		<rdfs:domain rdf:resource="&po;TextualElement"/>
+		<rdfs:domain rdf:resource="&po;Textual"/>
 		<skos:definition>relates a textual element to its precise literal text</skos:definition>
 	</owl:DatatypeProperty>
 	
