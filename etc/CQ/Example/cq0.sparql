@@ -13,6 +13,12 @@ WHERE {
     
     ?Substance rdf:type/rdfs:subClassOf* idmp-sub:Substance .
 
+	# the standard IDMP-O access to the substance label
+	OPTIONAL {
+      ?Substance idmp-sub:hasSubstanceName/idmp-sub:hasSubstanceNameValue ?SubstanceName .
+      FILTER(lcase(str(?SubstanceName)) = lcase(str(?SubstanceInputReference)))
+    }
+
     OPTIONAL {
       ?SimpleLabelProperty rdfs:subPropertyOf* rdfs:label .
       ?Substance ?SimpleLabelProperty ?SubstanceLabel .
