@@ -26,33 +26,56 @@ WHERE {
     			cmns-rlcmp:isPlayedBy $ActiveMoiety
     	] .
   	}
-     
+  
     # Make sure that we only return actual substances
-    ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
-     
-    # Optionally, get one of the official names of the substance
+   	?SubstanceAlias a/rdfs:subClassOf* idmp-sub:Substance .
+    # consider alternate substance IRIs
+    ?Substance (owl:sameAs|^owl:sameAs)* ?SubstanceAlias .
+  
+  	# Optionally, get one of the official names of the substance
     OPTIONAL{
-		?Substance  idmp-sub:hasSubstanceName ?Name .
-	    ?Name idmp-sub:hasSubstanceNameValue ?OfficialName .
-	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-OfficialName 
+		?SubstanceAlias  idmp-sub:hasSubstanceName ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?OfficialName .
+	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-OfficialName
+	}
+    # Optionally, get one of the systematic names of the substance
+    OPTIONAL{
+    	?SubstanceAlias  idmp-sub:hasSubstanceName ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?SystematicName .
+	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-SystematicName
 	}
     # Optionally, get one of the common names of the substance
     OPTIONAL{
-		?Substance  idmp-sub:hasSubstanceName ?Name .
-	    ?Name idmp-sub:hasSubstanceNameValue ?CommonName .
-	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-CommonName 
+    	?SubstanceAlias  idmp-sub:hasSubstanceName ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?CommonName .
+	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-CommonName
 	}
-    # Optionally, get any name of the substance
-    OPTIONAL{
-		?Substance  idmp-sub:hasSubstanceName ?Name .
-	    ?Name idmp-sub:hasSubstanceNameValue ?AnyName .
+    # Optionally, get any substance name of the substance
+    OPTIONAL {
+    	?SubstanceAlias  idmp-sub:hasSubstanceName ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?AnyName .
 	}
-	BIND(IF(BOUND(?OfficialName),
-			?OfficalName, 
-			IF(BOUND(?CommonName),
-				?CommonName,
-				IF(BOUND(?AnyName),
-					?AnyName,
-					""))) AS ?SubstanceLabel)
+    # Optionally, get the name from SPOR SRS term name
+    OPTIONAL {
+    	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
+                     idmp-spor:hasSPORTermName ?Name .
+        ?Name cmns-txt:hasTextValue ?SRSTermName.
+	}
+    # Optionally, get the name from SPOR SRS short name
+    OPTIONAL {
+    	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
+                    idmp-spor:hasSPORShortName ?Name .
+        ?Name cmns-txt:hasTextValue ?SRSShortName.
+	}
+    # Optionally, get the name from SPOR SRS other name
+    OPTIONAL {
+    	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
+                    idmp-spor:hasSPOROtherName ?Name .
+        ?Name cmns-txt:hasTextValue ?SRSOtherName.
+	}
+  
+	BIND(COALESCE(?OfficialName,  ?SystematicName, ?CommonName, ?AnyName, ?SRSTermName, ?SRSShortName, ?SRSOtherName, "") AS ?SubstanceLabel)
  
-} GROUP BY ?Substance
+} 
+GROUP BY ?Substance
+ORDER BY ?Substance
