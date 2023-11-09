@@ -12,8 +12,8 @@ PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
 GENERATE {
 
     # TEMP FIXES to be included in ontology development
-    idmp-ra:EPACompTox rdfs:label "EPA CompTox" .
-    idmp-sub:hasInhibitorTarget rdfs:label "has inhibitor target" .
+    #idmp-ra:EPACompTox rdfs:label "EPA CompTox" .
+    #idmp-sub:hasInhibitorTarget rdfs:label "has inhibitor target" .
 
     # Ontology
     <https://data.pistoiaalliance.org/idmp/gsrs> a owl:Ontology ;
@@ -140,8 +140,7 @@ GENERATE {
 
     BIND(
         IF(str(?RelationshipType) = "ACTIVE MOIETY" || str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-sub:hasActiveMoiety,
-        IF(str(?RelationshipType) = "INHIBITOR->TARGET", idmp-sub:hasInhibitorTarget,
-        skos:related))
+        skos:related)
         AS ?SubstancesRelationship)
 
     BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, idmp-sub:isActiveMoietyOf, ?nothing) AS ?IsActiveMoietyOfProperty)

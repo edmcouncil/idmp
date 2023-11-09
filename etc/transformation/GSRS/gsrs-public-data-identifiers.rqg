@@ -20,7 +20,7 @@ GENERATE {
         cmns-ra:isRegisteredIn ?Registry ;
         rdfs:seeAlso ?SeeAlsoIdentifier ;
         cmns-id:identifies ?Substance ;
-        idmp-x:hasCodeType ?CodeType ;
+        skos:note ?CodeType ;
         .
 }
 
@@ -86,7 +86,6 @@ BIND(
     IF(str(?CodeCodeSystem) = "UNIPROT", idmp-eura:UniProt ,
     IF(str(?CodeCodeSystem) = "UCSF-FDA TRANSPORTAL", idmp-nara:UniversityOfCaliforniaSanFrancisoFederalDrugAdministrationTransport ,
     IF(str(?CodeCodeSystem) = "WHO INTERNATIONAL PHARMACOPOEIA", idmp-ra:WorldHealthOrganizationInternationalPharmacopoeia ,
-    IF(str(?CodeCodeSystem) = "CLINICAL_TRIALS.GOV", cmns-ra:ClinicalTrialsGov ,
     IF(str(?CodeCodeSystem) = "COSMETIC INGREDIENT REVIEW (CIR)", idmp-nara:CosmeticIngredientReviewDatabase ,
     IF(str(?CodeCodeSystem) = "EVMPD", idmp-eura:ExtendedEudraVigilanceMedicinalProductDictionary ,
     IF(str(?CodeCodeSystem) = "EMA ASSESSMENT REPORTS", idmp-eura:EuropeanPublicAssessmentReports ,
@@ -95,7 +94,7 @@ BIND(
     IF(str(?CodeCodeSystem) = "FDA UNII", idmp-nara:GlobalSubstanceRegistrationSystem ,
     IF(str(?CodeCodeSystem) = "UNII", idmp-nara:GlobalSubstanceRegistrationSystem ,
     IF(str(?CodeCodeSystem) = "INN", idmp-ra:MedNetINN,
-    ?CodeCodeSystem ))))))))))))))))))))))))))))))))))))))))
+    ?CodeCodeSystem )))))))))))))))))))))))))))))))))))))))
     AS ?Registry)
 
 BIND(replace(str(?CodeCodeSystem), " ", "_") as ?CodeCodeSystemWithoutSpace)

@@ -138,56 +138,16 @@ WHERE {
 
   BIND( IF(?Name_Source = "", ?unbound, <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }/{ StrUUID() }>) AS ?nameURI )
   BIND(
-    IF(?Name_Source = "ADISINSIGHT", cmns-ra:ADISINSIGHT,
-    IF(?Name_Source = "BAN", cmns-ra:BAN,
-    IF(?Name_Source = "BRITISH HERBAL PHARMACOPOEIA", cmns-ra:BritishHerbalPharmacopoeia,
-    IF(?Name_Source = "BRITISH PHARMACOPOEIA", cmns-ra:BritishPharmacopoeia,
     IF(?Name_Source = "CHEBI", idmp-eura:ChemicalEntitiesOfBiologicalInterest, # valid
     IF(?Name_Source = "CHEMICAL ABSTRACT SERVICE", idmp-amra:ChemicalAbstractsService, # valid
-    IF(?Name_Source = "CHEMICALBOOK", cmns-ra:CHEMICALBOOK,
-    IF(?Name_Source = "CHEMIDPLUS", cmns-ra:CHEMIDPLUS,
-    IF(?Name_Source = "CHINESE PHARMACOPOEIA", cmns-ra:ChinesePharmacopoeia,
-    IF(?Name_Source = "COLORCON", cmns-ra:COLORCON,
-    IF(?Name_Source = "COMMUNITY HERBAL MONOGRAPHS", cmns-ra:CommunityHerbalMonographs,
-    IF(?Name_Source = "COMMUNITY REGISTER OF THE EUROPEAN COMMISSION", cmns-ra:CommunityRegisterOfTheEuropeanCommission,
-    IF(?Name_Source = "COMPANY SPECIFICATION", cmns-ra:CompanySpecification,
-    IF(?Name_Source = "COSING", cmns-ra:COSING,
-    IF(?Name_Source = "CZECH PHARMACOPOEIA", cmns-ra:CzechPharmacopoeia,
-    IF(?Name_Source = "DEUTSCHES ARZNEIBUCH", cmns-ra:DeutschesArzneibuch,
-    IF(?Name_Source = "ENCYCLOPEDIA OF LIFE (EOL)", cmns-ra:EncyclopediaOfLifeEol,
     IF(?Name_Source = "EUROPEAN CHEMICALS AGENCY (ECHA)", idmp-eura:EuropeanChemicalsAgency, # valid
-    IF(?Name_Source = "EUROPEAN FOOD SAFETY AUTHORITY (EFSA)", cmns-ra:EuropeanFoodSafetyAuthorityEfsa,
-    IF(?Name_Source = "EUROPEAN PHARMACOPOEIA", cmns-ra:EuropeanPharmacopoeia,
-    IF(?Name_Source = "FDA INACTIVE INGREDIENTS DATABASE", cmns-ra:FdaInactiveIngredientsDatabase,
     IF(?Name_Source = "FDA SUBSTANCE REGISTRATION SYSTEM", idmp-amra:FoodAndDrugAdministrationRegistrationAuthority, # valid
-    IF(?Name_Source = "FRENCH PHARMACOPOEIA", cmns-ra:FrenchPharmacopoeia,
-    IF(?Name_Source = "GLOBAL DIVERSITY INFORMATION FACILITY", cmns-ra:GlobalDiversityInformationFacility,
-    IF(?Name_Source = "GREEK PHARMACOPOEIA", cmns-ra:GreekPharmacopoeia,
-    IF(?Name_Source = "HAB", cmns-ra:HAB,
-    IF(?Name_Source = "HANDBOOK OF PHARMACEUTICAL EXCIPIENT (2ND EDITION)", cmns-ra:HandbookOfPharmaceuticalExcipient,
-    IF(?Name_Source = "HOMEOPATHIC PHARMACOPOEIA OF THE UNITED STATES", cmns-ra:HomeopathicPharmacopoeiaOfTheUnitedStates,
-    IF(?Name_Source = "INDEX FUNGORUM", cmns-ra:IndexFungorum,
-    IF(?Name_Source = "INFLUENZA RECOMMENDATIONS", cmns-ra:InfluenzaRecommendations,
     IF(?Name_Source = "INN", idmp-ra:InternationalNonproprietaryName, # valid
-    IF(?Name_Source = "INTERNATIONAL CODE OF NOMENCLATURE OF BACTERIA (ICNB)", cmns-ra:InternationalCodeOfNomenclatureOfBacteria,
-    IF(?Name_Source = "INTERNATIONAL NUMBERING SYSTEM (INS) FOR FOOD ADDITIVES", cmns-ra:InternationalNumberingSystem,
-    IF(?Name_Source = "INVESTIGATOR'S BROCHURE", cmns-ra:InvestigatorBrochure,
-    IF(?Name_Source = "ITALIAN PHARMACOPOEIA", cmns-ra:ItalianPharmacopoeia,
     IF(?Name_Source = "ITIS (INTEGRATED TAXONOMIC INFORMATION SYSTEM)", idmp-amra:IntegratedTaxonomicInformationSystem, # valid
-    IF(?Name_Source = "JAN", cmns-ra:JAN,
-    IF(?Name_Source = "JAPANESE PHARMACOPOEIA", cmns-ra:JapanesePharmacopoeia,
-    IF(?Name_Source = "KEW GARDEN- IPLANTS DATABASE", cmns-ra:KewGardenIplantsDatabase,
-    IF(?Name_Source = "MARTINDALE", cmns-ra:MARTINDALE,
-    IF(?Name_Source = "POLISH PHARMACOPOEIA", cmns-ra:PolishPharmacopoeia,
-    IF(?Name_Source = "PROTEIN DATA BANK (PDB)", idmp-ra:ProteinDataBankPdb,
     IF(?Name_Source = "PUBCHEM", cmns-ra:PubChem, # valid
-    IF(?Name_Source = "SPC", cmns-ra:SPC,
-    IF(?Name_Source = "Substance Validation Group", cmns-ra:SubstanceValidationGroup,
     IF(?Name_Source = "THE MERCK INDEX 20TH EDITION", idmp-ra:MerckIndexOnline, # valid
-    IF(?Name_Source = "THE PLANT LIST", cmns-ra:PlantList,
-    IF(?Name_Source = "USAN", cmns-ra:USAN,
     IF(?Name_Source = "USP", idmp-ra:USPharmacopeiaMedicinesCompendium, # valid
     IF(?Name_Source = "WHO", idmp-ra:WorldHealthOrganization, # valid
-    ?Name_Source ))))))))))))))))))))))))))))))))))))))))))))))))))
+    ?unbound ))))))))))
     AS ?sourceAuthority )
 }
