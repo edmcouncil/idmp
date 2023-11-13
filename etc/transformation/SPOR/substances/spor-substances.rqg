@@ -8,6 +8,7 @@ PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
 PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
+PREFIX idmp-eureg: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/>
 PREFIX idmp-amra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/>
 PREFIX cmns-ra: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 PREFIX spor-st: <https://spor.ema.europa.eu/v1/lists/100000075826/terms/>
@@ -120,7 +121,7 @@ WHERE {
     IF(?Substance_Type = "Specified Substance Group 2", spor-st:200000005032,
     IF(?Substance_Type = "Specified Substance Group 3", spor-st:200000005033,
     IF(?Substance_Type = "Specified Substance Group 4", spor-st:200000005034,
-    IF(?Substance_Type = "Structurally Diverse - Allergen", spor-st:200000005026,
+    IF(?Substance_Type = "Structurally Diverse - Allergen", spor-st:200000005026,https://pistoiaalliance.accurids.com/search
     IF(?Substance_Type = "Structurally Diverse - Cell therapy", spor-st:200000005029,
     IF(?Substance_Type = "Structurally Diverse - Herbal", spor-st:200000005025,
     IF(?Substance_Type = "Structurally Diverse - Other", spor-st:200000005030,
@@ -140,13 +141,13 @@ WHERE {
   BIND(
     IF(?Name_Source = "CHEBI", idmp-eura:ChemicalEntitiesOfBiologicalInterest, # valid
     IF(?Name_Source = "CHEMICAL ABSTRACT SERVICE", idmp-amra:ChemicalAbstractsService, # valid
-    IF(?Name_Source = "EUROPEAN CHEMICALS AGENCY (ECHA)", idmp-eura:EuropeanChemicalsAgency, # valid
+    IF(?Name_Source = "EUROPEAN CHEMICALS AGENCY (ECHA)", idmp-eureg:EuropeanChemicalsAgency, # valid
     IF(?Name_Source = "FDA SUBSTANCE REGISTRATION SYSTEM", idmp-amra:FoodAndDrugAdministrationRegistrationAuthority, # valid
     IF(?Name_Source = "INN", idmp-ra:InternationalNonproprietaryName, # valid
     IF(?Name_Source = "ITIS (INTEGRATED TAXONOMIC INFORMATION SYSTEM)", idmp-amra:IntegratedTaxonomicInformationSystem, # valid
     IF(?Name_Source = "PUBCHEM", cmns-ra:PubChem, # valid
     IF(?Name_Source = "THE MERCK INDEX 20TH EDITION", idmp-ra:MerckIndexOnline, # valid
-    IF(?Name_Source = "USP", idmp-ra:USPharmacopeiaMedicinesCompendium, # valid
+    IF(?Name_Source = "USP", idmp-amra:USPharmacopeiaMedicinesCompendium, # valid
     IF(?Name_Source = "WHO", idmp-ra:WorldHealthOrganization, # valid
     ?unbound ))))))))))
     AS ?sourceAuthority )

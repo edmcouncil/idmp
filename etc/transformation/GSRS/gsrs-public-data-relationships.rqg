@@ -5,6 +5,7 @@ PREFIX cmns-rlcmp: <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-amra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/>
+PREFIX idmp-nara: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegulatoryAgencies>
 PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 
 GENERATE {
@@ -83,7 +84,7 @@ BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, idmp-sub:Active
 BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, idmp-sub:isActiveMoietyOf, ?nothing) AS ?IsActiveMoietyOfProperty)
 
 BIND(
-    IF(str(?RelationshipType) = "ACTIVE MOIETY", idmp-amra:RegulatoryContext-FoodAndDrugAdministrationGeneral,
-    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-amra:RegulatoryContext-ActiveMoietyForFoodAndDrugAdministrationExclusivity,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY", idmp-nara:RegulatoryContext-FoodAndDrugAdministrationGeneral,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-nara:RegulatoryContext-ActiveMoietyForFoodAndDrugAdministrationExclusivity,
     ?nothing))
     AS ?RegulatoryContext)
