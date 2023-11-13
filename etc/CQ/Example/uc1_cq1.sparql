@@ -8,7 +8,18 @@ PREFIX rdf:              <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:             <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:              <http://www.w3.org/2002/07/owl#>
  
-SELECT DISTINCT ?Substance (SAMPLE(LCASE(?SubstanceLabel)) AS ?SubstanceName)
+
+# Prior versions of this SPARQL query used an aggregate query using SAMPLE()
+# SELECT DISTINCT ?Substance (SAMPLE(?SubstanceLabel) AS ?SubstanceName)
+#
+# This does not work determinstically, if there are more than 1 official names per substance, 
+# which for the Amlodine active moieties is the case (FDA uses GSRS, EMA uses SPOR)
+# There is no way to do this in SPARQL 1.1, because of missing correlated subqueries.
+
+# The aggregate query is replaced by a non-aggregate one, so that the query can be used for unit tests.
+# for a determinstic result, based on the example data, we return all (official) names of the moieties, which in the Amlodipine case are 5 labels
+
+SELECT  DISTINCT ?Substance ?SubstanceLabel
 
 WHERE {
     # Bind Variable ActiveMoiety <$ActiveMoiety>
@@ -77,8 +88,11 @@ WHERE {
         ?Name cmns-txt:hasTextValue ?SRSOtherName.
 	}
   
-	BIND(COALESCE(?OfficialName,  ?SystematicName, ?CommonName, ?AnyName, ?SRSTermName, ?SRSShortName, ?SRSOtherName, "") AS ?SubstanceLabel)
+	BIND(LCASE(COALESCE(?OfficialName,  ?SystematicName, ?CommonName, ?AnyName, ?SRSTermName, ?SRSShortName, ?SRSOtherName)) AS ?SubstanceLabel)
+	FIlTER(BOUND(?SubstanceLabel))
  
 } 
-GROUP BY ?Substance
-ORDER BY ?Substance
+# original aggregate query does group by substance
+# GROUP BY ?Substance
+# ORDER BY ?Substance
+ORDER BY ?Substance ?SubstanceLabel
