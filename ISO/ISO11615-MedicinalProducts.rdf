@@ -2312,6 +2312,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isManagedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProductMasterFileHolder"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
@@ -2323,6 +2330,26 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>https://www.fda.gov/drugs/guidances-drugs/drug-master-files-guidelines</cmns-av:adaptedFrom>
 		<cmns-av:synonym>master file</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductMasterFileHolder">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;AuthorizedParty"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
+				<owl:onClass rdf:resource="&cmns-org;LegalEntity"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;manages"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductMasterFile"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medicinal product master file holder</rdfs:label>
+		<skos:definition>authorized role of a legal entity (organization) that holds a master file for a given medicinal product</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductName">
