@@ -1,38 +1,38 @@
-prefix idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
-prefix cmns-dsg:	  <https://www.omg.org/spec/Commons/Designators/>
-prefix cmns-txt: 	  <https://www.omg.org/spec/Commons/TextDatatype/>
-prefix cmns-id:	    <https://www.omg.org/spec/Commons/Identifiers/>
-prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
-prefix skos:        <http://www.w3.org/2004/02/skos/core#>
+PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX cmns-dsg:	  <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-txt: 	  <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX cmns-id:	    <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:        <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?Substance
  
 WHERE {
-    BIND(cq0_parameter_1 AS ?SubstanceInputReference )
+    BIND ( cq0_parameter_1 AS ?SubstanceInputReference )
     
     ?Substance rdf:type/rdfs:subClassOf* idmp-sub:Substance .
 
 	# the standard IDMP-O access to the substance label
 	OPTIONAL {
       ?Substance idmp-sub:hasSubstanceName/idmp-sub:hasSubstanceNameValue ?SubstanceName .
-      FILTER(lcase(str(?SubstanceName)) = lcase(str(?SubstanceInputReference)))
+      FILTER ( LCASE(STR(?SubstanceName)) = LCASE(STR(?SubstanceInputReference)))
     }
 
     OPTIONAL {
       ?SimpleLabelProperty rdfs:subPropertyOf* rdfs:label .
       ?Substance ?SimpleLabelProperty ?SubstanceLabel .
-      FILTER(lcase(str(?SubstanceLabel)) = lcase(?SubstanceInputReference))
+      FILTER (LCASE(STR(?SubstanceLabel)) = LCASE(?SubstanceInputReference))
     }
     OPTIONAL {
       ?Substance cmns-dsg:hasName/cmns-txt:hasTextValue ?SubstanceName .
-      FILTER(lcase(str(?SubstanceName)) = lcase(str(?SubstanceInputReference)))
+      FILTER (LCASE(STR(?SubstanceName)) = LCASE(STR(?SubstanceInputReference)))
     }
     OPTIONAL {
       ?nameNode rdf:type/rdfs:subClassOf* idmp-sub:SubstanceName .
       ?nameNode cmns-dsg:isNameOf ?Substance .
       ?nameNode cmns-txt:hasTextValue ?textValue .
-      FILTER(lcase(str(?textValue)) = lcase(str(?SubstanceInputReference)))
+      FILTER (LCASE(STR(?textValue)) = LCASE(STR(?SubstanceInputReference)))
     }
-    FILTER(bound(?SubstanceLabel) || bound(?SubstanceName) || bound(?SubstanceIdentifier)|| bound(?textValue))
+    FILTER (BOUND(?SubstanceLabel) || BOUND(?SubstanceName) || BOUND(?SubstanceIdentifier)|| BOUND(?textValue))
 }
