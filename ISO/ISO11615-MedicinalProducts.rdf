@@ -2035,6 +2035,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;OrphanDesignation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2312,6 +2319,20 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>institutional body that, according to the legal system under which it has been established, is responsible for the granting of marketing authorizations, clinical trial authorizations and manufacturing authorizations for medicinal products</skos:definition>
 		<skos:note>In certain regions, the role of the institutional body, which according to the legal system grants the marketing authorization of medicinal products, may be complemented by an additional institutional body responsible for the evaluation and supervision of medicinal products. For example, in the EU, the European Commission is the institutional body that grants the marketing authorization of medicinal products and the European Medicines Agency is the body responsible for the evaluation and supervision of medicinal products.</skos:note>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.56</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;OrphanDesignation">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>orphan designation</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6</dct:source>
+		<skos:definition>classifier for a product that has been deemed to be an orphan</skos:definition>
+		<skos:note>This class includes several attributes required to have all the information related to a product with an orphan designation status.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;OtherTherapySpecifics">
@@ -2800,13 +2821,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductSpecification"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>product classifier</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6</dct:source>
-		<skos:definition>classifier for a product according to various classification systems, which may be jurisdictional or international</skos:definition>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<skos:definition>classifier for a product using a categorisation or grouping of Medicinal Products based on specific properties</skos:definition>
+		<skos:note>The Medicinal Product can be classified according to various classification systems, which may be regional or international.</skos:note>
 		<cmns-av:synonym>product classification</cmns-av:synonym>
 	</owl:Class>
 	
