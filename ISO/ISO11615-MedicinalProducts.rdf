@@ -28,6 +28,7 @@
 	<!ENTITY idmp-uom "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/">
 	<!ENTITY lcc-639-1 "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/">
 	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
+	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
 	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -64,6 +65,7 @@
 	xmlns:idmp-uom="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/"
 	xmlns:lcc-639-1="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
 	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
+	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
 	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -101,6 +103,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231101/ISO11615-MedicinalProducts/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298). It was also extended to include concepts such as process, manufacturing process, process identifier, batch, batch identifier, lot, lot number, and others required in support of the regulatory to manufacturing bridge use case.</skos:changeNote>
@@ -2280,6 +2283,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductNameLocale"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
@@ -2288,6 +2297,37 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>name as authorized by a medicines regulatory agency</skos:definition>
 		<skos:note>This may be either an invented name not liable to be confused with the common name, or a common or a scientific name accompanied by a trade mark or any other applicable descriptor.</skos:note>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.54</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductNameLocale">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;Context"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rga;hasJurisdiction"/>
+				<owl:onClass rdf:resource="&cmns-rga;Jurisdiction"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rga;hasReach"/>
+				<owl:onClass rdf:resource="&lcc-cr;GeographicRegion"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasLanguage"/>
+				<owl:onClass rdf:resource="&lcc-lr;Language"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">medicinal product name locale</rdfs:label>
+		<skos:definition>context in which a given medicinal product name applies</skos:definition>
+		<skos:note>The country and optionally the region where the medicinal product name of a medicinal product is authorized shall be specified in the official language as applicable.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-ModelConformant"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
+		<cmns-av:synonym xml:lang="en">Country / Language</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinesRegulatoryAgency">
@@ -3640,7 +3680,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAttachedDocument">
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
 		<rdfs:label>has attached document</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-doc;AttachedDocument"/>
+		<rdfs:range rdf:resource="&idmp-mprd;AttachedDocument"/>
 		<skos:definition>indicates a reference document that is specifically associated with a pharmaceutical or medicinal product</skos:definition>
 	</owl:ObjectProperty>
 	
