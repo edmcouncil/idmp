@@ -102,7 +102,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11615-MedicinalProducts/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231101/ISO11615-MedicinalProducts/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298). It was also extended to include concepts such as process, manufacturing process, process identifier, batch, batch identifier, lot, lot number, and others required in support of the regulatory to manufacturing bridge use case.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename product constituency to product composition, which is better understood by the user community, and to move a couple of restrictions from ingredient to substance, including strength and whether or not that substance is potentially allergenic. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate additional manufacturing and packaging details required for UC-2 (IDMP-465), to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to change the status of this ontology to &apos;release&apos; (IDMP-525), to add content related to dose forms (IDMP-531, IDMP-538), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
@@ -111,6 +111,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11615-MedicinalProducts.rdf version of this ontology was modified to extend the definition of product role to relate to product specifications in addition to products (IDMP-633).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add other therapy specifics (IDMP-639), and to (1) reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, (2) incorporate hasExpirationDate, which was simplified out of the OMG Commons ontology, and (3) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to restructure the inheritance hierarchy with respect to Batch and Lot definitions (IDMP-632).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add package components, devices, and physical characteristics (IDMP-659), to eliminate default codes on Ingredient and InactiveIngredient (IDMP-634), and add characteristics for target populations (IDMP-640).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to fill in gaps with respect to the top-level class definitions and relationships in Figure , in ISO 11615 (IDMP-677).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -695,6 +696,12 @@
 		<rdfs:subClassOf rdf:resource="&idmp-uom;TimeQuantityValue"/>
 		<rdfs:label>age value</rdfs:label>
 		<skos:definition>time quantity value expressing the amount of time passed since creation of something</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AttachedDocument">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
+		<rdfs:label>attached document</rdfs:label>
+		<skos:definition>document that provides additional information about something</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Authorization">
@@ -2042,6 +2049,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ProductClassifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rlcmp;playsRole"/>
 				<owl:onClass rdf:resource="&idmp-mprd;ProductRole"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2066,6 +2080,18 @@
 				<owl:onProperty rdf:resource="&idmp-mprd;hasUndesirableEffect"/>
 				<owl:onClass rdf:resource="&idmp-mprd;UndesirableEffect"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasAttachedDocument"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;AttachedDocument"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductName"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>medicinal product</rdfs:label>
@@ -2767,6 +2793,21 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>identifier assigned to a part of a process</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:adaptedFrom>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ProductClassifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductSpecification"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>product classifier</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6</dct:source>
+		<skos:definition>classifier for a product according to various classification systems, which may be jurisdictional or international</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:synonym>product classification</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ProductComposition">
@@ -3573,6 +3614,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label>has age range</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;AgeRange"/>
 		<skos:definition>relates to a range of ages by specifying lower and upper bounds as time quantity value</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAttachedDocument">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
+		<rdfs:label>has attached document</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-doc;AttachedDocument"/>
+		<skos:definition>indicates a reference document that is specifically associated with a pharmaceutical or medicinal product</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorization">
