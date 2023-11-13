@@ -12,49 +12,74 @@ PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
 PREFIX idmp-spor: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX cmns-av: <https://www.omg.org/spec/Commons/AnnotationVocabulary/>
+PREFIX cmns-col: <https://www.omg.org/spec/Commons/Collections/>
 
 GENERATE {
-    <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }/terms>
+    <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }/ontology>
         a owl:Ontology ;
-        rdfs:label "SPOR RMS - {?Name}" ;
+        rdfs:label "SPOR RMS - {?Name} - Ontology" ;
         skos:scopeNote ?Spor_Domain_URI ;
         skos:note ?Spor_Status_URI ;
         dct:modified "{?Modified_On}"^^xsd:dateTime ;
         dct:created "{?Created_On}"^^xsd:dateTime ;
         owl:versionInfo ?Version ;
+        cmns-av:copyright "Copyright (c) 2022-2023 EMA SPOR";
         rdfs:comment "Created as part of the IDMP Ontology project using Accurids" ;
         .
 
     <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }>
-        a owl:Class ;
-        rdfs:subClassOf idmp-spor:SPORControlledVocabularyTerm;
+        a idmp-spor:SPORControlledVocabulary;
         rdfs:label ?Name ;
         rdfs:seeAlso <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }/terms> ;
-        cmns-dsg:isDefinedIn idmp-spor:ReferentialsManagementServicesClassificationScheme ;
         skos:exactMatch ?ExactMatch ;
-        #cmns-col:isIncludedIn <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }/terms>;
+        idmp-spor:hasSPORDomain ?Spor_Domain_URI;
+        #idmp-spor:hasSPORVisibility ;
+        cmns-dsg:hasName <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }-ListName>;
+        cmns-id:isIdentifiedBy <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }-ListIdentifier>;
+        #dct:source ;
+        .
+
+    <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }-ListIdentifier>
+        a idmp-spor:SPORListIdentifier;
+        rdfs:label "SPOR-RMS - {?Name} - ListIdentifier";
+        cmns-txt:hasTextValue ?Identifier;
+        .
+    
+    <https://spor.ema.europa.eu/v1/lists/{ ?Identifier }-ListName>
+        a idmp-spor:SPORListName;
+        rdfs:label "SPOR-RMS - {?Name} - List Name";
+        cmns-txt:hasTextValue ?Name;
         .
 
     GENERATE {
         <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>
-            a <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }> ;
+            a idmp-spor:SPORControlledVocabularyTerm;
             rdfs:label ?English_Term_Name_LangString ;
-            skos:definition ?Term_Description_LangString ;
+            idmp-spor:hasSPORTermDescription <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }-TermDescription-English>;
             skos:notation ?Term_Symbol ;
-            cmns-cls:isClassifiedBy <https://spor.ema.europa.eu/v1/lists/100000000004/terms/{ ?Domain_ID }> ;
-            cmns-cls:isClassifiedBy ?Spor_Term_Status_URI ;
+            cmns-col:isIncludedIn <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }>;
+            idmp-spor:hasSPORDomain ?Spor_Domain_URI;
+            idmp-spor:hasSPORVisibility ?Spor_Term_Status_URI ;
             dct:created "{?Term_Created_On_ISO}"^^xsd:dateTime ;
             dct:modified "{?Term_Modified_On_ISO}"^^xsd:dateTime ;
-            cmns-id:isIdentifiedBy <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/SPOR-TermIdentifier-{ ?List_ID }-{ ?Term_ID }>;
+            cmns-id:isIdentifiedBy <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }-TermIdentifier>;
             .
 
-        <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/SPOR-TermIdentifier-{ ?List_ID }-{ ?Term_ID }>
+        <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }-TermIdentifier>
             a idmp-spor:SPORTermIdentifier;
-            rdfs:label ?TermIdentifierLabel;
+            rdfs:label "SPOR-RMS, {?Name} Vocabulary,  {?English_Term_Name_LangString}, Term Identifier";
             dct:source <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
             skos:definition "SPOR term identifier";
             cmns-txt:hasTextValue ?Term_ID;
             cmns-id:identifies <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
+            .
+
+        <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }-TermDescription-English>
+            a idmp-spor:SPORTermDescription;
+            rdfs:label "SPOR-RMS, {?Name} Vocabulary,  {?English_Term_Name_LangString}, Term Description - English";
+            cmns-txt:hasTextValue ?Term_Description_LangString;	
+            #mvf:hasLanguage lcc-639-1:English 
             .
 
         GENERATE {
@@ -68,10 +93,10 @@ GENERATE {
 
         # generate reification statement for term status
         GENERATE {
-            <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }/termStatus/{ ?Term_Status_Rowid }>
+            <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }/statement/{ ?Term_Status_Rowid }>
                 a rdf:Statement ;
                 rdf:subject <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }> ;
-                rdf:predicate cmns-cls:isClassifiedBy ;
+                rdf:predicate idmp-spor:hasSPORVisibility ;
                 rdf:object ?Spor_Term_Status_URI ;
                 dct:modified "{?Term_Status_Modified_On}"^^xsd:dateTime ;
                 dct:contributor ?Term_Status_Modified_By ;
@@ -89,10 +114,10 @@ GENERATE {
             <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Term_Name_Rowid }>
                 a idmp-spor:SPORTermName;
                 cmns-txt:hasTextValue ?Term_Name_LangString ;
-                rdfs:label ?Term_Name_LangString ;
-                dct:source <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
-                skos:definition "SPOR term name";
-                cmns-dsg:denotes <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
+                rdfs:label "SPOR-RMS - {?Name} Vocabulary - { ?Term_Name_LangString} - Term Name - {?Language}";
+                #dct:source <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
+                skos:definition "SPOR term name of { ?Term_Name_LangString} in {?Language}";
+                #cmns-dsg:denotes <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
                 dct:modified "{?Term_Name_Modified_On_ISO}"^^xsd:dateTime ;
                 dct:contributor ?Term_Name_Modified_By ;
                 cmns-cls:isClassifiedBy ?Spor_Term_Name_Translation_Status_URI ;
@@ -130,10 +155,10 @@ GENERATE {
             <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Short_Name_Rowid }>
                 a idmp-spor:SPORShortName;
                 cmns-txt:hasTextValue ?Short_Name_LangString ;
-                rdfs:label ?Short_Name_LangString ;
-                dct:source <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
-                skos:definition "SPOR short name";
-                cmns-dsg:denotes <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
+                rdfs:label "SPOR-RMS - {?Name} Vocabulary - { ?Short_Name_LangString} - Short Name - {?Language}";
+                #dct:source <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
+                skos:definition "SPOR short name of { ?Short_Name_LangString} in {?Language}";
+                #cmns-dsg:denotes <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
                 dct:modified "{?Short_Name_Modified_On_ISO}"^^xsd:dateTime ;
                 dct:contributor ?Short_Name_Modified_By ;
                 cmns-cls:isClassifiedBy ?Spor_Short_Name_Translation_Status_URI ;
@@ -171,10 +196,10 @@ GENERATE {
             <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }/label/{ ?Splitted_Other_Name_Rowid }>
                 a idmp-spor:SPOROtherName;
                 cmns-txt:hasTextValue ?Splitted_Other_Name_LangString ;
-                rdfs:label ?Splitted_Other_Name_LangString ;
-                dct:source <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
-                skos:definition "SPOR other name";
-                cmns-dsg:denotes <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
+                rdfs:label "SPOR-RMS - {?Name} Vocabulary - { ?Splitted_Other_Name_LangString} - Short Name - {?Language}";
+                #dct:source <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
+                skos:definition "SPOR other name of { ?Splitted_Other_Name_LangString} in {?Language}";
+                #cmns-dsg:denotes <https://spor.ema.europa.eu/v1/lists/{ ?List_ID }/terms/{ ?Term_ID }>;
                 dct:modified "{?Splitted_Other_Name_Modified_On_ISO}"^^xsd:dateTime ;
                 dct:contributor ?Splitted_Other_Name_Modified_By ;
                 cmns-cls:isClassifiedBy ?Spor_Splitted_Other_Name_Translation_Status_URI ;
@@ -308,7 +333,7 @@ GENERATE {
     ?Is_Major_Version
     ?Term_Visibility
     WHERE {
-        BIND(concat("SPOR Term Identifier for ",?List_ID,"-",?Term_ID) AS ?TermIdentifierLabel)
+        BIND(concat("SPOR Term Identifier for ",?Term_ID) AS ?TermIdentifierLabel)
         BIND(IF(?Language = "en", STRLANG(?Term_Name, ?Language), ?unbound) AS ?English_Term_Name_LangString)
         BIND(IF(BOUND(?Other_Name), strlen(replace(?Other_Name, "[^¦]", "")) + 1, 0) AS ?Other_Name_Length)
         BIND(STRLANG(?Term_Description, ?Language) AS ?Term_Description_LangString)
