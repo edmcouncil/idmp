@@ -2038,6 +2038,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProductMasterFile"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;OrphanDesignation"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2277,6 +2284,22 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:note>The critical process, critical process steps, starting and processing materials and critical production parameters are included.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:synonym>manufacturing</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductMasterFile">
+		<rdfs:subClassOf rdf:resource="&cmns-ra;Registry"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medicinal product master file</rdfs:label>
+		<skos:definition>collection of records submitted to a medicines regulatory agency that may be used to provide confidential detailed information about facilities, processes, or articles used in the manufacturing, processing, packaging, and storing of one or more human drugs</skos:definition>
+		<skos:note>This may be either an invented name not liable to be confused with the common name, or a common or a scientific name accompanied by a trade mark or any other applicable descriptor.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>https://www.fda.gov/drugs/guidances-drugs/drug-master-files-guidelines</cmns-av:adaptedFrom>
+		<cmns-av:synonym>master file</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductName">
