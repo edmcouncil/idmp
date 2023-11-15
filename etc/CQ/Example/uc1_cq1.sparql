@@ -48,43 +48,43 @@ WHERE {
   
   	# Optionally, get one of the official names of the substance
     OPTIONAL{
-		?SubstanceAlias  idmp-sub:hasSubstanceName ?Name .
+		?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
 	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?OfficialName .
 	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-OfficialName
 	}
     # Optionally, get one of the systematic names of the substance
     OPTIONAL{
-    	?SubstanceAlias  idmp-sub:hasSubstanceName ?Name .
+    	?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
 	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?SystematicName .
 	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-SystematicName
 	}
     # Optionally, get one of the common names of the substance
     OPTIONAL{
-    	?SubstanceAlias  idmp-sub:hasSubstanceName ?Name .
+    	?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
 	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?CommonName .
 	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-CommonName
 	}
     # Optionally, get any substance name of the substance
     OPTIONAL {
-    	?SubstanceAlias  idmp-sub:hasSubstanceName ?Name .
+    	?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
 	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?AnyName .
 	}
     # Optionally, get the name from SPOR SRS term name
     OPTIONAL {
     	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
-                     idmp-spor:hasSPORTermName ?Name .
+                     idmp-spor:hasSPORTermName|^cmns-dsg:isNameOf ?Name .
         ?Name cmns-txt:hasTextValue ?SRSTermName.
 	}
     # Optionally, get the name from SPOR SRS short name
     OPTIONAL {
     	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
-                    idmp-spor:hasSPORShortName ?Name .
+                    idmp-spor:hasSPORShortName|^cmns-dsg:isNameOf ?Name .
         ?Name cmns-txt:hasTextValue ?SRSShortName.
 	}
     # Optionally, get the name from SPOR SRS other name
     OPTIONAL {
     	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
-                    idmp-spor:hasSPOROtherName ?Name .
+                    idmp-spor:hasSPOROtherName|^cmns-dsg:isNameOf ?Name .
         ?Name cmns-txt:hasTextValue ?SRSOtherName.
 	}
   
