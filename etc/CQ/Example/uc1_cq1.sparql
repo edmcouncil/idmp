@@ -45,7 +45,13 @@ WHERE {
    	?SubstanceAlias a/rdfs:subClassOf* idmp-sub:Substance .
     # consider alternate substance IRIs
     ?Substance (owl:sameAs|^owl:sameAs)* ?SubstanceAlias .
-  
+	
+   	# Optionally, get the preferred name of the substance
+    OPTIONAL{
+		?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?PreferredName .
+	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-PreferredName
+	} 
   	# Optionally, get one of the official names of the substance
     OPTIONAL{
 		?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
@@ -88,7 +94,7 @@ WHERE {
         ?Name cmns-txt:hasTextValue ?SRSOtherName.
 	}
   
-	BIND(LCASE(COALESCE(?OfficialName,  ?SystematicName, ?CommonName, ?AnyName, ?SRSTermName, ?SRSShortName, ?SRSOtherName)) AS ?SubstanceLabel)
+	BIND(LCASE(COALESCE(?PreferredName, ?OfficialName,  ?SystematicName, ?CommonName, ?AnyName, ?SRSTermName, ?SRSShortName, ?SRSOtherName)) AS ?SubstanceLabel)
 	FIlTER(BOUND(?SubstanceLabel))
  
 } 
