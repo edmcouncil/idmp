@@ -6,33 +6,37 @@ PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos:        <http://www.w3.org/2004/02/skos/core#>
 
+
+#Search substance by name case-insensitive
+
 SELECT DISTINCT ?Substance
- 
 WHERE {
-    BIND ( cq0_parameter_1 AS ?SubstanceInputReference )
+	# Bind Variable SubstanceNameSearch
+    # Example  "Amlodipine" for $SubstanceNameSearch
+    BIND ( cq0_parameter_1 AS $SubstanceNameSearch )
     
     ?Substance rdf:type/rdfs:subClassOf* idmp-sub:Substance .
 
 	# the standard IDMP-O access to the substance label
 	OPTIONAL {
       ?Substance idmp-sub:hasSubstanceName/idmp-sub:hasSubstanceNameValue ?SubstanceName .
-      FILTER ( LCASE(STR(?SubstanceName)) = LCASE(STR(?SubstanceInputReference)))
+      FILTER ( LCASE(STR(?SubstanceName)) = LCASE(STR($SubstanceNameSearch)))
     }
 
     OPTIONAL {
       ?SimpleLabelProperty rdfs:subPropertyOf* rdfs:label .
       ?Substance ?SimpleLabelProperty ?SubstanceLabel .
-      FILTER (LCASE(STR(?SubstanceLabel)) = LCASE(?SubstanceInputReference))
+      FILTER (LCASE(STR(?SubstanceLabel)) = LCASE($SubstanceNameSearch))
     }
     OPTIONAL {
       ?Substance cmns-dsg:hasName/cmns-txt:hasTextValue ?SubstanceName .
-      FILTER (LCASE(STR(?SubstanceName)) = LCASE(STR(?SubstanceInputReference)))
+      FILTER (LCASE(STR(?SubstanceName)) = LCASE(STR($SubstanceNameSearch)))
     }
     OPTIONAL {
       ?nameNode rdf:type/rdfs:subClassOf* idmp-sub:SubstanceName .
       ?nameNode cmns-dsg:isNameOf ?Substance .
       ?nameNode cmns-txt:hasTextValue ?textValue .
-      FILTER (LCASE(STR(?textValue)) = LCASE(STR(?SubstanceInputReference)))
+      FILTER (LCASE(STR(?textValue)) = LCASE(STR($SubstanceNameSearch)))
     }
     FILTER (BOUND(?SubstanceLabel) || BOUND(?SubstanceName) || BOUND(?SubstanceIdentifier)|| BOUND(?textValue))
 }
