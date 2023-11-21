@@ -15,7 +15,8 @@ WHERE {
     # Example  "Amlodipine" for $SubstanceNameSearch
     BIND ( cq0_parameter_1 AS $SubstanceNameSearch )
     
-    ?Substance rdf:type/rdfs:subClassOf* idmp-sub:Substance .
+    ?SubstanceAlias rdf:type/rdfs:subClassOf* idmp-sub:Substance .
+	?Substance (owl:sameAs|^owl:sameAs)* ?SubstanceAlias .
 
 	# the standard IDMP-O access to the substance label
 	OPTIONAL {
@@ -23,20 +24,19 @@ WHERE {
       FILTER ( LCASE(STR(?SubstanceName)) = LCASE(STR($SubstanceNameSearch)))
     }
 
+	OPTIONAL {
+      ?Substance (^cmns-dsg:isNameOf|cmns-dsg:hasName)/cmns-txt:hasTextValue ?SubstanceName .
+      FILTER (LCASE(STR(?SubstanceName)) = LCASE(STR($SubstanceNameSearch)))
+    }
+	
+	# using skos or rdfs:label
     OPTIONAL {
       ?SimpleLabelProperty rdfs:subPropertyOf* rdfs:label .
       ?Substance ?SimpleLabelProperty ?SubstanceLabel .
       FILTER (LCASE(STR(?SubstanceLabel)) = LCASE($SubstanceNameSearch))
     }
-    OPTIONAL {
-      ?Substance cmns-dsg:hasName/cmns-txt:hasTextValue ?SubstanceName .
-      FILTER (LCASE(STR(?SubstanceName)) = LCASE(STR($SubstanceNameSearch)))
-    }
-    OPTIONAL {
-      ?nameNode rdf:type/rdfs:subClassOf* idmp-sub:SubstanceName .
-      ?nameNode cmns-dsg:isNameOf ?Substance .
-      ?nameNode cmns-txt:hasTextValue ?textValue .
-      FILTER (LCASE(STR(?textValue)) = LCASE(STR($SubstanceNameSearch)))
-    }
-    FILTER (BOUND(?SubstanceLabel) || BOUND(?SubstanceName) || BOUND(?SubstanceIdentifier)|| BOUND(?textValue))
+    
+
+    FILTER (BOUND(?SubstanceLabel) || BOUND(?SubstanceName)
 }
+ORDER BY ?Substance
