@@ -17,27 +17,27 @@ WHERE {
     BIND ( cq0_parameter_1 AS $SubstanceNameSearch )
     
     ?SubstanceAlias rdf:type/rdfs:subClassOf* idmp-sub:Substance .
+	
 	?Substance (owl:sameAs|^owl:sameAs)* ?SubstanceAlias .
 
 	# the standard IDMP-O access to the substance label
 	OPTIONAL {
-      ?Substance idmp-sub:hasSubstanceName/idmp-sub:hasSubstanceNameValue ?SubstanceName .
-      FILTER ( LCASE(STR(?SubstanceName)) = LCASE(STR($SubstanceNameSearch)))
+      ?SubstanceAlias idmp-sub:hasSubstanceName/idmp-sub:hasSubstanceNameValue ?SubstanceName .
+      FILTER (LCASE(?SubstanceName) = LCASE($SubstanceNameSearch))
     }
 
 	OPTIONAL {
-      ?Substance (^cmns-dsg:isNameOf|cmns-dsg:hasName)/cmns-txt:hasTextValue ?SubstanceName .
-      FILTER (LCASE(STR(?SubstanceName)) = LCASE(STR($SubstanceNameSearch)))
+      ?SubstanceAlias (^cmns-dsg:isNameOf|cmns-dsg:hasName)/cmns-txt:hasTextValue ?SubstanceName .
+      FILTER (LCASE(?SubstanceName) = LCASE($SubstanceNameSearch))
     }
 	
 	# using skos or rdfs:label
     OPTIONAL {
       ?SimpleLabelProperty rdfs:subPropertyOf* rdfs:label .
-      ?Substance ?SimpleLabelProperty ?SubstanceLabel .
+      ?SubstanceAlias ?SimpleLabelProperty ?SubstanceLabel .
       FILTER (LCASE(STR(?SubstanceLabel)) = LCASE($SubstanceNameSearch))
     }
-    
 
-  FILTER (BOUND(?SubstanceLabel) || BOUND(?SubstanceName))
+    FILTER (BOUND(?SubstanceLabel) || BOUND(?SubstanceName))
 }
 ORDER BY ?Substance
