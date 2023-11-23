@@ -15,4 +15,4 @@ sudo wget --no-verbose -m -nH -nd -P /usr/bin https://github.com/ontodev/robot/r
 sudo chmod +x /usr/bin/robot
 
 # Prepare IDMP Ontologies
-robot merge --input AboutIDMPDev-ReferenceIndividuals.rdf --output AboutIDMPDev-ReferenceIndividuals.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
+robot merge --input AboutIDMPOntologiesAndExamples.rdf --output AboutIDMPOntologiesAndExamples.ttl --catalog /home/runner/work/idmp/idmp/catalog-v001.xml
