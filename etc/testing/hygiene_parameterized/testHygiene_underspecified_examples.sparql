@@ -10,6 +10,7 @@ SELECT DISTINCT ?error ?instance ?property
 WHERE
 {
     ?instance rdf:type ?class.
+    ?sameasinstance (owl:sameAs | ^owl:sameAs)* ?instance.
     
     ?class rdfs:subClassOf ?restriction.
     ?restriction rdf:type owl:Restriction.
@@ -32,7 +33,7 @@ WHERE
         {?inverseProperty owl:inverseOf ?property.}
 
         ?subInverseProperty rdfs:subPropertyOf* ?inverseProperty.
-        ?inverseRestriction owl:hasValue ?instance.
+        ?inverseRestriction owl:hasValue ?sameasinstance.
         ?restrictedClass rdfs:subClassOf* ?restrictingClass.
         ?restrictedClass rdfs:subClassOf* ?inverseRestriction.
     }
@@ -44,14 +45,14 @@ WHERE
         {?inverseProperty owl:inverseOf ?property.}
 
         ?subInverseProperty rdfs:subPropertyOf* ?inverseProperty.
-        ?inverseInstance ?subInverseProperty ?instance.
+        ?inverseInstance ?subInverseProperty ?sameasinstance.
         ?inverseInstance rdf:type/rdfs:subClassOf* ?restrictingClass.
     }
 
     FILTER NOT EXISTS 
     {
         ?subProperty rdfs:subPropertyOf* ?property. 
-        ?instance ?subProperty []. 
+        ?sameasinstance ?subProperty []. 
     }
 
     BIND (concat ("WARN: Individual ", STR(?instance), " looks like an unfinished example because it is missing a property required by its type.") AS ?error)
