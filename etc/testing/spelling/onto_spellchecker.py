@@ -9,6 +9,8 @@ from spellchecker import SpellChecker
 
 HTTP_REGEX = re.compile(pattern='http[^\s]+')
 LOCAL_NAME_SEPARATOR = '/'
+HAS_LANGUAGE_PREDICATE = URIRef('ttps://www.omg.org/spec/MVF/MultipleVocabularyFacility/hasLanguage')
+ENGLISH_LANGUAGE_OBJECT = URIRef('https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/English')
 
 
 def __get_local_name_from_iri(iri: URIRef) -> str:
@@ -57,6 +59,14 @@ def __check_word(
             misspelled_words.add(word)
 
 
+def __check_if_literal_is_in_scope(literal: Literal, triple_subject: URIRef, ontology: Graph) -> bool:
+    if literal.language is None:
+        language_objects = set(ontology.objects(subject=triple_subject, predicate=HAS_LANGUAGE_PREDICATE))
+        return ENGLISH_LANGUAGE_OBJECT in language_objects
+    else:
+        return literal.language == 'en'
+
+
 def __get_misspellings(ontology: Graph, resource_filter: str, spellchecker: SpellChecker) -> set:
     misspelled_words_in_triples = set()
     misspelled_words = set()
@@ -66,21 +76,20 @@ def __get_misspellings(ontology: Graph, resource_filter: str, spellchecker: Spel
                 literal = triple_object
                 literal_value = literal.value
                 if isinstance(literal_value, str):
-                    if literal.language is not None:
-                        if literal.language != 'en':
-                            continue
-                    trunc_text = re.sub(pattern=HTTP_REGEX, repl='', string=literal_value)
-                    trunc_text = re.sub(pattern=r'[a-z\-]+:[^\s]+', repl='', string=trunc_text)
-                    words = spellchecker.split_words(text=trunc_text)
-                    for word in words:
-                        __check_word(
-                            word=word,
-                            misspelled_words_in_triples=misspelled_words_in_triples,
-                            misspelled_words=misspelled_words,
-                            spellchecker=spellchecker,
-                            triple_subject=triple_subject,
-                            triple_predicate=triple_predicate,
-                            annotation_value=triple_object)
+                    continue_search = __check_if_literal_is_in_scope(literal=literal, triple_subject=triple_subject, ontology=ontology)
+                    if continue_search:
+                        trunc_text = re.sub(pattern=HTTP_REGEX, repl='', string=literal_value)
+                        trunc_text = re.sub(pattern=r'[a-z\-]+:[^\s]+', repl='', string=trunc_text)
+                        words = spellchecker.split_words(text=trunc_text)
+                        for word in words:
+                            __check_word(
+                                word=word,
+                                misspelled_words_in_triples=misspelled_words_in_triples,
+                                misspelled_words=misspelled_words,
+                                spellchecker=spellchecker,
+                                triple_subject=triple_subject,
+                                triple_predicate=triple_predicate,
+                                annotation_value=triple_object)
     return misspelled_words_in_triples
 
 
