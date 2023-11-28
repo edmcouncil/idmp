@@ -114,7 +114,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11615-MedicinalProducts.rdf version of this ontology was modified to extend the definition of product role to relate to product specifications in addition to products (IDMP-633).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add other therapy specifics (IDMP-639), and to (1) reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, (2) incorporate hasExpirationDate, which was simplified out of the OMG Commons ontology, and (3) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to restructure the inheritance hierarchy with respect to Batch and Lot definitions (IDMP-632).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add package components, devices, and physical characteristics (IDMP-659), to eliminate default codes on Ingredient and InactiveIngredient (IDMP-634), and add characteristics for target populations (IDMP-640).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to fill in gaps with respect to the top-level class definitions and relationships in Figure , in ISO 11615 (IDMP-677).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to fill in gaps with respect to the top-level class definitions and relationships in the complete model figures for authorized and investigational medicinal product in Annex A and Annex B, respectively, in ISO 11615 (IDMP-677).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -940,7 +940,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -955,7 +955,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -2122,6 +2122,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProductHeaderRecord"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasAttachedDocument"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;AttachedDocument"/>
 			</owl:Restriction>
@@ -2264,6 +2271,24 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:note>There can be a cross-reference between the MPIDs/PCIDs of the authorized Medicinal Product(s) and the related IMPIDs/IPCIDs of an Investigational Medicinal Product(s) assigned during the development phase and clinical investigation of that Medicinal Product. In addition, there may be references between authorized Medicinal Products and their corresponding identifiers. The related Medicinal Products and Investigational Medicinal Products can be specified with their corresponding identifiers.</skos:note>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
 		<cmns-av:synonym>product cross-reference</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductHeaderRecord">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Record"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medicinal product header record</rdfs:label>
+		<skos:definition>record that specifies the versioning of the core identifiers related to a medicinal product in a region [jurisdiction], as well as the characteristics associated with the medicinal product and the documentation that supports the versioning</skos:definition>
+		<skos:note>Regional guidance might contain additional criteria which may warrant a new version of a regulated document as it relates to the characteristics of a medicinal product.</skos:note>
+		<skos:note>The characteristics of an authorized medicinal product as defined herein shall be versioned within a regulated document, as applicable. For a given version, some characteristics of the medicinal product have changed but are not different to a sufficient extent to warrant the assignment of a new primary identifier. However, the difference(s) are required to be recorded and tracked against the MPID/PCID.</skos:note>
+		<skos:note>This is also a record to track against previous versions of a regulated document, regardless of whether the revisions warrant a new primary identifier (primary identifier reference shall be listed as an example of a change within a regulated document).</skos:note>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
+		<cmns-av:synonym>header</cmns-av:synonym>
+		<cmns-av:usageNote>A given medicinal product will have exactly 1 &apos;header&apos;, although a given &apos;header&apos; may apply to multiple medicinal products.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductIdentifier">
@@ -2460,6 +2485,8 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6</dct:source>
 		<skos:definition>classifier for medicinal products, including drugs and biologics, that have orphan status, especially with respect to rare diseases and or populations that meet certain criteria</skos:definition>
 		<skos:note>This class includes several attributes required to have all the information related to a product with an orphan designation status.</skos:note>
+		<cmns-av:explanatoryNote>In some cases, a rare disease indication may provide marketing exclusivity for a period of time, which may or may not be approved once a product is authorized. For certain new drugs that are not covered by patent exclusivity, there may also be a period of time when market exclusivity is granted. This may be complicated by jurisdiction specific designations, for example, in the US and EU. There may be multiple orphan designations for the same product, not only by jurisdiction, but by intended use, such as for pediatric patients.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>If the value for orphan designation status on the medicinal product is non-empty (i.e., the product has such a status), then from a business rule perspective, at least one instance of this classifier should be present.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;OtherTherapySpecifics">
