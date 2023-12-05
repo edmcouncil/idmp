@@ -943,7 +943,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -958,7 +958,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1969,6 +1969,49 @@
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.1.40 and 9.3.2, Figure 7</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;MarketingAuthorizationApplication">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorizationApplicationIdentifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;isReferredToBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorizationProcedure"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en-GB">marketing authorisation application</rdfs:label>
+		<rdfs:label xml:lang="en-US">marketing authorization application</rdfs:label>
+		<skos:definition>formal written request for the authorization to market a medicinal product</skos:definition>
+		<skos:note>A marketing authorization shall be supported by an application(s), which may comprise of a number of submissions (regulatory activities): initial marketing application and subsequent applications for changes to an existing marketing authorization (e.g. to renew, vary or withdraw).</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.1</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.2.7, Figure 7</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MarketingAuthorizationApplicationIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorizationApplication"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en-GB">marketing authorisation application identifier</rdfs:label>
+		<rdfs:label xml:lang="en-US">marketing authorization application identifier</rdfs:label>
+		<skos:definition>unique identifier for a marketing authorization application for a medicinal product</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.1</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.2.7, Figure 7</cmns-av:directSource>
+		<cmns-av:explanatoryNote>A unique identifier for the specific instance of an application shall be provided in text. The application identifier/number is usually assigned by a medicines regulatory agency.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>application identifier/number</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;MarketingAuthorizationHolder">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;AuthorizedParty"/>
 		<rdfs:subClassOf>
@@ -1997,7 +2040,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en-GB">marketing authorisation holder identifier</rdfs:label>
 		<rdfs:label xml:lang="en-US">marketing authorization holder identifier</rdfs:label>
-		<skos:definition>unique identifier for the marketing authorisation holder (organization) for the medicinal product</skos:definition>
+		<skos:definition>unique identifier for the marketing authorization holder (organization) for the medicinal product</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.2.2.3</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.1</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>An international coding system for unique marketing authorisation holders (organisations) identifiers can be applied, if available.</cmns-av:explanatoryNote>
@@ -2040,6 +2083,13 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
 				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorizationApplication"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2522,7 +2572,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-doc;isReferedToBy"/>
+				<owl:onProperty rdf:resource="&cmns-doc;isReferredToBy"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
