@@ -102,7 +102,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11615-MedicinalProducts/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231101/ISO11615-MedicinalProducts/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298). It was also extended to include concepts such as process, manufacturing process, process identifier, batch, batch identifier, lot, lot number, and others required in support of the regulatory to manufacturing bridge use case.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename product constituency to product composition, which is better understood by the user community, and to move a couple of restrictions from ingredient to substance, including strength and whether or not that substance is potentially allergenic. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate additional manufacturing and packaging details required for UC-2 (IDMP-465), to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to change the status of this ontology to &apos;release&apos; (IDMP-525), to add content related to dose forms (IDMP-531, IDMP-538), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
@@ -111,6 +111,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11615-MedicinalProducts.rdf version of this ontology was modified to extend the definition of product role to relate to product specifications in addition to products (IDMP-633).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add other therapy specifics (IDMP-639), and to (1) reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, (2) incorporate hasExpirationDate, which was simplified out of the OMG Commons ontology, and (3) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to restructure the inheritance hierarchy with respect to Batch and Lot definitions (IDMP-632).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add package components, devices, and physical characteristics (IDMP-659), to eliminate default codes on Ingredient and InactiveIngredient (IDMP-634), and add characteristics for target populations (IDMP-640).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to correct definitions to be compliant with IDMP-O policies (GitHub-501).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -2379,6 +2380,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:note>The PCID shall use a common segment pattern related to a package of a Medicinal Product, which when each segment is valued, shall define a specific PCID concept. The pattern is: a) MPID for the Medicinal Product; b) package description code segment, which refers to a unique identifier for each package.</skos:note>
 		<cmns-av:abbreviation>PCID</cmns-av:abbreviation>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.3, 9.6.2.2.1</cmns-av:directSource>
+		<cmns-av:synonym>packaged medicinal product identifier</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PackageItem">
@@ -2448,9 +2450,16 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackageItem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackageIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>packaged medicinal product</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.57</dct:source>
-		<skos:definition>medicinal product in a container being part of a package, representing the entirety that has been packaged for sale or supply</skos:definition>
+		<skos:definition>medicinal product in a container that is all or part of a package</skos:definition>
+		<skos:note>A packaged medicinal product represents the entirety that has been packaged for sale or supply.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.57</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalDoseForm">
@@ -3422,7 +3431,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>undesirable effect</rdfs:label>
-		<skos:definition>specification that defines the undesirable effects of the medicinal product is authorized or under investigation</skos:definition>
+		<skos:definition>specification of any potential undesirable side effect, adverse reaction or event, complication, or other similar potential consequence associated with the medicinal product as authorized or under investigation</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.2 and Figure 14</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 	</owl:Class>
