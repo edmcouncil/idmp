@@ -53,7 +53,7 @@
 		
 		The implementation of ISO 21090 included herein is an OWL 2 DL compliant representation of the datatypes defined in the ISO specification. This means that it is not a perfect match for the UML (Unified Modeling Language) representation given in the standard, as there is not a one-to-one alignment between UML and OWL. For details on mapping UML to OWL, please refer to the Object Management Group (OMG) specifications for (1) the Ontology Definition Metamode (ODM), available at https://www.omg.org/spec/ODM/, and (2) MOF to RDF Mapping (MOF2RDF), available at https://www.omg.org/spec/MOF2RDF/. As a consequence, this ontology is an indirectly conforming implementation that provides mappings to the XML Schema Datatypes that are supported in OWL 2 for some ISO 21090 datatypes, and encodes others in a manner that is OWL 2 DL compliant. References to ISO 11179 with respect to the representation of codes and code sets are faithful to the 3rd edition of 11179 as well as to revisions to that standard that are part of emerging work in the ISO JTC 1 SC32 WG2 working group to the degree possible.
 		
-		For more information on the ontologies on which this ontology depends, please refer to the Object Management Group (OMG) specifications for (1) the Commons Ontology Library (Commons) specification, available at https://www.omg.org/spec/COMMONS/, (2) the Languages, Countries and Codes (LCC) specification, available at https://www.omg.org/spec/LCC/, and (3) the Multiple Vocabulary Facility (MVF) specification, available at https://www.omg.org/spec/MVF/. Note that certain Commons ontologies referenced herein, including Documents and Quantities and Units, are not part of the Commons Ontology Library 1.0 Specification but are planned for inclusion in the 1.1 revision of the Commons planned for late 2023.</dct:abstract>
+		For more information on the ontologies on which this ontology depends, please refer to the Object Management Group (OMG) specifications for (1) the Commons Ontology Library (Commons) specification, available at https://www.omg.org/spec/COMMONS/, (2) the Languages, Countries and Codes (LCC) specification, available at https://www.omg.org/spec/LCC/, and (3) the Multiple Vocabulary Facility (MVF) specification, available at https://www.omg.org/spec/MVF/.</dct:abstract>
 		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
@@ -70,9 +70,10 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/2023001/ISO21090-HarmonizedDatatypes/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231201/ISO21090-HarmonizedDatatypes/"/>
 		<owl:versionInfo>The IDMP MVP version of this ontology is incomplete, and covers only the parts of the ISO 21090 standard required to support the MVP use cases.</owl:versionInfo>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO21090-HarmonizedDatatypes.rdf version of this ontology was modified to incorporate the Multiple Vocabulary Facility (MVF) for consistent representation of controlled vocabularies and code systems, and to align representations of URI-related properties (IDMP-636).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/2023001/ISO21090-HarmonizedDatatypes.rdf version of this ontology was modified to make hasBooleanValue and hasIntegerValue non-functional properties.</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -1330,7 +1331,6 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasBooleanValue">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>has boolean value</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.4.3.1</dct:source>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
@@ -1393,7 +1393,6 @@
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasExceptionalValue">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
 		<rdfs:label>has exceptional value</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.3.3.3.1</dct:source>
@@ -1415,7 +1414,6 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasIntegerValue">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>has integer value</rdfs:label>
 		<dct:source>ISO 21090:2011 Health informatics - Harmonized data types for information interchange, clause 7.8.3.3</dct:source>
 		<rdfs:range rdf:resource="&xsd;integer"/>
