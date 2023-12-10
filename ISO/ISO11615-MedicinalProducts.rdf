@@ -275,6 +275,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasOtherCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;NonPhysicalCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
 				<owl:onClass rdf:resource="&idmp-mprd;ProductComposition"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -951,7 +958,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -966,7 +973,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -2317,16 +2324,22 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasPhysicalCharacteristic"/>
-				<owl:onClass rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasOtherCharacteristic"/>
+				<owl:onClass rdf:resource="&idmp-mprd;NonPhysicalCharacteristic"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>medical device</rdfs:label>
-		<skos:definition>specification of an instrument, apparatus, contrivance, implant, in vitro reagent or similar article intended for use in the diagnosis of a disease or other conditions, or in the cure, mitigation, treatment, or prevention fo disease</skos:definition>
-		<skos:note>Devices may be of several types such as separate administration devices, an integral administration device or a part of a Medicinal Product. Where a Medicinal Product is combined with a medical device and where the pharmacological, immunological or metabolic action should be considered as the principal mode of action, the medical device is presented as part of the pharmaceutical product.</skos:note>
-		<cmns-av:adoptedFrom>FDA</cmns-av:adoptedFrom>
-		<cmns-av:adoptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.6.2.12</cmns-av:adoptedFrom>
+		<rdfs:seeAlso rdf:resource="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/classification-products-drugs-and-devices-and-additional-product-classification-issues"/>
+		<skos:definition>specification of an instrument, apparatus, appliance, software, material or other article, whether used alone or in combination, including the software intended by its manufacturer to be used specifically for diagnostic and/or therapeutic purposes and necessary for its proper application, intended by the manufacturer to be used for human beings for the purpose of:
+		— diagnosis, prevention, monitoring, treatment or alleviation of disease;
+— diagnosis, monitoring, treatment, alleviation of or compensation for an injury or handicap;
+— investigation, replacement or modification of the anatomy or of a physiological process;
+— control of conception, and which does not achieve its principal intended action in or on the human body by pharmacological, immunological or metabolic means, but which may be assisted in its function by such means</skos:definition>
+		<skos:example>Some examples of devices in the context of pharmaceutical products are drug delivery systems, drug-eluting stents, insulin pumps, glucose meters, and diagnostic test kits.</skos:example>
+		<skos:note>Devices may be of several types such as separate administration devices, an integral administration device or a part of a medicinal product. Where a medicinal product is combined with a medical device and where the pharmacological, immunological or metabolic action should be considered as the principal mode of action, the medical device is presented as part of the pharmaceutical product.</skos:note>
+		<cmns-av:adoptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.1.49 and 9.6.2.12</cmns-av:adoptedFrom>
+		<cmns-av:explanatoryNote>The FDA further clarifies this definition to say that such a device does not achieve its primary intended purposes through chemical action within or on the body of a man or other animals and which is not dependent upon being metabolized for the achievement of its primary intended purposes.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>device</cmns-av:synonym>
 	</owl:Class>
 	
@@ -2848,6 +2861,16 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.56</cmns-av:directSource>
 		<cmns-av:synonym xml:lang="en-GB">medicines regulatory agency (organisation)</cmns-av:synonym>
 		<cmns-av:synonym xml:lang="en-US">medicines regulatory agency (organization)</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;NonPhysicalCharacteristic">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:label>non-physical characteristic</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.20.6, 9.6.2.22</dct:source>
+		<owl:disjointWith rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<skos:definition>characterization of matter (or a specification thereof) that is based on something other than physically observable properties of the matter</skos:definition>
+		<skos:note>Where applicable for a package item, a manufactured item or a device, other characteristics can be specified. This facility is useful for capturing unusual details not explicitly catered for in the other attributes.</skos:note>
+		<cmns-av:synonym>other characteristic</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;OrphanDesignation">
@@ -4512,6 +4535,25 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:range rdf:resource="&idmp-mprd;VolumeCharacteristic"/>
 		<skos:definition>specifies the nominal volume of some material</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.6</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasOtherCharacteristic">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
+		<rdfs:label>has other characteristic</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&idmp-mprd;NonPhysicalCharacteristic"/>
+		<skos:definition>specifies a characteristic of some specification for a manufactured item, package item, or device that is not explicitly a physical characteristic</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NonConformant"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.22</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasOtherTherapySpecifics">
