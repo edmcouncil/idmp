@@ -951,7 +951,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -966,7 +966,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1738,6 +1738,17 @@
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;Interaction">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:label>interaction</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://ichgcp.net/1-glossary"/>
+		<rdfs:seeAlso rdf:resource="https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-drug-interactions-revision-1_en.pdf"/>
+		<skos:definition>specification of a change in the effect of a medicinal product when it is taken with another substance, such as another medicinal product, food, alcohol, or herbal product</skos:definition>
+		<skos:note>The change can be an increase or decrease in the effectiveness or side effects of the medicinal product. Medicinal product interactions can have different mechanisms, such as affecting the absorption, distribution, metabolism, or excretion of the medicinal product, or interfering with its target site. Medicinal product interactions can be beneficial or harmful, depending on the situation and the desired outcome of the treatment. They may be with respect to other medicinal products or other forms of interactions as described in the regulated product information.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.7</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.5</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;IntermediatePackaging">
 		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
@@ -2388,6 +2399,13 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasContraindication"/>
 				<owl:onClass rdf:resource="&idmp-mprd;Contraindication"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasInteraction"/>
+				<owl:onClass rdf:resource="&idmp-mprd;Interaction"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -4430,6 +4448,16 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasInteraction">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;isSpecifiedIn"/>
+		<rdfs:label>has interaction</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-mprd;Interaction"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;isInteractionFor"/>
+		<skos:definition>relates a product to a change in the effect of a medicinal product when it is taken with another substance, such as another medicinal product, food, alcohol, or herbal product</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.7</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.5</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasManufacturedItemQuantity">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has manufactured item quantity</rdfs:label>
@@ -4866,6 +4894,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>is input to</rdfs:label>
 		<skos:definition>is put in, taken in, or operated on by</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isInteractionFor">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
+		<rdfs:label>is interaction for</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;Interaction"/>
+		<skos:definition>inverse of has interaction</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isOtherTherapySpecificsOf">
