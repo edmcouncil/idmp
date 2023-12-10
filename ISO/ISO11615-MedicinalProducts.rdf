@@ -951,7 +951,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -966,7 +966,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -2299,6 +2299,13 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialSpecification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasPhysicalCharacteristic"/>
 				<owl:onClass rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2961,9 +2968,18 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-mprd;PackageItem">
 							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;MedicalDevice">
+							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
 				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
