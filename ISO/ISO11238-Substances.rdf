@@ -3200,7 +3200,7 @@ For the description of nucleic acids, the following information can be used to a
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalCharacteristic">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PropertyOfSubstance"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:label>physical characteristic</rdfs:label>
 		<skos:definition>characterization of matter (or a specification thereof) based on physically observable properties of the matter</skos:definition>
 		<skos:example>a distribution of molecular weight</skos:example>
@@ -4469,6 +4469,13 @@ For the description of nucleic acids, the following information can be used to a
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningNumberOfMoieties"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;integer">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
 				<owl:onClass rdf:resource="&idmp-sub;OpticalActivity"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -4479,13 +4486,6 @@ For the description of nucleic acids, the following information can be used to a
 				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;PropertyOfSubstance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningNumberOfMoieties"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;integer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>single substance</rdfs:label>
@@ -6850,7 +6850,6 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasDefiningNumberOfMoieties">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has defining number of moieties</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.1.4</dct:source>
