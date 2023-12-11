@@ -7,18 +7,21 @@ PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?Packaging (SAMPLE(?PackagingLabel) AS ?PackagingName)
 
-where {
+WHERE {
     # Bind Variable substance <$Substance>
-	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/PolyvinylChloride>
+	# Example substance PVC: <https://spor.ema.europa.eu/v2/SubstanceDefinition/100000131565>
     BIND( uc2_cq1d_parameter_1 AS $Substance )
 
-    # Target Substance Comprises a form of packaging
-    ?Packaging cmns-col:comprises $Substance ;
-
-    # Make sure that we only return actual substances
-    a/rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
-     
+    ?Packaging a/rdfs:subClassOf* idmp-mprd:MedicinalProductContainer .
     # Optionally, get the name of the substance
     OPTIONAL{?Packaging  rdfs:label  ?PackagingLabel }
 
-} GROUP BY ?Packaging
+    # A package is made of a single material no components, e.g. the paperboard box
+    # or the package is made of components, e.g. the form and lidding of a blister
+    # cmns-col:comprises may have subproperties for material and alternate material
+    # IDMP allows any material from a controlled vocabulary, that need not be substances in the defintion of IDMP
+	# The material itself should be comprised of a substance for the query to work
+    ?Packaging idmp-mprd:hasPackageComponent*/cmns-col:comprises+ $Substance .
+	
+} 
+GROUP BY ?Packaging
