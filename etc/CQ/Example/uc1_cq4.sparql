@@ -10,7 +10,7 @@ SELECT DISTINCT ?Code (SAMPLE(?CodeLabel) AS ?CodeName) (SAMPLE(?CodeTextValue) 
 
 WHERE {
     # Bind Variable Substance <$Substance>
-    # Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
+    # Example for AMLODIPINE: <https://spor.ema.europa.eu/v2/SubstanceDefinition/100000085259>
     # Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/Terlipressin>
     # Example for GSRS <https://gsrs.ncats.nih.gov/api/v1/substances/1J444QC288>
     BIND( uc1_cq4_parameter_1 AS $Substance )
@@ -21,7 +21,7 @@ WHERE {
     BIND( uc1_cq4_parameter_2 AS $Registry )
    
     # A Code identifies the $Substance and is registered in $Registry
-    ?Code cmns-id:identifies $Substance ;
+    ?Code cmns-id:identifies|^cmns-id:isIdentifiedBy $Substance ;
         cmns-ra:isRegisteredIn $Registry .
 
   	# Optionally, get the name of the code

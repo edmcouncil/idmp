@@ -1,16 +1,30 @@
 # UC1-CQ 1: What substances have a common active moiety <$ActiveMoiety>?
-PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
-PREFIX cmns-rlcmp:    <https://www.omg.org/spec/Commons/RolesAndCompositions/>
-PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
-PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX cmns-dsg:     <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-rlcmp:  <https://www.omg.org/spec/Commons/RolesAndCompositions/>
+PREFIX cmns-txt:     <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX idmp-spor:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/>
+PREFIX idmp-sub:     <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX rdf:              <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:             <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:              <http://www.w3.org/2002/07/owl#>
  
-SELECT DISTINCT ?Substance (SAMPLE(?SubstanceLabel) AS ?SubstanceName)
+
+# Prior versions of this SPARQL query used an aggregate query using SAMPLE()
+# SELECT DISTINCT ?Substance (SAMPLE(?SubstanceLabel) AS ?SubstanceName)
+#
+# This does not work determinstically, if there are more than 1 official names per substance, 
+# which for the Amlodine active moieties is the case (FDA uses GSRS, EMA uses SPOR)
+# There is no way to do this in SPARQL 1.1, because of missing correlated subqueries.
+
+# The aggregate query is replaced by a non-aggregate one, so that the query can be used for unit tests.
+# for a determinstic result, based on the example data, we return all (official) names of the moieties, which in the Amlodipine case are 5 labels
+
+SELECT  DISTINCT ?Substance ?SubstanceLabel
 
 WHERE {
     # Bind Variable ActiveMoiety <$ActiveMoiety>
     # Example for Dataset GSRS: <https://gsrs.ncats.nih.gov/api/v1/substances/1J444QC288>
-	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
+	# Example for AMLODIPINE: <https://spor.ema.europa.eu/v2/SubstanceDefinition/100000085259>
   	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/Terlipressin>
     BIND(uc1_cq1_parameter_1 AS $ActiveMoiety )
      
@@ -26,11 +40,65 @@ WHERE {
     			cmns-rlcmp:isPlayedBy $ActiveMoiety
     	] .
   	}
-     
+  
     # Make sure that we only return actual substances
-    ?Substance a/rdfs:subClassOf* idmp-sub:Substance .
-     
-    # Optionally, get the name of the substance
-    OPTIONAL{?Substance  rdfs:label  ?SubstanceLabel }
+   	?SubstanceAlias a/rdfs:subClassOf* idmp-sub:Substance .
+    # consider alternate substance IRIs
+    ?Substance (owl:sameAs|^owl:sameAs)* ?SubstanceAlias .
+	
+   	# Optionally, get the preferred name of the substance
+    OPTIONAL{
+		?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?PreferredName .
+	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-PreferredName
+	} 
+  	# Optionally, get one of the official names of the substance
+    OPTIONAL{
+		?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?OfficialName .
+	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-OfficialName
+	}
+    # Optionally, get one of the systematic names of the substance
+    OPTIONAL{
+    	?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?SystematicName .
+	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-SystematicName
+	}
+    # Optionally, get one of the common names of the substance
+    OPTIONAL{
+    	?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?CommonName .
+	    ?Name idmp-sub:hasSubstanceNameType idmp-sub:SubstanceNameClassifier-CommonName
+	}
+    # Optionally, get any substance name of the substance
+    OPTIONAL {
+    	?SubstanceAlias  idmp-sub:hasSubstanceName|^cmns-dsg:isNameOf ?Name .
+	    ?Name cmns-txt:hasTextValue|idmp-sub:hasSubstanceNameValue ?AnyName .
+	}
+    # Optionally, get the name from SPOR SRS term name
+    OPTIONAL {
+    	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
+                     idmp-spor:hasSPORTermName|^cmns-dsg:isNameOf ?Name .
+        ?Name cmns-txt:hasTextValue ?SRSTermName.
+	}
+    # Optionally, get the name from SPOR SRS short name
+    OPTIONAL {
+    	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
+                    idmp-spor:hasSPORShortName|^cmns-dsg:isNameOf ?Name .
+        ?Name cmns-txt:hasTextValue ?SRSShortName.
+	}
+    # Optionally, get the name from SPOR SRS other name
+    OPTIONAL {
+    	?SubstanceAlias rdf:type idmp-spor:SPORControlledVocabularyTerm ;	
+                    idmp-spor:hasSPOROtherName|^cmns-dsg:isNameOf ?Name .
+        ?Name cmns-txt:hasTextValue ?SRSOtherName.
+	}
+  
+	BIND(LCASE(COALESCE(?PreferredName, ?OfficialName,  ?SystematicName, ?CommonName, ?AnyName, ?SRSTermName, ?SRSShortName, ?SRSOtherName)) AS ?SubstanceLabel)
+	FIlTER(BOUND(?SubstanceLabel))
  
-} GROUP BY ?Substance
+} 
+# original aggregate query does group by substance
+# GROUP BY ?Substance
+# ORDER BY ?Substance
+ORDER BY ?Substance ?SubstanceLabel
