@@ -649,7 +649,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantity"/>
 		<rdfs:label>age</rdfs:label>
 		<skos:definition>time (duration or quantity) since the creation or birth of something</skos:definition>
-		<cmns-av:usageNote>The age is both a duration and a quantity. Its magnitude value can be expressed as quantity value with a time unit or as an ISO 8601 duration expression. Which way of expression is preferred depends on the domain.</cmns-av:usageNote>
+		<cmns-av:usageNote>Age is both a duration and a quantity. Its magnitude value can be expressed as quantity value with a time unit or as an ISO 8601 duration expression, depending on the domain.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AgeClassifier">
@@ -661,7 +661,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>age classifier</rdfs:label>
-		<skos:definition>classifier for ages</skos:definition>
+		<skos:definition>qualitative classifier for ages</skos:definition>
 		<skos:example>adult</skos:example>
 		<skos:example>elderly</skos:example>
 	</owl:Class>
@@ -691,12 +691,6 @@
 		<rdfs:label>age population characteristic</rdfs:label>
 		<skos:definition>classifier for a statistical population based on the age of its members</skos:definition>
 		<cmns-av:usageNote>The age is either expressed as an explicit range of ages or by an age classifier from a controlled vocabulary.</cmns-av:usageNote>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-mprd;AgeRange">
-		<rdfs:subClassOf rdf:resource="&idmp-uom;TimeQuantityValueRange"/>
-		<rdfs:label>age range</rdfs:label>
-		<skos:definition>upper and lower bounds of age</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AgeRangeValue">
@@ -955,7 +949,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -970,7 +964,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -4307,13 +4301,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label>has active ingredient</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;ActiveIngredient"/>
 		<skos:definition>relates something representing the constituents of a pharmaceutical or medicinal product to something in the role of an active ingredient</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAgeRange">
-		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
-		<rdfs:label>has age range</rdfs:label>
-		<rdfs:range rdf:resource="&idmp-mprd;AgeRange"/>
-		<skos:definition>relates to a range of ages by specifying lower and upper bounds as time quantity value</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAttachedDocument">
