@@ -275,15 +275,15 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasOtherCharacteristic"/>
-				<owl:onClass rdf:resource="&idmp-mprd;NonPhysicalCharacteristic"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ProductComposition"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
-				<owl:onClass rdf:resource="&idmp-mprd;ProductComposition"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasOtherCharacteristic"/>
+				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -952,7 +952,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -967,7 +967,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1235,6 +1235,33 @@
 		</rdfs:subClassOf>
 		<rdfs:label>contraindication text</rdfs:label>
 		<skos:definition>textual description of the contraindications of a medicinal product</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;DataCarrierIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtid;StructuredIdentifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PackageItem"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>data carrier identifier</rdfs:label>
+		<skos:definition>unique identifier for items that are traded (e.g. pharmaceuticals, medical devices) in the supply chain</skos:definition>
+		<skos:example>For example, a GTIN is used to identify any item upon which there is a need to retrieve predefined information and that may be priced, ordered or invoiced at any point in any supply chain. GTINs may be 8, 12, 13 or 14 digits in length. GS1 advocates the use of global standardisation to aid compliance to the regulatory requirements of all countries.</skos:example>
+		<skos:note>A modification to any of the basic elements that characterize a trade item will usually lead to a change in the data carrier identifier. Additional data can be included with the data carrier such as batch number and expiration date.</skos:note>
+		<skos:note>Data carrier identifiers such as barcodes can be presented at each packaging level. Regional regulatory requirements can specify the data carrier(s) to be used.</skos:note>
+		<skos:note>The basic predefined characteristics of a data carrier identifier can be:
+- product name, product brand and product description;
+- formulation (active ingredients);
+- strength;
+- dosage (or usage);
+- net quantity (weight, volume, or other dimension impacting trade);
+- packaging configuration;
+- form, fit or function;
+- for groupings, the number of elementary items contained and their subdivision in subpackaging units, the nature of the grouping (carton, blister, blister-cell).</skos:note>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 6.6 and 9.6.2.4</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;DepthCharacteristic">
@@ -2319,7 +2346,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasOtherCharacteristic"/>
-				<owl:onClass rdf:resource="&idmp-mprd;NonPhysicalCharacteristic"/>
+				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2857,16 +2884,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:synonym xml:lang="en-US">medicines regulatory agency (organization)</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;NonPhysicalCharacteristic">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
-		<rdfs:label>non-physical characteristic</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.20.6, 9.6.2.22</dct:source>
-		<owl:disjointWith rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
-		<skos:definition>characterization of matter (or a specification thereof) that is based on something other than physically observable properties of the matter</skos:definition>
-		<skos:note>Where applicable for a package item, a manufactured item or a device, other characteristics can be specified. This facility is useful for capturing unusual details not explicitly catered for in the other attributes.</skos:note>
-		<cmns-av:synonym>other characteristic</cmns-av:synonym>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-mprd;OrphanDesignation">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
@@ -3021,6 +3038,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasPhysicalCharacteristic"/>
 				<owl:onClass rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;DataCarrierIdentifier"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -4544,8 +4568,9 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:domain>
-		<rdfs:range rdf:resource="&idmp-mprd;NonPhysicalCharacteristic"/>
-		<skos:definition>specifies a characteristic of some specification for a manufactured item, package item, or device that is not explicitly a physical characteristic</skos:definition>
+		<rdfs:range rdf:resource="&cmns-cls;Aspect"/>
+		<skos:definition>specifies a characteristic of some specification for a manufactured item, package item, or device that is not explicitly a defined physical characteristic</skos:definition>
+		<skos:note>This can be anything per subject matter expert discussions.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NonConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.22</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
