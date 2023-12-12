@@ -952,7 +952,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -967,7 +967,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -3175,6 +3175,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductComposition"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductIdentifierSet"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product</rdfs:label>
 		<skos:definition>specification for the qualitative and quantitative composition of a medicinal product in the dose form approved for administration in line with the regulated product information</skos:definition>
 		<skos:note>In many instances, the pharmaceutical product is equal to the manufactured item. However, there are instances where the manufactured item shall undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
@@ -3258,6 +3264,15 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>unique identifier for a pharmaceutical product</skos:definition>
 		<cmns-av:abbreviation>PhPID</cmns-av:abbreviation>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.61</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductIdentifierSet">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:label>pharmaceutical product identifier set</rdfs:label>
+		<skos:definition>unique identifier for a collection of identifiers associated with a pharmaceutical product</skos:definition>
+		<skos:note>This class shall carry the relevant identifiers as defined by ISO 11616 and ISO/TS 20451. This provides a uniform representation of the pharmaceutical product using the substance(s)/specified substance(s), their (reference) strength(s), the administrable dose form and, where applicable, the integral device.</skos:note>
+		<cmns-av:abbreviation>PhPID set</cmns-av:abbreviation>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.8.2.6</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PhysicalMedicinalProduct">
