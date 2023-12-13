@@ -952,7 +952,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -967,7 +967,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -2362,6 +2362,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicalDeviceMaterial"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasOtherCharacteristic"/>
 				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2395,6 +2402,22 @@
 		<skos:note>At implementation, any batch number and expiry date for a device in a packaged medicinal product will be related to a particular batch or batches of that packaged medicinal product (as described using the BAID1), but for simplification at a conceptual level, the &apos;many-to-many&apos; relationship that this would give has been omitted.</skos:note>
 		<skos:note>This class can be used to describe the batch number and/or expiry date of a device in a packaged medicinal product.</skos:note>
 		<cmns-av:synonym>device batch identifier</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MedicalDeviceMaterial">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialSpecification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicalDevice"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medical device material</rdfs:label>
+		<skos:definition>specification of the material(s) of which a given device is made</skos:definition>
+		<skos:note>This class is used to list the substances that are used to create the material(s) of which the device is made and also for indicating if the substance is representing an alternate material and if the substance is a known allergen.</skos:note>
+		<cmns-av:adoptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.6.2.13</cmns-av:adoptedFrom>
+		<cmns-av:synonym>device material</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicalDeviceNomenclature">
