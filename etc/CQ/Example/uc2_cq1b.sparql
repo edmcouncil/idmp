@@ -19,7 +19,7 @@ WHERE {
 	{
 		# Find SKUs where the a packaging is comprised of the substance, which is contained in the packaged medicinal product
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-                    cmns-dsg:denotes [ idmp-mprd:contains [cmns-col:comprises $Substance] ] .
+                    cmns-dsg:denotes [ cmns-col:comprises [cmns-col:comprises $Substance] ] .
 						
 		# Make sure that we only return actual substances
 		?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
@@ -29,7 +29,7 @@ WHERE {
   } union {
 		# Find SKUs where an intermediate packaging within the SKU's packaging is comprised of the substance (1-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes  [ idmp-mprd:contains [ idmp-mprd:contains [
+			cmns-dsg:denotes  [ cmns-col:comprises [ idmp-mprd:contains [
 					cmns-col:comprises $Substance
 				]
       ] ].
@@ -42,7 +42,7 @@ WHERE {
   } union {
 		# Find SKUs where an intermediate packaging within the SKU's packaging is comprised of the substance (2-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
-			cmns-dsg:denotes  [ idmp-mprd:contains [ idmp-mprd:contains [ 
+			cmns-dsg:denotes  [ cmns-col:comprises [ idmp-mprd:contains [ 
 					idmp-mprd:contains
 					[
 						cmns-col:comprises $Substance
@@ -58,7 +58,7 @@ WHERE {
      	# Find SKUs where a substance is used in the pharmaceutical product contained in an intermediate packaging (1-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
 			cmns-dsg:denotes $PackagedMedicinalProduct .
-    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
+    	?PackagedMedicinalProduct cmns-col:comprises $OuterPackaging .
       	$OuterPackaging idmp-mprd:contains $IntermediatePackaging .
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
     	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
@@ -75,7 +75,7 @@ WHERE {
        	# Find SKUs where a substance is used in the pharmaceutical product contained in an intermediate packaging (2-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
 			cmns-dsg:denotes $PackagedMedicinalProduct .
-    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
+    	?PackagedMedicinalProduct cmns-col:comprises $OuterPackaging .
       	$OuterPackaging idmp-mprd:contains $InnerPackaing .
 		$InnerPackaing 	idmp-mprd:contains $IntermediatePackaging .
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
@@ -92,7 +92,7 @@ WHERE {
      	# Find SKUs where a substance is an active moiety for a substance used in the pharmaceutical product contained in an intermediate packaging (1-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
 			cmns-dsg:denotes $PackagedMedicinalProduct .
-    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
+    	?PackagedMedicinalProduct cmns-col:comprises $OuterPackaging .
       	$OuterPackaging idmp-mprd:contains $IntermediatePackaging .
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
     	$PharmaceuticalProductComposition cmns-dsg:defines $PharmaceuticalProduct .
@@ -111,7 +111,7 @@ WHERE {
      	# Find SKUs where a substance is an active moiety for a substance used in the pharmaceutical product contained in an intermediate packaging (2-step)
 		?StockKeepingUnit a cmns-prd:StockKeepingUnit ;
 			cmns-dsg:denotes $PackagedMedicinalProduct .
-    	?PackagedMedicinalProduct idmp-mprd:contains $OuterPackaging .
+    	?PackagedMedicinalProduct cmns-col:comprises $OuterPackaging .
       	$OuterPackaging idmp-mprd:contains $InnerPackaing .
 		$InnerPackaing 	idmp-mprd:contains $IntermediatePackaging .
     	$IntermediatePackaging idmp-mprd:contains $PharmaceuticalProduct . 
