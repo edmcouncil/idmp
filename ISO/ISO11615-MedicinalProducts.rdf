@@ -822,8 +822,9 @@
 		<dct:source>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</dct:source>
 		<skos:definition>material that is being produced or that has been produced by a single execution of a process that leads to the production of finite quantities of material by subjecting quantities of input materials to an ordered set of processing activities over a finite period of time</skos:definition>
 		<skos:editorialNote>The restriction with respect to matter should be revised or augmented to define a specific amount (or amounts) of matter used to produce the batch. Also note that in order to shorten the definition to use the term &apos;batch process&apos; in place of most of the definition of a batch process requires loosening the constraint on circular definitions, or creating an exception for a compound term where that term appears in a different label in the ontology.</skos:editorialNote>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<skos:note>From an ISO 11615 perspective, a batch is a specific quantity of a drug or other material that is intended to have uniform character and quality, within specified limits, and is produced according to a single manufacturing order during the same cycle of manufacture.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.8</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;BatchManufacturingProcess">
@@ -847,9 +848,10 @@
 		</rdfs:subClassOf>
 		<rdfs:label>batch number</rdfs:label>
 		<skos:definition>identifier assigned to a specific batch of material that is being produced or that has been produced by a single execution of a batch process</skos:definition>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<skos:note>From an ISO 11615 perspective, a batch number is an identifier assigned to a specific batch of a medicinal product or item resulting from a manufacturing process at a specific point of time</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
 		<cmns-av:adaptedFrom>ANSI/ISA S88: https://www.isa.org/products/ansi-isa-88-00-01-2010-batch-control-part-1-models (paragraph 3.1.6)</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.9</cmns-av:adaptedFrom>
 		<cmns-av:synonym>batch identifier</cmns-av:synonym>
 	</owl:Class>
 	
@@ -900,7 +902,8 @@
 				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>clinical trial authorization</rdfs:label>
+		<rdfs:label xml:lang="en-GB">clinical trial authorisation</rdfs:label>
+		<rdfs:label xml:lang="en-US">clinical trial authorization</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.12</dct:source>
 		<skos:definition>approval given by a medicines regulatory agency to conduct a clinical trial in a region</skos:definition>
 	</owl:Class>
@@ -949,7 +952,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -964,7 +967,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1036,6 +1039,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>container constituency</rdfs:label>
 		<skos:definition>constituency (relationship) that defines containers based on the items contained therein</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:synonym>container composition</cmns-av:synonym>
 		<cmns-av:synonym>packaging composition</cmns-av:synonym>
 	</owl:Class>
@@ -1072,6 +1076,7 @@
 			</owl:Restriction>
 		</rdfs:subclassOf>
 		<skos:definition>constituent that specifies the number or quantity of things of the same kind being held in a given container or package</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:explanatoryNote>The container constituent is the object (passive) role in a container constituency, which is a reification of the contains relation.</cmns-av:explanatoryNote>
 		<cmns-av:usageNote>In IDMP packaging, constituents are either package items, if the container is an outer or intermediate packaging of a packaged medicinal product, or manufactured items if the container is the immediate container.</cmns-av:usageNote>
 	</owl:Class>
@@ -1929,7 +1934,8 @@
 				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>manufacturing authorization</rdfs:label>
+		<rdfs:label xml:lang="en-GB">manufacturing authorisation</rdfs:label>
+		<rdfs:label xml:lang="en-US">manufacturing authorization</rdfs:label>
 		<skos:definition>authorization provided by a medicines regulatory agency to manufacture medicinal products within a region</skos:definition>
 		<skos:note>Such authorization may be required for both total and partial manufacture and for the various processes of dividing up, packaging or presentation. However, such authorization may not be required for preparation, dividing up, changes in packaging or presentation where these processes are carried out, solely for retail supply, by pharmacists in dispensing pharmacies or by persons legally authorized in a region to carry out such processes.</skos:note>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
@@ -2349,6 +2355,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicalDeviceBatchIdentifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasOtherCharacteristic"/>
 				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2366,6 +2379,22 @@
 		<cmns-av:adoptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.1.49 and 9.6.2.12</cmns-av:adoptedFrom>
 		<cmns-av:explanatoryNote>The FDA further clarifies this definition to say that such a device does not achieve its primary intended purposes through chemical action within or on the body of a man or other animals and which is not dependent upon being metabolized for the achievement of its primary intended purposes.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>device</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;MedicalDeviceBatchIdentifier">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;BatchNumber"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasExpirationDate"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dt;ExplicitDate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medical device batch identifier</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.6.2.15</dct:source>
+		<skos:definition>unique identifier allocated to a specific batch of a medical device</skos:definition>
+		<skos:note>At implementation, any batch number and expiry date for a device in a packaged medicinal product will be related to a particular batch or batches of that packaged medicinal product (as described using the BAID1), but for simplification at a conceptual level, the &apos;many-to-many&apos; relationship that this would give has been omitted.</skos:note>
+		<skos:note>This class can be used to describe the batch number and/or expiry date of a device in a packaged medicinal product.</skos:note>
+		<cmns-av:synonym>device batch identifier</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicalDeviceNomenclature">
