@@ -8,13 +8,12 @@ PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-S
 PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
-PREFIX idmp-x: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ExtensionTBD/>
 
 GENERATE {
 
     # TEMP FIXES to be included in ontology development
-    idmp-ra:EPACompTox rdfs:label "EPA CompTox" .
-    idmp-sub:hasInhibitorTarget rdfs:label "has inhibitor target" .
+    #EPACompTox rdfs:label "EPA CompTox" .
+    #hasInhibitorTarget rdfs:label "has inhibitor target" .
 
     # Ontology
     <https://data.pistoiaalliance.org/idmp/gsrs> a owl:Ontology ;
@@ -35,29 +34,34 @@ GENERATE {
     # Molecular Structure
     ?MolecularStructure a idmp-sub:MolecularStructure ;
         idmp-sub:hasSMILESValue ?structureSmilesString ;
-        cmns-dsg:isDescribedBy ?MolfileURI;
+        cmns-dsg:isDescribedBy ?StructureMolfileURI;
     .
 
-    ?MolfileURI a idmp-sub:Molfile;
-        idmp-sub:hasStructuralRepresentationAttachment ?structureMolfile;
+    # Molecular Structure Molfile
+    ?StructureMolfileURI a idmp-sub:Molfile;
+        idmp-sub:hasStructuralRepresentationText ?structureMolfile;
     .
 
 
     GENERATE{
-        ?Substance idmp-sub:hasMoiety ?SubstanceMoiety;
+        ?Substance idmp-sub:hasMoiety ?Moiety;
         .
 
-        ?SubstanceMoiety a idmp-sub:Moiety; 
+        ?Moiety a idmp-sub:Moiety;
             rdfs:label ?moietyFormula;
-            idmp-sub:hasDefiningStructure ?MoietyMolecularStructure;
+            idmp-sub:hasDefiningStructure ?MoietyStructure;
             idmp-sub:hasDefiningMolecularWeight ?MoietyStructureMolecularWeight ;
             idmp-sub:hasDefiningMolecularFormula ?moietyFormula ;
             idmp-sub:hasDefiningStereochemistry ?MoietyStereochemistry ;
         .
 
-        ?MoietyMolecularStructure a idmp-sub:MolecularStructure ;
+        ?MoietyStructure a idmp-sub:MolecularStructure ;
             idmp-sub:hasSMILESValue ?MoietyStructureSmilesString ;
-            cmns-dsg:isDescribedBy ?MoietyStructureMolfile;
+            cmns-dsg:isDescribedBy ?MoietyStructureMolfileURI;
+        .
+
+        ?MoietyStructureMolfileURI a idmp-sub:Molfile;
+            idmp-sub:hasStructuralRepresentationText ?MoietyStructureMolfile;
         .
     }
     # Molecular Structure Moieties
@@ -81,10 +85,9 @@ GENERATE {
     ?MoietyStructureMolecularWeight
     ?moietyStructureID
 
-    BIND(str(StrUUID()) as ?MoietyUUID)
-    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?RelatedSubstanceApprovalID }/{ ?MoietyUUID }> AS ?SubstanceMoiety )
-
-    BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?MoietyUUID }> AS ?MoietyMolecularStructure )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })> AS ?Moiety )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure> AS ?MoietyStructure )
+    BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/moieties({ ?moietyStructureID })/structure/molfile> AS ?MoietyStructureMolfileURI )
 
     BIND(IF(str(?MoietystructureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
     IF(str(?MoietystructureStereochemistry) = "ACHIRAL", idmp-sub:Stereochemistry-Achiral ,
@@ -113,17 +116,17 @@ GENERATE {
 
     GENERATE{
         # Relationships
-        ?Substance ?SubstancesRelationshipProperty ?RelatedSubstance; 
+        ?Substance ?SubstancesRelationshipProperty ?RelatedSubstance;
         .
         # Is Active Moiety Of
-        ?RelatedSubstance ?IsActiveMoietyOfProperty ?Substance; 
+        ?RelatedSubstance ?IsActiveMoietyOfProperty ?Substance;
         .
     }
-    ITERATOR iter:JSONSurfer(?relationships, 
+    ITERATOR iter:JSONSurfer(?relationships,
         "$[*]",
         "$.type",
         "$.relatedSubstance.approvalID"
-    ) AS 
+    ) AS
     ?Relationship
     ?RelationshipType
     ?RelatedSubstanceApprovalID
@@ -137,8 +140,7 @@ GENERATE {
 
     BIND(
         IF(str(?RelationshipType) = "ACTIVE MOIETY" || str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-sub:hasActiveMoiety,
-        IF(str(?RelationshipType) = "INHIBITOR->TARGET", idmp-sub:hasInhibitorTarget,
-        skos:related))
+        skos:related)
         AS ?SubstancesRelationship)
 
     BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, idmp-sub:isActiveMoietyOf, ?nothing) AS ?IsActiveMoietyOfProperty)
@@ -173,7 +175,8 @@ ITERATOR iter:JSONSurfer(<public_data.json>,
 ?relationships
 
 BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }> AS ?Substance )
-BIND(<https://data.pistoiaalliance.org/idmp/gsrs/structure/{ ?structureID }> AS ?MolecularStructure )
+BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/structure> AS ?MolecularStructure )
+BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?approvalID }/structure/molfile> AS ?StructureMolfileURI )
 
 BIND(IF(contains(str(?structureFormula), "."), idmp-sub:hasDefiningMolecularFormulaByMoiety , ?nothing ) AS ?hasMolecularFormulaByMoietyProperty)
 
@@ -210,6 +213,3 @@ BIND(IF(str(?structureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Ab
     IF(str(?structureStereochemistry) = "UNKNOWN", idmp-sub:Stereochemistry-Unknown ,
     ?structureStereochemistry )))))))))))))))))))))
     AS ?Stereochemistry)
-
- BIND(IF(?structureMolfile != "",<https://data.pistoiaalliance.org/idmp/gsrs/molfile/{ StrUUID() }>, ?unbound) as ?MolfileURI)
-
