@@ -35,6 +35,7 @@
 	<!ENTITY lcc-639-1 "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/">
 	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
+	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -77,6 +78,7 @@
 	xmlns:lcc-639-1="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
 	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -127,22 +129,52 @@
 		<cmns-av:usageNote>This example is for illustration purposes only. The data provided may not be up-to-date, and in some cases, &apos;dummy&apos; data has been included. The product information included here shall not be used for any other purpose than for educational purposes regarding the IDMP-O implementation.</cmns-av:usageNote>
 	</owl:Ontology>
 	
-	<owl:NamedIndividual rdf:about="https://chem.nlm.nih.gov/chemidplus/rn/14636-12-5">
-		<rdf:type rdf:resource="&idmp-nara;CASRegistryNumber"/>
-		<rdfs:label>14636-12-5</rdfs:label>
-		<cmns-id:identifies rdf:resource="&idmp-trlp;Terlipressin"/>
-		<cmns-ra:isRegisteredBy rdf:resource="&idmp-nara;AmericanChemicalSocietyRegistrationAuthority"/>
-		<cmns-ra:isRegisteredIn rdf:resource="&idmp-ra;AnatomicalTherapeuticChemicalClassificationSystem"/>
-		<cmns-txt:hasTextValue>14636-12-5</cmns-txt:hasTextValue>
+	<owl:NamedIndividual rdf:about="https://gsrs.ncats.nih.gov/api/v1/substances/4U092XZF0K">
+		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<owl:sameAs rdf:resource="&idmp-trlp;TerlipressinAcetate"/>
+		<rdfs:label>GSRS, TERLIPRESSIN ACETATE</rdfs:label>
+		<idmp-sub:hasSubstanceName rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/4U092XZF0K-PreferredName-English-TERLIPRESSIN_ACETATE"/>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-nara;GlobalSubstanceRegistrationSystem-UniqueIngredientNumber-4U092XZF0K"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-trlp;EVMPD-SUB10927MIG">
-		<rdf:type rdf:resource="&idmp-eura;EudraVigilanceCode"/>
-		<rdfs:label>SUB10927MIG</rdfs:label>
-		<cmns-id:identifies rdf:resource="&idmp-trlp;Terlipressin"/>
-		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
-		<cmns-ra:isRegisteredIn rdf:resource="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionary"/>
-		<cmns-txt:hasTextValue>SUB10927MIG</cmns-txt:hasTextValue>
+	<owl:NamedIndividual rdf:about="https://gsrs.ncats.nih.gov/api/v1/substances/4U092XZF0K-PreferredName-English-TERLIPRESSIN_ACETATE">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceName"/>
+		<rdfs:label>GSRS, TERLIPRESSIN ACETATE, Preferred Name, English</rdfs:label>
+		<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-PreferredName"/>
+		<idmp-sub:hasSubstanceNameValue>TERLIPRESSIN ACETATE</idmp-sub:hasSubstanceNameValue>
+		<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+		<cmns-dsg:isNameOf rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/4U092XZF0K"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://gsrs.ncats.nih.gov/api/v1/substances/7Z5X49W53P">
+		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<owl:sameAs rdf:resource="&idmp-trlp;Terlipressin"/>
+		<rdfs:label>GSRS, TERLIPRESSIN</rdfs:label>
+		<idmp-sub:hasSubstanceName rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/7Z5X49W53P-PreferredName-English-TERLIPRESSIN"/>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-nara;GlobalSubstanceRegistrationSystem-UniqueIngredientNumber-4U092XZF0K"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://gsrs.ncats.nih.gov/api/v1/substances/7Z5X49W53P-PreferredName-English-TERLIPRESSIN">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceName"/>
+		<rdfs:label>GSRS, TERLIPRESSIN, Preferred Name, English</rdfs:label>
+		<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-PreferredName"/>
+		<idmp-sub:hasSubstanceNameValue>TERLIPRESSIN</idmp-sub:hasSubstanceNameValue>
+		<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
+		<cmns-dsg:isNameOf rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/7Z5X49W53P"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://precision.fda.gov/uniisearch/srs/unii/4U092XZF0K">
+		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<owl:sameAs rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/4U092XZF0K"/>
+		<owl:sameAs rdf:resource="&idmp-trlp;TerlipressinAcetate"/>
+		<rdfs:label>UNII, TERLIPRESSIN</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://precision.fda.gov/uniisearch/srs/unii/7Z5X49W53P">
+		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<owl:sameAs rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/7Z5X49W53P"/>
+		<owl:sameAs rdf:resource="&idmp-trlp;Terlipressin"/>
+		<rdfs:label>UNII, TERLIPRESSIN</rdfs:label>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;GSKAsManufacturer">
@@ -177,7 +209,6 @@
 		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
 		<rdf:type rdf:resource="&idmp-sub;Moiety"/>
 		<rdfs:label>terlipressin</rdfs:label>
-		<dct:source rdf:resource="https://chem.nlm.nih.gov/chemidplus/rn/14636-12-5"/>
 		<skos:definition>protein that is an analogue of vasopressin used as a vasoactive drug in the management of low blood pressure</skos:definition>
 		<skos:note>It has been found to be effective when norepinephrine does not help. Indications for use include norepinephrine-resistant septic shock and hepatorenal syndrome. In addition, it is used to treat bleeding esophageal varices.</skos:note>
 		<skos:note>Terlipressin is currently not available in the United States, or Canada, but it is available in New Zealand, Australia, much of Europe, India, Pakistan and UAE.</skos:note>
@@ -187,6 +218,7 @@
 		<idmp-sub:hasDefiningNumberOfMoieties rdf:datatype="&xsd;integer">1</idmp-sub:hasDefiningNumberOfMoieties>
 		<idmp-sub:hasDefiningStructure rdf:resource="&idmp-trlp;TerlipressinMolecularStructure"/>
 		<idmp-sub:isActiveMoietyOf rdf:resource="&idmp-trlp;TerlipressinAcetate"/>
+		<cmns-id:isIdentifiedBy rdf:resource="&idmp-nara;ChemicalAbstractsServiceRegistry-CasRegistryNumber-14636-12-5"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetate">
@@ -215,7 +247,7 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateCommonName">
 		<rdf:type rdf:resource="&idmp-ra;InternationalNonproprietaryName"/>
-		<rdfs:label>terlipressin acetate common name</rdfs:label>
+		<rdfs:label>terlipressin acetate, common name</rdfs:label>
 		<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-CommonName"/>
 		<idmp-sub:hasSubstanceNameValue>terlipressin diacetate pentahydrate</idmp-sub:hasSubstanceNameValue>
 		<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
@@ -261,23 +293,23 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateMolecularFormula">
 		<rdf:type rdf:resource="&idmp-sub;MolecularFormula"/>
-		<rdfs:label>terlipressin acetate molecular formula</rdfs:label>
+		<rdfs:label>terlipressin acetate, molecular formula</rdfs:label>
 		<skos:definition>molecular formula for the substance terlipressin acetate</skos:definition>
 		<cmns-txt:hasTextValue>C56H92N16O24S2</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateMolecularFormulaByMoiety">
 		<rdf:type rdf:resource="&idmp-sub;MolecularFormulaByMoiety"/>
-		<rdfs:label>terlipressin acetate molecular formula by moiety</rdfs:label>
+		<rdfs:label>terlipressin acetate, molecular formula by moiety</rdfs:label>
 		<skos:definition>molecular formula by moiety for the substance terlipressin acetate</skos:definition>
 		<cmns-txt:hasTextValue>C52H74N16O15S2.2C2H4O2.5H2O</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateMolecularStructure">
 		<rdf:type rdf:resource="&idmp-sub;MolecularStructure"/>
-		<rdfs:label>terlipressin acetate molecular structure</rdfs:label>
+		<rdfs:label>terlipressin acetate, molecular structure</rdfs:label>
 		<rdfs:seeAlso rdf:resource="https://go.drugbank.com/salts/DBSALT002332"/>
-		<cmns-dsg:isDescribedBy rdf:resource="&idmp-trlp;TerlipressinSimplifiedMolecularInputLineEntry"/>
+		<idmp-sub:hasSMILES rdf:resource="&idmp-trlp;TerlipressinAcetateSMILES"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateMolecularWeight">
@@ -303,7 +335,7 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetatePreferredName">
 		<rdf:type rdf:resource="&idmp-ra;InternationalNonproprietaryName"/>
-		<rdfs:label>terlipressin acetate preferred name</rdfs:label>
+		<rdfs:label>terlipressin acetate, preferred name</rdfs:label>
 		<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-PreferredName"/>
 		<idmp-sub:hasSubstanceNameValue>terlipressin acetate</idmp-sub:hasSubstanceNameValue>
 		<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
@@ -325,9 +357,16 @@
 		<cmns-qtu:hasNumerator rdf:resource="&idmp-trlp;TerlipressinAcetateNumeratorInTerlipressinSUN1MgSolutionForInjectionPresentationStrength"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSMILES">
+		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
+		<rdfs:label>terlipressin acetate, SMILES</rdfs:label>
+		<dct:source>https://pubchem.ncbi.nlm.nih.gov</dct:source>
+		<idmp-sub:hasSMILESValue>CC(=O)O.CC(=O)O.C1CC(N(C1)C(=O)C2CSSCC(C(=O)NC(C(=O)NC(C(=O)NC(C(=O)NC(C(=O)N2)CC(=O)N)CCC(=O)N)CC3=CC=CC=C3)CC4=CC=C(C=C4)O)NC(=O)CNC(=O)CNC(=O)CN)C(=O)NC(CCCCN)C(=O)NCC(=O)N</idmp-sub:hasSMILESValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSUN-ManufacturedItem">
 		<rdf:type rdf:resource="&idmp-sub;ManufacturedItem"/>
-		<rdfs:label>terlipressin acetate SUN - manufactured item</rdfs:label>
+		<rdfs:label>terlipressin acetate SUN, manufactured item</rdfs:label>
 		<skos:definition>manufactured item that is terlipressin acetate solution for injection</skos:definition>
 		<cmns-col:comprises rdf:resource="&idmp-trlp;TerlipressinAcetate"/>
 		<cmns-col:isIncludedIn rdf:resource="&idmp-trlp;TerlipressinAcetateSUN0.12MgPerMlSolutionForInjection"/>
@@ -339,27 +378,14 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSUN-PharmaceuticalProduct">
 		<rdf:type rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
-		<rdfs:label>terlipressin acetate SUN - pharmaceutical product</rdfs:label>
+		<rdfs:label>terlipressin acetate SUN, pharmaceutical product</rdfs:label>
 		<skos:definition>pharmaceutical product that is terlipressin acetate solution for injection</skos:definition>
-		<idmp-mprd:hasRouteOfAdministration rdf:resource="&idmp-trlp;TerlipressinAcetateSUN-RouteOfAdministration"/>
+		<idmp-mprd:hasRouteOfAdministration rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073345/terms/100000073611"/>
 		<cmns-col:comprises rdf:resource="&idmp-trlp;TerlipressinAcetate"/>
 		<cmns-col:isIncludedIn rdf:resource="&idmp-trlp;TerlipressinAcetateSUN0.12MgPerMlSolutionForInjection"/>
 		<cmns-col:isIncludedIn rdf:resource="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjection"/>
 		<cmns-col:isIncludedIn rdf:resource="&idmp-trlp;TerlipressinSUN1MgSolutionForInjection"/>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-trlp;TerlipressinAcetateSUNComposition"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSUN-RouteOfAdministration">
-		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
-		<rdf:type rdf:resource="&idmp-mprd;RouteOfAdministration"/>
-		<rdfs:label>terlipressin acetate SUN - route of administration</rdfs:label>
-		<skos:definition>Injection of a medicinal product into a vein.</skos:definition>
-		<cmns-id:isIdentifiedBy>
-			<idmp-spor:SPORTermIdentifier>
-				<cmns-txt:hasTextValue>100000073611</cmns-txt:hasTextValue>
-			</idmp-spor:SPORTermIdentifier>
-		</cmns-id:isIdentifiedBy>
-		<cmns-txt:hasTextValue>Intravenous use</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSUN0.12MgPerMlSolutionForInjection">
@@ -382,18 +408,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSUN0.12MgPerMlSolutionForInjectionTherapeuticIndication">
 		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
 		<dct:source>https://www.medicines.org.uk/emc/product/2115/smpc#gref</dct:source>
-		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
-				<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
-				<rdfs:label>bleeding esophageal varices</rdfs:label>
-				<cmns-id:isIdentifiedBy>
-					<idmp-meddra:MedDRAIdentifier>
-						<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
-					</idmp-meddra:MedDRAIdentifier>
-				</cmns-id:isIdentifiedBy>
-			</owl:NamedIndividual>
-		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10005112"/>
 		<idmp-mprd:hasTherapeuticIndicationText>
 			<owl:NamedIndividual>
 				<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
@@ -409,12 +424,6 @@
 		<idmp-mprd:hasActiveIngredient rdf:resource="&idmp-trlp;TerlipressinAcetateAsActiveIngredientInTerlipressinAcetateSUN"/>
 		<cmns-dsg:defines rdf:resource="&idmp-trlp;TerlipressinAcetateSUN-ManufacturedItem"/>
 		<cmns-dsg:defines rdf:resource="&idmp-trlp;TerlipressinAcetateSUN-PharmaceuticalProduct"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateSimplifiedMolecularInputLineEntry">
-		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
-		<rdfs:label>terlipressin acetate simplified molecular input line entry</rdfs:label>
-		<idmp-sub:hasSMILESValue>CC(=O)O.CC(=O)O.C1CC(N(C1)C(=O)C2CSSCC(C(=O)NC(C(=O)NC(C(=O)NC(C(=O)NC(C(=O)N2)CC(=O)N)CCC(=O)N)CC3=CC=CC=C3)CC4=CC=C(C=C4)O)NC(=O)CNC(=O)CNC(=O)CN)C(=O)NC(CCCCN)C(=O)NCC(=O)N</idmp-sub:hasSMILESValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinAcetateStrengthAsManufacturedInTerlipressinAcetate1MgPerAmpouleSolutionForInjection">
@@ -470,7 +479,7 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinCommonName">
 		<rdf:type rdf:resource="&idmp-ra;InternationalNonproprietaryName"/>
-		<rdfs:label>terlipressin common name</rdfs:label>
+		<rdfs:label>terlipressin, common name</rdfs:label>
 		<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-CommonName"/>
 		<idmp-sub:hasSubstanceNameValue>Terlipressin [INN]</idmp-sub:hasSubstanceNameValue>
 		<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
@@ -499,29 +508,29 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinMolecularFormula">
 		<rdf:type rdf:resource="&idmp-sub;MolecularFormula"/>
-		<rdfs:label>terlipressin molecular formula</rdfs:label>
-		<dct:source rdf:resource="https://chem.nlm.nih.gov/chemidplus/rn/14636-12-5"/>
+		<rdfs:label>terlipressin, molecular formula</rdfs:label>
+		<dct:source rdf:resource="&idmp-nara;ChemicalAbstractsServiceRegistry-CasRegistryNumber-14636-12-5"/>
 		<skos:definition>molecular formula for the substance terlipressin</skos:definition>
 		<cmns-txt:hasTextValue>C52H75O15N16S2</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinMolecularFormulaByMoiety">
 		<rdf:type rdf:resource="&idmp-sub;MolecularFormulaByMoiety"/>
-		<rdfs:label>terlipressin molecular formula by moiety</rdfs:label>
-		<dct:source rdf:resource="https://chem.nlm.nih.gov/chemidplus/rn/14636-12-5"/>
+		<rdfs:label>terlipressin, molecular formula by moiety</rdfs:label>
+		<dct:source rdf:resource="&idmp-nara;ChemicalAbstractsServiceRegistry-CasRegistryNumber-14636-12-5"/>
 		<skos:definition>molecular formula by moiety for the substance terlipressin</skos:definition>
 		<cmns-txt:hasTextValue>C52H75O15N16S2</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinMolecularStructure">
 		<rdf:type rdf:resource="&idmp-sub;MolecularStructure"/>
-		<rdfs:label>terlipressin molecular structure</rdfs:label>
-		<cmns-dsg:isDescribedBy rdf:resource="&idmp-trlp;TerlipressinSimplifiedMolecularInputLineEntry"/>
+		<rdfs:label>terlipressin, molecular structure</rdfs:label>
+		<idmp-sub:hasSMILES rdf:resource="&idmp-trlp;TerlipressinSMILES"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinMolecularWeight">
 		<rdf:type rdf:resource="&idmp-sub;MolecularWeight"/>
-		<rdfs:label>terlipressin molecular weight</rdfs:label>
+		<rdfs:label>terlipressin, molecular weight</rdfs:label>
 		<cmns-qtu:hasMeasurementUnit rdf:resource="&idmp-ucum;GramsPerMole"/>
 		<cmns-qtu:hasNumericValue rdf:datatype="&xsd;decimal">1227.39</cmns-qtu:hasNumericValue>
 	</owl:NamedIndividual>
@@ -543,7 +552,7 @@
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinOfficialName">
 		<rdf:type rdf:resource="&idmp-ra;InternationalNonproprietaryName"/>
 		<rdf:type rdf:resource="&idmp-sub;OfficialName"/>
-		<rdfs:label>terlipressin official name</rdfs:label>
+		<rdfs:label>terlipressin, official name</rdfs:label>
 		<idmp-sub:hasSubstanceNameType rdf:resource="&idmp-sub;SubstanceNameClassifier-OfficialName"/>
 		<idmp-sub:hasSubstanceNameValue>terlipressin</idmp-sub:hasSubstanceNameValue>
 		<idmp-dtp:hasLanguageCode rdf:resource="&lcc-639-1;en"/>
@@ -557,6 +566,12 @@
 		<cmns-ra:isRegisteredIn rdf:resource="&idmp-nara;GlobalSubstanceRegistrationSystem"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSMILES">
+		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
+		<rdfs:label>terlipressin, SMILES</rdfs:label>
+		<idmp-sub:hasSMILESValue>O=C(N)CNC(=O)[C@@H](NC(=O)[C@H]4N(C(=O)[C@H]1NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)CNC(=O)CNC(=O)CN)CSSC1)Cc2ccc(O)cc2)Cc3ccccc3)CCC(=O)N)CC(=O)N)CCC4)CCCCN</idmp-sub:hasSMILESValue>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjection">
 		<rdf:type rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<rdfs:label>terlipressin SUN 0.1 mg/ml solution for injection</rdfs:label>
@@ -568,7 +583,7 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjectionComposition">
 		<rdf:type rdf:resource="&idmp-mprd;ProductComposition"/>
-		<rdfs:label>terlipressin SUN 0.1 mg/ml solution for injection composition</rdfs:label>
+		<rdfs:label>terlipressin SUN 0.1 mg/ml solution for injection, composition</rdfs:label>
 		<idmp-mprd:hasActiveIngredient rdf:resource="&idmp-trlp;TerlipressinAsActiveIngredientInTerlipressinAcetate1MgPerAmpouleSolutionForInjection"/>
 		<cmns-dsg:defines rdf:resource="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjection"/>
 		<cmns-rga:isApplicableInJurisdiction rdf:resource="&lcc-3166-1;Netherlands"/>
@@ -576,26 +591,19 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjectionTherapeuticIndication">
 		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<rdfs:label>terlipressin SUN 0.1 mg/ml solution for injection, therapeutic indication</rdfs:label>
 		<dct:source>https://www.geneesmiddeleninformatiebank.nl/smpc/h110384_smpc.pdf</dct:source>
-		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
-				<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
-				<rdfs:label>bleeding esophageal varices</rdfs:label>
-				<cmns-id:isIdentifiedBy>
-					<idmp-meddra:MedDRAIdentifier>
-						<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
-					</idmp-meddra:MedDRAIdentifier>
-				</cmns-id:isIdentifiedBy>
-			</owl:NamedIndividual>
-		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
-		<idmp-mprd:hasTherapeuticIndicationText>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
-				<cmns-txt:hasTextValue>Terlipressine is bestemd voor de behandeling van bloedende oesofagusvarices.</cmns-txt:hasTextValue>
-			</owl:NamedIndividual>
-		</idmp-mprd:hasTherapeuticIndicationText>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10005112"/>
+		<idmp-mprd:hasTherapeuticIndicationText rdf:resource="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjectionTherapeuticIndicationTherapeuticIndicationText"/>
 		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjection"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN0.1MgPerMlSolutionForInjectionTherapeuticIndicationTherapeuticIndicationText">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+		<rdfs:label>terlipressin SUN 0.1 mg/ml solution for injection, therapeutic indication, therapeutic indication text</rdfs:label>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Netherlands"/>
+		<cmns-txt:hasTextValue>Terlipressine is bestemd voor de behandeling van bloedende oesofagusvarices.</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;Dutch"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN1MgSolutionForInjection">
@@ -609,7 +617,7 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN1MgSolutionForInjectionComposition">
 		<rdf:type rdf:resource="&idmp-mprd;ProductComposition"/>
-		<rdfs:label>terlipressin SUN 1 mg solution for injection composition</rdfs:label>
+		<rdfs:label>terlipressin SUN 1 mg solution for injection, composition</rdfs:label>
 		<idmp-mprd:hasActiveIngredient rdf:resource="&idmp-trlp;TerlipressinAsActiveIngredientInTerlipressinAcetate1MgPerAmpouleSolutionForInjection"/>
 		<cmns-dsg:defines rdf:resource="&idmp-trlp;TerlipressinSUN1MgSolutionForInjection"/>
 		<cmns-rga:isApplicableInJurisdiction rdf:resource="&lcc-3166-1;Sweden"/>
@@ -617,37 +625,56 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN1MgSolutionForInjectionTherapeuticIndication">
 		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<rdfs:label>terlipressin SUN 1 mg solution for Injection, therapeutic indication</rdfs:label>
 		<dct:source>https://docetp.mpa.se/LMF/Terlipressin%20SUN%20solution%20for%20injection%20SmPC_09001bee807a73ff.pdf</dct:source>
-		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
-				<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
-				<rdfs:label>bleeding esophageal varices</rdfs:label>
-				<cmns-id:isIdentifiedBy>
-					<idmp-meddra:MedDRAIdentifier>
-						<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
-					</idmp-meddra:MedDRAIdentifier>
-				</cmns-id:isIdentifiedBy>
-			</owl:NamedIndividual>
-		</idmp-mprd:hasIndicationAsDiseaseSymptomProcedure>
-		<idmp-mprd:hasTherapeuticIndicationText>
-			<owl:NamedIndividual>
-				<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
-				<cmns-txt:hasTextValue>Terlipressin är indicerat för behandlingen av blödande esofagusvaricer.</cmns-txt:hasTextValue>
-			</owl:NamedIndividual>
-		</idmp-mprd:hasTherapeuticIndicationText>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10005112"/>
+		<idmp-mprd:hasTherapeuticIndicationText rdf:resource="&idmp-trlp;TerlipressinSUN1MgSolutionForInjectionTherapeuticIndicationTherapeuticIndicationText"/>
 		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-trlp;TerlipressinSUN1MgSolutionForInjection"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSimplifiedMolecularInputLineEntry">
-		<rdf:type rdf:resource="&idmp-sub;SMILES"/>
-		<rdfs:label>terlipressin simplified molecular input line entry</rdfs:label>
-		<idmp-sub:hasSMILESValue>O=C(N)CNC(=O)[C@@H](NC(=O)[C@H]4N(C(=O)[C@H]1NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)CNC(=O)CNC(=O)CN)CSSC1)Cc2ccc(O)cc2)Cc3ccccc3)CCC(=O)N)CC(=O)N)CCC4)CCCCN</idmp-sub:hasSMILESValue>
+	<owl:NamedIndividual rdf:about="&idmp-trlp;TerlipressinSUN1MgSolutionForInjectionTherapeuticIndicationTherapeuticIndicationText">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+		<rdfs:label>terlipressin SUN 1 mg Solution for Injection, therapeutic Indication, therapeutic indication text</rdfs:label>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Sweden"/>
+		<cmns-txt:hasTextValue>Terlipressin är indicerat för behandlingen av blödande esofagusvaricer.</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;Swedish"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-trlp;UNII-4U092XZF0K">
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10005112">
+		<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, bleeding esophageal varices</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10005112-MedDRAIdentifier"/>
+		<cmns-txt:hasTextValue>bleeding esophageal varices</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10005112-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, bleeding esophageal varices, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10005112</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-nara;ChemicalAbstractsServiceRegistry-CasRegistryNumber-14636-12-5">
+		<rdf:type rdf:resource="&idmp-nara;CASRegistryNumber"/>
+		<rdfs:label>CAS Registry Number, 14636-12-5</rdfs:label>
+		<cmns-id:identifies rdf:resource="&idmp-trlp;Terlipressin"/>
+		<cmns-ra:isRegisteredBy rdf:resource="&idmp-nara;AmericanChemicalSocietyRegistrationAuthority"/>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-ra;AnatomicalTherapeuticChemicalClassificationSystem"/>
+		<cmns-txt:hasTextValue>14636-12-5</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-nara;ExtendedEudraVigilanceMedicinalProductDictionary-EudraVigilanceCode-SUB10927MIG">
+		<rdf:type rdf:resource="&idmp-eura;EudraVigilanceCode"/>
+		<rdfs:label>Eudra Vigilance Code, SUB10927MIG</rdfs:label>
+		<cmns-id:identifies rdf:resource="&idmp-trlp;Terlipressin"/>
+		<cmns-ra:isRegisteredBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionary"/>
+		<cmns-txt:hasTextValue>SUB10927MIG</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-nara;GlobalSubstanceRegistrationSystem-UniqueIngredientNumber-4U092XZF0K">
 		<rdf:type rdf:resource="&idmp-nara;UniqueIngredientNumber"/>
-		<rdfs:label>4U092XZF0K</rdfs:label>
+		<rdfs:label>GSRS, Unique Ingredient Number, 4U092XZF0K</rdfs:label>
 		<dct:source rdf:resource="https://precision.fda.gov/uniisearch/srs/unii/4U092XZF0K"/>
 		<cmns-id:identifies rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/4U092XZF0K"/>
 		<cmns-id:identifies rdf:resource="&idmp-trlp;TerlipressinAcetate"/>
@@ -656,15 +683,41 @@
 		<cmns-txt:hasTextValue>4U092XZF0K</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-trlp;UNII-7Z5X49W53P">
+	<owl:NamedIndividual rdf:about="&idmp-nara;GlobalSubstanceRegistrationSystem-UniqueIngredientNumber-7Z5X49W53P">
 		<rdf:type rdf:resource="&idmp-nara;UniqueIngredientNumber"/>
-		<rdfs:label>7Z5X49W53P</rdfs:label>
+		<rdfs:label>GSRS, Unique Ingredient Number, 7Z5X49W53P</rdfs:label>
 		<dct:source rdf:resource="https://precision.fda.gov/uniisearch/srs/unii/7Z5X49W53P"/>
 		<cmns-id:identifies rdf:resource="https://gsrs.ncats.nih.gov/api/v1/substances/7Z5X49W53P"/>
 		<cmns-id:identifies rdf:resource="&idmp-trlp;Terlipressin"/>
 		<cmns-ra:isRegisteredBy rdf:resource="&idmp-nara;FoodAndDrugAdministrationRegistrationAuthority"/>
 		<cmns-ra:isRegisteredIn rdf:resource="&idmp-nara;GlobalSubstanceRegistrationSystem"/>
 		<cmns-txt:hasTextValue>7Z5X49W53P</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000073345/terms/100000073611">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
+		<rdf:type rdf:resource="&idmp-mprd;RouteOfAdministration"/>
+		<rdfs:label>SPOR-RMS, Routes and Methods of Administration Vocabulary, Intravenous use</rdfs:label>
+		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanAndVeterinaryUse"/>
+		<idmp-spor:hasSPORTermDescription rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073345/terms/100000073611-TermDescription-English"/>
+		<idmp-spor:hasSPORTermName rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073345/terms/100000073611-TermName-English"/>
+		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
+		<cmns-col:isIncludedIn rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073345"/>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073345/terms/100000073611-TermIdentifier"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000073345/terms/100000073611-TermIdentifier">
+		<rdf:type rdf:resource="&idmp-spor;SPORTermIdentifier"/>
+		<rdfs:label>SPOR-RMS, Routes and Methods of Administration Vocabulary, Intravenous use, Term Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>100000073611</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000073345/terms/100000073611-TermName-English">
+		<rdf:type rdf:resource="&idmp-spor;SPORTermName"/>
+		<rdfs:label>SPOR-RMS, Routes and Methods of Administration Vocabulary, Intravenous use, Term Name, English</rdfs:label>
+		<cmns-dsg:isNameOf rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073345/terms/100000073611"/>
+		<cmns-txt:hasTextValue>Intravenous use</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
 	</owl:NamedIndividual>
 
 </rdf:RDF>
