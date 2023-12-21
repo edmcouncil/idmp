@@ -103,7 +103,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230701/ISO11238-Substances.rdf version of this ontology was modified to add structural representations including molfile.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances.rdf version of this ontology was modified to reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to incorporate additional content for structurally diverse substances (IDMP-635), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, and (2) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to augment the definition of nucleic acid substance to complete the requirements specified in clause 7.5 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-592).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of protein substance to complete the requirements specified in clause 7.4 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-594), to build out the definition of polymer substance to complete the requirements specified in clause 7.6 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-673), and to add details for Organism (IDMP-640).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of mixture to complete the requirements specified in clause 7.8 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-675), and to assist in addressing gaps with respect to the top-level class definitions and relationships in the complete model figures for authorized and investigational medicinal product in Annex A and Annex B, respectively, in ISO 11615 (IDMP-677).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of mixture to complete the requirements specified in clause 7.8 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-675), to assist in addressing gaps with respect to the top-level class definitions and relationships in the complete model figures for authorized and investigational medicinal product in Annex A and Annex B, respectively, in ISO 11615 (IDMP-677), and to update the conformance points to be current (IDMP-322).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -118,6 +118,7 @@
 		<skos:example>An example of an acid is hydrochloric acid.</skos:example>
 		<skos:note>An acid is also defined as a chemical that gives off hydrogen ions in water and forms salts by combining with certain metals. Acids have a sour taste and turn certain dyes red. Some acids made by the body, such as gastric acid, can help the body work the way it should.</skos:note>
 		<skos:note>An acid is also defined in CHEBI as a molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid).</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ActiveIngredient">
@@ -157,7 +158,7 @@
 		<skos:definition>ingredient that potentiates the immune response to an antigen and/or modulates it towards the desired immune response</skos:definition>
 		<skos:note>An adjuvant is an agent that enhances the activity or therapeutic effect of another pharmacologic substance without having much, if any, therapeutic impact by itself.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
-		<cmns-av:explanatoryNote>An adjuvant is defined as a component of a mixture in the ISO 11238 standard rather than as a role that such a component plays, thus this definition is non-conformant.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>An adjuvant is defined as a component of a mixture in the ISO 11238 standard rather than as a role that such a component (substance) plays, thus this definition is non-conformant. It does, however, conform with its use as an ingredient in ISO 11615/TS 20443.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AgentModificationMethod">
@@ -207,7 +208,10 @@
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.5</dct:source>
 		<skos:definition>method of a modification by means of an agent where the chemical modifications are diverse or unclear</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-ModelConformant"/>
 		<cmns-av:explanatoryNote>Agent modification describes modifications that do not result in the addition of a single well-defined chemical entity (i.e. formaldehyde, glutaraldehyde treatment, peroxide treatment). In the inactivation of vaccines or treatment of tissue matrices, agent modification is essential for the description of these materials. Agent modification is also used in describing the culturing of cells that result in phenotypic differentiation. The agent modification could also be used to capture the actual agent that reacts with a protein that results in the attachment of a well-defined chemical fragment or entity.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>This class is equivalent to the agent modification class in Figure 15 of ISO 11238, but has been renamed to support the specification of an agent modification (this class), and the actual modification that in the physical world.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AgentModificationType">
@@ -286,6 +290,7 @@
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.8</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Note that the model for representing an amount of something reuses the pattern from the Object Management Group&apos;s Quantities and Units ontology, which conforms with SysML v2 and a number of other ISO standards for the representation of quantities. Restrictions with respect to quantity value ranges and the associated units are modeled but not using the relational pattern represented in Figure 24 and others in ISO 11238.</cmns-av:explanatoryNote>
 		<cmns-av:usageNote>Note that units in the ontology are associated with the quantity or quantity value rather than with the higher level amount concept.</cmns-av:usageNote>
 		<cmns-av:usageNote>The amount can be a range.</cmns-av:usageNote>
 		<cmns-av:usageNote>The amount can be expressed relative to a reference amount.</cmns-av:usageNote>
@@ -313,7 +318,7 @@
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 6.8.1</cmns-av:adaptedFrom>
-		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide. Values specified in the standard are included, however.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-Approximate">
@@ -332,20 +337,20 @@
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NLT">
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NotLessThan">
 		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
-		<rdfs:label>amount type - NLT</rdfs:label>
+		<rdfs:label>amount type - not less than</rdfs:label>
 		<skos:definition>amount type for quantity values that are a lower bound</skos:definition>
-		<cmns-av:synonym>amount type - not less than</cmns-av:synonym>
+		<cmns-av:abbreviation>NLT</cmns-av:abbreviation>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 	</owl:NamedIndividual>
 	
-	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NMT">
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-NotMoreThan">
 		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
-		<rdfs:label>amount type - NMT</rdfs:label>
+		<rdfs:label>amount type - not more than</rdfs:label>
 		<skos:definition>amount type for quantity values that are an upper bound</skos:definition>
-		<cmns-av:synonym>amount type - not more than</cmns-av:synonym>
+		<cmns-av:abbreviation>NMT</cmns-av:abbreviation>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 		<cmns-dsg:isDefinedIn rdf:resource="&idmp-sub;ISO11238-AmountTypeVocabulary"/>
 	</owl:NamedIndividual>
@@ -374,6 +379,7 @@
 		<rdfs:label>atom</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
 		<skos:definition>smallest particle characterizing a chemical element</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:directSource>Nomenclature of Inorganic Chemistry – IUPAC Recommendations 2005, N. G. Connelly, T. Damhus, R. M. Hartshorn, A. T. Hutton (Eds.), Royal Society of Chemistry, Cambridge, U.K., ISBN 0-85404-438-8. 3rd ed., p. 35</cmns-av:directSource>
 		<cmns-av:explanatoryNote>It consists of a nucleus of a positive charge carrying almost all its mass (more than 99.9%) and Z electrons determining its size.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -385,6 +391,7 @@
 		<rdfs:seeAlso rdf:resource="http://semanticscience.org/resource/SIO_010454"/>
 		<skos:definition>substance having an available pair of electrons capable of forming a covalent bond with a hydron or with the vacant orbital of some other molecular entity</skos:definition>
 		<skos:note>A base is a molecular entity dissolved in a solvent that is capable of accepting a proton (Bronsted base) or forming a covalent bond with a hydron (Lewis base) (SIO).</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;BaseIngredient">
@@ -399,7 +406,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalSubstance"/>
 		<rdfs:label>chemical element</rdfs:label>
 		<skos:definition>chemical substance comprised of atoms with the same atomic number</skos:definition>
-		<cmns-av:synonym>chemical element</cmns-av:synonym>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ChemicalSubstance">
@@ -437,8 +444,7 @@
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
 		<skos:definition>single substance that can be described as a stoichiometric or non-stoichiometric single molecular entity and is not a protein, nucleic acid or polymer substance</skos:definition>
 		<skos:note>Chemical substances are generally considered &apos;small&apos; molecules which have associated salts, solvates or ions and may be described using a single definitive or representative structure.</skos:note>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
-		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.11</cmns-av:directSource>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.11 and 7.3</cmns-av:directSource>
 		<cmns-av:synonym>simple chemical</cmns-av:synonym>
 		<cmns-av:synonym>simple chemical substance</cmns-av:synonym>
 	</owl:Class>
@@ -2522,13 +2528,6 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasComment"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -4508,7 +4507,6 @@ For the description of nucleic acids, the following information can be used to a
 		<skos:definition>substance that specifies a single representation or set of descriptive elements for a given class of substances</skos:definition>
 		<skos:note>A single substance can be described using one or more of five types of elements: chemical, protein, nucleic acid, polymer or structurally diverse substances.</skos:note>
 		<skos:note>Racemates and substances with unknown, epimeric or mixed chirality can be defined as single substances because a single structural representation may be generated and the stereochemistry indicated as descriptive text.</skos:note>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.74</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:synonym>classifier for a single molecular entity</cmns-av:synonym>
@@ -5419,6 +5417,13 @@ For the description of nucleic acids, the following information can be used to a
 				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceInformation"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceInformation"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasComment"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
