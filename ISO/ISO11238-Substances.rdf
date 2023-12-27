@@ -2144,7 +2144,7 @@
 		<rdfs:label>molecular entity</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity</skos:definition>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1142</cmns-av:directSource>
 	</owl:Class>
 	
@@ -2263,6 +2263,7 @@
 		<skos:definition>role of the molecular fragment that undergoes a modification</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularGraph">
@@ -2312,10 +2313,10 @@
 		<rdfs:label>molecular group</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24433"/>
 		<skos:definition>defined linked collection of atoms or a single atom within a molecular entity</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:adaptedFrom>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1118</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>This use of the term in physical organic and general chemistry is less restrictive than the definition adopted for the purpose of nomenclature of organic compounds.</cmns-av:explanatoryNote>
 		<cmns-av:explanatoryNote>portion of a molecule that has one or more sites of attachment to other fragments or moieties</cmns-av:explanatoryNote>
-		<cmns-av:synonym>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.48</cmns-av:synonym>
 		<cmns-av:synonym>chemical group</cmns-av:synonym>
 	</owl:Class>
 	
@@ -2456,6 +2457,7 @@
 		<rdfs:label>molecule</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
 		<skos:definition>electrically neutral entity consisting of more than one atom (n&gt;1)</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1143</cmns-av:directSource>
 	</owl:Class>
 	
@@ -2760,8 +2762,8 @@ For the description of nucleic acids, the following information can be used to a
 		<dct:source>IUPAC. Compendium of Chemical Terminology, 2nd ed. (the &quot;Gold Book&quot;). Compiled by A. D. McNaught and A. Wilkinson. Blackwell Scientific Publications, Oxford (1997).</dct:source>
 		<dct:source>PAC, 1982, 54, 1533. (Glossary of terms used in nuclear analytical chemistry (Provisional)) on page 1547</dct:source>
 		<dct:source>PAC, 1994, 66, 2513. (Nomenclature for radioanalytical chemistry (IUPAC Recommendations 1994)) on page 2522</dct:source>
-		<skos:definition>a species of atom, characterized by its mass number, atomic number and nuclear energy state, provided that the mean life in that state is long enough to be observable</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2 and figure 14</cmns-av:adaptedFrom>
+		<skos:definition>species of atom, characterized by its mass number, atomic number and nuclear energy state, provided that the mean life in that state is long enough to be observable</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2 and Figure 14</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NuclideIdentifier">
@@ -2779,7 +2781,13 @@ For the description of nucleic acids, the following information can be used to a
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>nuclide identifier</rdfs:label>
-		<skos:definition>identifies a isotope and thereby classifies the nuclide that the isotope consists of</skos:definition>
+		<skos:definition>identifies an isotope and thereby classifies the nuclide that the isotope consists of</skos:definition>
+		<skos:note>A Substance ID for each non-natural or radioisotope is created. The ID is linked to a single atom zero valence element.</skos:note>
+		<idmp-sub:hasBusinessRules>Mandatory when substance contains non-natural or radioisotope.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>ISO 11238 Substance ID</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.1</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NuclideName">
@@ -2795,6 +2803,9 @@ For the description of nucleic acids, the following information can be used to a
 		<skos:example>CARBON ¹³C</skos:example>
 		<skos:example>¹⁸F-Fluoride</skos:example>
 		<idmp-sub:hasBusinessRules>This element is Mandatory when substance contains non-natural or radioisotope. Implicitly derived from Nuclide ID.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-sub:hasValuesAllowed>ISO 11238 Substance names</idmp-sub:hasValuesAllowed>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.2</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -3125,6 +3136,7 @@ For the description of nucleic acids, the following information can be used to a
 		</rdfs:subClassOf>
 		<rdfs:label>optical rotation</rdfs:label>
 		<skos:definition>angle of rotation of polarized light when transmitting through material</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:adaptedFrom>PAC, 1996, 68, 2193. (Basic terminology of stereochemistry (IUPAC Recommendations 1996)) on page 2212</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>A sample of material able to rotate the plane of polarization of a beam of transmitted plane-polarized light is said to possess optical activity (or to be optically active). This optical rotation is the classical distinguishing characteristic (sufficient but not necessary) of systems containing unequal amounts of corresponding enantiomers. An enantiomer causing rotation in a clockwise direction (when viewed in the direction facing the oncoming light beam) under specified conditions is called dextrorotatory and its chemical name or formula is designated by the prefix (+)-; one causing rotation in the opposite sense is laevorotatory and designated by the prefix (−)-. Materials with optical activity also exhibit other chiroptic phenomena.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -3138,7 +3150,7 @@ For the description of nucleic acids, the following information can be used to a
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>organism</rdfs:label>
-		<skos:definition>specification for a living entity that can react to stimuli reproduce, grow, and maintain homeostasis</skos:definition>
+		<skos:definition>specification for an individual living entity that can react to stimuli reproduce, grow, and maintain homeostasis</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.56</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -3194,13 +3206,17 @@ For the description of nucleic acids, the following information can be used to a
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.2</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.6.3, 7.6.4.3, 8.1.7.7 and figures 20, 34, 35, 37</dct:source>
 		<skos:definition>named expression of a numeric, textual or amount value or range that is input to some method or function, or states metadata or qualifiers about some characteristic</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ParameterName">
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
 		<rdfs:label>parameter name</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10.6.3, 7.6.4.3, 8.1.7.7 and Figures 20, 34, 35, 37</dct:source>
 		<skos:definition>name of a parameter</skos:definition>
 		<skos:note>name of a parameter that is unique in the context where the parameter is applied</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PharmacopoeialGrade">
