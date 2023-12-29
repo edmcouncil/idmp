@@ -355,6 +355,8 @@
 				<owl:onDataRange rdf:resource="&xsd;boolean"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
+		<skos:note>Material is more specifically defined in ISO 11615 to be a &apos;substance or specified substance of which a certain packaging or device is made. This definition applies to a medicinal product package item (container), package (component) and device.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MechanicalIngredient">
@@ -638,13 +640,36 @@
 	
 	<owl:Class rdf:about="&idmp-mprd;AdministrableDoseForm">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;PharmaceuticalDoseForm"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;AdministrableDoseFormClassifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>administrable dose form</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.2</dct:source>
 		<skos:definition>pharmaceutical dose form for administration to the patient, after any necessary transformation of the manufactured items and their corresponding manufactured dose forms has been carried out</skos:definition>
 		<skos:note>Administered dose form and pharmaceutical administrable dose form are synonyms of administrable dose form.</skos:note>
 		<skos:note>The administrable dose form is identical to the manufactured dose form in cases where no transformation of the manufactured item is necessary (i.e. where the manufactured item is equal to the pharmaceutical product).</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:synonym>administered dose form</cmns-av:synonym>
 		<cmns-av:synonym>pharmaceutical administrable dose form</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AdministrableDoseFormClassifier">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;AdministrableDoseForm"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>administrable dose form classifier</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 13</dct:source>
+		<skos:definition>classifier for the pharmaceutical dose form for administration to the patient, after any necessary transformation of the manufactured items and their corresponding manufactured dose forms has been carried out</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AgeClassifier">
@@ -667,6 +692,7 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:synonym>age</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AgePopulationCharacteristic">
@@ -733,6 +759,7 @@
 	<owl:Class rdf:about="&idmp-mprd;AttachedDocument">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
 		<rdfs:label>attached document</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.2.2.11, 11.3.2.6 and Figure 6</dct:source>
 		<skos:definition>document that provides additional information about something</skos:definition>
 	</owl:Class>
 	
@@ -752,6 +779,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>authorization</rdfs:label>
 		<skos:definition>situation in which a party authorizes someone to act on their behalf or to have other responsibilities or capabilities under certain conditions for some period of time</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AuthorizedMedicinalProduct">
@@ -779,6 +807,12 @@
 		</rdfs:subClassOf>
 		<rdfs:label>authorized medicinal product</rdfs:label>
 		<skos:definition>role of a medicinal product that has been authorized for some purpose in some jurisdiction</skos:definition>
+		<skos:note>The unique identification of authorized medicinal Products and the description of their main characteristics shall apply the following principles:
+a) the assignment of a unique medicinal product identifier (MPID) to reliably recognize, monitor and trace the use of medicinal products;
+b) the assignment of a unique medicinal product package identifier (PCID) to reliably recognize and trace medicinal products as packaged for sale or supply;
+c) the assignment of a unique medicinal product batch identifier (BAID1) to reliably recognize and trace a manufacturer&apos;s batch number, which appears on the outer packaging of the medicinal product, in compliance with the requirements of the marketing authorization;
+d) the assignment of a unique medicinal product batch identifier (BAID2) to reliably recognize and trace a batch number on the immediate packaging of the medicinal product, where this is not the outer packaging, in compliance with the requirements of the marketing authorization.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 6.2, 8, and Figures 5, 6 and Annex A</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AuthorizedParty">
@@ -791,6 +825,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>authorized party</rdfs:label>
 		<skos:definition>party that has been given the responsibility to act on behalf of another party or to have other responsibilities or capabilities under some set of guidelines</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AuthorizingParty">
@@ -803,6 +838,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>authorizing party</rdfs:label>
 		<skos:definition>party that delegates some role, authority, capability, or control to another party</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Batch">
@@ -965,7 +1001,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -980,7 +1016,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
