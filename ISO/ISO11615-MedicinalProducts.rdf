@@ -685,8 +685,7 @@
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 8.2.2.4 and Figure 14</dct:source>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure F.1, clause F.2.7.1</dct:source>
 		<skos:definition>qualitative classifier for a range of ages, specified in terms of a controlled vocabulary</skos:definition>
-		<skos:example>adult</skos:example>
-		<skos:example>elderly</skos:example>
+		<skos:example>Adults (18 to &lt; 65)</skos:example>
 		<skos:note>The age group of the specific population for an indication, undesirable effect, or a contraindication as authorized for the medicinal product in accordance with the regulated medicinal product information can be specified using an appropriate controlled terminology.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
@@ -760,7 +759,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
 		<rdfs:label>attached document</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.2.2.11, 11.3.2.6 and Figure 6</dct:source>
-		<skos:definition>document that provides additional information about something</skos:definition>
+		<skos:definition>document officially submitted to a medicines regulatory agency</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Authorization">
@@ -845,6 +844,12 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasExpirationDate"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dt;ExplicitDate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;isOutputOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;BatchManufacturingProcess"/>
 			</owl:Restriction>
@@ -924,15 +929,29 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ClinicalTrialIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>clinical trial</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.11</dct:source>
 		<dct:source>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C71104</dct:source>
 		<skos:definition>investigation in human subjects intended to discover or verify the clinical, pharmacological and/or other pharmacodynamic effects of an investigational product(s), and/or to identify any adverse reactions to an investigational medicinal product(s), and/or to study absorption, distribution, metabolism and excretion of investigational medicinal product(s) with the object of ascertaining its safety and/or efficacy</skos:definition>
 		<skos:note>A clinical trial is a research study that prospectively assigns human participants or groups of humans to one or more health-related interventions to evaluate the effects on health outcomes.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ClinicalTrialAuthorization">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Authorization"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ClinicalTrialIdentifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorizingParty"/>
@@ -955,6 +974,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:label xml:lang="en-US">clinical trial authorization</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.12</dct:source>
 		<skos:definition>approval given by a medicines regulatory agency to conduct a clinical trial in a region</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ClinicalTrialIdentifier">
@@ -968,8 +988,11 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>clinical trial identifier</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.74</dct:source>
 		<rdfs:seeAlso rdf:resource="https://clinicaltrials.gov/"/>
-		<skos:definition>sequence of characters uniquely identifying a clinical trial</skos:definition>
+		<skos:definition>identifier assigned to a clinical trial by a medicines regulatory agency in a region for tracking purposes</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:synonym>registration number</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ColorCharacteristic">
@@ -981,11 +1004,15 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>color characteristic</rdfs:label>
+		<rdfs:label xml:lang="en-US">color characteristic</rdfs:label>
+		<rdfs:label xml:lang="en-GB">colour characteristic</rdfs:label>
 		<skos:definition>composite chromatic physical characteristic composed of hue, saturation and intensity parts</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.9</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_0000014</cmns-av:adaptedFrom>
+		<cmns-av:synonym xml:lang="en-US">color</cmns-av:synonym>
 		<cmns-av:synonym>color</cmns-av:synonym>
+		<cmns-av:synonym xml:lang="en-GB">colour</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;CombinedPharmaceuticalDoseForm">
@@ -1043,7 +1070,10 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
 		<rdfs:label>concentration</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</dct:source>
-		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass) ...</skos:definition>
+		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass)</skos:definition>
+		<skos:note>For solid dose forms, strength (concentration) is generally the same as strength (presentation) and therefore is not required to be expressed separately; the strength (presentation) only is required.</skos:note>
+		<skos:note>When required for expression of strength, the unit of presentation shall be specified in accordance with ISO 11239 and its resulting terminology. The controlled term and a term identifier for the unit of presentation shall be specified in the associated manufactured item or pharmaceutical product. For strength expressed using standard units, the unit of measure symbol and the symbol identifier as defined in ISO 11240 and its resulting controlled vocabulary shall be specified.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:synonym>strength (concentration)</cmns-av:synonym>
 	</owl:Class>
 	
@@ -1286,6 +1316,11 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:label>contraindication text</rdfs:label>
 		<skos:definition>textual description of the contraindications of a medicinal product</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 3.1.82, 9.9.2.3.3 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+		<cmns-av:synonym>contraindications text</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;DataCarrierIdentifier">
@@ -1326,6 +1361,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:label>depth characteristic</rdfs:label>
 		<skos:definition>1-D extent physical characteristic inhering in a bearer by virtue of the bearer&apos;s downward or backward or inward dimension</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.4</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_000001595</cmns-av:adaptedFrom>
 		<cmns-av:synonym>depth</cmns-av:synonym>
@@ -1343,6 +1379,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:label>diameter characteristic</rdfs:label>
 		<dct:source rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_000001334</dct:source>
 		<skos:definition>length physical characteristic which is equal to the length of any straight line segment that passes through the center of a circle and whose endpoints are on the circular boundary.</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.7</cmns-av:adaptedFrom>
 		<cmns-av:synonym>diameter</cmns-av:synonym>
 	</owl:Class>
@@ -1407,30 +1444,18 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<skos:definition>specified quantity of a medicine, to be taken at one time or at stated intervals</skos:definition>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;Gender">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>gender</rdfs:label>
-		<skos:definition>biological sex of an organism or for humans the characteristics of women, men, girls and boys that are socially constructed</skos:definition>
-		<cmns-av:adaptedFrom>WHO Gender and Health https://www.who.int/health-topics/gender</cmns-av:adaptedFrom>
-		<cmns-av:usageNote>ISO IDMP recommends the use of ISO 5128 concept descriptors for this</cmns-av:usageNote>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-mprd;GenderPopulationCharacteristic">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;Gender"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>gender population characteristic</rdfs:label>
-		<skos:definition>classifier for a statistical population based on the gender (sex) of its members</skos:definition>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.5.5</dct:source>
+		<skos:definition>classifier for a statistical population based on the biological sex of an organism or for humans the characteristics of women, men, girls and boys that are socially constructed</skos:definition>
+		<skos:note>The gender of the specific population for an indication or a contraindication in accordance with the regulated product information shall be specified using ISO/IEC 5218.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-ModelConformant"/>
+		<cmns-av:adaptedFrom>WHO Gender and Health https://www.who.int/health-topics/gender</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;HeightCharacteristic">
@@ -1444,6 +1469,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:label>height characteristic</rdfs:label>
 		<skos:definition>1-D extent physical characteristic inhering in a bearer by virtue of the bearer&apos;s vertical dimension of extension</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.2</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_000000119</cmns-av:adaptedFrom>
 		<cmns-av:synonym>height</cmns-av:synonym>
@@ -1469,21 +1495,26 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:label>ISO 20443 code set</rdfs:label>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://www.iso.org/standard/68041.html</rdfs:seeAlso>
 		<skos:definition>set of controlled vocabularies and codes for reporting of medicinal product-related information specified in the ISO/TS 20443 guidelines</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-mprd;Image">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
-				<owl:onClass rdf:resource="&owl;Thing"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&mvf-trm;depicts"/>
+				<owl:minCardinality rdf:datatype="&xsd;NonNegativeInteger">0</owl:minCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>image</rdfs:label>
 		<skos:definition>visual representation of something</skos:definition>
-		<skos:note>In ISO 11615, an image is a physical characteristic. This is not correct.</skos:note>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.11</cmns-av:adaptedFrom>
+		<skos:note>The format of the image attachment shall be specified by regional implementations. The format of the image shall follow ISO 12639 and shall be held in an ED data type.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ED"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.6.2.9.5, 9.6.2.17, 9.6.2.20.5, 9.6.2.21.1 and 9.6.2.21.11</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.14.9</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>In ISO 11615, an image is modeled as a physical characteristic. This is not correct from an ontological perspective.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ImmediateContainer">
@@ -1516,10 +1547,9 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:label>immediate container</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.27</dct:source>
-		<skos:definition>immediate packaging in which a manufactured item or pharmaceutical product is contained and with which it is in direct contact</skos:definition>
-		<skos:note>A pharmaceutical dose form can fulfil the role of an immediate container, e.g. a capsule containing a powder for inhalation; the capsule in this case is not a container.</skos:note>
-		<skos:note>An alternative, compatible definition of immediate container (&apos;immediate packaging) is given in Directive 92/27/EEC.</skos:note>
-		<skos:note>An immediate container can be fitted with or have integrated into it an administration device and/or closure.</skos:note>
+		<skos:definition>packaging in which a manufactured item or pharmaceutical product is contained and with which it is in direct contact</skos:definition>
+		<skos:note>An immediate container can be fitted with or have integrated into it an administration device and/or closure. A pharmaceutical dose form can fulfil the role of an immediate container, e.g. a capsule containing a powder for inhalation; the capsule in this case is not a container. An alternative, compatible definition of immediate container (&apos;immediate packaging&apos;) is given in Directive 92/27/EEC.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Imprint">
@@ -1533,7 +1563,9 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:label>imprint</rdfs:label>
 		<skos:definition>stamp or impress on a surface</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.10</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.14.10</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;IndicationAsDiseaseSymptomProcedure">
@@ -2439,17 +2471,12 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicalDeviceBatchIdentifier">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;BatchNumber"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasExpirationDate"/>
-				<owl:someValuesFrom rdf:resource="&cmns-dt;ExplicitDate"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>medical device batch identifier</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.6.2.15</dct:source>
 		<skos:definition>unique identifier allocated to a specific batch of a medical device</skos:definition>
 		<skos:note>At implementation, any batch number and expiry date for a device in a packaged medicinal product will be related to a particular batch or batches of that packaged medicinal product (as described using the BAID1), but for simplification at a conceptual level, the &apos;many-to-many&apos; relationship that this would give has been omitted.</skos:note>
 		<skos:note>This class can be used to describe the batch number and/or expiry date of a device in a packaged medicinal product.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:synonym>device batch identifier</cmns-av:synonym>
 	</owl:Class>
 	
@@ -2682,16 +2709,10 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductBatchNumber"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom rdf:resource="&cmns-dt;ExplicitDate"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>medicinal product batch identifier for immediate packaging</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.52</dct:source>
 		<skos:definition>unique identifier allocated to a specific batch of a medicinal product, which appears on the immediate packaging, where this is not the outer packaging</skos:definition>
-		<skos:editorialNote>For more explicit modeling of the semantics we should consider creating a property chain that links the BAID1 through the pharmaceutical product batch identifier, through the pharmaceutical product batch to its expiration date rather than using a disconnected date (future update).</skos:editorialNote>
+		<skos:editorialNote>For more explicit modeling of the semantics we should consider creating a property chain that links the BAID1 through the pharmaceutical product batch identifier, through the pharmaceutical product batch to its expiration date (future update).</skos:editorialNote>
 		<skos:note>It is constructed by using the batch number assigned by the manufacturer and the expiration date. This is for indexing purposes and to contribute to improving patient safety by allowing for the unique identification of a medicinal product based at the level of the immediate container.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:abbreviation>BAID2</cmns-av:abbreviation>
@@ -2707,16 +2728,10 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductBatchNumber"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom rdf:resource="&cmns-dt;ExplicitDate"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>medicinal product batch identifier for outer packaging</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.51</dct:source>
 		<skos:definition>unique identifier allocated to a specific batch of a medicinal product, which appears on the outer packaging of the medicinal product</skos:definition>
-		<skos:editorialNote>For more explicit modeling of the semantics we should consider creating a property chain that links the BAID1 through the pharmaceutical product batch identifier, through the pharmaceutical product batch to its expiration date rather than using a disconnected date (future update).</skos:editorialNote>
+		<skos:editorialNote>For more explicit modeling of the semantics we should consider creating a property chain that links the BAID1 through the pharmaceutical product batch identifier, through the pharmaceutical product batch to its expiration date (future update).</skos:editorialNote>
 		<skos:note>It is constructed by using the batch number assigned by the manufacturer and the expiration date. This is for indexing purposes and to contribute to improving patient safety by allowing for the unique identification of a medicinal product at the package level.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:abbreviation>BAID1</cmns-av:abbreviation>
