@@ -1950,7 +1950,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>intermediate packaging</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.29</dct:source>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.1.29 and 9.6</dct:source>
 		<skos:definition>container between the outer packaging and the immediate container</skos:definition>
 	</owl:Class>
 	
@@ -2068,6 +2068,20 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Authorization"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ManufacturingAuthorizationReferenceNumber"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasEffectiveDate"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorizedParty"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Manufacturer"/>
 			</owl:Restriction>
@@ -2096,6 +2110,23 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<skos:note>Such authorization may be required for both total and partial manufacture and for the various processes of dividing up, packaging or presentation. However, such authorization may not be required for preparation, dividing up, changes in packaging or presentation where these processes are carried out, solely for retail supply, by pharmacists in dispensing pharmacies or by persons legally authorized in a region to carry out such processes.</skos:note>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.39</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ManufacturingAuthorizationReferenceNumber">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;ManufacturingAuthorization"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en-GB">manufacturing authorisation reference number</rdfs:label>
+		<rdfs:label xml:lang="en-US">manufacturing authorization reference number</rdfs:label>
+		<skos:definition>reference number of the authorization for manufacturing or equivalent</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause H.2.1.2</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.5.2.3.3</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ManufacturingOrBusinessOperation">
@@ -2228,8 +2259,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorizationApplication"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MarketingAuthorizationApplication"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en-GB">marketing authorisation application identifier</rdfs:label>
@@ -2253,6 +2283,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:label xml:lang="en-GB">marketing authorisation holder</rdfs:label>
 		<rdfs:label xml:lang="en-US">marketing authorization holder</rdfs:label>
 		<skos:definition>authorized party role of a legal entity (organization) that holds the authorization for marketing a medicinal product in a region</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.41</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.1</cmns-av:adaptedFrom>
 	</owl:Class>
@@ -2336,8 +2367,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorizationProcedure"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MarketingAuthorizationProcedure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en-GB">marketing authorisation procedure identifier</rdfs:label>
@@ -2485,14 +2515,16 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	<owl:Class rdf:about="&idmp-mprd;MassBasedStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
 		<rdfs:label>mass-based strength</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</dct:source>
-		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass) ...</skos:definition>
+		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass)</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicalCondition">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:label>medical condition</rdfs:label>
 		<skos:definition>situation in which a patient experiences a pathological condition or disorder that impairs the body&apos;s normal functioning or its parts and is characterized by specific symptoms and/or signs</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicalDevice">
@@ -2541,6 +2573,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 — control of conception, and which does not achieve its principal intended action in or on the human body by pharmacological, immunological or metabolic means, but which may be assisted in its function by such means</skos:definition>
 		<skos:example>Some examples of devices in the context of pharmaceutical products are drug delivery systems, drug-eluting stents, insulin pumps, glucose meters, and diagnostic test kits.</skos:example>
 		<skos:note>Devices may be of several types such as separate administration devices, an integral administration device or a part of a medicinal product. Where a medicinal product is combined with a medical device and where the pharmacological, immunological or metabolic action should be considered as the principal mode of action, the medical device is presented as part of the pharmaceutical product.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:adoptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.1.49 and 9.6.2.12</cmns-av:adoptedFrom>
 		<cmns-av:explanatoryNote>The FDA further clarifies this definition to say that such a device does not achieve its primary intended purposes through chemical action within or on the body of a man or other animals and which is not dependent upon being metabolized for the achievement of its primary intended purposes.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>device</cmns-av:synonym>
@@ -2553,7 +2586,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<skos:definition>unique identifier allocated to a specific batch of a medical device</skos:definition>
 		<skos:note>At implementation, any batch number and expiry date for a device in a packaged medicinal product will be related to a particular batch or batches of that packaged medicinal product (as described using the BAID1), but for simplification at a conceptual level, the &apos;many-to-many&apos; relationship that this would give has been omitted.</skos:note>
 		<skos:note>This class can be used to describe the batch number and/or expiry date of a device in a packaged medicinal product.</skos:note>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:synonym>device batch identifier</cmns-av:synonym>
 	</owl:Class>
 	
@@ -2609,6 +2641,9 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:label>medication</rdfs:label>
 		<skos:definition>role of a substance or product that is used in the treatment of a disease or symptom</skos:definition>
+		<skos:note>Reference to a specific medication, which can be expressed as an active substance, medicinal product or class of medicinal products, as part of a specific indication or contraindication in accordance with the regulated product information shall be specified using an appropriate controlled vocabulary [see medication classifier].</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adoptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.9.2.6.3</cmns-av:adoptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicationClassifier">
@@ -2627,7 +2662,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>medication classifier</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.6.3</dct:source>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.6.3, Figure 14</dct:source>
 		<skos:definition>classifier for a medication by active substance or medicinal product(s)</skos:definition>
 		<skos:note>Reference to a specific medication, which can be expressed as an active substance, Medicinal Product or class of Medicinal Products, as part of a specific indication or contraindication in accordance with the regulated product information shall be specified using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
@@ -2643,6 +2678,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:label>medication therapy</rdfs:label>
 		<skos:definition>therapy in which a medication is administered to the patient</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:synonym>therapy with medication</cmns-av:synonym>
 	</owl:Class>
 	
@@ -2893,8 +2929,39 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:synonym>product cross-reference</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;MedicinalProductHeaderIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MedicinalProductHeaderRecord"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>medicinal product header identifier</rdfs:label>
+		<skos:definition>unique identifier allocated to a specific version of a header [record], i.e., a record specifying the versioning of the core identifiers related to a medicinal product in a region, as well as the characteristics associated with the medicinal product and the documentation that supports the versioning</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-ModelConformant"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.3. Figure 6</cmns-av:adaptedFrom>
+		<cmns-av:synonym>identifier</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductHeaderRecord">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Record"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProductHeaderIdentifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasEffectiveDate"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
@@ -2906,6 +2973,8 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:note>Regional guidance might contain additional criteria which may warrant a new version of a regulated document as it relates to the characteristics of a medicinal product, including potentially language-specific versions.</skos:note>
 		<skos:note>The characteristics of an authorized medicinal product as defined herein shall be versioned within a regulated document, as applicable. For a given version, some characteristics of the medicinal product have changed but are not different to a sufficient extent to warrant the assignment of a new primary identifier. However, the difference(s) are required to be recorded and tracked against the MPID/PCID.</skos:note>
 		<skos:note>This is also a record to track against previous versions of a regulated document, including but not limited to language-specific variations, regardless of whether the revisions warrant a new primary identifier (primary identifier reference shall be listed as an example of a change within a regulated document).</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-ModelConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
 		<cmns-av:synonym>header</cmns-av:synonym>
 		<cmns-av:usageNote>A given medicinal product will have exactly 1 &apos;header&apos;, although a given &apos;header&apos; may apply to multiple medicinal products.</cmns-av:usageNote>
@@ -2986,6 +3055,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>collection of records submitted to a medicines regulatory agency that may be used to provide confidential detailed information about facilities, processes, or articles used in the manufacturing, processing, packaging, and storing of one or more human drugs</skos:definition>
 		<skos:example>Pharmacovigilance System Master File</skos:example>
 		<skos:note>This may be either an invented name not liable to be confused with the common name, or a common or a scientific name accompanied by a trade mark or any other applicable descriptor.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>https://www.fda.gov/drugs/guidances-drugs/drug-master-files-guidelines</cmns-av:adaptedFrom>
 		<cmns-av:synonym>master file</cmns-av:synonym>
@@ -3008,6 +3078,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:label>medicinal product master file holder</rdfs:label>
 		<skos:definition>authorized role of a legal entity (organization) that holds a master file for a given medicinal product</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
 		<cmns-av:synonym xml:lang="en">master file holder</cmns-av:synonym>
 		<cmns-av:synonym xml:lang="en-GB">master file holder (organisation)</cmns-av:synonym>
@@ -3060,6 +3131,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label xml:lang="en">medicinal product name locale</rdfs:label>
 		<skos:definition>context in which a given medicinal product name applies</skos:definition>
 		<skos:note>The country and optionally the region where the medicinal product name of a medicinal product is authorized shall be specified in the official language as applicable.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-ModelConformant"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 6</cmns-av:adaptedFrom>
 		<cmns-av:synonym xml:lang="en">Country / Language</cmns-av:synonym>
@@ -3093,6 +3165,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label>medicines regulatory agency</rdfs:label>
 		<skos:definition>institutional body that, according to the legal system under which it has been established, is responsible for the granting of marketing authorizations, clinical trial authorizations and manufacturing authorizations for medicinal products</skos:definition>
 		<skos:note>In certain regions, the role of the institutional body, which according to the legal system grants the marketing authorization of medicinal products, may be complemented by an additional institutional body responsible for the evaluation and supervision of medicinal products. For example, in the EU, the European Commission is the institutional body that grants the marketing authorization of medicinal products and the European Medicines Agency is the body responsible for the evaluation and supervision of medicinal products.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.56</cmns-av:directSource>
 		<cmns-av:synonym xml:lang="en-GB">medicines regulatory agency (organisation)</cmns-av:synonym>
 		<cmns-av:synonym xml:lang="en-US">medicines regulatory agency (organization)</cmns-av:synonym>
