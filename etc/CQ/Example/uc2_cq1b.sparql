@@ -7,8 +7,9 @@ PREFIX cmns-prd: 	<https://www.omg.org/spec/Commons/ProductsAndServices/>
 PREFIX cmns-dsg:   <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-col: <https://www.omg.org/spec/Commons/Collections/>
 PREFIX cmns-cmp: <https://www.omg.org/spec/Commons/Composites/>
+PREFIX cmns-rlcmp:  <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX idmp-mprd: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
-
+PREFIX cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
 
 SELECT DISTINCT ?StockKeepingUnit (SAMPLE(?StockKeepingUnitLabel) AS ?StockKeepingUnitName)
 
@@ -17,7 +18,7 @@ where {
 
       # Bind Variable substance <$Substance>
 	  # Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/Amlodipine>
-	  BIND( uc2_cq1b_parameter_1 AS $Substance )
+	  BIND( <https://spor.ema.europa.eu/v2/SubstanceDefinition/100000085259> AS $Substance )
         
         #Get the PharmaceuticalProduct which is connected to SKU via PackagedMedicinalProduct
 		
@@ -27,7 +28,8 @@ where {
 		# Using property path as PharmaceuticalProduct can be contained in multilevel packaging of PackagedMedicinalProduct
 		# idmp-mprd:contains+ could be replaced by idmp-mprd:contains{1,n} where n is number of level of packaging for PharmaceuticalProduct
 		
-        ?PackagedMedicinalProduct idmp-mprd:contains+ ?PharmaceuticalProduct .  
+        #?PackagedMedicinalProduct idmp-mprd:contains+ ?PharmaceuticalProduct . 
+        ?PackagedMedicinalProduct cmns-col:comprises+/idmp-mprd:contains+ ?PharmaceuticalProduct . 
          {
 		   #Case1 : 	
            # PharmaceuticalProduct is comprised of the substance
@@ -46,7 +48,7 @@ where {
 				#Case 2:	
 				#substance is an active moiety for a substance connected to the pharmaceutical product via ActiveIngredient
 				
-				?ActiveIngredient cmns-cmp:isPlayedBy ?ActiveMoiety.
+				?ActiveIngredient cmns-rlcmp:isPlayedBy ?ActiveMoiety.
 				?ActiveMoiety ^idmp-sub:isActiveMoietyOf|idmp-sub:hasActiveMoiety $Substance .
 			
 			}
@@ -55,7 +57,7 @@ where {
 				#Case3 :
 				#substance is connected to the pharmaceutical product via ActiveIngredient
 				
-				?ActiveIngredient cmns-cmp:isPlayedBy $Substance.
+				?ActiveIngredient cmns-rlcmp:isPlayedBy $Substance.
 				
 			}
 
@@ -65,7 +67,7 @@ where {
         ?StockKeepingUnit a/rdfs:subClassOf* cmns-prd:StockKeepingUnit .
 
 		# Optionally, get the name of the stock keeping unit
-		OPTIONAL{?StockKeepingUnit  rdfs:label  ?StockKeepingUnitLabel }
+		OPTIONAL{?StockKeepingUnit  cmns-txt:hasTextValue  ?StockKeepingUnitLabel }
 
 		
 } GROUP BY ?StockKeepingUnit
