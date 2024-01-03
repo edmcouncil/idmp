@@ -1370,6 +1370,24 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<cmns-av:synonym>depth</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;DiameterCharacteristic">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>diameter characteristic</rdfs:label>
+		<dct:source rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_000001334</dct:source>
+		<skos:definition>length physical characteristic which is equal to the length of any straight line segment that passes through the center of a circle and whose endpoints are on the circular boundary.</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.7</cmns-av:adaptedFrom>
+		<cmns-av:synonym>diameter</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;DiscreteManufacturingProcess">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ManufacturingProcess"/>
 		<rdfs:label>discrete manufacturing process</rdfs:label>
@@ -1429,24 +1447,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:label>dose</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.23</dct:source>
 		<skos:definition>specified quantity of a medicine, to be taken at one time or at stated intervals</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-mprd;ExternalDiameterCharacteristic">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>external diameter characteristic</rdfs:label>
-		<dct:source rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_000001334</dct:source>
-		<skos:definition>length physical characteristic which is equal to the length of any straight line segment that passes through the center of a circle and whose endpoints are on the circular boundary.</skos:definition>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.7</cmns-av:adaptedFrom>
-		<cmns-av:synonym>external diameter</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;GenderPopulationCharacteristic">
@@ -3175,24 +3175,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:synonym xml:lang="en-US">medicines regulatory agency (organization)</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;NominalVolumeCharacteristic">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>nominal volume characteristic</rdfs:label>
-		<skos:definition>3-D extent physical characteristic inhering in a bearer by virtue of the bearer&apos;s amount of 3-dimensional space it occupies</skos:definition>
-		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.6</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_000000918</cmns-av:adaptedFrom>
-		<cmns-av:synonym>nominal volume</cmns-av:synonym>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-mprd;OrphanDesignation">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
@@ -4543,6 +4525,24 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:label>undesirable effect text</rdfs:label>
 		<skos:definition>textual description of an undesirable effect of a medicinal product</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;VolumeCharacteristic">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:onClass rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>volume characteristic</rdfs:label>
+		<skos:definition>3-D extent physical characteristic inhering in a bearer by virtue of the bearer&apos;s amount of 3-dimensional space it occupies</skos:definition>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.6</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">http://purl.obolibrary.org/obo/PATO_000000918</cmns-av:adaptedFrom>
+		<cmns-av:synonym>volume</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;WeightCharacteristic">
