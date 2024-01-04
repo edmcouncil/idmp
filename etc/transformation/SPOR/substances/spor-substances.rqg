@@ -5,6 +5,7 @@ PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
+PREFIX cmns-ra: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
@@ -33,9 +34,10 @@ GENERATE {
     .
 
   <https://data.pistoiaalliance.org/id/EVMPD/{ ?External_Code_XEVMPD }>
-    a idmp-eura:EudraVigilanceCode ;
+    a idmp-eura:EudraVigilanceCode, cmns-ra:RegisteredIdentifier ;
     cmns-id:identifies <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }> ;
     cmns-txt:hasTextValue ?External_Code_XEVMPD ;
+    cmns-ra:registeredIn idmp-eura:ExtendedEudraVigilanceMedicinalProductDictionary;
     .
 }
 ITERATOR iter:CSV(<sms-substances-list.csv>) AS
