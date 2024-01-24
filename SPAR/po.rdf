@@ -49,6 +49,18 @@ Describing documents by means of their structural components</dc:title>
 	<owl:AnnotationProperty rdf:about="&dc;title">
 	</owl:AnnotationProperty>
 	
+	<swrl:Variable rdf:about="http://purl.org/spar/swrl#p">
+	</swrl:Variable>
+	
+	<swrl:Variable rdf:about="http://purl.org/spar/swrl#s">
+	</swrl:Variable>
+	
+	<swrl:Variable rdf:about="http://purl.org/spar/swrl#x">
+	</swrl:Variable>
+	
+	<swrl:Variable rdf:about="http://purl.org/spar/swrl#y">
+	</swrl:Variable>
+	
 	<owl:Class rdf:about="http://www.essepuntato.it/2008/12/pattern#Atom">
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -615,18 +627,6 @@ Any entity belonging to this class is compliant with exactly one structural patt
 	<owl:AnnotationProperty rdf:about="&owl;versionInfo">
 	</owl:AnnotationProperty>
 	
-	<swrl:Variable rdf:about="urn:swrl#p">
-	</swrl:Variable>
-	
-	<swrl:Variable rdf:about="urn:swrl#s">
-	</swrl:Variable>
-	
-	<swrl:Variable rdf:about="urn:swrl#x">
-	</swrl:Variable>
-	
-	<swrl:Variable rdf:about="urn:swrl#y">
-	</swrl:Variable>
-	
 	<owl:AllDisjointClasses>
 		<owl:members rdf:parseType="Collection">
 			<rdf:Description rdf:about="http://www.essepuntato.it/2008/12/pattern#HeadedContainer">
@@ -920,6 +920,37 @@ Any entity belonging to this class is compliant with exactly one structural patt
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:IndividualPropertyAtom>
+				<swrl:argument1 rdf:resource="http://purl.org/spar/swrl#p"/>
+				<swrl:argument2 rdf:resource="http://purl.org/spar/swrl#x"/>
+				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#contains"/>
+			</swrl:IndividualPropertyAtom>
+			<swrl:IndividualPropertyAtom>
+				<swrl:argument1 rdf:resource="http://purl.org/spar/swrl#p"/>
+				<swrl:argument2 rdf:resource="http://purl.org/spar/swrl#y"/>
+				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#contains"/>
+			</swrl:IndividualPropertyAtom>
+			<swrl:DatavaluedPropertyAtom>
+				<swrl:argument1 rdf:resource="http://purl.org/spar/swrl#x"/>
+				<swrl:argument2 rdf:resource="http://purl.org/spar/swrl#s"/>
+				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#hasName"/>
+			</swrl:DatavaluedPropertyAtom>
+			<swrl:DatavaluedPropertyAtom>
+				<swrl:argument1 rdf:resource="http://purl.org/spar/swrl#y"/>
+				<swrl:argument2 rdf:resource="http://purl.org/spar/swrl#s"/>
+				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#hasName"/>
+			</swrl:DatavaluedPropertyAtom>
+		</swrl:body>
+		<swrl:head rdf:parseType="Collection">
+			<swrl:DatavaluedPropertyAtom>
+				<swrl:argument1 rdf:resource="http://purl.org/spar/swrl#p"/>
+				<swrl:argument2 rdf:datatype="&xsd;boolean">true</swrl:argument2>
+				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#canContainHomonymousElements"/>
+			</swrl:DatavaluedPropertyAtom>
+		</swrl:head>
+	</swrl:Imp>
+	<swrl:Imp>
+		<swrl:body rdf:parseType="Collection">
+			<swrl:IndividualPropertyAtom>
 				<swrl:argument1 rdf:resource="http://www.essepuntato.it/2008/12/pattern#p"/>
 				<swrl:argument2 rdf:resource="http://www.essepuntato.it/2008/12/pattern#x"/>
 				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#contains"/>
@@ -954,37 +985,6 @@ Any entity belonging to this class is compliant with exactly one structural patt
 				<swrl:argument1 rdf:resource="http://www.essepuntato.it/2008/12/pattern#p"/>
 				<swrl:argument2 rdf:datatype="&xsd;boolean">true</swrl:argument2>
 				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#canContainHeteronymousElements"/>
-			</swrl:DatavaluedPropertyAtom>
-		</swrl:head>
-	</swrl:Imp>
-	<swrl:Imp>
-		<swrl:body rdf:parseType="Collection">
-			<swrl:IndividualPropertyAtom>
-				<swrl:argument1 rdf:resource="urn:swrl#p"/>
-				<swrl:argument2 rdf:resource="urn:swrl#x"/>
-				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#contains"/>
-			</swrl:IndividualPropertyAtom>
-			<swrl:IndividualPropertyAtom>
-				<swrl:argument1 rdf:resource="urn:swrl#p"/>
-				<swrl:argument2 rdf:resource="urn:swrl#y"/>
-				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#contains"/>
-			</swrl:IndividualPropertyAtom>
-			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="urn:swrl#x"/>
-				<swrl:argument2 rdf:resource="urn:swrl#s"/>
-				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#hasName"/>
-			</swrl:DatavaluedPropertyAtom>
-			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="urn:swrl#y"/>
-				<swrl:argument2 rdf:resource="urn:swrl#s"/>
-				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#hasName"/>
-			</swrl:DatavaluedPropertyAtom>
-		</swrl:body>
-		<swrl:head rdf:parseType="Collection">
-			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="urn:swrl#p"/>
-				<swrl:argument2 rdf:datatype="&xsd;boolean">true</swrl:argument2>
-				<swrl:propertyPredicate rdf:resource="http://www.essepuntato.it/2008/12/pattern#canContainHomonymousElements"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:head>
 	</swrl:Imp>
