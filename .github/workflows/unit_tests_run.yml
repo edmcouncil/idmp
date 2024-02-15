@@ -35,7 +35,7 @@ jobs:
       - name: Run unit tests using Apache Jena
         run: |
           java -Xmx5G -jar etc/unit_tests/target/unit-test-runner-1.0.jar \
-            -ontology_location ./AboutIDMPDev-ReferenceIndividuals.ttl \
+            -ontology_location ./AboutIDMPOntologiesAndExamples.ttl \
             -root_folder etc/unit_tests/ \
             -cq_source etc/CQ/Example/ \
             -config_file configs/idmp_tests_config.yaml
@@ -48,7 +48,7 @@ jobs:
         if: always()
         with:
           name: merged-ontology
-          path: AboutIDMPDev-ReferenceIndividuals.ttl
+          path: AboutIDMPOntologiesAndExamples.ttl
   GSRS:
     runs-on: ubuntu-latest
     env:
@@ -93,7 +93,7 @@ jobs:
           done
       - name: Combine GSRS with IDMP
         run: |
-          source_files=(gsrs-transformed.ttl AboutIDMPDev-ReferenceIndividuals.ttl)
+          source_files=(gsrs-transformed.ttl AboutIDMPOntologiesAndExamples.ttl)
           output_file=gsrs-final.ttl
           # Loop through the source files and append their contents to the output file
           for file in "${source_files[@]}"; do
