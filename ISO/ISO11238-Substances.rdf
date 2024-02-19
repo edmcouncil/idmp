@@ -9,6 +9,7 @@
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-loc "https://www.omg.org/spec/Commons/Locations/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
@@ -42,6 +43,7 @@
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-loc="https://www.omg.org/spec/Commons/Locations/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
@@ -81,6 +83,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Locations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
@@ -1635,7 +1638,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMaterial"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAlternateMaterial"/>
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1653,7 +1656,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasAlternateMaterial"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMaterial"/>
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -5032,6 +5035,13 @@ For the description of nucleic acids, the following information can be used to a
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCountryOfOrigin"/>
+				<owl:onClass rdf:resource="&lcc-cr;Alpha2RegionCode"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
 				<owl:onClass>
 					<owl:Class>
@@ -7290,6 +7300,24 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.7.2</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasCountryOfOrigin">
+		<rdfs:label>has country of origin</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-loc;hasCountry">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-id;isIdentifiedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates something, such as source material, to the country from which it was harvested or sourced</skos:definition>
+		<skos:example>NL, DE, FR, ES, US. This is in line with Table G1 of the Annex G of ISO/TS 19844:2018(E), and it is the largest collection of countries</skos:example>
+		<skos:note>The country where the plant material is harvested or the countries where the plasma is sourced from as laid down in accordance with the Plasma Master File. For &apos;Plasma-derived substances&apos; the attribute country of origin provides information about the countries used for the manufacturing of the Cryopoor plama or Cryoprecipitate.</skos:note>
+		<idmp-sub:hasBusinessRules>This attribute is mandatory when the substance name type is herbal or plasma-derived. When the information for herbals is provided at the substance level it is not necessary to provide the same information again at the specified group 1 information level.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.8</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasDaughterNuclide">
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
