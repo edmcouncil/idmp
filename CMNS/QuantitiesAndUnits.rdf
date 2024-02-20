@@ -36,8 +36,11 @@
 		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
 		<dct:contributor>Evan Wallace, U.S. National Institute of Standards and Technology (NIST)</dct:contributor>
 		<dct:contributor>Hans Peter de Koenig, DEKonsult</dct:contributor>
+		<dct:contributor>Michel Sauvage, Airbus</dct:contributor>
 		<dct:contributor>Roger Burkhart, Thematix Partners LLC</dct:contributor>
+		<dct:contributor>Steve Jenkins, Jet Propulsion Laboratory (JPL), California Institute of Technology, National Aeronautics and Space Administration (NASA)</dct:contributor>
 		<dct:contributor>Stuart Chalk, University of North Florida</dct:contributor>
+		<dct:contributor>Thomas Barre, Airbus</dct:contributor>
 		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
@@ -46,13 +49,14 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20240501/QuantitiesAndUnits/"/>
-		<skos:changeNote>The https://www.omg.org/spec/Commons/20230801/QuantitiesAndUnits.rdf version of this ontology was modified to add the concept of a measurement reference to enable better alignment of such references with quantity values whose reference is something other than a unit of measure (Commons-1.2-3).</skos:changeNote>
+		<skos:changeNote>The https://www.omg.org/spec/Commons/20230801/QuantitiesAndUnits.rdf version of this ontology was modified to add the concept of a measurement reference to enable better alignment of such references with quantity values whose reference is something other than a unit of measure (Commons-1.2-3) and to loosen functional constraints on a number of properties, which caused reasoning errors when these generic properties were reused with multiple subproperties on the same concept (Commons-1.2-5).</skos:changeNote>
 		<cmns-av:copyright>Copyright (c) 2011-2024 Thematix Partners LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2024 Object Management Group, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023-2024 DEKonsult</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023-2024 Mayo Clinic</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023-2024 University of North Florida</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2024 Airbus</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-qtu;ArbitraryUnit">
@@ -337,16 +341,20 @@
 					</rdf:Description>
 					<rdf:Description rdf:about="&cmns-qtu;ReferenceMaterial">
 					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-qtu;MeasurementScale">
+					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:subClassOf>
 		<rdfs:label>measurement reference</rdfs:label>
-		<dct:source>International Vocabulary of Metrology - Basic and General Concepts and Associated Terms (VIM), Third Edition, JCGM 200:2012, available at https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf</dct:source>
 		<skos:definition>measurement unit, measurement procedure, reference material, or a combination of such</skos:definition>
+		<skos:note>Note that the concept of a measurement reference is currently not defined in terms and definitions in the VIM standard, but rather in Note 2 on quantity.</skos:note>
+		<cmns-av:adaptedFrom>International Vocabulary of Metrology - Basic and General Concepts and Associated Terms (VIM), Third Edition, JCGM 200:2012, available at https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementScale">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementReference"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasMaximumPermissiveValue"/>
@@ -708,7 +716,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementUnit"/>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementReference"/>
 				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementReference"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -875,7 +883,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasDenominator">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:label>has denominator</rdfs:label>
 		<rdfs:range>
@@ -901,7 +908,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;hasExponent">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>has exponent</rdfs:label>
 		<rdfs:range rdf:resource="&owl;rational"/>
 		<skos:definition>indicates the number of times a number should be multiplied by itself</skos:definition>
@@ -920,14 +926,12 @@
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;hasFactorValue">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>has factor value</rdfs:label>
 		<rdfs:range rdf:resource="&owl;rational"/>
 		<skos:definition>indicates the numeric multiple or submultiple multiplication factor</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasLowerBound">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has lower bound</rdfs:label>
@@ -936,7 +940,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMaximumPermissiveValue">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has maximum permissive value</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
@@ -958,7 +961,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMinimumPermissiveValue">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has minimum permissive value</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;MeasurementScale"/>
@@ -967,7 +969,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasNumerator">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:label>has numerator</rdfs:label>
 		<rdfs:range>
@@ -1012,7 +1013,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasUpperBound">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has upper bound</rdfs:label>
@@ -1036,14 +1036,12 @@
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMaximumInclusive">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>is maximum inclusive</rdfs:label>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates whether something, such as a measurement scale, includes the absolute maximum permissive value or not</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMinimumInclusive">
-		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>is minimum inclusive</rdfs:label>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates whether something, such as a measurement scale, includes the absolute minimum permissive value or not</skos:definition>
