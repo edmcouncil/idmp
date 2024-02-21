@@ -1202,53 +1202,8 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;IndividualOrganism">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;IndividualOrganismPart"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>individual organism</rdfs:label>
-		<skos:definition>individual living entity that can react to stimuli reproduce, grow, and maintain homeostasis</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.56</cmns-av:adaptedFrom>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;IndividualOrganismFraction">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
-		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganismPart"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>individual organism fraction</rdfs:label>
-		<skos:definition>fraction of a constituent of an individual living entity of anatomical origin of source material within an organism</skos:definition>
-		<skos:note>Many complex materials are fractions of parts of plants, animals, or minerals. Fraction elements are often necessary to define both substances and specified group 1 substances. For substances derived from plants, fraction information will be captured at the substance information level (e.g. oils, juices and exudates). Additional information for extracts, such as extraction solvent composition, will be captured at the specified substance group 1 information level. For plasma-derived products fraction information will be captured at the substance and the specified substance group 1 levels. If there is a fraction, the class &apos;fraction description&apos; is mandatory.</skos:note>
-		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.12</cmns-av:adaptedFrom>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;IndividualOrganismPart">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
-		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>individual organism part</rdfs:label>
-		<skos:definition>constituent of an individual living entity of anatomical origin of source material within an organism</skos:definition>
-		<skos:example>cartilage, root and stolon; whole plant is considered as a part, aerial part of the plant; leaf, tuberous root, whole animal, venom, intestinal mucosa</skos:example>
-		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
-		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.11</cmns-av:adaptedFrom>
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentClass rdf:resource="&idmp-sub;PhysicalOrganism"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Ingredient">
@@ -1638,7 +1593,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMaterial"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAlternateMaterial"/>
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1656,7 +1611,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasAlternateMaterial"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMaterial"/>
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -3238,7 +3193,7 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganism"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>organism</rdfs:label>
@@ -3301,7 +3256,7 @@ For the description of nucleic acids, the following information can be used to a
 						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-sub;OrganismFraction">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;IndividualOrganismFraction">
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganismFraction">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -3332,7 +3287,7 @@ For the description of nucleic acids, the following information can be used to a
 						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-sub;Organism">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;IndividualOrganism">
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -3361,7 +3316,7 @@ For the description of nucleic acids, the following information can be used to a
 						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-sub;Organism">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;IndividualOrganism">
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -3434,7 +3389,7 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganismPart"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganismPart"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>organism part</rdfs:label>
@@ -3460,7 +3415,7 @@ For the description of nucleic acids, the following information can be used to a
 						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-sub;OrganismPart">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;IndividualOrganismPart">
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganismPart">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -3490,7 +3445,7 @@ For the description of nucleic acids, the following information can be used to a
 						<owl:unionOf rdf:parseType="Collection">
 							<rdf:Description rdf:about="&idmp-sub;OrganismPart">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;IndividualOrganismPart">
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganismPart">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -3695,6 +3650,57 @@ For the description of nucleic acids, the following information can be used to a
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10</dct:source>
 		<skos:definition>method of modification where no new covalent bonds are formed</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalOrganism">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalOrganismPart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical organism</rdfs:label>
+		<skos:definition>physical, living entity that can react to stimuli reproduce, grow, and maintain homeostasis</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.56</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalOrganismFraction">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganismPart"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical organism fraction</rdfs:label>
+		<skos:definition>fraction of a constituent of a living entity of anatomical origin, i.e., of an organism, from which source material is derived</skos:definition>
+		<skos:note>Many complex materials are fractions of parts of plants, animals, or minerals. Fraction elements are often necessary to define both substances and specified group 1 substances. For substances derived from plants, fraction information will be captured at the substance information level (e.g. oils, juices and exudates). Additional information for extracts, such as extraction solvent composition, will be captured at the specified substance group 1 information level. For plasma-derived products fraction information will be captured at the substance and the specified substance group 1 levels. If there is a fraction, the class &apos;fraction description&apos; is mandatory.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.12</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalOrganismPart">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical organism part</rdfs:label>
+		<skos:definition>constituent of a living entity of anatomical origin, i.e., of an organism, from which source material is derived</skos:definition>
+		<skos:example>cartilage, root and stolon; whole plant is considered as a part, aerial part of the plant; leaf, tuberous root, whole animal, venom, intestinal mucosa</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.11</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
