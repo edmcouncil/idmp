@@ -888,6 +888,20 @@
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.3 and Figure 8</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Genus">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>genus</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45292"/>
+		<skos:definition>taxonomic category ranking below a family (or subfamily) and above a species and generally consisting of a group of species exhibiting similar characteristics.</skos:definition>
+		<skos:example>Ginkgo; Harpagophytum</skos:example>
+		<skos:note>Genus refers to the Latin epithet of the genus element of the plant/animal scientific name; it is present in names for genera, species and intraspecies.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>GENUS: CD</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Glycosylation">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:subClassOf>
@@ -5212,6 +5226,21 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Species">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>species</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45293"/>
+		<skos:definition>taxonomic group of organisms that differ from all other groups of organisms and that are capable of breeding and producing fertile offspring.</skos:definition>
+		<skos:example>Biloba; procumbens</skos:example>
+		<skos:note>Species refers to the Latin epithet of the species of the plant/animal; it is present in names for species and intraspecies.</skos:note>
+		<idmp-sub:hasBusinessRules>For Herbals, this element shall be Mandatory. They shall be specified as a code from an appropriate taxonomy terminology (e.g., the Catalogue of Life, Kew Gardens Medicinal Plant Names Services for plants or NCBI Taxonomy ID).</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>SPECIES: CD</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedItemCount">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:subClassOf>
@@ -7249,6 +7278,22 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
 		<cmns-av:synonym>CLASS: CD</cmns-av:synonym>
 		<cmns-av:synonym>class taxon</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;TaxonomicFamily">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>taxonomic family</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45290"/>
+		<skos:definition>taxonomic category between order and genus</skos:definition>
+		<skos:example>Ginkgoaceae</skos:example>
+		<skos:note>A taxonomic family consists of a group of organisms among which the differences are quite minor, e.g. Equiidae - horses and their relatives.</skos:note>
+		<idmp-sub:hasBusinessRules>This is implied by the species and is referenced from an appropriate terminology/taxonomy, e.g. Kew Gardens Medicinal Plant Names Services for plants. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>FAMILY: CD</cmns-av:synonym>
+		<cmns-av:synonym>family taxon</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Taxonomy">
