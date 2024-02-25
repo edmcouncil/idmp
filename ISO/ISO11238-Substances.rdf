@@ -616,7 +616,17 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Organism"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Organism">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>development stage</rdfs:label>
@@ -1382,6 +1392,20 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.3</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Kingdom">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>kingdom</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45276"/>
+		<skos:definition>highest taxonomic rank, immediately above phylum or division</skos:definition>
+		<skos:example>Plantae</skos:example>
+		<idmp-sub:hasBusinessRules>This is derived from the species and is referenced from an appropriate terminology/taxonomy. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>KINGDOM: CD</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Linkage">
@@ -3184,6 +3208,21 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:explanatoryNote>A sample of material able to rotate the plane of polarization of a beam of transmitted plane-polarized light is said to possess optical activity (or to be optically active). This optical rotation is the classical distinguishing characteristic (sufficient but not necessary) of systems containing unequal amounts of corresponding enantiomers. An enantiomer causing rotation in a clockwise direction (when viewed in the direction facing the oncoming light beam) under specified conditions is called dextrorotatory and its chemical name or formula is designated by the prefix (+)-; one causing rotation in the opposite sense is laevorotatory and designated by the prefix (−)-. Materials with optical activity also exhibit other chiroptic phenomena.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Order">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>order</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45287"/>
+		<skos:definition>taxonomic category between class and family</skos:definition>
+		<skos:example>Ginkgoales</skos:example>
+		<skos:note>A taxonomic order represents a group of organisms that although differing quite a bit among themselves still have a large degree of characteristics in common.</skos:note>
+		<idmp-sub:hasBusinessRules>This is derived from the species and is referenced from an appropriate terminology/taxonomy. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>ORDER: CD</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Organism">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
@@ -3601,6 +3640,21 @@ For the description of nucleic acids, the following information can be used to a
 		<skos:definition>name in accordance with the pharmacopeia</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 32</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause F.3.7.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Phylum">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>phylum</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45277"/>
+		<skos:definition>major division of a biological kingdom, consisting of closely-related classes</skos:definition>
+		<skos:example>Tracheophyta</skos:example>
+		<skos:note>Phylum represents a basic fundamental pattern of organization and, presumably, a common descent.</skos:note>
+		<idmp-sub:hasBusinessRules>This is derived from the species and is referenced from an appropriate terminology/taxonomy. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>PHYLUM: CD</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalCharacteristic">
@@ -7131,8 +7185,8 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:onClass rdf:resource="&idmp-sub;Organism"/>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:onClass rdf:resource="&idmp-sub;Taxonomy"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -7143,20 +7197,71 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Organism">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Organism">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>taxon</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C17469"/>
 		<skos:definition>ranked category for the classification of an organism according to its suspected evolutionary relationships</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;TaxonomicClass">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>taxonomic class</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45280"/>
+		<skos:definition>taxonomic subdivision directly under phylum</skos:definition>
+		<skos:example>Mammalia, Maxillopoda, Sauropsida. Ginkgoopsida</skos:example>
+		<skos:note>A taxonomic class represents a major group of organisms, e.g. Mammalia, Reptilia, Gastropoda, Insecta, etc., that contains a large number of different sublineages, but have shared characteristics in common (e.g. warm-blooded, fur, six legs etc.).</skos:note>
+		<idmp-sub:hasBusinessRules>This is derived from the species and is referenced from an appropriate terminology/taxonomy. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>CLASS: CD</cmns-av:synonym>
+		<cmns-av:synonym>class taxon</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Taxonomy">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:subClassOf rdf:resource="&mvf-tsc;Nomenclature"/>
 		<rdfs:label>taxonomy</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13</dct:source>
 		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C17469"/>
-		<skos:definition>scientific organism classification system needed to describe the origin of source material in substances isolated from biological matrices</skos:definition>
+		<skos:definition>scientific organism classification system that describes the origin of source material in substances isolated from biological matrices</skos:definition>
+		<skos:note>Substances of organic origin, such as plants and animals, should be defined simply by taxonomic information and the organism part. Taxonomic information, particularly the scientific name of an organism (usually a species, but may be a genus or an intraspecies), is essential for defining such substances in medicinal products.</skos:note>
 		<skos:note>Taxonomic information is captured to the species level for all polydisperse substances isolated from biological matrices, if such information is available and the source material is consistently derived from the species. Taxonomic family, genus and species along with the taxon author are necessary to identify the source organism. Kingdom, phylum, class and order are also captured when available. Intraspecific information (e.g. subspecies, strain or variety) is captured when the forms exhibit consistent differences in either material content or function.</skos:note>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.88, 7.2.1</cmns-av:adaptedFrom>
+		<skos:note>The Kew Gardens Medicinal Plant Names Services (MPNS) should be the authoritative source for all scientific names of plants (see E.2.2 for further details). The expert opinion for fungi should be obtained from Species Fungorum (http://www.speciesfungorum.org/) which is managed and maintained by Kew Gardens. Taxonomic information for most other organisms is available through Catalogue of Life (COL, currently 1,600,000+ organsims, http://www.catalogueoflife.org/col/) and its 151 contributing source databases. The most notable contributors are Kew Gardens and the Integrated Taxonomic Information System (www.itis.gov). COL has integrated the source datasets into a common seven level taxonomic tree using an eight-kingdom model and includes intraspecifics where relevant. For organisms omitted in the above sources, NCBI taxonomy (http://www.ncbi.nlm.nih.gov/taxonomy) is the most useful source database. The higher levels of taxonomy are useful but all levels above family are not required for organism definition. The primary definition of organism is the combination of genus and species together with the describing author and family in that order providing validation. Intraspecific type, description and hybrid characteristics are also definitional where appropriate. The organism should be described as whole with no other characteristics. Because taxonomy is continuously changing, new organism identifiers should only be generated after analysing potential collisions with existing identifiers using the above public datasets and/or conferring with appropriate taxonomic experts. Developmental stage, part and viral strain characteristics should be associated with separate identifiers that refer back to the whole organism parent substance.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.88, 7.2.5</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>The NCI Thesaurus defines taxonomy as &apos;the theories and techniques of naming, describing, and classifying organisms, and the study of the relationships of taxa&apos;.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
