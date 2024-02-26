@@ -1329,6 +1329,19 @@
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;IntraspecificType">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>intraspecific type</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C62700"/>
+		<skos:definition>taxonomic category ranking below species</skos:definition>
+		<skos:example>cv. (cultivar), var. (variety), serotype, strain, subsp. (subspecies); cell line; year of isolation</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>INTRASPECIFIC_TYPE: CD</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Isotope">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalElement"/>
 		<rdfs:subClassOf>
@@ -3281,6 +3294,13 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;IntraspecificType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;Kingdom"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
@@ -3318,6 +3338,13 @@ For the description of nucleic acids, the following information can be used to a
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;TaxonomicFamily"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasIntraspecificDescription"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -7949,6 +7976,20 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasIntraspecificDescription">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
+		<rdfs:label>has intraspecific description</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Organism"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>describes strains, serotypes, varieties, cultivars and cell lines</skos:definition>
+		<skos:example>A/BRISBANE/59/2007(H1N1)</skos:example>
+		<skos:note>Intraspecific information should be used to describe strains, serotypes, varieties, cultivars and cell lines. Often there is not a naming or taxonomic authority for this information. Standardized formats for this information may be developed. The actual intraspecific information should also be captured in the naming of these substances and synonyms should be maintained to help to identify intraspecific information and avoid duplication. For plants, the intraspecific description will be the variety or subspecies name from the Medicinal Plant Names Services portal, and for other organisms, such as animals, the appropriate taxonomy will be used.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasIsotopeSubstitutionType">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
