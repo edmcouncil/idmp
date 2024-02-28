@@ -2,6 +2,7 @@
 <!DOCTYPE rdf:RDF [
 	<!ENTITY dc "http://purl.org/dc/elements/1.1/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY po "http://purl.org/spar/po/">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
 	<!ENTITY swrl "http://www.w3.org/2003/11/swrl#">
@@ -11,6 +12,7 @@
 <rdf:RDF xml:base="http://purl.org/spar/po/"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:po="http://purl.org/spar/po/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:swrl="http://www.w3.org/2003/11/swrl#"
@@ -46,16 +48,16 @@ Describing documents by means of their structural components</dc:title>
 	<owl:AnnotationProperty rdf:about="&dc;title">
 	</owl:AnnotationProperty>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Atom">
+	<owl:Class rdf:about="&po;Atom">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+				<owl:onProperty rdf:resource="&po;isContainedBy"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+							<rdf:Description rdf:about="&po;Block">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+							<rdf:Description rdf:about="&po;Inline">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -64,20 +66,20 @@ Describing documents by means of their structural components</dc:title>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en">atom element</rdfs:label>
 		<rdfs:comment xml:lang="en">This class is defined to describe literal text that is part of the document body. Moreover, similarly to Inline, elements following the Atom pattern can only be contained within block or inline elements (and consequently they also cannot be used as root elements of documents). It can contain textual content and no other elements.</rdfs:comment>
-		<owl:disjointWith rdf:resource="http://purl.org/spar/po/Field"/>
+		<owl:disjointWith rdf:resource="&po;Field"/>
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Flat">
+					<rdf:Description rdf:about="&po;Flat">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+						<owl:onProperty rdf:resource="&po;isContainedBy"/>
 						<owl:allValuesFrom>
 							<owl:Class>
 								<owl:unionOf rdf:parseType="Collection">
-									<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+									<rdf:Description rdf:about="&po;Block">
 									</rdf:Description>
-									<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+									<rdf:Description rdf:about="&po;Inline">
 									</rdf:Description>
 								</owl:unionOf>
 							</owl:Class>
@@ -88,20 +90,20 @@ Describing documents by means of their structural components</dc:title>
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Block">
+	<owl:Class rdf:about="&po;Block">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="http://purl.org/spar/po/contains"/>
+				<owl:onProperty rdf:resource="&po;contains"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="http://purl.org/spar/po/Atom">
+							<rdf:Description rdf:about="&po;Atom">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+							<rdf:Description rdf:about="&po;Inline">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Milestone">
+							<rdf:Description rdf:about="&po;Milestone">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Popup">
+							<rdf:Description rdf:about="&po;Popup">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -110,20 +112,20 @@ Describing documents by means of their structural components</dc:title>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en">block element</rdfs:label>
 		<rdfs:comment xml:lang="en">This class organise the document content as a sequence of nestable elements and text nodes. In particular, elements following this pattern can contain text and other elements compliant with the patterns Inline, Atom, Milestones and Popup, which will be introduced in the following. Furthermore, it is a requirement that block elements are contained only by container and popup elements</rdfs:comment>
-		<owl:disjointWith rdf:resource="http://purl.org/spar/po/Inline"/>
+		<owl:disjointWith rdf:resource="&po;Inline"/>
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Mixed">
+					<rdf:Description rdf:about="&po;Mixed">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+						<owl:onProperty rdf:resource="&po;isContainedBy"/>
 						<owl:allValuesFrom>
 							<owl:Class>
 								<owl:unionOf rdf:parseType="Collection">
-									<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+									<rdf:Description rdf:about="&po;Container">
 									</rdf:Description>
-									<rdf:Description rdf:about="http://purl.org/spar/po/Popup">
+									<rdf:Description rdf:about="&po;Popup">
 									</rdf:Description>
 								</owl:unionOf>
 							</owl:Class>
@@ -134,28 +136,28 @@ Describing documents by means of their structural components</dc:title>
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Bucket">
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/NonTextual"/>
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/Structured"/>
+	<owl:Class rdf:about="&po;Bucket">
+		<rdfs:subClassOf rdf:resource="&po;NonTextual"/>
+		<rdfs:subClassOf rdf:resource="&po;Structured"/>
 		<rdfs:label xml:lang="en">bucket element</rdfs:label>
 		<rdfs:comment xml:lang="en">The class of elements that can contain other elements but no text nodes.</rdfs:comment>
-		<owl:disjointWith rdf:resource="http://purl.org/spar/po/Marker"/>
+		<owl:disjointWith rdf:resource="&po;Marker"/>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Container">
+	<owl:Class rdf:about="&po;Container">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="http://purl.org/spar/po/contains"/>
+				<owl:onProperty rdf:resource="&po;contains"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+							<rdf:Description rdf:about="&po;Block">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+							<rdf:Description rdf:about="&po;Container">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Field">
+							<rdf:Description rdf:about="&po;Field">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Meta">
+							<rdf:Description rdf:about="&po;Meta">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -164,20 +166,20 @@ Describing documents by means of their structural components</dc:title>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en">container element</rdfs:label>
 		<rdfs:comment xml:lang="en">This class concerns the structural organization of a document. Elements following this pattern contain no textual content and contain only elements compliant with the patterns: Meta, Field, Block and any subtype of Container. It is disjointed with the pattern Popup, although they share the same content model.</rdfs:comment>
-		<owl:disjointWith rdf:resource="http://purl.org/spar/po/Popup"/>
+		<owl:disjointWith rdf:resource="&po;Popup"/>
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Bucket">
+					<rdf:Description rdf:about="&po;Bucket">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+						<owl:onProperty rdf:resource="&po;isContainedBy"/>
 						<owl:allValuesFrom>
 							<owl:Class>
 								<owl:unionOf rdf:parseType="Collection">
-									<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+									<rdf:Description rdf:about="&po;Container">
 									</rdf:Description>
-									<rdf:Description rdf:about="http://purl.org/spar/po/Popup">
+									<rdf:Description rdf:about="&po;Popup">
 									</rdf:Description>
 								</owl:unionOf>
 							</owl:Class>
@@ -188,22 +190,22 @@ Describing documents by means of their structural components</dc:title>
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Field">
+	<owl:Class rdf:about="&po;Field">
 		<rdfs:label xml:lang="en">field element</rdfs:label>
 		<rdfs:comment xml:lang="en">This class is defined to describe literal metadata or text that is not really part of the document body, contrarily to its disjointed sibling Atom. Its main difference with Meta is that Field can contain textual content.</rdfs:comment>
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Flat">
+					<rdf:Description rdf:about="&po;Flat">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+						<owl:onProperty rdf:resource="&po;isContainedBy"/>
 						<owl:allValuesFrom>
 							<owl:Class>
 								<owl:unionOf rdf:parseType="Collection">
-									<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+									<rdf:Description rdf:about="&po;Container">
 									</rdf:Description>
-									<rdf:Description rdf:about="http://purl.org/spar/po/Popup">
+									<rdf:Description rdf:about="&po;Popup">
 									</rdf:Description>
 								</owl:unionOf>
 							</owl:Class>
@@ -214,23 +216,23 @@ Describing documents by means of their structural components</dc:title>
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Flat">
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/NonStructured"/>
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/Textual"/>
+	<owl:Class rdf:about="&po;Flat">
+		<rdfs:subClassOf rdf:resource="&po;NonStructured"/>
+		<rdfs:subClassOf rdf:resource="&po;Textual"/>
 		<rdfs:label xml:lang="en">flat element</rdfs:label>
 		<rdfs:comment xml:lang="en">The class of elements that can contain text nodes but no elements.</rdfs:comment>
-		<owl:disjointWith rdf:resource="http://purl.org/spar/po/Mixed"/>
+		<owl:disjointWith rdf:resource="&po;Mixed"/>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/HeadedContainer">
+	<owl:Class rdf:about="&po;HeadedContainer">
 		<rdfs:subClassOf>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+					<rdf:Description rdf:about="&po;Container">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/containsAsHeader"/>
-						<owl:allValuesFrom rdf:resource="http://purl.org/spar/po/Block"/>
+						<owl:onProperty rdf:resource="&po;containsAsHeader"/>
+						<owl:allValuesFrom rdf:resource="&po;Block"/>
 					</owl:Restriction>
 				</owl:intersectionOf>
 			</owl:Class>
@@ -239,20 +241,20 @@ Describing documents by means of their structural components</dc:title>
 		<rdfs:comment xml:lang="en">This class describes container elements whose content model need to begin with one or more block elements (the heading), specified through the property containsAsHeader.</rdfs:comment>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Inline">
+	<owl:Class rdf:about="&po;Inline">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="http://purl.org/spar/po/contains"/>
+				<owl:onProperty rdf:resource="&po;contains"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="http://purl.org/spar/po/Atom">
+							<rdf:Description rdf:about="&po;Atom">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+							<rdf:Description rdf:about="&po;Inline">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Milestone">
+							<rdf:Description rdf:about="&po;Milestone">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Popup">
+							<rdf:Description rdf:about="&po;Popup">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -261,13 +263,13 @@ Describing documents by means of their structural components</dc:title>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+				<owl:onProperty rdf:resource="&po;isContainedBy"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+							<rdf:Description rdf:about="&po;Block">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+							<rdf:Description rdf:about="&po;Inline">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -281,16 +283,16 @@ These constraints also imply that inline elements cannot be used as root element
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Mixed">
+					<rdf:Description rdf:about="&po;Mixed">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+						<owl:onProperty rdf:resource="&po;isContainedBy"/>
 						<owl:allValuesFrom>
 							<owl:Class>
 								<owl:unionOf rdf:parseType="Collection">
-									<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+									<rdf:Description rdf:about="&po;Block">
 									</rdf:Description>
-									<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+									<rdf:Description rdf:about="&po;Inline">
 									</rdf:Description>
 								</owl:unionOf>
 							</owl:Class>
@@ -301,30 +303,30 @@ These constraints also imply that inline elements cannot be used as root element
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Marker">
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/NonStructured"/>
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/NonTextual"/>
+	<owl:Class rdf:about="&po;Marker">
+		<rdfs:subClassOf rdf:resource="&po;NonStructured"/>
+		<rdfs:subClassOf rdf:resource="&po;NonTextual"/>
 		<rdfs:label xml:lang="en">marker element</rdfs:label>
 		<rdfs:comment xml:lang="en">The class of elements that can contain neither text nodes nor elements.</rdfs:comment>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Meta">
+	<owl:Class rdf:about="&po;Meta">
 		<rdfs:label xml:lang="en">meta element</rdfs:label>
 		<rdfs:comment xml:lang="en">This class describes elements that contain neither other elements nor textual content. Contrarily to the pattern Milestone, which was meant to describe markup elements that impact the document because of their location, the main feature of its disjoint sibling is the mere existence, independently from the position it has within the document. Meta elements convey metadata information about the document or part of it, independently of where they are. Thus, meta elements can be contained only within container elements.</rdfs:comment>
-		<owl:disjointWith rdf:resource="http://purl.org/spar/po/Milestone"/>
+		<owl:disjointWith rdf:resource="&po;Milestone"/>
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Marker">
+					<rdf:Description rdf:about="&po;Marker">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+						<owl:onProperty rdf:resource="&po;isContainedBy"/>
 						<owl:someValuesFrom>
 							<owl:Class>
 								<owl:unionOf rdf:parseType="Collection">
-									<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+									<rdf:Description rdf:about="&po;Container">
 									</rdf:Description>
-									<rdf:Description rdf:about="http://purl.org/spar/po/Popup">
+									<rdf:Description rdf:about="&po;Popup">
 									</rdf:Description>
 								</owl:unionOf>
 							</owl:Class>
@@ -335,16 +337,16 @@ These constraints also imply that inline elements cannot be used as root element
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Milestone">
+	<owl:Class rdf:about="&po;Milestone">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+				<owl:onProperty rdf:resource="&po;isContainedBy"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+							<rdf:Description rdf:about="&po;Block">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+							<rdf:Description rdf:about="&po;Inline">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -358,16 +360,16 @@ The distinctive characteristic of the pattern Milestone is the location it assum
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Marker">
+					<rdf:Description rdf:about="&po;Marker">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+						<owl:onProperty rdf:resource="&po;isContainedBy"/>
 						<owl:allValuesFrom>
 							<owl:Class>
 								<owl:unionOf rdf:parseType="Collection">
-									<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+									<rdf:Description rdf:about="&po;Block">
 									</rdf:Description>
-									<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+									<rdf:Description rdf:about="&po;Inline">
 									</rdf:Description>
 								</owl:unionOf>
 							</owl:Class>
@@ -378,58 +380,58 @@ The distinctive characteristic of the pattern Milestone is the location it assum
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Mixed">
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/Structured"/>
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/Textual"/>
+	<owl:Class rdf:about="&po;Mixed">
+		<rdfs:subClassOf rdf:resource="&po;Structured"/>
+		<rdfs:subClassOf rdf:resource="&po;Textual"/>
 		<rdfs:label xml:lang="en">mixed element</rdfs:label>
 		<rdfs:comment xml:lang="en">The class of elements that can contain other elements and text nodes.</rdfs:comment>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/NonStructured">
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/Pattern"/>
+	<owl:Class rdf:about="&po;NonStructured">
+		<rdfs:subClassOf rdf:resource="&po;Pattern"/>
 		<rdfs:label xml:lang="en">non-structured element</rdfs:label>
 		<rdfs:comment xml:lang="en">The class of elements that cannot contain other elements.</rdfs:comment>
-		<owl:disjointWith rdf:resource="http://purl.org/spar/po/Structured"/>
+		<owl:disjointWith rdf:resource="&po;Structured"/>
 		<owl:equivalentClass>
 			<owl:Class>
-				<owl:complementOf rdf:resource="http://purl.org/spar/po/Structured"/>
+				<owl:complementOf rdf:resource="&po;Structured"/>
 			</owl:Class>
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/NonTextual">
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/Pattern"/>
+	<owl:Class rdf:about="&po;NonTextual">
+		<rdfs:subClassOf rdf:resource="&po;Pattern"/>
 		<rdfs:label xml:lang="en">non-textual element</rdfs:label>
 		<rdfs:comment xml:lang="en">The class of elements that cannot have textual content in their content models.</rdfs:comment>
-		<owl:disjointWith rdf:resource="http://purl.org/spar/po/Textual"/>
+		<owl:disjointWith rdf:resource="&po;Textual"/>
 		<owl:equivalentClass>
 			<owl:Class>
-				<owl:complementOf rdf:resource="http://purl.org/spar/po/Textual"/>
+				<owl:complementOf rdf:resource="&po;Textual"/>
 			</owl:Class>
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Pattern">
+	<owl:Class rdf:about="&po;Pattern">
 		<rdfs:label xml:lang="en">pattern-based element</rdfs:label>
 		<rdfs:comment xml:lang="en">A structural pattern is an atomic component of a document, that is able to capture a recurrent and well knwon structure of a document.
 
 Any entity belonging to this class is compliant with exactly one structural pattern.</rdfs:comment>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Popup">
+	<owl:Class rdf:about="&po;Popup">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="http://purl.org/spar/po/contains"/>
+				<owl:onProperty rdf:resource="&po;contains"/>
 				<owl:allValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+							<rdf:Description rdf:about="&po;Block">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+							<rdf:Description rdf:about="&po;Container">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Field">
+							<rdf:Description rdf:about="&po;Field">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Meta">
+							<rdf:Description rdf:about="&po;Meta">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -438,13 +440,13 @@ Any entity belonging to this class is compliant with exactly one structural patt
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+				<owl:onProperty rdf:resource="&po;isContainedBy"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+							<rdf:Description rdf:about="&po;Block">
 							</rdf:Description>
-							<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+							<rdf:Description rdf:about="&po;Inline">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -456,16 +458,16 @@ Any entity belonging to this class is compliant with exactly one structural patt
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Bucket">
+					<rdf:Description rdf:about="&po;Bucket">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+						<owl:onProperty rdf:resource="&po;isContainedBy"/>
 						<owl:allValuesFrom>
 							<owl:Class>
 								<owl:unionOf rdf:parseType="Collection">
-									<rdf:Description rdf:about="http://purl.org/spar/po/Block">
+									<rdf:Description rdf:about="&po;Block">
 									</rdf:Description>
-									<rdf:Description rdf:about="http://purl.org/spar/po/Inline">
+									<rdf:Description rdf:about="&po;Inline">
 									</rdf:Description>
 								</owl:unionOf>
 							</owl:Class>
@@ -476,20 +478,20 @@ Any entity belonging to this class is compliant with exactly one structural patt
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Record">
+	<owl:Class rdf:about="&po;Record">
 		<rdfs:label xml:lang="en">record element</rdfs:label>
 		<rdfs:comment xml:lang="en">This class describes container elements that can only contain heterogeneous and non repeatable elements.</rdfs:comment>
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+					<rdf:Description rdf:about="&po;Container">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/canContainHeteronymousElements"/>
+						<owl:onProperty rdf:resource="&po;canContainHeteronymousElements"/>
 						<owl:hasValue rdf:datatype="&xsd;boolean">true</owl:hasValue>
 					</owl:Restriction>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/canContainHomonymousElements"/>
+						<owl:onProperty rdf:resource="&po;canContainHomonymousElements"/>
 						<owl:hasValue rdf:datatype="&xsd;boolean">false</owl:hasValue>
 					</owl:Restriction>
 				</owl:intersectionOf>
@@ -497,26 +499,26 @@ Any entity belonging to this class is compliant with exactly one structural patt
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Structured">
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/Pattern"/>
+	<owl:Class rdf:about="&po;Structured">
+		<rdfs:subClassOf rdf:resource="&po;Pattern"/>
 		<rdfs:label xml:lang="en">structured element</rdfs:label>
 		<rdfs:comment xml:lang="en">The class of elements that can contain other elements.</rdfs:comment>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Table">
+	<owl:Class rdf:about="&po;Table">
 		<rdfs:label xml:lang="en">table element</rdfs:label>
 		<rdfs:comment xml:lang="en">This class describes container elements that must contain only homogeneous elements (but they can be repeated).</rdfs:comment>
 		<owl:equivalentClass>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/Container">
+					<rdf:Description rdf:about="&po;Container">
 					</rdf:Description>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/canContainHeteronymousElements"/>
+						<owl:onProperty rdf:resource="&po;canContainHeteronymousElements"/>
 						<owl:hasValue rdf:datatype="&xsd;boolean">false</owl:hasValue>
 					</owl:Restriction>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="http://purl.org/spar/po/canContainHomonymousElements"/>
+						<owl:onProperty rdf:resource="&po;canContainHomonymousElements"/>
 						<owl:hasValue rdf:datatype="&xsd;boolean">true</owl:hasValue>
 					</owl:Restriction>
 				</owl:intersectionOf>
@@ -524,79 +526,79 @@ Any entity belonging to this class is compliant with exactly one structural patt
 		</owl:equivalentClass>
 	</owl:Class>
 	
-	<owl:Class rdf:about="http://purl.org/spar/po/Textual">
-		<rdfs:subClassOf rdf:resource="http://purl.org/spar/po/Pattern"/>
+	<owl:Class rdf:about="&po;Textual">
+		<rdfs:subClassOf rdf:resource="&po;Pattern"/>
 		<rdfs:label xml:lang="en">textual element</rdfs:label>
 		<rdfs:comment xml:lang="en">The class of elements that can have textual content in their content models.</rdfs:comment>
 	</owl:Class>
 	
-	<owl:DatatypeProperty rdf:about="http://purl.org/spar/po/canContainHeteronymousElements">
+	<owl:DatatypeProperty rdf:about="&po;canContainHeteronymousElements">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label xml:lang="en">can contain heteronymous elements</rdfs:label>
 		<rdfs:comment xml:lang="en">A hierarchical-based entity contains al least two entities having different names.</rdfs:comment>
-		<rdfs:domain rdf:resource="http://purl.org/spar/po/Structured"/>
+		<rdfs:domain rdf:resource="&po;Structured"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 	</owl:DatatypeProperty>
 	
-	<owl:DatatypeProperty rdf:about="http://purl.org/spar/po/canContainHomonymousElements">
+	<owl:DatatypeProperty rdf:about="&po;canContainHomonymousElements">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label xml:lang="en">can contain homonymous elements</rdfs:label>
 		<rdfs:comment xml:lang="en">A hierarchical-based entity contains al least two entities that share the same name.</rdfs:comment>
-		<rdfs:domain rdf:resource="http://purl.org/spar/po/Structured"/>
+		<rdfs:domain rdf:resource="&po;Structured"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 	</owl:DatatypeProperty>
 	
-	<owl:ObjectProperty rdf:about="http://purl.org/spar/po/contains">
+	<owl:ObjectProperty rdf:about="&po;contains">
 		<rdfs:label xml:lang="en">contains</rdfs:label>
 		<rdfs:comment xml:lang="en">A structured element contains another generic element.</rdfs:comment>
-		<rdfs:domain rdf:resource="http://purl.org/spar/po/Structured"/>
-		<owl:inverseOf rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+		<rdfs:domain rdf:resource="&po;Structured"/>
+		<owl:inverseOf rdf:resource="&po;isContainedBy"/>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="http://purl.org/spar/po/containsAsHeader">
-		<rdfs:subPropertyOf rdf:resource="http://purl.org/spar/po/contains"/>
+	<owl:ObjectProperty rdf:about="&po;containsAsHeader">
+		<rdfs:subPropertyOf rdf:resource="&po;contains"/>
 		<rdfs:label xml:lang="en">contains as header</rdfs:label>
 		<rdfs:comment xml:lang="en">A structured element contains another generic element as part of its header.</rdfs:comment>
-		<owl:inverseOf rdf:resource="http://purl.org/spar/po/isContainedByAsHeader"/>
+		<owl:inverseOf rdf:resource="&po;isContainedByAsHeader"/>
 	</owl:ObjectProperty>
 	
-	<swrl:Variable rdf:about="http://purl.org/spar/po/g">
+	<swrl:Variable rdf:about="&po;g">
 	</swrl:Variable>
 	
-	<owl:DatatypeProperty rdf:about="http://purl.org/spar/po/hasName">
+	<owl:DatatypeProperty rdf:about="&po;hasName">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label xml:lang="en">has name</rdfs:label>
 		<rdfs:comment xml:lang="en">The name of a particular element.</rdfs:comment>
 		<rdfs:range rdf:resource="&xsd;string"/>
 	</owl:DatatypeProperty>
 	
-	<owl:ObjectProperty rdf:about="http://purl.org/spar/po/isContainedBy">
+	<owl:ObjectProperty rdf:about="&po;isContainedBy">
 		<rdfs:label xml:lang="en">is contained by</rdfs:label>
 		<rdfs:comment xml:lang="en">An element that is contained by another structured element.</rdfs:comment>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="http://purl.org/spar/po/isContainedByAsHeader">
-		<rdfs:subPropertyOf rdf:resource="http://purl.org/spar/po/isContainedBy"/>
+	<owl:ObjectProperty rdf:about="&po;isContainedByAsHeader">
+		<rdfs:subPropertyOf rdf:resource="&po;isContainedBy"/>
 		<rdfs:label xml:lang="en">is contained by as header</rdfs:label>
 		<rdfs:comment xml:lang="en">An element is contained by another structured element as part of its header.</rdfs:comment>
 	</owl:ObjectProperty>
 	
-	<swrl:Variable rdf:about="http://purl.org/spar/po/p">
+	<swrl:Variable rdf:about="&po;p">
 	</swrl:Variable>
 	
-	<swrl:Variable rdf:about="http://purl.org/spar/po/s">
+	<swrl:Variable rdf:about="&po;s">
 	</swrl:Variable>
 	
-	<swrl:Variable rdf:about="http://purl.org/spar/po/t">
+	<swrl:Variable rdf:about="&po;t">
 	</swrl:Variable>
 	
-	<swrl:Variable rdf:about="http://purl.org/spar/po/x">
+	<swrl:Variable rdf:about="&po;x">
 	</swrl:Variable>
 	
-	<swrl:Variable rdf:about="http://purl.org/spar/po/y">
+	<swrl:Variable rdf:about="&po;y">
 	</swrl:Variable>
 	
-	<swrl:Variable rdf:about="http://purl.org/spar/po/z">
+	<swrl:Variable rdf:about="&po;z">
 	</swrl:Variable>
 	
 	<owl:AnnotationProperty rdf:about="&rdfs;comment">
@@ -622,321 +624,321 @@ Any entity belonging to this class is compliant with exactly one structural patt
 	
 	<owl:AllDisjointClasses>
 		<owl:members rdf:parseType="Collection">
-			<rdf:Description rdf:about="http://purl.org/spar/po/HeadedContainer">
+			<rdf:Description rdf:about="&po;HeadedContainer">
 			</rdf:Description>
-			<rdf:Description rdf:about="http://purl.org/spar/po/Record">
+			<rdf:Description rdf:about="&po;Record">
 			</rdf:Description>
-			<rdf:Description rdf:about="http://purl.org/spar/po/Table">
+			<rdf:Description rdf:about="&po;Table">
 			</rdf:Description>
 		</owl:members>
 	</owl:AllDisjointClasses>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Block"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Block"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Block"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Block"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Container"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Container"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Container"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Container"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Field"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Field"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Field"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Field"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Inline"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Inline"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Inline"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Inline"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Meta"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Meta"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Meta"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Meta"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Milestone"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Milestone"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Milestone"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Milestone"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Record"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Record"/>
 			</swrl:ClassAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
 				<swrl:argument2 rdf:datatype="&xsd;boolean">false</swrl:argument2>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/canContainHomonymousElements"/>
+				<swrl:propertyPredicate rdf:resource="&po;canContainHomonymousElements"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Record"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Record"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Record"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Record"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Table"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Table"/>
 			</swrl:ClassAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
 				<swrl:argument2 rdf:datatype="&xsd;boolean">false</swrl:argument2>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/canContainHeteronymousElements"/>
+				<swrl:propertyPredicate rdf:resource="&po;canContainHeteronymousElements"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Table"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Table"/>
 			</swrl:ClassAtom>
 			<swrl:IndividualPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/contains"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;y"/>
+				<swrl:propertyPredicate rdf:resource="&po;contains"/>
 			</swrl:IndividualPropertyAtom>
 			<swrl:IndividualPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/z"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/contains"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;z"/>
+				<swrl:propertyPredicate rdf:resource="&po;contains"/>
 			</swrl:IndividualPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/z"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;z"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Table"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Table"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Table"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Table"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Pattern"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Pattern"/>
 			</swrl:ClassAtom>
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Textual"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:classPredicate rdf:resource="&po;Textual"/>
 			</swrl:ClassAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/g"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;g"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/g"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;g"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:ClassAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:classPredicate rdf:resource="http://purl.org/spar/po/Textual"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:classPredicate rdf:resource="&po;Textual"/>
 			</swrl:ClassAtom>
 		</swrl:head>
 	</swrl:Imp>
 	<swrl:Imp>
 		<swrl:body rdf:parseType="Collection">
 			<swrl:IndividualPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/p"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/contains"/>
+				<swrl:argument1 rdf:resource="&po;p"/>
+				<swrl:argument2 rdf:resource="&po;x"/>
+				<swrl:propertyPredicate rdf:resource="&po;contains"/>
 			</swrl:IndividualPropertyAtom>
 			<swrl:IndividualPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/p"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/contains"/>
+				<swrl:argument1 rdf:resource="&po;p"/>
+				<swrl:argument2 rdf:resource="&po;y"/>
+				<swrl:propertyPredicate rdf:resource="&po;contains"/>
 			</swrl:IndividualPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/x"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;x"/>
+				<swrl:argument2 rdf:resource="&po;s"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/y"/>
-				<swrl:argument2 rdf:resource="http://purl.org/spar/po/t"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:argument1 rdf:resource="&po;y"/>
+				<swrl:argument2 rdf:resource="&po;t"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:BuiltinAtom>
 				<swrl:arguments rdf:parseType="Collection">
-					<rdf:Description rdf:about="http://purl.org/spar/po/s">
+					<rdf:Description rdf:about="&po;s">
 					</rdf:Description>
-					<rdf:Description rdf:about="http://purl.org/spar/po/t">
+					<rdf:Description rdf:about="&po;t">
 					</rdf:Description>
 				</swrl:arguments>
 				<swrl:builtin rdf:resource="&swrlb;notEqual"/>
@@ -944,9 +946,9 @@ Any entity belonging to this class is compliant with exactly one structural patt
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:DatavaluedPropertyAtom>
-				<swrl:argument1 rdf:resource="http://purl.org/spar/po/p"/>
+				<swrl:argument1 rdf:resource="&po;p"/>
 				<swrl:argument2 rdf:datatype="&xsd;boolean">true</swrl:argument2>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/canContainHeteronymousElements"/>
+				<swrl:propertyPredicate rdf:resource="&po;canContainHeteronymousElements"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:head>
 	</swrl:Imp>
@@ -955,29 +957,29 @@ Any entity belonging to this class is compliant with exactly one structural patt
 			<swrl:IndividualPropertyAtom>
 				<swrl:argument1 rdf:resource="&swrl;p"/>
 				<swrl:argument2 rdf:resource="&swrl;x"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/contains"/>
+				<swrl:propertyPredicate rdf:resource="&po;contains"/>
 			</swrl:IndividualPropertyAtom>
 			<swrl:IndividualPropertyAtom>
 				<swrl:argument1 rdf:resource="&swrl;p"/>
 				<swrl:argument2 rdf:resource="&swrl;y"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/contains"/>
+				<swrl:propertyPredicate rdf:resource="&po;contains"/>
 			</swrl:IndividualPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
 				<swrl:argument1 rdf:resource="&swrl;x"/>
 				<swrl:argument2 rdf:resource="&swrl;s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 			<swrl:DatavaluedPropertyAtom>
 				<swrl:argument1 rdf:resource="&swrl;y"/>
 				<swrl:argument2 rdf:resource="&swrl;s"/>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/hasName"/>
+				<swrl:propertyPredicate rdf:resource="&po;hasName"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:body>
 		<swrl:head rdf:parseType="Collection">
 			<swrl:DatavaluedPropertyAtom>
 				<swrl:argument1 rdf:resource="&swrl;p"/>
 				<swrl:argument2 rdf:datatype="&xsd;boolean">true</swrl:argument2>
-				<swrl:propertyPredicate rdf:resource="http://purl.org/spar/po/canContainHomonymousElements"/>
+				<swrl:propertyPredicate rdf:resource="&po;canContainHomonymousElements"/>
 			</swrl:DatavaluedPropertyAtom>
 		</swrl:head>
 	</swrl:Imp>
