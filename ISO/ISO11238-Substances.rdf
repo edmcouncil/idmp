@@ -397,6 +397,21 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isAuthorOf"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-doc;Document">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-doc;Reference">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;AuthorType"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -4954,6 +4969,7 @@ For the description of nucleic acids, the following information can be used to a
 	
 	<owl:Class rdf:about="&idmp-sub;ReferenceSourceDocument">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceSource"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
@@ -7693,6 +7709,26 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:synonym>has proton number</cmns-av:synonym>
 	</owl:DatatypeProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasAuthor">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedBy"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;hasRole"/>
+		<rdfs:label>has author</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-doc;Document">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-doc;Reference">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&idmp-sub;Author"/>
+		<owl:inverseOf rdf:resource="&idmp-sub;isAuthorOf"/>
+		<skos:definition>indicates the party responsible for the creation of a publication, document or research, including data</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasAuthorDescription">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
 		<rdfs:label>has author description</rdfs:label>
@@ -8272,7 +8308,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:range>
-		<skos:definition>relates a material specification or material to a another material specification, material classifier or substance that the material is made of.</skos:definition>
+		<skos:definition>relates a material specification or material to a another material specification, material classifier or substance that the material is made of</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMaterialComponentType">
@@ -9603,6 +9639,25 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a moiety to a substance for which it is the essential aspect, responsible for its pharmacological activity</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isAuthorOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;provides"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;isRoleIn"/>
+		<rdfs:label>is author of</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Author"/>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-doc;Document">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-doc;Reference">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>specifies a reference and/or document attributed to the party</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;isDefiningElement">
