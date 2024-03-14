@@ -9,6 +9,7 @@
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-loc "https://www.omg.org/spec/Commons/Locations/">
 	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
@@ -26,6 +27,7 @@
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
 	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
 	<!ENTITY mvf-trm "https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/">
+	<!ENTITY mvf-tsc "https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -42,6 +44,7 @@
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-loc="https://www.omg.org/spec/Commons/Locations/"
 	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
@@ -59,6 +62,7 @@
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
 	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
 	xmlns:mvf-trm="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"
+	xmlns:mvf-tsc="https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -81,6 +85,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Locations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
@@ -91,9 +96,10 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231201/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240201/ISO11238-Substances/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
@@ -104,9 +110,10 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11238-Substances.rdf version of this ontology was modified to reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to incorporate additional content for structurally diverse substances (IDMP-635), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, and (2) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to augment the definition of nucleic acid substance to complete the requirements specified in clause 7.5 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-592).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of protein substance to complete the requirements specified in clause 7.4 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-594), to build out the definition of polymer substance to complete the requirements specified in clause 7.6 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-673), and to add details for Organism (IDMP-640).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of mixture to complete the requirements specified in clause 7.8 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-675), to assist in addressing gaps with respect to the top-level class definitions and relationships in the complete model figures for authorized and investigational medicinal product in Annex A and Annex B, respectively, in ISO 11615 (IDMP-677), and to update the conformance points to be current (IDMP-322).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231201/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of source material (Figure 17 in the ISO standard) to support representation of biologics (IDMP-713).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
-		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;Acid">
@@ -386,6 +393,74 @@
 		<cmns-av:explanatoryNote>It consists of a nucleus of a positive charge carrying almost all its mass (more than 99.9%) and Z electrons determining its size.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Author">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Actor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isAuthorOf"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-doc;Document">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-doc;Reference">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;AuthorType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAuthorDescription"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>author</rdfs:label>
+		<skos:definition>role of a party responsible for the creation of a publication, document, or of research, including data</skos:definition>
+		<skos:note>In the context of ISO 11238, the author is a party (typically a person) that is recognized as the first to describe an organism species.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5 and Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 5127:2017 Information and documentation - Foundation and vocabulary, clause 3.7.1.01</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13.6 and Figure 19</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AuthorType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Author"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Author"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>author type</rdfs:label>
+		<skos:definition>classifier for a party responsible for the creation of a publication, document, or of research, including data</skos:definition>
+		<skos:example>Species parenthetical author, Species primary author</skos:example>
+		<skos:note>The type of author of an organism species should be specified. The parenthetical author of an organism species refers to the first author who published the plant/animal name (of any rank). The primary author of an organism species refers to the first author(s), who validly published the plant/animal name.</skos:note>
+		<idmp-sub:hasBusinessRules>All names should have a primary author to avoid ambiguity, but not every name will have a parenthetical author.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5 and Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13.6 and Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Base">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>base</rdfs:label>
@@ -600,6 +675,37 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.4.2 and Figure 29</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.6</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;DevelopmentStage">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Organism">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>development stage</rdfs:label>
+		<skos:definition>classifier representing the period of life of an animal, plant, algae, fungi, insect or micro-organism, characterized by growth pattern, behavior, and other milesones</skos:definition>
+		<skos:example>foetus, infant, juvenile, adult, senescent, leafing, pre-flowering, flowering, fruiting, mature development stage, mature animal</skos:example>
+		<skos:note>This information should be provided only when the substance is significantly different in these stages (e.g. foetal bovine serum).</skos:note>
+		<idmp-sub:hasBusinessRules>The &apos;Source Material Type&apos; values are presented based on the &apos;Source Material Class&apos; values. Because organic/inorganic is just a class best captured in terminology of the source material types, only one data element is needed for type which implies class. For herbals, this class shall be mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.5, 8.5.5, and Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.10</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
@@ -850,6 +956,20 @@
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.5.3 and Figure 8</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Genus">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>genus</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45292"/>
+		<skos:definition>taxonomic category ranking below a family (or subfamily) and above a species and generally consisting of a group of species exhibiting similar characteristics</skos:definition>
+		<skos:example>Ginkgo; Harpagophytum</skos:example>
+		<skos:note>Genus refers to the Latin epithet of the genus element of the plant/animal scientific name; it is present in names for genera, species and intraspecies.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>GENUS: CD</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Glycosylation">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:subClassOf>
@@ -908,6 +1028,127 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.32, Figures 20 and 23</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.8 and 7.5.6</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;HybridOrganism">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Organism"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;HybridType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMaternalParentOrganismNamed"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismName">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceName">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasPaternalParentOrganismNamed"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismName">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceName">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:onClass rdf:resource="&idmp-sub;Organism"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMaternalParentOrganismIdentifiedBy"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismIdentifier">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasPaternalParentOrganismIdentifiedBy"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismIdentifier">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Taxon"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>hybrid organism</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C128790"/>
+		<skos:definition>offspring resulting from combining the qualities of two organisms of different varieties, species, or genera</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>hybrid</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;HybridType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;HybridOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>hybrid type</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<skos:definition>classifier specifying the type of hybridization, based on a controlled vocabulary, if known</skos:definition>
+		<skos:example>hybrid unknown lineage, hybrid known lineage</skos:example>
+		<idmp-sub:hasBusinessRules>If the hybridization step is present, the type of hybridization should be provided.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
@@ -1198,10 +1439,8 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;IndividualOrganism">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
-		<rdfs:label>individual organism</rdfs:label>
-		<skos:definition>individual living entity that can react to stimuli reproduce, grow, and maintain homeostasis</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.56</cmns-av:adaptedFrom>
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentClass rdf:resource="&idmp-sub;PhysicalOrganism"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Ingredient">
@@ -1234,13 +1473,13 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;SubstrateTargetInteraction"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;TargetInteraction"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;SubstrateTargetInteraction"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;TargetInteraction"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>interaction type</rdfs:label>
@@ -1252,6 +1491,19 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;IntraspecificType">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>intraspecific type</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C62700"/>
+		<skos:definition>taxonomic category ranking below species</skos:definition>
+		<skos:example>cv. (cultivar), var. (variety), serotype, strain, subsp. (subspecies); cell line; year of isolation</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>INTRASPECIFIC_TYPE: CD</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Isotope">
@@ -1356,6 +1608,20 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.7.3</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Kingdom">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>kingdom</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45276"/>
+		<skos:definition>highest taxonomic rank, immediately above phylum or division</skos:definition>
+		<skos:example>Plantae</skos:example>
+		<idmp-sub:hasBusinessRules>This is derived from the species and is referenced from an appropriate terminology/taxonomy. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>KINGDOM: CD</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Linkage">
@@ -1564,7 +1830,16 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Material">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>material role</rdfs:label>
@@ -1582,7 +1857,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMaterial"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasAlternateMaterial"/>
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -1600,7 +1875,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasAlternateMaterial"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMaterial"/>
 				<owl:onClass>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
@@ -2862,8 +3137,8 @@ For the description of nucleic acids, the following information can be used to a
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;OfficialNameStatus">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;State"/>
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
@@ -3149,17 +3424,402 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:explanatoryNote>A sample of material able to rotate the plane of polarization of a beam of transmitted plane-polarized light is said to possess optical activity (or to be optically active). This optical rotation is the classical distinguishing characteristic (sufficient but not necessary) of systems containing unequal amounts of corresponding enantiomers. An enantiomer causing rotation in a clockwise direction (when viewed in the direction facing the oncoming light beam) under specified conditions is called dextrorotatory and its chemical name or formula is designated by the prefix (+)-; one causing rotation in the opposite sense is laevorotatory and designated by the prefix (−)-. Materials with optical activity also exhibit other chiroptic phenomena.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Order">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>order</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45287"/>
+		<skos:definition>taxonomic category between class and family</skos:definition>
+		<skos:example>Ginkgoales</skos:example>
+		<skos:note>A taxonomic order represents a group of organisms that although differing quite a bit among themselves still have a large degree of characteristics in common.</skos:note>
+		<idmp-sub:hasBusinessRules>This is derived from the species and is referenced from an appropriate terminology/taxonomy. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>ORDER: CD</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Organism">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Genus"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;IntraspecificType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Kingdom"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Order"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Phylum"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Species"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;TaxonomicClass"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;TaxonomicFamily"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasIntraspecificDescription"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Author"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;DevelopmentStage"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;OrganismIdentifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-sub;OrganismName"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;OrganismPart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;IndividualOrganism"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganism"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>organism</rdfs:label>
 		<skos:definition>specification for an individual living entity that can react to stimuli reproduce, grow, and maintain homeostasis</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.56</cmns-av:adaptedFrom>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.56, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clauses 6.9.4, 6.9.5</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;OrganismFraction">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;OrganismFractionMaterialType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasFractionDescription"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;OrganismPart"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>organism fraction</rdfs:label>
+		<skos:definition>specification for a fraction of a constituent of an individual living entity of anatomical origin of source material within an organism</skos:definition>
+		<skos:note>Many complex materials are fractions of parts of plants, animals, or minerals. Fraction elements are often necessary to define both substances and specified group 1 substances. For substances derived from plants, fraction information will be captured at the substance information level (e.g. oils, juices and exudates). Additional information for extracts, such as extraction solvent composition, will be captured at the specified substance group 1 information level. For plasma-derived products fraction information will be captured at the substance and the specified substance group 1 levels. If there is a fraction, the class &apos;fraction description&apos; is mandatory.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.12</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>A fraction in the context of ISO 11238 is a fraction of a part of an organism, although &apos;part&apos; can be a whole organism. It is a result of a fractionation process, and is specific to the part.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>FRACTION_DESCRIPTION</cmns-av:synonym>
+		<cmns-av:synonym>fraction description</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;OrganismFractionMaterialType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismFraction">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganismFraction">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>organism fraction material type</rdfs:label>
+		<skos:definition>classifier and code for the specific type of the material constituting the organism fraction</skos:definition>
+		<skos:example>Lipid; Phospholipid; Protein; Nucleic acid; Herbal; Liquid/Dry Herbal extract; Herbal part; Biological fluid; Herbal extract; Liquid Herbal Extract; Dry Ethanolic Extract; Herbal, Leaf; Botanical, Herbal, Polysaccharide</skos:example>
+		<skos:note>For Herbal preparations, the particulars of the extracts (liquid/dry) are described in Specified Substance Group 1.</skos:note>
+		<idmp-sub:hasBusinessRules>When the herbal substance is derived from a fraction of the plant, the description of the fraction is required.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.12</cmns-av:adaptedFrom>
+		<cmns-av:synonym>MATERIAL_TYPE: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;OrganismIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Organism">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>organism identifier</rdfs:label>
+		<skos:definition>unique identifier associated with the source material parent organism</skos:definition>
+		<skos:example>The substance Ginkgo biloba L. Leaf has an Organism ID belonging to the Organism Ginkgo biloba L.</skos:example>
+		<skos:note>This ID might or might not be the parent ID of the substance.</skos:note>
+		<idmp-sub:hasBusinessRules>For Herbals, this element shall be Mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.4, Figure 19</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;OrganismName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Organism">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-ra;Registrar">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-ra;RegistrationAuthority">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>organism name</rdfs:label>
+		<skos:definition>organism accepted scientific name based on the organism taxonomy</skos:definition>
+		<skos:example>Ginkgo biloba L.; Harpagophytum procumbens (Burch.) DC. ex Meisn.</skos:example>
+		<idmp-sub:hasBusinessRules>For Herbals, this element shall be Mandatory. The accepted scientific name for plants is provided by Kew Gardens&apos; Medicinal Plant Names Services (MPNS). The names for other organisms will be provided by other authoritative sources.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.5, Figure 19</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;OrganismPart">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;OrganismPartLocation"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;OrganismFraction"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;OrganismPartIdentifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Organism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganismPart"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>organism part</rdfs:label>
+		<skos:definition>specification for an entity of anatomical origin and location of source material within an organism</skos:definition>
+		<skos:example>cartilage, root and stolon; whole plant is considered as a part, aerial part of the plant; leaf, tuberous root, whole animal, venom, intestinal mucosa</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.5.7 and Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.11</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>An organism &apos;part&apos;, which in some cases may be a whole organism, represents the part of an organism that is harvested. For example, for flu vaccines, the envelope part of the virus is separated and then fractionated for use in the vaccine.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>PART_DESCRIPTION</cmns-av:synonym>
+		<cmns-av:synonym>part description</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;OrganismPartIdentifier">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismPart">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganismPart">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>organism part identifier</rdfs:label>
+		<skos:definition>identifier and code for a constituent of an individual living entity of anatomical origin of source material within an organism</skos:definition>
+		<idmp-sub:hasBusinessRules>Depending on the Source Material Type values (e.g. human/mammalian or plant) the relevant controlled vocabulary applies (e.g. organism or plant). A controlled vocabulary for plant parts is maintained by Kew Gardens Medicinal Plant Names Services.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.11</cmns-av:adaptedFrom>
+		<cmns-av:synonym>PART: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;OrganismPartLocation">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismPart">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganismPart">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>organism part location</rdfs:label>
+		<skos:definition>classifier and code for the detailed anatomic location when the part can be extracted from different anatomical locations of the organism</skos:definition>
+		<skos:example>For cartilage: knee, elbow, stomach, shoulder</skos:example>
+		<skos:note>When multiple alternative locations may apply, the part description (OrganismPart) class will be repeated for each value.</skos:note>
+		<idmp-sub:hasBusinessRules>Applicable only if &apos;Source Material Type&apos; is human or mammalian. Not applicable for Herbals.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.11</cmns-av:adaptedFrom>
+		<cmns-av:synonym>PART_LOCATION: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;OrientationOfPolymerization">
@@ -3268,6 +3928,21 @@ For the description of nucleic acids, the following information can be used to a
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause F.3.7.4</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Phylum">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>phylum</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45277"/>
+		<skos:definition>major division of a biological kingdom, consisting of closely-related classes</skos:definition>
+		<skos:example>Tracheophyta</skos:example>
+		<skos:note>Phylum represents a basic fundamental pattern of organization and, presumably, a common descent.</skos:note>
+		<idmp-sub:hasBusinessRules>This is derived from the species and is referenced from an appropriate terminology/taxonomy. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>PHYLUM: CD</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PhysicalCharacteristic">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:label>physical characteristic</rdfs:label>
@@ -3346,6 +4021,57 @@ For the description of nucleic acids, the following information can be used to a
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.10</dct:source>
 		<skos:definition>method of modification where no new covalent bonds are formed</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalOrganism">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalOrganismPart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical organism</rdfs:label>
+		<skos:definition>individual living entity that can react to stimuli reproduce, grow, and maintain homeostasis</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.56</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalOrganismFraction">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganismPart"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical organism fraction</rdfs:label>
+		<skos:definition>fraction of a constituent of a living entity of anatomical origin, i.e., of an organism, from which source material is derived</skos:definition>
+		<skos:note>Many complex materials are fractions of parts of plants, animals, or minerals. Fraction elements are often necessary to define both substances and specified group 1 substances. For substances derived from plants, fraction information will be captured at the substance information level (e.g. oils, juices and exudates). Additional information for extracts, such as extraction solvent composition, will be captured at the specified substance group 1 information level. For plasma-derived products fraction information will be captured at the substance and the specified substance group 1 levels. If there is a fraction, the class &apos;fraction description&apos; is mandatory.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.12</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalOrganismPart">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical organism part</rdfs:label>
+		<skos:definition>entity of anatomical origin and location of source material within an organism</skos:definition>
+		<skos:example>cartilage, root and stolon; whole plant is considered as a part, aerial part of the plant; leaf, tuberous root, whole animal, venom, intestinal mucosa</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.5.7 and Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.11</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
@@ -4243,6 +4969,7 @@ For the description of nucleic acids, the following information can be used to a
 	
 	<owl:Class rdf:about="&idmp-sub;ReferenceSourceDocument">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceSource"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
@@ -4593,48 +5320,121 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;SourceMaterialClassifierCode"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SourceMaterialRole"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>source material classifier</rdfs:label>
 		<skos:definition>general high-level classification of the source material specific to the origin of the material</skos:definition>
-		<skos:example>biologic</skos:example>
-		<skos:example>botanical</skos:example>
-		<skos:example>mineral</skos:example>
-		<skos:example>organic</skos:example>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.1</cmns-av:adaptedFrom>
-		<cmns-av:synonym>source material class</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;SourceMaterialClassifierCode">
-		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;SourceMaterialClassifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>source material classifier code</rdfs:label>
-		<skos:definition>code for the general high-level classification of the source material specific to the origin of the material</skos:definition>
-		<skos:example>mineral, biologic, organic, botanical</skos:example>
-		<idmp-sub:hasBusinessRules>For Structurally Diverse substances, this class shall be Mandatory.</idmp-sub:hasBusinessRules>
+		<skos:example>biologic, botanical, mineral, organic</skos:example>
+		<idmp-sub:hasBusinessRules>For structurally diverse substances, this class shall be mandatory.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.5, 8.5.5, and Figures 17 and 30</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.1</cmns-av:adaptedFrom>
-		<cmns-av:synonym>source material class code</cmns-av:synonym>
+		<cmns-av:synonym>SOURCE_MATERIAL_CLASS: CD</cmns-av:synonym>
+		<cmns-av:synonym>source material class</cmns-av:synonym>
 		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SourceMaterialRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isDerivedFromOrganismOfStage"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;DevelopmentStage"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isDerivedFromOrganismFraction"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;OrganismFraction"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isDerivedFromOrganismIdentifiedBy"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;OrganismIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isDerivedFromOrganismNamed"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;OrganismName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isDerivedFromOrganismPart"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;OrganismPart"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCountryOfOrigin"/>
+				<owl:allValuesFrom rdf:resource="&lcc-cr;Alpha2RegionCode"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasParentSubstanceIdentifiedBy"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismIdentifier">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasParentSubstanceNamed"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;OrganismName">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SubstanceName">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;isDerivedFrom"/>
+				<owl:onClass rdf:resource="&idmp-sub;Organism"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;SourceMaterialClassifier"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;SourceMaterialState"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;SourceMaterialType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rlcmp;isManifestedIn"/>
@@ -4655,25 +5455,78 @@ For the description of nucleic acids, the following information can be used to a
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Material">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&idmp-sub;hasGeographicalLocation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>source material role</rdfs:label>
 		<skos:definition>role of material from which a substance is derived, which is defined based on taxonomic and anatomical origins</skos:definition>
+		<skos:note>Fresh plant material, herbal drugs and herbal preparations, including extracts with limited information, will all be captured as substances, defined using the elements of the structurally diverse substance type.</skos:note>
+		<skos:note>Human plasma-derived substances, allergens, vaccines and some homeopathic substances, when the homeopathic stock is derived from botanical or zoological material, will also be captured as structurally diverse substances and the source material will be a predominant element group.</skos:note>
+		<skos:note>Source material captures the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. The Source material shall be used to define the structurally diverse and polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using controlled vocabularies as required.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.76 and clause 8.5.5, Figure 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.76 and clauses 7.2.5, 8.5.5, and Figures 17 and 30</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause G.3.14</cmns-av:adaptedFrom>
-		<cmns-av:explanatoryNote>Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define proteins and polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. Information defining the nature of the source material is required for naturally derived proteins and polymers (e.g. starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or intraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>Information defining the nature of the source material is required for naturally derived proteins and polymers (e.g. starch) and structurally diverse substances. For organisms belonging to the Kingdom Plantae the substance level defines the fresh material of a single species or intraspecies, the herbal Drug and the herbal preparation. For herbal preparations, the fraction information will be captured at the substance information level and additional information for herbal extracts will be captured at the specified substance group 1 information level.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>SOURCE_MATERIAL</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SourceMaterialState">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;State"/>
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SourceMaterialRole"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>source material state</rdfs:label>
+		<skos:definition>classifier for the state of the source material when extracted</skos:definition>
+		<skos:example>live, activated, inactivated, attenuated, conjugated, live (attenuated), cultured (killed), polysaccharide, natural-derived</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.5, 8.5.5, and Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.3</cmns-av:adaptedFrom>
+		<cmns-av:synonym>SOURCE_MATERIAL_STATE: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SourceMaterialType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SourceMaterialRole"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>source material type</rdfs:label>
+		<skos:definition>classifier for the type of the source material based on a controlled vocabulary</skos:definition>
+		<skos:example>bacteria, human, mammal, fungus, virus, plant, animal, grass pollen, arachnid, porcine</skos:example>
+		<skos:note>For vaccines, this subclause refers to the class of infectious agent.</skos:note>
+		<idmp-sub:hasBusinessRules>The &apos;Source Material Type&apos; values are presented based on the &apos;Source Material Class&apos; values. Because organic/inorganic is just a class best captured in terminology of the source material types, only one data element is needed for type which implies class. For herbals, this class shall be mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.5, 8.5.5, and Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.2</cmns-av:adaptedFrom>
+		<cmns-av:synonym>SOURCE_MATERIAL_TYPE: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Species">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>species</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45293"/>
+		<skos:definition>taxonomic group of organisms that differ from all other groups of organisms and that are capable of breeding and producing fertile offspring</skos:definition>
+		<skos:example>Biloba; procumbens</skos:example>
+		<skos:note>Species refers to the Latin epithet of the species of the plant/animal; it is present in names for species and intraspecies.</skos:note>
+		<idmp-sub:hasBusinessRules>For Herbals, this element shall be Mandatory. They shall be specified as a code from an appropriate taxonomy terminology (e.g., the Catalogue of Life, Kew Gardens Medicinal Plant Names Services for plants or NCBI Taxonomy ID).</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>SPECIES: CD</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedItemCount">
@@ -4831,17 +5684,19 @@ For the description of nucleic acids, the following information can be used to a
 	
 	<owl:Class rdf:about="&idmp-sub;StartingMaterialRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>starting material role</rdfs:label>
 		<skos:definition>role of material from which the manufacturing process of the substance starts</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5.5, Figure 30</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause G.3.16</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>This material is a building block which will be (partially) incorporated in the structure of the resultant product.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;State">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:label>state</rdfs:label>
+		<skos:definition>classifier indicating a condition of something that holds for some period of time</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:explanatoryNote>The concept of state typically refers to a fixed condition that does not change unless acted on via some process or external force. Condition and state are often used interchangeably, though condition sometimes implies a more dynamic situation.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Stereochemistry">
@@ -5854,6 +6709,12 @@ For the description of nucleic acids, the following information can be used to a
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
+				<owl:allValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSource"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -5901,14 +6762,8 @@ For the description of nucleic acids, the following information can be used to a
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>substance name</rdfs:label>
-		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4 and Figure 13</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3</dct:source>
 		<skos:definition>name or company code associated with the substance</skos:definition>
 		<skos:example>During the early stages of clinical development, the preferred term for a substance can be its company code. In later stages, an INN can be associated with the substance and become the preferred term for that substance.</skos:example>
@@ -5934,7 +6789,7 @@ For the description of nucleic acids, the following information can be used to a
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance name classifier</rdfs:label>
-		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4 and Figure 13</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.3.2</dct:source>
 		<owl:equivalentClass>
 			<owl:Class>
@@ -5980,6 +6835,7 @@ For the description of nucleic acids, the following information can be used to a
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
 		<idmp-sub:hasValuesAllowed>Official Name, Systematic Name, Scientific Name, Company Code, Other Name, Brand Name, Herbal Name, Homeopathic Name, Specified Homeopathic Name, Plasma-Derived Name, Preferred Name, Specified Substance Group 1 Name, Specified Substance Group 2 Name, Specified Substance Group 3 Name, Display Name, Common Name</idmp-sub:hasValuesAllowed>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:synonym>SUBSTANCE_NAME_TYPE: CD</cmns-av:synonym>
 		<cmns-av:synonym>substance name type</cmns-av:synonym>
 	</owl:Class>
 	
@@ -6478,46 +7334,6 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-txt:hasTextValue>Structurally Diverse</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-sub;SubstrateTargetInteraction">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;InteractionType"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
-				<owl:someValuesFrom>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-						<owl:someValuesFrom rdf:resource="&idmp-sub;Target"/>
-					</owl:Restriction>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
-				<owl:someValuesFrom>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-						<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-					</owl:Restriction>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>substrate target interaction</rdfs:label>
-		<skos:definition>interaction that may occur between a substance and its target</skos:definition>
-		<skos:example>AGONIST, INDUCER, INHIBITOR, PARTIAL ANTAGONIST, SUBSTRATE, PRODUCT</skos:example>
-		<skos:note>A controlled vocabulary should be developed to capture these types of interactions. The interaction type should be captured for all substrate-target interactions. A substance can have multiple types of interactions.</skos:note>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;Sugar">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalSubstance"/>
 		<rdfs:subClassOf>
@@ -6569,6 +7385,27 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasTargetOrganism"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Organism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasTargetOrganismType"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Taxon">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SourceMaterialType">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasAmount"/>
 				<owl:onClass rdf:resource="&idmp-sub;Amount"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -6614,9 +7451,11 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:label>target</rdfs:label>
 		<skos:definition>something that a substance is known to interact with and the interaction results in a biological effect or transformation</skos:definition>
 		<skos:note>For monoclonal antibodies, the target shall always be provided. For other types substances, the target may be provided if known. Ideally the target is a substance with its own Substance ID. However, in specific circumstances, the target may be handled as a relationship between two substances.</skos:note>
+		<skos:note>Genes from which proteins are derived, target information and codes from code systems also constitute reference information for which [ISO 11238] provides a consistent structure to capture and link to a substance. Classification systems such as the WHO ATC and the United States Veterans Administration NDF-RT, which code classification information for substances, are particularly important. Target information is important for monoclonal and polyclonal antibodies and small molecules directed against specific molecular targets.</skos:note>
 		<skos:note>These targets can be therapeutic, metabolic, interactions postulated to result in toxicity or interactions of unknown effect. Targets are typically proteins, or complexes of proteins. The target may be a substance in its own right and ID shall be assigned and/or existing ID of a known system used (i.e. GenBank, UniProt) to refer to a target.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4 and Figure 8</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -6635,11 +7474,156 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:example>The therapeutic target would be HIV-1 protease when ritonavir is used in HIV-related therapy. The metabolic target is Cyp 3A4 and ritonavir is an inhibitor of this target. Ritonavir is also an inhibitor of P-glycoprotein, a drug transporter. In many combination products ritonavir is used strictly to inhibit Cyp 3A4/5 and transporter enzymes.</skos:example>
 		<skos:example>therapeutic, metabolic, toxic, transporter</skos:example>
 		<skos:note>The type is dependent on the substance and also to some extent the use of the substance. A given target-substance interaction can be of more than one type.</skos:note>
+		<skos:note>Type is a limited form of classification associated with a target of an active substance. Some targets can be both toxic and therapeutic; the choice is dependent on the dose (Km value) of a given substance.</skos:note>
 		<idmp-sub:hasBusinessRules>Each target should be associated with a target type when the target can be classified.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.6 and Figure 8</cmns-av:adaptedFrom>
+		<cmns-av:synonym>TARGET_TYPE: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;TargetInteraction">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;InteractionType"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasObjectRole"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;Target"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;hasSubjectRole"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
+						<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>target interaction</rdfs:label>
+		<skos:definition>interaction that may occur between a substance and its target</skos:definition>
+		<skos:example>AGONIST, INDUCER, INHIBITOR, PARTIAL ANTAGONIST, SUBSTRATE, PRODUCT</skos:example>
+		<skos:note>A controlled vocabulary should be developed to capture these types of interactions. The interaction type should be captured for all substrate-target interactions. A substance can have multiple types of interactions.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Taxon">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:onClass rdf:resource="&idmp-sub;Taxonomy"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:onClass rdf:resource="&idmp-sub;Taxonomy"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Organism">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Organism">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalOrganism">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>taxon</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C17469"/>
+		<skos:definition>ranked category for the classification of an organism according to its suspected evolutionary relationships</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;TaxonomicClass">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>taxonomic class</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45280"/>
+		<skos:definition>taxonomic subdivision directly under phylum</skos:definition>
+		<skos:example>Mammalia, Maxillopoda, Sauropsida. Ginkgoopsida</skos:example>
+		<skos:note>A taxonomic class represents a major group of organisms, e.g. Mammalia, Reptilia, Gastropoda, Insecta, etc., that contains a large number of different sublineages, but have shared characteristics in common (e.g. warm-blooded, fur, six legs etc.).</skos:note>
+		<idmp-sub:hasBusinessRules>This is derived from the species and is referenced from an appropriate terminology/taxonomy. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>CLASS: CD</cmns-av:synonym>
+		<cmns-av:synonym>class taxon</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;TaxonomicFamily">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+		<rdfs:label>taxonomic family</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45290"/>
+		<skos:definition>taxonomic category between order and genus</skos:definition>
+		<skos:example>Ginkgoaceae</skos:example>
+		<skos:note>A taxonomic family consists of a group of organisms among which the differences are quite minor, e.g. Equiidae - horses and their relatives.</skos:note>
+		<idmp-sub:hasBusinessRules>This is implied by the species and is referenced from an appropriate terminology/taxonomy, e.g. Kew Gardens Medicinal Plant Names Services for plants. Catalogue of Life typically captures complete taxonomy in a manner consistent with this standard.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:synonym>FAMILY: CD</cmns-av:synonym>
+		<cmns-av:synonym>family taxon</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Taxonomy">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdfs:subClassOf rdf:resource="&mvf-tsc;Nomenclature"/>
+		<rdfs:label>taxonomy</rdfs:label>
+		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13</dct:source>
+		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C17469"/>
+		<skos:definition>scientific organism classification system that describes the origin of source material in substances isolated from biological matrices</skos:definition>
+		<skos:note>Substances of organic origin, such as plants and animals, should be defined simply by taxonomic information and the organism part. Taxonomic information, particularly the scientific name of an organism (usually a species, but may be a genus or an intraspecies), is essential for defining such substances in medicinal products.</skos:note>
+		<skos:note>Taxonomic information is captured to the species level for all polydisperse substances isolated from biological matrices, if such information is available and the source material is consistently derived from the species. Taxonomic family, genus and species along with the taxon author are necessary to identify the source organism. Kingdom, phylum, class and order are also captured when available. Intraspecific information (e.g. subspecies, strain or variety) is captured when the forms exhibit consistent differences in either material content or function.</skos:note>
+		<skos:note>The Kew Gardens Medicinal Plant Names Services (MPNS) should be the authoritative source for all scientific names of plants (see E.2.2 for further details). The expert opinion for fungi should be obtained from Species Fungorum (http://www.speciesfungorum.org/) which is managed and maintained by Kew Gardens. Taxonomic information for most other organisms is available through Catalogue of Life (COL, currently 1,600,000+ organsims, http://www.catalogueoflife.org/col/) and its 151 contributing source databases. The most notable contributors are Kew Gardens and the Integrated Taxonomic Information System (www.itis.gov). COL has integrated the source datasets into a common seven level taxonomic tree using an eight-kingdom model and includes intraspecifics where relevant. For organisms omitted in the above sources, NCBI taxonomy (http://www.ncbi.nlm.nih.gov/taxonomy) is the most useful source database. The higher levels of taxonomy are useful but all levels above family are not required for organism definition. The primary definition of organism is the combination of genus and species together with the describing author and family in that order providing validation. Intraspecific type, description and hybrid characteristics are also definitional where appropriate. The organism should be described as whole with no other characteristics. Because taxonomy is continuously changing, new organism identifiers should only be generated after analysing potential collisions with existing identifiers using the above public datasets and/or conferring with appropriate taxonomic experts. Developmental stage, part and viral strain characteristics should be associated with separate identifiers that refer back to the whole organism parent substance.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.88, 7.2.5</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The NCI Thesaurus defines taxonomy as &apos;the theories and techniques of naming, describing, and classifying organisms, and the study of the relationships of taxa&apos;.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">
@@ -6733,6 +7717,40 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:symbol>Z</cmns-av:symbol>
 		<cmns-av:synonym>has nuclear charge number</cmns-av:synonym>
 		<cmns-av:synonym>has proton number</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasAuthor">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedBy"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;hasRole"/>
+		<rdfs:label>has author</rdfs:label>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-doc;Document">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-doc;Reference">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range rdf:resource="&idmp-sub;Author"/>
+		<owl:inverseOf rdf:resource="&idmp-sub;isAuthorOf"/>
+		<skos:definition>indicates the party responsible for the creation of a publication, document or research, including data</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasAuthorDescription">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
+		<rdfs:label>has author description</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Author"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>describes the party responsible for the creation of a publication, document, or of research, including data</skos:definition>
+		<skos:example>L.; Sch.Bip; Linnaeus, 1766</skos:example>
+		<skos:note>The author of an organism species should be specified. The author year of an organism shall also be specified when applicable; refers to the year in which the first author(s) published the intraspecific plant/animal name (of any rank).</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5 and Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13.6 and Figure 19</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasAverageMolecularFormulaByRepeatUnit">
@@ -6865,6 +7883,24 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 13, 14, 16-23, 25-26, 28-29, and 31-32</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.7.2</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasCountryOfOrigin">
+		<rdfs:label>has country of origin</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-loc;hasCountry">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-id;isIdentifiedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates something, such as source material, to the country from which it was harvested or sourced</skos:definition>
+		<skos:example>NL, DE, FR, ES, US. This is in line with Table G1 of the Annex G of ISO/TS 19844:2018(E), and it is the largest collection of countries</skos:example>
+		<skos:note>The country where the plant material is harvested or the countries where the plasma is sourced from as laid down in accordance with the Plasma Master File. For &apos;Plasma-derived substances&apos; the attribute country of origin provides information about the countries used for the manufacturing of the Cryopoor plama or Cryoprecipitate.</skos:note>
+		<idmp-sub:hasBusinessRules>This attribute is mandatory when the substance name type is herbal or plasma-derived. When the information for herbals is provided at the substance level it is not necessary to provide the same information again at the specified group 1 information level.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.8</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasDaughterNuclide">
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
@@ -7032,6 +8068,31 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.5</cmns-av:directSource>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasFractionDescription">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
+		<rdfs:label>has fragment description</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;OrganismFraction"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>provides information about the fraction of a plant part, or human plasma for fractionation</skos:definition>
+		<skos:example>oils; juice; exudates; liquid or dry extract; polyclonal antibodies; serum; Cryopoor plasma; Cryoprecipitate, faecal fraction, body fraction; water soluble freeze-dried extract; water soluble extract; process flow &apos;N&apos;</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.12</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasGeographicalLocation">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has geographical location</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>specifies the place/region where the plant is harvested or the places/regions where the animal source material has its habitat</skos:definition>
+		<skos:example>Shaanxi Province, China</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.9</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasGranularMolecularPart">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasGranularPart"/>
 		<rdfs:label>has granular molecular part</rdfs:label>
@@ -7154,9 +8215,24 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:note>A controlled vocabulary should be developed to capture these types of interactions. The interaction type should be captured for all substrate-target interactions. A substance can have multiple types of interactions.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.3</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasIntraspecificDescription">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasDescription"/>
+		<rdfs:label>has intraspecific description</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Organism"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition>describes strains, serotypes, varieties, cultivars and cell lines</skos:definition>
+		<skos:example>A/BRISBANE/59/2007(H1N1)</skos:example>
+		<skos:note>Intraspecific information should be used to describe strains, serotypes, varieties, cultivars and cell lines. Often there is not a naming or taxonomic authority for this information. Standardized formats for this information may be developed. The actual intraspecific information should also be captured in the naming of these substances and synonyms should be maintained to help to identify intraspecific information and avoid duplication. For plants, the intraspecific description will be the variety or subspecies name from the Medicinal Plant Names Services portal, and for other organisms, such as animals, the appropriate taxonomy will be used.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13</cmns-av:adaptedFrom>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasIsotopeSubstitutionType">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
@@ -7242,7 +8318,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:range>
-		<skos:definition>relates a material specification or material to a another material specification, material classifier or substance that the material is made of.</skos:definition>
+		<skos:definition>relates a material specification or material to a another material specification, material classifier or substance that the material is made of</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMaterialComponentType">
@@ -7251,6 +8327,30 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:range rdf:resource="&idmp-sub;MaterialClassifier"/>
 		<skos:definition>relates a material component specification to the type of component used for the material component</skos:definition>
 		<cmns-av:synonym>has component type</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMaternalParentOrganismIdentifiedBy">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasParentSubstanceIdentifiedBy"/>
+		<rdfs:label>has maternal parent organism identified by</rdfs:label>
+		<skos:definition>relates something, such as source material or a hybrid specification, to an identifier for a maternal organism</skos:definition>
+		<skos:note>The identifier of the maternal species constituting the hybrid organism should be specified based on a controlled vocabulary. For plants, the parents aren&apos;t always known, and it is unlikely that it will be known which is maternal and which is paternal.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:synonym>HYBRID_SPECIES_MATERNAL_ORGANISM_ID: ST</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMaternalParentOrganismNamed">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasParentSubstanceNamed"/>
+		<rdfs:label>has maternal parent organism named</rdfs:label>
+		<skos:definition>relates something, such as source material or a hybrid specification, to a name of a maternal organism</skos:definition>
+		<skos:note>The name of the maternal species constituting the hybrid organism should be specified. For plants, the parents aren&apos;t always known, and it is unlikely that it will be known which is maternal and which is paternal.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:synonym>HYBRID_SPECIES_MATERNAL_ORGANISM_NAME: ST</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasModification">
@@ -7724,6 +8824,80 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>relates a substance to its parent substance</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasParentSubstanceIdentifiedBy">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceIdentifier"/>
+		<rdfs:label>has parent substance identified by</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;OrganismIdentifier">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;SubstanceCode">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;SubstanceIdentifier">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates something, such as source material, to an identifier for a parent substance</skos:definition>
+		<skos:example>The substance ID of Ginkgo biloba L., Leaf</skos:example>
+		<skos:note>The Parent substance ID of the herbal drug Ginkgo biloba, Leaf is the substance ID of the substance (fresh) of Ginkgo biloba L. or Ginkgo biloba L. (Whole plant).</skos:note>
+		<idmp-sub:hasBusinessRules>For herbal drugs, herbal preparations and vaccines this element shall be mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.6, Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:synonym>PARENT_SUBSTANCE_ID: II</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasParentSubstanceNamed">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasRelatedSubstanceName"/>
+		<rdfs:label>has parent substance named</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;OrganismName">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;SubstanceName">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates something, such as source material, to a name for a parent substance</skos:definition>
+		<skos:example>The parent substance of the Herbal Drug Ginkgo biloba, Leaf is the substance (fresh): Ginkgo biloba L., or Ginkgo biloba L. (Whole plant). The parent substance of Influenza A virus A/Christchurch/16/2010 (H1N1), NIB-74xp is Influenza A virus A/Christchurch/16/2010 (H1N1).</skos:example>
+		<idmp-sub:hasBusinessRules>For herbal drugs, herbal preparations and vaccines this element shall be mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.7, Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The parent substance of an herbal drug or preparation may be an organism rather than a &apos;substance&apos; in the IDMP sense, in which case the range of this property should be the organism name rather than substance name. There may be cases, however, where the organism and substance are the same thing.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>PARENT_SUBSTANCE_NAME: ST</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasPaternalParentOrganismIdentifiedBy">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasParentSubstanceIdentifiedBy"/>
+		<rdfs:label>has paternal parent organism identified by</rdfs:label>
+		<skos:definition>relates something, such as source material or a hybrid specification, to an identifier for a paternal organism</skos:definition>
+		<skos:note>The identifier of the paternal species constituting the hybrid organism should be specified based on a controlled vocabulary. For plants, the parents aren&apos;t always known, and it is unlikely that it will be known which is maternal and which is paternal.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:synonym>HYBRID_SPECIES_PATERNAL_ORGANISM_ID: ST</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasPaternalParentOrganismNamed">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasParentSubstanceNamed"/>
+		<rdfs:label>has paternal parent organism named</rdfs:label>
+		<skos:definition>relates something, such as source material or a hybrid specification, to a name of a paternal organism</skos:definition>
+		<skos:note>The name of the paternal species constituting the hybrid organism should be specified. For plants, the parents aren&apos;t always known, and it is unlikely that it will be known which is maternal and which is paternal.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.13, Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:synonym>HYBRID_SPECIES_PATERNAL_ORGANISM_NAME: ST</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasPhysicalModificationRole">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has physical modification role</rdfs:label>
@@ -7879,12 +9053,14 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;Matter">
 					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;Organism">
+					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;Substance">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:range>
-		<skos:definition>relates something, such as a substance relationship, to the substance, moiety, or matter, including a molecular entity or physical substance that is the target of the relationship</skos:definition>
+		<skos:definition>relates something, such as a substance relationship, to the specification for a substance, moiety, or organism, or to the corresponding matter, including a molecular entity or physical organism or substance that is the target of the relationship</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6 and Figure 8</cmns-av:adaptedFrom>
@@ -7898,7 +9074,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 			<rdf:Description rdf:about="&cmns-id;isIdentifiedBy">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
-		<skos:definition>relates a substance that is the target of something, such as a substance relationship, to an identifier for that substance, moiety, or matter</skos:definition>
+		<skos:definition>relates something, such as an organism or substance relationship, to an identifier for that substance, moiety, organism, or corresponding matter</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-sub:hasValuesAllowed>ISO 11238 Substance ID</idmp-sub:hasValuesAllowed>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
@@ -7914,7 +9090,7 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 			<rdf:Description rdf:about="&idmp-sub;hasSubstanceName">
 			</rdf:Description>
 		</owl:propertyChainAxiom>
-		<skos:definition>relates a substance that is the target of something, such as a substance relationship, to a preferred term or primary name for that substance, moiety, or matter</skos:definition>
+		<skos:definition>relates something, such as an organism or substance relationship, to a preferred term or primary name for that substance, moiety, organism or the corresponding matter</skos:definition>
 		<idmp-sub:hasBusinessRules>The preferred term of the related substance is captured; this information is required when there is a &apos;Substance Relationship&apos;; The substance name is implicit and derived from the Substance ID.</idmp-sub:hasBusinessRules>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-sub:hasValuesAllowed>Based on ISO 11238 substance name</idmp-sub:hasValuesAllowed>
@@ -8363,6 +9539,48 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6, 6.6.4.2 and Figure 8</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasTargetOrganism">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
+		<rdfs:label>has target organism</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;Organism"/>
+		<skos:definition>relates something, such as a target, to the organism for which the active substance is targeted</skos:definition>
+		<skos:example>Homo Sapiens, M. TB, HIV-1</skos:example>
+		<idmp-sub:hasBusinessRules>At least one organism type should be associated.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.6 and Figure 8</cmns-av:adaptedFrom>
+		<cmns-av:synonym>TARGET_ORGANISM: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasTargetOrganismType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has target organism type</rdfs:label>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Taxon">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;SourceMaterialType">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>relates something, such as a target, to a classifier for the organism for which the active substance is targeted</skos:definition>
+		<skos:example>human, viral, bacterial, fungal, insect, helminth, malarial</skos:example>
+		<skos:note>Every organism should have a type that is maintained within this terminology. The organism type may also be used independent of the organism particularly for substances such as antibacterial which may be targeted against a wide range of organisms.</skos:note>
+		<idmp-sub:hasBusinessRules>At least one organism type should be associated.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.4.6 and Figure 8</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Note that the target organism type -may- be a taxon but more likely will be source material type based on discussion with the FDA on 2024-03-04. This is not clear in the ISO 19844 implementation guide and may be addressed in a future revision. Also, the diagrams in ISO 11238 and ISO/TS 19844 show a multiplicity of [0..1], but that does not agree with the note stating that at least one organism type should be associated.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>TARGET_ORGANISM_TYPE: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasTargetType">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has target type</rdfs:label>
@@ -8440,6 +9658,25 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<skos:definition>relates a moiety to a substance for which it is the essential aspect, responsible for its pharmacological activity</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isAuthorOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;provides"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;isRoleIn"/>
+		<rdfs:label>is author of</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;Author"/>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-doc;Document">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-doc;Reference">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>specifies a reference and/or document attributed to the party</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;isDefiningElement">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
@@ -8468,6 +9705,94 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.4 and Figure 16</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6, 6.6.3.5 and Figure 8</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isDerivedFromOrganismFraction">
+		<rdfs:label>is derived from organism fraction</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-qtu;isDerivedFrom">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-col;comprises">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-col;comprises">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates source material to the specification for a fraction of a constituent of an individual living entity of anatomical origin of source material within an organism</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.12</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isDerivedFromOrganismIdentifiedBy">
+		<rdfs:label>is derived from organism identified by</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;SourceMaterialRole"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-qtu;isDerivedFrom">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-id;isIdentifiedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates source material to a unique identifier associated with the source material parent organism</skos:definition>
+		<skos:example>The substance Ginkgo biloba L. Leaf has an Organism ID belonging to the Organism Ginkgo biloba L.</skos:example>
+		<skos:note>This ID might or might not be the parent ID of the substance.</skos:note>
+		<idmp-sub:hasBusinessRules>For Herbals, this element shall be Mandatory.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.4, Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:synonym>ORGANISM_ID: II</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isDerivedFromOrganismNamed">
+		<rdfs:label>is derived from organism named</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;SourceMaterialRole"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-qtu;isDerivedFrom">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-dsg;hasName">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates source material to an accepted scientific name associated with the source material parent organism based on the organism taxonomy</skos:definition>
+		<skos:example>Ginkgo biloba L.; Harpagophytum procumbens (Burch.) DC. ex Meisn.</skos:example>
+		<idmp-sub:hasBusinessRules>For Herbals, this element shall be Mandatory. The accepted scientific name for plants is provided by Kew Gardens&apos; Medicinal Plant Names Services (MPNS). The names for other organisms will be provided by other authoritative sources.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 17</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.5, Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:synonym>ORGANISM_NAME: ST</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isDerivedFromOrganismOfStage">
+		<rdfs:label>is derived from organism of stage</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;SourceMaterialRole"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-qtu;isDerivedFrom">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-cls;isClassifiedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates source material to the developmental stage of an animal, plant, algae, fungi, insect or micro-organism from which the source material is derived</skos:definition>
+		<skos:example>foetus, infant, juvenile, adult, senescent, leafing, pre-flowering, flowering, fruiting, mature development stage, mature animal</skos:example>
+		<skos:note>This information should be provided only when the substance is significantly different in these stages (e.g. foetal bovine serum).</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.2.5, 8.5.5, and Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.10 and Figure 19</cmns-av:adaptedFrom>
+		<cmns-av:synonym>DEVELOPMENT_STAGE: CD</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary or code list is defined in either ISO 11238 or the ISO/TS 19844 implementation guide.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isDerivedFromOrganismPart">
+		<rdfs:label>is derived from organism part</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-qtu;isDerivedFrom">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-col;comprises">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates source material to the specification for a constituent of an individual living entity of anatomical origin of source material within an organism</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figures 17 and 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.11</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isGranularMolecularPartOf">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isGranularPartOf"/>
