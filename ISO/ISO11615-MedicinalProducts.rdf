@@ -111,7 +111,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231201/ISO11615-MedicinalProducts/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240301/ISO11615-MedicinalProducts/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to rename &apos;ingredient role&apos;s to ingredients for clarification and refine the restrictions relating ingredients to pharmaceutical products and manufactured items per discussion at the Pistoia Alliance Conference Workshop on 3 November 2022 (IDMP-298). It was also extended to include concepts such as process, manufacturing process, process identifier, batch, batch identifier, lot, lot number, and others required in support of the regulatory to manufacturing bridge use case.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename product constituency to product composition, which is better understood by the user community, and to move a couple of restrictions from ingredient to substance, including strength and whether or not that substance is potentially allergenic. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to integrate additional manufacturing and packaging details required for UC-2 (IDMP-465), to make manufactured item and pharmaceutical product disjoint, but both product specifications (IDMP-466), to change the status of this ontology to &apos;release&apos; (IDMP-525), to add content related to dose forms (IDMP-531, IDMP-538), and to complete the set of ingredient roles specified in the implementation guide for ISO 11615 (IDMP-304).</skos:changeNote>
@@ -121,9 +121,10 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add other therapy specifics (IDMP-639), and to (1) reflect the migration of some content in Commons from the Parties and Situations ontology to a new Roles and Compositions ontology at OMG (IDMP-642), to (1) rename cmns-doc;isSpecifiedBy to cmns-doc;isSpecifiedIn, (2) incorporate hasExpirationDate, which was simplified out of the OMG Commons ontology, and (3) rename concepts including Quantity, QuantityValue, and QuantityValueRange to ScalarQuantity, ScalarQuantityValue, and ScalarQuantityValueRange per the Commons 1.1 release (IDMP-655), and to restructure the inheritance hierarchy with respect to Batch and Lot definitions (IDMP-632).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230901/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add package components, devices, and physical characteristics (IDMP-659), to eliminate default codes on Ingredient and InactiveIngredient (IDMP-634), and add characteristics for target populations (IDMP-640).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11615-MedicinalProducts.rdf version of this ontology was modified to correct definitions to be compliant with IDMP-O policies (GitHub-501), fill in gaps with respect to the top-level class definitions and relationships in the complete model figures for authorized and investigational medicinal product in Annex A and Annex B, respectively, in ISO 11615 (IDMP-677), and to update the conformance points to be current (IDMP-322).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231201/ISO11615-MedicinalProducts.rdf version of this ontology was modified to add content from ISO 11615 that was incomplete but required for representation of jurisdiction-agnostic medicinal products (IDMP-726).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
-		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;ActiveIngredient">
@@ -1078,6 +1079,20 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<cmns-av:synonym>strength (concentration)</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;Condition">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isExperiencedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganism"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>condition</rdfs:label>
+		<dct:source>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C25457</dct:source>
+		<skos:definition>state of being, such as a state of health</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Container">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
 		<rdfs:label>container</rdfs:label>
@@ -1206,6 +1221,13 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasContraindicationAsDiseaseSymptomProcedure"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ContraindicationAsDiseaseSymptomProcedure"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasDiseaseStatus"/>
 				<owl:onClass rdf:resource="&idmp-mprd;DiseaseStatus"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -1222,13 +1244,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasComorbidity"/>
 				<owl:onClass rdf:resource="&idmp-mprd;Comorbidity"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasContraindicationAsDiseaseSymptomProcedure"/>
-				<owl:onClass rdf:resource="&idmp-mprd;ContraindicationAsDiseaseSymptomProcedure"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2525,10 +2540,12 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicalCondition">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Condition"/>
 		<rdfs:label>medical condition</rdfs:label>
-		<skos:definition>situation in which a patient experiences a pathological condition or disorder that impairs the body&apos;s normal functioning or its parts and is characterized by specific symptoms and/or signs</skos:definition>
+		<skos:definition>condition that impairs the body&apos;s normal functioning or its parts and is characterized by specific symptoms and/or signs</skos:definition>
+		<skos:note>A medical condition can be kind of illness or circumstance which requires medical monitoring.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+		<cmns-av:adaptedFrom>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C156809</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicalDevice">
@@ -2774,13 +2791,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasTherapeuticIndication"/>
-				<owl:onClass rdf:resource="&idmp-mprd;TherapeuticIndication"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasUndesirableEffect"/>
 				<owl:onClass rdf:resource="&idmp-mprd;UndesirableEffect"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -2801,6 +2811,18 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasTherapeuticIndication"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductName"/>
 			</owl:Restriction>
@@ -2816,6 +2838,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<skos:note>The provisions in this document [ontology] apply to proprietary medicinal products for human use intended to be placed on the market and to industrially manufactured medicinal products, the marketing of which has been authorized by a medicines regulatory agency. However, the provisions do not apply to: i) medicinal products prepared according to prescription (e.g. prepared in a pharmacy from a prescription intended for a specific patient), ii) medicinal products prepared in accordance with an official formula (e.g. prepared in a pharmacy in accordance with the instructions in a pharmacopoeia and intended to be given direct to the patient by the pharmacy), iii) medicinal products intended for research and development trials, and to iv) intermediate products intended for subsequent processing by an authorized manufacturer.</skos:note>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.42</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.50</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Note that while the constraints defined above enable optional inclusion of either a pharmaceutical product or manufactured item, in most cases at least one pharmaceutical product should be included and likely both. This definition allows for the option of a medicinal product that is limited to a manufactured item, such as a medical device, as well as the option of some sort of pharmaceutical product that is not considered a manufactured item within a given context.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProductBatchIdentifierForImmediatePackaging">
@@ -3633,15 +3656,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PhysiologicalCondition">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isExperiencedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganism"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;Condition"/>
 		<rdfs:label>physiological condition</rdfs:label>
-		<skos:definition>condition of the external or internal milieu for an organism</skos:definition>
+		<dct:source>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C176718</dct:source>
+		<skos:definition>condition or state of the external or internal milieu for an organism</skos:definition>
+		<skos:example>Being in good health and being pregnant are physiological conditions but not necessarily medical conditions. Pregnancy can have complications that would be classified as medical conditions, however.</skos:example>
+		<skos:note>With respect to a person, physiological condition is defined as the functional state of the body or body systems.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
@@ -3655,9 +3675,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:label>physiological condition population characteristic</rdfs:label>
 		<skos:definition>classifier for a statistical population based on the physiological condition of its members</skos:definition>
+		<skos:note>Various aspects of the physiological conditions of the specific population for an indication or contraindication in accordance with the regulated product information can be specified using an appropriate controlled reference terminology. The controlled term and the controlled term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
-		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause Figure 14</cmns-av:directSource>
-		<cmns-av:synonym>physiological condition</cmns-av:synonym>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause Figure 14, and clause 9.9.2.5.7</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2.7.5</cmns-av:adaptedFrom>
+		<cmns-av:synonym>Physiological Condition: CD</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Placebo">
@@ -4280,6 +4303,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasIndicationAsDiseaseSymptomProcedure"/>
+				<owl:onClass rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasIntendedEffect"/>
 				<owl:onClass rdf:resource="&idmp-mprd;IntendedEffect"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -4303,13 +4333,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasComorbidity"/>
 				<owl:onClass rdf:resource="&idmp-mprd;Comorbidity"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasIndicationAsDiseaseSymptomProcedure"/>
-				<owl:onClass rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
