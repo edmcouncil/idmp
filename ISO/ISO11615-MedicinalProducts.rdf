@@ -1415,8 +1415,8 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;DiseaseStatus">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;State"/>
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
@@ -3482,16 +3482,21 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasRouteOfAdministration"/>
-				<owl:onClass rdf:resource="&idmp-mprd;RouteOfAdministration"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasDoseForm"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AdministrableDoseForm"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasDoseForm"/>
-				<owl:onClass rdf:resource="&idmp-mprd;AdministrableDoseForm"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasRouteOfAdministration"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;RouteOfAdministration"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductIdentifierSet"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -3506,18 +3511,14 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;ProductComposition"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductIdentifierSet"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product</rdfs:label>
 		<skos:definition>specification for the qualitative and quantitative composition of a medicinal product in the dose form approved for administration in line with the regulated product information</skos:definition>
 		<skos:note>In many instances, the pharmaceutical product is equal to the manufactured item. However, there are instances where the manufactured item shall undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.58</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.60</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 13 and clauses 3.1.60, 9.8.2.2</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause I.2.20</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Note that the ingredients that a pharmaceutical product contains are linked via its composition rather than directly. There is also a direct &apos;comprises&apos; relationship to the individual substances that are part of the product for the sake of convenience, though understanding the role(s) of a given substance requires linking through the product composition.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductBatch">
@@ -3566,13 +3567,73 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalProductCharacteristicStatus"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PharmaceuticalProductCharacteristicCode"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product characteristic</rdfs:label>
-		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.8</dct:source>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 13, clause 9.8.2.4</dct:source>
 		<skos:definition>aspect of a pharmaceutical product that describes that product, such as its onset of action</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses I.2.21, E.2.5</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductCharacteristicCode">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductCharacteristic"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>pharmaceutical product characteristic code</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 13, clause 9.8.2.4</dct:source>
+		<skos:definition>value for a specific pharmaceutical product characteristic value, derived from a controlled vocabulary</skos:definition>
+		<skos:note>The value from the pharmaceutical product characteristics system can be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-DefinitionallyConformant"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses I.2.21, E.2.5</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductCharacteristicStatus">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;State"/>
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductCharacteristic"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;PharmaceuticalProductCharacteristic"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>pharmaceutical product characteristic status</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 13, clause 9.8.4.4</dct:source>
+		<skos:definition>classifier for an aspect of a pharmaceutical product that describes that product, such as its onset of action, indicating the state of the characteristic in question</skos:definition>
+		<skos:example>assigned, not assigned or pending</skos:example>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause I.2.21, Annex E</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductIdentifier">
@@ -3600,11 +3661,18 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalProductIdentifierSet">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&cmns-id;Identifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>pharmaceutical product identifier set</rdfs:label>
-		<skos:definition>unique identifier for a collection of identifiers associated with a pharmaceutical product</skos:definition>
-		<skos:note>This class shall carry the relevant identifiers as defined by ISO 11616 and ISO/TS 20451. This provides a uniform representation of the pharmaceutical product using the substance(s)/specified substance(s), their (reference) strength(s), the administrable dose form and, where applicable, the integral device.</skos:note>
+		<skos:definition>collection of identifiers associated with a given pharmaceutical product</skos:definition>
+		<skos:note>This class shall be assigned the relevant identifiers as defined by ISO 11616 and ISO/TS 20451. This provides a uniform representation of the pharmaceutical product using the substance(s)/specified substance(s), their (reference) strength(s), the administrable dose form and, where applicable, the integral device.</skos:note>
 		<cmns-av:abbreviation>PhPID set</cmns-av:abbreviation>
-		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.8.2.6</cmns-av:directSource>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause E.2.3</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 13 and clause 9.8.2.6</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PhysicalMedicinalProduct">
