@@ -1464,6 +1464,19 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<skos:definition>specified quantity of a medicine, to be taken at one time or at stated intervals</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;FrequencyOfOccurrence">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:label>frequency of occurrence</rdfs:label>
+		<skos:definition>classifier for the number of occurrences of a given symptom, condition or effect within a specified period of time</skos:definition>
+		<skos:note>The frequency of occurrence of the &apos;symptom/condition/effect&apos; can be specified, using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.9.2.4.5 and Figure 14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.4.4</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;GenderPopulationCharacteristic">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
@@ -4446,7 +4459,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasFrequencyOfOccurrence"/>
-				<owl:onClass rdf:resource="&cmns-cls;Classifier"/>
+				<owl:onClass rdf:resource="&idmp-mprd;FrequencyOfOccurrence"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -4825,12 +4838,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has frequency of occurrence</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:range rdf:resource="&idmp-mprd;FrequencyOfOccurrence"/>
 		<skos:definition>relates the undesirable effect to a classifier / code for medical terminology that is used for, but not limited to, the registration, documentation and safety monitoring of medicinal products, that indicates how often the undesirable effect occurs</skos:definition>
 		<skos:note>The frequency of occurrence of the “symptom/condition/effect” can be specified using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.9.2.4.5 and Figure 14</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.4.4</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasHeight">
