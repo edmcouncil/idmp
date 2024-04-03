@@ -272,13 +272,6 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasDoseForm"/>
-				<owl:onClass rdf:resource="&idmp-mprd;ManufacturedDoseForm"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
 				<owl:onClass rdf:resource="&idmp-mprd;ProductComposition"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -289,6 +282,20 @@
 				<owl:onProperty rdf:resource="&idmp-mprd;hasOtherCharacteristic"/>
 				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasDoseForm"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ManufacturedDoseForm"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ManufacturedItemQuantity"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
@@ -2096,6 +2103,22 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<skos:note>The manufactured dose form is identical to the administrable dose form in cases where no transformation of the manufactured item is necessary (i.e. where the manufactured item is equal to the pharmaceutical product).</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;ManufacturedItemQuantity">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementUnit"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementUnit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>manufactured item quantity</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.20.4</dct:source>
+		<skos:definition>quantity (or count number) of the manufactured item</skos:definition>
+		<skos:note>It shall be specified as a value and units, and the units shall be specified as a symbol and a symbol identifier as defined in ISO 11240 and the resulting terminology. For solid dose forms and other items that are measured by counting integer quantities, the unit for quantity shall be &apos;unit&apos; and the &apos;unit of presentation&apos; shall be the item that is counted.</skos:note>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-PQ"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause C.3.13.3</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;ManufacturingAuthorization">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Authorization"/>
 		<rdfs:subClassOf>
@@ -3421,23 +3444,47 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PackagedMedicinalProduct">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductSpecification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;BatchNumber"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProduct"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;PackageIdentifier"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackageItem"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackageIdentifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>packaged medicinal product</rdfs:label>
-		<skos:definition>medicinal product in a container that is all or part of a package</skos:definition>
-		<skos:note>A packaged medicinal product represents the entirety that has been packaged for sale or supply.</skos:note>
-		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.57</cmns-av:adaptedFrom>
+		<skos:definition>medicinal product in a container being part of a package, representing the entirety that has been packaged for sale or supply</skos:definition>
+		<skos:note>Packaged medicinal product specifies information about the packaging and container(s) of a medicinal product and any associated device(s) which is an integral part or provided in combination with a medicinal product, as supplied by the manufacturer for sale and distribution. It also specifies the ingredient information for the manufactured item(s).</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 11 and clauses 3.1.57, 9.1.7, and 9.6</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PharmaceuticalDoseForm">
