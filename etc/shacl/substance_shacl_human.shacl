@@ -19,6 +19,33 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+
+ISO11238-Substances:SubstanceShape
+	a sh:NodeShape ;
+	sh:property
+		[
+			sh:class ISO11238-Substances:SubstanceName ;
+			sh:minCount "1"^^xsd:integer ;
+			sh:path ISO11238-Substances:hasSubstanceName ;
+		] ,
+		[
+			sh:class ISO11238-Substances:SubstanceTypeClassifier ;
+			sh:minCount "1"^^xsd:integer ;
+			sh:path ISO11238-Substances:hasSubstanceType ;
+		] ,
+		[
+			sh:minCount "1"^^xsd:integer ;
+			sh:or (
+				ISO11238-Substances:SubstanceCode
+				ISO11238-Substances:SubstanceIdentifier
+			) ;
+			sh:path Identifiers:isIdentifiedBy ;
+		]
+		;
+	sh:targetClass ISO11238-Substances:Substance ;
+	.
+
+
 ISO11238-Substances:SubstanceCodeShape
 	a sh:NodeShape ;
 	sh:property
@@ -181,31 +208,6 @@ ISO11238-Substances:SubstanceNameShape
 		]
 		;
 	sh:targetClass ISO11238-Substances:SubstanceName ;
-	.
-
-ISO11238-Substances:SubstanceShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:class ISO11238-Substances:SubstanceName ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path ISO11238-Substances:hasSubstanceName ;
-		] ,
-		[
-			sh:class ISO11238-Substances:SubstanceTypeClassifier ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path ISO11238-Substances:hasSubstanceType ;
-		] ,
-		[
-			sh:minCount "1"^^xsd:integer ;
-			sh:or (
-				ISO11238-Substances:SubstanceCode
-				ISO11238-Substances:SubstanceIdentifier
-			) ;
-			sh:path Identifiers:isIdentifiedBy ;
-		]
-		;
-	sh:targetClass ISO11238-Substances:Substance ;
 	.
 
 ISO11238-Substances:SubstanceTypeClassifierShape
