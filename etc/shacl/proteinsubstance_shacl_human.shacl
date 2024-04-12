@@ -19,35 +19,6 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ISO11238-Substances:PhysicalSubstanceShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:class ISO11238-Substances:Substance ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path <https://www.omg.org/spec/Commons/Documents/isSpecifiedIn> ;
-		] ,
-		[
-			sh:minCount "1"^^xsd:integer ;
-			sh:or (
-				ISO11238-Substances:SubstanceCode
-				ISO11238-Substances:SubstanceIdentifier
-			) ;
-			sh:path Identifiers:isIdentifiedBy ;
-		]
-		;
-	sh:targetClass ISO11238-Substances:PhysicalSubstance ;
-	.
-
-ISO11238-Substances:ProteinSequenceTypeShape
-	a sh:NodeShape ;
-	sh:property [
-		sh:class CodeSet:CodeSet ;
-		sh:minCount "1"^^xsd:integer ;
-		sh:path Collections:isMemberOf ;
-	] ;
-	sh:targetClass ISO11238-Substances:ProteinSequenceType ;
-	.
 
 ISO11238-Substances:ProteinSubstanceShape
 	a sh:NodeShape ;
@@ -90,6 +61,7 @@ ISO11238-Substances:ProteinSubstanceShape
 	sh:targetClass ISO11238-Substances:ProteinSubstance ;
 	.
 
+
 ISO11238-Substances:ProteinSubunitShape
 	a sh:NodeShape ;
 	sh:property
@@ -113,6 +85,17 @@ ISO11238-Substances:ProteinSubunitShape
 		]
 		;
 	sh:targetClass ISO11238-Substances:ProteinSubunit ;
+	.
+
+
+ISO11238-Substances:ProteinSequenceTypeShape
+	a sh:NodeShape ;
+	sh:property [
+		sh:class CodeSet:CodeSet ;
+		sh:minCount "1"^^xsd:integer ;
+		sh:path Collections:isMemberOf ;
+	] ;
+	sh:targetClass ISO11238-Substances:ProteinSequenceType ;
 	.
 
 ISO11238-Substances:SubstanceCodeShape
@@ -218,16 +201,6 @@ ISO11238-Substances:SubstanceIdentifierShape
 	sh:targetClass ISO11238-Substances:SubstanceIdentifier ;
 	.
 
-ISO11238-Substances:SubstanceNameClassifierShape
-	a sh:NodeShape ;
-	sh:property [
-		sh:class CodeSet:CodeSet ;
-		sh:minCount "1"^^xsd:integer ;
-		sh:path Collections:isMemberOf ;
-	] ;
-	sh:targetClass ISO11238-Substances:SubstanceNameClassifier ;
-	.
-
 ISO11238-Substances:SubstanceNameShape
 	a sh:NodeShape ;
 	sh:property
@@ -289,31 +262,6 @@ ISO11238-Substances:SubstanceNameShape
 	sh:targetClass ISO11238-Substances:SubstanceName ;
 	.
 
-ISO11238-Substances:SubstanceShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:class ISO11238-Substances:SubstanceName ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path ISO11238-Substances:hasSubstanceName ;
-		] ,
-		[
-			sh:class ISO11238-Substances:SubstanceTypeClassifier ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path ISO11238-Substances:hasSubstanceType ;
-		] ,
-		[
-			sh:minCount "1"^^xsd:integer ;
-			sh:or (
-				ISO11238-Substances:SubstanceCode
-				ISO11238-Substances:SubstanceIdentifier
-			) ;
-			sh:path Identifiers:isIdentifiedBy ;
-		]
-		;
-	sh:targetClass ISO11238-Substances:Substance ;
-	.
-
 ISO11238-Substances:SubstanceTypeClassifierShape
 	a sh:NodeShape ;
 	sh:property [
@@ -324,181 +272,7 @@ ISO11238-Substances:SubstanceTypeClassifierShape
 	sh:targetClass ISO11238-Substances:SubstanceTypeClassifier ;
 	.
 
-RegistrationAuthorities:RegistrarShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:class RegistrationAuthorities:RegistrationAuthority ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path RegistrationAuthorities:isDesignatedBy ;
-		] ,
-		[
-			sh:class RegistrationAuthorities:RegistrationService ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path ProductsAndServices:provides ;
-		]
-		;
-	sh:targetClass RegistrationAuthorities:Registrar ;
-	.
 
-RegistrationAuthorities:RegistrationAuthorityShape
-	a sh:NodeShape ;
-	sh:property [
-		sh:class ProductsAndServices:Service ;
-		sh:minCount "1"^^xsd:integer ;
-		sh:path ProductsAndServices:provides ;
-	] ;
-	sh:targetClass RegistrationAuthorities:RegistrationAuthority ;
-	.
-
-RegistrationAuthorities:RegistrationServiceShape
-	a sh:NodeShape ;
-	sh:property [
-		sh:class ProductsAndServices:ServiceProvider ;
-		sh:minCount "1"^^xsd:integer ;
-		sh:path ProductsAndServices:isProvidedBy ;
-	] ;
-	sh:targetClass RegistrationAuthorities:RegistrationService ;
-	.
-
-RegistrationAuthorities:RegistryShape
-	a sh:NodeShape ;
-	sh:property [
-		sh:minCount "1"^^xsd:integer ;
-		sh:or (
-			RegistrationAuthorities:Registrar
-			RegistrationAuthorities:RegistrationAuthority
-		) ;
-		sh:path RegistrationAuthorities:isManagedBy ;
-	] ;
-	sh:targetClass RegistrationAuthorities:Registry ;
-	.
-
-LanguageRepresentation:LanguageIdentifierShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:class CodeSet:CodeSet ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Collections:isMemberOf ;
-		] ,
-		[
-			sh:datatype xsd:string ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path LanguageRepresentation:hasTag ;
-		]
-		;
-	sh:targetClass LanguageRepresentation:LanguageIdentifier ;
-	.
-
-ISO1087-VocabularyForTermsAndDefinitions:SpecialLanguageShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:class MultipleVocabularyFacility:MVFEntry ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Collections:comprises ;
-		] ,
-		[
-			sh:minCount "1"^^xsd:integer ;
-			sh:or (
-				ISO1087-VocabularyForTermsAndDefinitions:Domain
-				ISO1087-VocabularyForTermsAndDefinitions:Subject
-			) ;
-			sh:path ContextualDesignators:isUsedBy ;
-		]
-		;
-	sh:targetClass ISO1087-VocabularyForTermsAndDefinitions:SpecialLanguage ;
-	.
-
-MultipleVocabularyFacility:MVFDictionaryShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:datatype xsd:anyURI ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path MultipleVocabularyFacility:hasURI ;
-		] ,
-		[
-			sh:datatype xsd:string ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Designators:hasDescription ;
-		] ,
-		[
-			sh:datatype xsd:string ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path MultipleVocabularyFacility:hasTextualName ;
-		]
-		;
-	sh:targetClass MultipleVocabularyFacility:MVFDictionary ;
-	.
-
-MultipleVocabularyFacility:MVFEntryShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:class MultipleVocabularyFacility:MVFDictionary ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Collections:isIncludedIn ;
-		] ,
-		[
-			sh:datatype xsd:anyURI ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path MultipleVocabularyFacility:hasURI ;
-		] ,
-		[
-			sh:datatype xsd:string ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Designators:hasDescription ;
-		] ,
-		[
-			sh:datatype xsd:string ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path MultipleVocabularyFacility:hasTextualName ;
-		]
-		;
-	sh:targetClass MultipleVocabularyFacility:MVFEntry ;
-	.
-
-MultipleVocabularyFacility:VocabularyEntryShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:class MultipleVocabularyFacility:MVFEntry ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Designators:denotes ;
-		] ,
-		[
-			sh:datatype xsd:anyURI ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path MultipleVocabularyFacility:hasURI ;
-		] ,
-		[
-			sh:datatype xsd:string ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Designators:hasDescription ;
-		] ,
-		[
-			sh:datatype xsd:string ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path MultipleVocabularyFacility:hasTextualName ;
-		]
-		;
-	sh:targetClass MultipleVocabularyFacility:VocabularyEntry ;
-	.
-
-MultipleVocabularyFacility:VocabularyShape
 	a sh:NodeShape ;
 	sh:property
 		[
