@@ -20,30 +20,19 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-ISO11238-Substances:ProteinSubstanceShape
+ISO11238-Substances:ChemicalSubstanceShape
 	a sh:NodeShape ;
 	sh:property
-		[
-			sh:class ISO11238-Substances:ProteinSequenceType ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Classifiers:isClassifiedBy ;
-		] ,
-		[
-			sh:class ISO11238-Substances:ProteinSubunit ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path Collections:hasConstituent ;
-		] ,
 		[
 			sh:class ISO11238-Substances:SubstanceName ;
 			sh:minCount "1"^^xsd:integer ;
 			sh:path ISO11238-Substances:hasSubstanceName ;
 		] ,
 		[
-			sh:datatype xsd:int ;
+			sh:datatype xsd:boolean ;
 			sh:maxCount "1"^^xsd:integer ;
 			sh:minCount "1"^^xsd:integer ;
-			sh:path ISO11238-Substances:hasNumberOfSubunits ;
+			sh:path ISO11238-Substances:isStoichiometric ;
 		] ,
 		[
 			sh:minCount "1"^^xsd:integer ;
@@ -54,49 +43,13 @@ ISO11238-Substances:ProteinSubstanceShape
 			sh:path Identifiers:isIdentifiedBy ;
 		] ,
 		[
-			sh:node ISO11238-Substances:SubstanceTypeClassifier-Protein ;
+			sh:node ISO11238-Substances:SubstanceTypeClassifier-Chemical ;
 			sh:path ISO11238-Substances:hasSubstanceType ;
 		]
 		;
-	sh:targetClass ISO11238-Substances:ProteinSubstance ;
+	sh:targetClass ISO11238-Substances:ChemicalSubstance ;
 	.
 
-
-ISO11238-Substances:ProteinSubunitShape
-	a sh:NodeShape ;
-	sh:property
-		[
-			sh:datatype xsd:int ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path ISO11238-Substances:hasSequenceLength ;
-		] ,
-		[
-			sh:datatype xsd:int ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path ISO11238-Substances:hasSubunitIndex ;
-		] ,
-		[
-			sh:datatype xsd:string ;
-			sh:maxCount "1"^^xsd:integer ;
-			sh:minCount "1"^^xsd:integer ;
-			sh:path ISO11238-Substances:hasProteinSequence ;
-		]
-		;
-	sh:targetClass ISO11238-Substances:ProteinSubunit ;
-	.
-
-
-ISO11238-Substances:ProteinSequenceTypeShape
-	a sh:NodeShape ;
-	sh:property [
-		sh:class CodeSet:CodeSet ;
-		sh:minCount "1"^^xsd:integer ;
-		sh:path Collections:isMemberOf ;
-	] ;
-	sh:targetClass ISO11238-Substances:ProteinSequenceType ;
-	.
 
 ISO11238-Substances:SubstanceCodeShape
 	a sh:NodeShape ;
@@ -179,7 +132,7 @@ ISO11238-Substances:SubstanceIdentifierShape
 				ISO11238-Substances:PhysicalSubstance
 				ISO11238-Substances:Substance
 			) ;
-			sh:path Identifiers:identifies ;
+			sh:path Classifiers:classifies ;
 		] ,
 		[
 			sh:minCount "1"^^xsd:integer ;
@@ -187,7 +140,7 @@ ISO11238-Substances:SubstanceIdentifierShape
 				ISO11238-Substances:PhysicalSubstance
 				ISO11238-Substances:Substance
 			) ;
-			sh:path Classifiers:classifies ;
+			sh:path Identifiers:identifies ;
 		] ,
 		[
 			sh:minCount "1"^^xsd:integer ;
@@ -261,3 +214,4 @@ ISO11238-Substances:SubstanceNameShape
 		;
 	sh:targetClass ISO11238-Substances:SubstanceName ;
 	.
+	
