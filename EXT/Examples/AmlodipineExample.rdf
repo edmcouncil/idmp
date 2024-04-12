@@ -29,6 +29,7 @@
 	<!ENTITY idmp-narga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegulatoryAgencies/">
 	<!ENTITY idmp-phdf "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/">
 	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
+	<!ENTITY idmp-snomed "https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/">
 	<!ENTITY idmp-spor "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/">
 	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
 	<!ENTITY idmp-ucum "https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/">
@@ -74,6 +75,7 @@
 	xmlns:idmp-narga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegulatoryAgencies/"
 	xmlns:idmp-phdf="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/"
 	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
+	xmlns:idmp-snomed="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/"
 	xmlns:idmp-spor="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"
 	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns:idmp-ucum="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/"
@@ -106,6 +108,7 @@
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/"/>
 		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
@@ -1127,6 +1130,14 @@
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascAsAuthorizedMedicinalProductInUnitedStates">
+		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
+		<rdfs:label>Norvasc as authorized medicinal product in United States</rdfs:label>
+		<idmp-mprd:hasAuthorization rdf:resource="&idmp-amp;NorvascMarketingAuthorizationInUnitedSates"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlister">
 		<rdf:type rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdf:type rdf:resource="&idmp-mprd;PackageItem"/>
@@ -1263,6 +1274,15 @@
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Germany"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMarketingAuthorizationInUnitedStates">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<rdfs:label>Norvasc Market Authorization in United States</rdfs:label>
+		<idmp-mprd:hasAuthorizedParty rdf:resource="&idmp-amp;PfizerIncAsMarketingAuthorizationHolder"/>
+		<idmp-mprd:hasAuthorizingParty rdf:resource="&idmp-narga;UnitedStatesFoodAndDrugAdministrationAsMedicinesRegulatoryAgency"/>
+		<cmns-cxtdsg:appliesTo rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProductInUnitedStates"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;UnitedStates"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMedicinalProduct">
 		<rdf:type rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<rdfs:label>Norvasc medicinal product</rdfs:label>
@@ -1297,6 +1317,17 @@
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProductInGermany"/>
 	</owl:NamedIndividual>
 	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascMedicinalProduct-TherapeuticIndication-UnitedStates">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<rdfs:label>Norvasc medicinal product, therapeutic indication in United States</rdfs:label>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/233819005"/>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003"/>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002"/>
+		<idmp-mprd:hasTherapeuticIndicationText rdf:resource="&idmp-amp;NorvascTherapeuticIndicationTextInUnitedStates"/>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-amp;NorvascMedicinalProduct"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-amp;NorvascAsAuthorizedMedicinalProductInUnitedStates"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascPackagedMedicinalProduct">
 		<rdf:type rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
 		<rdfs:label>Norvasc packaged medicinal product</rdfs:label>
@@ -1323,6 +1354,19 @@
 		<rdfs:label>Norvasc, Therapeutic Indication Text, Germany</rdfs:label>
 		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;Germany"/>
 		<cmns-txt:hasTextValue>Hypertension and chronic stable angina pectoris and vasospastic (Prinzmetal’s) angina</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascTherapeuticIndicationTextInUnitedStates">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+		<rdfs:label>Norvasc, Therapeutic Indication Text, United States</rdfs:label>
+		<cmns-av:directSource rdf:resource="https://www.accessdata.fda.gov/drugsatfda_docs/label/2011/019787s047lbl.pdf"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&lcc-3166-1;UnitedStates"/>
+		<cmns-txt:hasTextValue>NORVASC is a calcium channel blocker and may be used alone or in combination with other antihypertensive and antianginal agents for the treatment of:
+-	 Hypertension (1.1)
+-	 Coronary Artery Disease (1.2)
+     - Chronic Stable Angina
+     - Vasospastic Angina (Prinzmetal’s or Variant Angina)
+     - Angiographically Documented Coronary Artery Disease in patients without heart failure or an ejection fraction &lt; 40%</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;P015011211">
@@ -1360,6 +1404,12 @@
 		<rdf:type rdf:resource="&cmns-org;LegalEntity"/>
 		<rdfs:label>Pfizer Inc.</rdfs:label>
 		<cmns-dsg:hasDescription>American multinational pharmaceutical and biotechnology corporation headquartered on 42nd Street in Manhattan, New York City.</cmns-dsg:hasDescription>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerIncAsMarketingAuthorizationHolder">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorizationHolder"/>
+		<rdfs:label>Pfizer Inc. as marketing authorization holder</rdfs:label>
+		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;PfizerInc"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;PfizerLaboratoriesAsManufacturer">
@@ -1715,6 +1765,135 @@
 		<cmns-ra:isRegisteredIn rdf:resource="&idmp-nara;PlantListOfAcceptedNomenclatureTaxonomyAndSymbols"/>
 		<cmns-txt:hasTextValue>ZETA</cmns-txt:hasTextValue>
 	</idmp-nara:PlantListOfAcceptedNomenclatureTaxonomyAndSymbolsEntry>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/233819005">
+		<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-Concept"/>
+		<rdfs:label>SNOMED CT, Concept, Stable angina (disorder)</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://lookup.snomedtools.org/snowstorm/snomed-ct/browser/MAIN/2024-02-01/concepts/233819005"/>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/233819005-SNOMED-CT-ConceptIdentifier"/>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-snomed;SNOMED-CT"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/233819005-FullySpecifiedName-English">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-FullySpecifiedName"/>
+		<rdfs:label>SNOMED CT, Concept, Stable angina (disorder), Fully Specified Name, English</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/233819005"/>
+		<cmns-txt:hasTextValue>Stable angina (disorder)</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">true</mvf:isPreferred>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/233819005-PreferredTerm-English-StableAngina">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-PreferredTerm"/>
+		<rdfs:label>SNOMED CT, Concept, Stable angina (disorder), Preferred Term, English</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/233819005"/>
+		<cmns-txt:hasTextValue>Stable angina</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">true</mvf:isPreferred>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/233819005-SNOMED-CT-ConceptIdentifier">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-ConceptIdentifier"/>
+		<rdfs:label>SNOMED CT, Concept, Stable angina (disorder), SNOMED CT Concept Identifier</rdfs:label>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-snomed;SNOMED-CT"/>
+		<cmns-txt:hasTextValue>233819005</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003">
+		<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-Concept"/>
+		<rdfs:label>SNOMED CT, Concept, Hypertensive disorder</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://lookup.snomedtools.org/snowstorm/snomed-ct/browser/MAIN/2024-02-01/concepts/38341003"/>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003-SNOMED-CT-ConceptIdentifier"/>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-snomed;SNOMED-CT"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003-FullySpecifiedName-English">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-FullySpecifiedName"/>
+		<rdfs:label>SNOMED CT, Concept, Hypertensive disorder, Fully Specified Name, English</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003"/>
+		<cmns-txt:hasTextValue>Hypertensive disorder, systemic arterial (disorder)</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">true</mvf:isPreferred>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003-PreferredTerm-English">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-PreferredTerm"/>
+		<rdfs:label>SNOMED CT, Concept, Hypertensive disorder, Synonym, English, Hypertension</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003"/>
+		<cmns-txt:hasTextValue>Hypertensive disorder</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">true</mvf:isPreferred>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003-SNOMED-CT-ConceptIdentifier">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-ConceptIdentifier"/>
+		<rdfs:label>SNOMED CT, Concept, Hypertensive disorder, SNOMED CT Concept Identifier</rdfs:label>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-snomed;SNOMED-CT"/>
+		<cmns-txt:hasTextValue>38341003</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003-Synonym-English-Hypertension">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-Synonym"/>
+		<rdfs:label>SNOMED CT, Concept, Hypertensive disorder, Synonym, English, Hypertension</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/38341003"/>
+		<cmns-txt:hasTextValue>Hypertension</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">false</mvf:isPreferred>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002">
+		<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-Concept"/>
+		<rdfs:label>SNOMED CT, Concept, Prinzmetal angina (disorder)</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://lookup.snomedtools.org/snowstorm/snomed-ct/browser/MAIN/2024-02-01/concepts/87343002"/>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002-SNOMED-CT-ConceptIdentifier"/>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-snomed;SNOMED-CT"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002-FullySpecifiedName-English">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-FullySpecifiedName"/>
+		<rdfs:label>SNOMED CT, Concept, Prinzmetal angina (disorder), Fully Specified Name, English</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002"/>
+		<cmns-txt:hasTextValue>Prinzmetal angina (disorder)</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">true</mvf:isPreferred>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002-PreferredTerm-English">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-PreferredTerm"/>
+		<rdfs:label>SNOMED CT, Concept, Prinzmetal angina (disorder), Preferred Term, English</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002"/>
+		<cmns-txt:hasTextValue>Prinzmetal angina</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">true</mvf:isPreferred>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002-SNOMED-CT-ConceptIdentifier">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-ConceptIdentifier"/>
+		<rdfs:label>SNOMED CT, Concept, Prinzmetal angina (disorder), SNOMED CT Concept Identifier</rdfs:label>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-snomed;SNOMED-CT"/>
+		<cmns-txt:hasTextValue>87343002</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002-Synonym-English-PrinzmetalsAngina">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-Synonym"/>
+		<rdfs:label>SNOMED CT, Concept, Prinzmetal angina (disorder), Synonym, English, Prinzmetal angina</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002"/>
+		<cmns-txt:hasTextValue>Prinzmetal&apos;s angina</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">false</mvf:isPreferred>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002-Synonym-English-VariantAngina">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-Synonym"/>
+		<rdfs:label>SNOMED CT, Concept, Prinzmetal angina (disorder), Synonym, English, Variant angina</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/87343002"/>
+		<cmns-txt:hasTextValue>Variant angina</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+		<mvf:isPreferred rdf:datatype="&xsd;boolean">false</mvf:isPreferred>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000000006">
 		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabulary"/>
