@@ -37,8 +37,8 @@ ISO11238-Substances:ChemicalSubstanceShape
 		[
 			sh:minCount "1"^^xsd:integer ;
 			sh:or (
-				ISO11238-Substances:SubstanceCode
-				ISO11238-Substances:SubstanceIdentifier
+				ISO11238-Substances:SubstanceCodeShape
+				ISO11238-Substances:SubstanceIdentifierShape
 			) ;
 			sh:path Identifiers:isIdentifiedBy ;
 		] ,
@@ -84,16 +84,16 @@ ISO11238-Substances:SubstanceCodeShape
 		[
 			sh:minCount "1"^^xsd:integer ;
 			sh:or (
-				ISO11238-Substances:PhysicalSubstance
-				ISO11238-Substances:Substance
+				ISO11238-Substances:PhysicalSubstanceShape
+				ISO11238-Substances:SubstanceShape
 			) ;
 			sh:path Identifiers:identifies ;
 		] ,
 		[
 			sh:minCount "1"^^xsd:integer ;
 			sh:or (
-				RegistrationAuthorities:Registrar
-				RegistrationAuthorities:RegistrationAuthority
+				RegistrationAuthorities:RegistrarShape
+				RegistrationAuthorities:RegistrationAuthorityShape
 			) ;
 			sh:path RegistrationAuthorities:isRegisteredBy ;
 		]
@@ -129,24 +129,24 @@ ISO11238-Substances:SubstanceIdentifierShape
 		[
 			sh:minCount "1"^^xsd:integer ;
 			sh:or (
-				ISO11238-Substances:PhysicalSubstance
-				ISO11238-Substances:Substance
+				ISO11238-Substances:PhysicalSubstanceShape
+				ISO11238-Substances:SubstanceShape
 			) ;
 			sh:path Classifiers:classifies ;
 		] ,
 		[
 			sh:minCount "1"^^xsd:integer ;
 			sh:or (
-				ISO11238-Substances:PhysicalSubstance
-				ISO11238-Substances:Substance
+				ISO11238-Substances:PhysicalSubstanceShape
+				ISO11238-Substances:SubstanceShape
 			) ;
 			sh:path Identifiers:identifies ;
 		] ,
 		[
 			sh:minCount "1"^^xsd:integer ;
 			sh:or (
-				RegistrationAuthorities:Registrar
-				RegistrationAuthorities:RegistrationAuthority
+				RegistrationAuthorities:RegistrarShape
+				RegistrationAuthorities:RegistrationAuthorityShape
 			) ;
 			sh:path RegistrationAuthorities:isRegisteredBy ;
 		]
@@ -206,12 +206,27 @@ ISO11238-Substances:SubstanceNameShape
 		[
 			sh:minCount "1"^^xsd:integer ;
 			sh:or (
-				ISO11238-Substances:PhysicalSubstance
-				ISO11238-Substances:Substance
+				ISO11238-Substances:PhysicalSubstanceShape
+				ISO11238-Substances:SubstanceShape
 			) ;
 			sh:path Designators:isNameOf ;
 		]
 		;
 	sh:targetClass ISO11238-Substances:SubstanceName ;
 	.
+
+RegistrationAuthorities:RegistrarShape a sh:NodeShape ;
+sh:property [ sh:class RegistrationAuthorities:RegistrationAuthority ;
+		sh:minCount 1 ;
+		sh:path RegistrationAuthorities:isDesignatedBy ],
+	[ sh:class RegistrationAuthorities:RegistrationService ;
+		sh:minCount 1 ;
+		sh:path ProductsAndServices:provides ] ;
+sh:targetClass RegistrationAuthorities:Registrar .
+
+RegistrationAuthorities:RegistrationAuthorityShape a sh:NodeShape ;
+	sh:property [ sh:class ProductsAndServices:Service ;
+		sh:minCount 1 ;
+		sh:path ProductsAndServices:provides ] ;
+sh:targetClass RegistrationAuthorities:RegistrationAuthority .
 	
