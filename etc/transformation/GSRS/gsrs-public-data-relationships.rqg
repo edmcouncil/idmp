@@ -4,6 +4,8 @@ PREFIX cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
 PREFIX cmns-rlcmp: <https://www.omg.org/spec/Commons/RolesAndCompositions/>
 PREFIX cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/>
 PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
+PREFIX idmp-nara: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/>
+PREFIX idmp-narga: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegulatoryAgencies/>
 PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 
 GENERATE {
@@ -58,15 +60,13 @@ BIND(<https://gsrs.ncats.nih.gov/api/v1/substances/{ ?RelatedSubstanceApprovalID
 BIND(
     IF(?Substance = ?RelatedSubstance, ?nothing, # avoid meaningless triple
     IF(str(?RelationshipType) = "ACTIVE MOIETY" || str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", ?nothing,
-    IF(str(?RelationshipType) = "INHIBITOR->TARGET", idmp-sub:hasInhibitorTarget,
-    skos:related)))
+    skos:related))
     AS ?SubstancesRelationshipProperty)
 
 BIND(
     IF(?Substance = ?RelatedSubstance, ?nothing, # avoid meaningless triple
     IF(str(?RelationshipType) = "ACTIVE MOIETY" || str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-sub:hasActiveMoiety,
-    IF(str(?RelationshipType) = "INHIBITOR->TARGET", idmp-sub:hasInhibitorTarget,
-    skos:related)))
+    skos:related))
     AS ?SubstancesRelationship)
 
 # HAS ACTIVE MOIETY ROLE AND CONTEXT
@@ -84,7 +84,7 @@ BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, idmp-sub:Active
 BIND(IF(uri(?SubstancesRelationship) = idmp-sub:hasActiveMoiety, idmp-sub:isActiveMoietyOf, ?nothing) AS ?IsActiveMoietyOfProperty)
 
 BIND(
-    IF(str(?RelationshipType) = "ACTIVE MOIETY", idmp-ra:RegulatoryContext-FoodAndDrugAdministrationGeneral,
-    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-ra:RegulatoryContext-ActiveMoietyForFoodAndDrugAdministrationExclusivity,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY", idmp-narga:RegulatoryContext-FoodAndDrugAdministrationGeneral,
+    IF(str(?RelationshipType) = "ACTIVE MOIETY (FOR EXCLUSIVITY)", idmp-narga:RegulatoryContext-ActiveMoietyForFoodAndDrugAdministrationExclusivity,
     ?nothing))
     AS ?RegulatoryContext)

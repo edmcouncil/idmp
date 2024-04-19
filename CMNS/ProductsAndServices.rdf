@@ -60,10 +60,10 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230801/ProductsAndServices/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20240801/ProductsAndServices/"/>
 		<skos:note>This ontology was originally designed for and has been adapted from the Financial Industry Business Ontology (FIBO) Products and Services Ontology.</skos:note>
-		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022-2023 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-prd;Capability">
@@ -523,6 +523,13 @@
 		<skos:definition>indicates a role played by a functional entity or party responsible for circulating, distributing, or publishing something</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-prd;isIssuedTo">
+		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedTo"/>
+		<rdfs:label>is issued to</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-pts;AgentRole"/>
+		<skos:definition>indicates a role played by a functional entity or party to the recipient of something, such as a license or authorization</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isProducedBy">
 		<rdfs:label>is produced by</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-prd;Producer"/>
@@ -534,6 +541,11 @@
 		<rdfs:label>is provided by</rdfs:label>
 		<owl:inverseOf rdf:resource="&cmns-prd;provides"/>
 		<skos:definition>is made available by</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-prd;isProvidedTo">
+		<rdfs:label>is provided to</rdfs:label>
+		<skos:definition>is made available to</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isSituatedAt">

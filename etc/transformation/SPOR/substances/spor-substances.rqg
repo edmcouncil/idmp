@@ -5,9 +5,13 @@ PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX cmns-cls: <https://www.omg.org/spec/Commons/Classifiers/>
+PREFIX cmns-ra: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
+PREFIX idmp-eureg: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/>
+PREFIX idmp-nara: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/>
+PREFIX cmns-ra: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 PREFIX spor-st: <https://spor.ema.europa.eu/v1/lists/100000075826/terms/>
 
 GENERATE {
@@ -30,9 +34,10 @@ GENERATE {
     .
 
   <https://data.pistoiaalliance.org/id/EVMPD/{ ?External_Code_XEVMPD }>
-    a idmp-eura:EudraVigilanceCode ;
+    a idmp-eura:EudraVigilanceCode, cmns-ra:RegisteredIdentifier ;
     cmns-id:identifies <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }> ;
     cmns-txt:hasTextValue ?External_Code_XEVMPD ;
+    cmns-ra:registeredIn idmp-eura:ExtendedEudraVigilanceMedicinalProductDictionary;
     .
 }
 ITERATOR iter:CSV(<sms-substances-list.csv>) AS
@@ -136,56 +141,16 @@ WHERE {
 
   BIND( IF(?Name_Source = "", ?unbound, <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }/{ StrUUID() }>) AS ?nameURI )
   BIND(
-    IF(?Name_Source = "ADISINSIGHT", idmp-ra:ADISINSIGHT,
-    IF(?Name_Source = "BAN", idmp-ra:BAN,
-    IF(?Name_Source = "BRITISH HERBAL PHARMACOPOEIA", idmp-ra:BritishHerbalPharmacopoeia,
-    IF(?Name_Source = "BRITISH PHARMACOPOEIA", idmp-ra:BritishPharmacopoeia,
-    IF(?Name_Source = "CHEBI", idmp-ra:ChemicalEntitiesOfBiologicalInterest, # valid
-    IF(?Name_Source = "CHEMICAL ABSTRACT SERVICE", idmp-ra:ChemicalAbstractsService, # valid
-    IF(?Name_Source = "CHEMICALBOOK", idmp-ra:CHEMICALBOOK,
-    IF(?Name_Source = "CHEMIDPLUS", idmp-ra:CHEMIDPLUS,
-    IF(?Name_Source = "CHINESE PHARMACOPOEIA", idmp-ra:ChinesePharmacopoeia,
-    IF(?Name_Source = "COLORCON", idmp-ra:COLORCON,
-    IF(?Name_Source = "COMMUNITY HERBAL MONOGRAPHS", idmp-ra:CommunityHerbalMonographs,
-    IF(?Name_Source = "COMMUNITY REGISTER OF THE EUROPEAN COMMISSION", idmp-ra:CommunityRegisterOfTheEuropeanCommission,
-    IF(?Name_Source = "COMPANY SPECIFICATION", idmp-ra:CompanySpecification,
-    IF(?Name_Source = "COSING", idmp-ra:COSING,
-    IF(?Name_Source = "CZECH PHARMACOPOEIA", idmp-ra:CzechPharmacopoeia,
-    IF(?Name_Source = "DEUTSCHES ARZNEIBUCH", idmp-ra:DeutschesArzneibuch,
-    IF(?Name_Source = "ENCYCLOPEDIA OF LIFE (EOL)", idmp-ra:EncyclopediaOfLifeEol,
-    IF(?Name_Source = "EUROPEAN CHEMICALS AGENCY (ECHA)", idmp-ra:EuropeanChemicalsAgency, # valid
-    IF(?Name_Source = "EUROPEAN FOOD SAFETY AUTHORITY (EFSA)", idmp-ra:EuropeanFoodSafetyAuthorityEfsa,
-    IF(?Name_Source = "EUROPEAN PHARMACOPOEIA", idmp-ra:EuropeanPharmacopoeia,
-    IF(?Name_Source = "FDA INACTIVE INGREDIENTS DATABASE", idmp-ra:FdaInactiveIngredientsDatabase,
-    IF(?Name_Source = "FDA SUBSTANCE REGISTRATION SYSTEM", idmp-ra:FoodAndDrugAdministrationRegistrationAuthority, # valid
-    IF(?Name_Source = "FRENCH PHARMACOPOEIA", idmp-ra:FrenchPharmacopoeia,
-    IF(?Name_Source = "GLOBAL DIVERSITY INFORMATION FACILITY", idmp-ra:GlobalDiversityInformationFacility,
-    IF(?Name_Source = "GREEK PHARMACOPOEIA", idmp-ra:GreekPharmacopoeia,
-    IF(?Name_Source = "HAB", idmp-ra:HAB,
-    IF(?Name_Source = "HANDBOOK OF PHARMACEUTICAL EXCIPIENT (2ND EDITION)", idmp-ra:HandbookOfPharmaceuticalExcipient,
-    IF(?Name_Source = "HOMEOPATHIC PHARMACOPOEIA OF THE UNITED STATES", idmp-ra:HomeopathicPharmacopoeiaOfTheUnitedStates,
-    IF(?Name_Source = "INDEX FUNGORUM", idmp-ra:IndexFungorum,
-    IF(?Name_Source = "INFLUENZA RECOMMENDATIONS", idmp-ra:InfluenzaRecommendations,
+    IF(?Name_Source = "CHEBI", idmp-eura:ChemicalEntitiesOfBiologicalInterest, # valid
+    IF(?Name_Source = "CHEMICAL ABSTRACT SERVICE", idmp-nara:ChemicalAbstractsService, # valid
+    IF(?Name_Source = "EUROPEAN CHEMICALS AGENCY (ECHA)", idmp-eureg:EuropeanChemicalsAgency, # valid
+    IF(?Name_Source = "FDA SUBSTANCE REGISTRATION SYSTEM", idmp-nara:FoodAndDrugAdministrationRegistrationAuthority, # valid
     IF(?Name_Source = "INN", idmp-ra:InternationalNonproprietaryName, # valid
-    IF(?Name_Source = "INTERNATIONAL CODE OF NOMENCLATURE OF BACTERIA (ICNB)", idmp-ra:InternationalCodeOfNomenclatureOfBacteria,
-    IF(?Name_Source = "INTERNATIONAL NUMBERING SYSTEM (INS) FOR FOOD ADDITIVES", idmp-ra:InternationalNumberingSystem,
-    IF(?Name_Source = "INVESTIGATOR'S BROCHURE", idmp-ra:InvestigatorBrochure,
-    IF(?Name_Source = "ITALIAN PHARMACOPOEIA", idmp-ra:ItalianPharmacopoeia,
-    IF(?Name_Source = "ITIS (INTEGRATED TAXONOMIC INFORMATION SYSTEM)", idmp-ra:IntegratedTaxonomicInformationSystem, # valid
-    IF(?Name_Source = "JAN", idmp-ra:JAN,
-    IF(?Name_Source = "JAPANESE PHARMACOPOEIA", idmp-ra:JapanesePharmacopoeia,
-    IF(?Name_Source = "KEW GARDEN- IPLANTS DATABASE", idmp-ra:KewGardenIplantsDatabase,
-    IF(?Name_Source = "MARTINDALE", idmp-ra:MARTINDALE,
-    IF(?Name_Source = "POLISH PHARMACOPOEIA", idmp-ra:PolishPharmacopoeia,
-    IF(?Name_Source = "PROTEIN DATA BANK (PDB)", idmp-ra:ProteinDataBankPdb,
-    IF(?Name_Source = "PUBCHEM", idmp-ra:PubChem, # valid
-    IF(?Name_Source = "SPC", idmp-ra:SPC,
-    IF(?Name_Source = "Substance Validation Group", idmp-ra:SubstanceValidationGroup,
+    IF(?Name_Source = "ITIS (INTEGRATED TAXONOMIC INFORMATION SYSTEM)", idmp-nara:IntegratedTaxonomicInformationSystem, # valid
+    IF(?Name_Source = "PUBCHEM", cmns-ra:PubChem, # valid
     IF(?Name_Source = "THE MERCK INDEX 20TH EDITION", idmp-ra:MerckIndexOnline, # valid
-    IF(?Name_Source = "THE PLANT LIST", idmp-ra:PlantList,
-    IF(?Name_Source = "USAN", idmp-ra:USAN,
-    IF(?Name_Source = "USP", idmp-ra:USPharmacopeiaMedicinesCompendium, # valid
+    IF(?Name_Source = "USP", idmp-nara:USPharmacopeiaMedicinesCompendium, # valid
     IF(?Name_Source = "WHO", idmp-ra:WorldHealthOrganization, # valid
-    ?Name_Source ))))))))))))))))))))))))))))))))))))))))))))))))))
+    ?unbound ))))))))))
     AS ?sourceAuthority )
 }

@@ -1,0 +1,1308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dc "http://purl.org/dc/elements/1.1/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY deo "http://purl.org/spar/deo/">
+	<!ENTITY doco "http://purl.org/spar/doco/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY po "http://purl.org/spar/po/">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="http://purl.org/spar/doco/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:deo="http://purl.org/spar/deo/"
+	xmlns:doco="http://purl.org/spar/doco/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:po="http://purl.org/spar/po/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="http://purl.org/spar/doco/">
+		<rdfs:comment xml:lang="en">The Document Components Ontology (DoCO) in an ontology that provides a structured vocabulary written of document components, both structural (e.g., block, inline, paragraph, section, chapter) and rhetorical (e.g., introduction, discussion, acknowledgements, reference list, figure, appendix).
+
+**URL:** http://purl.org/spar/doco
+
+**Creators**: [David Shotton](http://orcid.org/0000-0001-5506-523X), [Silvio Peroni](http://orcid.org/0000-0003-0530-4305)
+
+**License:** [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/legalcode)
+
+**Website:** http://www.sparontologies.net/ontologies/doco
+
+**Cite as:** Constantin, A., Peroni, S., Pettifer, S., Shotton, D., Vitali, F. (2016). The Document Components Ontology (DoCO). In Semantic Web, 7 (2): 167-181. DOI: http://dx.doi.org/10.3233/SW-150177</rdfs:comment>
+		<rdfs:comment xml:lang="en">This ontology is available at http://purl.org/spar/doco, and uses the namespace prefix doco.</rdfs:comment>
+		<dc:creator>David Shotton</dc:creator>
+		<dc:creator>Silvio Peroni</dc:creator>
+		<dc:date>2015-07-03</dc:date>
+		<dc:description xml:lang="en">DoCO, the Document Components Ontology, provides a structured vocabulary written in OWL 2 DL of document components, both structural (e.g. block, inline, paragraph, section, chapter) and rhetorical (e.g. introduction, discussion, acknowledgements, reference list, figure, appendix), enabling these components, and documents composed of them, to be described in RDF. It imports the Discourse Elements Ontology (http://purl.org/spar/deo) and the Document Structural Patterns Ontology (http://purl.org/spar/po), and uses seven rhetorical block elements abstracted from the SALT Rhetorical Ontology and the Ontology of Rhetorical Blocks (ORB).</dc:description>
+		<dc:description rdf:resource="http://purl.org/spar/doco/doco%20architecture.png"/>
+		<dc:rights xml:lang="en">This work is distributed under a Creative Commons Attribution License (http://creativecommons.org/licenses/by/3.0/).</dc:rights>
+		<dc:title xml:lang="en">DoCO, the Document Components Ontology</dc:title>
+		<owl:imports rdf:resource="http://purl.org/spar/deo/"/>
+		<owl:imports rdf:resource="http://purl.org/spar/po/"/>
+		<owl:priorVersion rdf:resource="https://svn.code.sf.net/p/sempublishing/code/DoCO/2014-05-14_doco-1_2.owl"/>
+		<owl:versionIRI rdf:resource="&doco;2015-07-03"/>
+		<owl:versionInfo>1.3</owl:versionInfo>
+	</owl:Ontology>
+	
+	<owl:AnnotationProperty rdf:about="&dc;creator">
+	</owl:AnnotationProperty>
+	
+	<owl:AnnotationProperty rdf:about="&dc;date">
+	</owl:AnnotationProperty>
+	
+	<owl:AnnotationProperty rdf:about="&dc;description">
+	</owl:AnnotationProperty>
+	
+	<owl:AnnotationProperty rdf:about="&dc;rights">
+	</owl:AnnotationProperty>
+	
+	<owl:AnnotationProperty rdf:about="&dc;title">
+	</owl:AnnotationProperty>
+	
+	<owl:ObjectProperty rdf:about="&dct;hasPart">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&dct;isPartOf">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&dct;relation">
+	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&deo;BibliographicReference">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&deo;Caption">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&deo;DiscourseElement">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&deo;Reference">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Abstract">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;Chapter">
+							</rdf:Description>
+							<rdf:Description rdf:about="&doco;Section">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BodyMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:someValuesFrom>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label>abstract</rdfs:label>
+		<rdfs:comment>A brief summary of a book, a research article, thesis, review, conference proceeding or any in-depth analysis of a particular subject or discipline, the purpose of which is to help the reader quickly ascertain the publication&apos;s purpose.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Afterword">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Section">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&doco;BackMatter"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">afterword</rdfs:label>
+		<rdfs:comment xml:lang="en">A literary device that is often found at the end of a piece of literature. It generally covers the story of how the book came into being, or how the idea for the book was developed. Alternatively, it may be written by someone other than the author of the book, and may discuss the work&apos;s historical or cultural context, if the work is being reissued many years after its original publication.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Appendix">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;Section">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;HeadedContainer">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&doco;BackMatter"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">appendix</rdfs:label>
+		<rdfs:comment xml:lang="en">A supplemental addition to the main work. It may contain data, more detailed information about methods and materials, or provide additional detail concerning the information found in the main work.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;BackMatter">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&deo;DiscourseElement">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;Container">
+					</rdf:Description>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;isContainedBy"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:complementOf>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BackMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;BodyMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:complementOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">back matter</rdfs:label>
+		<rdfs:comment xml:lang="en">The final principle part of a document, in which is usually found the bibliography, index, appendixes, etc.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;BibliographicReferenceList">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;ListOfReferences">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&po;contains"/>
+						<owl:someValuesFrom rdf:resource="&deo;BibliographicReference"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">bibliographic reference list</rdfs:label>
+		<rdfs:comment xml:lang="en">A list, usually within a bibliography, of all the references within the citing document that refer to  journal articles, books, book chapters, Web sites or similar publications.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Bibliography">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;Chapter">
+							</rdf:Description>
+							<rdf:Description rdf:about="&doco;Section">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;hasPart"/>
+						<owl:someValuesFrom rdf:resource="&deo;BibliographicReference"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">bibliography</rdfs:label>
+		<rdfs:comment xml:lang="en">A document section containing a list of bibliographic references.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;BlockQuotation">
+		<rdfs:subClassOf rdf:resource="&po;Container"/>
+		<rdfs:label xml:lang="en">block quotation</rdfs:label>
+		<rdfs:comment xml:lang="en">A block quotation (also known as a long quotation or extract) is a quotation in a written document which is set off from the main text as a container for distinct paragraphs, which is typically distinguished visually using indentation, a different font, or smaller size. Block quotations are used for longer passages than run-in quotations (which are set off with quotation marks).</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;BodyMatter">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&deo;DiscourseElement">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;Container">
+					</rdf:Description>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;isContainedBy"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:complementOf>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BackMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;BodyMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:complementOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">body matter</rdfs:label>
+		<rdfs:comment xml:lang="en">The central principle part of a document, that contains the real content. It may be subdivided hierarchically by the use of chapters and sections.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;CaptionedBox">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&deo;DiscourseElement">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;Container">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;hasPart"/>
+						<owl:someValuesFrom rdf:resource="&deo;Caption"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">captioned box</rdfs:label>
+		<rdfs:comment xml:lang="en">A rectangle space within a page that contains an object and its related caption.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Chapter">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&deo;DiscourseElement">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;HeadedContainer">
+					</rdf:Description>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;contains"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:complementOf rdf:resource="&doco;Chapter"/>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;contains"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;Paragraph">
+							</rdf:Description>
+							<rdf:Description rdf:about="&doco;Section">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">chapter</rdfs:label>
+		<rdfs:comment xml:lang="en">A principle division of the body matter of a large document, such as a book, a report or a legislative document.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ChapterLabel">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Label">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&doco;Chapter"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">chapter label</rdfs:label>
+		<rdfs:comment xml:lang="en">A block containing a label for the chapter, that may include the chapter number.</rdfs:comment>
+		<owl:disjointWith rdf:resource="&doco;SectionLabel"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ChapterSubtitle">
+		<rdfs:subClassOf rdf:resource="&doco;Subtitle"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&dct;isPartOf"/>
+				<owl:someValuesFrom rdf:resource="&doco;Chapter"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">chapter subtitle</rdfs:label>
+		<rdfs:comment xml:lang="en">The subtitle of a chapter.</rdfs:comment>
+		<owl:disjointWith rdf:resource="&doco;SectionSubtitle"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ChapterTitle">
+		<rdfs:subClassOf rdf:resource="&doco;Title"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;isContainedByAsHeader"/>
+				<owl:someValuesFrom rdf:resource="&doco;Chapter"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">chapter title</rdfs:label>
+		<rdfs:comment xml:lang="en">The title of a chapter.</rdfs:comment>
+		<owl:disjointWith rdf:resource="&doco;SectionTitle"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Colophon">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Section">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BackMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:someValuesFrom>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">colophon</rdfs:label>
+		<rdfs:comment xml:lang="en">A brief description of publication or production notes relevant to the document.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ComplexRunInQuotation">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf rdf:resource="&po;Popup"/>
+		<rdfs:label xml:lang="en">complex run-in quotation</rdfs:label>
+		<rdfs:comment xml:lang="en">A quotation with a complex structure, that is included inline and is usually enclosed within quotation marks.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Figure">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&po;Meta">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;Milestone">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">figure</rdfs:label>
+		<rdfs:comment xml:lang="en">A communication object comprising one or more graphics, drawings, images, or other visual representations..</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;FigureBox">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;CaptionedBox">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;hasPart"/>
+						<owl:someValuesFrom rdf:resource="&doco;Figure"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">figure box</rdfs:label>
+		<rdfs:comment xml:lang="en">A space within a document that contains a figure and its caption.</rdfs:comment>
+		<owl:disjointWith rdf:resource="&doco;TableBox"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;FigureLabel">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Label">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&doco;FigureBox"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">figure label</rdfs:label>
+		<rdfs:comment xml:lang="en">A block containing a label for the figure box, that may include the figure number.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Footnote">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&po;Container">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;Popup">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">footnote</rdfs:label>
+		<rdfs:comment xml:lang="en">A structure within a sentence that permits the author to make a comment or to cite another publication in support of the text, or both. A footnote is normally flagged by a superscript number immediately following that portion of the text to which it relates. For convenience of reading, the text of the footnote is usually printed at the bottom of the page or at the end of a text.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Foreword">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Section">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&doco;FrontMatter"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">foreword</rdfs:label>
+		<rdfs:comment xml:lang="en">A section in a book or report, usually written by someone other than the author, that introduces or commends the document to the reader. It may include description of the interaction between the writer of the foreword and the author.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Formula">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf rdf:resource="&po;Popup"/>
+		<rdfs:label xml:lang="en">formula</rdfs:label>
+		<rdfs:comment xml:lang="en">A unit of information expressed in mathematical, chemical or logical symbols and language.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;FormulaBox">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&deo;DiscourseElement">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;Container">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;hasPart"/>
+						<owl:someValuesFrom rdf:resource="&doco;Formula"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">formula box</rdfs:label>
+		<rdfs:comment xml:lang="en">A space within a document that contains one or more formulae.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;FrontMatter">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&deo;DiscourseElement">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;Container">
+					</rdf:Description>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;isContainedBy"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:complementOf>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BackMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;BodyMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:complementOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">front matter</rdfs:label>
+		<rdfs:comment xml:lang="en">The initial principle part of a document, usually containing self-referential metadata. In a book, this typically includes its title, authors, publisher, publication date, ISBN and copyright declaration, together with the preface, foreword, table of content, etc. In a journal article, the front matter is normally restricted to the title, authors and the authors&apos; affiliation details, although the latter may alternatively be included in a footnote or the back matter. In books, the front matter pages may be numbered in lowercase Roman numerals.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Glossary">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Section">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BackMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:someValuesFrom>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">glossary</rdfs:label>
+		<rdfs:comment xml:lang="en">A set of definitions of words or phrases of importance to the work, normally alphabetized. In longer works of fiction, the entries may contains places and characters.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Index">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;Section">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;HeadedContainer">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&doco;BackMatter"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&dct;hasPart"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;ListOfReferences">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&po;contains"/>
+								<owl:allValuesFrom>
+									<owl:Restriction>
+										<owl:onProperty rdf:resource="&dct;relation"/>
+										<owl:someValuesFrom rdf:resource="&doco;TextChunk"/>
+									</owl:Restriction>
+								</owl:allValuesFrom>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">index</rdfs:label>
+		<rdfs:comment xml:lang="en">A section containing a list of references to information on the named topic of importance to the content of the document. The references may be to page numbers, paragraph numbers, section numbers or chapter numbers within the document.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Label">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;isContainedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&po;Block">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;Container">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">label</rdfs:label>
+		<rdfs:comment xml:lang="en">A block containing text, that may include a number (e.g., &quot;Chapter Three&quot;, &quot;3.2&quot;, &quot;Figure 1&quot;, &quot;Table&quot;), used to identify an item within the document, for example a chapter, a figure, a section or a table.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Line">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf rdf:resource="&po;Block"/>
+		<rdfs:label xml:lang="en">line</rdfs:label>
+		<rdfs:comment xml:lang="en">A line in poetry is a unit of language into which a poem is divided which operates on principles which are distinct from and not necessarily coincident with grammatical structures, such as the sentence or clauses in sentences.
+
+A distinct numbered group of lines in verse is normally called a stanza.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;List">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&po;Table">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&po;contains"/>
+						<owl:someValuesFrom rdf:resource="&po;Pattern"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;contains"/>
+				<owl:allValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&po;Block">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;Field">
+							</rdf:Description>
+							<owl:Class>
+								<owl:intersectionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&po;Container">
+									</rdf:Description>
+									<owl:Class>
+										<owl:complementOf>
+											<owl:Class>
+												<owl:unionOf rdf:parseType="Collection">
+													<rdf:Description rdf:about="&po;HeadedContainer">
+													</rdf:Description>
+													<rdf:Description rdf:about="&po;Table">
+													</rdf:Description>
+												</owl:unionOf>
+											</owl:Class>
+										</owl:complementOf>
+									</owl:Class>
+								</owl:intersectionOf>
+							</owl:Class>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:allValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">list</rdfs:label>
+		<rdfs:comment xml:lang="en">An enumeration of items.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ListOfAgents">
+		<rdfs:subClassOf rdf:resource="&doco;List"/>
+		<rdfs:label xml:lang="en">list of agents</rdfs:label>
+		<rdfs:comment xml:lang="en">A list of items each denoting an agent, such as an author, a contributor or an organization, related to a particular publication.</rdfs:comment>
+		<owl:disjointWith rdf:resource="&doco;ListOfReferences"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ListOfAuthors">
+		<rdfs:subClassOf rdf:resource="&doco;ListOfAgents"/>
+		<rdfs:label xml:lang="en">list of authors</rdfs:label>
+		<rdfs:comment xml:lang="en">A list of items each denoting an author of a particular publication.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ListOfContributors">
+		<rdfs:subClassOf rdf:resource="&doco;ListOfAgents"/>
+		<rdfs:label xml:lang="en">list of contributors</rdfs:label>
+		<rdfs:comment xml:lang="en">A list of items, each denoting a contributor to a publication such as an encyclopedia or a text book, where such contributions are insufficient to warrant classification as author.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ListOfFigures">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;Section">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;HeadedContainer">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BackMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:someValuesFrom>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&dct;hasPart"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;ListOfReferences">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&po;contains"/>
+								<owl:allValuesFrom>
+									<owl:Restriction>
+										<owl:onProperty rdf:resource="&dct;relation"/>
+										<owl:someValuesFrom rdf:resource="&doco;FigureBox"/>
+									</owl:Restriction>
+								</owl:allValuesFrom>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">list of figures</rdfs:label>
+		<rdfs:comment xml:lang="en">A section of the document listing all the figures, identified by their titles and referenced to their locations in the document. May also be referred to as &apos;List of illustrations&apos;.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ListOfOrganizations">
+		<rdfs:subClassOf rdf:resource="&doco;ListOfAgents"/>
+		<rdfs:label xml:lang="en">list of organizations</rdfs:label>
+		<rdfs:comment xml:lang="en">A list of items, each denoting an organization or institution related to the publication, for example the authors&apos; affiliations, or the suppliers of information, software, equipment or consumables used in the work described in the publication.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ListOfReferences">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;List">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&po;contains"/>
+						<owl:allValuesFrom rdf:resource="&deo;Reference"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">list of references</rdfs:label>
+		<rdfs:comment xml:lang="en">A list of items each representing a reference to a specific part of the same document, or to another publication.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;ListOfTables">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;Section">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;HeadedContainer">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BackMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:someValuesFrom>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&dct;hasPart"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;ListOfReferences">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&po;contains"/>
+								<owl:allValuesFrom>
+									<owl:Restriction>
+										<owl:onProperty rdf:resource="&dct;relation"/>
+										<owl:someValuesFrom rdf:resource="&doco;TableBox"/>
+									</owl:Restriction>
+								</owl:allValuesFrom>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">list of tables</rdfs:label>
+		<rdfs:comment xml:lang="en">A section of the document listing all the tables, identified by their titles and referenced to their locations in the document.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Paragraph">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&deo;DiscourseElement">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;Block">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&po;contains"/>
+						<owl:someValuesFrom rdf:resource="&doco;Sentence"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">paragraph</rdfs:label>
+		<rdfs:comment xml:lang="en">A self-contained unit of discourse that deals with a particular point or idea. Paragraphs contains one or more sentences. The start of a paragraph is indicated by beginning on a new line, which may be indented or separated by a small vertical space by the preceding paragraph.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Part">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&deo;DiscourseElement">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;Container">
+					</rdf:Description>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">part</rdfs:label>
+		<rdfs:comment xml:lang="en">A container of a semantic subdivision of a document. For example, chapters of a novel may be grouped into distinct parts that may be named &apos;Part 1&apos;, &apos;Part 2&apos;, etc., &apos;Book 1&apos;, &apos;Book 2&apos;, etc., or &apos;Genesis&apos;, &apos;Exodus&apos;, etc.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Preface">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Section">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&doco;FrontMatter"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">preface</rdfs:label>
+		<rdfs:comment xml:lang="en">A section describing how the document came into being, or how the idea for it was developed. The preface may contains acknowledgements. The preface to a later edition of the work often explains in what respect that edition differs from previous ones.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Section">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&deo;DiscourseElement">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;HeadedContainer">
+					</rdf:Description>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;contains"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:complementOf rdf:resource="&doco;Chapter"/>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;contains"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;Paragraph">
+							</rdf:Description>
+							<rdf:Description rdf:about="&doco;Section">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">section</rdfs:label>
+		<rdfs:comment xml:lang="en">A logical division of the text, usually numbered and/or titled, which may contain subsections.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;SectionLabel">
+		<rdfs:subClassOf rdf:resource="&doco;Label"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&dct;isPartOf"/>
+				<owl:someValuesFrom rdf:resource="&doco;Section"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">section label</rdfs:label>
+		<rdfs:comment xml:lang="en">A block containing a label for the section, that may include the section number.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;SectionSubtitle">
+		<rdfs:subClassOf rdf:resource="&doco;Subtitle"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&dct;isPartOf"/>
+				<owl:someValuesFrom rdf:resource="&doco;Section"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">section subtitle</rdfs:label>
+		<rdfs:comment xml:lang="en">The subtitle of a section.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;SectionTitle">
+		<rdfs:subClassOf rdf:resource="&doco;Title"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;isContainedByAsHeader"/>
+				<owl:someValuesFrom rdf:resource="&doco;Section"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">section title</rdfs:label>
+		<rdfs:comment xml:lang="en">The title of a section.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Sentence">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf rdf:resource="&po;Inline"/>
+		<rdfs:label xml:lang="en">sentence</rdfs:label>
+		<rdfs:comment xml:lang="en">An expression in natural language forming a single grammatical unit. A sentence minimally consists of a subject and an intransitive verb, or a subject, a transitive verb and an object, and may include additional dependent clauses. In written text, a sentence is always terminated by a full stop. A sentence can include words grouped meaningfully to express a statement, a question, an exclamation, a request or a command.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;SimpleRunInQuotation">
+		<rdfs:subClassOf rdf:resource="&po;Inline"/>
+		<rdfs:label xml:lang="en">simple run-in quotation</rdfs:label>
+		<rdfs:comment xml:lang="en">A textual quotation that is included inline and is usually enclosed within quotation marks.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Stanza">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&deo;DiscourseElement">
+							</rdf:Description>
+							<rdf:Description rdf:about="&po;Container">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&po;contains"/>
+						<owl:allValuesFrom rdf:resource="&doco;Line"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">stanza</rdfs:label>
+		<rdfs:comment xml:lang="en">A unit within a larger poem. A stanza consists of a grouping of lines, set off by a vertical space from other stanzas, that usually has a set pattern of meter and rhyme.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Subtitle">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf rdf:resource="&po;Block"/>
+		<rdfs:label xml:lang="en">subtitle</rdfs:label>
+		<rdfs:comment xml:lang="en">An explanatory or alternative title of a publication. For example, Mary Shelley uses the alternative title &apos;The Modern Prometheus&apos; to hint at the theme of her most famous novel &apos;Frankenstein&apos;; Nick Efford uses the subtitle &apos;a practical introduction using Java&apos; to qualify the title of his book &apos;Digital Image Processing&apos;.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Table">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf rdf:resource="&po;Table"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;contains"/>
+				<owl:someValuesFrom rdf:resource="&po;Container"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">table</rdfs:label>
+		<rdfs:comment xml:lang="en">A set of data arranged in cells within rows and columns.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;TableBox">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;CaptionedBox">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;hasPart"/>
+						<owl:someValuesFrom rdf:resource="&doco;Table"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">table box</rdfs:label>
+		<rdfs:comment xml:lang="en">A space within a document that contains a table and its caption.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;TableLabel">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Label">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&doco;TableBox"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">table label</rdfs:label>
+		<rdfs:comment xml:lang="en">A block containing a label for the table box, that may include the table number.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;TableOfContents">
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&doco;Section">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&dct;isPartOf"/>
+						<owl:someValuesFrom>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&doco;BackMatter">
+									</rdf:Description>
+									<rdf:Description rdf:about="&doco;FrontMatter">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:someValuesFrom>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&dct;hasPart"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&doco;ListOfReferences">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&po;contains"/>
+								<owl:allValuesFrom>
+									<owl:Restriction>
+										<owl:onProperty rdf:resource="&dct;relation"/>
+										<owl:someValuesFrom rdf:resource="&doco;Section"/>
+									</owl:Restriction>
+								</owl:allValuesFrom>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">table of contents</rdfs:label>
+		<rdfs:comment xml:lang="en">A section of the document listing all the chapters and sections, identified by their titles and referenced to their locations in the document. The table of contents may include a list of the front-matter and back-matter items, in addition to the body-matter items.  Where the document is a journal or magazine issue, the table of content lists the constituent items contained in that issue, typically by title, authors and first page number.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;TextBox">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf rdf:resource="&po;Container"/>
+		<rdfs:label xml:lang="en">text box</rdfs:label>
+		<rdfs:comment xml:lang="en">A space within a document that contains textual content relating to, quoting from or expanding upon the main text. Usually a textbox is delimited by a border or use of a background colour distinct from that of the main text.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;TextChunk">
+		<rdfs:subClassOf rdf:resource="&po;Inline"/>
+		<rdfs:label xml:lang="en">text chunk</rdfs:label>
+		<rdfs:comment xml:lang="en">A piece of text defined by a start point and an end point.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&doco;Title">
+		<rdfs:subClassOf rdf:resource="&deo;DiscourseElement"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&po;Block">
+					</rdf:Description>
+					<rdf:Description rdf:about="&po;Field">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&po;isContainedByAsHeader"/>
+				<owl:someValuesFrom rdf:resource="&po;HeadedContainer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">title</rdfs:label>
+		<rdfs:comment xml:lang="en">A word, phrase or sentence that precedes and indicates the subject of a document or a document component - e.g., a book, a report, a news article, a chapter, a section or a table.</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Block">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Container">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Field">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;HeadedContainer">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Inline">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Meta">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Milestone">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Pattern">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Popup">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&po;Table">
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&po;contains">
+		<rdfs:subPropertyOf rdf:resource="&dct;hasPart"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&po;isContainedBy">
+		<rdfs:subPropertyOf rdf:resource="&dct;isPartOf"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&po;isContainedByAsHeader">
+	</owl:ObjectProperty>
+	
+	<owl:AnnotationProperty rdf:about="&rdfs;comment">
+	</owl:AnnotationProperty>
+	
+	<owl:AnnotationProperty rdf:about="&rdfs;label">
+	</owl:AnnotationProperty>
+	
+	<owl:AllDisjointClasses>
+		<owl:members rdf:parseType="Collection">
+			<rdf:Description rdf:about="&doco;Abstract">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Afterword">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Appendix">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Colophon">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Foreword">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Glossary">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Index">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;ListOfFigures">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;ListOfTables">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Preface">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;TableOfContents">
+			</rdf:Description>
+		</owl:members>
+	</owl:AllDisjointClasses>
+	<owl:AllDisjointClasses>
+		<owl:members rdf:parseType="Collection">
+			<rdf:Description rdf:about="&doco;BackMatter">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;BodyMatter">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;CaptionedBox">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Chapter">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;ComplexRunInQuotation">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Footnote">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Formula">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;FormulaBox">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;FrontMatter">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;List">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Part">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Section">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Table">
+			</rdf:Description>
+		</owl:members>
+	</owl:AllDisjointClasses>
+	<owl:AllDisjointClasses>
+		<owl:members rdf:parseType="Collection">
+			<rdf:Description rdf:about="&doco;Label">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Paragraph">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Subtitle">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;Title">
+			</rdf:Description>
+		</owl:members>
+	</owl:AllDisjointClasses>
+	<owl:AllDisjointClasses>
+		<owl:members rdf:parseType="Collection">
+			<rdf:Description rdf:about="&doco;ListOfAuthors">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;ListOfContributors">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;ListOfOrganizations">
+			</rdf:Description>
+		</owl:members>
+	</owl:AllDisjointClasses>
+	<owl:AllDisjointClasses>
+		<owl:members rdf:parseType="Collection">
+			<rdf:Description rdf:about="&doco;Sentence">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;SimpleRunInQuotation">
+			</rdf:Description>
+			<rdf:Description rdf:about="&doco;TextChunk">
+			</rdf:Description>
+		</owl:members>
+	</owl:AllDisjointClasses>
+</rdf:RDF>
