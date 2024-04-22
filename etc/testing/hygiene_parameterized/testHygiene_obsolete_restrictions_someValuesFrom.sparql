@@ -22,6 +22,7 @@ WHERE
     {?property1 rdfs:subPropertyOf+ ?property2.} UNION {?property1 rdfs:subPropertyOf* ?property2. FILTER (?property1 = ?property2)}
     {?restrictingClass1 rdfs:subClassOf+ ?restrictingClass2.} UNION {?restrictingClass1 rdfs:subClassOf* ?restrictingClass2. FILTER (?restrictingClass1 = ?restrictingClass2)}
     FILTER (?restriction1 != ?restriction2)
+    FILTER regex(str(?subject), <HYGIENE_TESTS_FILTER_PARAMETER>)
     BIND (CONCAT(STR(afn:localname(?property1)), " someValuesFrom ", STR(afn:localname(?restrictingClass1))) as ?restriction1String)
     BIND (CONCAT(STR(afn:localname(?property2)), " someValuesFrom ", STR(afn:localname(?restrictingClass2))) as ?restriction2String)
     BIND(CONCAT("PRODERROR: Class ", STR(?class), " has obsolete restriction <", ?restriction2String, "> because of restriction <", ?restriction1String, ">.") as ?error)

@@ -25,6 +25,7 @@ WHERE
     FILTER (?restriction1 != ?restriction2)
     FILTER (?minCardinality1 >= ?minCardinality2)
     FILTER (?minCardinality1 != 0)
+    FILTER regex(str(?subject), <HYGIENE_TESTS_FILTER_PARAMETER>)
     BIND (CONCAT(STR(afn:localname(?property1)), " min ", STR(?minCardinality1), " ", STR(afn:localname(?restrictingClass1))) as ?restriction1String)
     BIND (CONCAT(STR(afn:localname(?property2)), " min ", STR(?minCardinality2), " ", STR(afn:localname(?restrictingClass2))) as ?restriction2String)
     BIND(CONCAT("PRODERROR: Class ", STR(?class), " has obsolete restriction <", ?restriction2String, "> because of restriction <", ?restriction1String, ">.") as ?error)
