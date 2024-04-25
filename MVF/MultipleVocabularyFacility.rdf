@@ -50,12 +50,14 @@ MVF also reuses several ontologies from the OMG Commons library for specific pat
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/MVF/20230501/MultipleVocabularyFacility/"/>
-		<cmns-av:copyright>Copyright (c) 2019-2023 Thematix Partners LLC</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2019-2023 agnos.ai U.K. Ltd</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2020-2023 Mayo Clinic</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2020-2023 Object Management Group, Inc.</cmns-av:copyright>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/MVF/20240501/MultipleVocabularyFacility/"/>
+		<skos:changeNote>The https://www.omg.org/spec/MVF/20230501/MultipleVocabularyFacility.rdf version of the ontology was modified to loosen constraints on restrictions on the number of names, descriptions, and URIs an MVF element can have to facilitate cases where the same exact term is duplicated across controlled vocabularies and are mapped using owl:sameAs, which occurs in certain pharmaceutical cases (e.g., across jurisdictions where the terms are identical but repeated, as in MEDdra terms that are repeated in the EMA SPOR controlled vocabularies (MVF11-13).</skos:changeNote>
+		<cmns-av:copyright>Copyright (c) 2019-2024 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2019-2024 agnos.ai U.K. Ltd</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2024 Mayo Clinic</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2024 Object Management Group, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 QuoteWell Insurance Services, LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2024 Adaptive, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&mvf;Abbreviation">
@@ -113,28 +115,26 @@ MVF also reuses several ontologies from the OMG Commons library for specific pat
 	<owl:Class rdf:about="&mvf;MVFElement">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&mvf;hasURI"/>
-				<owl:onDataRange rdf:resource="&xsd;anyURI"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&mvf;hasTextualName"/>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasURI"/>
+				<owl:someValuesFrom rdf:resource="&xsd;anyURI"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MVF element</rdfs:label>
 		<skos:definition>abstract entity in a multiple vocabulary facility model or ontology</skos:definition>
 		<cmns-av:explanatoryNote>An MVF element corresponds roughly to an element in category theory, namely one that can be an object of any category, and to &apos;entity&apos; in many top level ontologies.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>Typically there will be exactly one URI, description, and name for a term, but issues arise when the same term is intentionally duplicated across controlled vocabularies, which happens from time to time in bioinformatics, for example.</cmns-av:usageNote>
 		<cmns-av:usageNote>Use the Dublin Core &apos;references&apos; annotation for any relevant citations or other references, corresponding to the &apos;reference&apos; property in the MVF metamodel.</cmns-av:usageNote>
 	</owl:Class>
 	
