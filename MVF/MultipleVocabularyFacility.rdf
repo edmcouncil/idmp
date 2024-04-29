@@ -41,8 +41,21 @@ MVF also reuses several ontologies from the OMG Commons library for specific pat
 		<dct:contributor>Davide Sottara, Mayo Clinic</dct:contributor>
 		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
 		<dct:contributor>Evan Wallace, U.S. National Institute of Standards and Technology (NIST)</dct:contributor>
-		<dct:contributor>Pete Rivett, agnos.ai U.K. Ltd</dct:contributor>
-		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<dct:contributor>Pete Rivett, Adaptive, Inc.</dct:contributor>
+		<dct:license rdf:datatype="&xsd;anyURI">Copyright (c) 2019-2024 Thematix Partners LLC
+Copyright (c) 2019-2024 agnos.ai U.K. Ltd
+Copyright (c) 2020-2024 Mayo Clinic
+Copyright (c) 2020-2024 Object Management Group, Inc.
+Copyright (c) 2022-2023 QuoteWell Insurance Services, LLC
+Copyright (c) 2024 Adaptive, Inc.
+		
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &apos;Software&apos;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		
+See https://opensource.org/licenses/MIT.</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
@@ -50,12 +63,14 @@ MVF also reuses several ontologies from the OMG Commons library for specific pat
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/MVF/20230501/MultipleVocabularyFacility/"/>
-		<cmns-av:copyright>Copyright (c) 2019-2023 Thematix Partners LLC</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2019-2023 agnos.ai U.K. Ltd</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2020-2023 Mayo Clinic</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2020-2023 Object Management Group, Inc.</cmns-av:copyright>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/MVF/20240801/MultipleVocabularyFacility/"/>
+		<skos:changeNote>The https://www.omg.org/spec/MVF/20230501/MultipleVocabularyFacility.rdf version of the ontology was modified to loosen constraints on restrictions on the number of names, descriptions, and URIs an MVF element can have to facilitate cases where the same exact term is duplicated across controlled vocabularies and are mapped using owl:sameAs, which occurs in certain pharmaceutical cases (e.g., across jurisdictions where the terms are identical but repeated, as in MEDdra terms that are repeated in the EMA SPOR controlled vocabularies (MVF11-13).</skos:changeNote>
+		<cmns-av:copyright>Copyright (c) 2019-2024 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2019-2024 agnos.ai U.K. Ltd</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2024 Mayo Clinic</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2024 Object Management Group, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2023 QuoteWell Insurance Services, LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2024 Adaptive, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&mvf;Abbreviation">
@@ -113,28 +128,26 @@ MVF also reuses several ontologies from the OMG Commons library for specific pat
 	<owl:Class rdf:about="&mvf;MVFElement">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&mvf;hasURI"/>
-				<owl:onDataRange rdf:resource="&xsd;anyURI"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&mvf;hasTextualName"/>
-				<owl:onDataRange rdf:resource="&xsd;string"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasURI"/>
+				<owl:someValuesFrom rdf:resource="&xsd;anyURI"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>MVF element</rdfs:label>
 		<skos:definition>abstract entity in a multiple vocabulary facility model or ontology</skos:definition>
 		<cmns-av:explanatoryNote>An MVF element corresponds roughly to an element in category theory, namely one that can be an object of any category, and to &apos;entity&apos; in many top level ontologies.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>Typically there will be exactly one URI, description, and name for a term, but issues arise when the same term is intentionally duplicated across controlled vocabularies, which happens from time to time in bioinformatics, for example.</cmns-av:usageNote>
 		<cmns-av:usageNote>Use the Dublin Core &apos;references&apos; annotation for any relevant citations or other references, corresponding to the &apos;reference&apos; property in the MVF metamodel.</cmns-av:usageNote>
 	</owl:Class>
 	
