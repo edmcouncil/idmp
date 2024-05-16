@@ -1,0 +1,19 @@
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl:   <http://www.w3.org/2002/07/owl#>
+prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+##
+# banner No resource should have more than one prefLabel per language tag.
+
+
+SELECT DISTINCT (concat ("ERROR: IRI ", str(?resource), " has multiple prefLabels.") AS ?error)
+WHERE
+{
+  ?resource skos:prefLabel ?prefLabel.
+  FILTER NOT EXISTS {?resource owl:deprecated "true"^^xsd:boolean} .
+	FILTER regex(str(?resource), <HYGIENE_TESTS_FILTER_PARAMETER>)
+}
+GROUP BY ?resource LANG(?prefLabel)
+HAVING (COUNT(STR(?prefLabel)) > 1)
