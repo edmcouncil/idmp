@@ -5,7 +5,7 @@ prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
 prefix afn:   <http://jena.apache.org/ARQ/function#>
 
 ##
-# banner We should avoid restrictions that can be inferred from other restrictions.
+# banner We may want to avoid restrictions that can be remotely inferred from other restrictions.
 
 SELECT ?error ?class
 WHERE
@@ -28,5 +28,5 @@ WHERE
     FILTER regex(str(?class), <HYGIENE_TESTS_FILTER_PARAMETER>)
     BIND (CONCAT(STR(afn:localname(?property1)), " max ", STR(?cardinality1), " ", STR(afn:localname(?restrictingClass1))) as ?restriction1String)
     BIND (CONCAT(STR(afn:localname(?property2)), " max ", STR(?cardinality2), " ", STR(afn:localname(?restrictingClass2))) as ?restriction2String)
-    BIND(CONCAT("WARN: Class ", STR(?class), " may have obsolete restriction <", ?restriction2String, "> because of restriction <", ?restriction1String, ">.") as ?error)
+    BIND(CONCAT("WARN: Class ", STR(?class), " may inherit obsolete restriction <", ?restriction2String, "> because of restriction <", ?restriction1String, ">.") as ?error)
 }
