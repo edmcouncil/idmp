@@ -24,8 +24,9 @@ WHERE
     ?restrictingClass1 rdfs:subClassOf* ?restrictingClass2.
     FILTER (?restriction1 != ?restriction2)
     FILTER (?cardinality2 >= ?cardinality1)
+    FILTER (?cardinality2 > 0)
     FILTER regex(str(?class), <HYGIENE_TESTS_FILTER_PARAMETER>)
     BIND (CONCAT(STR(afn:localname(?property1)), " exactly ", STR(?cardinality1), " ", STR(afn:localname(?restrictingClass1))) as ?restriction1String)
     BIND (CONCAT(STR(afn:localname(?property2)), " max ", STR(?cardinality2), " ", STR(afn:localname(?restrictingClass2))) as ?restriction2String)
-    BIND(CONCAT("WARN: Class ", STR(?class), " has obsolete restriction <", ?restriction2String, "> because of restriction <", ?restriction1String, ">.") as ?error)
+    BIND(CONCAT("WARN: Class ", STR(?class), " may have obsolete restriction <", ?restriction2String, "> because of restriction <", ?restriction1String, ">.") as ?error)
 }
