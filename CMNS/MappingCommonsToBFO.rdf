@@ -24,6 +24,7 @@
 	<!ENTITY cmns-stat "https://www.omg.org/spec/Commons/StatisticalMeasures/">
 	<!ENTITY cmns-strcol "https://www.omg.org/spec/Commons/StructuredCollections/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
+	<!ENTITY dc "http://purl.org/dc/elements/1.1/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
 	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
 	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
@@ -34,6 +35,7 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/Commons/MappingCommonsToBFO/"
+	xmlns="https://spec.pistoiaalliance.org/idmp/ontology/Commons/MappingCommonsToBFO/"
 	xmlns:bfo="http://purl.obolibrary.org/obo/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-bfo="https://spec.pistoiaalliance.org/idmp/ontology/Commons/MappingCommonsToBFO/"
@@ -58,6 +60,7 @@
 	xmlns:cmns-stat="https://www.omg.org/spec/Commons/StatisticalMeasures/"
 	xmlns:cmns-strcol="https://www.omg.org/spec/Commons/StructuredCollections/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
 	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
@@ -68,7 +71,7 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 	
 	<owl:Ontology rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/Commons/MappingCommonsToBFO/">
-		<rdfs:label xml:lang="en-US">Mapping Commons to BFO Ontology</rdfs:label>
+		<rdfs:label xml:lang="en-us">Mapping Commons to BFO Ontology</rdfs:label>
 		<dct:abstract>This ontology maps the top-level OMG Commons Ontology Library concepts to those of the Basic Formal Ontology (BFO 2020).</dct:abstract>
 		<dct:contributor>Milos Drobnjakovic, National Institute of Standards and Technology (NIST)</dct:contributor>
 		<dct:creator>Elisa Kendall, Thematix Partners LLC</dct:creator>
@@ -106,6 +109,10 @@
 		<cmns-av:copyright>Copyright (c) 2024 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
+	<rdf:Description rdf:about="&bfo;BFO_0000008">
+		<owl:equivalentClass rdf:resource="&cmns-dt;TemporalEntity"/>
+	</rdf:Description>
+	
 	<rdf:Description rdf:about="&bfo;BFO_0000062">
 		<owl:equivalentProperty rdf:resource="&cmns-dt;succeeds"/>
 	</rdf:Description>
@@ -136,6 +143,14 @@
 	
 	<rdf:Description rdf:about="&bfo;BFO_0000177">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;isPartOf"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="&bfo;BFO_0000202">
+		<owl:equivalentClass rdf:resource="&cmns-dt;TimeInterval"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="&bfo;BFO_0000203">
+		<owl:equivalentClass rdf:resource="&cmns-dt;TimeInstant"/>
 	</rdf:Description>
 	
 	<owl:Class rdf:about="&cmns-cls;Aspect">
@@ -239,17 +254,14 @@
 	
 	<owl:Class rdf:about="&cmns-dt;TemporalEntity">
 		<rdfs:subClassOf rdf:resource="&bfo;BFO_0000003"/>
-		<owl:equivalentClass rdf:resource="&bfo;BFO_0000008"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-dt;TimeInstant">
 		<rdfs:subClassOf rdf:resource="&bfo;BFO_0000148"/>
-		<owl:equivalentClass rdf:resource="&bfo;BFO_0000203"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-dt;TimeInterval">
 		<rdfs:subClassOf rdf:resource="&bfo;BFO_0000038"/>
-		<owl:equivalentClass rdf:resource="&bfo;BFO_0000202"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-dsg;Designation">
@@ -408,7 +420,6 @@
 	
 	<owl:Class rdf:about="&cmns-rlcmp;Role">
 		<rdfs:subClassOf rdf:resource="&bfo;BFO_0000002"/>
-		<cmns-av:explanatoryNote>Note that a role in Commons is much more general than the BFO notion of role, and allows generically dependent continuants (information content entities) to play roles, such as the ingredient role concept of a specification for a product in IDMP.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&lcc-cr;Location">
@@ -422,5 +433,11 @@
 	<owl:Class rdf:about="&lcc-lr;LanguageVariation">
 		<rdfs:subClassOf rdf:resource="&bfo;BFO_0000016"/>
 	</owl:Class>
-
+	
+	<owl:Axiom>
+		<owl:annotatedProperty rdf:resource="&rdfs;subClassOf"/>
+		<owl:annotatedSource rdf:resource="&cmns-rlcmp;Role"/>
+		<owl:annotatedTarget rdf:resource="&bfo;BFO_0000002"/>
+		<cmns-av:explanatoryNote>Note that a role in Commons is much more general than the BFO notion of role, and allows generically dependent continuants (information content entities) to play roles, such as the ingredient role concept of a specification for a product in IDMP.</cmns-av:explanatoryNote>
+	</owl:Axiom>
 </rdf:RDF>
