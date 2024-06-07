@@ -41,7 +41,22 @@
 		<dct:contributor>Steve Jenkins, Jet Propulsion Laboratory (JPL), California Institute of Technology, National Aeronautics and Space Administration (NASA)</dct:contributor>
 		<dct:contributor>Stuart Chalk, University of North Florida</dct:contributor>
 		<dct:contributor>Thomas Barre, Airbus</dct:contributor>
-		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<dct:license rdf:datatype="&xsd;anyURI">Copyright (c) 2011-2024 Thematix Partners LLC
+Copyright (c) 2015-2024 EDM Council, Inc.
+Copyright (c) 2015-2024 Object Management Group, Inc.
+Copyright (c) 2023-2024 DEKonsult
+Copyright (c) 2023-2024 Mayo Clinic
+Copyright (c) 2023-2024 University of North Florida
+Copyright (c) 2024 Airbus
+Copyright (c) 2024 Dassault Systèmes
+		
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &apos;Software&apos;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		
+See https://opensource.org/licenses/MIT.</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
@@ -49,7 +64,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20240501/QuantitiesAndUnits/"/>
-		<skos:changeNote>The https://www.omg.org/spec/Commons/20230801/QuantitiesAndUnits.rdf version of this ontology was modified to add the concept of a measurement reference to enable better alignment of such references with quantity values whose reference is something other than a unit of measure (Commons-1.2-3) and to loosen functional constraints on a number of properties, which caused reasoning errors when these generic properties were reused with multiple subproperties on the same concept (Commons-1.2-5).</skos:changeNote>
+		<skos:changeNote>The https://www.omg.org/spec/Commons/20230801/QuantitiesAndUnits.rdf version of this ontology was modified to loosen functional constraints on a number of properties, which caused reasoning errors when these generic properties were reused with multiple subproperties on the same concept and eliminate potentially circular restrictions (Commons-1.2-5).</skos:changeNote>
 		<cmns-av:copyright>Copyright (c) 2011-2024 Thematix Partners LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2024 Object Management Group, Inc.</cmns-av:copyright>
@@ -57,6 +72,7 @@
 		<cmns-av:copyright>Copyright (c) 2023-2024 Mayo Clinic</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023-2024 University of North Florida</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2024 Airbus</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2024 Dassault Systèmes</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-qtu;ArbitraryUnit">
@@ -319,42 +335,19 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementProcedure">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementReference"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
 		<rdfs:label>measurement procedure</rdfs:label>
-		<skos:definition>procedure of a measurement according to one or more measurement principles (i.e. phenomena, observables) and a given measurement method, based on a measurement model and including any calculation to obtain a measurement result</skos:definition>
+		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.16</dct:source>
+		<skos:definition>detailed description of a measurement according to one or more measurement principles (i.e. phenomena, observables) and to a given measurement method, based on a measurement model and including any calculation to obtain a measurement result</skos:definition>
 		<skos:example>Lowering of the concentration of glucose in blood in a fasting rabbit is an observable that can be applied to the measurement of insulin concentration in a preparation. Together with a description of the measurement method this can be used to define a measurement procedure.</skos:example>
 		<skos:note>A measurement procedure can include a statement concerning a target measurement uncertainty.</skos:note>
 		<skos:note>A measurement procedure is usually documented in sufficient detail to enable an operator to perform a measurement.</skos:note>
 		<cmns-av:abbreviation>SOP</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.16</cmns-av:adaptedFrom>
 		<cmns-av:synonym>standard operating procedure</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-qtu;MeasurementReference">
-		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
-		<rdfs:subClassOf>
-			<owl:Class>
-				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&cmns-qtu;MeasurementProcedure">
-					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-qtu;MeasurementUnit">
-					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-qtu;ReferenceMaterial">
-					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-qtu;MeasurementScale">
-					</rdf:Description>
-				</owl:unionOf>
-			</owl:Class>
-		</rdfs:subClassOf>
-		<rdfs:label>measurement reference</rdfs:label>
-		<skos:definition>measurement unit, measurement procedure, reference material, or a combination of such</skos:definition>
-		<skos:note>Note that the concept of a measurement reference is currently not defined in terms and definitions in the VIM standard, but rather in Note 2 on quantity.</skos:note>
-		<cmns-av:adaptedFrom>International Vocabulary of Metrology - Basic and General Concepts and Associated Terms (VIM), Third Edition, JCGM 200:2012, available at https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementScale">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementReference"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasMaximumPermissiveValue"/>
@@ -399,7 +392,6 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;MeasurementUnit">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementReference"/>
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantity"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -668,7 +660,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-qtu;ReferenceMaterial">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementReference"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
 		<rdfs:label>reference material</rdfs:label>
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.26</dct:source>
 		<skos:definition>material, sufficiently homogeneous and stable with reference to specified properties, which has been established to be fit for its intended use in measurement or in examination of nominal properties</skos:definition>
@@ -716,8 +708,8 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementReference"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementReference"/>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasMeasurementUnit"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementUnit"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>scalar quantity value</rdfs:label>
@@ -755,26 +747,6 @@
 	
 	<owl:Class rdf:about="&cmns-qtu;SystemOfQuantities">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&cmns-qtu;SystemOfQuantities"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;uses"/>
-				<owl:onClass rdf:resource="&cmns-qtu;SystemOfQuantities"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityKind"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en">system of quantities</rdfs:label>
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.29</dct:source>
 		<dct:source>ISO 80000-1:2009 Quantities and units - Part 1: General, clause 3.3</dct:source>
@@ -786,33 +758,6 @@
 	
 	<owl:Class rdf:about="&cmns-qtu;SystemOfUnits">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&cmns-qtu;SystemOfUnits"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;uses"/>
-				<owl:onClass rdf:resource="&cmns-qtu;SystemOfUnits"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
-				<owl:onClass rdf:resource="&cmns-qtu;SystemOfQuantities"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;MeasurementUnit"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>system of units</rdfs:label>
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.30</dct:source>
 		<dct:source>ISO 80000-1:2009 Quantities and units - Part 1: General, clause 3.13</dct:source>
@@ -947,17 +892,10 @@
 		<skos:definition>indicates the maximum allowed value for a measurement on the given scale</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMeasurementReference">
-		<rdfs:label>has measurement unit</rdfs:label>
-		<rdfs:range rdf:resource="&cmns-qtu;MeasurementReference"/>
-		<skos:definition>indicates the reference against which a quantity can be expressed with respect to a number</skos:definition>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMeasurementUnit">
-		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasMeasurementReference"/>
 		<rdfs:label>has measurement unit</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-qtu;MeasurementUnit"/>
-		<skos:definition>indicates the unit against which a quantity can be expressed in a quantity value</skos:definition>
+		<skos:definition>indicates the unit in which something is expressed</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasMinimumPermissiveValue">
