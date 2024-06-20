@@ -29,5 +29,5 @@ WHERE
     FILTER regex(str(?class), <HYGIENE_TESTS_FILTER_PARAMETER>)
     BIND (CONCAT(STR(afn:localname(?property1)), " max ", STR(?cardinality1), " ", STR(afn:localname(?restrictingClass1))) as ?restriction1String)
     BIND (CONCAT(STR(afn:localname(?property2)), " exactly ", STR(?cardinality2), " ", STR(afn:localname(?restrictingClass2))) as ?restriction2String)
-    BIND(CONCAT("WARN: Class ", STR(?class), " may inherit obsolete restriction <", ?restriction1String, "> because of restriction <", ?restriction2String, ">.", " on ", STR(?superClass)) as ?error)
+    BIND(CONCAT("WARN: Class ", STR(?class), " may inherit obsolete restriction <", ?restriction1String, "> because of restriction <", ?restriction2String, ">", " from class ", STR(?superClass)) as ?error)
 }
