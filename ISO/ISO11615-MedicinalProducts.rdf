@@ -716,7 +716,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationClassifiedBy"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;AgeClassifier"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -4053,13 +4053,6 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasPopulationClassifiedBy"/>
-				<owl:onClass rdf:resource="&cmns-cls;Classifier"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
 				<owl:someValuesFrom rdf:resource="&cmns-stat;StatisticalPopulation"/>
 			</owl:Restriction>
@@ -5409,10 +5402,8 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPopulationClassifiedBy">
-		<rdfs:label>has population classified by</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-mprd;PopulationCharacteristic"/>
-		<rdfs:range rdf:resource="&cmns-cls;Classifier"/>
-		<skos:definition>relates a population characteristic with a classifier for aspects of the population members or a common situation that the population member experience</skos:definition>
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceIngredientRole">
