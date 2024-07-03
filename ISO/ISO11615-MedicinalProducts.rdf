@@ -1232,16 +1232,21 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:label>container role</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.6</dct:source>
 		<owl:equivalentClass>
-			<owl:Class>
-				<owl:oneOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-mprd;ImmediateContainer">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-mprd;IntermediatePackaging">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-mprd;OuterPackaging">
-					</rdf:Description>
-				</owl:oneOf>
-			</owl:Class>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;playsRole"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:oneOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;ImmediateContainer">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;IntermediatePackaging">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;OuterPackaging">
+							</rdf:Description>
+						</owl:oneOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
 		</owl:equivalentClass>
 		<skos:definition>functional role of a package item with respect to inclusive layering within a medicinal product</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
