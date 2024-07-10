@@ -184,7 +184,11 @@ BIND(IF(str(?substanceClass) = "chemical", idmp-sub:ChemicalSubstance ,
     IF(str(?substanceClass) = "polymer", idmp-sub:PolymerSubstance ,
     IF(str(?substanceClass) = "structurallyDiverse", idmp-sub:StructurallyDiverseSubstance ,
     IF(str(?substanceClass) = "specifiedSubstance", idmp-sub:SpecifiedSubstance ,
-    idmp-sub:Substance )))))))
+    IF(str(?substanceClass) = "specifiedSubstanceG1", idmp-sub:SpecifiedSubstanceGroup1 ,
+    IF(str(?substanceClass) = "specifiedSubstanceG2", idmp-sub:SpecifiedSubstanceGroup2 ,
+    IF(str(?substanceClass) = "specifiedSubstanceG3", idmp-sub:SpecifiedSubstanceGroup3 ,
+    IF(str(?substanceClass) = "specifiedSubstanceG4", idmp-sub:SpecifiedSubstanceGroup4 ,
+    idmp-sub:Substance )))))))))))
     AS ?SubstanceType)
 
 BIND(IF(str(?structureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
