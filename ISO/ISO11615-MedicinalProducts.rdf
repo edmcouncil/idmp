@@ -785,6 +785,13 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AuthorizationStatus"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorizedParty"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;AuthorizedParty"/>
 			</owl:Restriction>
@@ -795,9 +802,57 @@
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;AuthorizingParty"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>authorization</rdfs:label>
+		<rdfs:label xml:lang="en-GB">authorisation</rdfs:label>
+		<rdfs:label xml:lang="en-US">authorization</rdfs:label>
 		<skos:definition>situation in which a party authorizes someone to act on their behalf or to have other responsibilities or capabilities under certain conditions for some period of time</skos:definition>
+		<skos:prefLabel xml:lang="en-US">authorization</skos:prefLabel>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AuthorizationStatus">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;State"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AuthorizationStatusCode"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorizationStatusDate"/>
+				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en-GB">authorisation status</rdfs:label>
+		<rdfs:label xml:lang="en-US">authorization status</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.1 and Figure 7</dct:source>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.4</dct:source>
+		<skos:definition>status of an authorization as of a particular point in the lifecycle of a medicinal product depending on the regulatory process applicable in a region</skos:definition>
+		<skos:prefLabel xml:lang="en-US">authorization status</skos:prefLabel>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
+		<cmns-av:explanatoryNote>During the lifetime of a Medicinal Product, its marketing authorization is likely to have had a variety of changes. Therefore, the status of a marketing authorization will change over time, which has to be recorded accordingly.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>Note that the authorization status code and date are modeled as part of the status rather than as independent attributes of the marketing authorization, allowing for a given authorization to have multiple status values with unique dates over the lifecycle of the authorization. This is slightly different from the way it appears in the ISO 11615:2017 standard, but is more in line with the explanatory text. This approach allows potentially multiple status values to be associated with the same marketing authorization if nothing else has changed aside from where it stands in the authorization lifecycle. If the authorization itself has been revised, however, a new individual representing that authorization should be created with the relevant statns value and date, however, and the authorizations linked using properties such as &apos;precedes&apos; or &apos;succeeds&apos; from the Commons Dates and Times ontology.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;AuthorizationStatusCode">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-mprd;AuthorizationStatus"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en-GB">authorisation status code</rdfs:label>
+		<rdfs:label xml:lang="en-US">authorization status code</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.1 and Figure 7</dct:source>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.4</dct:source>
+		<skos:definition>sequence of characters denoting the status of an authorization as of a particular point in the lifecycle of a medicinal product depending on the regulatory process applicable in a region</skos:definition>
+		<skos:prefLabel xml:lang="en-US">authorization status code</skos:prefLabel>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;AuthorizedMedicinalProduct">
@@ -823,13 +878,15 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>authorized medicinal product</rdfs:label>
+		<rdfs:label xml:lang="en-GB">authorised medicinal product</rdfs:label>
+		<rdfs:label xml:lang="en-US">authorized medicinal product</rdfs:label>
 		<skos:definition>role of a medicinal product that has been authorized for some purpose in some jurisdiction</skos:definition>
 		<skos:note>The unique identification of authorized medicinal Products and the description of their main characteristics shall apply the following principles:
 a) the assignment of a unique medicinal product identifier (MPID) to reliably recognize, monitor and trace the use of medicinal products;
 b) the assignment of a unique medicinal product package identifier (PCID) to reliably recognize and trace medicinal products as packaged for sale or supply;
 c) the assignment of a unique medicinal product batch identifier (BAID1) to reliably recognize and trace a manufacturer&apos;s batch number, which appears on the outer packaging of the medicinal product, in compliance with the requirements of the marketing authorization;
 d) the assignment of a unique medicinal product batch identifier (BAID2) to reliably recognize and trace a batch number on the immediate packaging of the medicinal product, where this is not the outer packaging, in compliance with the requirements of the marketing authorization.</skos:note>
+		<skos:prefLabel xml:lang="en-US">authorized medicinal product</skos:prefLabel>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 6.2, 8, and Figures 5, 6 and Annex A</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -841,8 +898,10 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;Authorization"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>authorized party</rdfs:label>
+		<rdfs:label xml:lang="en-GB">authorised party</rdfs:label>
+		<rdfs:label xml:lang="en-US">authorized party</rdfs:label>
 		<skos:definition>party that has been given the responsibility to act on behalf of another party or to have other responsibilities or capabilities under some set of guidelines</skos:definition>
+		<skos:prefLabel xml:lang="en-US">authorized party</skos:prefLabel>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
@@ -854,8 +913,10 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;Authorization"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>authorizing party</rdfs:label>
+		<rdfs:label xml:lang="en-GB">authorising party</rdfs:label>
+		<rdfs:label xml:lang="en-US">authorizing party</rdfs:label>
 		<skos:definition>party that delegates some role, authority, capability, or control to another party</skos:definition>
+		<skos:prefLabel xml:lang="en-US">authorizing party</skos:prefLabel>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
@@ -5146,6 +5207,19 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:range rdf:resource="&idmp-mprd;Authorization"/>
 		<skos:definition>relates a medicinal product to a specific authorization (manufacturing or marketing) in some jurisdiction</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasAuthorizationStatusDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
+		<rdfs:label xml:lang="en-GB">has authorisation status date</rdfs:label>
+		<rdfs:label xml:lang="en-US">has authorization status date</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.1 and Figure 7</dct:source>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.4</dct:source>
+		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
+		<skos:definition>indicates the date at which the given status has become applicable</skos:definition>
+		<skos:prefLabel xml:lang="en-US">has authorization status date</skos:prefLabel>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<cmns-av:explanatoryNote>date shall be specified using the ISO 8601 date format. ISO 8601 can accommodate year and month should day of the month not be known. (i.e., YYYY-MM).</cmns-av:explanatoryNote>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorizedParty">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasUndergoer"/>
