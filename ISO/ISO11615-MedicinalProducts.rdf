@@ -2346,15 +2346,15 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
-				<owl:onClass rdf:resource="&idmp-mprd;MarketingStatusReason"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onProperty rdf:resource="&mvf-trm;hasExtension"/>
+				<owl:onClass rdf:resource="&idmp-mprd;JurisdictionalMarketingAuthorization"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&mvf-trm;hasExtension"/>
-				<owl:onClass rdf:resource="&idmp-mprd;JurisdictionalMarketingAuthorization"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MarketingStatusReason"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2374,9 +2374,8 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
-				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorizationProcedure"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorizationProcedure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MarketingAuthorizationProcedure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -2434,6 +2433,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.1</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.1.40 and 9.3.2, Figure 7</cmns-av:directSource>
+		<cmns-av:explanatoryNote>Note that certain cardinality constraints have been relaxed to allow for tracking status changes, amendments, and other process-related revisions to the same marketing authorization per SME discussions.</cmns-av:explanatoryNote>
 		<cmns-av:explanatoryNote>Note that marketing status in the ISO 11615:2017 standard is not linked directly to marketing authorization, only to the medicinal product. We have augmented that pattern in the ontology, to link the status directly to the authorization along with status reasons that are specific to a given status. In discussion with SMEs, there was agreement that this was an oversight in the ISO standard that may be addressed in a subsequent version.</cmns-av:explanatoryNote>
 		<cmns-av:explanatoryNote>Note that rather than mapping directly to a single country code, a marketing authorization may be applicable in a region, in order to include the EU (which is not a valid ISO 3166 country code). At a high level, a marketing authorization may be applicable in one or more regions and may be recognized officially in others. For example, an EU-wide authorization may be recognized in the EU, and potentially in at least one country, but perhaps not in others.</cmns-av:explanatoryNote>
 		<cmns-av:explanatoryNote>Note that the marketing authorization is applicable in a region rather than country, given that the European Union is a region. The addition of the jurisdiction in which the authorization is recognized, which may include some but not all EU countries in the case of a general authorization issued  in the EU is important for similar reasons and has been added as a required element.</cmns-av:explanatoryNote>
@@ -5240,6 +5240,21 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label>has authorization</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;Authorization"/>
 		<skos:definition>relates a medicinal product to a specific authorization (manufacturing or marketing) in some jurisdiction</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorizationProcedure">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
+		<rdfs:label xml:lang="en-GB">has authorisation procedure</rdfs:label>
+		<rdfs:label xml:lang="en-US">has authorization procedure</rdfs:label>
+		<rdfs:label>has authorization procedure</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<rdfs:range rdf:resource="&idmp-mprd;MarketingAuthorizationProcedure"/>
+		<skos:definition>indicates the regulatory procedure applied to grant or amend a marketing authorization for a medicinal product</skos:definition>
+		<skos:note>A region may further refine the requirements in relation to the marketing authorization procedure (and the associated marketing authorization application) at implementation such that this information is to be specified only if required.</skos:note>
+		<skos:prefLabel xml:lang="en-US">has authorization procedure</skos:prefLabel>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.2.6</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.15</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorizationStatus">
