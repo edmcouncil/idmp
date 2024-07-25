@@ -81,8 +81,9 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240301/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240701/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/EuropeanJurisdiction/EuropeanRegistrationAuthorities.rdf version of this ontology was revised to normalize the use of hasTextualName from MVF rather than from LCC.</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240301/EuropeanJurisdiction/EuropeanRegistrationAuthorities.rdf version of this ontology was revised to complete the details related to the EudraVigilence code (IDMP-753).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -202,8 +203,26 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredBy"/>
+				<owl:hasValue rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
 				<owl:hasValue rdf:resource="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionary"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:hasValue rdf:resource="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionaryScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:hasValue rdf:resource="&cmns-ge-euj;EuropeanEconomicArea"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -425,6 +444,14 @@
 		<skos:definition>entry in the eXtended EudraVigilance Medicinal Product Dictionary (XEVMPD) registry, that includes the EudraVigilance codes (EV codes) used in the electronic product dictionary and for other regulatory activities</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
 	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionaryScheme">
+		<rdf:type rdf:resource="&cmns-ra;RegistrationScheme"/>
+		<rdfs:label>eXtended EudraVigilance Medicinal Product Dictionary scheme</rdfs:label>
+		<skos:definition>data submission requirements for authorized medicines, including the legal notice, detailed guidance documents and controlled vocabularies for the Extended EudraVigilance Product Report Message (XEVPRM) schema</skos:definition>
+		<cmns-av:abbreviation>XEVMPD scheme</cmns-av:abbreviation>
+		<cmns-av:directSource rdf:resource="https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/data-medicines-iso-idmp-standards-post-authorisation/reporting-requirements-marketing-authorisation-holders/guidance-documents-related-data-submission-authorised-medicines#detailed-guidance-pdf-format-8927"/>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionaryService">
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
