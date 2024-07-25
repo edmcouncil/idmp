@@ -1502,9 +1502,9 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 6.6 and 9.6.2.4</cmns-av:directSource>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;DateExclusivityPeriod">
+	<owl:Class rdf:about="&idmp-mprd;DataExclusivityPeriod">
 		<rdfs:subClassOf rdf:resource="&cmns-dt;ExplicitDatePeriod"/>
-		<rdfs:label>date exclusivity period</rdfs:label>
+		<rdfs:label>data exclusivity period</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.1 and Figure 7</dct:source>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.4</dct:source>
 		<skos:definition>explicit time period from initial authorization of the reference product granting exclusivity for a given marketing authorization</skos:definition>
@@ -2340,9 +2340,16 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Authorization"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasDateExclusivityPeriod"/>
-				<owl:onClass rdf:resource="&idmp-mprd;DateExclusivityPeriod"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasDataExclusivityPeriod"/>
+				<owl:onClass rdf:resource="&idmp-mprd;DataExclusivityPeriod"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasDateOfFirstAuthorization"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -5275,12 +5282,12 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:label xml:lang="en-GB">has authorisation status date</rdfs:label>
 		<rdfs:label xml:lang="en-US">has authorization status date</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.1 and Figure 7</dct:source>
-		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.4</dct:source>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses B.2.4 and B.2.5</dct:source>
 		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
 		<skos:definition>indicates the date at which the given status has become applicable</skos:definition>
 		<skos:prefLabel xml:lang="en-US">has authorization status date</skos:prefLabel>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
-		<cmns-av:explanatoryNote>date shall be specified using the ISO 8601 date format. ISO 8601 can accommodate year and month should day of the month not be known. (i.e., YYYY-MM).</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>The date shall be specified using the ISO 8601 date format. ISO 8601 can accommodate year and month should day of the month not be known. (i.e., YYYY-MM).</cmns-av:explanatoryNote>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasAuthorizedParty">
@@ -5377,16 +5384,29 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.3.1</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;hasDateExclusivityPeriod">
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasDataExclusivityPeriod">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasDatePeriod"/>
-		<rdfs:label>has date exclusivity period</rdfs:label>
+		<rdfs:label>has data exclusivity period</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.1 and Figure 7</dct:source>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.4</dct:source>
 		<rdfs:domain rdf:resource="&idmp-mprd;MarketingAuthorization"/>
-		<rdfs:range rdf:resource="&idmp-mprd;DateExclusivityPeriod"/>
+		<rdfs:range rdf:resource="&idmp-mprd;DataExclusivityPeriod"/>
 		<skos:definition>indicates an explicit time period from initial authorization of the reference product granting exclusivity for a given marketing authorization</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasDateOfFirstAuthorization">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasObservedDateTime"/>
+		<rdfs:label xml:lang="en-GB">has date of first authorisation</rdfs:label>
+		<rdfs:label xml:lang="en-US">has date of first authorization</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.1 and Figure 7</dct:source>
+		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.10</dct:source>
+		<rdfs:range rdf:resource="&cmns-dt;CombinedDateTime"/>
+		<skos:definition>indicates the date when the first authorization was granted by the authorizing body</skos:definition>
+		<skos:prefLabel xml:lang="en-US">has date of first authorization</skos:prefLabel>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<cmns-av:explanatoryNote>The date shall be specified using the ISO 8601 date format. ISO 8601 can accommodate year and month should day of the month not be known. (i.e., YYYY-MM).</cmns-av:explanatoryNote>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasDefiningStrength">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
