@@ -11,7 +11,6 @@ PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Reg
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
 PREFIX idmp-eureg: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/>
 PREFIX idmp-nara: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/>
-PREFIX cmns-ra: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 PREFIX spor-st: <https://spor.ema.europa.eu/v1/lists/100000075826/terms/>
 
 GENERATE {
@@ -37,7 +36,7 @@ GENERATE {
     a idmp-eura:EudraVigilanceCode, cmns-ra:RegisteredIdentifier ;
     cmns-id:identifies <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }> ;
     cmns-txt:hasTextValue ?External_Code_XEVMPD ;
-    cmns-ra:registeredIn idmp-eura:ExtendedEudraVigilanceMedicinalProductDictionary;
+    cmns-ra:isRegisteredIn idmp-eura:ExtendedEudraVigilanceMedicinalProductDictionary ;
     .
 }
 ITERATOR iter:CSV(<sms-substances-list.csv>) AS
@@ -147,7 +146,7 @@ WHERE {
     IF(?Name_Source = "FDA SUBSTANCE REGISTRATION SYSTEM", idmp-nara:FoodAndDrugAdministrationRegistrationAuthority, # valid
     IF(?Name_Source = "INN", idmp-ra:InternationalNonproprietaryName, # valid
     IF(?Name_Source = "ITIS (INTEGRATED TAXONOMIC INFORMATION SYSTEM)", idmp-nara:IntegratedTaxonomicInformationSystem, # valid
-    IF(?Name_Source = "PUBCHEM", cmns-ra:PubChem, # valid
+    IF(?Name_Source = "PUBCHEM", idmp-nara:PubChem, # valid
     IF(?Name_Source = "THE MERCK INDEX 20TH EDITION", idmp-ra:MerckIndexOnline, # valid
     IF(?Name_Source = "USP", idmp-nara:USPharmacopeiaMedicinesCompendium, # valid
     IF(?Name_Source = "WHO", idmp-ra:WorldHealthOrganization, # valid

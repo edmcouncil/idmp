@@ -1,12 +1,9 @@
 PREFIX iter: <http://w3id.org/sparql-generate/iter/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX idmp: <https://purl.iso.org/idmp/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
-PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
-PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
 
 GENERATE {
@@ -187,7 +184,11 @@ BIND(IF(str(?substanceClass) = "chemical", idmp-sub:ChemicalSubstance ,
     IF(str(?substanceClass) = "polymer", idmp-sub:PolymerSubstance ,
     IF(str(?substanceClass) = "structurallyDiverse", idmp-sub:StructurallyDiverseSubstance ,
     IF(str(?substanceClass) = "specifiedSubstance", idmp-sub:SpecifiedSubstance ,
-    idmp-sub:Substance )))))))
+    IF(str(?substanceClass) = "specifiedSubstanceG1", idmp-sub:SpecifiedSubstanceGroup1 ,
+    IF(str(?substanceClass) = "specifiedSubstanceG2", idmp-sub:SpecifiedSubstanceGroup2 ,
+    IF(str(?substanceClass) = "specifiedSubstanceG3", idmp-sub:SpecifiedSubstanceGroup3 ,
+    IF(str(?substanceClass) = "specifiedSubstanceG4", idmp-sub:SpecifiedSubstanceGroup4 ,
+    idmp-sub:Substance )))))))))))
     AS ?SubstanceType)
 
 BIND(IF(str(?structureStereochemistry) = "ABSOLUTE", idmp-sub:Stereochemistry-Absolute ,
