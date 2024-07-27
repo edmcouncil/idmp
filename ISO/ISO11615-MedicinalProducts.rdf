@@ -2792,6 +2792,12 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
+				<owl:allValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;MarketingStatusReason"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -2806,13 +2812,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
-				<owl:onClass rdf:resource="&cmns-rga;Jurisdiction"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasMarketingStartDate"/>
 				<owl:onClass rdf:resource="&cmns-dt;ExplicitDate"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -2821,8 +2820,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;appliesInCountry"/>
-				<owl:onClass rdf:resource="&lcc-cr;Country"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&lcc-cr;Alpha2RegionCode"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>marketing status record</rdfs:label>
@@ -4561,7 +4559,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
+				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>registration number</rdfs:label>
