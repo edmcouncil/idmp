@@ -985,6 +985,27 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<cmns-av:synonym>batch identifier</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;ChangeRequestOrganizationType">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MarketingStatusReason"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en-GB">change request organisation type</rdfs:label>
+		<rdfs:label xml:lang="en-US">change request organization type</rdfs:label>
+		<skos:definition>sequence of characters denoting the nature of the organization that triggered the legal action taken on the marketing or on the marketing authorization</skos:definition>
+		<skos:example>marketing authorization revoked by the competent authority, marketing authorization not renewed by the MAH</skos:example>
+		<skos:note>The controlled term and the controlled term identifier shall be specified.</skos:note>
+		<skos:prefLabel>change request organization type</skos:prefLabel>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.19.8</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.2.9.9 and Figure 7</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;ClinicalTrial">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Situation"/>
 		<rdfs:subClassOf>
@@ -2756,6 +2777,13 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	
 	<owl:Class rdf:about="&idmp-mprd;MarketingStatusReason">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Record"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ChangeRequestOrganizationType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
