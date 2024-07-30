@@ -1677,6 +1677,25 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;GeographicAreaForActionTaken">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MarketingStatusReason"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>geographic area for action taken</rdfs:label>
+		<skos:definition>sequence of characters denoting the geographic area where the legal action taken on the marketing or the on marketing authorization is having effect</skos:definition>
+		<skos:note>The controlled term and the controlled term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.19.9</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.2.9.10 and Figure 7</cmns-av:directSource>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;HeightCharacteristic">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
 		<rdfs:subClassOf>
@@ -2422,7 +2441,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onProperty rdf:resource="&cmns-doc;refersTo"/>
 				<owl:onClass rdf:resource="&idmp-mprd;MarketingStatusReason"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -2794,6 +2813,13 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;GeographicAreaForActionTaken"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;LegalGrounds"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
@@ -2842,15 +2868,17 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
-				<owl:onClass rdf:resource="&idmp-mprd;MarketingAuthorization"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-doc;isReferredToBy"/>
-				<owl:onClass rdf:resource="&idmp-mprd;MarketingStatusRecord"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;MarketingStatusRecord">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;MarketingAuthorization">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
