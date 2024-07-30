@@ -1195,6 +1195,25 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;ConditionToRestoreAuthorization">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;MarketingStatusReason"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>condition to restore authorization</rdfs:label>
+		<skos:definition>sequence of characters denoting the condition under which the marketing authorization or the marketing is restored</skos:definition>
+		<skos:note>The controlled term and the controlled term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.19.6</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.2.9.7 and Figure 7</cmns-av:directSource>
+		<cmns-av:synonym>condition to restore</cmns-av:synonym>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Container">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
 		<rdfs:label>container</rdfs:label>
@@ -2156,7 +2175,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.3.2 and Figure 7</cmns-av:directSource>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-mprd;LegalGroundsCode">
+	<owl:Class rdf:about="&idmp-mprd;LegalGrounds">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -2164,7 +2183,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:allValuesFrom rdf:resource="&idmp-mprd;MarketingStatusReason"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>legal grounds code</rdfs:label>
+		<rdfs:label>legal grounds</rdfs:label>
 		<skos:definition>sequence of characters denoting the legal grounds for the action taken on the marketing or on the marketing authorization</skos:definition>
 		<skos:note>The controlled term and the controlled term identifier shall be specified.</skos:note>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
@@ -2740,7 +2759,14 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
-				<owl:onClass rdf:resource="&idmp-mprd;LegalGroundsCode"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ConditionToRestoreAuthorization"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;LegalGrounds"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2756,6 +2782,20 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;MarketingStatusReasonCode"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasRestoreDate"/>
+				<owl:onClass rdf:resource="&cmns-dt;ExplicitDate"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasConditionToRestoreComment"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -5418,6 +5458,17 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasConditionToRestoreComment">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasComment"/>
+		<rdfs:label>has condition to restore comment</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 7 and clause 9.3.2.9.8</dct:source>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.19.7</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;MarketingStatusReason"/>
+		<skos:definition>provides any additional comments on the condition to restore the marketing or the marketing authorization of the product</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasContraindication">
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;isSpecifiedIn"/>
 		<rdfs:label>has contraindication</rdfs:label>
@@ -5833,6 +5884,20 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 			</owl:Class>
 		</rdfs:range>
 		<skos:definition>relates a substance in the role of an active ingredient in a pharmaceutical or medicinal product to a reference substance that is its underlying basis of strength</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasRestoreDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasExplicitDate"/>
+		<rdfs:label>has restore date</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 7 and clause 9.3.2.9.6</dct:source>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.19.5</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;MarketingStatusReason"/>
+		<rdfs:range rdf:resource="&cmns-dt;ExplicitDate"/>
+		<skos:definition>indicates the date when the marketing or the marketing authorization of the product is anticipated to be restored</skos:definition>
+		<skos:example>the date of the lift of the marketing authorization suspension</skos:example>
+		<skos:note>A complete date consisting of day, month and year shall be specified using the ISO 8601 date format.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Optional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-TS"/>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasRiskOfSupplyShortage">
