@@ -3640,6 +3640,20 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasScientificNamePart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasStrengthNamePart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasFullMedicinalProductName"/>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -6028,6 +6042,19 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.76</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasScientificNamePart">
+		<rdfs:subPropertyOf rdf:resource="&mvf;hasTextualName"/>
+		<rdfs:label>has scientific name part</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6 and clause 9.2.2.8.4</dct:source>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause A.2.13.3</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProductName"/>
+		<skos:definition>provides the scientific or common (i.e. generic) name of the Medicinal Product without any other descriptors</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ENXP"/>
+		<cmns-av:synonym>has generic name</cmns-av:synonym>
+		<cmns-av:synonym>has scientific name</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasScoring">
 		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasPhysicalCharacteristic"/>
 		<rdfs:label>has scoring</rdfs:label>
@@ -6128,6 +6155,18 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:range rdf:resource="&idmp-mprd;Strength"/>
 		<skos:definition>indicates the actual strength of any element in a substance or pharmaceutical product</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasStrengthNamePart">
+		<rdfs:subPropertyOf rdf:resource="&mvf;hasTextualName"/>
+		<rdfs:label>has strength name part</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6 and clause 9.2.2.8.5</dct:source>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause A.2.13.4</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProductName"/>
+		<skos:definition>provides the strength, if reflected in the medicinal product name</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ENXP"/>
+		<cmns-av:explanatoryNote>This strength name part can differ from the concept of &apos;Strength&apos;.</cmns-av:explanatoryNote>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasSymptomConditionEffectClassification">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
