@@ -118,9 +118,9 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-loc;FederalCapitalArea">
-		<rdfs:subClassOf rdf:resource="&cmns-loc;GeopoliticalEntity"/>
+		<rdfs:subClassOf rdf:resource="&cmns-loc;CountrySubdivision"/>
 		<rdfs:label>federal capital area</rdfs:label>
-		<skos:definition>geopolitical entity that is or includes the municipality or capital city that acts as the seat of the federal government</skos:definition>
+		<skos:definition>country subdivision that is or includes the municipality or capital city that acts as the seat of the federal government</skos:definition>
 		<skos:example>Examples include the District of Columbia in the US, and the Canberra area in Australia.</skos:example>
 		<cmns-av:explanatoryNote>The capital administrative region of some federations includes those for which the capital is situated other than within one of the states or provinces which make up the country as a whole.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -130,6 +130,9 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<rdfs:label>federal state</rdfs:label>
 		<skos:definition>self-governing geopolitical unit which forms part of a wider geopolitical unit that is recognized as a country</skos:definition>
 		<cmns-av:explanatoryNote>This type of entity, variously referred to as a state, province or canton, has a level of self government including its own legal system and court jurisdiction, but cedes a level of autonomy to the federation of which it forms a part.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>canton</cmns-av:synonym>
+		<cmns-av:synonym>province</cmns-av:synonym>
+		<cmns-av:synonym>state</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-loc;GeodeticCoordinateSystem">
@@ -161,12 +164,26 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<rdfs:label>geographic region</rdfs:label>
 		<dct:source rdf:resource="https://www.nationalgeographic.org/encyclopedia/region/"/>
 		<skos:definition>area of land that has common features</skos:definition>
-		<skos:note>A region can be defined by natural or artificial features. For the purposes of LCC, a geographic region is describes part of a country or the world having definable characteristics but not always fixed boundaries.</skos:note>
+		<cmns-av:explanatoryNote>A region may be defined by natural or artificial features, and may be described as part of a country or the world having definable characteristics but not always fixed boundaries.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>Many cases in which a geographic region, or subclass thereof, is mapped to certain applications or a relational store, or where codes are used to identify the region, require a class to represent the name of the region. In such situations, attributes of the name, such as the dates when a particular name was in use, or was valid under certain circumstances, may be important. For other applications, such as for addressing, a text value may be required. Thus, both options are provided here, with a preference for use of the full class option, depending on the use case.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-loc;GeographicRegionIdentificationScheme">
+		<rdfs:subClassOf rdf:resource="&cmns-id;IdentificationScheme"/>
+		<rdfs:label>geographic region identification scheme</rdfs:label>
+		<skos:definition>identification scheme dedicated to the unique identification of geographic regions</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-loc;GeographicRegionIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
 		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:onClass rdf:resource="&cmns-loc;GeographicRegionIdentificationScheme"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
@@ -180,8 +197,7 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>geographic region identifier</rdfs:label>
-		<skos:definition>string of letters that indicates the name of a geographical region where the designation is used, assigned for the purpose of uniquely identifying it</skos:definition>
-		<cmns-av:adaptedFrom>ISO 22745-2:2010, Industrial automation systems and integration - Open technical dictionaries and their application to master data</cmns-av:adaptedFrom>
+		<skos:definition>string of letters that indicates a code or other identifier for geographical region, assigned for the purpose of uniquely identifying it within some context</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-loc;GeographicRegionKind">
@@ -199,7 +215,7 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 	<owl:Class rdf:about="&cmns-loc;GeopoliticalEntity">
 		<rdfs:subClassOf rdf:resource="&cmns-loc;GeographicRegion"/>
 		<rdfs:label>geopolitical entity</rdfs:label>
-		<skos:definition>geographic area that represents a geophysical location associated with some form of political political structure</skos:definition>
+		<skos:definition>geographic area that represents a geophysical location associated with some form of political structure</skos:definition>
 		<skos:example>A geopolitical entity may be any country, federal province, city or other administrative unit that represents a geophysical location</skos:example>
 	</owl:Class>
 	
@@ -209,7 +225,7 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-loc;Municipality">
-		<rdfs:subClassOf rdf:resource="&cmns-loc;GeopoliticalEntity"/>
+		<rdfs:subClassOf rdf:resource="&cmns-loc;CountrySubdivision"/>
 		<rdfs:label>municipality</rdfs:label>
 		<skos:definition>urban administrative division having corporate status and usually powers of self-government or jurisdiction</skos:definition>
 		<skos:example>A municipality can be any political jurisdiction from a sovereign state, such as the Principality of Monaco, or a small village, such as West Hampton Dunes, New York.</skos:example>
@@ -232,9 +248,9 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-loc;Territory">
-		<rdfs:subClassOf rdf:resource="&cmns-loc;GeopoliticalEntity"/>
+		<rdfs:subClassOf rdf:resource="&cmns-loc;GeographicRegion"/>
 		<rdfs:label>territory</rdfs:label>
-		<skos:definition>geopolitical entity, typically considered an area of special geopolitical interest, related to a country or other geopolitical entity</skos:definition>
+		<skos:definition>geographic area, typically considered an area of special geopolitical interest, subject to the sovereignty, control, or jurisdiction of a state or other entity</skos:definition>
 		<skos:note>Certain territories are included in the ISO 3166-2 code set without an alpha 2 or alpha 3 code. In these cases, the numeric code for the subregion may have more than 3 characters in their corresponding numeric region codes.</skos:note>
 	</owl:Class>
 	
@@ -256,7 +272,7 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 	<owl:DatatypeProperty rdf:about="&cmns-loc;hasCityName">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasTextualName"/>
 		<rdfs:label>has city name</rdfs:label>
-		<skos:definition>indicates the name of a large, permanent, and densely settled place</skos:definition>
+		<skos:definition>indicates the name of a typically large, permanent, and densely settled place</skos:definition>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://en.wikipedia.org/wiki/City</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.gleif.org/en/about-lei/common-data-file-format/current-versions/level-1-data-lei-cdf-3-1-format</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Typical working definitions for small-city populations start at around 100,000 people. Common population definitions for an urban area (city or town) range between 1,500 and 50,000 people, with most U.S states using a minimum between 1,500 and 5,000 inhabitants. Some jurisdictions set no such minima.</cmns-av:explanatoryNote>
@@ -302,7 +318,7 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 				</owl:withRestrictions>
 			</rdfs:Datatype>
 		</rdfs:range>
-		<skos:definition>the angle formed by the intersection of a line perpendicular to the Earth&apos;s surface at a point and the plane of the Equator</skos:definition>
+		<skos:definition>the angle formed by the intersection of a line perpendicular to the Earth&apos;s (or other celestial body&apos;s) surface at a point and the plane of the Equator</skos:definition>
 		<skos:note>Points north of the Equator have positive latitude values, while points south have negative values. Latitude values range from minus 90 to plus 90 degrees. Lines of latitude are also called parallels because a particular value of latitude forms a circle parallel to the Equator.</skos:note>
 	</owl:DatatypeProperty>
 	
@@ -396,7 +412,7 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<rdfs:label>is independent</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-loc;GeopoliticalEntity"/>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
-		<skos:definition>indicates whether a geopolitical entity stands alone or is part of another country</skos:definition>
+		<skos:definition>indicates whether a geopolitical entity stands alone or is considered part of another geopolitical entity (e.g., a country)</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-loc;isSubregionOf">
