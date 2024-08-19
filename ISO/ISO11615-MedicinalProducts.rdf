@@ -3633,7 +3633,28 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasFormulationPart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasIntendedUsePart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasInventedNamePart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasPharmaceuticalDoseFormPart"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
@@ -3648,6 +3669,13 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasStrengthNamePart"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasTargetPopulationPart"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
 			</owl:Restriction>
@@ -3673,6 +3701,9 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:label>medicinal product name</rdfs:label>
 		<skos:definition>name as authorized by a medicines regulatory agency</skos:definition>
+		<skos:note>The medicinal product name is one of the defining characteristics of a medicinal product and its MPID. There may be more than one medicinal product name for a medicinal product instance.
+A medicinal product may have more than one proprietary/non-proprietary name across jurisdictions. Multiple languages may also be applicable per jurisdictional requirements.
+The convention applied for naming a medicinal product can differ between medicines regulatory agencies within regions. As a general principle, a marketing authorization is granted to a single marketing authorization holder who is responsible for placing the medicinal product on the market. The marketing authorization contains the name of the medicinal product, which can refer to, for example, a single invented name or a scientific name [when available, the international non-proprietary name (INN) of the active substance(s)] accompanied by a trademark or other characteristics).</skos:note>
 		<skos:note>This may be either an invented name not liable to be confused with the common name, or a common or a scientific name accompanied by a trade mark or any other applicable descriptor.</skos:note>
 		<cmns-av:directSource>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.1.54</cmns-av:directSource>
 	</owl:Class>
@@ -5673,6 +5704,17 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.6.2.21.7</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasFormulationPart">
+		<rdfs:subPropertyOf rdf:resource="&mvf;hasTextualName"/>
+		<rdfs:label>has formulation part</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6 and clause 9.2.2.8.7</dct:source>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause A.2.13.6</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProductName"/>
+		<skos:definition>provides information regarding the formulation of the product, if included in the medicinal product name</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ENXP"/>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasFrequencyOfOccurrence">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<rdfs:label>has frequency of occurrence</rdfs:label>
@@ -5752,6 +5794,17 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.9.2.2.6 and Figure 14</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause F.2</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasIntendedUsePart">
+		<rdfs:subPropertyOf rdf:resource="&mvf;hasTextualName"/>
+		<rdfs:label>has intended use part</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6 and clause 9.2.2.8.8</dct:source>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause A.2.13.7</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProductName"/>
+		<skos:definition>provides information regarding the intended use of the product, if included in the medicinal product name</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ENXP"/>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasInteraction">
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;isSpecifiedIn"/>
@@ -5929,6 +5982,18 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>relates a package item to its type of container</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasPharmaceuticalDoseFormPart">
+		<rdfs:subPropertyOf rdf:resource="&mvf;hasTextualName"/>
+		<rdfs:label>has pharmaceutical dose form part</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6 and clause 9.2.2.8.6</dct:source>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause A.2.13.5</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProductName"/>
+		<skos:definition>provides dose form information, which may or may not be the same as is specified for the administrable and manufactured dose forms for the product</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ENXP"/>
+		<cmns-av:explanatoryNote>The pharmaceutical dose form, if reflected in the Medicinal Product name, can be specified as text, where applicable. This pharmaceutical dose form name part can differ from the concept of administrable dose form and manufactured dose form as described in ISO/TS 20443.</cmns-av:explanatoryNote>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPhysicalCharacteristic">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
 		<rdfs:label>has physical characteristic</rdfs:label>
@@ -6048,7 +6113,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6 and clause 9.2.2.8.4</dct:source>
 		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause A.2.13.3</dct:source>
 		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProductName"/>
-		<skos:definition>provides the scientific or common (i.e. generic) name of the Medicinal Product without any other descriptors</skos:definition>
+		<skos:definition>provides the scientific or common (i.e. generic) name of the medicinal product without any other descriptors</skos:definition>
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ENXP"/>
 		<cmns-av:synonym>has generic name</cmns-av:synonym>
@@ -6200,6 +6265,17 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<skos:definition>relates a therapeutic indication or contraindication to its the target population</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.9.2.5</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasTargetPopulationPart">
+		<rdfs:subPropertyOf rdf:resource="&mvf;hasTextualName"/>
+		<rdfs:label>has target population part</rdfs:label>
+		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, Figure 6 and clause 9.2.2.8.9</dct:source>
+		<dct:source>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause A.2.13.8</dct:source>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProductName"/>
+		<skos:definition>provides information regarding the target population for the product, if included in the medicinal product name</skos:definition>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ENXP"/>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasTherapeuticIndication">
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;isSpecifiedIn"/>
