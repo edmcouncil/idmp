@@ -81,12 +81,12 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231201/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240701/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials.rdf version of this ontology was modified to eliminate EMA SPOR terms that will be generated rather than hand crafted (IDMP-674).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials.rdf version of this ontology was modified to finalize names of certain elements for release (IDMP-616).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
-		<cmns-av:copyright>Copyright (c) 2022-2023 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
 		<cmns-av:usageNote>Note that the copyright and licensing terms for contents of this ontology that are taken from the EMA SPOR repository(ies), including but not limited to the definitions and descriptions of specific lists (controlled vocabularies) managed therein, are also subject to the following copyright and license: &apos;The content of this list and associated intellectual property rights were developed under projects funded by the EMA therefore becoming the property of the EMA. Reproduction is authorised provided the source is acknowledged.&apos; Not all lists referenced in the SPOR repositories are covered under these terms if, for example, they came from other sources. The default case assumes that the EMA license and copyright applies, such as for Shelf Life Type. In cases used herein where different terms apply, additional annotations will be included on a per list (controlled vocabulary) basis.</cmns-av:usageNote>
 	</owl:Ontology>
 	
@@ -117,6 +117,41 @@
 		<cmns-prd:isProvidedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-spor;ProductManagementServicesIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:hasValue rdf:resource="&idmp-spor;ProductManagementServicesRegistrationScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
+				<owl:hasValue rdf:resource="&idmp-spor;ProductManagementServicesRegistry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>Product Management Services identifier</rdfs:label>
+		<skos:definition>contextual identifier for medicinal product data that is registered in the Substances Products Organisations Referentials (SPOR) Product Management Services (PMS) registry</skos:definition>
+		<cmns-av:abbreviation>PMS ID</cmns-av:abbreviation>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-spor;ProductManagementServicesRegistrationScheme">
+		<rdf:type rdf:resource="&cmns-ra;RegistrationScheme"/>
+		<rdfs:label>Product Management Services (PMS) registration scheme</rdfs:label>
+		<skos:definition>scheme for organizing information in the Substances Products Organisations Referentials (SPOR) Product Management Services (PMS) registry and allocating identifiers to registered items</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-spor;ProductManagementServicesRegistry">
+		<rdf:type rdf:resource="&cmns-ra;Registry"/>
+		<rdfs:label>Product Management Services (PMS) registry</rdfs:label>
+		<skos:definition>central dictionary of product data in multiple languages available through the Substances Products Organisations Referentials (SPOR) Product Management Services (PMS)</skos:definition>
+		<cmns-av:abbreviation>SPOR PMS</cmns-av:abbreviation>
+		<cmns-av:abbreviation>SPOR-PMS</cmns-av:abbreviation>
+		<cmns-av:directSource rdf:resource="https://spor.ema.europa.eu/"/>
+		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-spor;ReferentialsManagementServices">
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdfs:label>Referentials Management Services (RMS)</rdfs:label>
@@ -127,11 +162,11 @@
 		<cmns-prd:isProvidedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-spor;ReferentialsManagementServicesRegistrationScheme">
-		<rdfs:subClassOf rdf:resource="&cmns-ra;RegistrationScheme"/>
+	<owl:NamedIndividual rdf:about="&idmp-spor;ReferentialsManagementServicesRegistrationScheme">
+		<rdf:type rdf:resource="&cmns-ra;RegistrationScheme"/>
 		<rdfs:label>Referentials Management Services (RMS) registration scheme</rdfs:label>
 		<skos:definition>scheme for organizing information in the Substances Products Organisations Referentials (SPOR) Referentials Management Services (RMS) registry and allocating identifiers to registered items</skos:definition>
-	</owl:Class>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-spor;ReferentialsManagementServicesRegistry">
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
