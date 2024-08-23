@@ -63,16 +63,6 @@
 		<cmns-av:copyright>Copyright (c) 2022-2024 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
-	<owl:Class rdf:about="&cmns-prd;Capability">
-		<rdfs:label>capability</rdfs:label>
-		<skos:definition>ability to perform or support a function</skos:definition>
-		<cmns-av:adaptedFrom>ISO 22886:2020 Healthcare organization management - Vocabulary</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>ISO 6707-1:2020 Buildings and civil engineering works - Vocabulary - Part 1: General terms</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>Value Delivery Modeling Language Specification, http://www.omg.org/spec/VDML/</cmns-av:adaptedFrom>
-		<cmns-av:explanatoryNote>Capabilities may involve people with particular skills and knowledge, intellectual property, defined practices, operating facilities, tools and equipment.</cmns-av:explanatoryNote>
-		<cmns-av:explanatoryNote>More specifically, a capability can be defined as the ability to perform a directed process towards meeting an objective or according to some specification.</cmns-av:explanatoryNote>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&cmns-prd;CommercialProduct">
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
 		<rdfs:subClassOf>
@@ -82,7 +72,7 @@
 					</rdf:Description>
 					<rdf:Description rdf:about="&cmns-prd;Right">
 					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-prd;Service">
+					<rdf:Description rdf:about="&cmns-org;Service">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -108,8 +98,8 @@
 		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
-				<owl:onClass rdf:resource="&cmns-prd;Capability"/>
+				<owl:onProperty rdf:resource="&cmns-org;provides"/>
+				<owl:onClass rdf:resource="&cmns-org;Capability"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -164,7 +154,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;GS1CompanyPrefixIssuer">
-		<rdfs:subClassOf rdf:resource="&cmns-prd;ServiceProvider"/>
+		<rdfs:subClassOf rdf:resource="&cmns-org;ServiceProvider"/>
 		<rdfs:subClassOf>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
@@ -355,41 +345,6 @@
 		<cmns-av:explanatoryNote>Rights dominate modern understandings of what actions are permissible and which institutions are just. Rights structure the form of governments, the content of laws, and the shape of morality as many now see it. To accept a set of rights is to approve a distribution of freedom and authority, and so to endorse a certain view of what may, must, and must not be done. According to the Hohfeldian incidents (Wesley Hohfeld (1879-1918)), rights are complex and consist of four major components: privilege, claim, power, and immunity.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-prd;Service">
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
-				<owl:onClass rdf:resource="&cmns-prd;Capability"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;isProvidedBy"/>
-				<owl:someValuesFrom rdf:resource="&cmns-prd;ServiceProvider"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>service</rdfs:label>
-		<rdfs:seeAlso rdf:resource="https://unstats.un.org/unsd/nationalaccount/glossresults.asp?gID=501"/>
-		<skos:definition>intangible activity performed by some party for the benefit of another party</skos:definition>
-		<skos:example>Services include intangible products, such as accounting, banking, cleaning, consultancy, education, insurance, expertise, medical treatment, or transportation services.</skos:example>
-		<cmns-av:explanatoryNote>Sometimes services are difficult to identify because they are closely associated with a good; such as the combination of a diagnosis with the administration of a medicine. No transfer of possession or ownership takes place when services are sold, and they (1) cannot be stored or transported, (2) are instantly perishable, and (3) come into existence at the time they are bought and consumed.</cmns-av:explanatoryNote>
-		<cmns-av:explanatoryNote>The OECD defines services as outputs produced to order and which cannot be traded separately from their production; ownership rights cannot be established over services and by the time their production is completed they must have been provided to the consumers. As an exception to this rule there is a group of industries, generally classified as service industries, some of whose outputs have characteristics of goods, i.e. those concerned with the provision, storage, communication and dissemination of information, advice and entertainment in the broadest sense of those terms; the products of these industries, where ownership rights can be established, may be classified either as goods or services depending on the medium by which these outputs are supplied.</cmns-av:explanatoryNote>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-prd;ServiceProvider">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;AgentRole"/>
-		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
-				<owl:someValuesFrom rdf:resource="&cmns-prd;Service"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>service provider</rdfs:label>
-		<skos:definition>agent that provides professional services, such as consulting, financial, legal, real estate, education, communications, registration, regulatory, manufacturing, storage, processing, or other services</skos:definition>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&cmns-prd;Site">
 		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Role"/>
 		<rdfs:subClassOf>
@@ -456,7 +411,7 @@
 					</rdf:Description>
 					<rdf:Description rdf:about="&cmns-prd;Product">
 					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-prd;Service">
+					<rdf:Description rdf:about="&cmns-org;Service">
 					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
@@ -514,14 +469,14 @@
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isIssuedBy">
-		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedBy"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-org;isProvidedBy"/>
 		<rdfs:label>is issued by</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;AgentRole"/>
 		<skos:definition>indicates a role played by a functional entity or party responsible for circulating, distributing, or publishing something</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isIssuedTo">
-		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedTo"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-org;isProvidedTo"/>
 		<rdfs:label>is issued to</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;AgentRole"/>
 		<skos:definition>indicates a role played by a functional entity or party to the recipient of something, such as a license or authorization</skos:definition>
@@ -534,17 +489,6 @@
 		<skos:definition>is fabricated, manufactured or otherwise created by, through some production process</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&cmns-prd;isProvidedBy">
-		<rdfs:label>is provided by</rdfs:label>
-		<owl:inverseOf rdf:resource="&cmns-prd;provides"/>
-		<skos:definition>is made available by</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&cmns-prd;isProvidedTo">
-		<rdfs:label>is provided to</rdfs:label>
-		<skos:definition>is made available to</skos:definition>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isSituatedAt">
 		<rdfs:label>is situated at</rdfs:label>
 		<skos:definition>is placed at</skos:definition>
@@ -552,7 +496,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;issues">
-		<rdfs:subPropertyOf rdf:resource="&cmns-prd;provides"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-org;provides"/>
 		<rdfs:label>issues</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;AgentRole"/>
 		<owl:inverseOf rdf:resource="&cmns-prd;isIssuedBy"/>
@@ -563,11 +507,6 @@
 		<rdfs:label>produces</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-prd;Producer"/>
 		<skos:definition>creates through a fabrication, manufacturing or production process</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&cmns-prd;provides">
-		<rdfs:label>provides</rdfs:label>
-		<skos:definition>makes something available</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;situates">
