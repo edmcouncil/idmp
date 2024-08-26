@@ -1,0 +1,14 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+##
+# banner We be aware when an OWL class is used as the individual in an OWL construct.
+
+SELECT DISTINCT (concat ("WARN: Class ", str(?class), " is used as an individual.") AS ?error) ?class
+WHERE
+{
+    ?class rdf:type owl:Class.
+    ?object owl:hasValue | owl:sameAs | owl:differentFrom ?class.
+    FILTER regex(str(?resource), <HYGIENE_TESTS_FILTER_PARAMETER>)
+}
