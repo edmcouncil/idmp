@@ -44,7 +44,16 @@
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/ProductsAndServices/">
 		<rdfs:label>Commons Products and Services Ontology</rdfs:label>
 		<dct:abstract>This ontology defines fundamental concepts for products, services, and providers of those services. It also covers well-known identifiers used to support supply chain applications.</dct:abstract>
-		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<dct:license>Copyright (c) 2013-2024 EDM Council, Inc.
+		Copyright (c) 2013-2024 Object Management Group, Inc.
+		
+		Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &apos;Software&apos;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		
+		See https://opensource.org/licenses/MIT.</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
@@ -59,8 +68,8 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20241101/ProductsAndServices/"/>
 		<skos:note>This ontology was originally designed for and has been adapted from the Financial Industry Business Ontology (FIBO) Products and Services Ontology.</skos:note>
-		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022-2024 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2013-2024 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2013-2024 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-prd;CommercialProduct">
@@ -183,10 +192,15 @@
 		<rdf:type rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdf:type rdf:resource="&cmns-doc;ReferenceDocument"/>
 		<rdf:type rdf:resource="&cmns-id;IdentificationScheme"/>
+		<rdf:type>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;isAbout"/>
+				<owl:someValuesFrom rdf:resource="&cmns-prd;TradeItem"/>
+			</owl:Restriction>
+		</rdf:type>
 		<rdfs:label>GS1 General Specifications</rdfs:label>
 		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://ref.gs1.org/standards/genspecs/</rdfs:seeAlso>
 		<skos:definition>reference specification and scheme that defines how identification keys, data attributes and barcodes must be formulated and used in business applications</skos:definition>
-		<cmns-doc:isAbout rdf:resource="&cmns-prd;TradeItem"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&cmns-prd;GS1GlobalOffice">
