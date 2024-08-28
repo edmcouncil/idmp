@@ -5,11 +5,11 @@
 	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
 	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-loc "https://www.omg.org/spec/Commons/Locations/">
 	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
 	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
 	<!ENTITY cmns-rlcmp "https://www.omg.org/spec/Commons/RolesAndCompositions/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
-	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -22,11 +22,11 @@
 	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
 	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-loc="https://www.omg.org/spec/Commons/Locations/"
 	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
 	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
 	xmlns:cmns-rlcmp="https://www.omg.org/spec/Commons/RolesAndCompositions/"
 	xmlns:dct="http://purl.org/dc/terms/"
-	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -35,27 +35,45 @@
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/Organizations/">
 		<rdfs:label>Commons Organizations Ontology</rdfs:label>
-		<dct:abstract>This ontology defines high-level concepts for organizations and related terms. It is purposefully underspecified to facilitate mapping to specific organization ontologies, such as the emerging W3C organization ontology, organization from a BMM or BPMN perspective, organization from a records management (RMS) perspective, and so forth.</dct:abstract>
-		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<dct:abstract>This ontology defines high-level concepts for organizations, legal entities, and related terms, such as organization membership. It is purposefully underspecified to facilitate mapping to specific organization ontologies, such as the W3C organization ontology, organization from a business (BMM or BPMN) perspective, organization from a records management (RMS) and provenance (PPMN) perspective, and to other models describing organizations.</dct:abstract>
+		<dct:license>Copyright (c) 2013-2024 EDM Council, Inc.
+		Copyright (c) 2013-2024 Object Management Group, Inc.
+		
+		Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &apos;Software&apos;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		
+		See https://opensource.org/licenses/MIT.</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Locations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20240801/Organizations/"/>
-		<skos:note>This ontology is derived from the Financial Industry Business Ontology (FIBO) Organizations, Formal Organizations, and Legal Persons ontologies.</skos:note>
+		<skos:note>This ontology is derived, in part, from the Financial Industry Business Ontology (FIBO) Organizations, Formal Organizations, and Legal Persons ontologies.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2013-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2013-2024 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-org;Capability">
+		<rdfs:label>capability</rdfs:label>
+		<skos:definition>ability to perform a specific function or achieve a particular outcome</skos:definition>
+		<cmns-av:adaptedFrom>Business Architecture Core Metamodel, https://www.omg.org/spec/BACM</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>The TOGAF Standard, https://pubs.opengroup.org/togaf-standard/business-architecture/business-capability-planning.html</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>Value Delivery Modeling Language Specification, https://www.omg.org/spec/VDML</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Capabilities are described in terms of outcomes as well as the roles involved in achieving those outcomes. The ability for an organization to perform or provide some capability may involve people with particular skills and knowledge, intellectual property, defined practices, operating facilities, tools and equipment.</cmns-av:explanatoryNote>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-org;FormalOrganization">
 		<rdfs:subClassOf rdf:resource="&cmns-org;Organization"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-org;isDomiciledIn"/>
-				<owl:onClass rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+				<owl:onClass rdf:resource="&cmns-loc;GeopoliticalEntity"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -68,22 +86,14 @@
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.w3.org/TR/vocab-org/#class-formalorganization</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-org;Group">
-		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
-				<owl:allValuesFrom rdf:resource="&cmns-pts;Agent"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>group</rdfs:label>
-		<skos:definition>collection of agents (people, organizations, software agents, etc.) that are considered as a unit</skos:definition>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&cmns-org;InformalOrganization">
 		<rdfs:subClassOf rdf:resource="&cmns-org;Organization"/>
-		<rdfs:label>informal organization</rdfs:label>
-		<skos:definition>organization that is not formally constituted in some way</skos:definition>
+		<rdfs:label xml:lang="en-GB">informal organisation</rdfs:label>
+		<rdfs:label xml:lang="en-US">informal organization</rdfs:label>
+		<skos:definition>group of individuals who come together for a common purpose without forming a legal entity</skos:definition>
+		<skos:prefLabel>informal organization</skos:prefLabel>
+		<cmns-av:explanatoryNote>A bridge club with officers and a bank account can be classified as an informal organization, but it depends on how the club is structured and whether it has taken steps to formalize its existence. If the bridge club has officers and a bank account but has not incorporated or registered as a legal entity (like a nonprofit organization or a corporation), it would be considered an informal organization. The officers manage the club&apos;s affairs, and the bank account is likely opened under the names of the officers or with the designation &apos;on behalf of the bridge club&apos;.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>There is usually no formal registration with governmental authorities, and the group operates based on mutual agreement among its members rather than a formal legal structure.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-org;LegalEntity">
@@ -91,7 +101,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-org;LegalPerson"/>
 		<rdfs:label>legal entity</rdfs:label>
 		<skos:definition>legal person that is a partnership, corporation, or other organization having the capacity to negotiate contracts, assume financial obligations, and pay off debts, organized under the laws of some jurisdiction</skos:definition>
-		<skos:scopeNote>The term &apos;legal entities&apos; includes, but is not limited to, unique parties that are legally or financially responsible for the performance of financial transactions or have the legal right in their jurisdiction to enter independently into legal contracts, regardless of whether they are incorporated or constituted in some other way (e.g. trust, partnership, contractual). It excludes natural persons, but includes governmental organizations and supranationals.</skos:scopeNote>
+		<skos:scopeNote>The term &apos;legal entity&apos; includes, but is not limited to, unique parties that are legally or financially responsible for the performance of financial transactions or have the legal right in their jurisdiction to enter independently into legal contracts, regardless of whether they are incorporated or constituted in some other way (e.g. trust, partnership, contractual). It excludes natural persons, but includes governmental organizations and supranationals.</skos:scopeNote>
 		<cmns-av:adaptedFrom>ISO 17442, Financial services - Legal Entity Identifier (LEI), first edition, 2012-06-01, section 3.1</cmns-av:adaptedFrom>
 		<cmns-av:synonym>artificial person</cmns-av:synonym>
 		<cmns-av:synonym>juridical entity</cmns-av:synonym>
@@ -236,7 +246,7 @@
 		<skos:prefLabel>organization name</skos:prefLabel>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-org;OrganizationPartIdentifier">
+	<owl:Class rdf:about="&cmns-org;OrganizationSubUnitIdentifier">
 		<rdfs:subClassOf rdf:resource="&cmns-id;Identifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -244,13 +254,13 @@
 				<owl:someValuesFrom rdf:resource="&cmns-org;OrganizationalSubUnit"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label xml:lang="en-GB">organisation part identifier</rdfs:label>
-		<rdfs:label xml:lang="en-US">organization part identifier</rdfs:label>
+		<rdfs:label xml:lang="en-GB">organisation sub-unit identifier</rdfs:label>
+		<rdfs:label xml:lang="en-US">organization sub-unit identifier</rdfs:label>
 		<skos:definition>identifier allocated to a particular organizational sub-unit</skos:definition>
-		<skos:prefLabel>organization part identifier</skos:prefLabel>
+		<skos:prefLabel>organization sub-unit identifier</skos:prefLabel>
 		<cmns-av:abbreviation>OPI</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO/IEC 6523-1:1998 Information technology — Structure for the identification of organizations and organization parts — Part 1: Identification of organization identification schemes, https://www.iso.org/obp/ui/#iso:std:iso-iec:6523:-1:ed-1:v1:en</cmns-av:adaptedFrom>
-		<cmns-av:synonym>organization sub-unit identifier</cmns-av:synonym>
+		<cmns-av:synonym>organization part identifier</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-org;OrganizationalSubUnit">
@@ -264,12 +274,57 @@
 		<rdfs:label xml:lang="en-GB">organisational sub-unit</rdfs:label>
 		<rdfs:label xml:lang="en-US">organizational sub-unit</rdfs:label>
 		<rdfs:seeAlso rdf:resource="https://www.w3.org/TR/vocab-org/#org:OrganizationalUnit"/>
-		<skos:definition>any department, service, and other entity within a larger organization that only has full recognition within the context of that organization, but requires identification for some purpose</skos:definition>
+		<skos:definition>any department or other entity within a larger organization that only has full recognition within the context of that organization, but requires identification for some purpose</skos:definition>
 		<skos:prefLabel>organizational sub-unit</skos:prefLabel>
 		<cmns-av:adaptedFrom>ISO/IEC 6523-1:1998 Information technology — Structure for the identification of organizations and organization parts — Part 1: Identification of organization identification schemes, https://www.iso.org/obp/ui/#iso:std:iso-iec:6523:-1:ed-1:v1:en</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>In other words, it is not a legal entity in its own right.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>organization part</cmns-av:synonym>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-org;Service">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-org;provides"/>
+				<owl:onClass rdf:resource="&cmns-org;Capability"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-org;isProvidedBy"/>
+				<owl:someValuesFrom rdf:resource="&cmns-org;ServiceProvider"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>service</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://unstats.un.org/unsd/nationalaccount/glossresults.asp?gID=501"/>
+		<skos:definition>intangible activity performed by some party for the benefit of another party</skos:definition>
+		<skos:example>Services include intangible products, such as accounting, banking, cleaning, consultancy, education, insurance, expertise, medical treatment, or transportation services.</skos:example>
+		<cmns-av:explanatoryNote>Sometimes services are difficult to identify because they are closely associated with a good; such as the combination of a diagnosis with the administration of a medicine. No transfer of possession or ownership takes place when services are sold, and they (1) cannot be stored or transported, (2) are instantly perishable, and (3) come into existence at the time they are bought and consumed.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>The OECD defines services as outputs produced to order and which cannot be traded separately from their production; ownership rights cannot be established over services and by the time their production is completed they must have been provided to the consumers. As an exception to this rule there is a group of industries, generally classified as service industries, some of whose outputs have characteristics of goods, i.e. those concerned with the provision, storage, communication and dissemination of information, advice and entertainment in the broadest sense of those terms; the products of these industries, where ownership rights can be established, may be classified either as goods or services depending on the medium by which these outputs are supplied.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-org;ServiceProvider">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;AgentRole"/>
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-org;provides"/>
+				<owl:someValuesFrom rdf:resource="&cmns-org;Service"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>service provider</rdfs:label>
+		<skos:definition>role of an agent that provides some service, including but not limited to commercial or professional services</skos:definition>
+		<skos:example>Example services may include consulting, financial, legal, real estate, education, communications, registration, regulatory, manufacturing, storage, processing, or other services.</skos:example>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-org;designates">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRelatedPartyRole"/>
+		<rdfs:label>designates</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
+		<skos:definition>appoints someone officially</skos:definition>
+		<cmns-av:explanatoryNote>This property is intended to cover assigning a job or role to someone, selecting or designating someone to fill an office or a position, and fixing or setting by authority or by mutual agreement.</cmns-av:explanatoryNote>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-org;hasMembership">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasActor"/>
@@ -288,7 +343,7 @@
 		<rdfs:range rdf:resource="&cmns-org;OrganizationMember"/>
 		<rdfs:seeAlso rdf:resource="https://www.w3.org/TR/vocab-org/#org:member"/>
 		<owl:inverseOf rdf:resource="&cmns-org;isOrganizationMember"/>
-		<skos:definition>indicates the party that is the member in an organizational membership situation</skos:definition>
+		<skos:definition>indicates the party acting in the role of the member in an organizational membership situation</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-org;hasSubUnit">
@@ -301,12 +356,45 @@
 		<skos:definition>relates an organization to a part of that organization</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:DatatypeProperty rdf:about="&cmns-org;hasURL">
+		<rdfs:label>has URL</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;anyURI"/>
+		<skos:definition>links something to a web resource that specifies its location on a computer network and a method for retrieving it</skos:definition>
+		<cmns-av:synonym>has uniform resource locator</cmns-av:synonym>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-org;hasWebsite">
+		<rdfs:subPropertyOf rdf:resource="&cmns-org;hasURL"/>
+		<rdfs:label>has website</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;anyURI"/>
+		<rdfs:seeAlso rdf:resource="https://www.w3.org/standards/webdesign/"/>
+		<skos:definition>links something to a page or set of related web pages located under a single domain name, typically produced by a single person or organization</skos:definition>
+		<cmns-av:explanatoryNote>Web Design and Applications involve the standards for building and Rendering Web pages, including HTML, CSS, SVG, device APIs, and other technologies for Web Applications (&apos;WebApps&apos;). HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages. HTML provides the structure of the page, CSS the (visual and aural) layout, for a variety of devices and services.</cmns-av:explanatoryNote>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-org;isDesignatedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasRelatedPartyRole"/>
+		<rdfs:label>is designated by</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
+		<owl:inverseOf rdf:resource="&cmns-org;designates"/>
+		<skos:definition>indicates the role of the party that has assigned or appointed someone to an office or position</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-org;isDomiciledIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-loc;hasRegion"/>
 		<rdfs:label>is domiciled in</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-org;FormalOrganization"/>
-		<rdfs:range rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+		<rdfs:range rdf:resource="&cmns-loc;GeopoliticalEntity"/>
 		<skos:definition>indicates the principal place where an entity conducts business within some country, such as where its headquarters is located</skos:definition>
 		<cmns-av:explanatoryNote>Corporate domicile refers to a place where a company&apos;s affairs are discharged. It is also typically the legal home of a corporation within a country because the place is considered by law as the center of corporate affairs. In cases where a business has incorporated in one location for convenience, such as for taxation, legal, or regulatory purposes, but operates primarily in one or more other locations, domicile refers to the operational location(s) rather than legal location. Many companies in the US have incorporated in the State of Delaware, for example, but do not have operational facilities in Delaware (or only have small offices there).</cmns-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-org;isManagedBy">
+		<rdfs:subPropertyOf rdf:resource="&cmns-pts;hasPartyRole"/>
+		<rdfs:label>is managed by</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-pts;PartyRole"/>
+		<skos:definition>indicates the role of a party that directs the affairs or administration of something or someone</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-org;isMembershipPartyIn">
@@ -314,7 +402,7 @@
 		<rdfs:label>is membership party in</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-org;MemberBearingOrganization"/>
 		<rdfs:range rdf:resource="&cmns-org;Membership"/>
-		<skos:definition>indicates the context of membership in which the party plays the role of having members</skos:definition>
+		<skos:definition>indicates the membership situation in which the party plays the role of having members</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-org;isOrganizationMember">
@@ -323,7 +411,18 @@
 		<rdfs:domain rdf:resource="&cmns-org;OrganizationMember"/>
 		<rdfs:range rdf:resource="&cmns-org;Membership"/>
 		<rdfs:seeAlso rdf:resource="https://www.w3.org/TR/vocab-org/#org:role"/>
-		<skos:definition>indicates the context of membership in which some party is an organization member</skos:definition>
+		<skos:definition>indicates the context of membership in which the party plays the role of an organization member</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-org;isProvidedBy">
+		<rdfs:label>is provided by</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-org;provides"/>
+		<skos:definition>is made available by</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-org;isProvidedTo">
+		<rdfs:label>is provided to</rdfs:label>
+		<skos:definition>is made available to</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-org;isSubUnitOf">
@@ -333,6 +432,19 @@
 		<rdfs:range rdf:resource="&cmns-org;Organization"/>
 		<rdfs:seeAlso rdf:resource="https://www.w3.org/TR/vocab-org/#org:subOrganizationOf"/>
 		<skos:definition>relates a part of an organization to the larger entity</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-org;manages">
+		<rdfs:subPropertyOf rdf:resource="&cmns-rlcmp;isRoleIn"/>
+		<rdfs:label>manages</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-pts;PartyRole"/>
+		<owl:inverseOf rdf:resource="&cmns-org;isManagedBy"/>
+		<skos:definition>relates a party role to something or someone that it directs or administers in some way</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-org;provides">
+		<rdfs:label>provides</rdfs:label>
+		<skos:definition>makes available</skos:definition>
 	</owl:ObjectProperty>
 
 </rdf:RDF>
