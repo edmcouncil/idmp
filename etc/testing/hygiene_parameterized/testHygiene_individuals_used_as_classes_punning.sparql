@@ -9,9 +9,9 @@ SELECT DISTINCT (concat ("WARN: Individual ", str(?individual), " is used as a c
 WHERE
 {
     ?individual rdf:type/rdfs:subClassOf* owl:NamedIndividual.
-    {?individual rdfs:subClassOf | owl:unionOf | owl:intersectionOf | owl:disjointWith | owl:unionOf | owl:disjointUnionOf | owl:equivalentClass | owl:hasKey | owl:hasSelf | owl:hasValue ?resource.}
+    {?individual rdfs:subClassOf | owl:complementOf | owl:unionOf | owl:intersectionOf | owl:disjointWith | owl:disjointUnionOf | owl:equivalentClass | owl:hasKey | owl:hasSelf | owl:hasValue ?resource.}
     UNION
-    {?resource rdfs:subClassOf | rdfs:domain | rdfs:range | owl:equivalentClass ?individual.}
+    {?resource rdfs:subClassOf | rdfs:domain | rdfs:range | owl:equivalentClass | owl:complementOf | owl:disjointWith ?individual.}
     FILTER regex(str(?individual), <HYGIENE_TESTS_FILTER_PARAMETER>)
 }
 ORDER BY ?individual
