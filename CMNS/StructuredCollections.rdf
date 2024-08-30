@@ -31,18 +31,27 @@
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/StructuredCollections/">
 		<rdfs:label>Commons Structured Collections Ontology</rdfs:label>
-		<dct:abstract>The collections ontology extends the concept of a structured collection, to include sets, lists, and collections whose elements are ordered by date.</dct:abstract>
-		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<dct:abstract>This ontology extends the concept of a structured collection to include sets, lists, and collections whose elements are ordered chronologically or are indexed.</dct:abstract>
+		<dct:license>Copyright (c) 2019-2024 Thematix Partners LLC
+		Copyright (c) 2021-2024 EDM Council, Inc.
+		Copyright (c) 2024 Object Management Group, Inc.
+		Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &apos;Software&apos;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		
+		See https://opensource.org/licenses/MIT.</dct:license>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230401/StructuredCollections/"/>
-		<cmns-av:copyright>Copyright (c) 2019-2023 Thematix Partners LLC</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2021-2023 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022-2023 Object Management Group, Inc.</cmns-av:copyright>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20240801/StructuredCollections/"/>
+		<cmns-av:copyright>Copyright (c) 2019-2024 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2021-2024 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2024 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-col;Constituent">
@@ -60,7 +69,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>chronologically ordered collection</rdfs:label>
-		<skos:definition>structured collection whose elements are ordered by a sequence of dates in time</skos:definition>
+		<skos:definition>structured collection whose elements are ordered by time</skos:definition>
 		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Examples include simple schedules, bank statements, and other records that are ordered by time.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -70,11 +79,12 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dt;hasObservedDateTime"/>
-				<owl:someValuesFrom rdf:resource="&cmns-dt;CombinedDateTime"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&cmns-dt;CombinedDateTime"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>chronologically ordered constituent</rdfs:label>
-		<skos:definition>element of a collection that is ordered within a collection with respect to a sequence of dates in time</skos:definition>
+		<skos:definition>element of a collection that is ordered within a collection with respect to time</skos:definition>
 		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Note that the use of several options for the representation of a date and time stamp enables extensions for milliseconds, nanoseconds using an xsd:string that has the format of an xsd:dateTime datatype but extends the level of granularity consistently. An example of where this is required is to represent records that are ordered by date and time and security prices that change multiple times in a given day.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -104,7 +114,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-strcol;hasIndexValue"/>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:someValuesFrom rdf:resource="&cmns-strcol;IndexValue"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -130,7 +140,8 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:allValuesFrom rdf:resource="&cmns-strcol;IndexedConstituent"/>
+				<owl:onClass rdf:resource="&cmns-strcol;IndexedConstituent"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>list</rdfs:label>

@@ -128,7 +128,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240301/ISO11615-MedicinalProducts.rdf version of this ontology was augmented to add SKOS prefLabels for elements that have multiple labels (IDMP-734), modified to clean up URIs that had an erroneous final slash or do not resolve reliably, and rephrased the definition of &apos;marketing status reason code&apos; to be grammatically correct.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240501/ISO11615-MedicinalProducts.rdf version of this ontology was modified to correctly represent the notion of age as a population characteristic (IDMP-682) and simplify the representation of container roles (IDMP-748).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240601/ISO11615-MedicinalProducts.rdf version of this ontology was extended to complete the details for marketing authorization (IDMP-747) and marketing status (IDMP-750).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240701/ISO11615-MedicinalProducts.rdf version of this ontology was extended to complete the details for medicinal product name (IDMP-745).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240701/ISO11615-MedicinalProducts.rdf version of this ontology was extended to complete the details for medicinal product name (IDMP-745) and integrate revisions to the content from the 1.2 revision of the OMG Commons Ontology Library (IDMP-774).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -1065,7 +1065,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
+				<owl:someValuesFrom rdf:resource="&cmns-loc;GeographicRegion"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en-GB">clinical trial authorisation</rdfs:label>
@@ -1680,7 +1680,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	
 	<owl:Class rdf:about="&idmp-mprd;GeographicAreaForActionTaken">
 		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
-		<rdfs:subClassOf rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-loc;GeographicRegionIdentifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
@@ -2204,7 +2204,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
-				<owl:onClass rdf:resource="&lcc-cr;GeographicRegion"/>
+				<owl:onClass rdf:resource="&cmns-loc;GeographicRegion"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2354,7 +2354,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
+				<owl:someValuesFrom rdf:resource="&cmns-loc;GeographicRegion"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en-GB">manufacturing authorisation</rdfs:label>
@@ -2501,7 +2501,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
+				<owl:someValuesFrom rdf:resource="&cmns-loc;GeographicRegion"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -2928,7 +2928,7 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
-				<owl:allValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+				<owl:allValuesFrom rdf:resource="&cmns-loc;GeographicRegionIdentifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -3564,7 +3564,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;isManagedBy"/>
+				<owl:onProperty rdf:resource="&cmns-org;isManagedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProductMasterFileHolder"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
@@ -3596,7 +3596,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-ra;manages"/>
+				<owl:onProperty rdf:resource="&cmns-org;manages"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductMasterFile"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -3763,7 +3763,7 @@ The convention applied for naming a medicinal product can differ between medicin
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rga;hasReach"/>
-				<owl:onClass rdf:resource="&lcc-cr;GeographicRegion"/>
+				<owl:onClass rdf:resource="&cmns-loc;GeographicRegion"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -4809,7 +4809,7 @@ The convention applied for naming a medicinal product can differ between medicin
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rga;isApplicableInJurisdiction"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+				<owl:someValuesFrom rdf:resource="&cmns-loc;GeographicRegionIdentifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>registration number</rdfs:label>
@@ -5455,7 +5455,7 @@ The convention applied for naming a medicinal product can differ between medicin
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;administers">
-		<rdfs:subPropertyOf rdf:resource="&cmns-prd;provides"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-org;provides"/>
 		<rdfs:label>administers</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<owl:inverseOf rdf:resource="&idmp-mprd;isAdministeredBy"/>
@@ -6495,7 +6495,7 @@ The convention applied for naming a medicinal product can differ between medicin
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAdministeredBy">
-		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedBy"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-org;isProvidedBy"/>
 		<rdfs:label>is administered by</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProduct"/>
 		<skos:definition>indicates a party, such as a clinician, that administers some medicinal product</skos:definition>
