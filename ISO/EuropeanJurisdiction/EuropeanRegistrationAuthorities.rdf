@@ -81,8 +81,9 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240301/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240701/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230801/EuropeanJurisdiction/EuropeanRegistrationAuthorities.rdf version of this ontology was revised to normalize the use of hasTextualName from MVF rather than from LCC.</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240301/EuropeanJurisdiction/EuropeanRegistrationAuthorities.rdf version of this ontology was revised to complete the details related to the EudraVigilence code (IDMP-753).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -101,7 +102,7 @@
 		<rdfs:label>British Pharmacological Society as registration authority</rdfs:label>
 		<skos:definition>British Pharmacological Society in its role as a Registration Authority (RA)</skos:definition>
 		<cmns-av:abbreviation>BPS RA</cmns-av:abbreviation>
-		<cmns-ra:manages rdf:resource="&idmp-eura;InternationalUnionOfBasicAndClinicalPharmacologyGuide"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;InternationalUnionOfBasicAndClinicalPharmacologyGuide"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-eura;BritishPharmacologicalSociety"/>
 	</owl:NamedIndividual>
 	
@@ -111,7 +112,7 @@
 		<skos:definition>manually curated database of bioactive molecules with drug-like properties</skos:definition>
 		<cmns-av:abbreviation>ChEMBL</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://www.ebi.ac.uk/chembl/"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
 		<mvf:hasTextualName>ChEMBL database</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -120,7 +121,7 @@
 		<rdfs:label>Chemical Entities of Biological Interest</rdfs:label>
 		<skos:definition>freely available dictionary of molecular entities focused on &apos;small&apos; chemical compounds</skos:definition>
 		<cmns-av:directSource rdf:resource="https://www.ebi.ac.uk/chebi/"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstituteRegistrationAuthority"/>
 		<mvf:hasTextualName>Chemical Entities of Biological Interest (ChEBI)</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -202,8 +203,26 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredBy"/>
+				<owl:hasValue rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-ra;isRegisteredIn"/>
 				<owl:hasValue rdf:resource="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionary"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;compliesWith"/>
+				<owl:hasValue rdf:resource="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionaryScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:hasValue rdf:resource="&cmns-ge-euj;EuropeanEconomicArea"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -226,7 +245,7 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<rdfs:label>European Chemicals Agency registration authority</rdfs:label>
 		<skos:definition>European Chemicals Agency in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-ra:manages rdf:resource="&idmp-eura;EuropeanInventoryOfExistingCommercialChemicalSubstances"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;EuropeanInventoryOfExistingCommercialChemicalSubstances"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-eurga;EuropeanChemicalsAgency"/>
 	</owl:NamedIndividual>
 	
@@ -236,7 +255,7 @@
 		<skos:definition>database that informs about the food additives approved for use in food in the EU and their conditions of use</skos:definition>
 		<cmns-av:directSource rdf:resource="https://ec.europa.eu/food/safety/food-improvement-agents/additives/database_en"/>
 		<cmns-av:explanatoryNote>It is based on the Union list of food additives.</cmns-av:explanatoryNote>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanDirectorateForTheQualityOfMedicinesAndHealthcareRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanDirectorateForTheQualityOfMedicinesAndHealthcareRegistrationAuthority"/>
 		<mvf:hasTextualName>European Commission Food Additives Database</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -245,7 +264,7 @@
 		<rdfs:label>European Commission Scientific Committee on Consumer Safety Opinions</rdfs:label>
 		<skos:definition>registry that provides opinions on health and safety risks (chemical, biological, mechanical and other physical risks) of non-food consumer products (e.g. cosmetic products and their ingredients, toys, textiles, clothing, personal care and household products) and services (e.g. tattooing, artificial sun tanning)</skos:definition>
 		<cmns-av:directSource rdf:resource="https://ec.europa.eu/health/scientific-committees/scientific-committee-consumer-safety-sccs_en"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanCommissionScientificCommitteeOnConsumerSafetyRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanCommissionScientificCommitteeOnConsumerSafetyRegistrationAuthority"/>
 		<mvf:hasTextualName>European Commission Scientific Committee on Consumer Safety Opinions</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -253,7 +272,7 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<rdfs:label>European Commission Scientific Committee on Consumer Safety registration authority</rdfs:label>
 		<skos:definition>European Commission Scientific Committee on Consumer Safety in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-ra:manages rdf:resource="&idmp-eura;EuropeanCommissionScientificCommitteeOnConsumerSafetyOpinions"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;EuropeanCommissionScientificCommitteeOnConsumerSafetyOpinions"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-eurga;EuropeanCommissionScientificCommitteeOnConsumerSafety"/>
 	</owl:NamedIndividual>
 	
@@ -287,7 +306,7 @@
 		<rdfs:label>European Directorate for the Quality of Medicines and Healthcare Knowledge Database</rdfs:label>
 		<skos:definition>repository managed by the European Directorate for the Quality of Medicines and Healthcare that provides information on a given substance or general method of analysis</skos:definition>
 		<cmns-av:directSource rdf:resource="https://www.edqm.eu/en/knowledge-database"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanDirectorateForTheQualityOfMedicinesAndHealthcareRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanDirectorateForTheQualityOfMedicinesAndHealthcareRegistrationAuthority"/>
 		<mvf:hasTextualName>European Directorate for the Quality of Medicines and Healthcare Knowledge Database</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -295,8 +314,8 @@
 		<rdf:type rdf:resource="&cmns-ra;RegistrationAuthority"/>
 		<rdfs:label>European Directorate for the Quality of Medicines and Healthcare registration authority</rdfs:label>
 		<skos:definition>European Directorate for the Quality of Medicines and Healthcare in its role as a Registration Authority (RA)</skos:definition>
-		<cmns-ra:manages rdf:resource="&idmp-eura;EuropeanCommissionFoodAdditivesDatabase"/>
-		<cmns-ra:manages rdf:resource="&idmp-eura;EuropeanDirectorateForTheQualityOfMedicinesAndHealthcareKnowledgeDatabase"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;EuropeanCommissionFoodAdditivesDatabase"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;EuropeanDirectorateForTheQualityOfMedicinesAndHealthcareKnowledgeDatabase"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-eurga;EuropeanDirectorateForTheQualityOfMedicinesAndHealthcare"/>
 	</owl:NamedIndividual>
 	
@@ -306,7 +325,7 @@
 		<skos:definition>legacy repository consisting of an inventory of substances that were deemed to be available on the European Community market between 1 January 1971 and 18 September 1981</skos:definition>
 		<cmns-av:abbreviation>EINECS</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://echa.europa.eu/information-on-chemicals/ec-inventory"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanChemicalsAgencyRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanChemicalsAgencyRegistrationAuthority"/>
 		<mvf:hasTextualName>EINECS (European inventory of existing commercial chemical substances)</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -341,10 +360,10 @@
 		<skos:definition>European Medicines Agency (EMA) in its role as a Registration Authority (RA), which is a function of the eXtended EudraVigilance Medicinal Product Dictionary (XEVMPD) for registration of substances</skos:definition>
 		<cmns-av:abbreviation>EMA XEVMPD RA</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
-		<cmns-ra:manages rdf:resource="&idmp-eura;EuropeanPublicAssessmentReports"/>
-		<cmns-ra:manages rdf:resource="&idmp-eura;EuropeanUnionClinicalTrialsRegister"/>
-		<cmns-ra:manages rdf:resource="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionary"/>
-		<cmns-ra:manages rdf:resource="&idmp-eura;SummaryOfProductCharacteristics"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;EuropeanPublicAssessmentReports"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;EuropeanUnionClinicalTrialsRegister"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionary"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;SummaryOfProductCharacteristics"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-eurga;EuropeanMedicinesAgency"/>
 	</owl:NamedIndividual>
 	
@@ -370,7 +389,7 @@
 		<rdfs:label>European Molecular Biology Laboratory European Bioinformatics Institute registration authority</rdfs:label>
 		<skos:definition>European Molecular Biology Laboratory European Bioinformatics Institute in its role as a Registration Authority (RA)</skos:definition>
 		<cmns-av:abbreviation>EMBL-EBI RA</cmns-av:abbreviation>
-		<cmns-ra:manages rdf:resource="&idmp-eura;EuropeanInventoryOfExistingCommercialChemicalSubstances"/>
+		<cmns-org:manages rdf:resource="&idmp-eura;EuropeanInventoryOfExistingCommercialChemicalSubstances"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-eura;EuropeanMolecularBiologyLaboratoryEuropeanBioinformaticsInstitute"/>
 	</owl:NamedIndividual>
 	
@@ -378,7 +397,7 @@
 		<rdf:type rdf:resource="&cmns-ra;Registry"/>
 		<rdfs:label>european public assessment reports</rdfs:label>
 		<cmns-av:directSource rdf:resource="https://www.ema.europa.eu/en/glossary/european-public-assessment-report"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 		<mvf:hasTextualName>European public assessment reports</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -387,7 +406,7 @@
 		<rdfs:label>European Union Clinical Trials Register</rdfs:label>
 		<skos:definition>register that contains information on interventional clinical trials on medicines conducted in the European Union (EU), or the European Economic Area (EEA) which started after 1 May 2004</skos:definition>
 		<cmns-av:directSource rdf:resource="https://www.clinicaltrialsregister.eu/about.html"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 		<mvf:hasTextualName>European Union Clinical Trials Register</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -397,7 +416,7 @@
 		<skos:definition>registry that was designed to support the collection, reporting, coding and evaluation of authorized and investigational medicinal product and substance information in a standardized and structured way</skos:definition>
 		<cmns-av:abbreviation>XEVMPD</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 		<mvf:hasTextualName>eXtended EudraVigilance Medicinal Product Dictionary</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -426,13 +445,21 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionaryScheme">
+		<rdf:type rdf:resource="&cmns-ra;RegistrationScheme"/>
+		<rdfs:label>eXtended EudraVigilance Medicinal Product Dictionary scheme</rdfs:label>
+		<skos:definition>data submission requirements for authorized medicines, including the legal notice, detailed guidance documents and controlled vocabularies for the Extended EudraVigilance Product Report Message (XEVPRM) schema</skos:definition>
+		<cmns-av:abbreviation>XEVMPD scheme</cmns-av:abbreviation>
+		<cmns-av:directSource rdf:datatype="&xsd;anyURI">https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/data-medicines-iso-idmp-standards-post-authorisation/reporting-requirements-marketing-authorisation-holders/guidance-documents-related-data-submission-authorised-medicines</cmns-av:directSource>
+	</owl:NamedIndividual>
+	
 	<owl:NamedIndividual rdf:about="&idmp-eura;ExtendedEudraVigilanceMedicinalProductDictionaryService">
 		<rdf:type rdf:resource="&cmns-ra;RegistrationService"/>
 		<rdfs:label>eXtended EudraVigilance Medicinal Product Dictionary service</rdfs:label>
 		<skos:definition>service for the collection, reporting, coding and evaluation of authorized and investigational medicinal product and substance information in a standardized and structured way</skos:definition>
 		<cmns-av:abbreviation>XEVMPD service</cmns-av:abbreviation>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.1.7</cmns-av:adaptedFrom>
-		<cmns-prd:isProvidedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+		<cmns-org:isProvidedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-eura;InternationalUnionOfBasicAndClinicalPharmacologyGuide">
@@ -440,7 +467,7 @@
 		<rdfs:label>International Union of Basic and Clinical Pharmacology Guide</rdfs:label>
 		<skos:definition>expert-curated resource of ligand-activity-target relationships, the majority of which come from high-quality pharmacological and medicinal chemistry literature</skos:definition>
 		<cmns-av:directSource rdf:resource="https://www.guidetopharmacology.org/"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;BritishPharmacologicalSocietyAsRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;BritishPharmacologicalSocietyAsRegistrationAuthority"/>
 		<mvf:hasTextualName>International Union of Basic and Clinical Pharmacology Guide</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	
@@ -451,7 +478,7 @@
 		<skos:note>Summaries of product characteristics form the basis of information for healthcare professionals on how to use the medicine safely and effectively.</skos:note>
 		<cmns-av:abbreviation>SmPC</cmns-av:abbreviation>
 		<cmns-av:directSource rdf:resource="https://www.ema.europa.eu/en/glossary/summary-product-characteristics"/>
-		<cmns-ra:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
+		<cmns-org:isManagedBy rdf:resource="&idmp-eura;EuropeanMedicinesAgencyRegistrationAuthority"/>
 		<mvf:hasTextualName>Summary of Product Characteristics</mvf:hasTextualName>
 	</owl:NamedIndividual>
 	

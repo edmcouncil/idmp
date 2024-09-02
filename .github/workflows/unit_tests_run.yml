@@ -22,9 +22,9 @@ jobs:
   IDMP:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Java 11
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "11"
@@ -34,7 +34,7 @@ jobs:
           ./etc/unit_tests/dependencies.sh
       - name: Run unit tests using Apache Jena
         run: |
-          java -Xmx5G -jar etc/unit_tests/target/unit-test-runner-1.0.jar \
+          java -Xmx8G -jar etc/unit_tests/target/unit-test-runner-1.0.jar \
             -ontology_location ./AboutIDMPDev-ReferenceIndividuals.ttl \
             -root_folder etc/unit_tests/ \
             -cq_source etc/CQ/Example/ \
@@ -44,7 +44,7 @@ jobs:
           exit $?
           fi
       - name: Archive merged ontology on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: merged-ontology
@@ -52,11 +52,11 @@ jobs:
   GSRS:
     runs-on: ubuntu-latest
     env:
-      GSRS_VERSION: ${{ inputs.gsrs_version || '2022-12-15' }}
+      GSRS_VERSION: ${{ inputs.gsrs_version || '2023-12-14' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Java 11
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "11"
@@ -66,7 +66,7 @@ jobs:
           ./etc/unit_tests/dependencies.sh
       - name: GSRS Cache
         id: gsrs-caches
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             gsrs-transformed.ttl
@@ -84,7 +84,7 @@ jobs:
           queries=(gsrs-public-data-identifiers gsrs-public-data-names gsrs-public-data-relationships gsrs-public-data-substances)
           for query in "${queries[@]}"; do
             echo "Transforming $query.rqg"
-            java -Xmx5G -jar sparql-generate.jar -l INFO -q etc/transformation/GSRS/$query.rqg -o $query.ttl
+            java -Xmx8G -jar sparql-generate.jar -l INFO -q etc/transformation/GSRS/$query.rqg -o $query.ttl
           done
           result=gsrs-transformed.ttl
           rm -rf $result
@@ -101,7 +101,7 @@ jobs:
           done
       - name: Run unit tests using Apache Jena
         run: |
-          java -Xmx5G -jar etc/unit_tests/target/unit-test-runner-1.0.jar \
+          java -Xmx8G -jar etc/unit_tests/target/unit-test-runner-1.0.jar \
             -ontology_location ./gsrs-final.ttl \
             -root_folder etc/unit_tests/ \
             -cq_source etc/CQ/Example/ \
