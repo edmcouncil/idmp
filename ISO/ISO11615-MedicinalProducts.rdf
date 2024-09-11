@@ -2354,6 +2354,12 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ManufacturingOrBusinessOperation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2361,6 +2367,12 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
 				<owl:someValuesFrom rdf:resource="&cmns-loc;GeographicRegion"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;holdsDuring"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ValidityPeriod"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en-GB">manufacturing authorisation</rdfs:label>
@@ -2438,7 +2450,8 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en">manufacturing or business operation</rdfs:label>
-		<skos:definition>facility (operation) managed by a given entity that provides some operational capability</skos:definition>
+		<skos:definition>facility (operation) managed by a given manufacturer that provides some operational capability</skos:definition>
+		<skos:note>The manufacturing/business operation being undertaken by the particular manufacturer/establishment (organisation) shall be specified.</skos:note>
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 9.5.2.3</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.1</cmns-av:adaptedFrom>
 		<cmns-av:synonym xml:lang="en">manufacturing / business operation</cmns-av:synonym>
@@ -2457,8 +2470,8 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	<owl:Class rdf:about="&idmp-mprd;ManufacturingSite">
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Site"/>
 		<rdfs:label>manufacturing site</rdfs:label>
-		<skos:definition>structured set of activities or operations performed upon material to convert it from the raw material or a semifinished state to a state of further completion</skos:definition>
-		<skos:note>Manufacturing processes may be arranged in process layout, product layout, cellular layout or fixed position layout. Manufacturing processes may be planned to support make-to-stock, make-to-order, assemble-to-order, etc., based on strategic use and placements of inventories. [SOURCE:ISO 15531-1]</skos:note>
+		<skos:definition>place, setting, or context in which a manufacturing or business operation is situated</skos:definition>
+		<skos:note>A given manufacturing site may be associated with one or more manufacturing or business operations (facilities). A given facility (manufacturing or business operation) may span multiple manufacturing sites.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
