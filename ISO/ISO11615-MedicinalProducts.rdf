@@ -2341,6 +2341,18 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;authorizesManufacturingAt"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ManufacturingOrBusinessOperation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;authorizesManufacturingOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorizedParty"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Manufacturer"/>
 			</owl:Restriction>
@@ -2349,18 +2361,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorizingParty"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinesRegulatoryAgency"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;ManufacturingOrBusinessOperation"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -5527,6 +5527,22 @@ The convention applied for naming a medicinal product can differ between medicin
 		<rdfs:range rdf:resource="&idmp-mprd;AuthorizedParty"/>
 		<owl:inverseOf rdf:resource="&idmp-mprd;isAuthorizedBy"/>
 		<skos:definition>endorses, enables, empowers, or gives permission to</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizesManufacturingAt">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
+		<rdfs:label>authorizes manufacturing at</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;ManufacturingAuthorization"/>
+		<rdfs:range rdf:resource="&idmp-mprd;ManufacturingOrBusinessOperation"/>
+		<skos:definition>gives permission to manufacture at</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizesManufacturingOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
+		<rdfs:label>authorizes manufacturing of</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;ManufacturingAuthorization"/>
+		<rdfs:range rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<skos:definition>gives permission to manufacture</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizesThrough">
