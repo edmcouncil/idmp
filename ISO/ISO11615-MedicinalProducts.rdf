@@ -2348,7 +2348,16 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;authorizesManufacturingOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-mprd;MedicinalProduct">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
