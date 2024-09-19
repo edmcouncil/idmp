@@ -1,6 +1,7 @@
 PREFIX iter: <http://w3id.org/sparql-generate/iter/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
 PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
@@ -11,31 +12,39 @@ PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Reg
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
 PREFIX idmp-eureg: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/>
 PREFIX idmp-nara: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/>
+PREFIX idmp-dtp: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/>
 PREFIX spor-st: <https://spor.ema.europa.eu/v1/lists/100000075826/terms/>
+PREFIX spor-sub: <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/>
+PREFIX lcc-639-1: <https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/>
 
 GENERATE {
-  <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }>
+  ?substanceURI
     a ?idmpSubstanceType, ?sporRMSSubstanceType ;
     skos:prefLabel ?prefLabel ;
     skos:altLabel ?altLabel ;
     dct:created ?Created_Date ;
     dct:modified ?Last_Updated_Date ;
     cmns-dsg:hasName ?nameURI ;
-    cmns-id:isIdentifiedBy <https://data.pistoiaalliance.org/id/EVMPD/{ ?External_Code_XEVMPD }> ;
-    cmns-id:isIdentifiedBy <https://data.pistoiaalliance.org/id/FDA_UNII/{ ?External_Code_UNII }> ;
-    skos:exactMatch <https://gsrs.ncats.nih.gov/api/v1/substances/{ ?External_Code_UNII }> ;
+    cmns-id:isIdentifiedBy <https://data.pistoiaalliance.org/id/EVMPD/{ ?EV_Code }> ;
+    cmns-id:isIdentifiedBy <https://data.pistoiaalliance.org/id/FDA_UNII/{ ?UNII }> ;
+    skos:exactMatch <https://gsrs.ncats.nih.gov/api/v1/substances/{ ?UNII }> ;
     cmns-cls:isClassifiedBy ?idmpSubstanceDomain ;
     .
 
   ?nameURI a idmp-sub:SubstanceName ;
+    rdfs:label ?Substance_Name_LangString ;
     cmns-txt:hasTextValue ?Substance_Name ;
+    idmp-sub:hasSubstanceNameValue ?Substance_Name ;
     dct:source ?sourceAuthority ;
+    cmns-dsg:isNameOf ?substanceURI ;
+    idmp-dtp:hasLanguageCode <https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/{ ?Normalized_Language }> ;
     .
 
-  <https://data.pistoiaalliance.org/id/EVMPD/{ ?External_Code_XEVMPD }>
+  <https://data.pistoiaalliance.org/id/EVMPD/{ ?EV_Code }>
     a idmp-eura:EudraVigilanceCode, cmns-ra:RegisteredIdentifier ;
-    cmns-id:identifies <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }> ;
-    cmns-txt:hasTextValue ?External_Code_XEVMPD ;
+    cmns-id:identifies ?substanceURI ;
+    rdfs:label ?EV_Code ;
+    cmns-txt:hasTextValue ?EV_Code ;
     cmns-ra:isRegisteredIn idmp-eura:ExtendedEudraVigilanceMedicinalProductDictionary ;
     .
 }
@@ -54,9 +63,12 @@ ITERATOR iter:CSV(<sms-substances-list.csv>) AS
 ?Comment
 ?Created_Date
 ?Last_Updated_Date
-?External_Code_XEVMPD
-?External_Code_SVG
-?External_Code_UNII
+?EV_Code
+?SVG_Flag
+?UNII
+?INN_Number
+?EC_List_Number
+?Parent_Substance
 WHERE {
   BIND(
     IF(?Language = "Bulgarian", "bg",
@@ -138,7 +150,11 @@ WHERE {
     ?unbound )))
     AS ?idmpSubstanceDomain )
 
-  BIND( IF(?Name_Source = "", ?unbound, <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }/{ StrUUID() }>) AS ?nameURI )
+  BIND( <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }> AS ?substanceURI )
+  BIND( md5(?Substance_Name) AS ?nameHash )
+  BIND( IF(?Name_Source = "", ?unbound,
+    <https://spor.ema.europa.eu/v1/lists/SubstanceDefinition/terms/{ ?SMS_ID }/{ ?nameHash }>
+  ) AS ?nameURI )
   BIND(
     IF(?Name_Source = "CHEBI", idmp-eura:ChemicalEntitiesOfBiologicalInterest, # valid
     IF(?Name_Source = "CHEMICAL ABSTRACT SERVICE", idmp-nara:ChemicalAbstractsService, # valid
@@ -150,6 +166,6 @@ WHERE {
     IF(?Name_Source = "THE MERCK INDEX 20TH EDITION", idmp-ra:MerckIndexOnline, # valid
     IF(?Name_Source = "USP", idmp-nara:USPharmacopeiaMedicinesCompendium, # valid
     IF(?Name_Source = "WHO", idmp-ra:WorldHealthOrganization, # valid
-    ?unbound ))))))))))
+    ?Name_Source ))))))))))
     AS ?sourceAuthority )
 }
