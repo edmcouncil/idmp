@@ -322,6 +322,25 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;produces"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;MedicinalProduct">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;PharmaceuticalProduct">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
 				<owl:someValuesFrom rdf:resource="&cmns-org;LegalEntity"/>
 			</owl:Restriction>
@@ -6732,6 +6751,30 @@ The convention applied for naming a medicinal product can differ between medicin
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, figure 11</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isProducedATManufacturingSite">
+		<rdfs:label>is produced at manufacturing site</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-prd;isProducedBy">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-org;manages">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-prd;isSituatedAt">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a substance, manufactured item, medicinal product, or pharmaceutical product to a manufacturing site where it is produced</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isProducedByManufacturingOperation">
+		<rdfs:label>is produced by manufacturing operation</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-prd;isProducedBy">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-org;manages">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a substance, manufactured item, medicinal product, or pharmaceutical product to a manufacturing operation that produces it</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isTherapeuticIndicationFor">
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;specifies"/>
 		<rdfs:label>is therapeutic indication for</rdfs:label>
@@ -6752,6 +6795,28 @@ The convention applied for naming a medicinal product can differ between medicin
 		<rdfs:domain rdf:resource="&idmp-mprd;ClinicalTrial"/>
 		<rdfs:range rdf:resource="&idmp-mprd;InvestigationalMedicinalProduct"/>
 		<skos:definition>indicates an investigational medicinal product that is administered in the context of a clinical trial</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;manufacturesAtSite">
+		<rdfs:label>manufactures at site</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-org;manages">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-prd;isSituatedAt">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a manufacturer to a site at which it, or a delegated third party, conducts manufacturing</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;manufacturesInRegion">
+		<rdfs:label>manufactures in region</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&idmp-mprd;isAuthorizedThrough">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-cxtdsg;isApplicableIn">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a manufacturer to a region in which it is authorized to manufacture something</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;sponsors">
