@@ -326,13 +326,13 @@
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
+							<rdf:Description rdf:about="&idmp-sub;Matter">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-mprd;MedicinalProduct">
+							<rdf:Description rdf:about="&idmp-sub;MaterialSpecification">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-mprd;PharmaceuticalProduct">
+							<rdf:Description rdf:about="&idmp-mprd;ContainerSpecification">
 							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;Substance">
+							<rdf:Description rdf:about="&idmp-mprd;ProductSpecification">
 							</rdf:Description>
 						</owl:unionOf>
 					</owl:Class>
@@ -376,6 +376,13 @@
 	<owl:Class rdf:about="&idmp-sub;MaterialSpecification">
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasPhysicalCharacteristic"/>
 				<owl:onClass rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -397,6 +404,16 @@
 		</rdfs:subClassOf>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
 		<skos:note>Material is more specifically defined in ISO 11615 to be a &apos;substance or specified substance of which a certain packaging or device is made. This definition applies to a medicinal product package item (container), package (component) and device.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Matter">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MechanicalIngredient">
@@ -483,6 +500,13 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstance">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasConfidentialityIndicator"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ConfidentialityIndicator"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.77</dct:source>
 	</owl:Class>
 	
@@ -514,6 +538,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Substance">
+		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductSpecification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasDefiningStrength"/>
@@ -1261,6 +1286,37 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-mprd;ConfidentialityIndicator">
+		<rdfs:subClassOf rdf:resource="&idmp-dtp;ISO21090-ConceptDescriptor"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;SpecifiedSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-org;Organization">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-mprd;ManufacturingOrBusinessOperation">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>confidentiality indicator</rdfs:label>
+		<skos:definition>classifier for information about a specified substance, an organization, a manufacturing or business operation, or a contact, describing the level of confidentiality associated with information about it</skos:definition>
+		<skos:note>The confidentiality level can be specified using an appropriate controlled vocabulary. The controlled term and a term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.4.2.2.5, 9.4.2.4.5, 9.5.2.3.5, and 9.7.2.2.4, and Figures 8, 10 and 12</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses D.2.5.3, G.2.4, G.2.6.4, and H.2.1.4</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>No controlled vocabulary is defined in either ISO 11615 or the ISO/TS 20443 implementation guide.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-mprd;Container">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
 		<rdfs:label>container</rdfs:label>
@@ -1382,6 +1438,13 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	
 	<owl:Class rdf:about="&idmp-mprd;ContainerSpecification">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasPhysicalCharacteristic"/>
@@ -3090,13 +3153,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialSpecification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;MedicalDeviceBatchIdentifier"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -3269,13 +3325,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;PediatricUseIndicator"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -4006,13 +4055,6 @@ The convention applied for naming a medicinal product can differ between medicin
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialComponentSpecification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasPhysicalCharacteristic"/>
 				<owl:onClass rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -4088,13 +4130,6 @@ The convention applied for naming a medicinal product can differ between medicin
 						</owl:unionOf>
 					</owl:Class>
 				</owl:allValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -4764,6 +4799,13 @@ The convention applied for naming a medicinal product can differ between medicin
 	
 	<owl:Class rdf:about="&idmp-mprd;ProductSpecification">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasPhysicalCharacteristic"/>
@@ -5740,6 +5782,17 @@ The convention applied for naming a medicinal product can differ between medicin
 		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasConfidentialityIndicator">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:label>has confidentiality indicator</rdfs:label>
+		<skos:definition>relates information about a specified substance, an organization, a manufacturing or business operation, or a contact to a classifier describing the level of confidentiality associated with information about it</skos:definition>
+		<skos:note>The confidentiality level can be specified using an appropriate controlled vocabulary. The controlled term and a term identifier shall be specified.</skos:note>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Conditional"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-CD"/>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses 9.4.2.2.5, 9.4.2.4.5, 9.5.2.3.5, and 9.7.2.2.4, and Figures 8, 10 and 12</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 20443:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clauses D.2.5.3, G.2.4, G.2.6.4, and H.2.1.4</cmns-av:adaptedFrom>
+	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-mprd;hasContainerPart">
 		<rdfs:subPropertyOf rdf:resource="&mvf;hasTextualName"/>
@@ -6751,7 +6804,7 @@ The convention applied for naming a medicinal product can differ between medicin
 		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, figure 11</cmns-av:adaptedFrom>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-mprd;isProducedATManufacturingSite">
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isProducedAtManufacturingSite">
 		<rdfs:label>is produced at manufacturing site</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
 			<rdf:Description rdf:about="&cmns-prd;isProducedBy">
@@ -6831,11 +6884,20 @@ The convention applied for naming a medicinal product can differ between medicin
 	<owl:Class rdf:about="&cmns-org;LegalEntity">
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;hasConfidentialityIndicator"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ConfidentialityIndicator"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-mprd;SmallToMediumEnterprise"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<skos:note>The confidentiality level of the organization information can be specified using an appropriate controlled vocabulary. The controlled term and a term identifier shall be specified.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.4.2.2.5</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&mvf-tsc;TerminologyWork">
