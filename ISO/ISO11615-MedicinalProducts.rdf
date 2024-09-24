@@ -128,7 +128,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240301/ISO11615-MedicinalProducts.rdf version of this ontology was augmented to add SKOS prefLabels for elements that have multiple labels (IDMP-734), modified to clean up URIs that had an erroneous final slash or do not resolve reliably, and rephrased the definition of &apos;marketing status reason code&apos; to be grammatically correct.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240501/ISO11615-MedicinalProducts.rdf version of this ontology was modified to correctly represent the notion of age as a population characteristic (IDMP-682) and simplify the representation of container roles (IDMP-748).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240601/ISO11615-MedicinalProducts.rdf version of this ontology was extended to complete the details for marketing authorization (IDMP-747) and marketing status (IDMP-750).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240701/ISO11615-MedicinalProducts.rdf version of this ontology was extended to complete the details for medicinal product name (IDMP-745), integrate revisions to the content from the 1.2 revision of the OMG Commons Ontology Library (IDMP-774), and complete the linkage beween a manufacturer, a given business operation (facility), and the manufacturing site(s) at which a particular medicinal product (or component of a medicinal product) is manufactured (IDMP-779).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240701/ISO11615-MedicinalProducts.rdf version of this ontology was extended to complete the details for medicinal product name (IDMP-745), integrate revisions to the content from the 1.2 revision of the OMG Commons Ontology Library (IDMP-774), complete the linkage beween a manufacturer, a given business operation (facility), and the manufacturing site(s) at which a particular medicinal product (or component of a medicinal product) is manufactured (IDMP-779), and revise the name of concentration to concentration strength for consistency (IDMP-776).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -1243,8 +1243,13 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;Concentration">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:equivalentClass rdf:resource="&idmp-mprd;ConcentrationStrength"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ConcentrationStrength">
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;Strength"/>
-		<rdfs:label>concentration</rdfs:label>
+		<rdfs:label>concentration strength</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 9.7.2.5.3</dct:source>
 		<skos:definition>quantity or range of quantities of the substance/specified substance present per unitary volume (or mass)</skos:definition>
 		<skos:note>For solid dose forms, strength (concentration) is generally the same as strength (presentation) and therefore is not required to be expressed separately; the strength (presentation) only is required.</skos:note>
