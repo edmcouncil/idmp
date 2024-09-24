@@ -102,7 +102,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-TerminologyScience/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240801/ISO11238-Substances/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240901/ISO11238-Substances/"/>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243), and to refactor concepts including substance, moiety, and add physical substance in order to distinguish specifications for substances, which is the primary perspective of the IDMP standards from physical substances, and rename substance constituency to substance composition, which is better understood by the user community. (IDMP-405)</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230201/ISO11238-Substances.rdf version of this ontology was modified to integrate a revised manufactured item and packaging strategy for UC-2. (IDMP-465)</skos:changeNote>
@@ -115,7 +115,7 @@
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231001/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of mixture to complete the requirements specified in clause 7.8 of the ISO 11238 standard and related information in ISO/TS 19844 (IDMP-675), to assist in addressing gaps with respect to the top-level class definitions and relationships in the complete model figures for authorized and investigational medicinal product in Annex A and Annex B, respectively, in ISO 11615 (IDMP-677), and to update the conformance points to be current (IDMP-322).</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20231201/ISO11238-Substances.rdf version of this ontology was augmented to build out the definition of source material (Figure 17 in the ISO standard) to support representation of biologics (IDMP-713) and to normalize the use of hasTextualName from MVF rather than from LCC.</skos:changeNote>
 		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240301/ISO11238-Substances.rdf version of this ontology was augmented to add SKOS prefLabels for elements that have multiple labels (IDMP-734), to correct a wrong prefix for ReferenceSource, to make starting and resultant material roles disjoint, clean up URIs that had an erroneous final slash or were ill-formed, augment definitions with additional metadata from ISO 11238, and adjust the cardinality constraint on has quantity value range for amount to cover the case where there is both a quantity value range and reference range (GitHub-598).</skos:changeNote>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240601/ISO11238-Substances.rdf version of this ontology was augmented to integrate revisions to the content from the 1.2 revision of the OMG Commons Ontology Library (IDMP-774).</skos:changeNote>
+		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20240601/ISO11238-Substances.rdf version of this ontology was augmented to integrate revisions to the content from the 1.2 revision of the OMG Commons Ontology Library (IDMP-774), and complete the linkage beween a manufacturer, a given business operation (facility), and the manufacturing site(s) at which a particular medicinal product (or component of a medicinal product) is manufactured (IDMP-779).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -1698,17 +1698,9 @@
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Producer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;produces"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;ManufacturedItem">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;Substance">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
+				<owl:onClass rdf:resource="&cmns-org;LegalEntity"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>manufacturer</rdfs:label>
@@ -6354,6 +6346,13 @@ For the description of nucleic acids, the following information can be used to a
 				<owl:onProperty rdf:resource="&idmp-sub;hasComment"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Manufacturer"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
