@@ -8,12 +8,11 @@
 	<!ENTITY cmns-dt "https://www.omg.org/spec/Commons/DatesAndTimes/">
 	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
 	<!ENTITY cmns-loc "https://www.omg.org/spec/Commons/Locations/">
-	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
+	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
 	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
 	<!ENTITY cmns-stat "https://www.omg.org/spec/Commons/StatisticalMeasures/">
 	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
 	<!ENTITY dct "http://purl.org/dc/terms/">
-	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
 	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
 	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -29,12 +28,11 @@
 	xmlns:cmns-dt="https://www.omg.org/spec/Commons/DatesAndTimes/"
 	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
 	xmlns:cmns-loc="https://www.omg.org/spec/Commons/Locations/"
-	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
+	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
 	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-stat="https://www.omg.org/spec/Commons/StatisticalMeasures/"
 	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
 	xmlns:dct="http://purl.org/dc/terms/"
-	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -57,16 +55,15 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Locations/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
-		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230901/Statistics/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20241101/Statistics/"/>
 		<skos:note>This ontology was originally designed for and has been adapted from the Financial Industry Business Ontology (FIBO) Analytics Ontology.</skos:note>
-		<cmns-av:copyright>Copyright (c) 2013-2023 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2013-2023 Object Management Group, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2013-2023 Thematix Partners LLC</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2021-2023 agnos.ai U.K. Ltd</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2013-2024 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2013-2024 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2013-2024 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2021-2024 agnos.ai U.K. Ltd</cmns-av:copyright>
 		<cmns-av:usageNote>Note that this ontology can be mapped to STAT-O, given that there is overlap but not a 1-1 correspondence in terms of coverage. It does not extend STAT-O, however, as STAT-O duplicates terminology from a number of ontologies from the OBO Foundry, some of which are not standardized, and which may be an issue for some use cases.</cmns-av:usageNote>
 	</owl:Ontology>
 	
@@ -275,7 +272,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-stat;Percentage">
-		<rdfs:subClassOf rdf:resource="&cmns-stat;RatioValue"/>
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Ratio"/>
 		<rdfs:label>percentage</rdfs:label>
 		<skos:definition>ratio value expressed as a fraction of 100, i.e., in which the denominator is fixed rather than variable and equal to 100</skos:definition>
 		<cmns-av:explanatoryNote>The percent value is computed by multiplying the numeric value of the ratio by 100.</cmns-av:explanatoryNote>
@@ -309,28 +306,6 @@
 		</rdfs:subClassOf>
 		<rdfs:label>qualified measure</rdfs:label>
 		<skos:definition>statistical measure that is constrained by features, quantity kinds or units that refine how it is calculated</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-stat;Ratio">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
-		<rdfs:subClassOf rdf:resource="&cmns-stat;StatisticalMeasure"/>
-		<rdfs:label>ratio</rdfs:label>
-		<skos:definition>proportional relationship between two different numbers or quantities, or in mathematics a quotient of two numbers or expressions, arrived at by dividing one by the other</skos:definition>
-		<cmns-av:explanatoryNote>A ratio is a quantity measured with respect to some other quantity.</cmns-av:explanatoryNote>
-		<cmns-av:synonym>rate</cmns-av:synonym>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-stat;RatioValue">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;ScalarQuantityValue"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasArgument"/>
-				<owl:onClass rdf:resource="&cmns-qtu;Variable"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>ratio value</rdfs:label>
-		<skos:definition>proportional relationship specifically between two different quantity values that gives rise to a datum of a specific quantity type</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-stat;RecurrenceInterval">
@@ -434,7 +409,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-stat;StatisticalArea">
-		<rdfs:subClassOf rdf:resource="&lcc-cr;GeographicRegion"/>
+		<rdfs:subClassOf rdf:resource="&cmns-loc;GeographicRegion"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
@@ -448,7 +423,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-stat;StatisticalAreaIdentifier">
-		<rdfs:subClassOf rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+		<rdfs:subClassOf rdf:resource="&cmns-loc;GeographicRegionIdentifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
@@ -528,7 +503,7 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;provides"/>
+				<owl:onProperty rdf:resource="&cmns-org;provides"/>
 				<owl:someValuesFrom rdf:resource="&cmns-stat;StatisticalMeasure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -553,14 +528,6 @@
 		<rdfs:label>statistical universe</rdfs:label>
 		<skos:definition>collection representing the total membership, or &apos;universe&apos;, of people, resources, products, services, events, or entities of interest for some question, experiment, survey or statistical program</skos:definition>
 		<skos:example>A statistical universe can be a group of actually existing objects (e.g. the set of all stars within the Milky Way galaxy) or a hypothetical and potentially infinite group of objects conceived as a generalization from experience (e.g. the set of all possible hands in a game of poker).</skos:example>
-		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.bls.gov/bls/glossary.htm</cmns-av:adaptedFrom>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-stat;Total">
-		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
-		<rdfs:subClassOf rdf:resource="&cmns-stat;StatisticalMeasure"/>
-		<rdfs:label>total</rdfs:label>
-		<skos:definition>sum of the values for some characteristic of all units</skos:definition>
 		<cmns-av:adaptedFrom rdf:datatype="&xsd;anyURI">https://www.bls.gov/bls/glossary.htm</cmns-av:adaptedFrom>
 	</owl:Class>
 	

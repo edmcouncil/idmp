@@ -1,12 +1,12 @@
 PREFIX iter: <http://w3id.org/sparql-generate/iter/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX cmns-dsg:  <https://www.omg.org/spec/Commons/Designators/>
-PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
-PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX cmns-dsg: <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
+PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX idmp-sub: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 
 GENERATE {
-
     # Substance
     ?Substance ?labelProperty ?OfficialSubstanceName ;
         rdfs:label ?OfficialSubstanceName ;
@@ -14,11 +14,11 @@ GENERATE {
     .
 
     # Names
-    ?SubstanceName a cmns-dsg:ContextualName ;
+    ?SubstanceName a cmns-cxtdsg:ContextualName ;
         cmns-txt:hasTextValue ?SubstanceNameValue ;
         cmns-dsg:isNameOf ?Substance ;
         idmp-sub:hasSubstanceNameType ?SubstanceNameType ;
-        .
+    .
 }
 
 ITERATOR iter:JSONSurfer(<public_data.json>,
