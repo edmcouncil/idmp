@@ -2,14 +2,12 @@ PREFIX iter: <http://w3id.org/sparql-generate/iter/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX cmns-id:   <https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX cmns-id: <https://www.omg.org/spec/Commons/Identifiers/>
 PREFIX cmns-ra: <https://www.omg.org/spec/Commons/RegistrationAuthorities/>
 PREFIX idmp-nara: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/>
-PREFIX cmns-txt:  <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX cmns-txt: <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX idmp-eura: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/>
-PREFIX idmp-sub:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
-PREFIX idmp-ra:  <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
-PREFIX idmp-x: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ExtensionTBD/>
+PREFIX idmp-ra: <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/>
 
 GENERATE {
     # Substance
@@ -83,7 +81,7 @@ BIND(
     IF(str(?CodeCodeSystem) = "USDA PLANTS", idmp-nara:PlantListOfAcceptedNomenclatureTaxonomyAndSymbols ,
     IF(str(?CodeCodeSystem) = "PUBCHEM", idmp-nara:PubChem ,
     IF(str(?CodeCodeSystem) = "USP-MC MONOGRAPH", idmp-nara:USPharmacopeiaMedicinesCompendium ,
-    IF(str(?CodeCodeSystem) = "USP-MC VALIDATION RPT", cmns-ra:USPharmacopeiaMedicinesCompendium ,
+    IF(str(?CodeCodeSystem) = "USP-MC VALIDATION RPT", idmp-nara:USPharmacopeiaMedicinesCompendium ,
     IF(str(?CodeCodeSystem) = "UNIPROT", idmp-eura:UniProt ,
     IF(str(?CodeCodeSystem) = "UCSF-FDA TRANSPORTAL", idmp-nara:UniversityOfCaliforniaSanFrancisoFederalDrugAdministrationTransport ,
     IF(str(?CodeCodeSystem) = "WHO INTERNATIONAL PHARMACOPOEIA", idmp-ra:WorldHealthOrganizationInternationalPharmacopoeia ,

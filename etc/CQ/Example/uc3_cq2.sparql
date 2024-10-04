@@ -34,12 +34,12 @@ WHERE {
 			?TherapeuticIndication cmns-ctxdsg:isApplicableIn ?ProductRole .
 			?ProductRole a idmp-mprd:AuthorizedMedicinalProduct .
 		    ?ProductRole (cmns-rlcmp:isPlayedBy|^cmns-rlcmp:playsRole) ?MedicinalProduct  .
-			idmp-mprd:AuthorizedMedicinalProduct rdfs:label ?ProductRoleType .
+			BIND (idmp-mprd:AuthorizedMedicinalProduct as ?ProductRoleType )
 		} UNION {
 			?TherapeuticIndication cmns-ctxdsg:isApplicableIn ?ProductRole .
 			?ProductRole a idmp-mprd:InvestigationalMedicinalProduct .
 		    ?ProductRole (cmns-rlcmp:isPlayedBy|^cmns-rlcmp:playsRole) ?MedicinalProduct  .
-			idmp-mprd:InvestigationalMedicinalProduct rdfs:label ?ProductRoleType .
+			BIND (idmp-mprd:InvestigationalMedicinalProduct as ?ProductRoleType )
 		}
 	
 		

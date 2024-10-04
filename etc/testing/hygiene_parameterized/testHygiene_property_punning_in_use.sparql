@@ -1,0 +1,19 @@
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl:   <http://www.w3.org/2002/07/owl#>
+
+
+##
+# banner We should avoid punning properties in use.
+
+SELECT DISTINCT (concat ("ERROR: Properties ", str(?property1), " ", str(?property2), " are used as if they were incorrectly punned.") AS ?error) ?property1 ?property2
+WHERE
+{
+    ?property1 rdf:type ?propertyType1.
+    FILTER (REGEX(STR(?propertyType1), "ObjectProperty|AnnotationProperty|DatatypeProperty"))
+    ?property2 rdf:type ?propertyType2.
+    FILTER (REGEX(STR(?propertyType2), "ObjectProperty|AnnotationProperty|DatatypeProperty"))
+    FILTER (?propertyType1 != ?propertyType2)
+    ?property1 rdfs:subPropertyOf | owl:propertyDisjointWith | owl:equivalentProperty | owl:inverseOf ?property2.
+    FILTER (regex(str(?property1), <HYGIENE_TESTS_FILTER_PARAMETER>) || regex(str(?property2), <HYGIENE_TESTS_FILTER_PARAMETER>))
+}
