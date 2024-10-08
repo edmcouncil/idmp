@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
+	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
+	<!ENTITY cmns-cmp "https://www.omg.org/spec/Commons/Composites/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
+	<!ENTITY cmns-dsg "https://www.omg.org/spec/Commons/Designators/">
+	<!ENTITY cmns-ge-euj "https://www.omg.org/spec/Commons/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
+	<!ENTITY cmns-prd "https://www.omg.org/spec/Commons/ProductsAndServices/">
+	<!ENTITY cmns-pts "https://www.omg.org/spec/Commons/PartiesAndSituations/">
+	<!ENTITY cmns-qtu "https://www.omg.org/spec/Commons/QuantitiesAndUnits/">
+	<!ENTITY cmns-ra "https://www.omg.org/spec/Commons/RegistrationAuthorities/">
+	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
+	<!ENTITY cmns-strcol "https://www.omg.org/spec/Commons/StructuredCollections/">
+	<!ENTITY cmns-txt "https://www.omg.org/spec/Commons/TextDatatype/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY doc-ema "https://www.ema.europa.eu/en/documents/product-information/pluvicto-epar-product-information_en.pdf#">
+	<!ENTITY doc-fda "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215833s000lbl.pdf#">
+	<!ENTITY idmp-chg "https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/">
+	<!ENTITY idmp-ctcae "https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/CommonTerminologyCriteriaForAdverseEvents/">
+	<!ENTITY idmp-dtp "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/">
+	<!ENTITY idmp-eura "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/">
+	<!ENTITY idmp-eurga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/">
+	<!ENTITY idmp-meddra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/">
+	<!ENTITY idmp-mprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/">
+	<!ENTITY idmp-nara "https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/">
+	<!ENTITY idmp-narga "https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegulatoryAgencies/">
+	<!ENTITY idmp-phprd "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/">
+	<!ENTITY idmp-plu "https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/PluvictoExample/">
+	<!ENTITY idmp-ra "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/">
+	<!ENTITY idmp-snomed "https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/">
+	<!ENTITY idmp-spor "https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/">
+	<!ENTITY idmp-sub "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/">
+	<!ENTITY idmp-ucum "https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/">
+	<!ENTITY idmp-uom "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/">
+	<!ENTITY lcc-3166-1 "https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/">
+	<!ENTITY lcc-639-1 "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/">
+	<!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
+	<!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/">
+	<!ENTITY mvf "https://www.omg.org/spec/MVF/MultipleVocabularyFacility/">
+	<!ENTITY mvf-trm "https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/PluvictoExample/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
+	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns:cmns-cmp="https://www.omg.org/spec/Commons/Composites/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:cmns-dsg="https://www.omg.org/spec/Commons/Designators/"
+	xmlns:cmns-ge-euj="https://www.omg.org/spec/Commons/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
+	xmlns:cmns-prd="https://www.omg.org/spec/Commons/ProductsAndServices/"
+	xmlns:cmns-pts="https://www.omg.org/spec/Commons/PartiesAndSituations/"
+	xmlns:cmns-qtu="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
+	xmlns:cmns-ra="https://www.omg.org/spec/Commons/RegistrationAuthorities/"
+	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
+	xmlns:cmns-strcol="https://www.omg.org/spec/Commons/StructuredCollections/"
+	xmlns:cmns-txt="https://www.omg.org/spec/Commons/TextDatatype/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:doc-ema="https://www.ema.europa.eu/en/documents/product-information/pluvicto-epar-product-information_en.pdf#"
+	xmlns:doc-fda="https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215833s000lbl.pdf#"
+	xmlns:idmp-chg="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"
+	xmlns:idmp-ctcae="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/CommonTerminologyCriteriaForAdverseEvents/"
+	xmlns:idmp-dtp="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"
+	xmlns:idmp-eura="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"
+	xmlns:idmp-eurga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"
+	xmlns:idmp-meddra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/"
+	xmlns:idmp-mprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"
+	xmlns:idmp-nara="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"
+	xmlns:idmp-narga="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegulatoryAgencies/"
+	xmlns:idmp-phprd="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11616-PharmaceuticalProducts/"
+	xmlns:idmp-plu="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/PluvictoExample/"
+	xmlns:idmp-ra="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"
+	xmlns:idmp-snomed="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/"
+	xmlns:idmp-spor="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/"
+	xmlns:idmp-sub="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
+	xmlns:idmp-ucum="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/"
+	xmlns:idmp-uom="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/"
+	xmlns:lcc-3166-1="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"
+	xmlns:lcc-639-1="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
+	xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
+	xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+	xmlns:mvf="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"
+	xmlns:mvf-trm="https://www.omg.org/spec/MVF/ISO1087-VocabularyForTermsAndDefinitions/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/PluvictoExample/">
+		<rdfs:label>Novartis&apos; PLUVICTO® Example Ontology</rdfs:label>
+		<dct:abstract>This ontology provides an example for some of the data related to the substance, amlodipine, to demonstrate substance and basis of strength representation.</dct:abstract>
+		<dct:description>Example using Pluvicto focusing on clinical particulars with multiple adverse events referenced from content in the EMA and FDA patient information documents</dct:description>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/PluvictoExample-EMADocument/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/PluvictoExample-FDADocument/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/DocumentComponents/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/UnifiedCodeForUnitsOfMeasure/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/EuropeanRegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-RegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11240-UnitsOfMeasurement/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/CommonTerminologyCriteriaForAdverseEvents/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/NorthAmericanJurisdiction/NorthAmericanRegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/"/>
+		<owl:imports rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Classifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ProductsAndServices/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/StructuredCollections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20240229/Examples/PluvictoExample/"/>
+		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Informative"/>
+		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:usageNote>This example is for illustration purposes only. The data provided may not be up-to-date, and in some cases, &apos;dummy&apos; data has been included. The product information included here shall not be used for any other purpose than for educational purposes regarding the IDMP-O implementation.</cmns-av:usageNote>
+	</owl:Ontology>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;Lutetium177LuVipivotideTeraxetan">
+		<rdf:type rdf:resource="&idmp-sub;ChemicalSubstance"/>
+		<rdfs:label>lutetium (177Lu) vipivotide tetraxetan</rdfs:label>
+		<cmns-dsg:hasName rdf:resource="&idmp-plu;Lutetium177LuVipivotideTeraxetan-CommonName"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;Lutetium177LuVipivotideTeraxetan-CommonName">
+		<rdf:type rdf:resource="&idmp-sub;SubstanceName"/>
+		<cmns-cls:isClassifiedBy rdf:resource="&idmp-sub;SubstanceNameClassifier-CommonName"/>
+		<cmns-txt:hasTextValue>lutetium (177Lu) vipivotide tetraxetan</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;Lutetium177LuVipivotideTeraxetanAsActiveIngredientInPluvicto">
+		<rdf:type rdf:resource="&idmp-sub;ActiveIngredient"/>
+		<rdfs:label>lutetium (177Lu) vipivotide tetraxetan as active ingredient in Pluvicto</rdfs:label>
+		<cmns-cmp:isPlayedBy rdf:resource="&idmp-plu;Lutetium177LuVipivotideTeraxetan"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA">
+		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
+		<rdfs:label>Pluvicto AMP (EMA)</rdfs:label>
+		<idmp-mprd:hasAuthorization rdf:resource="&idmp-plu;PluvictoMarketingAuthorizationByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-Contraindication-Hypersensitivity">
+		<rdf:type rdf:resource="&idmp-mprd;Contraindication"/>
+		<rdfs:label>Pluvicto AMP (EMA), Contraindication, hypersensitivity</rdfs:label>
+		<idmp-mprd:hasContraindicationText>
+			<owl:NamedIndividual>
+				<rdf:type rdf:resource="&idmp-mprd;ContraindicationText"/>
+				<cmns-doc:refersTo rdf:resource="&doc-ema;Section-6.1"/>
+				<cmns-txt:hasTextValue>Hypersensitivity to the active substance or to any of the excipients listed in section 6.1.</cmns-txt:hasTextValue>
+			</owl:NamedIndividual>
+		</idmp-mprd:hasContraindicationText>
+		<idmp-mprd:isContraindicationFor rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-TherapeuticIndication-Text">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Therapeutic Indication Text</rdfs:label>
+		<cmns-txt:hasTextValue>Pluvicto in combination with androgen deprivation therapy (ADT) with or without androgen receptor (AR) pathway inhibition is indicated for the treatment of adult patients with progressive prostate-specific membrane antigen (PSMA)-positive metastatic castration-resistant prostate cancer (mCRPC) who have been treated with AR pathway inhibition and taxane-based chemotherapy</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-TherapeuticIndication-TreatmentOfPSMACancer">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<rdfs:label>Pluvicto AMP (EMA), Therapeutic Indication, treatment of PSMA cancer</rdfs:label>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/PT/10060862"/>
+		<idmp-mprd:hasTargetPopulation rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-TherapeuticIndication-TreatmentOfPSMACancer-TargetPopulation-Adults"/>
+		<idmp-mprd:hasTherapeuticIndicationText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-TherapeuticIndication-Text"/>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-TherapeuticIndication-TreatmentOfPSMACancer-TargetPopulation-Adults">
+		<rdf:type rdf:resource="&idmp-mprd;TargetPopulation"/>
+		<rdfs:label>Pluvicto AMP (EMA), Therapeutic Indication, treatment of PSMA cancer - target population - adults</rdfs:label>
+		<cmns-cls:isClassifiedBy rdf:resource="https://spor.ema.europa.eu/rmswi/lists/100000000001/terms/200000002250"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-ASTOrALTElevation">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, AST or ALT elevation</rdfs:label>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10001551"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10003481"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-ASTOrALTElevation-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-ASTOrALTElevation-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, AST or ALT elevation</rdfs:label>
+		<cmns-txt:hasTextValue>AST or ALT elevation | AST or ALT &gt;5 times ULN in the absence of liver metastases</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-AnaemiaThrombocytopeniaLeukopeniaNeutropeniaPancytopenia-Grade2">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, anaemia, thrombocytopenia, neutropenia, pancytopenia - grade 2</rdfs:label>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade2"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10002034"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10024384"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10029354"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10033661"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10043554"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-AnaemiaThrombocytopeniaLeukopeniaNeutropeniaPancytopenia-Grade2-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-AnaemiaThrombocytopeniaLeukopeniaNeutropeniaPancytopenia-Grade2-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, anaemia, thrombocytopenia, neutropenia, pancytopenia - grade 2</rdfs:label>
+		<cmns-txt:hasTextValue>Anaemia, thrombocytopenia, leukopenia, neutropenia, pancytopenia | Grade 2</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-AnaemiaThrombocytopeniaLeukopeniaNeutropeniaPancytopenia-Grade3">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, anaemia, thrombocytopenia, neutropenia, pancytopenia - grade 3</rdfs:label>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade3"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10002034"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10024384"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10029354"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10033661"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10043554"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-AnaemiaThrombocytopeniaLeukopeniaNeutropeniaPancytopenia-Grade3-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-AnaemiaThrombocytopeniaLeukopeniaNeutropeniaPancytopenia-Grade3-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, anaemia, thrombocytopenia, neutropenia, pancytopenia - grade 3</rdfs:label>
+		<cmns-txt:hasTextValue>Anaemia, thrombocytopenia, leukopenia, neutropenia, pancytopenia | Grade 3</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-DecreasedAppetite">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, decreased appetite</rdfs:label>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/100061428"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-DecreasedAppetite-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-DecreasedAppetite-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, decreased appetite</rdfs:label>
+		<cmns-txt:hasTextValue>Decreased appetite</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-DryMouth">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, dry mouth</rdfs:label>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade3"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10013781"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-DryMouth-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-DryMouth-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, dry mouth</rdfs:label>
+		<cmns-txt:hasTextValue>Dry mouth | Grade 3</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-ElectrolyteOrMetabolicAbnormalities">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, electrolyte or metabolic abnormalities</rdfs:label>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade2"/>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade3"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10014410"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10058097"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-ElectrolyteOrMetabolicAbnormalities-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-ElectrolyteOrMetabolicAbnormalities-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, electrolyte or metabolic abnormalities</rdfs:label>
+		<cmns-txt:hasTextValue>Electrolyte or metabolic abnormalities | Grade ≥2</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Fatigue-Grade3">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, fatigue, grade 3</rdfs:label>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade3"/>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10016256"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Fatigue-Grade3-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Fatigue-Grade3-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, fatigue, grade 3</rdfs:label>
+		<cmns-txt:hasTextValue>Fatigue | Grade ≥3</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-FractureInWeightBearingBones">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, fracture in weight bearing bones</rdfs:label>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10017076"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-FractureInWeightBearingBones-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-FractureInWeightBearingBones-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, fracture in weight bearing bones</rdfs:label>
+		<cmns-txt:hasTextValue>Fracture in weight-bearing bones</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Hypersensitivity">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, hypersensitivity</rdfs:label>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10020751"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Hypersensitivity-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Hypersensitivity-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, hypersensitivity</rdfs:label>
+		<cmns-doc:refersTo rdf:resource="&doc-ema;Section-6.1"/>
+		<cmns-txt:hasTextValue>Hypersensitivity to the active substance or to any of the excipients listed in section 6.1.</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Myelosuppression">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, myelosuppression</rdfs:label>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10028584"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Myelosuppression-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-Myelosuppression-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, myelosuppression</rdfs:label>
+		<cmns-txt:hasTextValue>PLUVICTO can cause severe and life-threatening myelosuppression, including anemia, thrombocytopenia, leukopenia,
+						and neutropenia. In the VISION study, Grade 3 or 4 decreased hemoglobin (15%), decreased platelets(9%), decreased
+						leukocytes(7%), and decreased neutrophils (4.5%) occurred in patients treated with PLUVICTO. Grade ≥ 3 pancytopenia
+						occurred in 1.1% (which includes two fatal events) in patients treated with PLUVICTO. Two deaths(0.4%) due to
+						intracranial hemorrhage and subdural hematoma in association with thrombocytopenia were observed in patients who
+						received PLUVICTO. One death due to sepsis and concurrent neutropenia was observed in patients who received
+						PLUVICTO.</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-NonHaematologicalToxicity">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, non-haematological toxicity</rdfs:label>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade2"/>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade3"/>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade4"/>
+		<idmp-mprd:hasSymptomConditionEffectClassification rdf:resource="&idmp-ctcae;CTCAE-Grade5"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-NonHaematologicalToxicity-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-NonHaematologicalToxicity-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, non-haematological toxicity</rdfs:label>
+		<cmns-txt:hasTextValue>Non-haematological toxicity (clinically significant, not otherwise stated) in Grade ≥2</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-RenalToxicity">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, renal toxicity</rdfs:label>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10044258"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-RenalToxicity-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-RenalToxicity-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, renal toxicity</rdfs:label>
+		<cmns-txt:hasTextValue>Renal toxicity</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-SpinalCordCompression">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffect"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect, spinal cord compression</rdfs:label>
+		<idmp-mprd:hasUndesirableEffectAsSymptomConditionEffect rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10041549"/>
+		<idmp-mprd:hasUndesirableEffectText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-SpinalCordCompression-Text"/>
+		<idmp-mprd:isUndesirableEffectOf rdf:resource="&idmp-plu;PluvictoMedicinalProductInEU"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA-UndesirableEffect-SpinalCordCompression-Text">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectText"/>
+		<rdfs:label>Pluvicto AMP (EMA), Undesirable Effect Text, spinal cord compression</rdfs:label>
+		<cmns-txt:hasTextValue>Spinal cord compression</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByFDA">
+		<rdf:type rdf:resource="&idmp-mprd;AuthorizedMedicinalProduct"/>
+		<rdfs:label>Pluvicto AMP (FDA)</rdfs:label>
+		<idmp-mprd:hasAuthorization rdf:resource="&idmp-plu;PluvictoMarketingAuthorizationByFDA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByFDA-TherapeuticIndication">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndication"/>
+		<rdfs:label>Pluvicto AMP (FDA), Therapeutic Indication</rdfs:label>
+		<idmp-mprd:hasIndicationAsDiseaseSymptomProcedure rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/399068003"/>
+		<idmp-mprd:hasTherapeuticIndicationText rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByFDA-TherapeuticIndication-Text"/>
+		<idmp-mprd:isTherapeuticIndicationFor rdf:resource="&idmp-plu;PluvictoMedicinalProductInUS"/>
+		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByFDA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoAuthorizedMedicinalProductByFDA-TherapeuticIndication-Text">
+		<rdf:type rdf:resource="&idmp-mprd;TherapeuticIndicationText"/>
+		<rdfs:label>Pluvicto AMP (FDA), Therapeutic Indication Text</rdfs:label>
+		<cmns-doc:refersTo rdf:resource="&doc-fda;Section-1-Text"/>
+		<cmns-txt:hasTextValue>PLUVICTO is a radioligand therapeutic agent indicated for the treatment of adult patients with prostate-specific membrane antigen (PSMA)-positive metastatic castration-resistant prostate cancer (mCRPC) who have been treated with androgen receptor (AR) pathway inhibition and taxane-based chemotherapy.</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoMarketingAuthorizationByEMA">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<rdfs:label>Pluvicto marketing authorization by EMA</rdfs:label>
+		<idmp-mprd:hasAuthorizingParty rdf:resource="&idmp-eurga;EuropeanMedicinesAgencyAsMedicinesRegulatoryAgency"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoMarketingAuthorizationByFDA">
+		<rdf:type rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<rdfs:label>Pluvicto marketing authorization by FDA</rdfs:label>
+		<idmp-mprd:hasAuthorizingParty rdf:resource="&idmp-narga;UnitedStatesFoodAndDrugAdministrationAsMedicinesRegulatoryAgency"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoMedicinalProductInEU">
+		<rdf:type rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:label>PLUVICTO® medicinal product in EU</rdfs:label>
+		<cmns-dsg:hasName>
+			<idmp-mprd:MedicinalProductName>
+				<cmns-txt:hasTextValue>Pluvicto 1,000 MBq/mL solution for injection/infusion</cmns-txt:hasTextValue>
+			</idmp-mprd:MedicinalProductName>
+		</cmns-dsg:hasName>
+		<cmns-pts:playsRole rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByEMA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-plu;PluvictoMedicinalProductInUS">
+		<rdf:type rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:label>PLUVICTO® medicinal product in US</rdfs:label>
+		<cmns-dsg:hasName>
+			<idmp-mprd:MedicinalProductName>
+				<cmns-txt:hasTextValue>PLUVICTO® (lutetium Lu 177 vipivotide tetraxetan) injection, for intravenous use</cmns-txt:hasTextValue>
+			</idmp-mprd:MedicinalProductName>
+		</cmns-dsg:hasName>
+		<cmns-pts:playsRole rdf:resource="&idmp-plu;PluvictoAuthorizedMedicinalProductByFDA"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10001551">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, Alanine aminotransferase increased</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10001551-MedDRAIdentifier"/>
+		<mvf:hasTextualName>Alanine aminotransferase increased</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10001551-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, Alanine aminotransferase increased, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10001551</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10002034">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, anaemia</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10002034-MedDRAIdentifier"/>
+		<cmns-txt:hasTextValue>anaemia</cmns-txt:hasTextValue>
+		<mvf:hasTextualName>anaemia</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10002034-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, anaemia, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10002034</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10003481">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, Aspartate aminotransferase increased</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10003481-MedDRAIdentifier"/>
+		<mvf:hasTextualName>Aspartate aminotransferase increased</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10003481-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, Aspartate aminotransferase increased, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10003481</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/100061428">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, decreased appetite</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/100061428-MedDRAIdentifier"/>
+		<mvf:hasTextualName>decreased appetite</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/100061428-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, decreased appetite, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10061428</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10013781">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, dry mouth</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10013781-MedDRAIdentifier"/>
+		<mvf:hasTextualName>dry mouth</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10013781-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, dry mouth, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10013781</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10014410">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, electrolyte abnormality</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10014410-MedDRAIdentifier"/>
+		<cmns-txt:hasTextValue>electrolyte abnormality</cmns-txt:hasTextValue>
+		<mvf:hasTextualName>electrolyte abnormality</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10014410-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, electrolyte abnormality, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10014410</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10016256">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, fatigue</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10016256-MedDRAIdentifier"/>
+		<cmns-txt:hasTextValue>fatigue</cmns-txt:hasTextValue>
+		<mvf:hasTextualName>fatigue</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10016256-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, fatigue, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10016256</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10017076">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, fracture</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10017076-MedDRAIdentifier"/>
+		<mvf:hasTextualName>fracture</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10017076-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, fracture, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10017076</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10020751">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, hypersensitivity</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10020751-MedDRAIdentifier"/>
+		<mvf:hasTextualName>hypersensitivity</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10020751-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, hypersensitivity, MedDRAIdentifier</rdfs:label>
+		<cmns-txt:hasTextValue>10020751</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10024384">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, leukopenia</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10024384-MedDRAIdentifier"/>
+		<mvf:hasTextualName>leukopenia</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10024384-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, leukopenia, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10024384</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10028584">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, myelosuppression</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10028584-MedDRAIdentifier"/>
+		<mvf:hasTextualName>myelosuppression</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10028584-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, myelosuppression, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10028584</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10029354">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, neutropenia</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10029354-MedDRAIdentifier"/>
+		<mvf:hasTextualName>neutropenia</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10029354-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, neutropenia, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10029354</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10033661">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, pancytopenia</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10033661-MedDRAIdentifier"/>
+		<mvf:hasTextualName>pancytopenia</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10033661-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, pancytopenia, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10033661</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10038156">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, red blood cell count low</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10038156-MedDRAIdentifier"/>
+		<mvf:hasTextualName>red blood cell count low</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10038156-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, red blood cell count low, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10038156</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10041549">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, spinal cord compression</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10041549-MedDRAIdentifier"/>
+		<cmns-txt:hasTextValue>spinal cord compression</cmns-txt:hasTextValue>
+		<mvf:hasTextualName>spinal cord compression</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10041549-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, spinal cord compression, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10041549</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10043554">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, thrombocytopenia</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10043554-MedDRAIdentifier"/>
+		<mvf:hasTextualName>thrombocytopenia</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10043554-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, thrombocytopenia, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10043554</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10044258">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, toxicity renal</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10044258-MedDRAIdentifier"/>
+		<mvf:hasTextualName>toxicity renal</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10044258-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, toxicity renal, MedDRAIdentifier</rdfs:label>
+		<cmns-txt:hasTextValue>10044258</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10058097">
+		<rdf:type rdf:resource="&idmp-mprd;UndesirableEffectAsSymptomConditionEffect"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRALowestLevelTerm"/>
+		<rdfs:label>MedDRA, Lowest Level Term, metabolic disorder</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10058097-MedDRAIdentifier"/>
+		<mvf:hasTextualName>metabolic disorder</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/LLT/10058097-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Lowest Level Term, metabolic disorder, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10058097</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/PT/10060862">
+		<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAPreferredTerm"/>
+		<rdfs:label>MedDRA, Preferred Term, prostate cancer</rdfs:label>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/PT/10060862-MedDRAIdentifier"/>
+		<mvf:hasTextualName>prostate cancer</mvf:hasTextualName>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/MedicalDictionaryForRegulatoryActivities/term/PT/10060862-MedDRAIdentifier">
+		<rdf:type rdf:resource="&idmp-meddra;MedDRAIdentifier"/>
+		<rdfs:label>MedDRA, Preferred Term, prostate cancer, MedDRA Identifier</rdfs:label>
+		<cmns-txt:hasTextValue>10060862</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/399068003">
+		<rdf:type rdf:resource="&idmp-mprd;IndicationAsDiseaseSymptomProcedure"/>
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-Concept"/>
+		<rdfs:label>SNOMED CT, Concept, Malignant tumor of prostate</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://lookup.snomedtools.org/snowstorm/snomed-ct/browser/MAIN/2024-02-01/concepts/399068003"/>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/399068003-SNOMED-CT-ConceptIdentifier"/>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-snomed;SNOMED-CT"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/399068003-PreferredTerm-English">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-Term"/>
+		<rdf:type rdf:resource="&mvf-trm;PreferredTerm"/>
+		<rdfs:label>SNOMED CT, Concept, Malignant tumor of prostate, Preferred Term, English</rdfs:label>
+		<cmns-dsg:designates rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/399068003"/>
+		<cmns-txt:hasTextValue>Malignant tumor of prostate</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/SNOMED/concept/399068003-SNOMED-CT-ConceptIdentifier">
+		<rdf:type rdf:resource="&idmp-snomed;SNOMED-CT-ConceptIdentifier"/>
+		<rdfs:label>SNOMED CT, Concept, Malignant tumor of prostate, SNOMED CT Concept Identifier</rdfs:label>
+		<cmns-ra:isRegisteredIn rdf:resource="&idmp-snomed;SNOMED-CT"/>
+		<cmns-txt:hasTextValue>399068003</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000000001">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabulary"/>
+		<rdfs:label>SPOR-RMS, Age Range Vocabulary</rdfs:label>
+		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanAndVeterinaryUse"/>
+		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
+		<cmns-dsg:isSignifiedBy rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001-ListName"/>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001-ListIdentifier"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000000001-ListIdentifier">
+		<rdf:type rdf:resource="&idmp-spor;SPORListIdentifier"/>
+		<rdfs:label>SPOR-RMS, Age Range Vocabulary, List Identifier</rdfs:label>
+		<cmns-id:identifies rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001"/>
+		<cmns-txt:hasTextValue>100000000001</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000000001-ListName">
+		<rdf:type rdf:resource="&idmp-spor;SPORListName"/>
+		<rdfs:label>SPOR-RMS, Age Range Vocabulary, List Name</rdfs:label>
+		<cmns-dsg:isNameOf rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001"/>
+		<cmns-txt:hasTextValue>Age Range</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250">
+		<rdf:type rdf:resource="&idmp-spor;SPORControlledVocabularyTerm"/>
+		<rdf:type rdf:resource="&idmp-mprd;AgePopulationCharacteristic"/>
+		<rdfs:label>SPOR-RMS, Age Range Vocabulary, Adult and elderly population (&gt;18 years)</rdfs:label>
+		<idmp-spor:hasSPORDomain rdf:resource="&idmp-spor;SPOR-Domain-HumanUse"/>
+		<idmp-spor:hasSPORShortName rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250-ShortName-English"/>
+		<idmp-spor:hasSPORTermName rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250-TermName-English"/>
+		<idmp-spor:hasSPORVisibility rdf:resource="&idmp-spor;SPOR-DataClassification-Public"/>
+		<cmns-col:isIncludedIn rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001"/>
+		<cmns-id:isIdentifiedBy rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250-TermIdentifier"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250-ShortName-English">
+		<rdf:type rdf:resource="&idmp-spor;SPORTermName"/>
+		<rdfs:label>SPOR-RMS, Age Range Vocabulary, Adult and elderly population (&gt;18 years), Short Name, English</rdfs:label>
+		<cmns-dsg:isNameOf rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250"/>
+		<cmns-txt:hasTextValue>Adults and elderly</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250-TermIdentifier">
+		<rdf:type rdf:resource="&idmp-spor;SPORTermIdentifier"/>
+		<rdfs:label>SPOR-RMS, Age Range Vocabulary, Adult and elderly population (&gt;18 years), Term Identifier</rdfs:label>
+		<cmns-id:identifies rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250"/>
+		<cmns-txt:hasTextValue>200000002250</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250-TermName-English">
+		<rdf:type rdf:resource="&idmp-spor;SPORTermName"/>
+		<rdfs:label>SPOR-RMS, Age Range Vocabulary, Adult and elderly population (&gt;18 years), Term Name, English</rdfs:label>
+		<cmns-dsg:isNameOf rdf:resource="https://spor.ema.europa.eu/v1/lists/100000000001/terms/200000002250"/>
+		<cmns-txt:hasTextValue>Adult and elderly population (&gt;18 years)</cmns-txt:hasTextValue>
+		<mvf:hasLanguage rdf:resource="&lcc-639-1;English"/>
+	</owl:NamedIndividual>
+
+</rdf:RDF>
