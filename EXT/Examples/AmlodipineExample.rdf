@@ -123,7 +123,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/MVF/MultipleVocabularyFacility/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20240801/Examples/AmlodipineExample/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20241001/Examples/AmlodipineExample/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Informative"/>
 		<cmns-av:copyright>Copyright (c) 2022-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -1122,13 +1122,15 @@
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlister">
-		<rdf:type rdf:resource="&idmp-mprd;MedicinalProductContainer"/>
 		<rdf:type rdf:resource="&idmp-mprd;PackageItem"/>
 		<rdfs:label>Norvasc blister</rdfs:label>
 		<idmp-mprd:contains rdf:resource="&idmp-amp;Norvasc-ManufacturedItem-5mgTablet"/>
 		<idmp-mprd:hasPackageComponent rdf:resource="&idmp-amp;NorvascBlisterFormComponent"/>
 		<idmp-mprd:hasPackageComponent rdf:resource="&idmp-amp;NorvascBlisterLiddingComponent"/>
 		<idmp-mprd:hasPackageItemType rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073346/terms/100000073496"/>
+		<cmns-col:hasConstituent rdf:resource="&idmp-amp;NorvascBlisterTabletComponent"/>
+		<cmns-col:isPartOf rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+		<cmns-rlcmp:playsRole rdf:resource="&idmp-amp;NorvascBlisterAsImmediateContainer"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterAsImmediateContainer">
@@ -1136,14 +1138,6 @@
 		<rdfs:label>Norvasc blister as immediate container</rdfs:label>
 		<cmns-cls:isClassifiedBy rdf:resource="&idmp-mprd;ImmediateContainer"/>
 		<cmns-rlcmp:isPlayedBy rdf:resource="&idmp-amp;NorvascBlister"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterComposition">
-		<rdf:type rdf:resource="&idmp-mprd;ContainerConstituency"/>
-		<rdfs:label>Norvasc blister composition</rdfs:label>
-		<cmns-col:hasConstituent rdf:resource="&idmp-amp;NorvascBlisterTabletComponent"/>
-		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
-		<cmns-dsg:defines rdf:resource="&idmp-amp;NorvascBlister"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterFormComponent">
@@ -1175,6 +1169,7 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBlisterTabletComponent">
 		<rdf:type rdf:resource="&idmp-mprd;ContainerConstituent"/>
+		<rdfs:label>Norvasc blister tablet component</rdfs:label>
 		<idmp-mprd:hasManufacturedItemQuantity>
 			<cmns-qtu:ScalarQuantityValue>
 				<cmns-qtu:hasMeasurementUnit rdf:resource="https://spor.ema.europa.eu/v1/lists/200000000014/terms/200000002152"/>
@@ -1190,7 +1185,9 @@
 		<idmp-mprd:contains rdf:resource="&idmp-amp;NorvascBlister"/>
 		<idmp-mprd:hasPackageItemType rdf:resource="https://spor.ema.europa.eu/v1/lists/100000073346/terms/100000073498"/>
 		<cmns-col:comprises rdf:resource="https://spor.ema.europa.eu/v1/lists/200000003199/terms/200000003529"/>
-		<cmns-dsg:isDefinedIn rdf:resource="&idmp-amp;NorvascBoxComposition"/>
+		<cmns-col:hasConstituent rdf:resource="&idmp-amp;NorvascBoxBlisterComponent"/>
+		<cmns-col:isPartOf rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
+		<cmns-rlcmp:playsRole rdf:resource="&idmp-amp;NorvascBoxAsOuterPackaging"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBoxAsOuterPackaging">
@@ -1211,14 +1208,6 @@
 			</cmns-qtu:ScalarQuantityValue>
 		</idmp-mprd:hasPackageItemQuantity>
 		<idmp-mprd:isCharacterizedByPackageItem rdf:resource="&idmp-amp;NorvascBlister"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascBoxComposition">
-		<rdf:type rdf:resource="&idmp-mprd;ContainerConstituency"/>
-		<rdfs:label>Norvasc box composition</rdfs:label>
-		<cmns-col:hasConstituent rdf:resource="&idmp-amp;NorvascBoxBlisterComponent"/>
-		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
-		<cmns-dsg:defines rdf:resource="&idmp-amp;NorvascBox"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascComposition">
@@ -1297,14 +1286,6 @@
 		<rdf:type rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
 		<rdfs:label>Norvasc packaged medicinal product</rdfs:label>
 		<cmns-col:comprises rdf:resource="&idmp-amp;NorvascBox"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascPackagedMedicinalProductConstituency">
-		<rdf:type rdf:resource="&idmp-mprd;ContainerConstituency"/>
-		<rdfs:label>Norvasc packaged medicinal product constituency</rdfs:label>
-		<cmns-cxtdsg:isApplicableIn rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
-		<cmns-dsg:defines rdf:resource="&idmp-amp;NorvascPackagedMedicinalProduct"/>
-		<cmns-rlcmp:hasRole rdf:resource="&idmp-amp;NorvascBoxAsOuterPackaging"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-amp;NorvascTherapeuticIndicationTextInDenmark">
