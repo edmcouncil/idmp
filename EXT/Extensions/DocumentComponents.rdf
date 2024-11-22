@@ -50,7 +50,7 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/TextDatatype/"/>
-		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20231101/Extensions/DocumentComponents/"/>
+		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/20240201/Extensions/DocumentComponents/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Provisional"/>
 		<cmns-av:copyright>Copyright (c) 2023-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023-2024 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -300,14 +300,11 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableColumnIndex">
-		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has table column index</rdfs:label>
 		<rdfs:domain>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-doco;TableBodyCell">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-doco;TableColumnHeaderCell">
+					<rdf:Description rdf:about="&idmp-doco;TableCell">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-doco;TableColumn">
 					</rdf:Description>
@@ -323,16 +320,7 @@
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableColumnSpan">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has table column span</rdfs:label>
-		<rdfs:domain>
-			<owl:Class>
-				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-doco;TableBodyCell">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-doco;TableRowHeaderCell">
-					</rdf:Description>
-				</owl:unionOf>
-			</owl:Class>
-		</rdfs:domain>
+		<rdfs:domain rdf:resource="&idmp-doco;TableCell"/>
 		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
 		<skos:definition>number of columns the table cell should span</skos:definition>
 		<skos:note>The column span is counted beginning with and is including the left most column.</skos:note>
@@ -341,14 +329,11 @@
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableRowIndex">
-		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has table row index</rdfs:label>
 		<rdfs:domain>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-doco;TableBodyCell">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-doco;TableRowHeaderCell">
+					<rdf:Description rdf:about="&idmp-doco;TableCell">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-doco;TableRow">
 					</rdf:Description>
@@ -363,20 +348,18 @@
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTableRowSpan">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
 		<rdfs:label>has table row span</rdfs:label>
-		<rdfs:domain>
-			<owl:Class>
-				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-doco;TableBodyCell">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-doco;TableRowHeaderCell">
-					</rdf:Description>
-				</owl:unionOf>
-			</owl:Class>
-		</rdfs:domain>
+		<rdfs:domain rdf:resource="&idmp-doco;TableCell"/>
 		<rdfs:range rdf:resource="&xsd;positiveInteger"/>
 		<skos:definition>number of rows the table cell should span</skos:definition>
 		<skos:note>The row span is counted beginning with and is including the top most row.</skos:note>
 		<skos:note>This is similar to the HTML rowspan attribute.</skos:note>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-doco;hasText">
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has text</rdfs:label>
+		<rdfs:domain rdf:resource="&po;Textual"/>
+		<skos:definition>relates a textual element to its exact literal text</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-doco;hasTextualContent">
