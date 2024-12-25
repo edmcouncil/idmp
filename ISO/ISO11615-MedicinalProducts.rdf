@@ -908,23 +908,20 @@
 		<rdfs:subClassOf rdf:resource="&idmp-mprd;ProductRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;hasAuthorization"/>
-				<owl:someValuesFrom rdf:resource="&idmp-mprd;Authorization"/>
+				<owl:onProperty rdf:resource="&idmp-mprd;isAuthorizedForManufacturingThrough"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ManufacturingAuthorization"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isAuthorizedForMarketingThrough"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MarketingAuthorization"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-mprd;MedicinalProduct">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-mprd;PhysicalMedicinalProduct">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label xml:lang="en-GB">authorised medicinal product</rdfs:label>
@@ -5602,6 +5599,14 @@ The convention applied for naming a medicinal product can differ between medicin
 		<skos:definition>gives permission to manufacture</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizesMarketingOf">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;appliesTo"/>
+		<rdfs:label>authorizes marketing of</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<rdfs:range rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<skos:definition>gives permission to manufacture</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;authorizesThrough">
 		<rdfs:subPropertyOf rdf:resource="&cmns-pts;actsIn"/>
 		<rdfs:label>authorizes through</rdfs:label>
@@ -6137,8 +6142,8 @@ The convention applied for naming a medicinal product can differ between medicin
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasMarketingStopDate">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasEndDate"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasExplicitDate"/>
-		<rdfs:subPropertyOf rdf:resource="&cmns-dt;hasStopDate"/>
 		<rdfs:label>has marketing stop date</rdfs:label>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.1.45 and 9.3.2.8.5, and Figure 7</dct:source>
 		<dct:source>ISO/TS 20443:2017(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11615 data elements and structures for the unique identification and exchange of regulated medicinal product information, clause B.2.18.4</dct:source>
@@ -6687,6 +6692,24 @@ The convention applied for naming a medicinal product can differ between medicin
 		<rdfs:domain rdf:resource="&idmp-mprd;AuthorizedParty"/>
 		<rdfs:range rdf:resource="&idmp-mprd;AuthorizingParty"/>
 		<skos:definition>is endorsed, enabled, empowered, or otherwise permitted by</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedForManufacturingThrough">
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasAuthorization"/>
+		<rdfs:label>is authorized for manufacturing through</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:range rdf:resource="&idmp-mprd;ManufacturingAuthorization"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;authorizesManufacturingOf"/>
+		<skos:definition>relates a medicinal product to its manufacturing authorization(s)</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedForMarketingThrough">
+		<rdfs:subPropertyOf rdf:resource="&idmp-mprd;hasAuthorization"/>
+		<rdfs:label>is authorized for marketing through</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<rdfs:range rdf:resource="&idmp-mprd;MarketingAuthorization"/>
+		<owl:inverseOf rdf:resource="&idmp-mprd;authorizesMarketingOf"/>
+		<skos:definition>relates a medicinal product to its marketing authorization(s)</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedThrough">
