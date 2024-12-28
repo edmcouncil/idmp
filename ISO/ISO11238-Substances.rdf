@@ -1699,9 +1699,20 @@
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Producer"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ManufacturerName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ManufacturerIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-				<owl:onClass rdf:resource="&cmns-org;LegalEntity"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&cmns-org;LegalEntity"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>manufacturer</rdfs:label>
@@ -1710,6 +1721,52 @@
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NonConformant"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.39</cmns-av:adaptedFrom>
 		<cmns-av:synonym>establishment</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ManufacturerIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;Manufacturer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>manufacturer identifier</rdfs:label>
+		<skos:definition>unique identifier (code) for the role of a legal entity that produces finished products from raw materials or components thereof</skos:definition>
+		<skos:example>DUNS86745HF (Artificial ID)</skos:example>
+		<idmp-sub:hasBusinessRules>For both active ingredients and excipients intended to be used in the medicinal product the information shall be provided. A necessary condition for the Specified Substance Group 2 to exist is: either the Manufacturer ID, Manufacturer Name and Manufacturing Type is available AND/OR the production method type, product system type and production system exist. The manufacturer and Production Method Description can coexist, but at least one shall be provided. The Manufacturer ID for the Specified Substance Group 2 shall be linked to the actual Manufacturing site where the substance is manufactured. If necessary, bulk substance manufacturing site and further steps (e.g. micronization site) shall be provided. The Manufacturer ID is primarily linked to the bulk manufacturing of the substance. When other sites are needed to describe additional production steps this information shall be captured by the Reference Source Document class.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-II"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.2.7.9.1</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ManufacturerName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasTextualName"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Manufacturer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>manufacturer name</rdfs:label>
+		<skos:definition>designation for the role of a legal entity that produces finished products from raw materials or components thereof</skos:definition>
+		<skos:example>Company ABC, (Address, Geographical coordinates)</skos:example>
+		<skos:note>The process by which valid Manufacturer IDs are captured will be defined by Regional Guidance.</skos:note>
+		<idmp-sub:hasBusinessRules>For both active ingredients and excipients intended to be used in the medicinal product the information shall be provided.</idmp-sub:hasBusinessRules>
+		<idmp-sub:hasConformanceLevel rdf:resource="&idmp-sub;ConformanceLevel-Mandatory"/>
+		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 30</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.2.7.9.2</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The name of the manufacturer of the Specified Substance as provided in CTD 3.2.S.2.1</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MarketContext">

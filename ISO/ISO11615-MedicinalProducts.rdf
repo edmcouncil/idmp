@@ -341,12 +341,6 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&cmns-org;LegalEntity"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.47</dct:source>
 		<cmns-av:synonym xml:lang="en-GB">manufacturer / establishment (organisation)</cmns-av:synonym>
 		<cmns-av:synonym xml:lang="en-US">manufacturer / establishment (organization)</cmns-av:synonym>
@@ -2545,9 +2539,57 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 	
 	<owl:Class rdf:about="&idmp-mprd;ManufacturingSite">
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Site"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ManufacturingSiteIdentifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ManufacturingSiteName"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>manufacturing site</rdfs:label>
 		<skos:definition>place, setting, or context in which a manufacturing or business operation is situated</skos:definition>
 		<skos:note>A given manufacturing site may be associated with one or more manufacturing or business operations (facilities). A given facility (manufacturing or business operation) may span multiple manufacturing sites.</skos:note>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ManufacturingSiteIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-ra;RegisteredIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;ManufacturingSite"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>manufacturing site identifier</rdfs:label>
+		<skos:definition>unique identifier (code) for a place, setting, or context in which a manufacturing or business operation is situated</skos:definition>
+		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-mprd;ManufacturingSiteName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&mvf;hasTextualName"/>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isNameOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;ManufacturingSite"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>manufacturing site name</rdfs:label>
+		<skos:definition>designation for a place, setting, or context in which a manufacturing or business operation is situated</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
@@ -3323,6 +3365,13 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasInteraction"/>
 				<owl:onClass rdf:resource="&idmp-mprd;Interaction"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isAuthorizedForManufacturingThrough"/>
+				<owl:onClass rdf:resource="&idmp-mprd;ManufacturingAuthorization"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -4526,7 +4575,6 @@ The convention applied for naming a medicinal product can differ between medicin
 	
 	<owl:Class rdf:about="&idmp-mprd;PhysicalMedicinalProduct">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalManufacturedItem"/>
 		<rdfs:subClassOf rdf:resource="&cmns-prd;CommercialProduct"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -6718,6 +6766,14 @@ The convention applied for naming a medicinal product can differ between medicin
 		<rdfs:domain rdf:resource="&idmp-mprd;AuthorizedParty"/>
 		<rdfs:range rdf:resource="&idmp-mprd;Authorization"/>
 		<skos:definition>indicates the situation that facilitates endorsement of the authorized party for some purpose</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;isAuthorizedToManufacture">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+		<rdfs:label>is authorized to manufacture</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-mprd;ManufacturingOrBusinessOperation"/>
+		<rdfs:range rdf:resource="&idmp-mprd;MedicinalProduct"/>
+		<skos:definition>has permission to manufacture</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;isCharacterizedByManufacturedItem">
