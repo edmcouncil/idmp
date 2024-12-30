@@ -48,10 +48,12 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20240801/StructuredCollections/"/>
-		<cmns-av:copyright>Copyright (c) 2019-2024 Thematix Partners LLC</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2021-2024 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2024 Object Management Group, Inc.</cmns-av:copyright>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20250201/StructuredCollections/"/>
+		<skos:changeNote>The https://www.omg.org/spec/Commons/20240801/Collections.rdf version of this ontology was modified to clarify the definition of list (COMMONS13-8) and replace the property hasConstituent with hasMember due to a semantics mismatch (COMMONS13-4).</skos:changeNote>
+		<cmns-av:copyright>Copyright (c) 2019-2025 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2021-2025 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2024-2025 Dassault Systèmes</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2024-2025 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&cmns-col;Constituent">
@@ -64,7 +66,7 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:someValuesFrom rdf:resource="&cmns-strcol;ChronologicallyOrderedConstituent"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -139,13 +141,13 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:onClass rdf:resource="&cmns-strcol;IndexedConstituent"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>list</rdfs:label>
-		<skos:definition>structured collection containing a finite, ordered set of related items, where the same value may occur more than once</skos:definition>
+		<skos:definition>finite, linearly ordered collection of items, where the same item may occur more than once</skos:definition>
 		<cmns-av:adaptedFrom>ISO 5127 Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
 	</owl:Class>
 	

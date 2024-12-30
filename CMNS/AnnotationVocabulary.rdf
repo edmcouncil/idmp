@@ -19,17 +19,37 @@
 	
 	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 		<rdfs:label>Annotation Vocabulary</rdfs:label>
-		<dct:abstract>The Annotation Vocabulary provides commonly used annotation properties for documentation to facilitate understanding.</dct:abstract>
-		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<dct:abstract>The Annotation Vocabulary provides commonly used annotation properties for documentation to facilitate understanding.
+		
+		Note that this ontology defines a property hierarchy for a number of external annotations, including SKOS and Dublin Core annotations, to show how they relate to one another, although the semantics of OWL ignore this. Doing so emphasizes how the annotations are intended to be used and assists with integration in cases where different ontologies use different annotations and/or approaches.</dct:abstract>
+		<dct:license>Copyright (c) 2022-2024 Adaptive Analytics, Inc.
+Copyright (c) 2022-2025 EDM Council, Inc.
+Copyright (c) 2022-2025 Federated Knowledge LLC
+Copyright (c) 2022-2025 Object Management Group, Inc.
+Copyright (c) 2024-2025 Ontogenesis Solutions, LLC
+Copyright (c) 2022-2025 Thematix Partners LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &apos;Software&apos;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		
+See https://opensource.org/licenses/MIT.</dct:license>
 		<dct:references rdf:resource="http://purl.org/dc/terms/"/>
 		<dct:references rdf:resource="http://www.w3.org/2004/02/skos/core#"/>
 		<dct:title>Commons Annotation Vocabulary</dct:title>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/AnnotationVocabulary/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20241101/AnnotationVocabulary/"/>
 		<skos:changeNote>https://www.omg.org/spec/Commons/20220501/AnnotationVocabulary.rdf version of this ontology was modified to normalize the use of rdfs:isDefinedBy for SKOS and Dublin Core annotations (COMMONS-1).</skos:changeNote>
+		<skos:changeNote>https://www.omg.org/spec/Commons/20221101/AnnotationVocabulary.rdf version of this ontology was modified to further normalize the property hierarchy for SKOS and Dublin Core annotations (COMMONS-13-14).</skos:changeNote>
 		<skos:note>Note that any of the annotation properties provided in Dublin Core can be used in addition to those declared herein. However, Dublin Core terms that are not explicitly defined herein must be declared explicitly as annotation properties in the ontologies that use them.</skos:note>
 		<skos:note>The annotation properties defined below are derived from similar annotation vocabularies used in (1) the Object Management Group (OMG) specification metadata - see http://www.omg.org/techprocess/ab/SpecificationMetadata/, (2) annotations used in the Financial Industry Business Ontology (FIBO) - see https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/, and (3) other ontology efforts such as the NIST-sponsored Industrial Ontology Foundation (IOF).</skos:note>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
-		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2025 Adaptive Analytics, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2025 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2025 Federated Knowledge LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2025 Object Management Group, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2025 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2024-2025 Ontogenesis Solutions, LLC</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:AnnotationProperty rdf:about="&dct;abstract">
@@ -129,6 +149,7 @@
 	</owl:AnnotationProperty>
 	
 	<owl:AnnotationProperty rdf:about="&skos;definition">
+		<rdfs:subPropertyOf rdf:resource="&dct;description"/>
 		<rdfs:subPropertyOf rdf:resource="&skos;note"/>
 		<rdfs:label>definition</rdfs:label>
 		<rdfs:isDefinedBy rdf:resource="http://www.w3.org/2004/02/skos/core"/>
@@ -150,6 +171,7 @@
 	</owl:AnnotationProperty>
 	
 	<owl:AnnotationProperty rdf:about="&skos;note">
+		<rdfs:subPropertyOf rdf:resource="&rdfs;comment"/>
 		<rdfs:label>note</rdfs:label>
 		<rdfs:isDefinedBy rdf:resource="http://www.w3.org/2004/02/skos/core"/>
 		<skos:definition>general remark, for any purpose</skos:definition>
