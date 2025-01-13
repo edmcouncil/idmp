@@ -2673,6 +2673,12 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isApplicableInCountry"/>
+				<owl:someValuesFrom rdf:resource="&lcc-cr;Alpha2RegionCode"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
@@ -3143,12 +3149,6 @@ d) the assignment of a unique medicinal product batch identifier (BAID2) to reli
 				<owl:onProperty rdf:resource="&idmp-mprd;hasMarketingStartDate"/>
 				<owl:onClass rdf:resource="&cmns-dt;ExplicitDate"/>
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-mprd;isApplicableInCountry"/>
-				<owl:someValuesFrom rdf:resource="&lcc-cr;Alpha2RegionCode"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>marketing status record</rdfs:label>
@@ -3716,16 +3716,7 @@ g) therapeutic indication(s) as authorized for the medicinal product.</skos:note
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-mprd;MedicinalProduct">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-mprd;PhysicalMedicinalProduct">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProduct"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>medicinal product identifier</rdfs:label>
@@ -4581,6 +4572,18 @@ The convention applied for naming a medicinal product can differ between medicin
 		<rdfs:subClassOf rdf:resource="&cmns-prd;CommercialProduct"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isProducedByManufacturingOperation"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;ManufacturingOrBusinessOperation"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-mprd;isProducedAtManufacturingSite"/>
+				<owl:allValuesFrom rdf:resource="&idmp-mprd;ManufacturingSite"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:onClass rdf:resource="&idmp-sub;PhysicalManufacturedItem"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
@@ -4588,8 +4591,8 @@ The convention applied for naming a medicinal product can differ between medicin
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-mprd;PhysicalPharmaceuticalProduct"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:onClass rdf:resource="&idmp-mprd;MedicinalProduct"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -4598,6 +4601,18 @@ The convention applied for naming a medicinal product can differ between medicin
 				<owl:onProperty rdf:resource="&idmp-mprd;hasShelfLife"/>
 				<owl:onClass rdf:resource="&idmp-mprd;ShelfLife"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSpecifiedIdentifier"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;MedicinalProductIdentifier"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Manufacturer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>physical medicinal product</rdfs:label>

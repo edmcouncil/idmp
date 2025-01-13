@@ -9317,6 +9317,17 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 7.4 and 7.5</cmns-av:directSource>
 	</owl:DatatypeProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasSpecifiedIdentifier">
+		<rdfs:label>has specified identifier</rdfs:label>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-doc;isSpecifiedIn">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-id;isIdentifiedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates something, such as material or a physical substance, to an identifier or code for the specification for that material or substance</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasStartingMaterialIdentifier">
 		<rdfs:subPropertyOf rdf:resource="&cmns-id;isIdentifiedBy"/>
 		<rdfs:label>has starting material identifier</rdfs:label>
@@ -9751,6 +9762,18 @@ In all these cases, a new ID shall be issued, that is, &apos;Human Albumin, Plas
 		<rdfs:label>has values allowed</rdfs:label>
 		<skos:definition>describes the nature of valid values for a given class or element in cases where that information is encoded as a string rather than as a value domain per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;identifiesSpecificationFor">
+		<rdfs:label>identifies specification for</rdfs:label>
+		<owl:inverseOf rdf:resource="&idmp-sub;hasSpecifiedIdentifier"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-id;identifies">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-doc;specifies">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates an identifier for a specification of something, such as a substance, to the actual material or physical substance</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;interconnects">
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
