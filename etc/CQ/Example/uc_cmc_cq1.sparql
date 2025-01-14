@@ -1,0 +1,23 @@
+# UC-CMC-CQ 1: Which manufacturing site <site> is producing which packaged medicinal product <pmp>?
+PREFIX cmns-dsg:     <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-prd: 	<https://www.omg.org/spec/Commons/ProductsAndServices/>
+PREFIX cmns-rlcmp:  <https://www.omg.org/spec/Commons/RolesAndCompositions/>
+PREFIX cmns-txt:     <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
+PREFIX idmp-spor:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/>
+PREFIX idmp-sub:     <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
+PREFIX idmp-amp:   <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/>
+PREFIX rdf:              <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:             <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:              <http://www.w3.org/2002/07/owl#>
+
+
+SELECT DISTINCT ?site
+
+WHERE {
+    # Bind Variable packaged medicinal product <$PackagedMedicinalProduct>
+	# Example for Norvasc: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/NorvascPackagedMedicinalProduct>
+    BIND(uc_cmc_cq1_parameter_1 AS $PackagedMedicinalProduct )
+    $PackagedMedicinalProduct idmp-mprd:isProducedAtManufacturingSite ?site.
+    ?site a idmp-mprd:ManufacturingSite .
+}
