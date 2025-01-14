@@ -12,19 +12,19 @@ SELECT DISTINCT ?MarketingAuthorizationNumber (SAMPLE(?MarketingAuthorizationNum
 
 
 WHERE {
-    # Bind Variable substance <$SellableArticle>
+    # Bind Variable substance <$SellalbeArticle>
 	# Example for AMLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/NorvascMedicinalProduct>
-    BIND( uc2_cq2-1_parameter_1 AS $SellableArticle )
+    BIND( uc2_cq2-1_parameter_1 AS $SellalbeArticle )
 
-    $AuthorizedMedicinalProduct cmns-rlcmp:isPlayedBy $SellableArticle .
-    $AuthorizedMedicinalProduct idmp-mprd:isAuthorizedForMarketingThrough $Authorization .
+    $AuthorizedMedicinalProduct cmns-rlcmp:isPlayedBy $SellalbeArticle .
+    $AuthorizedMedicinalProduct idmp-mprd:hasAuthorization $Authorization .
     $Authorization cmns-cxtdsg:isApplicableIn ?Jurisdiction . 
     ?MarketingAuthorizationNumber cmns-id:identifies $Authorization 
      
     # Optionally, get the name of the Authorization Number
-    OPTIONAL{?MarketingAuthorizationNumber rdfs:label ?MarketingAuthorizationNumberLabel }
+    OPTIONAL{?MarketingAuthorizationNumber  rdfs:label  ?MarketingAuthorizationNumberLabel }
 
         # Optionally, get the name of the Jurisdiction
-    OPTIONAL{?Jurisdiction rdfs:label ?JurisdictionLabel }
+    OPTIONAL{?Jurisdiction  rdfs:label  ?JurisdictionLabel }
 
 } GROUP BY ?MarketingAuthorizationNumber ?Jurisdiction
