@@ -1,4 +1,4 @@
-# UC-CMC-CQ 4: Which material ID <m> is used in which batch ID <b>?
+# UC-CMC-CQ 3: Which material ID <m> is used in which batch ID <b>?
 PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
 PREFIX cmns-doc:    <https://www.omg.org/spec/Commons/Documents/>
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
@@ -10,7 +10,7 @@ PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:         <http://www.w3.org/2002/07/owl#>
 
-SELECT DISTINCT ?materialIdentifierValue ?productBatchId
+SELECT DISTINCT ?materialIdentifierValue ?productBatchIdentifierValue
 
 WHERE {
     # Bind Variable medicinal product <$medicinalProduct>
@@ -20,9 +20,9 @@ WHERE {
      $medicinalProduct cmns-doc:specifies ?physicalMedicinalProduct .
      ?physicalMedicinalProduct a idmp-mprd:PhysicalMedicinalProduct .
      ?productBatch cmns-col:isConstituentOf ?physicalMedicinalProduct .
-     
      ?productBatch rdf:type idmp-mprd:Batch .
      ?productBatch cmns-dsg:isSignifiedBy ?productBatchId .
+     ?productBatchId cmns-txt:hasTextValue ?productBatchIdentifierValue.
      ?productBatch cmns-col:comprises ?material .
      ?material cmns-id:isIdentifiedBy ?materialIdentifierIRI .
      ?materialIdentifierIRI rdf:type idmp-sub:MaterialIdentifier.
