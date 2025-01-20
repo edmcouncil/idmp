@@ -1,8 +1,12 @@
 # UC-CMC-CQ 5: Which material <m> is approved in which country <c> ? and what is the application ID?
+
 PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
 PREFIX cmns-doc:    <https://www.omg.org/spec/Commons/Documents/>
 PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
+PREFIX cmns-cxtdsg: <https://www.omg.org/spec/Commons/ContextualDesignators/>
 PREFIX cmns-id: 	<https://www.omg.org/spec/Commons/Identifiers/>
+PREFIX cmns-rlcmp:  <https://www.omg.org/spec/Commons/RolesAndCompositions/>
+PREFIX cmns-rga:    <https://www.omg.org/spec/Commons/RegulatoryAgencies/>
 PREFIX cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
@@ -10,7 +14,7 @@ PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:         <http://www.w3.org/2002/07/owl#>
 
-SELECT DISTINCT ?productBatchIdentifierValue ?productBatchId
+SELECT DISTINCT ?materialIdentifierValue ?marketingAuthorisationId ?country
 
 WHERE {
     # Bind Variable medicinal product <$medicinalProduct>
@@ -21,10 +25,12 @@ WHERE {
      ?physicalMedicinalProduct a idmp-mprd:PhysicalMedicinalProduct .
      ?productBatch cmns-col:isConstituentOf ?physicalMedicinalProduct .
      ?productBatch rdf:type idmp-mprd:Batch .
-     ?productBatch cmns-dsg:isSignifiedBy ?productBatchId .
-     ?productBatchId cmns-txt:hasTextValue ?productBatchIdentifierValue.
      ?productBatch cmns-col:comprises ?material .
-     ?material cmns-id:isIdentifiedBy ?materialIdentifierIRI .
      ?materialIdentifierIRI rdf:type idmp-sub:MaterialIdentifier.
      ?materialIdentifierIRI cmns-txt:hasTextValue ?materialIdentifierValue.
+     ?authorisedMedicinalProduct cmns-rlcmp:isPlayedBy $medicinalProduct .
+     ?authorisedMedicinalProduct idmp-mprd:isAuthorizedForMarketingThrough ?marketingAuthorisation .
+     ?marketingAuthorisationId cmns-id:identifies ?marketingAuthorisation .
+     ?marketingAuthorisation cmns-cxtdsg:isApplicableIn ?jurisdiction .
+     ?jurisdiction cmns-rga:hasReach ?country.
 }
