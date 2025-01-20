@@ -17,9 +17,10 @@ WHERE {
     BIND( uc2_cq2-1_parameter_1 AS $SellalbeArticle )
 
     $AuthorizedMedicinalProduct cmns-rlcmp:isPlayedBy $SellalbeArticle .
-    $AuthorizedMedicinalProduct idmp-mprd:hasAuthorization $Authorization .
+    ?hasAuthorization rdfs:subPropertyOf idmp-mprd:hasAuthorization .
+    $AuthorizedMedicinalProduct ?hasAuthorization $Authorization .
     $Authorization cmns-cxtdsg:isApplicableIn ?Jurisdiction . 
-    ?MarketingAuthorizationNumber cmns-id:identifies $Authorization 
+    ?MarketingAuthorizationNumber cmns-id:identifies $Authorization .
      
     # Optionally, get the name of the Authorization Number
     OPTIONAL{?MarketingAuthorizationNumber  rdfs:label  ?MarketingAuthorizationNumberLabel }

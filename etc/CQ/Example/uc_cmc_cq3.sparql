@@ -1,15 +1,11 @@
 # UC-CMC-CQ 3: Which manufacturing site <site> is producing which substance <substance>?
-PREFIX cmns-dsg:    <https://www.omg.org/spec/Commons/Designators/>
-PREFIX cmns-rlcmp:  <https://www.omg.org/spec/Commons/RolesAndCompositions/>
-PREFIX cmns-txt:    <https://www.omg.org/spec/Commons/TextDatatype/>
+PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
+PREFIX cmns-doc:    <https://www.omg.org/spec/Commons/Documents/>
 PREFIX idmp-mprd:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/>
-PREFIX idmp-spor:   <https://spec.pistoiaalliance.org/idmp/ontology/ISO/EuropeanJurisdiction/SubstancesProductsOrganisationsReferentials/>
 PREFIX idmp-sub:    <https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/>
 PREFIX rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:         <http://www.w3.org/2002/07/owl#>
-PREFIX cmns-col:    <https://www.omg.org/spec/Commons/Collections/>
-
 
 SELECT DISTINCT ?site ?substance
 
@@ -18,10 +14,13 @@ WHERE {
 	# Example for Norvasc: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/NorvascMedicinalProduct>
     BIND(uc_cmc_cq3_parameter_1 AS $medicinalProduct )
 
-    $medicinalProduct idmp-mprd:isProducedAtManufacturingSite ?site .
-    ?site a idmp-mprd:ManufacturingSite .
+     $medicinalProduct cmns-doc:specifies ?physicalMedicinalProduct .
+     ?physicalMedicinalProduct a idmp-mprd:PhysicalMedicinalProduct .
+     ?physicalMedicinalProduct idmp-mprd:isProducedAtManufacturingSite ?site .
+     ?site a idmp-mprd:ManufacturingSite .
     
-    $medicinalProduct cmns-col:comprises ?pharmaceuticalOrManufacturedProduct.
-    ?pharmaceuticalOrManufacturedProduct cmns-col:comprises ?substance.
-    ?substance rdf:type/rdfs:subClassOf idmp-sub:Substance.
+    $medicinalProduct cmns-col:comprises ?pharmaceuticalOrManufacturedProduct .
+    ?pharmaceuticalOrManufacturedProduct cmns-col:comprises ?substance .
+    ?substance rdf:type/rdfs:subClassOf idmp-sub:Substance .
+
 }
