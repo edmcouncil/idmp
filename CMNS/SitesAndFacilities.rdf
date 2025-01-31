@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-cxtid "https://www.omg.org/spec/Commons/ContextualIdentifiers/">
+	<!ENTITY cmns-id "https://www.omg.org/spec/Commons/Identifiers/">
+	<!ENTITY cmns-loc "https://www.omg.org/spec/Commons/Locations/">
+	<!ENTITY cmns-org "https://www.omg.org/spec/Commons/Organizations/">
+	<!ENTITY cmns-rga "https://www.omg.org/spec/Commons/RegulatoryAgencies/">
+	<!ENTITY cmns-sfc "https://www.omg.org/spec/Commons/SitesAndFacilities/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/Commons/SitesAndFacilities/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-cxtid="https://www.omg.org/spec/Commons/ContextualIdentifiers/"
+	xmlns:cmns-id="https://www.omg.org/spec/Commons/Identifiers/"
+	xmlns:cmns-loc="https://www.omg.org/spec/Commons/Locations/"
+	xmlns:cmns-org="https://www.omg.org/spec/Commons/Organizations/"
+	xmlns:cmns-rga="https://www.omg.org/spec/Commons/RegulatoryAgencies/"
+	xmlns:cmns-sfc="https://www.omg.org/spec/Commons/SitesAndFacilities/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/SitesAndFacilities/">
+		<rdfs:label>Sites and Facilities Ontology</rdfs:label>
+		<dct:abstract>This ontology provides high-level concepts related to facilities, both virtual and physical, including sites that provide the context for various facilities.</dct:abstract>
+		<dct:license>Copyright (c) 2013-2025 EDM Council, Inc.
+		Copyright (c) 2013-2025 Object Management Group, Inc.
+		
+		Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &apos;Software&apos;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		
+		See https://opensource.org/licenses/MIT.</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualIdentifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Identifiers/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Locations/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RegulatoryAgencies/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20250201/Facilities/"/>
+		<skos:note>This ontology is derived, in part, from the Financial Industry Business Ontology (FIBO) Organizations, Formal Organizations, and Legal Persons ontologies.</skos:note>
+		<cmns-av:copyright>Copyright (c) 2013-2025 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2013-2025 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-org;Capability">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-sfc;isEnabledBy"/>
+				<owl:onClass rdf:resource="&cmns-sfc;Facility"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-sfc;Facility">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-sfc;isSituatedAt"/>
+				<owl:onClass rdf:resource="&cmns-sfc;Site"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-sfc;enables"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-org;Capability">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-org;Service">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>facility</rdfs:label>
+		<skos:definition>something established to serve a particular purpose, make some course of action or operation easier, or provide some capability or service</skos:definition>
+		<cmns-av:explanatoryNote>A facility may be concrete (as in a manufacturing facility) or abstract. Concrete facilities may be permanent, semi-permanent, or temporary structures, providing one or more capabilities at a given site. A single site may include multiple facilities and a given facility may span multiple sites.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-sfc;Site">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;Context"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-loc;hasLocation"/>
+				<owl:onClass rdf:resource="&cmns-loc;Location"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-sfc;situates"/>
+				<owl:onClass rdf:resource="&cmns-sfc;Facility"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;appliesTo"/>
+				<owl:onClass rdf:resource="&cmns-sfc;TractOfLand"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>site</rdfs:label>
+		<skos:definition>place, setting, or context in which something, such as a facility, is situated</skos:definition>
+		<skos:example>Example facilities that may situated at some site include structures and buildings, an archeological dig, the landing location for an aircraft or spacecraft, and the site of a wound. A given site may accommodate multiple facilities.</skos:example>
+		<cmns-av:explanatoryNote>A physical site has certain characteristics that contribute to the context it provides, including area, shape, accessibility, and in the case of a geographic site, landforms, soil and ground conditions, climate, and so forth.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-sfc;TractIdentifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtid;ContextualIdentifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&cmns-rga;Jurisdiction"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-id;identifies"/>
+				<owl:onClass rdf:resource="&cmns-sfc;TractOfLand"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>tract identifier</rdfs:label>
+		<skos:definition>unique identifier for a parcel issued for use in some jurisidiction</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-sfc;TractOfLand">
+		<rdfs:subClassOf rdf:resource="&cmns-loc;GeographicRegion"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-loc;isSubregionOf"/>
+				<owl:someValuesFrom rdf:resource="&cmns-loc;GeographicRegion"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">tract of land</rdfs:label>
+		<skos:definition xml:lang="en">geographic region that is a contiguous parcel or area of land within a larger region on the surface of the earth, typically defined by its boundaries as described in a deed, survey, or legal document</skos:definition>
+		<cmns-av:explanatoryNote xml:lang="en">In some cases, such as in the case of unimproved land that may be owned by a government but without improvements, there may not be an address.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote xml:lang="en">Such a description typically includes a detailed, quantitative specification for that region specified using a prescribed coordinate and/or mapping system and/or a narrative description, such as &apos;metes and bounds&apos;, which provides a qualitative, but less precise, legal description of the location. The system(s) used to describe the tract are specified in local, regional, and national law.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-sfc;Venue">
+		<rdfs:subClassOf rdf:resource="&cmns-sfc;Site"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>venue</rdfs:label>
+		<skos:definition>site where something happens, described in the context of an event, activity, or something else that occurs there</skos:definition>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-sfc;enables">
+		<rdfs:label>enables</rdfs:label>
+		<skos:definition>creates an environment or situation where something can occur or function efficiently</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-sfc;isEnabledBy">
+		<rdfs:label>is enabled by</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-sfc;enables"/>
+		<skos:definition>indicates something that occurs or functions efficiently due to</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-sfc;isSituatedAt">
+		<rdfs:label>is situated at</rdfs:label>
+		<skos:definition>is placed at</skos:definition>
+		<cmns-av:explanatoryNote>Something may be situated at some site, or in some setting, situation, or context.</cmns-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-sfc;situates">
+		<rdfs:label>situates</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-sfc;isSituatedAt"/>
+		<skos:definition>indicates the place, setting, or context in which something is placed</skos:definition>
+	</owl:ObjectProperty>
+
+</rdf:RDF>

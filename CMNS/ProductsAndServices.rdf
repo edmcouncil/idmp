@@ -66,7 +66,7 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Organizations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/RolesAndCompositions/"/>
-		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20241101/ProductsAndServices/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20241201/ProductsAndServices/"/>
 		<skos:note>This ontology was originally designed for and has been adapted from the Financial Industry Business Ontology (FIBO) Products and Services Ontology.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2013-2024 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2013-2024 Object Management Group, Inc.</cmns-av:copyright>
@@ -101,27 +101,6 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<rdfs:seeAlso rdf:resource="https://www.thoughtco.com/commodity-economics-definition-1146936"/>
 		<skos:definition>material resource used in commerce that is interchangeable with other commodities of the same type</skos:definition>
 		<cmns-av:explanatoryNote>Commodities are most often used as inputs in the production of other goods or services. The quality of a given commodity may differ slightly, but it is essentially uniform across producers.</cmns-av:explanatoryNote>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&cmns-prd;Facility">
-		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;FunctionalRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-org;provides"/>
-				<owl:onClass rdf:resource="&cmns-org;Capability"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;isSituatedAt"/>
-				<owl:onClass rdf:resource="&cmns-prd;Site"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>facility</rdfs:label>
-		<skos:definition>something established to serve a particular purpose, make some course of action or operation easier, or provide some capability or service</skos:definition>
-		<cmns-av:explanatoryNote>A facility may be concrete (as in a manufacturing facility) or abstract. Concrete facilities may be permanent, semi-permanent, or temporary structures, providing one or more capabilities at a given site. A single site may include multiple facilities and a given facility may span multiple sites.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&cmns-prd;GS1CompanyPrefix">
@@ -359,33 +338,6 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<cmns-av:explanatoryNote>Rights dominate modern understandings of what actions are permissible and which institutions are just. Rights structure the form of governments, the content of laws, and the shape of morality as many now see it. To accept a set of rights is to approve a distribution of freedom and authority, and so to endorse a certain view of what may, must, and must not be done. According to the Hohfeldian incidents (Wesley Hohfeld (1879-1918)), rights are complex and consist of four major components: privilege, claim, power, and immunity.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-prd;Site">
-		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Role"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
-				<owl:onClass>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-prd;situates"/>
-						<owl:someValuesFrom rdf:resource="&owl;Thing"/>
-					</owl:Restriction>
-				</owl:onClass>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-loc;hasLocation"/>
-				<owl:onClass rdf:resource="&cmns-loc;Location"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>site</rdfs:label>
-		<skos:definition>place, setting, or context in which something is situated or to which something is, or may be, bound</skos:definition>
-		<skos:example>Examples include a structure or building, an archeological dig, the landing location for an aircraft or spacecraft, and the site of a wound. A given site may accommodate multiple facilities.</skos:example>
-		<cmns-av:explanatoryNote>A physical site has certain characteristics that contribute to the context it provides, including area, shape, accessibility, boundaries, and in the case of a geographic site, landforms, soil and ground conditions, climate, and so forth.</cmns-av:explanatoryNote>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&cmns-prd;StockKeepingUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualDesignation"/>
@@ -469,19 +421,6 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<cmns-av:explanatoryNote>Along with the related International Article Number (EAN) barcode, the UPC is the barcode mainly used for scanning of trade items at the point of sale, per the specifications of the international GS1 organization.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-prd;Venue">
-		<rdfs:subClassOf rdf:resource="&cmns-prd;Site"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
-				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>venue</rdfs:label>
-		<skos:definition>site where something happens, described in the context of the event or activity that occurs there</skos:definition>
-	</owl:Class>
-	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isIssuedBy">
 		<rdfs:subPropertyOf rdf:resource="&cmns-org;isProvidedBy"/>
 		<rdfs:label>is issued by</rdfs:label>
@@ -503,12 +442,6 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<skos:definition>is fabricated, manufactured or otherwise created by, through some production process</skos:definition>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&cmns-prd;isSituatedAt">
-		<rdfs:label>is situated at</rdfs:label>
-		<skos:definition>is placed at</skos:definition>
-		<cmns-av:explanatoryNote>Something may be situated at some site, or in some setting, situation, or context.</cmns-av:explanatoryNote>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&cmns-prd;issues">
 		<rdfs:subPropertyOf rdf:resource="&cmns-org;provides"/>
 		<rdfs:label>issues</rdfs:label>
@@ -521,12 +454,6 @@ THE SOFTWARE IS PROVIDED &apos;AS IS&apos;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 		<rdfs:label>produces</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-prd;Producer"/>
 		<skos:definition>creates through a fabrication, manufacturing or production process</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&cmns-prd;situates">
-		<rdfs:label>situates</rdfs:label>
-		<owl:inverseOf rdf:resource="&cmns-prd;isSituatedAt"/>
-		<skos:definition>indicates the place, setting, or context for something or in which something is placed</skos:definition>
 	</owl:ObjectProperty>
 
 </rdf:RDF>
